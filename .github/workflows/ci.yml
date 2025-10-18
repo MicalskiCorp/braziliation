@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ develop, main ]
+  pull_request:
+    branches: [ develop, main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies (if exists)
+        run: |
+          if ls *.sln 1> /dev/null 2>&1; then
+            dotnet restore
+          else
+            echo "No .sln found, skipping restore."
+          fi
+
+      - name: Build (if exists)
+        run: |
+          if ls *.sln 1> /dev/null 2>&1; then
+            dotnet build --configuration Release --no-restore
+          else
+            echo "No .sln found, skipping build."
+          fi
+
+       - name: Run tests (if exists)
+        run: |
+          if ls *.sln 1> /dev/null 2>&1; then
+            dotnet test --no-build --verbosity normal
+          else
+            echo "No .sln found, skipping tests."
+          fi
