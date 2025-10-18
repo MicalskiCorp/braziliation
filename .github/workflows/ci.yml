@@ -21,26 +21,38 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore dependencies (if exists)
+      - name: Find solution or project files
+        id: findproj
         run: |
-          if ls *.sln 1> /dev/null 2>&1; then
-            dotnet restore
-          else
-            echo "No .sln found, skipping restore."
-          fi
+          # procura por .sln na raiz e .csproj em subpastas
+          SLN_COUNT=$(ls *.sln 2>/dev/null | wc -l || true)
+          CSPROJ_COUNT=$(find . -name '*.csproj' | wc -l || true)
+          echo "sln_count=$SLN_COUNT" >> $GITHUB_OUTPUT
+          echo "csproj_count=$CSPROJ_COUNT" >> $GITHUB_OUTPUT
+          echo "Found: $SLN_COUNT .sln files; $CSPROJ_COUNT .csproj files"
+
+      - name: Restore dependencies (if exists)
+        if: steps.findproj.outputs.sln_count != '0' || steps.findproj.outputs.csproj_count != '0'
+        run: |
+          echo "Project/solution found — running dotnet restore"
+          dotnet restore
+      - name: Skip restore (no project found)
+        if: steps.findproj.outputs.sln_count == '0' && steps.findproj.outputs.csproj_count == '0'
+        run: |
+          echo "No .sln or .csproj found — skipping restore/build/test."
 
       - name: Build (if exists)
+        if: steps.findproj.outputs.sln_count != '0' || steps.findproj.outputs.csproj_count != '0'
         run: |
-          if ls *.sln 1> /dev/null 2>&1; then
-            dotnet build --configuration Release --no-restore
-          else
-            echo "No .sln found, skipping build."
-          fi
+          echo "Building..."
+          dotnet build --configuration Release --no-restore
 
-       - name: Run tests (if exists)
+      - name: Run tests (if exists)
+        if: steps.findproj.outputs.sln_count != '0' || steps.findproj.outputs.csproj_count != '0'
         run: |
-          if ls *.sln 1> /dev/null 2>&1; then
-            dotnet test --no-build --verbosity normal
-          else
-            echo "No .sln found, skipping tests."
-          fi
+          echo "Running tests..."
+          dotnet test --no-build --verbosity normal
+
+      - name: Post-check
+        run: |
+          echo "CI job completed. If no .sln/.csproj were found, build/test steps were skipped."
