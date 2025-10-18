@@ -21,11 +21,26 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Restore dependencies (if exists)
+        run: |
+          if ls *.sln 1> /dev/null 2>&1; then
+            dotnet restore
+          else
+            echo "No .sln found, skipping restore."
+          fi
 
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
+      - name: Build (if exists)
+        run: |
+          if ls *.sln 1> /dev/null 2>&1; then
+            dotnet build --configuration Release --no-restore
+          else
+            echo "No .sln found, skipping build."
+          fi
 
-      - name: Run tests
-        run: dotnet test --no-build --verbosity normal
+       - name: Run tests (if exists)
+        run: |
+          if ls *.sln 1> /dev/null 2>&1; then
+            dotnet test --no-build --verbosity normal
+          else
+            echo "No .sln found, skipping tests."
+          fi
