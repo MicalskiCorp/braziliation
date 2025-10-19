@@ -34,12 +34,16 @@ jobs:
         if: steps.unity.outputs.unity != 'true'
         run: |
           if [ -f "Braziliation.sln" ]; then
-            echo "Using Braziliation.sln — restoring..."
-            dotnet restore Braziliation.sln
-            echo "Building solution..."
-            dotnet build Braziliation.sln --configuration Release --no-restore
-            echo "Running tests (if present)..."
-            dotnet test Braziliation.sln --no-build --verbosity normal || true
+            if grep -q "Assembly-CSharp.csproj" Braziliation.sln; then
+              echo "Detected Unity solution (Assembly-CSharp) — skipping .NET build."
+            else
+              echo "Using Braziliation.sln — restoring..."
+              dotnet restore Braziliation.sln
+              echo "Building solution..."
+              dotnet build Braziliation.sln --configuration Release --no-restore
+              echo "Running tests (if present)..."
+              dotnet test Braziliation.sln --no-build --verbosity normal || true
+            fi
           else
             echo "Braziliation.sln not found — skipping dotnet steps."
           fi
