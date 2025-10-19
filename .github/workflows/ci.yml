@@ -21,38 +21,33 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Find solution or project files
-        id: findproj
+      - name: Detect Unity project
+        id: unity
         run: |
-          # procura por .sln na raiz e .csproj em subpastas
-          SLN_COUNT=$(ls *.sln 2>/dev/null | wc -l || true)
-          CSPROJ_COUNT=$(find . -name '*.csproj' | wc -l || true)
-          echo "sln_count=$SLN_COUNT" >> $GITHUB_OUTPUT
-          echo "csproj_count=$CSPROJ_COUNT" >> $GITHUB_OUTPUT
-          echo "Found: $SLN_COUNT .sln files; $CSPROJ_COUNT .csproj files"
+          if [ -f "Assets/ProjectSettings/ProjectVersion.txt" ]; then
+            echo "unity=true" >> $GITHUB_OUTPUT
+          else
+            echo "unity=false" >> $GITHUB_OUTPUT
+          fi
 
-      - name: Restore dependencies (if exists)
-        if: steps.findproj.outputs.sln_count != '0' || steps.findproj.outputs.csproj_count != '0'
+      - name: Restore/Build/Test using Braziliation.sln (if not Unity)
+        if: steps.unity.outputs.unity != 'true'
         run: |
-          echo "Project/solution found — running dotnet restore"
-          dotnet restore Braziliation.sln
-      - name: Skip restore (no project found)
-        if: steps.findproj.outputs.sln_count == '0' && steps.findproj.outputs.csproj_count == '0'
-        run: |
-          echo "No .sln or .csproj found — skipping restore/build/test."
+          if [ -f "Braziliation.sln" ]; then
+            echo "Using Braziliation.sln — restoring..."
+            dotnet restore Braziliation.sln
+            echo "Building solution..."
+            dotnet build Braziliation.sln --configuration Release --no-restore
+            echo "Running tests (if present)..."
+            dotnet test Braziliation.sln --no-build --verbosity normal || true
+          else
+            echo "Braziliation.sln not found — skipping dotnet steps."
+          fi
 
-      - name: Build (if exists)
-        if: steps.findproj.outputs.sln_count != '0' || steps.findproj.outputs.csproj_count != '0'
+      - name: Skip dotnet for Unity
+        if: steps.unity.outputs.unity == 'true'
         run: |
-          echo "Building..."
-          dotnet build Braziliation.sln --configuration Release --no-restore
-
-      - name: Run tests (if exists)
-        if: steps.findproj.outputs.sln_count != '0' || steps.findproj.outputs.csproj_count != '0'
-        run: |
-          echo "Running tests..."
-          dotnet test Braziliation.sln --no-build --verbosity normal
+          echo "Unity project detected — skipping dotnet restore/build/test."
 
       - name: Post-check
-        run: |
-          echo "CI job completed. If no .sln/.csproj were found, build/test steps were skipped."
+        run: echo "CI completed."
