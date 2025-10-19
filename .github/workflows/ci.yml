@@ -35,7 +35,7 @@ jobs:
         if: steps.findproj.outputs.sln_count != '0' || steps.findproj.outputs.csproj_count != '0'
         run: |
           echo "Project/solution found — running dotnet restore"
-          dotnet restore
+          dotnet restore Braziliation.sln
       - name: Skip restore (no project found)
         if: steps.findproj.outputs.sln_count == '0' && steps.findproj.outputs.csproj_count == '0'
         run: |
@@ -45,13 +45,13 @@ jobs:
         if: steps.findproj.outputs.sln_count != '0' || steps.findproj.outputs.csproj_count != '0'
         run: |
           echo "Building..."
-          dotnet build --configuration Release --no-restore
+          dotnet build Braziliation.sln --configuration Release --no-restore
 
       - name: Run tests (if exists)
         if: steps.findproj.outputs.sln_count != '0' || steps.findproj.outputs.csproj_count != '0'
         run: |
           echo "Running tests..."
-          dotnet test --no-build --verbosity normal
+          dotnet test Braziliation.sln --no-build --verbosity normal
 
       - name: Post-check
         run: |
