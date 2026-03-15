@@ -1,0 +1,37 @@
+---
+description: Contexto e estrutura do projeto Braziliation (jogo plataforma 2D)
+alwaysApply: true
+---
+
+# Braziliation – Projeto
+
+Jogo **plataforma 2D** em pixel art (C#), ambientação **dieselpunk pós-apocalíptica brasileira**.
+
+## Stack
+- **Engine**: Unity 6000.2 (Unity 6)
+- **Render**: URP 2D (Universal Render Pipeline)
+- **Linguagem**: C#
+- **Estilo**: Pixel Art, paleta restrita estilo SNES
+- **Input**: com.unity.inputsystem (Input System)
+- **Plataforma alvo**: PC / SNES (EverDrive) conforme build
+
+## Estrutura de pastas
+- `Assets/` – Arte, áudio, sprites, cenas, prefabs
+  - `Assets/Scripts/` – Código C# (Core, Systems, Tools, UI)
+  - `Assets/Art/` – Characters, Environment, Props, UI
+  - `Assets/Audio/` – Music, SFX
+  - `Assets/Scenes/` – Cenas Unity (SampleScene, teste1, etc.)
+  - `Assets/Settings/` – URP, Renderer2D, templates de cena
+- `Docs/` – Design, arte e documentação técnica
+- `scripts/` – setup_project.ps1, update_version.ps1
+- `ProjectSettings/` – Configurações do projeto Unity
+- `Packages/` – manifest.json e dependências (2D Animation, Tilemap, Aseprite, etc.)
+
+## Base do jogo já presente
+- **GameInitializer** (`Assets/Scripts/Core/GameInitializer.cs`): inicialização antes da cena (60 FPS, vSync 0).
+- **CameraScaler** (`Assets/Scripts/Core/CameraScaler.cs`): PixelPerfectCamera 320×180, 16 PPU.
+
+## Convenções (Docs/Tech/DevelopmentRules.md)
+- Branches: `main`, `develop`, `feature/*`, `hotfix/*`, `chore/*`
+- Commits: `tipo(scope): descrição` (ex: `feature(player): adicionar salto duplo`)
+- Merge via Pull Request; CI verde; releases com semantic versioning (v0.1.0).
