@@ -11,9 +11,9 @@ Thumbs.db
 /bin/
 /obj/
 
-# .NET test project (tests/)
-tests/**/bin/
-tests/**/obj/
+# .NET test project (Tests/ — respeitar maiúscula no Git para CI Linux)
+Tests/**/bin/
+Tests/**/obj/
 /Build/
 /Builds/
 

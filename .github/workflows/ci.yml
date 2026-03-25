@@ -30,21 +30,25 @@ jobs:
             echo "unity=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Verify test project exists
+      - name: Resolve test project path (Linux is case-sensitive)
         run: |
-          TEST_PROJECT="tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
-          if [ ! -f "$TEST_PROJECT" ]; then
-            echo "::error::Missing $TEST_PROJECT — commit the tests/ folder (see repo root)."
+          if [ -f "Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj" ]; then
+            echo "TEST_PROJECT=Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj" >> "$GITHUB_ENV"
+            echo "Using Tests/ (expected on Linux CI)."
+          elif [ -f "tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj" ]; then
+            echo "TEST_PROJECT=tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj" >> "$GITHUB_ENV"
+            echo "Using tests/ (legacy path)."
+          else
+            echo "::error::Missing Braziliation.Game.Tests.csproj under Tests/ or tests/ — commit the folder from repo root."
             ls -la
             exit 1
           fi
 
       - name: Restore, build and test (.NET tests project)
-        # Usa o .csproj diretamente para não depender de Braziliation.CI.sln no clone (evita MSB1009 se a .sln não foi commitada).
         run: |
-          dotnet restore tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj
-          dotnet build tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj --configuration Release --no-restore
-          dotnet test tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj --configuration Release --no-build --verbosity normal
+          dotnet restore "$TEST_PROJECT"
+          dotnet build "$TEST_PROJECT" --configuration Release --no-restore
+          dotnet test "$TEST_PROJECT" --configuration Release --no-build --verbosity normal
 
       - name: Post-check
         run: |
