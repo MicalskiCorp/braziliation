@@ -1,4 +1,6 @@
-﻿namespace Braziliation.Game.Tests;
+﻿using Xunit;
+
+namespace Braziliation.Game.Tests;
 
 public class UnitTest1
 {
