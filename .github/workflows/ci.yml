@@ -30,11 +30,21 @@ jobs:
             echo "unity=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Restore, build and test (Braziliation.CI.sln)
+      - name: Verify test project exists
         run: |
-          dotnet restore Braziliation.CI.sln
-          dotnet build Braziliation.CI.sln --configuration Release --no-restore
-          dotnet test Braziliation.CI.sln --configuration Release --no-build --verbosity normal
+          TEST_PROJECT="tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+          if [ ! -f "$TEST_PROJECT" ]; then
+            echo "::error::Missing $TEST_PROJECT — commit the tests/ folder (see repo root)."
+            ls -la
+            exit 1
+          fi
+
+      - name: Restore, build and test (.NET tests project)
+        # Usa o .csproj diretamente para não depender de Braziliation.CI.sln no clone (evita MSB1009 se a .sln não foi commitada).
+        run: |
+          dotnet restore tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj
+          dotnet build tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj --configuration Release --no-restore
+          dotnet test tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj --configuration Release --no-build --verbosity normal
 
       - name: Post-check
         run: |

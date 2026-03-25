@@ -14,7 +14,8 @@ Jogo plataforma 2D em pixel art (C#) — ambientação dieselpunk pós-apocalíp
 - `scripts/` → Scripts de setup/versionamento (PowerShell, shell)
 - `Packages/` / `ProjectSettings/` → Unity (não mover)
 - `Braziliation.sln` → solution gerada/usada com **Assembly-CSharp** (Unity / IDE)
-- `Braziliation.CI.sln` → solution só com testes .NET para **GitHub Actions** (`dotnet test`)
+- `Braziliation.CI.sln` → solution opcional com os testes .NET (útil no IDE)
+- **CI (GitHub / GitLab)** → `dotnet restore/build/test` em `tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj` (ficheiros em `tests/` têm de estar no repositório remoto)
 
 ### Limpeza local (logs)
 A pasta `Logs/` na raiz é gerada pelo Unity e está no `.gitignore`. Se quiser apagá-la, **feche o editor Unity** e remova `Logs/` manualmente (arquivos podem ficar bloqueados com o projeto aberto).
