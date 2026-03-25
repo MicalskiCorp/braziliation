@@ -17,7 +17,7 @@ Jogo **plataforma 2D** em pixel art (C#), ambientação **dieselpunk pós-apocal
 
 ## Estrutura de pastas
 - `Assets/` – Arte, áudio, sprites, cenas, prefabs
-  - `Assets/Scripts/` – Código C# (Core, Systems, Tools, UI)
+  - `Assets/Scripts/` – Código C# (Core, UI; demais domínios conforme `Docs/Architecture/AssetsStructure.md`)
   - `Assets/Art/` – Characters, Environment, Props, UI
   - `Assets/Audio/` – Music, SFX
   - `Assets/Scenes/` – Cenas Unity (SampleScene, teste1, etc.)

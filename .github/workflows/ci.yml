@@ -21,37 +21,26 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Detect Unity project
+      - name: Detect Unity project layout
         id: unity
         run: |
-          if [ -f "Assets/ProjectSettings/ProjectVersion.txt" ]; then
+          if [ -f "ProjectSettings/ProjectVersion.txt" ]; then
             echo "unity=true" >> $GITHUB_OUTPUT
           else
             echo "unity=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Restore/Build/Test using Braziliation.sln (if not Unity)
-        if: steps.unity.outputs.unity != 'true'
+      - name: Restore, build and test (Braziliation.CI.sln)
         run: |
-          if [ -f "Braziliation.sln" ]; then
-            if grep -q "Assembly-CSharp.csproj" Braziliation.sln; then
-              echo "Detected Unity solution (Assembly-CSharp) — skipping .NET build."
-            else
-              echo "Using Braziliation.sln — restoring..."
-              dotnet restore Braziliation.sln
-              echo "Building solution..."
-              dotnet build Braziliation.sln --configuration Release --no-restore
-              echo "Running tests (if present)..."
-              dotnet test Braziliation.sln --no-build --verbosity normal || true
-            fi
-          else
-            echo "Braziliation.sln not found — skipping dotnet steps."
-          fi
-
-      - name: Skip dotnet for Unity
-        if: steps.unity.outputs.unity == 'true'
-        run: |
-          echo "Unity project detected — skipping dotnet restore/build/test."
+          dotnet restore Braziliation.CI.sln
+          dotnet build Braziliation.CI.sln --configuration Release --no-restore
+          dotnet test Braziliation.CI.sln --configuration Release --no-build --verbosity normal
 
       - name: Post-check
-        run: echo "CI completed."
+        run: |
+          if [ "${{ steps.unity.outputs.unity }}" = "true" ]; then
+            echo "Unity project detected — gameplay C# builds in the Unity Editor; CI validated repository layout and .NET tests."
+          else
+            echo "ProjectSettings/ProjectVersion.txt not found — .NET tests ran against the current tree."
+          fi
+          echo "CI completed."

@@ -10,6 +10,10 @@ Thumbs.db
 # Build outputs
 /bin/
 /obj/
+
+# .NET test project (tests/)
+tests/**/bin/
+tests/**/obj/
 /Build/
 /Builds/
 
@@ -22,6 +26,14 @@ Builds/
 UserSettings/
 MemoryCaptures/
 .unitypackage
+
+# Unity / editor logs (pastas geradas localmente — não versionar)
+Logs/
+Braziliation/Logs/
+
+# Plastic SCM (projeto versionado em Git; metadados locais não entram no repo)
+.plastic/
+ignore.conf
 
 # Logs
 *.log
