@@ -15,4 +15,4 @@ Projeto **Unity 6** (2D, URP, C#): jogo plataforma pixel art, tema dieselpunk p�
 ## Docs úteis
 - `README.md` — visão geral e roadmap
 - `Docs/Tech/DevelopmentRules.md` — branches, commits, merge, versionamento
-- `Braziliation.CI.sln` + `Tests/Braziliation.Game.Tests/` — testes .NET no CI (sem Unity no runner); pasta `Tests/` com **T** maiúsculo
+- `Braziliation.CI.sln` + `dotnet-tests/Braziliation.Game.Tests/` — testes .NET no CI (sem Unity no runner)

@@ -4,12 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
-- `Braziliation.CI.sln` e `Tests/Braziliation.Game.Tests/`: projeto de testes **NUnit** (.NET 8) que valida layout do repositório (Unity 6, `ProjectVersion.txt`, `GameInitializer`, solution Unity). Pasta **`Tests/`** com **T** maiúsculo (CI em Linux é case-sensitive).
+- `dotnet-tests/Braziliation.Game.Tests/`: testes **NUnit** (.NET 8) para CI, **fora** de `Tests/` na raiz (essa pasta costuma ser Unity ou ficar sem o `.csproj` no Git).
 ### Changed
-- **CI (GitHub Actions / GitLab)**: resolução do caminho do `.csproj` com preferência por `Tests/` e fallback `tests/`; alinhado ao nome real da pasta no Git.
-- `Braziliation.CI.sln`: caminho do projeto com barras `/` para compatibilidade Linux.
-- `Braziliation.sln`: cabeçalho atualizado para Visual Studio 2022 (`# Visual Studio Version 17`).
-- `.gitignore`: `Tests/**/bin/` e `Tests/**/obj/`; já ignorava `Logs/`, `Braziliation/Logs/`, `.plastic/` e `ignore.conf`.
+- **CI (GitHub Actions / GitLab)**: preferência `dotnet-tests/…`, depois `Tests/…` e `tests/…`, mais `find` como último recurso; mensagens de diagnóstico se faltar o `.csproj`.
+- `Braziliation.CI.sln`: referencia `dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj`.
+- `Braziliation.sln`: cabeçalho Visual Studio 2022 (`# Visual Studio Version 17`).
+- `.gitignore`: `dotnet-tests/**/bin/` e `dotnet-tests/**/obj/`.
 ### Removed
 - Metadados locais do Plastic em `.plastic/` (projeto usa Git).
 - `ignore.conf` (configuração Plastic).
