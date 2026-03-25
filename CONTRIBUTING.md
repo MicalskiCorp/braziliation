@@ -18,3 +18,8 @@
 ## Estilo de código
 Siga as convenções C# (Microsoft Style).  
 Antes de commit, rode `dotnet format`.
+
+## Hooks e ferramentas recomendadas
+- **dotnet format** — formatação de C#
+- **StyleCop / EditorConfig** — regras de estilo (quando configurados no projeto)
+- **pre-commit hooks** — opcional: rodar linter/testes antes do commit
