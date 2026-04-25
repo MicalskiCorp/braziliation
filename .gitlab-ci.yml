@@ -1,5 +1,5 @@
 # CI GitLab — testes .NET (sem Unity no runner)
-# Caminho canónico: dotnet-tests/Braziliation.Game.Tests/ (evita conflito com Tests/ na raiz)
+# Caminho preferencial atual: Tests/Braziliation.Game.Tests/
 
 variables:
   DOTNET_CLI_TELEMETRY_OPTOUT: "1"
@@ -38,7 +38,7 @@ dotnet-test:
         fi
       fi
       if [[ -z "$FOUND" ]] || [[ ! -f "$FOUND" ]]; then
-        echo "ERRO: Braziliation.Game.Tests.csproj não encontrado — commit dotnet-tests/Braziliation.Game.Tests/"
+        echo "ERRO: Braziliation.Game.Tests.csproj não encontrado — commit Tests/Braziliation.Game.Tests/"
         ls -la
         ls -la dotnet-tests 2>/dev/null || true
         ls -la Tests 2>/dev/null || true

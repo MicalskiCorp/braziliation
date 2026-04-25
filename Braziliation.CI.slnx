@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Braziliation.Game.Core/Braziliation.Game.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj" />
+  </Folder>
+</Solution>

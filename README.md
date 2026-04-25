@@ -13,10 +13,10 @@ Jogo plataforma 2D em pixel art (C#) — ambientação dieselpunk pós-apocalíp
 - `Docs/` → GDD, arquitetura, lore, mecânicas e docs técnicos
 - `scripts/` → Scripts de setup/versionamento (PowerShell, shell)
 - `Packages/` / `ProjectSettings/` → Unity (não mover)
-- `Braziliation.sln` → solution gerada/usada com **Assembly-CSharp** (Unity / IDE)
-- `Braziliation.CI.sln` → solution opcional com os testes .NET (útil no IDE)
-- **`dotnet-tests/Braziliation.Game.Tests/`** → testes .NET para o CI (pasta **fora** de `Tests/` na raiz, que costuma ser Unity ou ficar vazia no Git)
-- **CI (GitHub / GitLab)** → `dotnet restore/build/test` nesse `.csproj`; o workflow aceita caminhos antigos (`Tests/…`, `tests/…`) ou `find` como último recurso
+- `Braziliation.slnx` → solution principal (Assembly-CSharp + Core + Tests)
+- `Braziliation.CI.slnx` → solution opcional com os testes .NET (útil no IDE)
+- **`Tests/Braziliation.Game.Tests/`** → testes .NET para o CI
+- **CI (GitHub / GitLab)** → `dotnet restore/build/test` nesse `.csproj`; o workflow aceita variações de caminho por compatibilidade
 
 ### Limpeza local (logs)
 A pasta `Logs/` na raiz é gerada pelo Unity e está no `.gitignore`. Se quiser apagá-la, **feche o editor Unity** e remova `Logs/` manualmente (arquivos podem ficar bloqueados com o projeto aberto).

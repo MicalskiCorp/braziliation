@@ -4,12 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
-- `dotnet-tests/Braziliation.Game.Tests/`: testes **NUnit** (.NET 8) para CI, **fora** de `Tests/` na raiz (essa pasta costuma ser Unity ou ficar sem o `.csproj` no Git).
+- `Tests/Braziliation.Game.Tests/`: testes **NUnit** (.NET 8) para CI.
 ### Changed
-- **CI (GitHub Actions / GitLab)**: preferência `dotnet-tests/…`, depois `Tests/…` e `tests/…`, mais `find` como último recurso; mensagens de diagnóstico se faltar o `.csproj`.
-- `Braziliation.CI.sln`: referencia `dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj`.
-- `Braziliation.sln`: cabeçalho Visual Studio 2022 (`# Visual Studio Version 17`).
-- `.gitignore`: `dotnet-tests/**/bin/` e `dotnet-tests/**/obj/`.
+- **CI (GitHub Actions / GitLab)**: detecção com fallback de caminhos (`Tests/…`, `tests/…`, `dotnet-tests/…`) e diagnóstico quando faltar o `.csproj`.
+- `Braziliation.CI.slnx`: referencia `Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj`.
+- `Braziliation.slnx`: inclui `Assembly-CSharp`, `src/Braziliation.Game.Core` e `Tests/Braziliation.Game.Tests`.
+- `.gitignore`: ignora `bin/` e `obj/` também sob `Tests/**`.
 ### Removed
 - Metadados locais do Plastic em `.plastic/` (projeto usa Git).
 - `ignore.conf` (configuração Plastic).

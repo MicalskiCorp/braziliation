@@ -1,73 +1,53 @@
 # AI-Assisted Development – Braziliation
 
-This folder supports **AI-assisted development** in Cursor: agent roles, context, prompt templates, and shared memory so that you and AI agents work in a consistent, scalable way.
+Esta pasta suporta o desenvolvimento assistido por **VS Code Copilot**: contexto, templates de prompt e memoria compartilhada.
 
 ## Folder structure
 
-| Folder      | Purpose |
-|------------|---------|
-| **Agents/** | Role definitions (Tech Lead, Architect, Unity Engineer, Gameplay Engineer, QA). Use these to “become” a role in the chat. |
-| **Context/** | Game vision, art direction, coding standards. Reference in prompts so the model stays on-theme and on-standards. |
-| **Prompts/** | Reusable prompt templates (create feature, refactor, review, design enemy). Copy into Cursor and fill in. |
-| **Memory/** | Shared memory: architecture decisions (ADRs), roadmap, tech debt. Update as the project evolves. |
+| Pasta | Propósito | Copilot |
+|-------|-----------|---------|
+| **Context/** | Visão do jogo, direção de arte, padrões de código. Arquivos de referência bruta para agentes e contexto explícito. | — |
+| **Memory/** | Documentos vivos: ADRs, roadmap, tech debt. Atualize conforme o projeto evolui. | — |
+| **Prompts/** | *(Legado/referência)* Templates convertidos para `.github/prompts/`. | — |
 
-## How to use Cursor agents for this project
+> **Arquivos ativos para VS Code Copilot estão em `.github/`:**
+> - `.github/agents/` — 10 agentes `.agent.md` (acione via `@NomeDoAgente`)
+> - `.github/instructions/` — 3 instruções auto-aplicadas
+> - `.github/prompts/` — 5 prompts de tarefa (acione via `/`)
 
-1. **Set the role** – At the start of a task, tell Cursor to adopt a role by referencing the right agent file, e.g. “You are the Tech Lead for Braziliation. Follow the role and responsibilities in `AI/Agents/tech_lead.md`.”
-2. **Add context** – For design or code tasks, attach or mention `AI/Context/game_vision.md`, `AI/Context/coding_standards.md`, or `Docs/Architecture/AssetsStructure.md` so answers stay aligned with the project.
-3. **Use templates** – For features, refactors, or reviews, open the matching file under `AI/Prompts/`, copy the template, fill in the bracketed parts, and paste into the chat.
-4. **Keep memory updated** – When you or an agent make a structural decision, add an ADR to `AI/Memory/architecture_decisions.md`. When you notice tech debt, add it to `AI/Memory/tech_debt.md`. Keep `AI/Memory/roadmap.md` in sync with priorities.
-5. **One role per thread** – For complex work, use one agent role per conversation (e.g. Architect for structure, then Gameplay Engineer for implementation) to avoid mixed instructions.
+## Como usar com VS Code Copilot
 
-## Example prompts: how to call each agent
+1. **Acione o agente** — Digite `@NomeDoAgente` no chat.
+2. **Use slash prompts** — Digite `/` no chat e selecione: `create-feature`, `design-enemy`, `refactor-system`, `review-code`, `project-context`.
+3. **Instruções auto-aplicadas** — `coding-standards` é injetado automaticamente em arquivos `.cs`; `game-vision` e `art-direction` são carregados sob demanda.
+4. **Atualize a memoria** — Decisões em `AI/Memory/architecture_decisions.md`. Tech debt em `AI/Memory/tech_debt.md`.
+5. **Um agente por thread** – Para trabalho complexo, use um agente por conversa.
 
-Use these in Cursor chat. You can @-mention the agent file or paste its path so the model loads the role.
+## Agentes disponiveis (.github/agents/)
 
----
+“”
+## Agentes disponiveis (.github/agents/)
 
-### Tech Lead
+| Agente | Use quando |
+|--------|------------|
+| `@TechLead` | Direcao tecnica, padroes, routing entre agentes |
+| `@Architect` | Limites de sistema, interfaces, ADRs |
+| `@UnityEngineer` | Setup de engine: URP, Input System, camera, physics |
+| `@UnityDeveloper` | UI controllers, ServiceLocator, MonoBehaviours |
+| `@SystemsDeveloper` | Sistemas C# puros: save, settings, storage |
+| `@GameplayEngineer` | Player, inimigos, combate, mecanicas de mundo |
+| `@QAEngineer` | Revisao, edge cases, acceptance criteria |
+| `@TestEngineer` | Testes xUnit automatizados |
+| `@GameArquitetoMarkdown` | Estrutura de docs Markdown, indices, features, sistemas |
+| `@GameCriativoMarkdown` | Lendas, brainstorm, personagens, arcos narrativos |
 
-- *“Act as the Tech Lead for Braziliation. Read `AI/Agents/tech_lead.md` and follow it. I want to add a save system: what should we document first, and where should the code live?”*
-- *“You are the Tech Lead (see AI/Agents/tech_lead.md). Review our current Scripts folder structure and suggest how to align it with Docs/Architecture/AssetsStructure.md without breaking existing scenes.”*
+Para **novas features**: comece com `@TechLead` ou `@Architect`; depois `@GameplayEngineer` ou `@UnityEngineer`. Para **revisoes**: use `@QAEngineer`.
 
----
 
-### Architect
 
-- *“Act as the Architect for Braziliation (AI/Agents/architect.md). Propose a combat system: which components, which interfaces (e.g. IDamageable), and where they live under Assets/Scripts.”*
-- *“You are the Architect. We’re adding an inventory. Define the boundaries between Inventory, UI, and World; suggest namespaces and one ADR for AI/Memory/architecture_decisions.md.”*
 
----
 
-### Unity Engineer
 
-- *“Act as the Unity Engineer (AI/Agents/unity_engineer.md). Implement a simple pause menu that freezes time and shows a panel, using the existing Input System and UI.”*
-- *“You are the Unity Engineer. Our pixel camera is 320×180 at 16 PPU. Add a script that keeps the player within the visible play area and suggest where to put it in Assets/Scripts.”*
 
----
 
-### Gameplay Engineer
 
-- *“Act as the Gameplay Engineer (AI/Agents/gameplay_engineer.md). Implement double jump using the existing input actions and movement script. Follow Docs/Mechanics/player_controls.md if it exists, or propose the rule.”*
-- *“You are the Gameplay Engineer. Use the template in AI/Prompts/design_enemy.md to design and implement a basic ‘Crawler’ enemy: patrol, chase, melee contact damage. Reference Docs/Lore for tone.”*
-
----
-
-### QA Engineer
-
-- *“Act as the QA Engineer (AI/Agents/qa_engineer.md). Review the player movement script in Assets/Scripts/ for edge cases, null safety, and alignment with AI/Context/coding_standards.md.”*
-- *“You are the QA Engineer. I added a new weapon. List acceptance criteria and test cases (happy path + edge cases) and suggest one entry for AI/Memory/tech_debt.md if you see debt.”*
-
----
-
-## Quick reference: when to use which agent
-
-| Need | Prefer |
-|------|--------|
-| Direction, standards, doc updates | Tech Lead |
-| System boundaries, interfaces, ADRs | Architect |
-| Unity setup, input, camera, editor tools | Unity Engineer |
-| Player, enemies, combat, world logic | Gameplay Engineer |
-| Review, test cases, tech debt list | QA Engineer |
-
-For **new features**, start with Tech Lead or Architect if the feature touches structure; then use Gameplay or Unity Engineer for implementation. For **reviews**, use QA Engineer or Tech Lead.

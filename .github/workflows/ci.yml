@@ -35,7 +35,7 @@ jobs:
         run: |
           set -euo pipefail
           cd "$GITHUB_WORKSPACE"
-          # Ordem: caminho canónico primeiro (fora de Tests/, que no remoto pode estar vazio ou ser só Unity)
+          # Ordem preferencial + compatibilidade com layouts antigos
           CANDIDATES=(
             "dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
             "Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
@@ -55,7 +55,7 @@ jobs:
             fi
           fi
           if [[ -z "$FOUND" ]] || [[ ! -f "$FOUND" ]]; then
-            echo "::error::Braziliation.Game.Tests.csproj não encontrado. Faça commit de dotnet-tests/Braziliation.Game.Tests/ (ver README)."
+            echo "::error::Braziliation.Game.Tests.csproj não encontrado. Verifique o commit de Tests/Braziliation.Game.Tests/ (ver README)."
             echo "--- ls -la (raiz) ---"
             ls -la
             echo "--- dotnet-tests/ ---"
