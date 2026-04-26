@@ -33,12 +33,12 @@ Assets/
 ### Art/
 
 - **Purpose:** All visual art assets (sprites, tiles, animations, UI art).
-- **Contents:** Character sprites, environment tiles, props, VFX sprites, UI graphics. Use subfolders e.g. Characters, Environment, Props, UI (already present). Keep 16 PPU and pixel-art pipeline in mind; see AI/Context/art_direction.md.
+- **Contents:** Character sprites, environment tiles, props, VFX sprites, UI graphics. Use subfolders e.g. Characters, Environment, Props, UI (already present). Keep 16 PPU and pixel-art pipeline in mind; see `.github/instructions/art-direction.instructions.md`.
 
 ### Audio/
 
 - **Purpose:** Music and sound effects.
-- **Contents:** Subfolders such as Music, SFX. Naming and organization should support per-level or per-system use; see AI/Context/art_direction.md for tone.
+- **Contents:** Subfolders such as Music, SFX. Naming and organization should support per-level or per-system use; see `.github/instructions/art-direction.instructions.md` for tone.
 
 ### Prefabs/
 

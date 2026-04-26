@@ -21,5 +21,5 @@
 ## Frequência de Atualização
 
 - Ao criar um novo script → adicionar ao índice do sistema correspondente
-- Ao renomear/mover um script → atualizar todos os links em `docs/IA/Sistemas/`
+- Ao renomear/mover um script → atualizar todos os links em `Docs/Architecture/Sistemas/`
 - Na Varredura Automática (Modo 6) → verificar gaps automaticamente

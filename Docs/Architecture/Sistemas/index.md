@@ -1,8 +1,8 @@
 # Sistemas — Módulos Técnicos do Braziliation
 
-> Um arquivo por sistema técnico do jogo. Ligado a [`../../estrutura/indices/sistemas.md`](../../estrutura/indices/sistemas.md).
+> Um arquivo por sistema técnico do jogo. Ligado a [`../indices/sistemas.md`](../indices/sistemas.md).
 > Para criar: `@GameArquitetoMarkdown Novo sistema: {Nome}`
-> Template: [`../Models/ModelSistema.md`](../Models/ModelSistema.md)
+> Template: [`../../Models/ModelSistema.md`](../../Models/ModelSistema.md)
 
 ## Conteúdo
 

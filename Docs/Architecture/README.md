@@ -20,4 +20,4 @@ This folder holds **technical architecture** documentation: system boundaries, d
 
 - **Architect** and **Tech Lead** maintain these docs.
 - **Unity Engineer** and **Gameplay Engineer** place new code according to AssetsStructure.md and system boundaries.
-- **ADR** entries for big structural decisions live in AI/Memory/architecture_decisions.md.
+- **ADR** entries for big structural decisions live in `Docs/Architecture/architecture_decisions.md`.

@@ -9,13 +9,12 @@ Jogo plataforma 2D em pixel art (C#) — ambientação dieselpunk pós-apocalíp
 
 ## 📂 Pastas principais
 - `Assets/` → Cenas, arte, áudio, scripts C# (`Assets/Scripts/`), configuração URP
-- `AI/` → Agentes, contexto, prompts e memória para desenvolvimento com Cursor
-- `Docs/` → GDD, arquitetura, lore, mecânicas e docs técnicos
+- `Docs/` → GDD, arquitetura, lore, mecânicas, roadmap e docs técnicos
 - `scripts/` → Scripts de setup/versionamento (PowerShell, shell)
 - `Packages/` / `ProjectSettings/` → Unity (não mover)
 - `Braziliation.slnx` → solution principal (Assembly-CSharp + Core + Tests)
 - `Braziliation.CI.slnx` → solution opcional com os testes .NET (útil no IDE)
-- **`Tests/Braziliation.Game.Tests/`** → testes .NET para o CI
+- **`dotnet-tests/Braziliation.Game.Tests/`** → testes .NET para o CI
 - **CI (GitHub / GitLab)** → `dotnet restore/build/test` nesse `.csproj`; o workflow aceita variações de caminho por compatibilidade
 
 ### Limpeza local (logs)
@@ -32,22 +31,21 @@ Consulte o ClickUp: (link do espaço do projeto)
 
 ---
 
-## 🤖 Desenvolvimento assistido por IA (Cursor)
+## 🤖 Desenvolvimento assistido por IA (VS Code Copilot)
 
-O repositório inclui uma estrutura para **desenvolvimento assistido por agentes de IA** no Cursor, sem alterar a organização Unity (Assets, Packages, ProjectSettings).
+O repositório usa **VS Code Copilot** com agentes, instructions e prompts customizados em `.github/`.
 
-### Estrutura AI/
+### Estrutura em `.github/`
 
-- **AI/Agents/** – Definições de papéis: Tech Lead, Architect, Unity Engineer, Gameplay Engineer, QA Engineer. Use esses arquivos para que o modelo atue como cada papel.
-- **AI/Context/** – Visão do jogo, direção de arte, padrões de código. Consulte em prompts para manter respostas alinhadas ao projeto.
-- **AI/Prompts/** – Modelos de prompt reutilizáveis: criar feature, refatorar sistema, revisar código, desenhar inimigo.
-- **AI/Memory/** – Memória compartilhada: decisões de arquitetura (ADRs), roadmap, tech debt. Atualize conforme o projeto evolui.
+- **`.github/agents/`** — 10 agentes especializados: `@TechLead`, `@Architect`, `@UnityEngineer`, `@UnityDeveloper`, `@SystemsDeveloper`, `@GameplayEngineer`, `@QAEngineer`, `@TestEngineer`, `@GameArquitetoMarkdown`, `@GameCriativoMarkdown`.
+- **`.github/instructions/`** — 3 instruções: `game-vision` (on-demand), `coding-standards` (auto-injetada em `.cs`), `art-direction` (on-demand).
+- **`.github/prompts/`** — 5 templates: `/create-feature`, `/design-enemy`, `/refactor-system`, `/review-code`, `/project-context`.
 
-### Como usar os agentes no Cursor
+### Como usar
 
-1. **Definir o papel** – No início da tarefa, peça ao Cursor que adote um papel citando o arquivo em `AI/Agents/` (ex.: `AI/Agents/tech_lead.md`).
-2. **Incluir contexto** – Para tarefas de design ou código, mencione ou anexe `AI/Context/` ou `Docs/Architecture/AssetsStructure.md`.
-3. **Usar templates** – Para features, refactors ou reviews, use os arquivos em `AI/Prompts/`, preencha os campos e cole no chat.
-4. **Manter a memória** – Decisões estruturais → `AI/Memory/architecture_decisions.md`; tech debt → `AI/Memory/tech_debt.md`; prioridades → `AI/Memory/roadmap.md`.
+1. **Acionar agente** — Digite `@NomeDoAgente` no chat do Copilot.
+2. **Usar template** — Digite `/` no chat e selecione o prompt.
+3. **Calibrar sessão** — Use `/project-context` para carregar todo o contexto do projeto.
+4. **Atualizar docs** — Decisões de arquitetura → `Docs/Architecture/architecture_decisions.md`; tech debt → `Docs/Tech/tech_debt.md`.
 
-**Guia completo e exemplos de prompts:** [AI/README.md](AI/README.md)
+**Guia completo:** [AGENTS.md](AGENTS.md) | [Docs/index.md](Docs/index.md)

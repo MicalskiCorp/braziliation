@@ -4,7 +4,7 @@ This folder holds the **Game Design Document** and related design specs for Braz
 
 ## Purpose
 
-- Define **vision**, **pillars**, and **target experience** (see also AI/Context/game_vision.md).
+- Define **vision**, **pillars**, and **target experience** (see also `.github/instructions/game-vision.instructions.md`).
 - Describe **features**, **modes**, and **content** (levels, characters, items).
 - Provide a single source of truth for “what the game is” so implementation and AI agents stay aligned.
 
@@ -20,4 +20,4 @@ This folder holds the **Game Design Document** and related design specs for Braz
 ## Usage
 
 - **Gameplay Engineer** and **Tech Lead** should reference GDD when implementing or reviewing features.
-- Update GDD when design decisions change; keep AI/Context/game_vision.md in sync for high-level direction.
+- Update GDD when design decisions change; keep `.github/instructions/game-vision.instructions.md` in sync for high-level direction.
