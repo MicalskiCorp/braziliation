@@ -6,7 +6,7 @@
 
 | # | Nome do Arco | Localização / Cenário | Status | Lendas Envolvidas |
 |---|--------------|----------------------|--------|------------------|
-| *(nenhum criado)* | — | — | — | — |
+| SQ-01 | *Os Gatos de Edith* | Blumenau (Die Unterwelt) + mapa geral de SC | 📋 Rascunho | História real — Edith Gaertner |
 
 ---
 

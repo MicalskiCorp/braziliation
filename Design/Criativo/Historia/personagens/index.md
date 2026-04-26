@@ -7,7 +7,7 @@
 
 | Personagem | Papel | Lenda Associada | Status |
 |------------|-------|-----------------|--------|
-| *(nenhum criado)* | — | — | — |
+| [Edith Gaertner](Edith-Gaertner.md) | NPC espectral — dadora de quest `SQ-01` | História real (Cemitério dos Gatos, Blumenau) | 📋 Rascunho |
 
 ---
 

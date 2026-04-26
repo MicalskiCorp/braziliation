@@ -17,7 +17,8 @@
 | Definir tom e atmosfera narrativa | [`Historia/premissa.md`](Historia/premissa.md) | Média | 📋 Rascunho |
 | Listar referências de obras | [`Historia/premissa.md`](Historia/premissa.md) | Baixa | 📋 Rascunho |
 | Criar arco: *A Rede Esquecida* — meta-arco dos túneis intercidades | [`Historia/arcos.md`](Historia/arcos.md) | Alta | ❌ Não iniciado |
-| Criar primeiro personagem | [`Historia/personagens/index.md`](Historia/personagens/index.md) | Média | ❌ Não iniciado |
+| Criar primeiro personagem (protagonista) | [`Historia/personagens/index.md`](Historia/personagens/index.md) | Média | ❌ Não iniciado |
+| Criar arquivo de personagem: Edith Gaertner — expandir diálogos e arte conceitual | [`Historia/personagens/Edith-Gaertner.md`](Historia/personagens/Edith-Gaertner.md) | Média | 📋 Rascunho |
 
 ### Lendas
 
@@ -78,6 +79,7 @@
 | Túnel de Blumenau — nome e razão histórica definidos (*Unterwasser-Gang*) | 2026-04-26 |
 | Túnel de Florianópolis — nome e razão histórica definidos (*Corredor da Fortaleza*) | 2026-04-26 |
 | Sessão de brainstorm: expansão de Blumenau — sistema de túneis intercidades | 2026-04-26 |
+| Blumenau — Cemitério dos Gatos: missão SQ-01 documentada, NPC Edith Gaertner criado | 2026-04-26 |
 
 ---
 

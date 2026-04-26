@@ -8,7 +8,7 @@
 
 | Feature | Descrição | Status |
 |---------|-----------|--------|
-| *(nenhuma documentada ainda)* | — | — |
+| Side-quest: Os Gatos de Edith `SQ-01` | Coleta de 41 gatos espectrais pelo mapa como coleccionáveis (pingentes). NPC Edith Gaertner em Blumenau. Recompensa com item a definir. | 📋 A documentar |
 
 ---
 
