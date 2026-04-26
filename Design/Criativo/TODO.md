@@ -16,7 +16,7 @@
 | Definir protagonista (nome, motivação, conflito) | [`Historia/premissa.md`](Historia/premissa.md) | Alta | 📋 Rascunho |
 | Definir tom e atmosfera narrativa | [`Historia/premissa.md`](Historia/premissa.md) | Média | 📋 Rascunho |
 | Listar referências de obras | [`Historia/premissa.md`](Historia/premissa.md) | Baixa | 📋 Rascunho |
-| Criar primeiro arco narrativo | [`Historia/arcos.md`](Historia/arcos.md) | Alta | ❌ Não iniciado |
+| Criar arco: *A Rede Esquecida* — meta-arco dos túneis intercidades | [`Historia/arcos.md`](Historia/arcos.md) | Alta | ❌ Não iniciado |
 | Criar primeiro personagem | [`Historia/personagens/index.md`](Historia/personagens/index.md) | Média | ❌ Não iniciado |
 
 ### Lendas
@@ -40,6 +40,10 @@
 | Popular ficha completa de Lages | [`Estados/SantaCatarina/cidades/Lages/index.md`](Estados/SantaCatarina/cidades/Lages/index.md) | Alta | 📋 Rascunho |
 | Definir nome no game e Punk Genre de Guabiruba | [`Estados/SantaCatarina/cidades/Guabiruba/index.md`](Estados/SantaCatarina/cidades/Guabiruba/index.md) | Alta | 📋 Rascunho |
 | Popular ficha completa de Guabiruba | [`Estados/SantaCatarina/cidades/Guabiruba/index.md`](Estados/SantaCatarina/cidades/Guabiruba/index.md) | Alta | 📋 Rascunho |
+| Elaborar descrição da cidade de Florianópolis no futuro distópico | [`Estados/SantaCatarina/cidades/Florianopolis/index.md`](Estados/SantaCatarina/cidades/Florianopolis/index.md) | Alta | 📋 Rascunho |
+| Detalhar monstros de Florianópolis (Bruxa, Mariposa, Boi Tatá, Animal Marinho) | [`Estados/SantaCatarina/cidades/Florianopolis/index.md`](Estados/SantaCatarina/cidades/Florianopolis/index.md) | Alta | 📋 Rascunho |
+| Definir nome e razão histórica do túnel de Lages | [`Estados/SantaCatarina/cidades/Lages/index.md`](Estados/SantaCatarina/cidades/Lages/index.md) | Média | ❌ Não iniciado |
+| Definir nome e razão histórica do túnel de Guabiruba | [`Estados/SantaCatarina/cidades/Guabiruba/index.md`](Estados/SantaCatarina/cidades/Guabiruba/index.md) | Média | ❌ Não iniciado |
 | Criar cidade: Joinville (IndustrialPunk) | [`Estados/SantaCatarina/cidades/`](Estados/SantaCatarina/cidades/) | Média | ❌ Não iniciado |
 | Criar cidade: Criciúma (CoalPunk) | [`Estados/SantaCatarina/cidades/`](Estados/SantaCatarina/cidades/) | Média | ❌ Não iniciado |
 | Criar cidade: São Francisco do Sul (PiratePunk) | [`Estados/SantaCatarina/cidades/`](Estados/SantaCatarina/cidades/) | Baixa | ❌ Não iniciado |
@@ -70,6 +74,10 @@
 | Bootstrap da estrutura `Design/Criativo/` | 2026-04-25 |
 | Mapeamento inicial de Santa Catarina (4 cidades) | 2026-04-25 |
 | Catálogo de 6 lendas catarinenses | 2026-04-25 |
+| Túnel Blumenau ↔ Florianópolis documentado (*Unterwasser-Gang* + *Corredor da Fortaleza*) | 2026-04-26 |
+| Túnel de Blumenau — nome e razão histórica definidos (*Unterwasser-Gang*) | 2026-04-26 |
+| Túnel de Florianópolis — nome e razão histórica definidos (*Corredor da Fortaleza*) | 2026-04-26 |
+| Sessão de brainstorm: expansão de Blumenau — sistema de túneis intercidades | 2026-04-26 |
 
 ---
 

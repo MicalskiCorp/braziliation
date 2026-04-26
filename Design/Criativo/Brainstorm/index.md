@@ -7,7 +7,7 @@
 
 | Data | Tema | Arquivo | Ideias Geradas | Aproveitadas |
 |------|------|---------|---------------|-------------|
-| *(nenhuma sessão)* | — | — | — | — |
+| 2026-04-26 | Expansão de Blumenau — Die Unterwelt | [`sessoes/2026-04-26-blumenau.md`](sessoes/2026-04-26-blumenau.md) | Em andamento | — |
 
 ---
 
