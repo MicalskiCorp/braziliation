@@ -5,7 +5,7 @@ Jogo plataforma 2D em pixel art (C#) — ambientação dieselpunk pós-apocalíp
 - Engine: Unity / MonoGame (C#)
 - Linguagem: C#
 - Estilo: Pixel Art (paleta restrita para estilo SNES)
-- Plataforma alvo: PC / SNES (EverDrive) - dependendo do build target
+- Plataforma alvo: PC - dependendo do build target
 
 ## 📂 Pastas principais
 - `Assets/` → Cenas, arte, áudio, scripts C# (`Assets/Scripts/`), configuração URP
