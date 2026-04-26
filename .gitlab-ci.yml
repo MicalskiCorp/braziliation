@@ -1,5 +1,5 @@
 # CI GitLab — testes .NET (sem Unity no runner)
-# Caminho preferencial atual: Tests/Braziliation.Game.Tests/
+# Caminho preferencial atual: Desenvolvimento/dotnet-tests/Braziliation.Game.Tests/
 
 variables:
   DOTNET_CLI_TELEMETRY_OPTOUT: "1"
@@ -20,9 +20,9 @@ dotnet-test:
     - |
       set -euo pipefail
       CANDIDATES=(
-        "dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
-        "Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
-        "tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+        "Desenvolvimento/dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+        "Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+        "Desenvolvimento/tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
       )
       FOUND=""
       for p in "${CANDIDATES[@]}"; do
@@ -46,7 +46,7 @@ dotnet-test:
       fi
       export TEST_PROJECT="$FOUND"
       echo "Using: $TEST_PROJECT"
-    - test -f "ProjectSettings/ProjectVersion.txt" || echo "Aviso: layout Unity não detetado (opcional para estes testes)."
+    - test -f "Desenvolvimento/ProjectSettings/ProjectVersion.txt" || echo "Aviso: layout Unity não detetado (opcional para estes testes)."
   script:
     - dotnet restore "$TEST_PROJECT"
     - dotnet build "$TEST_PROJECT" --configuration Release --no-restore

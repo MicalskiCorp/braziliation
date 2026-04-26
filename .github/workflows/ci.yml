@@ -24,7 +24,7 @@ jobs:
       - name: Detect Unity project layout
         id: unity
         run: |
-          if [ -f "ProjectSettings/ProjectVersion.txt" ]; then
+          if [ -f "Desenvolvimento/ProjectSettings/ProjectVersion.txt" ]; then
             echo "unity=true" >> $GITHUB_OUTPUT
           else
             echo "unity=false" >> $GITHUB_OUTPUT
@@ -37,9 +37,9 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           # Ordem preferencial + compatibilidade com layouts antigos
           CANDIDATES=(
-            "dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
-            "Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
-            "tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+            "Desenvolvimento/dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+            "Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+            "Desenvolvimento/tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
           )
           FOUND=""
           for p in "${CANDIDATES[@]}"; do
@@ -58,10 +58,10 @@ jobs:
             echo "::error::Braziliation.Game.Tests.csproj não encontrado. Verifique o commit de Tests/Braziliation.Game.Tests/ (ver README)."
             echo "--- ls -la (raiz) ---"
             ls -la
-            echo "--- dotnet-tests/ ---"
-            ls -la dotnet-tests 2>/dev/null || echo "(ausente)"
-            echo "--- Tests/ ---"
-            ls -la Tests 2>/dev/null || echo "(ausente)"
+            echo "--- Desenvolvimento/dotnet-tests/ ---"
+            ls -la Desenvolvimento/dotnet-tests 2>/dev/null || echo "(ausente)"
+            echo "--- Desenvolvimento/Tests/ ---"
+            ls -la Desenvolvimento/Tests 2>/dev/null || echo "(ausente)"
             echo "--- find *Game.Tests*.csproj ---"
             find . -name '*.Game.Tests.csproj' -type f ! -path './.git/*' 2>/dev/null || true
             exit 1
