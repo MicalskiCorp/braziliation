@@ -1,7 +1,7 @@
 # TODO — Pendências Criativas do Braziliation
 
 > Índice central de tarefas pendentes na camada Design. Atualizar a cada sessão de trabalho.
-> Agente responsável: `@DesignTODO` — executa e delega tarefas para `@GameCriativoMarkdown`.
+> Agente responsável: `@GameCriativoMarkdown` — modos 1 a 10 + Passo 0 / Passo Final.
 
 ---
 
@@ -73,6 +73,6 @@
 
 ---
 
-> **Executar pendência:** `@DesignTODO executar: {item}`
-> **Adicionar pendência:** `@DesignTODO adicionar: {descrição} — {arquivo} — {prioridade}`
-> **Varredura automática:** `@DesignTODO varredura`
+> **Executar pendência:** `@GameCriativoMarkdown TODOs: executar: {item}`
+> **Adicionar pendência:** `@GameCriativoMarkdown TODOs: adicionar: {descrição} — {arquivo} — {prioridade}`
+> **Varredura automática:** `@GameCriativoMarkdown TODOs: varredura`
