@@ -21,37 +21,65 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Detect Unity project
+      - name: Detect Unity project layout
         id: unity
         run: |
-          if [ -f "Assets/ProjectSettings/ProjectVersion.txt" ]; then
+          if [ -f "ProjectSettings/ProjectVersion.txt" ]; then
             echo "unity=true" >> $GITHUB_OUTPUT
           else
             echo "unity=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Restore/Build/Test using Braziliation.sln (if not Unity)
-        if: steps.unity.outputs.unity != 'true'
+      - name: Resolve test project (.csproj)
+        shell: bash
         run: |
-          if [ -f "Braziliation.sln" ]; then
-            if grep -q "Assembly-CSharp.csproj" Braziliation.sln; then
-              echo "Detected Unity solution (Assembly-CSharp) — skipping .NET build."
-            else
-              echo "Using Braziliation.sln — restoring..."
-              dotnet restore Braziliation.sln
-              echo "Building solution..."
-              dotnet build Braziliation.sln --configuration Release --no-restore
-              echo "Running tests (if present)..."
-              dotnet test Braziliation.sln --no-build --verbosity normal || true
+          set -euo pipefail
+          cd "$GITHUB_WORKSPACE"
+          # Ordem preferencial + compatibilidade com layouts antigos
+          CANDIDATES=(
+            "dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+            "Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+            "tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+          )
+          FOUND=""
+          for p in "${CANDIDATES[@]}"; do
+            if [[ -f "$p" ]]; then
+              FOUND="$p"
+              break
             fi
-          else
-            echo "Braziliation.sln not found — skipping dotnet steps."
+          done
+          if [[ -z "$FOUND" ]]; then
+            mapfile -t hits < <(find . -name 'Braziliation.Game.Tests.csproj' -type f ! -path './.git/*' 2>/dev/null || true)
+            if [[ ${#hits[@]} -gt 0 ]]; then
+              FOUND="${hits[0]#./}"
+            fi
           fi
+          if [[ -z "$FOUND" ]] || [[ ! -f "$FOUND" ]]; then
+            echo "::error::Braziliation.Game.Tests.csproj não encontrado. Verifique o commit de Tests/Braziliation.Game.Tests/ (ver README)."
+            echo "--- ls -la (raiz) ---"
+            ls -la
+            echo "--- dotnet-tests/ ---"
+            ls -la dotnet-tests 2>/dev/null || echo "(ausente)"
+            echo "--- Tests/ ---"
+            ls -la Tests 2>/dev/null || echo "(ausente)"
+            echo "--- find *Game.Tests*.csproj ---"
+            find . -name '*.Game.Tests.csproj' -type f ! -path './.git/*' 2>/dev/null || true
+            exit 1
+          fi
+          echo "TEST_PROJECT=$FOUND" >> "$GITHUB_ENV"
+          echo "Using test project: $FOUND"
 
-      - name: Skip dotnet for Unity
-        if: steps.unity.outputs.unity == 'true'
+      - name: Restore, build and test (.NET tests project)
         run: |
-          echo "Unity project detected — skipping dotnet restore/build/test."
+          dotnet restore "$TEST_PROJECT"
+          dotnet build "$TEST_PROJECT" --configuration Release --no-restore
+          dotnet test "$TEST_PROJECT" --configuration Release --no-build --verbosity normal
 
       - name: Post-check
-        run: echo "CI completed."
+        run: |
+          if [ "${{ steps.unity.outputs.unity }}" = "true" ]; then
+            echo "Unity project detected — gameplay C# builds in the Unity Editor; CI validated repository layout and .NET tests."
+          else
+            echo "ProjectSettings/ProjectVersion.txt not found — .NET tests ran against the current tree."
+          fi
+          echo "CI completed."

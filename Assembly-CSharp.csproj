@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
   <PropertyGroup>
@@ -9,7 +9,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{DC76BDF8-3961-F742-0335-365D96C7F292}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -61,8 +62,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.2.8f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\Menu\MainMenuUISetupEditor.cs" />
+    <Compile Include="Assets\Editor\Menu\MenuBackgroundSetupEditor.cs" />
     <Compile Include="Assets\Scripts\Core\GameInitializer.cs" />
     <Compile Include="Assets\Scripts\Core\CameraScaler.cs" />
+    <Compile Include="Assets\Scripts\Core\GameServiceLocator.cs" />
+    <Compile Include="Assets\Scripts\UI\MenuController.cs" />
+    <Compile Include="Assets\Scripts\UI\SaveSlotEntryView.cs" />
+    <Compile Include="Assets\Scripts\UI\SaveSlotsView.cs" />
+    <Compile Include="Assets\Scripts\UI\SettingsView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1333,8 +1341,65 @@
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Braziliation.Game.Core">
+      <HintPath>Assets\Plugins\Braziliation\Braziliation.Game.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Art\Characters\" />
+    <Folder Include="Assets\Art\Environment\" />
+    <Folder Include="Assets\Art\Props\" />
+    <Folder Include="Assets\Art\UI\" />
+    <Folder Include="Assets\Audio\Music\" />
+    <Folder Include="Assets\Audio\SFX\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AI\Agents\development\architect.md" />
+    <None Include="AI\Agents\development\systems-dev.md" />
+    <None Include="AI\Agents\development\unity-dev.md" />
+    <None Include="AI\Agents\development\gameplay_engineer.md" />
+    <None Include="AI\Agents\tech_lead.md" />
+    <None Include="AI\Agents\testing\qa_engineer.md" />
+    <None Include="AI\Agents\testing\test-engineer.md" />
+    <None Include="AI\Agents\development\unity_engineer.md" />
+    <None Include="AI\Context\art_direction.md" />
+    <None Include="AI\Context\coding_standards.md" />
+    <None Include="AI\Context\game_vision.md" />
+    <None Include="AI\Memory\architecture_decisions.md" />
+    <None Include="AI\Memory\roadmap.md" />
+    <None Include="AI\Memory\tech_debt.md" />
+    <None Include="AI\Prompts\chatgpt_calibration.md" />
+    <None Include="AI\README.md" />
+    <None Include="Assets\Animations.meta" />
+    <None Include="Assets\Animations\Menu.meta" />
+    <None Include="Assets\Animations\Menu\MenuBackgroundAnimator.controller" />
+    <None Include="Assets\Animations\Menu\MenuBackgroundAnimator.controller.meta" />
+    <None Include="Assets\Animations\Menu\MenuBackgroundLoop.anim" />
+    <None Include="Assets\Animations\Menu\MenuBackgroundLoop.anim.meta" />
+    <None Include="Assets\Art\.gitkeep" />
+    <None Include="Assets\Art\Characters.meta" />
+    <None Include="Assets\Art\Environment.meta" />
+    <None Include="Assets\Art\Menu.meta" />
+    <None Include="Assets\Art\Menu\Background.meta" />
+    <None Include="Assets\Art\Menu\Background\Frames.meta" />
+    <None Include="Assets\Art\Menu\Background\Frames\frame_001.png.meta" />
+    <None Include="Assets\Art\Menu\Background\Frames\frame_002.png.meta" />
+    <None Include="Assets\Art\Menu\Background\Frames\frame_003.png.meta" />
+    <None Include="Assets\Art\Menu\Background\Frames\frame_004.png.meta" />
+    <None Include="Assets\Art\Menu\Background\Frames\frame_005.png.meta" />
+    <None Include="Assets\Art\Menu\Background\Frames\frame_006.png.meta" />
+    <None Include="Assets\Art\Props.meta" />
+    <None Include="Assets\Art\UI.meta" />
+    <None Include="Assets\Audio\.gitkeep" />
+    <None Include="Assets\Audio\Music.meta" />
+    <None Include="Assets\Audio\SFX.meta" />
+    <None Include="Assets\Editor.meta" />
+    <None Include="Assets\Editor\Menu.meta" />
+    <None Include="Assets\Plugins\Braziliation\README.md" />
+    <None Include="Assets\Scenes\SampleScene.unity" />
+    <None Include="Assets\Scenes\SampleScene.unity.meta" />
+    <None Include="src\Braziliation.Game.Core\Braziliation.Game.Core.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
