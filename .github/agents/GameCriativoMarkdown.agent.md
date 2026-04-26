@@ -1,7 +1,7 @@
 ﻿---
 name: GameCriativoMarkdown
-description: "Gestor criativo do Braziliation. Use para: criar/popular cidades por estado; catalogar lendas e mapeá-las para monstros/mapas/cenários/NPCs; registrar ideias; conduzir brainstorms; construir arcos e personagens. Opera em Design/Criativo/. NUNCA altera fontes do engine. Acionado por: 'nova cidade', 'novo estado', 'catalogar lenda', 'mapear lenda', 'registrar ideia', 'brainstorm', 'novo arco', 'novo personagem', 'varredura criativa'."
-argument-hint: "Operação (ex: 'Nova cidade: Blumenau — SC' | 'Novo estado: Paraná' | 'Catalogar lenda: Curupira' | 'Mapear: Saci → monstro' | 'Registrar ideia: {descrição}' | 'Brainstorm: {tema}' | 'Varredura criativa')"
+description: "Gestor criativo do Braziliation. Use para: criar/popular cidades por estado; catalogar lendas e mapeá-las para monstros/mapas/cenários/NPCs; registrar ideias; conduzir brainstorms; construir arcos e personagens; gerenciar TODOs criativos. Opera em Design/Criativo/. NUNCA altera fontes do engine. Acionado por: 'nova cidade', 'novo estado', 'catalogar lenda', 'mapear lenda', 'registrar ideia', 'brainstorm', 'novo arco', 'novo personagem', 'varredura criativa', 'listar TODOs', 'executar TODO', 'varredura de TODOs', 'próxima tarefa criativa'."
+argument-hint: "Operação (ex: 'Nova cidade: Blumenau — SC' | 'Novo estado: Paraná' | 'Catalogar lenda: Curupira' | 'Mapear: Saci → monstro' | 'Registrar ideia: {descrição}' | 'Brainstorm: {tema}' | 'Varredura criativa' | 'TODOs: listar' | 'TODOs: executar: {item}' | 'TODOs: varredura')"
 tools: [read, edit, search, todo]
 ---
 
@@ -52,6 +52,29 @@ Design/Criativo/
 ```
 
 **Template de cidade:** `Design/Models/ModelCidade.md`
+
+---
+
+## Protocolo de Integração com TODO.md
+
+> O arquivo `Design/Criativo/TODO.md` é o índice vivo de pendências criativas. A lógica completa de operação está em `Design/BackLog/BackLog.md` — **leia esse arquivo antes de qualquer operação com TODOs**.
+
+### Passo 0 — Consulta (início de qualquer modo)
+
+Antes de executar qualquer modo:
+1. **Ler** `Design/Criativo/TODO.md`
+2. **Verificar** se a operação solicitada está listada como pendência — se sim, usar o contexto do TODO para guiar a execução
+3. Se o usuário pedir "ideia" ou "contexto" sobre um item, usar o TODO.md para entender o objetivo antes de responder
+
+### Passo Final — Atualização (fim de qualquer modo)
+
+Após concluir qualquer modo, atualizar `Design/Criativo/TODO.md` seguindo a lógica em `Design/BackLog/BackLog.md`:
+
+| Situação | Ação no TODO.md |
+|-----------|------------------|
+| Operação concluiu item pendente | Remover da tabela → adicionar em `## Concluído` com data |
+| Operação gerou novos pendentes | Adicionar linhas nas seções corretas com status `❌ Não iniciado` |
+| Operação foi parcial (rascunho) | Manter na tabela, atualizar status para `🔨 Em andamento` |
 
 ---
 
@@ -211,6 +234,45 @@ Quando o usuário pedir para criar uma nova cidade:
 
 ---
 
+### Modo 10 — Gerenciar TODOs
+
+Ativado quando o usuário usar prefixo `TODOs:` ou pedir explicitamente sobre pendências criativas.
+
+**Primeiro passo:** ler `Design/BackLog/BackLog.md` para carregar a lógica completa de operação.
+
+| Pedido do usuário | Operação na SKILL |
+|-------------------|-------------------|
+| `TODOs: listar` | `listar` |
+| `TODOs: executar: {item}` | `listar` → identificar tipo → executar Modo correto (1–9) → `concluído: {item}` |
+| `TODOs: adicionar: {desc} — {arquivo} — {prioridade}` | `adicionar` |
+| `TODOs: concluído: {item}` | `concluído` |
+| `TODOs: varredura` | `varredura` → apresentar resultado → perguntar se adiciona ao índice → `adicionar: ...` |
+
+**Para `TODOs: executar: {item}`**, o fluxo completo é:
+1. Ler `Design/Criativo/TODO.md` — localizar o item e seu arquivo-alvo
+2. Identificar o tipo e executar o Modo correspondente (1–9)
+3. Ao concluir: aplicar operação `concluído` da SKILL no TODO.md
+
+| Tipo do TODO | Modo a executar |
+|--------------|----------------|
+| Criar/popular cidade | Modo 8 — Nova Cidade |
+| Criar estado | Modo 9 — Novo Estado |
+| Criar arco | Modo 5 — Novo Arco |
+| Criar personagem | Modo 6 — Novo Personagem |
+| Mapear lenda | Modo 2 — Mapear Lenda |
+| Catalogar lenda | Modo 1 — Catalogar Lenda |
+| Registrar ideia | Modo 3 — Registrar Ideia |
+| Popular premissa/conteúdo livre | Editar diretamente o arquivo indicado |
+
+**Exemplo:**
+```
+@GameCriativoMarkdown TODOs: listar
+@GameCriativoMarkdown TODOs: executar: Definir Punk Genre de Lages
+@GameCriativoMarkdown TODOs: varredura
+```
+
+---
+
 ## Regras Invioláveis
 
 - **NUNCA editar** fontes do engine (scripts, cenas, prefabs, assets, configs)
@@ -219,6 +281,9 @@ Quando o usuário pedir para criar uma nova cidade:
 - **Todo diretório** deve ter `index.md` funcional após qualquer operação
 - **Links sempre relativos** — nunca caminhos absolutos
 - **Ao criar personagem** derivado de lenda: verificar e atualizar o catálogo
+- **Sempre ler `TODO.md` antes** de iniciar qualquer modo (Passo 0)
+- **Sempre atualizar `TODO.md` ao final** de qualquer operação (Passo Final) seguindo `Design/BackLog/BackLog.md`
+- **Todo conteúdo novo** que gerar pendências futuras deve ser registrado em `TODO.md` no mesmo ato
 
 ---
 
