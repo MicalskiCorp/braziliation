@@ -12,4 +12,4 @@
 ---
 
 > Para documentar mecânica: `@GameArquitetoMarkdown Nova mecânica: {Nome}`
-> Template: `Braziliation/Docs/Models/ModelMecanica.md`
+> Template: `Desenvolvimento/Docs/Models/ModelMecanica.md`

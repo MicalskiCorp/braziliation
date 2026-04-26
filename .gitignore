@@ -33,7 +33,7 @@ MemoryCaptures/
 
 # Unity / editor logs (pastas geradas localmente — não versionar)
 Logs/
-Braziliation/Logs/
+Desenvolvimento/Logs/
 
 # Plastic SCM (projeto versionado em Git; metadados locais não entram no repo)
 .plastic/

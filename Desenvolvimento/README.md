@@ -7,7 +7,7 @@ Jogo plataforma 2D em pixel art (C#) — ambientação dieselpunk pós-apocalíp
 - Estilo: Pixel Art (paleta restrita para estilo SNES)
 - Plataforma alvo: PC - dependendo do build target
 
-## 📂 Pastas principais
+## 📂 Pastas principais (dentro de `Desenvolvimento/`)
 - `Assets/` → Cenas, arte, áudio, scripts C# (`Assets/Scripts/`), configuração URP
 - `Docs/` → GDD, arquitetura, lore, mecânicas, roadmap e docs técnicos
 - `scripts/` → Scripts de setup/versionamento (PowerShell, shell)
@@ -15,7 +15,9 @@ Jogo plataforma 2D em pixel art (C#) — ambientação dieselpunk pós-apocalíp
 - `Braziliation.slnx` → solution principal (Assembly-CSharp + Core + Tests)
 - `Braziliation.CI.slnx` → solution opcional com os testes .NET (útil no IDE)
 - **`dotnet-tests/Braziliation.Game.Tests/`** → testes .NET para o CI
-- **CI (GitHub / GitLab)** → `dotnet restore/build/test` nesse `.csproj`; o workflow aceita variações de caminho por compatibilidade
+- **CI (GitHub / GitLab)** → `dotnet restore/build/test` nesse `.csproj`; caminhos prefixados com `Desenvolvimento/` no workflow
+
+> 📁 **Estrutura do repositório:** o projeto Unity vive em `Desenvolvimento/`. A camada criativa (lore, lendas, brainstorm) vive em `Design/Criativo/`. Agents e instructions em `.github/`.
 
 ### Limpeza local (logs)
 A pasta `Logs/` na raiz é gerada pelo Unity e está no `.gitignore`. Se quiser apagá-la, **feche o editor Unity** e remova `Logs/` manualmente (arquivos podem ficar bloqueados com o projeto aberto).
@@ -49,3 +51,5 @@ O repositório usa **VS Code Copilot** com agentes, instructions e prompts custo
 4. **Atualizar docs** — Decisões de arquitetura → `Docs/Architecture/architecture_decisions.md`; tech debt → `Docs/Tech/tech_debt.md`.
 
 **Guia completo:** [AGENTS.md](AGENTS.md) | [Docs/index.md](Docs/index.md)
+
+> 🎨 **Camada criativa:** `Design/Criativo/` na raiz do repo — gerida por `@GameCriativoMarkdown`.
