@@ -1,7 +1,7 @@
-# Mechanics — Mecânicas de Gameplay
+﻿# Mechanics — Mecânicas de Gameplay
 
 > Regras, parâmetros e comportamentos das mecânicas do Braziliation.
-> Agentes: `@GameplayEngineer` (implementação) · `@GameArquitetoMarkdown` (documentação)
+> Agentes: `@GameplayEngineer` (implementação) · `@GameArchitect` (documentação)
 
 ## Conteúdo
 
@@ -11,5 +11,5 @@
 
 ---
 
-> Para documentar mecânica: `@GameArquitetoMarkdown Nova mecânica: {Nome}`
+> Para documentar mecânica: `@GameArchitect Nova mecânica: {Nome}`
 > Template: `Desenvolvimento/Docs/Models/ModelMecanica.md`

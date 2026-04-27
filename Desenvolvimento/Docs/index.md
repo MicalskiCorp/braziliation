@@ -1,7 +1,7 @@
-# Braziliation — Documentação Técnica
+﻿# Braziliation — Documentação Técnica
 
 > Documentação técnica do projeto Braziliation. Engine: Unity 6 (C#) | Gênero: Plataforma 2D Pixel Art | Estilo: Dieselpunk pós-apocáltico brasileiro
-> 🎨 **Camada criativa (lendas, narrativa, brainstorm):** ver [`Design/Criativo/`](../../Design/Criativo/index.md) — gerida por `@GameCriativoMarkdown`
+> 🎨 **Camada criativa (lendas, narrativa, brainstorm):** ver [`Design/Criativo/`](../../Design/Criativo/index.md) — gerida por `@GameCreative`
 
 ## Design & Features
 
@@ -36,7 +36,7 @@
 
 ---
 
-> Para criar nova feature: `@GameArquitetoMarkdown Nova feature: {Nome}`
-> Para criar novo sistema: `@GameArquitetoMarkdown Novo sistema: {Nome}`
-> Para catalogar lenda / brainstorm: `@GameCriativoMarkdown {operação}` (opera em `Design/Criativo/`)
+> Para criar nova feature: `@GameArchitect Nova feature: {Nome}`
+> Para criar novo sistema: `@GameArchitect Novo sistema: {Nome}`
+> Para catalogar lenda / brainstorm: `@GameCreative {operação}` (opera em `Design/Criativo/`)
 > Para calibrar o modelo: `/project-context`

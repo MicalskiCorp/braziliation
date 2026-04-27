@@ -1,7 +1,7 @@
-# História — Narrativa do Braziliation
+﻿# História — Narrativa do Braziliation
 
 > Premissa, arcos narrativos e personagens do jogo.
-> Templates disponíveis em `Desenvolvimento/Docs/Models/` (geridos por `@GameArquitetoMarkdown`).
+> Templates disponíveis em `Desenvolvimento/Docs/Models/` (geridos por `@GameArchitect`).
 
 ## Conteúdo
 

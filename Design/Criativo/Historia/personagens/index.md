@@ -1,7 +1,7 @@
-# Personagens — Braziliation
+﻿# Personagens — Braziliation
 
 > Personagens principais, secundários e antagonistas do jogo.
-> Para criar: `@GameCriativoMarkdown Novo personagem: {nome}`
+> Para criar: `@GameCreative Novo personagem: {nome}`
 
 ## Conteúdo
 

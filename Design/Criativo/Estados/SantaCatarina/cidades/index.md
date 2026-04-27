@@ -1,4 +1,4 @@
-# Cidades — Santa Catarina
+﻿# Cidades — Santa Catarina
 
 > Cidades mapeadas para o jogo. Template: [`../../../Models/ModelCidade.md`](../../../Models/ModelCidade.md)
 
@@ -22,4 +22,4 @@
 
 ---
 
-> Para nova cidade: `@GameCriativoMarkdown Nova cidade: {Nome} — Santa Catarina`
+> Para nova cidade: `@GameCreative Nova cidade: {Nome} — Santa Catarina`

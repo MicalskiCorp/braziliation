@@ -1,4 +1,4 @@
-# Braziliation
+﻿# Braziliation
 Jogo plataforma 2D em pixel art (C#) — ambientação dieselpunk pós-apocalíptica brasileira.
 
 ## 🧱 Estrutura
@@ -39,7 +39,7 @@ O repositório usa **VS Code Copilot** com agentes, instructions e prompts custo
 
 ### Estrutura em `.github/`
 
-- **`.github/agents/`** — 10 agentes especializados: `@TechLead`, `@Architect`, `@UnityEngineer`, `@UnityDeveloper`, `@SystemsDeveloper`, `@GameplayEngineer`, `@QAEngineer`, `@TestEngineer`, `@GameArquitetoMarkdown`, `@GameCriativoMarkdown`.
+- **`.github/agents/`** — 10 agentes especializados: `@TechLead`, `@Architect`, `@UnityEngineer`, `@UnityDeveloper`, `@SystemsDeveloper`, `@GameplayEngineer`, `@QAEngineer`, `@TestEngineer`, `@GameArchitect`, `@GameCreative`.
 - **`.github/instructions/`** — 3 instruções: `game-vision` (on-demand), `coding-standards` (auto-injetada em `.cs`), `art-direction` (on-demand).
 - **`.github/prompts/`** — 5 templates: `/create-feature`, `/design-enemy`, `/refactor-system`, `/review-code`, `/project-context`.
 
@@ -52,4 +52,4 @@ O repositório usa **VS Code Copilot** com agentes, instructions e prompts custo
 
 **Guia completo:** [AGENTS.md](AGENTS.md) | [Docs/index.md](Docs/index.md)
 
-> 🎨 **Camada criativa:** `Design/Criativo/` na raiz do repo — gerida por `@GameCriativoMarkdown`.
+> 🎨 **Camada criativa:** `Design/Criativo/` na raiz do repo — gerida por `@GameCreative`.

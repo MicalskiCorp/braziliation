@@ -1,7 +1,7 @@
-# Architecture — Documentação Técnica do Braziliation
+﻿# Architecture — Documentação Técnica do Braziliation
 
 > Limites de sistema, ADRs, estrutura de assets e índice técnico de fontes.
-> Agentes: `@Architect` (limites/ADRs) · `@GameArquitetoMarkdown` (fichas de sistema e índices)
+> Agentes: `@Architect` (limites/ADRs) · `@GameArchitect` (fichas de sistema e índices)
 
 ## Conteúdo
 

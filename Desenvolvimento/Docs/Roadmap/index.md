@@ -1,4 +1,4 @@
-# Roadmap — Planejamento do Braziliation
+﻿# Roadmap — Planejamento do Braziliation
 
 > Fases de desenvolvimento e rastreamento de features planejadas.
 
@@ -11,4 +11,4 @@
 
 ---
 
-> Atualizado pelo `@TechLead` ou `@GameArquitetoMarkdown` conforme features são documentadas.
+> Atualizado pelo `@TechLead` ou `@GameArchitect` conforme features são documentadas.

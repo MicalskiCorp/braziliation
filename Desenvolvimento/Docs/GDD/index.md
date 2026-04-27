@@ -1,7 +1,7 @@
-# GDD — Game Design Document
+﻿# GDD — Game Design Document
 
 > Design e especificações do Braziliation. Fonte de verdade para o que o jogo é.
-> Agentes: `@GameplayEngineer` (referência de implementação) · `@GameArquitetoMarkdown` (features)
+> Agentes: `@GameplayEngineer` (referência de implementação) · `@GameArchitect` (features)
 
 ## Conteúdo
 
@@ -11,4 +11,4 @@
 
 ---
 
-> Para criar nova feature: `@GameArquitetoMarkdown Nova feature: {Nome}`
+> Para criar nova feature: `@GameArchitect Nova feature: {Nome}`

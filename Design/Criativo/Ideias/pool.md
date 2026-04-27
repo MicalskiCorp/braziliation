@@ -1,7 +1,7 @@
-# Pool de Ideias — Braziliation
+﻿# Pool de Ideias — Braziliation
 
 > Toda ideia entra aqui. Sem filtro — quantidade primeiro, qualidade depois.
-> Atualizar com `@GameCriativoMarkdown Registrar ideia: {descrição}`.
+> Atualizar com `@GameCreative Registrar ideia: {descrição}`.
 
 ## Ideias
 

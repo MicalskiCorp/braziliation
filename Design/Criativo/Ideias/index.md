@@ -1,7 +1,7 @@
-# Ideias — Pool de Ideias do Braziliation
+﻿# Ideias — Pool de Ideias do Braziliation
 
 > Repositório de ideias brutas, conceitos e insights. Toda ideia entra aqui antes de virar feature ou mecânica.
-> Para registrar: `@GameCriativoMarkdown Registrar ideia: {descrição}`
+> Para registrar: `@GameCreative Registrar ideia: {descrição}`
 
 ## Conteúdo
 

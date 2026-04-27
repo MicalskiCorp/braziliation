@@ -1,4 +1,4 @@
-# Protocolo de Comunicação — Índice Técnico ↔ Features
+﻿# Protocolo de Comunicação — Índice Técnico ↔ Features
 
 > Define as regras de sincronização entre `Docs/Architecture/indices/` (motor) e `Docs/GDD/Features/` + `Docs/Architecture/Sistemas/` (produto).
 
@@ -30,5 +30,5 @@ $sistemasNoFonte = Get-ChildItem "src/Braziliation.Game.Core" -Directory | Selec
 
 ## Ponto de Contato
 
-O agente `@GameArquitetoMarkdown` é o único responsável por manter ambas as camadas sincronizadas.
-Definição do agente: `.github/agents/GameArquitetoMarkdown.agent.md`
+O agente `@GameArchitect` é o único responsável por manter ambas as camadas sincronizadas.
+Definição do agente: `.github/agents/GameArchitect.agent.md`

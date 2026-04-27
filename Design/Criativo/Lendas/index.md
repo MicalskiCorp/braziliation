@@ -1,4 +1,4 @@
-# Lendas — Folclore Brasileiro Mapeado para o Jogo
+﻿# Lendas — Folclore Brasileiro Mapeado para o Jogo
 
 > Catálogo de lendas, mitos e entidades do folclore brasileiro, mapeadas para elementos do Braziliation.
 > Cada lenda pode gerar: monstro, cenário, mapa, NPC, mecânica ou item.
@@ -13,5 +13,5 @@
 
 ---
 
-> Para catalogar nova lenda: `@GameCriativoMarkdown Catalogar lenda: {Nome}`
-> Para mapear: `@GameCriativoMarkdown Mapear: {Lenda} → {monstro|mapa|cenário|NPC}`
+> Para catalogar nova lenda: `@GameCreative Catalogar lenda: {Nome}`
+> Para mapear: `@GameCreative Mapear: {Lenda} → {monstro|mapa|cenário|NPC}`

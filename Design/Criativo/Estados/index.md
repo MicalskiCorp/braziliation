@@ -1,7 +1,7 @@
-# Estados — Braziliation por Estado
+﻿# Estados — Braziliation por Estado
 
 > O Braziliation é construído estado a estado. Cada estado é um "bloco" de conteúdo com suas cidades, lendas e atmosfera própria.
-> Agente: `@GameCriativoMarkdown` | Template de cidade: [`../../Models/ModelCidade.md`](../../Models/ModelCidade.md)
+> Agente: `@GameCreative` | Template de cidade: [`../../Models/ModelCidade.md`](../../Models/ModelCidade.md)
 
 ## Estados Mapeados
 
@@ -22,4 +22,4 @@
 
 ---
 
-> Para adicionar novo estado: `@GameCriativoMarkdown Novo estado: {Nome}`
+> Para adicionar novo estado: `@GameCreative Novo estado: {Nome}`

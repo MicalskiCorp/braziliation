@@ -1,4 +1,4 @@
-# Arcos Narrativos — Braziliation
+﻿# Arcos Narrativos — Braziliation
 
 > Mapa dos arcos narrativos do jogo. Um arco por bloco de progressão do jogador.
 
@@ -21,4 +21,4 @@ Cada arco deve responder:
 
 ---
 
-> Para criar um arco: `@GameCriativoMarkdown Novo arco: {nome}`
+> Para criar um arco: `@GameCreative Novo arco: {nome}`

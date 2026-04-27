@@ -1,7 +1,7 @@
-# Catálogo de Lendas — Folclore Brasileiro
+﻿# Catálogo de Lendas — Folclore Brasileiro
 
 > Tabela mestra. Cada entrada representa uma lenda/entidade catalogada.
-> Atualizar com `@GameCriativoMarkdown Catalogar lenda: {Nome}`.
+> Atualizar com `@GameCreative Catalogar lenda: {Nome}`.
 
 ## Catálogo
 

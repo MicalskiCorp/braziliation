@@ -1,6 +1,6 @@
-# Motor — Metodologia de Indexação
+﻿# Motor — Metodologia de Indexação
 
-> Guia operacional de como o GameArquitetoMarkdown indexa o projeto Braziliation.
+> Guia operacional de como o GameArchitect indexa o projeto Braziliation.
 > Arquivos: [`como-indexar.md`](como-indexar.md) | [`escopo-indexacao.md`](escopo-indexacao.md)
 
 ## Conteúdo

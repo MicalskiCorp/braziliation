@@ -1,7 +1,7 @@
-# Features — Documentação por Feature
+﻿# Features — Documentação por Feature
 
 > Cada feature do jogo tem sua própria pasta com `index.md` e arquivo de detalhes.
-> Para criar: `@GameArquitetoMarkdown Nova feature: {Nome}`
+> Para criar: `@GameArchitect Nova feature: {Nome}`
 > Template: [`../../Models/ModelFeature.md`](../../Models/ModelFeature.md)
 
 ## Conteúdo

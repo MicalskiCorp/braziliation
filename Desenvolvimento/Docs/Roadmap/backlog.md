@@ -1,7 +1,7 @@
-# Backlog — Braziliation
+﻿# Backlog — Braziliation
 
 > Rastreamento de todas as features planejadas, em desenvolvimento e concluídas.
-> Atualizado pelo `@GameArquitetoMarkdown` a cada nova feature documentada.
+> Atualizado pelo `@GameArchitect` a cada nova feature documentada.
 
 ## Features
 

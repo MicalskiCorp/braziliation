@@ -1,4 +1,4 @@
-# Braziliation
+﻿# Braziliation
 
 > Jogo plataforma 2D em pixel art (C#) — ambientação **dieselpunk pós-apocalíptica brasileira**.
 > Engine: Unity 6 · Linguagem: C# · Estilo: Pixel Art (paleta restrita, 16 PPU)
@@ -101,8 +101,8 @@ O repositório usa **VS Code Copilot** com agentes, instructions e prompts custo
 | `@GameplayEngineer` | Player, inimigos, combate, mecânicas |
 | `@QAEngineer` | Revisão, edge cases, acceptance criteria |
 | `@TestEngineer` | Testes xUnit automatizados |
-| `@GameArquitetoMarkdown` | Estrutura Markdown, índices, features, sistemas |
-| `@GameCriativoMarkdown` | Lendas, brainstorm, personagens, lore |
+| `@GameArchitect` | Estrutura Markdown, índices, features, sistemas |
+| `@GameCreative` | Lendas, brainstorm, personagens, lore |
 
 ### Prompts rápidos
 
@@ -139,7 +139,7 @@ Design/Criativo/
 └── Ideias/
 ```
 
-Use `@GameCriativoMarkdown` para popular e navegar esta camada.
+Use `@GameCreative` para popular e navegar esta camada.
 
 ---
 

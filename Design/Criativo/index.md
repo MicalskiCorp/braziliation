@@ -1,8 +1,8 @@
-# Criativo — Gestão Criativa do Braziliation
+﻿# Criativo — Gestão Criativa do Braziliation
 
 > Hub de gestão criativa do projeto. Centraliza lendas, narrativa, ideias e brainstorms.
 > Alimenta o desenvolvimento de mapas, cenários, monstros e personagens.
-> Agente responsável: `@GameCriativoMarkdown` (definição em `.github/agents/GameCriativoMarkdown.agent.md`)
+> Agente responsável: `@GameCreative` (definição em `.github/agents/GameCreative.agent.md`)
 
 ## Navegação
 
@@ -18,15 +18,15 @@
 
 | Operação | Comando |
 |----------|---------|
-| Nova cidade | `@GameCriativoMarkdown Nova cidade: {Nome} — {Estado}` |
-| Novo estado | `@GameCriativoMarkdown Novo estado: {Nome}` |
-| Catalogar lenda | `@GameCriativoMarkdown Catalogar lenda: {Nome}` |
-| Mapear lenda | `@GameCriativoMarkdown Mapear: {Lenda} → {monstro\|mapa\|cenário\|NPC}` |
-| Registrar ideia | `@GameCriativoMarkdown Registrar ideia: {descrição}` |
-| Brainstorm | `@GameCriativoMarkdown Brainstorm: {tema}` |
-| Novo arco | `@GameCriativoMarkdown Novo arco: {nome}` |
-| Novo personagem | `@GameCriativoMarkdown Novo personagem: {nome}` |
-| Varredura criativa | `@GameCriativoMarkdown Varredura criativa` |
+| Nova cidade | `@GameCreative Nova cidade: {Nome} — {Estado}` |
+| Novo estado | `@GameCreative Novo estado: {Nome}` |
+| Catalogar lenda | `@GameCreative Catalogar lenda: {Nome}` |
+| Mapear lenda | `@GameCreative Mapear: {Lenda} → {monstro\|mapa\|cenário\|NPC}` |
+| Registrar ideia | `@GameCreative Registrar ideia: {descrição}` |
+| Brainstorm | `@GameCreative Brainstorm: {tema}` |
+| Novo arco | `@GameCreative Novo arco: {nome}` |
+| Novo personagem | `@GameCreative Novo personagem: {nome}` |
+| Varredura criativa | `@GameCreative Varredura criativa` |
 
 ---
 

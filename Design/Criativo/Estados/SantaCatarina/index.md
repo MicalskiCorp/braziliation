@@ -1,4 +1,4 @@
-# Santa Catarina — "O Sul do Fim"
+﻿# Santa Catarina — "O Sul do Fim"
 
 > Primeiro estado mapeado no Braziliation. Paisagens de extremos: ilhas, vales industriais, serras geladas e minas escuras.
 > Cada cidade tem sua própria atmosfera e gênero punk, refletindo a diversidade de colonização (açoriana, alemã, italiana, serrana).
@@ -30,4 +30,4 @@ As lendas específicas de Santa Catarina estão registradas em [`../../../Lendas
 
 ---
 
-> Para adicionar cidade: `@GameCriativoMarkdown Nova cidade: {Nome} — Santa Catarina`
+> Para adicionar cidade: `@GameCreative Nova cidade: {Nome} — Santa Catarina`

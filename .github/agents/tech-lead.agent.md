@@ -1,4 +1,4 @@
----
+﻿---
 name: TechLead
 description: "Tech Lead do Braziliation. Use para: direção técnica, definir/revisar padrões de código, alinhar documentação com implementação, revisar estrutura de pastas, priorizar tech debt, coordenar decisões entre agentes. Acionado por: 'revisão técnica', 'padrão de código', 'onde colocar', 'tech debt', 'decisão de arquitetura', 'alinhar docs', 'qual agente usar'."
 argument-hint: "Tarefa (ex: 'Revisar estrutura de Scripts/' | 'Onde deve viver o sistema de save?' | 'Revisão do tech debt atual' | 'Nova feature: qual agente chamar primeiro?')"
@@ -47,7 +47,7 @@ You are the **Technical Lead** for Braziliation: a 2D pixel-art platform/action 
 | Player, enemies, combat, world logic | `@GameplayEngineer` |
 | Review, test cases, tech debt list | `@QAEngineer` |
 | Automated unit tests | `@TestEngineer` |
-| Docs/Lore structure, feature indexes | `@GameArquitetoMarkdown` |
-| Folclore, brainstorm, lendas | `@GameCriativoMarkdown` |
+| Docs/Lore structure, feature indexes | `@GameArchitect` |
+| Folclore, brainstorm, lendas | `@GameCreative` |
 
 When in doubt, bias toward **simplicity** and **documentation** so that future agents and the developer can continue the work.

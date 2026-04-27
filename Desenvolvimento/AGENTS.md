@@ -1,4 +1,4 @@
-# Braziliation – Guia para agentes
+﻿# Braziliation – Guia para agentes
 
 Projeto **Unity 6** (2D, URP, C#): jogo plataforma pixel art, tema dieselpunk pós-apocalíptico brasileiro.
 
@@ -24,8 +24,8 @@ Todos os agentes estão em `.github/agents/` na raiz do workspace. Acione via `@
 | `@GameplayEngineer` | Player, inimigos, combate, mecânicas |
 | `@QAEngineer` | Revisão, edge cases, acceptance criteria |
 | `@TestEngineer` | Testes xUnit automatizados |
-| `@GameArquitetoMarkdown` | Estrutura Markdown, índices, features, sistemas |
-| `@GameCriativoMarkdown` | Lendas, brainstorm, personagens, lore |
+| `@GameArchitect` | Estrutura Markdown, índices, features, sistemas |
+| `@GameCreative` | Lendas, brainstorm, personagens, lore |
 
 ## Contexto de IA
 

@@ -1,4 +1,4 @@
-# Índice de Assets — Braziliation
+﻿# Índice de Assets — Braziliation
 
 > Assets principais referenciados por sistema. Atualizar conforme arte e áudio evoluem.
 
@@ -28,4 +28,4 @@
 
 ---
 
-> Preencher conforme assets forem finalizados. Use `@GameArquitetoMarkdown` para atualizar em varredura.
+> Preencher conforme assets forem finalizados. Use `@GameArchitect` para atualizar em varredura.

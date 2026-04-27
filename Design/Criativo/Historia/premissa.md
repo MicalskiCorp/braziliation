@@ -1,4 +1,4 @@
-# Premissa — Braziliation
+﻿# Premissa — Braziliation
 
 > **Gênero:** Plataforma 2D Pixel Art
 > **Estilo:** Dieselpunk Pós-Apocalíptico Brasileiro
@@ -38,4 +38,4 @@
 
 ---
 
-> Preencher e refinar com `@GameCriativoMarkdown`.
+> Preencher e refinar com `@GameCreative`.

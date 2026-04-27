@@ -1,7 +1,7 @@
-# Mapeamento de Lendas — Folclore → Elemento de Jogo
+﻿# Mapeamento de Lendas — Folclore → Elemento de Jogo
 
 > Onde cada lenda se manifesta no Braziliation: como monstro, cenário, mapa, mecânica ou NPC.
-> Atualizar com `@GameCriativoMarkdown Mapear: {Lenda} → {elemento}`.
+> Atualizar com `@GameCreative Mapear: {Lenda} → {elemento}`.
 
 ## Mapeamento
 

@@ -1,4 +1,4 @@
----
+﻿---
 description: "Carregar contexto completo do projeto Braziliation: stack, estrutura de repositório, estado atual do roadmap, ADRs, convenções e pipeline de agentes. Use no início de uma nova sessão de trabalho para calibrar o modelo."
 argument-hint: "Branch atual (ex: 'develop', 'feature/player-movement')"
 agent: agent
@@ -65,8 +65,8 @@ Design/                        ← camada criativa (pasta irmã ao repo)
 | `@GameplayEngineer` | Player, inimigos, combate, mecânicas |
 | `@QAEngineer` | Revisão, edge cases, acceptance criteria |
 | `@TestEngineer` | Testes xUnit automatizados |
-| `@GameArquitetoMarkdown` | Estrutura Markdown, índices, features |
-| `@GameCriativoMarkdown` | Lendas, brainstorm, lore |
+| `@GameArchitect` | Estrutura Markdown, índices, features |
+| `@GameCreative` | Lendas, brainstorm, lore |
 
 ## Scripts implementados até agora
 

@@ -1,13 +1,13 @@
----
+﻿---
 name: BackLog
-description: "Lógica de gerência de TODOs criativos do Braziliation. Lida diretamente pelo agente @GameCriativoMarkdown (.github/agents/GameCriativoMarkdown.agent.md) nas etapas Passo 0, Passo Final e Modo 10."
+description: "Lógica de gerência de TODOs criativos do Braziliation. Lida diretamente pelo agente @GameCreative (.github/agents/GameCreative.agent.md) nas etapas Passo 0, Passo Final e Modo 10."
 ---
 
 # BackLog — Lógica de TODOs Criativos
 
 Documento de operações para **ler, atualizar e varrer** o arquivo `Design/Criativo/TODO.md` do projeto Braziliation.
 
-> Este arquivo é lido diretamente pelo agente `@GameCriativoMarkdown` (`.github/agents/GameCriativoMarkdown.agent.md`).
+> Este arquivo é lido diretamente pelo agente `@GameCreative` (`.github/agents/GameCreative.agent.md`).
 
 ---
 

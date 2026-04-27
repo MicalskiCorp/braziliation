@@ -1,7 +1,7 @@
-# Design/Models — Templates Criativos
+﻿# Design/Models — Templates Criativos
 
 > Templates para criação de conteúdo na camada `Design/Criativo/`. **Nunca editar — apenas instanciar.**
-> Agente: `@GameCriativoMarkdown`
+> Agente: `@GameCreative`
 
 ## Conteúdo
 

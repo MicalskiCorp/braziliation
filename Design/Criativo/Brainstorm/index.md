@@ -1,7 +1,7 @@
-# Brainstorm — Sessões por Tema
+﻿# Brainstorm — Sessões por Tema
 
 > Sessões de brainstorm registradas e indexadas por tema.
-> Para iniciar: `@GameCriativoMarkdown Brainstorm: {tema}`
+> Para iniciar: `@GameCreative Brainstorm: {tema}`
 
 ## Sessões
 
