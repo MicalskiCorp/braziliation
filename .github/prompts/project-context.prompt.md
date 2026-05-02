@@ -14,7 +14,7 @@ Leia os arquivos de contexto abaixo e absorva o estado atual do projeto **Brazil
 4. `Desenvolvimento/Docs/Architecture/architecture_decisions.md` — ADRs aceitos
 5. `Desenvolvimento/Docs/Roadmap/roadmap.md` — fases e itens pendentes
 6. `Desenvolvimento/Docs/Tech/tech_debt.md` — tech debt conhecido
-7. `Desenvolvimento/AGENTS.md` — guia de agentes disponíveis
+7. `AGENTS.md` — guia de agentes disponíveis
 
 ## Contexto resumido (para referência rápida)
 

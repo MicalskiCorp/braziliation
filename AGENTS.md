@@ -16,16 +16,15 @@ Todos os agentes estão em `.github/agents/` na raiz do workspace. Acione via `@
 
 | Agente | Use para |
 |--------|----------|
-| `@TechLead` | Direção técnica, padrões, routing |
-| `@Architect` | Limites de sistema, interfaces, ADRs |
-| `@UnityEngineer` | Setup de engine: URP, Input System, câmera |
-| `@UnityDeveloper` | UI controllers, ServiceLocator, MonoBehaviours |
+| `@TechLead` | Direção técnica, padrões, routing, limites de sistema, interfaces, ADRs |
+| `@UnityDeveloper` | Tudo Unity: setup de engine (URP, action maps, build) e wiring de runtime (UI, MonoBehaviours, ServiceLocator) |
 | `@SystemsDeveloper` | Save, Settings, Storage (C# puro, sem Unity) |
 | `@GameplayEngineer` | Player, inimigos, combate, mecânicas |
 | `@QAEngineer` | Revisão, edge cases, acceptance criteria |
 | `@TestEngineer` | Testes xUnit automatizados |
 | `@GameArchitect` | Estrutura Markdown, índices, features, sistemas |
 | `@GameCreative` | Lendas, brainstorm, personagens, lore |
+| `@AgentArchitect` | Criação e gestão de agentes (.agent.md), validação de sobreposição |
 
 ## Contexto de IA
 

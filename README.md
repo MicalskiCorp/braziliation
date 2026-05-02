@@ -120,7 +120,7 @@ O repositório usa **VS Code Copilot** com agentes, instructions e prompts custo
 2. **Usar template** — Digite `/` no chat e selecione o prompt.
 3. **Calibrar sessão** — Use `/project-context` para carregar o contexto completo.
 
-**Guia detalhado:** [Desenvolvimento/AGENTS.md](Desenvolvimento/AGENTS.md)
+**Guia detalhado:** [AGENTS.md](AGENTS.md)
 
 ---
 
