@@ -24,6 +24,7 @@ Todos os agentes estão em `.github/agents/` na raiz do workspace. Acione via `@
 | `@TestEngineer` | Testes xUnit automatizados |
 | `@GameArchitect` | Estrutura Markdown, índices, features, sistemas |
 | `@GameCreative` | Lendas, brainstorm, personagens, lore |
+| `@Historian` | Pesquisa histórica e folclórica via web com fontes verificáveis; organização por estado/cidade; delegação ao @GameCreative |
 | `@AgentArchitect` | Criação e gestão de agentes (.agent.md), validação de sobreposição |
 
 ## Contexto de IA
