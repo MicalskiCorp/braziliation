@@ -18,7 +18,9 @@
 | Listar referências de obras | [`Historia/premissa.md`](Historia/premissa.md) | Baixa | 📋 Rascunho |
 | Criar arco: *A Rede Esquecida* — meta-arco dos túneis intercidades | [`Historia/arcos.md`](Historia/arcos.md) | Alta | ❌ Não iniciado |
 | Criar primeiro personagem (protagonista) | [`Historia/personagens/index.md`](Historia/personagens/index.md) | Média | ❌ Não iniciado |
-| Criar arquivo de personagem: Edith Gaertner — expandir diálogos e arte conceitual | [`Historia/personagens/Edith-Gaertner.md`](Historia/personagens/Edith-Gaertner.md) | Média | 📋 Rascunho |
+| Criar arte conceitual de Edith Gaertner | [`Historia/personagens/Edith-Gaertner.md`](Historia/personagens/Edith-Gaertner.md) | Média | ❌ Não iniciado |
+| Estruturar linha de quests de Hermann Baumgarten no cemitério e na Igreja Matriz Luterana | [`Historia/personagens/Hermann-Baumgarten.md`](Historia/personagens/Hermann-Baumgarten.md) | Alta | ❌ Não iniciado |
+| Definir relíquias e itens entregues por Hermann Baumgarten | [`Historia/personagens/Hermann-Baumgarten.md`](Historia/personagens/Hermann-Baumgarten.md) | Média | ❌ Não iniciado |
 
 ### Lendas
 
@@ -43,6 +45,15 @@
 | Popular ficha completa de Guabiruba | [`Estados/SantaCatarina/cidades/Guabiruba/index.md`](Estados/SantaCatarina/cidades/Guabiruba/index.md) | Alta | 📋 Rascunho |
 | Elaborar descrição da cidade de Florianópolis no futuro distópico | [`Estados/SantaCatarina/cidades/Florianopolis/index.md`](Estados/SantaCatarina/cidades/Florianopolis/index.md) | Alta | 📋 Rascunho |
 | Detalhar monstros de Florianópolis (Bruxa, Mariposa, Boi Tatá, Animal Marinho) | [`Estados/SantaCatarina/cidades/Florianopolis/index.md`](Estados/SantaCatarina/cidades/Florianopolis/index.md) | Alta | 📋 Rascunho |
+| Detalhar Teatro Carlos Gomes como mercado negro da elite e do alto clero | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Alta | ❌ Não iniciado |
+| Mapear a progressão das engrenagens do palco giratório por ciclos de enchente em Blumenau | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Alta | ❌ Não iniciado |
+| Definir recompensa do boss opcional Autômato de Engrenagens Esquecidas | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Média | ❌ Não iniciado |
+| Estruturar a dungeon do Cemitério da Igreja Matriz Luterana e a mecânica de confirmação de morte | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Alta | ❌ Não iniciado |
+| Detalhar Mausoléu do Fundador como área de culto político com catacumba inferior | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Média | ❌ Não iniciado |
+| Documentar o sistema hídrico de Blumenau: comportas, passarelas, docas, alertas e falha por saturação | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Alta | ❌ Não iniciado |
+| Consolidar referências das cheias de 2008 para a direção de arte de Blumenau | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Média | ❌ Não iniciado |
+| Detalhar Morro do Zendron como área de terror real e gatilho visual da cruz | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Média | ❌ Não iniciado |
+| Amarrar o contraste entre memória oficial do mausoléu e memória íntima de Edith na narrativa de Blumenau | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Média | ❌ Não iniciado |
 | Definir nome e razão histórica do túnel de Lages | [`Estados/SantaCatarina/cidades/Lages/index.md`](Estados/SantaCatarina/cidades/Lages/index.md) | Média | ❌ Não iniciado |
 | Definir nome e razão histórica do túnel de Guabiruba | [`Estados/SantaCatarina/cidades/Guabiruba/index.md`](Estados/SantaCatarina/cidades/Guabiruba/index.md) | Média | ❌ Não iniciado |
 | Criar cidade: Joinville (IndustrialPunk) | [`Estados/SantaCatarina/cidades/`](Estados/SantaCatarina/cidades/) | Média | ❌ Não iniciado |

@@ -1,6 +1,19 @@
 # TODO — Pendências de Documentação
 
 > Itens pendentes de documentação na camada IA. Atualizar a cada sessão de trabalho.
+> **Modelo reativo:** o @GameArchitect lê este arquivo no Passo 0 de cada sessão. Handoffs do @GameCreative chegam na seção abaixo e são processados manualmente pelo usuário acionando @GameArchitect.
+
+---
+
+## Handoffs do @GameCreative
+
+> Itens criativos aprovados aguardando documentação técnica. O @GameArchitect é acionado **manualmente** pelo usuário para processar estes itens.
+
+| Feature/Sistema | Referência Criativa | Prioridade | Status |
+|----------------|---------------------|-----------|--------|
+| *(nenhum handoff pendente ainda)* | — | — | — |
+
+---
 
 ## Pendências
 

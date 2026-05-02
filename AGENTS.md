@@ -22,10 +22,33 @@ Todos os agentes estão em `.github/agents/` na raiz do workspace. Acione via `@
 | `@GameplayEngineer` | Player, inimigos, combate, mecânicas |
 | `@QAEngineer` | Revisão, edge cases, acceptance criteria |
 | `@TestEngineer` | Testes xUnit automatizados |
-| `@GameArchitect` | Estrutura Markdown, índices, features, sistemas |
-| `@GameCreative` | Lendas, brainstorm, personagens, lore |
-| `@Historian` | Pesquisa histórica e folclórica via web com fontes verificáveis; organização por estado/cidade; delegação ao @GameCreative |
-| `@AgentArchitect` | Criação e gestão de agentes (.agent.md), validação de sobreposição |
+| `@GameArchitect` | Estrutura Markdown em `Desenvolvimento/Docs/`; lê `Desenvolvimento/Docs/TODO.md` no Passo 0; processa handoffs do @GameCreative — nunca invoca agentes de implementação |
+| `@Computador` | Pesquisa histórica e folclórica via web; organização em `Design/Pesquisa/`; gera TODOs em `Design/Criativo/TODO.md` — nunca invoca @GameCreative |
+| `@GameCreative` | Lendas, brainstorm, personagens, lore em `Design/Criativo/`; lê `Design/Pesquisa/` como contexto; gera TODOs em `Desenvolvimento/Docs/TODO.md` — nunca invoca @GameArchitect |
+| `@Jarvis` | Orquestrador e arquiteto de agentes; visão completa de todo o ecossistema; cria, refatora e valida agentes `.agent.md` |
+
+## Fluxo entre Camadas (Modelo Reativo)
+
+> Cada camada é acionada **manualmente** pelo usuário. Nenhum agente invoca outro automaticamente.
+
+```
+@Computador
+  └─ Pesquisa em Design/Pesquisa/  +  Design/Pesquisa/TODO.md
+  └─ Escreve handoffs em Design/Criativo/TODO.md
+         ↓ (usuário aciona manualmente)
+@GameCreative
+  └─ Lê Design/Criativo/TODO.md  +  valida em Design/Pesquisa/
+  └─ Cria/edita em Design/Criativo/
+  └─ Escreve handoffs em Desenvolvimento/Docs/TODO.md
+         ↓ (usuário aciona manualmente)
+@GameArchitect
+  └─ Lê Desenvolvimento/Docs/TODO.md (Passo 0)
+  └─ Cria/edita em Desenvolvimento/Docs/
+  └─ Escreve TODOs para agentes de implementação
+         ↓ (usuário aciona manualmente)
+@GameplayEngineer / @UnityDeveloper / @SystemsDeveloper
+  └─ Implementam em Desenvolvimento/Assets/ e src/
+```
 
 ## Contexto de IA
 

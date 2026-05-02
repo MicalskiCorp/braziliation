@@ -8,6 +8,7 @@
 | Personagem | Papel | Lenda Associada | Status |
 |------------|-------|-----------------|--------|
 | [Edith Gaertner](Edith-Gaertner.md) | NPC espectral — dadora de quest `SQ-01` | História real (Cemitério dos Gatos, Blumenau) | 📋 Rascunho |
+| [Hermann Baumgarten](Hermann-Baumgarten.md) | NPC macabro / quest giver do cemitério de Blumenau | Caso histórico (quase enterro vivo) + mutação por radiação | 📋 Rascunho |
 
 ---
 

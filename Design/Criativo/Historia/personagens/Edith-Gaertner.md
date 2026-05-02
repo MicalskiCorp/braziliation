@@ -37,11 +37,23 @@ Chora pelos 41 gatos restantes que, sem lápide que os ancorasse, fugiram pelo e
 
 ### Diálogo — Retorno com Pingentes
 
-{TODO} *(reação progressiva a cada grupo de pingentes entregues)*
+Edith reage em etapas, nunca como quem completa uma coleção, mas como quem recompõe uma casa despedaçada:
+
+> **Primeiros pingentes:** *"Eu reconheço esse peso... Eles ainda se lembram de mim. Mesmo sem pedra. Mesmo sem jardim."*
+>
+> **Metade dos pingentes:** *"Faz tanto tempo que eu só contava ausências. Agora eu volto a contar nomes."*
+>
+> **Quase todos:** *"Escute... já não é só o vento. Você ouve? Eles estão voltando pelo mato. Um por um."*
+
+Cada entrega faz um ou mais gatos espectrais reaparecerem no jardim, tornando o espaço visualmente mais vivo e menos vazio.
 
 ### Diálogo — Resolução (todos os 41 devolvidos)
 
-{TODO}
+> *"Agora sim... agora nenhum deles anda sozinho."*
+>
+> *"Você me devolveu mais que gatos. Devolveu nomes. Devolveu o lugar deles no mundo."*
+>
+> *"Leve isto. Não é uma relíquia de poder. É uma lembrança de cuidado. Às vezes é a única coisa que impede alguém de se tornar pedra, máquina... ou esquecimento."*
 
 ---
 
@@ -64,8 +76,9 @@ Chora pelos 41 gatos restantes que, sem lápide que os ancorasse, fugiram pelo e
 | Dr. Hermann Blumenau | Seu ancestral fundou a cidade — o clero que governa Die Unterwelt é herdeiro do poder que ela conheceu |
 | Side-quest `SQ-01` | Dadora e receptora da missão *Os Gatos de Edith* |
 | Cemitério dos Gatos | Sua localização permanente no mapa |
+| Mausoléu do Fundador | Contraponto entre memória íntima e memória oficial da cidade |
 
 ---
 
-> **Item de recompensa da quest:** {TODO}
+> **Item de recompensa da quest:** **Guizo de Edith** — relíquia passiva que suaviza a presença hostil de espectros menores e denuncia segredos próximos com um leve tilintar.
 > **Arte conceitual:** {TODO} — criar em `Design/Arts Conceituas/Personagens/`
