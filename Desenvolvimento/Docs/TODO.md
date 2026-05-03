@@ -11,7 +11,13 @@
 
 | Feature/Sistema | Referência Criativa | Prioridade | Status |
 |----------------|---------------------|-----------|--------|
-| *(nenhum handoff pendente ainda)* | — | — | — |
+| Criar feature: Blumenau — Igreja Luterana Matriz, cemitério histórico e linha de quests do Hermann | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Alta | ❌ Não iniciado |
+| Criar feature: Blumenau — Igreja Matriz do Centro e horror social de Podres de Ricos | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Alta | ❌ Não iniciado |
+| Criar feature: Blumenau — Teatro Carlos Gomes como mercado negro e boss Autômato de Engrenagens Esquecidas | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Alta | ❌ Não iniciado |
+| Criar feature: Blumenau — sistema hídrico com comportas, passarelas, docas e estados de cheia | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Alta | ❌ Não iniciado |
+| Criar feature: Blumenau — Jardim de Edith, SQ-01 e relíquia Guizo de Edith | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Alta | ❌ Não iniciado |
+| Criar feature: Blumenau — Mausoléu do Fundador como área de culto político com catacumba inferior | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Média | ❌ Não iniciado |
+| Criar feature: Blumenau — Morro do Zendron e mapas periféricos pós-enchente | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Média | ❌ Não iniciado |
 
 ---
 

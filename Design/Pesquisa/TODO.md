@@ -9,7 +9,6 @@
 
 | Estado | Tema | Prioridade | Status |
 |--------|------|-----------|--------|
-| Santa Catarina | Complementar pesquisa de Blumenau (fontes primárias) | Alta | 🔨 Em andamento |
 | Rio Grande do Sul | História, lendas gaúchas, cidades principais | Alta | ❌ Não iniciado |
 | Paraná | História, lendas paranaenses, cidades principais | Alta | ❌ Não iniciado |
 | Amazônia | Folclore amazônico, Curupira, lendas ribeirinhas | Alta | ❌ Não iniciado |
@@ -35,7 +34,7 @@
 
 | Tema | Arquivo Handoff | Data | Status |
 |------|----------------|------|--------|
-| *(nenhum handoff pendente ainda)* | — | — | — |
+
 
 ---
 
@@ -43,4 +42,7 @@
 
 | Item | Data |
 |------|------|
-| *(nenhum item concluído ainda)* | — |
+| Blumenau — pesquisa factual aprovada e salva (teatro, sistema hídrico, Edith Gaertner, Museu da Família Colonial e Mausoléu) | 2026-05-02 |
+| Santa Catarina — checagem do caso Hermann Baumgarten encerrada a pedido do usuário com base em matéria local secundária que relata o quase sepultamento vivo e a reanimação no velório | 2026-05-02 |
+| Hermann Baumgarten — handoff criativo processado mantendo o caso como memória urbana inspiradora e o enterramento consumado apenas na ficção do jogo | 2026-05-02 |
+| Blumenau — handoff factual de teatro, sistema hídrico, Edith Gaertner, Museu da Família Colonial e Mausoléu processado pela camada criativa | 2026-05-02 |

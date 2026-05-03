@@ -27,29 +27,46 @@
 
 ## Lugares
 
-### Cemitério — Igreja Matriz Luterana
+### Igreja Luterana Matriz e Cemitério Histórico
 
-- **Lenda / Mistério / Folclore:** O jornalista Hermann Baumgarten (45 anos) foi dado como morto em Blumenau por volta de 1905. O médico José Bonifácio, ao chegar para o velório, percebeu que o corpo não apresentava palidez nem frieza e o reanimou. Hermann declarou ter estado consciente durante todo o processo — ouvindo os prantos ao redor, incapaz de se mover. Há boatos de que outros foram enterrados vivos em estado cataléptico; ossadas em posições anormais dentro de caixões foram relatadas.
+- **Base factual verificada:** Hermann Baumgarten está confirmado como figura importante da imprensa blumenauense e fundador do *Blumenauer-Zeitung*, tratado nas fontes consultadas como o primeiro jornal de Blumenau.
+- **Causo local / memória urbana secundária:** circula em Blumenau a memória de que Baumgarten teria sido dado como morto em estado cataléptico e reanimado durante o velório. Para o projeto, esse motivo entra como lenda urbana convergente da cidade, e não como fato histórico primário comprovado.
 - **Ideias:**
   - O cemitério como dungeon: caixões que se movem, arranhões na madeira por baixo da terra, cordas de sineta presas a mãos enterradas.
   - Igreja abandonada no topo do morro — vista do mapa anterior da cidade, ponto de observação estratégica.
   - Mecânica: "confirmação de morte" pelo alto clero — quem o clero declara morto é enterrado, vivo ou não.
   - Primeiro encontro com Hermann: o jogador ouve batidas abafadas vindas dos túmulos; quanto mais se aproxima do túmulo correto, mais nítidas e urgentes ficam as pancadas.
-  - Hermann já estava morto quando a ecatombe aconteceu, mas o segundo enterro vivo o havia preservado de forma anormal; a radiação encontrou esse corpo quase intacto e o trouxe de volta como um zumbi consciente, preso entre lucidez e decomposição.
+  - No universo do jogo, Hermann sofreu uma segunda catalepsia durante o próprio enterro verdadeiro e foi sepultado vivo; mesmo morto depois disso, seu corpo permaneceu preservado de forma anormal dentro do caixão.
+  - Quando a ecatombe atingiu Blumenau, Hermann voltou à consciência dentro do próprio túmulo, transformado numa testemunha enterrada viva.
+
+#### Estrutura do Mapa
+
+- Espaço a céu aberto ligado à Rua das Palmeiras, à memória funerária popular de Blumenau e ao túmulo de Hermann.
+- É aqui que o jogador escuta as batidas vindas da terra e encontra Hermann enterrado vivo.
+- O horror deste mapa é físico, íntimo e humano: sepulturas expostas, catalepsia, terra remexida, caixões arranhados e a suspeita de que Hermann talvez não tenha sido o único.
+- As missões de Hermann começam e se resolvem a partir deste mapa, mas seus desdobramentos conduzem o jogador ao centro clerical da cidade.
 
 ### Teatro Carlos Gomes
 
-- **Lenda / Mistério / Folclore:** O Teatro Carlos Gomes foi remodelado como centro comercial — estrutura histórica preservada, função completamente desvirtuada.
+- **Base factual verificada:** a atividade teatral organizada em Blumenau remonta ao século XIX; o prédio atual do Teatro Carlos Gomes foi inaugurado em 1939 e o Auditório Heinz Geyer conserva como traço técnico o palco giratório motorizado de 12 metros, o fosso de orquestra e a infraestrutura cênica contrapesada.
+- **Camada ficcional:** em Die Unterwelt, a estrutura histórica foi preservada, mas seu uso foi corrompido. O teatro deixou de ser casa de espetáculo para se tornar o mercado negro central da cidade e palco político da elite germânica e do alto clero.
 - **Ideias:**
-  - No universo distópico: o teatro virou o mercado negro central de Die Unterwelt — peças mecânicas, autômatos usados, informações.
+  - O térreo e o foyer funcionam como bazar de luxo e contrabando fino: peças mecânicas raras, autômatos desmontados, mapas de áreas interditadas, documentos roubados e relíquias resgatadas das cheias.
+  - Os camarotes superiores pertencem à aristocracia e ao alto clero. Dali saem leilões privados, decisões políticas, pactos silenciosos e punições encenadas como se fossem parte do espetáculo.
+  - O subpalco e o fosso de orquestra foram convertidos em oficina clandestina, depósito técnico e rota de circulação para mercadorias e prisioneiros importantes.
+  - Os bastidores preservam a aparência cultural da cidade, mas atrás das cortinas o teatro opera como coração social da corrupção clockpunk de Blumenau.
   - Túneis sob o teatro conectam ao sistema subterrâneo da cidade — ponto de acesso à rede de passagens entre cidades.
-  - Camarotes superiores são reservados à elite germânica e ao alto clero — leilões fechados, pactos políticos e execuções discretas travestidas de espetáculo.
   - O palco giratório histórico está emperrado e incompleto: faltam engrenagens-chave espalhadas por Blumenau, levadas pela água, soterradas por lama ou escondidas em áreas secretas da cidade.
 
 ### Boss Extra — Autômato de Engrenagens Esquecidas
 
 - **Estado inicial:** o palco está quebrado, travado e sem peças essenciais. O teatro funciona parcialmente acima dele, mas a maquinaria principal permanece morta, como se o próprio prédio aguardasse algo ser remontado.
 - **Progressão:** o jogador encontra engrenagens perdidas em diferentes momentos da campanha em Blumenau. Algumas só ficam acessíveis quando o nível da água sobe ou baixa após enchentes; outras estão escondidas em porões, passagens técnicas, depósitos aristocráticos e trechos ocultos da cidade.
+- **Mapa das engrenagens por ciclo de enchente:**
+  - **Cota de rotina:** a primeira engrenagem fica na oficina do subpalco, acessível quando o teatro ainda opera em seu modo normal de mercado negro.
+  - **Cota de alerta:** a segunda peça surge num depósito lateral quando passarelas internas são elevadas para conter a primeira subida do rio.
+  - **Cota de cheia:** a terceira engrenagem só pode ser alcançada quando camarins e corredores baixos estão inundados, obrigando o jogador a usar rotas altas e estruturas improvisadas.
+  - **Cota de saturação:** a última engrenagem aparece quando o sistema do teatro falha parcialmente, expondo a carcaça central do palco sob lama, refluxo e ferragem torcida.
 - **Gatilho do boss:** ao reinstalar todas as engrenagens no mecanismo do palco giratório, o sistema volta a funcionar, o palco completa uma rotação inteira e revela o autômato recolhido sob a estrutura, agora reativado.
 - **Origem:** Construído a partir do maquinário do palco giratório e dos equipamentos cênicos mantidos pela elite do teatro, o autômato permaneceu adormecido no subpalco enquanto peças essenciais foram removidas, perdidas ou desviadas ao longo das enchentes e saques.
 - **Leitura histórica que sustenta a ideia:** o palco giratório real do Teatro Carlos Gomes dá base concreta para um boss centrado em rotação, cenografia móvel e mecânica teatral, sem precisar inventar uma lenda local específica para justificá-lo.
@@ -57,7 +74,7 @@
   - O autômato controla maquinarias, cenários móveis, contrapesos, cortinas, refletores e equipamentos cênicos como extensões do próprio corpo.
   - A arena muda por atos: salão da elite, oficina de cenografia e fosso inundado.
   - Marionetes mecânicas e peças de palco atacam em sincronia com comandos de cena, como se o boss ainda obedecesse a uma apresentação interrompida há décadas.
-- **Recompensa:** após vencer o boss, o jogador recebe um item especial ligado ao teatro. O efeito e a vantagem ficam em aberto para definição futura {TODO}.
+- **Recompensa:** após vencer o boss, o jogador recebe o **Selo do Maquinista Heinz** — medalhão de latão extraído do núcleo do palco. Como relíquia, ele permite acionar por alguns segundos mecanismos contrapesados e maquinário hidráulico antigo sem energia externa, abrindo rotas opcionais e passagens técnicas escondidas em Blumenau.
 - **Função narrativa:** reforça o Teatro Carlos Gomes como coração da elite germânica, máquina social da cidade e encontro opcional construído pela própria exploração hídrica de Blumenau.
 
 ### Igreja Matriz do Centro
@@ -68,10 +85,21 @@
   - Catacumbas com sacerdotes sepultados — arquivo de segredos da cidade enterrado literalmente.
   - A seita de aristocratas como facção principal — com quem o jogador negocia ou combate.
 
+#### Estrutura do Mapa
+
+- Sede do alto clero e centro ritual do poder religioso em Die Unterwelt.
+- Sua arquitetura monumental e posição central fazem dela símbolo de autoridade, vigilância e memória oficial.
+- Este mapa se conecta ao Teatro Carlos Gomes por túneis e abriga o horror social de *Podres de Ricos*: criptas internas, jazigos privilegiados e a morte transformada em distinção de classe.
+- No passado, o cemitério que existia no centro da cidade foi transferido para a área da igreja luterana.
+- A memória funerária comum foi deslocada para fora do centro.
+- Na Matriz central permaneceram apenas as sepulturas privilegiadas dos ricos, das famílias influentes e dos corpos que o poder julgou dignos de permanecer junto à igreja.
+- Este mapa complementa o da igreja luterana: o cemitério luterano guarda o horror popular e esquecido; a Matriz do centro guarda o horror elitista, ritual e institucional de Blumenau.
+
 ### Cemitério dos Gatos — Jardim de Edith
 
-- **Base histórica real:** Cemitério criado por **Edith Gaertner** (1882–1967), descendente direta do fundador Dr. Hermann Blumenau, ex-atriz de renome europeu que abandonou a carreira para cuidar dos irmãos doentes e viveu seus últimos anos em reclusão na propriedade da família. Enterrou mais de 50 gatos com rituais e cortejos fúnebres. Apenas 9 lápides permanecem.
+- **Base histórica real:** Edith Gaertner aparece ligada à preservação da memória da família do fundador e ao processo de formação do Museu da Família Colonial. Retornou a Blumenau em 1924, viveu na propriedade da família, reuniu bens e imóveis ligados a essa memória e sepultou ali seus gatos, dando origem ao Cemitério dos Gatos hoje integrado ao complexo museológico.
 - **Lenda / Mistério / Folclore:** Único ponto místico da cidade — ocultado pelas vegetação com vislumbres do sobrenatural esgueirando mini espectros de gatinhos revelando sua existência. Local esquecido pela cidade e oculto pela vegetação ao redor.
+- **Leitura narrativa:** o jardim de Edith funciona como contraponto do mausoléu oficial. Enquanto o fundador recebe pedra, rito e culto público, Edith preserva no silêncio uma memória íntima, doméstica e afetiva da cidade.
 
 ### Cenário — O Jardim
 
@@ -95,7 +123,7 @@ Edith conta ao jogador:
 
 ### Side-Quest — *Os Gatos de Edith* `[SQ-01]`
 
-**Gatilho:** vulto de gato espectral some numa trilha fechada → jogador segue → encontra o jardim de Edith → conversa com ela
+**Gatilho:** o jogador avista um gato espectral entrando por uma pequena abertura escondida na vegetação → segue o vulto pela passagem estreita → encontra o jardim de Edith → conversa com ela
 
 **Mecânica de coleta:**
 - 41 gatos espectrais espalhados pelo mapa geral (Blumenau e demais cidades de SC)
@@ -118,26 +146,46 @@ Edith conta ao jogador:
 - **Lenda / Mistério / Folclore:** O mausoléu do fundador não é apenas memorial — é o lugar onde a cidade tenta convencer a si mesma de que sua origem continua pura. Peregrinos deixam engrenagens, medalhas e nomes de família aos pés da pedra.
 - **Ideias:**
   - O alto clero usa o mausoléu como local de legitimação do poder: quem controla a memória do fundador controla a narrativa de quem tem direito à cidade.
-  - Edith e o mausoléu formam um contraste forte: de um lado a memória oficial petrificada; do outro, a memória íntima e viva de quem ficou para trás.
-  - Catacumba inferior com documentos e brasões de famílias aristocráticas que reescreveram a história após as enchentes e os períodos de censura.
+  - A superfície da área é solene, cerimonial e policiada, quase como um templo cívico onde história oficial e liturgia se confundem.
+  - A catacumba inferior funciona como arquivo fechado das famílias dominantes: livros de linhagem, retratos adulterados, decretos de posse, brasões e documentos que reescrevem a cidade depois das enchentes, da censura e das reorganizações de poder.
+  - O mausoléu não preserva só um corpo; preserva uma versão autorizada de Blumenau.
+  - Edith e o mausoléu formam o contraste central da memória da cidade: de um lado, a lembrança oficial petrificada, vigiada e monumental; do outro, a lembrança íntima, frágil e afetiva daquilo que a cidade quase deixou desaparecer.
+  - A travessia entre o mausoléu e o jardim de Edith deve operar como contraste de ritmo, luz e intenção: do mármore seco, monumental e policiado para a vegetação úmida, escondida e emocional.
 
 ### Rio Itajaí-Açu — Coração da Cidade
 
-- **Base histórica real:** Blumenau cresce em função do Itajaí-Açu e sofre repetidamente com suas cheias; o rio não é pano de fundo, é estrutura.
+- **Base factual verificada:** Blumenau cresceu em função do Itajaí-Açu e convive historicamente com cheias, monitoramento de nível e gestão institucional de risco hidrológico e geológico. Em Die Unterwelt, o rio continua sendo estrutura, não cenário.
 - **Lenda / Mistério / Folclore:** Em Die Unterwelt, o rio parece lembrar. Objetos perdidos retornam semanas depois em pontos improváveis; sinos submersos tocam durante a madrugada quando o nível da água sobe.
 - **Ideias:**
-  - Sistema central de cidade viva: comportas, passarelas elevadas, rodas hidráulicas, docas internas e bairros que entram em estado de alerta conforme a maré do rio.
-  - O rio alimenta as defesas, mas também pode desligá-las ao saturar os mecanismos — a mesma força que sustenta a cidade ameaça afogá-la.
+  - O rio alimenta a cidade e a ameaça ao mesmo tempo. Die Unterwelt depende de sua força para mover engrenagens, mas pode ser desmontada pela mesma água que a sustenta.
   - O trecho Blumenau do *Unterwasser-Gang* existe porque a cidade sempre tentou dominar a água e sempre falhou pela metade.
+
+#### Sistema Hídrico de Die Unterwelt
+
+- **Comportas:** instaladas nos acessos a bairros baixos, túneis, pontes e áreas de travessia. Servem tanto para conter a água quanto para controlar circulação civil em momentos de crise.
+- **Passarelas elevadas:** ruas, calçadas e plataformas podem ser erguidas por trilhos, guinchos e dobradiças. Em tempo normal, sustentam o comércio; em cheia, viram corredores militares e rotas de fuga da elite.
+- **Docas internas:** porões de casarões, depósitos e armazéns foram convertidos em ancoradouros menores para carga, evacuação e contrabando silencioso.
+- **Alertas:** a cidade usa sinos, sirenes pneumáticas, marcadores pintados em pilares e sinais públicos para indicar quatro estados do rio: vigilância, alerta, cheia e saturação.
+- **Falha por saturação:** quando lama, pressão e entulho excedem o limite do sistema, as comportas travam, eixos rompem, passarelas colapsam e bairros inteiros ficam presos entre água represada e refluxo interno. É nesse momento que Blumenau revela seus subterrâneos, seus segredos e seus mortos escondidos.
 
 ### Morro do Zendron — A Cruz do Deslizamento
 
 - **Base histórica real:** Após os deslizamentos de 2008, moradores apontaram no Morro do Zendron uma marca na vegetação semelhante a uma cruz, vista como imagem intrigante no meio da devastação.
-- **Lenda / Mistério / Folclore:** Ninguém concorda se a cruz é aviso, milagre, coincidência ou ironia da paisagem. O alto clero a trata como sinal de julgamento; os sobreviventes, como lembrança de que a terra também mata.
+- **Lenda / Mistério / Folclore:** Ninguém concorda se a cruz é aviso, milagre, coincidência ou ironia da paisagem. Para o alto clero, ela pode ser tratada como sinal de julgamento; para os moradores mais pobres e atingidos, ela resiste como imagem de esperança.
 - **Ideias:**
-  - Transformar o morro em área de terror real: casas partidas ao meio, escadarias interrompidas, pertences presos em lama seca e silêncio de bairro evacuado.
-  - A cruz pode ser visível apenas em certos ângulos ou após chuva forte, servindo como gatilho visual para quest, memória traumática ou encontro com sobreviventes.
-  - A área não precisa ter monstro sobrenatural: o horror principal é deslizamento, soterramento e abandono institucional.
+  - O morro deve funcionar como área de terror real, ligada aos bairros periféricos atingidos por enchentes e deslizamentos.
+  - Casas partidas ao meio, escadarias interrompidas, objetos presos em lama endurecida e silêncio de bairro evacuado constroem o peso material do lugar.
+  - A cruz na vegetação atua como lembrança de esperança para os mais necessitados, não como triunfo institucional do clero.
+  - O alto clero tenta capturar esse símbolo e reinterpretá-lo como discurso de culpa, punição e obediência; os moradores o leem como consolo, resistência e sobrevivência.
+  - A área não precisa de monstro sobrenatural. O principal horror é deslizamento, soterramento, perda de casa e abandono.
+
+#### Direção de Arte — Cheias de 2008 e Pós-Enchente
+
+- A memória das cheias e deslizamentos deve marcar principalmente os mapas periféricos ao centro de Blumenau, onde a infraestrutura falha primeiro e a recuperação chega por último.
+- Essa estética de trauma aparece com força depois da ocorrência das enchentes: lama seca nas paredes, móveis presos em andares altos, postes inclinados, pontes improvisadas, cicatrizes de água e remendos estruturais.
+- No centro, a cidade ainda tenta sustentar aparência de controle clockpunk; nas bordas, a enchente deixa visível a fragilidade real de Blumenau.
+- O contraste visual entre centro e periferia é essencial: a elite preserva fachada, enquanto os bairros mais pobres acumulam as marcas concretas da água, do abandono e da reconstrução improvisada.
+- O horror de Blumenau não vem só de monstros, mas da certeza de que certos mapas periféricos sempre serão os primeiros a afundar e os últimos a ser salvos.
 
 ---
 

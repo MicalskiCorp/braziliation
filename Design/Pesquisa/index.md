@@ -10,7 +10,7 @@ Repositório de informações históricas, folclóricas e culturais **verificada
 
 | Estado | História | Lendas | Cultura | Cidades |
 |--------|----------|--------|---------|---------|
-| *(nenhum estado pesquisado ainda)* | — | — | — | — |
+| Santa Catarina | Parcial | — | Parcial | 1 cidade |
 
 ---
 
@@ -36,3 +36,7 @@ Repositório de informações históricas, folclóricas e culturais **verificada
 - [Estados/](Estados/) — pesquisas organizadas por estado
 - [Temas/](Temas/) — pesquisas transversais
 - [Handoffs/](Handoffs/) — briefings preparados para o @GameCreative
+
+## Estados com Material Aprovado
+
+- [Estados/SantaCatarina/](Estados/SantaCatarina/index.md) — cobertura inicial de Blumenau

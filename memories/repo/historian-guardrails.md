@@ -1,0 +1,7 @@
+- Historiador/Computador nao pode editar conteudo em Design/Criativo/.
+- Excecao unica: Design/Criativo/TODO.md para handoffs reativos aprovados.
+- Correcao factual ou rumor do usuario deve virar checagem/nota em Design/Pesquisa/, nao edicao direta de lore criativo.
+- Nao executar TODOs criativos, nao preencher arquivos criativos e nao "adiantar" trabalho do @GameCreative sem pedido explicito para atuar fora do modo Historiador.
+- Se o pedido envolver camada criativa, limitar a acao a registrar handoff ou manter a pendencia; em caso de ambiguidade, parar e pedir confirmacao antes de editar.
+- Para este projeto, causos, mitos urbanos, rumores locais e memoria oral podem ser considerados validos para Pesquisa quando houver convergencia em varias materias locais ou registros secundarios confiaveis.
+- Nesses casos, nao exigir documento primario para encerrar a checagem, desde que o texto deixe claro que se trata de causo, mito local, memoria urbana ou validacao secundaria convergente, e nao de fato historico primario comprovado.

@@ -19,8 +19,6 @@
 | Criar arco: *A Rede Esquecida* — meta-arco dos túneis intercidades | [`Historia/arcos.md`](Historia/arcos.md) | Alta | ❌ Não iniciado |
 | Criar primeiro personagem (protagonista) | [`Historia/personagens/index.md`](Historia/personagens/index.md) | Média | ❌ Não iniciado |
 | Criar arte conceitual de Edith Gaertner | [`Historia/personagens/Edith-Gaertner.md`](Historia/personagens/Edith-Gaertner.md) | Média | ❌ Não iniciado |
-| Estruturar linha de quests de Hermann Baumgarten no cemitério e na Igreja Matriz Luterana | [`Historia/personagens/Hermann-Baumgarten.md`](Historia/personagens/Hermann-Baumgarten.md) | Alta | ❌ Não iniciado |
-| Definir relíquias e itens entregues por Hermann Baumgarten | [`Historia/personagens/Hermann-Baumgarten.md`](Historia/personagens/Hermann-Baumgarten.md) | Média | ❌ Não iniciado |
 
 ### Lendas
 
@@ -45,15 +43,6 @@
 | Popular ficha completa de Guabiruba | [`Estados/SantaCatarina/cidades/Guabiruba/index.md`](Estados/SantaCatarina/cidades/Guabiruba/index.md) | Alta | 📋 Rascunho |
 | Elaborar descrição da cidade de Florianópolis no futuro distópico | [`Estados/SantaCatarina/cidades/Florianopolis/index.md`](Estados/SantaCatarina/cidades/Florianopolis/index.md) | Alta | 📋 Rascunho |
 | Detalhar monstros de Florianópolis (Bruxa, Mariposa, Boi Tatá, Animal Marinho) | [`Estados/SantaCatarina/cidades/Florianopolis/index.md`](Estados/SantaCatarina/cidades/Florianopolis/index.md) | Alta | 📋 Rascunho |
-| Detalhar Teatro Carlos Gomes como mercado negro da elite e do alto clero | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Alta | ❌ Não iniciado |
-| Mapear a progressão das engrenagens do palco giratório por ciclos de enchente em Blumenau | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Alta | ❌ Não iniciado |
-| Definir recompensa do boss opcional Autômato de Engrenagens Esquecidas | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Média | ❌ Não iniciado |
-| Estruturar a dungeon do Cemitério da Igreja Matriz Luterana e a mecânica de confirmação de morte | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Alta | ❌ Não iniciado |
-| Detalhar Mausoléu do Fundador como área de culto político com catacumba inferior | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Média | ❌ Não iniciado |
-| Documentar o sistema hídrico de Blumenau: comportas, passarelas, docas, alertas e falha por saturação | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Alta | ❌ Não iniciado |
-| Consolidar referências das cheias de 2008 para a direção de arte de Blumenau | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Média | ❌ Não iniciado |
-| Detalhar Morro do Zendron como área de terror real e gatilho visual da cruz | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Média | ❌ Não iniciado |
-| Amarrar o contraste entre memória oficial do mausoléu e memória íntima de Edith na narrativa de Blumenau | [`Estados/SantaCatarina/cidades/Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) | Média | ❌ Não iniciado |
 | Definir nome e razão histórica do túnel de Lages | [`Estados/SantaCatarina/cidades/Lages/index.md`](Estados/SantaCatarina/cidades/Lages/index.md) | Média | ❌ Não iniciado |
 | Definir nome e razão histórica do túnel de Guabiruba | [`Estados/SantaCatarina/cidades/Guabiruba/index.md`](Estados/SantaCatarina/cidades/Guabiruba/index.md) | Média | ❌ Não iniciado |
 | Criar cidade: Joinville (IndustrialPunk) | [`Estados/SantaCatarina/cidades/`](Estados/SantaCatarina/cidades/) | Média | ❌ Não iniciado |
@@ -77,6 +66,11 @@
 |------|---------|-----------|--------|
 | Registrar primeiras ideias no pool | [`Ideias/pool.md`](Ideias/pool.md) | Baixa | ❌ Não iniciado |
 
+## Handoffs de Pesquisa
+
+| Item | Arquivo | Prioridade | Status |
+|------|---------|-----------|--------|
+
 ---
 
 ## Concluído
@@ -91,6 +85,19 @@
 | Túnel de Florianópolis — nome e razão histórica definidos (*Corredor da Fortaleza*) | 2026-04-26 |
 | Sessão de brainstorm: expansão de Blumenau — sistema de túneis intercidades | 2026-04-26 |
 | Blumenau — Cemitério dos Gatos: missão SQ-01 documentada, NPC Edith Gaertner criado | 2026-04-26 |
+| Hermann Baumgarten — linha de quests do cemitério e da Igreja Matriz Luterana estruturada | 2026-05-02 |
+| Hermann Baumgarten — relíquias e itens entregues definidos | 2026-05-02 |
+| Hermann Baumgarten reenquadrado como lenda local e memória urbana secundária no material criativo | 2026-05-02 |
+| Blumenau — Teatro Carlos Gomes detalhado como mercado negro da elite e do alto clero | 2026-05-02 |
+| Blumenau — Progressão das engrenagens do palco giratório mapeada por ciclos de enchente | 2026-05-02 |
+| Blumenau — Recompensa do boss Autômato de Engrenagens Esquecidas definida | 2026-05-02 |
+| Blumenau — Estrutura de horror entre cemitério luterano e Matriz do centro consolidada | 2026-05-02 |
+| Blumenau — Mausoléu do Fundador reforçado como área de culto político com catacumba inferior | 2026-05-02 |
+| Blumenau — Sistema hídrico documentado para uso criativo | 2026-05-02 |
+| Blumenau — Referências das cheias de 2008 consolidadas para direção de arte periférica | 2026-05-02 |
+| Blumenau — Morro do Zendron detalhado como área de terror real e esperança dos necessitados | 2026-05-02 |
+| Blumenau — Contraste entre memória oficial do mausoléu e memória íntima de Edith amarrado | 2026-05-02 |
+| Blumenau — Handoff factual de teatro, sistema hídrico, Edith e mausoléu incorporado ao dossiê criativo | 2026-05-02 |
 
 ---
 
