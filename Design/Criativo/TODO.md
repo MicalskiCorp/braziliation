@@ -58,6 +58,15 @@
 | Criar estado: Amazônia | Alta | ❌ Não iniciado |
 | Criar estado: São Paulo | Média | ❌ Não iniciado |
 | Criar estado: Minas Gerais | Média | ❌ Não iniciado |
+
+### Crafting & Build — Conteúdo Criativo
+
+> Itens solicitados pelo `@GameArchitect` a partir da documentação técnica de Crafting e Build. Referência: `Desenvolvimento/Docs/Mechanics/`.
+
+| Item | Referência Técnica | Prioridade | Status |
+|------|-----------------|-----------|--------|
+| Catálogo de componentes — definir nomes, tipos (Mecânico/Místico/Biológico) e lore de cada componente | [`Mechanics/Crafting.md`](../../Desenvolvimento/Docs/Mechanics/Crafting.md) | Alta | ❌ Não iniciado |
+| Lore da mesa de crafting — origem narrativa e funcionamento no mundo do jogo | [`Mechanics/Crafting.md`](../../Desenvolvimento/Docs/Mechanics/Crafting.md) | Média | ❌ Não iniciado |
 | Criar estado: Bahia | Média | ❌ Não iniciado |
 
 ### Ideias

@@ -7,7 +7,8 @@
 
 | Arquivo | Descrição | Status |
 |---------|-----------|--------|
-| *(nenhuma mecânica documentada ainda)* | — | — |
+| [Crafting.md](Crafting.md) | Sistema de Crafting — coleta, compatibilidade de slots e expansão via NPC | 📋 Conceito |
+| [Build.md](Build.md) | Build do Personagem — receptáculos, habilidades, progressão visual e exploração | 📋 Conceito |
 
 ---
 

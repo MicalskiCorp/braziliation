@@ -7,7 +7,8 @@
 
 | Feature | Prioridade | Status | Arquivo |
 |---------|-----------|--------|---------|
-| *(nenhuma documentada ainda)* | — | — | — |
+| Sistema de Crafting — Receptáculos | Alta | 📋 Planejado | [`Mechanics/Crafting.md`](../Mechanics/Crafting.md) |
+| Build do Personagem — Receptáculos e Identidade | Alta | 📋 Planejado | [`Mechanics/Build.md`](../Mechanics/Build.md) |
 
 ## Legenda de Status
 
