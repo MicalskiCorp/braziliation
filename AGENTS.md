@@ -12,7 +12,8 @@ Projeto **Unity 6** (2D, URP, C#): jogo plataforma pixel art, tema dieselpunk p�
 
 ## Agentes disponíveis (VS Code Copilot)
 
-Todos os agentes estão em `.github/agents/` na raiz do workspace. Acione via `@NomeDoAgente`.
+Todos os agentes de 2ª camada (estrutura) estão em `Braziliation/.github/agents/`. Acione via `@NomeDoAgente`.
+A 1ª camada (personas) vive em `.github/agents/` na raiz do workspace — cada persona delega para o agente de estrutura correspondente, deixado a parte do projeto para cada desenvolvedor editar de acordo com sua preferência.
 
 | Agente | Use para |
 |--------|----------|
@@ -23,16 +24,16 @@ Todos os agentes estão em `.github/agents/` na raiz do workspace. Acione via `@
 | `@QAEngineer` | Revisão, edge cases, acceptance criteria |
 | `@TestEngineer` | Testes xUnit automatizados |
 | `@GameArchitect` | Estrutura Markdown em `Desenvolvimento/Docs/`; lê `Desenvolvimento/Docs/TODO.md` no Passo 0; processa handoffs do @GameCreative — nunca invoca agentes de implementação |
-| `@Computador` | Pesquisa histórica e folclórica via web; organização em `Design/Pesquisa/`; gera TODOs em `Design/Criativo/TODO.md` — nunca invoca @GameCreative |
+| `@Historiador` | Pesquisa histórica e folclórica via web; organização em `Design/Pesquisa/`; gera TODOs em `Design/Criativo/TODO.md` — nunca invoca @GameCreative |
 | `@GameCreative` | Lendas, brainstorm, personagens, lore em `Design/Criativo/`; lê `Design/Pesquisa/` como contexto; gera TODOs em `Desenvolvimento/Docs/TODO.md` — nunca invoca @GameArchitect |
-| `@Jarvis` | Orquestrador e arquiteto de agentes; visão completa de todo o ecossistema; cria, refatora e valida agentes `.agent.md` |
+| `@AgentArchitect` | **Orquestrador Swarm** — abre sessões de desenvolvimento, lê TODO.md e roadmap, classifica tarefas, distribui comandos para agentes especializados, consolida resultados e documenta decisões; também cria, refatora e valida agentes `.agent.md` |
 
 ## Fluxo entre Camadas (Modelo Reativo)
 
 > Cada camada é acionada **manualmente** pelo usuário. Nenhum agente invoca outro automaticamente.
 
 ```
-@Computador
+@Historiador
   └─ Pesquisa em Design/Pesquisa/  +  Design/Pesquisa/TODO.md
   └─ Escreve handoffs em Design/Criativo/TODO.md
          ↓ (usuário aciona manualmente)

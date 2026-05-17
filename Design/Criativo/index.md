@@ -2,7 +2,7 @@
 
 > Hub de gestão criativa do projeto. Centraliza lendas, narrativa, ideias e brainstorms.
 > Alimenta o desenvolvimento de mapas, cenários, monstros e personagens.
-> Agente responsável: `@GameCreative` (definição em `.github/agents/GameCreative.agent.md`)
+> Agente responsável: `@GameCreative` (definição em `Braziliation/.github/agents/GameCreative.agent.md`)
 
 ## Navegação
 
