@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Braziliation.SaveSystem;
@@ -13,9 +14,9 @@ namespace Braziliation.UI
     public sealed class SaveSlotEntryView : MonoBehaviour
     {
         [Header("Labels")]
-        [SerializeField] private Text playerNameLabel;
-        [SerializeField] private Text playtimeLabel;
-        [SerializeField] private Text lastSavedLabel;
+        [SerializeField] private TextMeshProUGUI playerNameLabel;
+        [SerializeField] private TextMeshProUGUI playtimeLabel;
+        [SerializeField] private TextMeshProUGUI lastSavedLabel;
 
         [Header("State Indicators")]
         [SerializeField] private GameObject emptySlotIndicator;

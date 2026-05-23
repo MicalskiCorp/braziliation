@@ -18,30 +18,65 @@ namespace Braziliation.Editor.Menu
     /// </summary>
     public static class MainMenuUISetupEditor
     {
-        // ── Layout constants ──────────────────────────────────────────────────
-        private const float ButtonWidth    = 320f;
-        private const float ButtonHeight   = 64f;
-        private const float ButtonSpacing  = 16f;
-        private const float PanelPaddingH  = 40f;
-        private const float PanelPaddingV  = 32f;
-        private const int   FontSize       = 28;
+        // ── Layout constants (reference canvas: 320 × 180 px) ─────────────────
+        private const float ButtonWidth    = 80f;
+        private const float ButtonHeight   = 10f;
+        private const float ButtonSpacing  = 2f;
+        private const float PanelPaddingH  = 8f;
+        private const float PanelPaddingV  = 4f;
+        private const int   FontSize       = 5;
+        private const float TitleHeight    = 10f;
+        private const float TitleSpacing   = 3f;  // gap between title and first button
 
         private const string CanvasName    = "MainMenuCanvas";
         private const string EventSysName  = "EventSystem";
         private const string ServicesName  = "GameServices";
 
-        // ── Entry point ───────────────────────────────────────────────────────
+        // ── Entry points ──────────────────────────────────────────────────────
+
+        /// <summary>
+        /// One-click: configures background, fixes camera, and sets up the full menu UI.
+        /// Run via Tools → Braziliation → Build Main Menu Scene.
+        /// </summary>
+        [MenuItem("Tools/Braziliation/Build Main Menu Scene")]
+        public static void BuildMainMenuScene()
+        {
+            if (UnityEditor.EditorApplication.isPlaying)
+            {
+                Debug.LogError("[MenuSceneBuilder] Stop Play Mode before running this command.");
+                return;
+            }
+            MenuBackgroundSetupEditor.SetupMenuBackground();
+            SetupMainMenuUI();
+            Debug.Log("[MenuSceneBuilder] ✅ Main Menu Scene fully built.");
+        }
+
         [MenuItem("Tools/Braziliation/Setup Main Menu UI")]
         public static void SetupMainMenuUI()
         {
+            if (UnityEditor.EditorApplication.isPlaying)
+            {
+                Debug.LogError("[MainMenuUISetup] Stop Play Mode before running this command.");
+                return;
+            }
+            FixCamera();
             EnsureEventSystem();
             EnsureGameServices();
+
+            // Destroy existing canvas for a clean rebuild — avoids stale VLG/RectTransform state
+            var staleCanvas = GameObject.Find(CanvasName);
+            if (staleCanvas != null)
+            {
+                Undo.DestroyObjectImmediate(staleCanvas);
+                Debug.Log("[MainMenuUISetup] Existing canvas destroyed — rebuilding clean.");
+            }
 
             var canvas        = EnsureCanvas();
             var controllerGo  = EnsureChild(canvas, "MenuController");
             EnsureComponent<MenuController>(controllerGo);
 
             var mainPanel     = EnsureMainMenuPanel(canvas);
+            mainPanel.SetActive(false); // hidden at start — MenuController shows it after introDelay
             var (s, l, o, e)  = EnsureButtons(mainPanel);
 
             var settingsPanel  = EnsurePlaceholderPanel<SettingsView>(canvas, "SettingsPanel");
@@ -93,8 +128,8 @@ namespace Braziliation.Editor.Menu
             canvas.sortingOrder = 10;
 
             var scaler = go.AddComponent<CanvasScaler>();
-            scaler.uiScaleMode        = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1920f, 1080f);
+            scaler.uiScaleMode         = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(320f, 180f);
             scaler.matchWidthOrHeight  = 0.5f;
 
             go.AddComponent<GraphicRaycaster>();
@@ -104,16 +139,24 @@ namespace Braziliation.Editor.Menu
         // ── MainMenuPanel ─────────────────────────────────────────────────────
         private static GameObject EnsureMainMenuPanel(GameObject canvas)
         {
-            var panel  = EnsureChild(canvas, "MainMenuPanel");
-            var rt     = panel.GetComponent<RectTransform>();
+            var panel = EnsureChild(canvas, "MainMenuPanel");
+            var rt    = panel.GetComponent<RectTransform>();
 
             rt.anchorMin        = new Vector2(0.5f, 0.5f);
             rt.anchorMax        = new Vector2(0.5f, 0.5f);
             rt.pivot            = new Vector2(0.5f, 0.5f);
             rt.anchoredPosition = Vector2.zero;
 
-            float totalH = 4f * ButtonHeight + 3f * ButtonSpacing + 2f * PanelPaddingV;
+            // height: title + title-gap + 4 buttons + 3 gaps + top/bottom padding
+            float totalH = TitleHeight + TitleSpacing
+                         + 4f * ButtonHeight + 3f * ButtonSpacing
+                         + 2f * PanelPaddingV;
             rt.sizeDelta = new Vector2(ButtonWidth + 2f * PanelPaddingH, totalH);
+
+            // Dark navy semi-transparent background
+            EnsureComponent<CanvasRenderer>(panel);
+            var img = EnsureComponent<Image>(panel);
+            img.color = new Color(0.04f, 0.06f, 0.12f, 0.85f);
 
             var vlg = EnsureComponent<VerticalLayoutGroup>(panel);
             vlg.childAlignment        = TextAnchor.MiddleCenter;
@@ -124,19 +167,45 @@ namespace Braziliation.Editor.Menu
             vlg.childForceExpandWidth  = true;
             vlg.childForceExpandHeight = false;
             vlg.childControlWidth      = true;
-            vlg.childControlHeight     = false;
+            vlg.childControlHeight     = true;   // required for LayoutElement.preferredHeight
+
+            // Title is first child — must be called before EnsureButtons
+            EnsureTitle(panel);
 
             return panel;
+        }
+
+        // ── Title ───────────────────────────────────────────────────────────────
+        private static void EnsureTitle(GameObject panel)
+        {
+            var go = EnsureChild(panel, "TitleLabel");
+            go.transform.SetSiblingIndex(0);   // always first in VLG order
+            go.layer = LayerMask.NameToLayer("UI");
+            EnsureComponent<CanvasRenderer>(go);
+
+            var le = EnsureComponent<LayoutElement>(go);
+            le.preferredHeight = TitleHeight + TitleSpacing;
+            le.flexibleWidth   = 1f;
+
+            var tmp = EnsureComponent<TextMeshProUGUI>(go);
+            tmp.text             = "B R A Z I L I A T I O N";
+            tmp.fontSize         = 10;
+            tmp.fontStyle        = FontStyles.Bold;
+            tmp.alignment        = TextAlignmentOptions.Center;
+            tmp.color            = new Color(0.88f, 0.68f, 0.22f, 1f);  // dieselpunk amber/gold
+            tmp.characterSpacing = 2f;
+            tmp.enableAutoSizing = false;
+            tmp.overflowMode     = TextOverflowModes.Overflow;
         }
 
         // ── Buttons ───────────────────────────────────────────────────────────
         private static (Button start, Button load, Button settings, Button exit)
             EnsureButtons(GameObject parent)
         {
-            var start    = EnsureButton(parent, "StartGameButton",  "Start Game");
-            var load     = EnsureButton(parent, "LoadGameButton",   "Load Game");
-            var settings = EnsureButton(parent, "SettingsButton",   "Settings");
-            var exit     = EnsureButton(parent, "ExitButton",       "Exit");
+            var start    = EnsureButton(parent, "StartGameButton",  "Novo Jogo");
+            var load     = EnsureButton(parent, "LoadGameButton",   "Continuar");
+            var settings = EnsureButton(parent, "SettingsButton",   "Op\u00e7\u00f5es");
+            var exit     = EnsureButton(parent, "ExitButton",       "Sair");
             return (start, load, settings, exit);
         }
 
@@ -151,6 +220,7 @@ namespace Braziliation.Editor.Menu
 
             var le = EnsureComponent<LayoutElement>(go);
             le.preferredHeight = ButtonHeight;
+            le.minHeight       = ButtonHeight;
             le.flexibleWidth   = 1f;
 
             var btn  = EnsureComponent<Button>(go);
@@ -172,19 +242,28 @@ namespace Braziliation.Editor.Menu
             labelGo.layer = LayerMask.NameToLayer("UI");
             EnsureComponent<CanvasRenderer>(labelGo);
 
-            var rt = labelGo.GetComponent<RectTransform>();
-            rt.anchorMin        = Vector2.zero;
-            rt.anchorMax        = Vector2.one;
-            rt.offsetMin        = new Vector2(8f, 4f);
-            rt.offsetMax        = new Vector2(-8f, -4f);
+            // Remove any legacy Text left from previous runs
+            var legacyText = labelGo.GetComponent<Text>();
+            if (legacyText != null) Object.DestroyImmediate(legacyText);
 
-            var tmp = EnsureComponent<TextMeshProUGUI>(labelGo);
-            tmp.text                  = text;
-            tmp.fontSize              = FontSize;
-            tmp.fontStyle             = FontStyles.Bold;
-            tmp.alignment             = TextAlignmentOptions.Center;
-            tmp.color                 = Color.white;
-            tmp.overflowMode          = TextOverflowModes.Ellipsis;
+            // Remove any TextMeshProUGUI left from previous runs — avoids TMP resource errors
+            var stale = labelGo.GetComponent("TextMeshProUGUI");
+            if (stale != null) Object.DestroyImmediate(stale);
+
+            var rt = labelGo.GetComponent<RectTransform>();
+            rt.anchorMin = Vector2.zero;
+            rt.anchorMax = Vector2.one;
+            rt.offsetMin = new Vector2(4f, 2f);
+            rt.offsetMax = new Vector2(-4f, -2f);
+
+            var lbl = EnsureComponent<TextMeshProUGUI>(labelGo);
+            lbl.text           = text;
+            lbl.fontSize       = FontSize;
+            lbl.fontStyle      = FontStyles.Bold;
+            lbl.alignment      = TextAlignmentOptions.Center;
+            lbl.color          = Color.white;
+            lbl.overflowMode   = TextOverflowModes.Ellipsis;
+            lbl.enableAutoSizing = false;
         }
 
         // ── Placeholder panels ────────────────────────────────────────────────
@@ -246,6 +325,34 @@ namespace Braziliation.Editor.Menu
             nav.selectOnUp   = selectUp;
             nav.selectOnDown = selectDown;
             btn.navigation   = nav;
+        }
+
+        // ── TMP Resources ──────────────────────────────────────────────────
+        // (removed — editor script now uses UnityEngine.UI.Text to avoid TMP
+        //  Essential Resources dependency. TMP can be used in runtime scripts freely.)
+
+        // ── Camera ───────────────────────────────────────────────────────────
+
+        /// <summary>
+        /// Sets the main camera orthographic size so that a 320×180 sprite at 16 PPU
+        /// fills the viewport exactly. orthoSize = referenceHeight / (2 × PPU) = 5.625
+        /// </summary>
+        private static void FixCamera()
+        {
+            var cam = Camera.main;
+            if (cam == null)
+            {
+                Debug.LogWarning("[MainMenuUISetup] Main Camera not found — skipping ortho size fix.");
+                return;
+            }
+
+            if (!Mathf.Approximately(cam.orthographicSize, 5.625f))
+            {
+                Undo.RecordObject(cam, "Fix Camera OrthoSize");
+                cam.orthographicSize = 5.625f;
+                EditorUtility.SetDirty(cam);
+                Debug.Log("[MainMenuUISetup] Camera orthoSize set to 5.625 (320×180 @ 16 PPU).");
+            }
         }
 
         // ── Helpers ───────────────────────────────────────────────────────────

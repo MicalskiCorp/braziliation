@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -24,6 +25,10 @@ namespace Braziliation.UI
         [Header("Views")]
         [SerializeField] private SettingsView settingsView;
         [SerializeField] private SaveSlotsView saveSlotsView;
+
+        [Header("Intro")]
+        [Tooltip("Seconds the background loops before the menu panel appears.")]
+        [SerializeField] private float introDelay = 5f;
 
         [Header("Navigation – Steam Input")]
         [Tooltip("First button focused when the Main Menu panel is shown.")]
@@ -52,6 +57,16 @@ namespace Braziliation.UI
             optionsButton.onClick.AddListener(OnOptionsClicked);
             exitButton.onClick.AddListener(OnExitClicked);
 
+            // Background loops for introDelay seconds before the menu appears
+            mainMenuPanel.SetActive(false);
+            settingsView.Hide();
+            saveSlotsView.Hide();
+            StartCoroutine(ShowMenuAfterDelay());
+        }
+
+        private IEnumerator ShowMenuAfterDelay()
+        {
+            yield return new WaitForSeconds(introDelay);
             ShowMainMenu();
         }
 

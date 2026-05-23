@@ -25,6 +25,11 @@ namespace Braziliation.Editor.Menu
         [MenuItem("Tools/Braziliation/Setup Menu Background")]
         public static void SetupMenuBackground()
         {
+            if (UnityEditor.EditorApplication.isPlaying)
+            {
+                Debug.LogError("[MenuBackgroundSetup] Stop Play Mode before running this command.");
+                return;
+            }
             EnsureDirectories();
 
             var sprites = LoadAndConfigureSprites();
@@ -114,6 +119,7 @@ namespace Braziliation.Editor.Menu
 
             clip.name      = ClipName;
             clip.frameRate = FrameRate;
+            clip.wrapMode  = WrapMode.Loop;   // explicit loop — prevents animation stopping
 
             var settings = AnimationUtility.GetAnimationClipSettings(clip);
             settings.loopTime = true;
@@ -126,13 +132,26 @@ namespace Braziliation.Editor.Menu
                 propertyName = "m_Sprite"
             };
 
-            var keyframes = new ObjectReferenceKeyframe[sprites.Length];
-            for (int i = 0; i < sprites.Length; i++)
+            // Ping-pong sequence: forward (0..n-1) then backward (n-2..1)
+            // Avoids duplicate frames at loop endpoints → transição fluida
+            int n           = sprites.Length;
+            int totalFrames = n + (n - 2);          // e.g. 8 + 6 = 14
+            var keyframes   = new ObjectReferenceKeyframe[totalFrames];
+
+            for (int i = 0; i < n; i++)
             {
                 keyframes[i] = new ObjectReferenceKeyframe
                 {
                     time  = i / (float)FrameRate,
                     value = sprites[i]
+                };
+            }
+            for (int i = 0; i < n - 2; i++)
+            {
+                keyframes[n + i] = new ObjectReferenceKeyframe
+                {
+                    time  = (n + i) / (float)FrameRate,
+                    value = sprites[n - 2 - i]  // n-2, n-3, …, 1
                 };
             }
 
@@ -200,9 +219,19 @@ namespace Braziliation.Editor.Menu
 
             anim.runtimeAnimatorController = controller;
 
-            // Position at world origin, in front of camera z
+            // Position at world origin, scale must be 1:1 — PPU handles world size
             existing.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
             existing.transform.localScale = Vector3.one;
+
+            // Fix camera: orthoSize = referenceH / (2 × PPU) = 180 / 32 = 5.625
+            // so a 320×180 sprite at 16 PPU fills the viewport exactly with no black bars
+            var cam = Camera.main;
+            if (cam != null && !Mathf.Approximately(cam.orthographicSize, 5.625f))
+            {
+                cam.orthographicSize = 5.625f;
+                EditorUtility.SetDirty(cam);
+                Debug.Log("[MenuBackgroundSetup] Camera orthoSize set to 5.625 (320×180 @ 16 PPU).");
+            }
 
             // Mark scene dirty so Unity prompts to save
             UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(

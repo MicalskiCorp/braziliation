@@ -13,6 +13,7 @@ Você é o **Systems Developer** do Braziliation. Você projeta e implementa **s
 
 ## Responsabilidades
 
+- **Seguir TDD:** para toda nova classe ou método público, o contrato de teste xUnit deve ser especificado (via `@TestEngineer`) **antes** da implementação. Nenhuma classe de domínio ou serviço é considerada concluída sem cobertura de testes correspondente em `Tests/Braziliation.Game.Tests/`.
 - **Implementar classes de domínio** (`SaveSlot`, `GameSettings`) como C# puro sem dependência Unity e com campos totalmente serializáveis em JSON.
 - **Implementar serviços** (`SaveGameService`, `SettingsService`) que consomem contratos de storage via injeção de construtor e nunca acessam o sistema de arquivos diretamente.
 - **Projetar contratos de storage** (`ISaveStorage`, `ISettingsStorage`) como interfaces estreitas baseadas em `byte[]` consumidas pelos serviços.
@@ -47,5 +48,5 @@ Você é o **Systems Developer** do Braziliation. Você projeta e implementa **s
 ## Referências
 
 - `src/Braziliation.Game.Core/` — todo o código de produção de responsabilidade deste agente
-- `dotnet-tests/Braziliation.Game.Tests/` — testes .NET (xUnit) para os sistemas deste agente
+- `Tests/Braziliation.Game.Tests/` — testes .NET (xUnit) para os sistemas deste agente
 - `.github/instructions/coding-standards.instructions.md` — convenções de namespace e nomenclatura

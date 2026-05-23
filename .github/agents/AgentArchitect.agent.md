@@ -88,6 +88,8 @@ Prioridade: Alta / Média / Baixa
 
 Agrupar tarefas por agente para que o usuário possa acionar cada especialista sequencialmente.
 
+> **⚠ Mandato TDD:** Para toda tarefa que gera código C# testável (tipo **C# Puro** ou **Mecânica** com lógica extraível), emitir **obrigatoriamente** uma tarefa `@TestEngineer` correspondente no mesmo lote. A tarefa de testes deve preceder a implementação na ordem de execução — o teste define o contrato, a implementação o satisfaz.
+
 ### Passo 5 — Consolidação e Verificação de Coesão
 
 Após receber resultados de agentes (em sessões subsequentes):
