@@ -142,25 +142,25 @@
 
 | Tarefa | Prioridade | Status |
 |--------|-----------|--------|
-| Criar `PlayerController.cs` — movimentação básica: andar, pular, colisão com tilemap | Alta | ❌ Não iniciado |
-| Implementar `IStatReceiver` em `PlayerController` — receber stats da build via `PlayerBuildController` | Alta | ❌ Não iniciado |
-| Criar sistema de interação — jogador usa `IInteractable.Interact()` ao pressionar botão próximo a objeto | Alta | ❌ Não iniciado |
+| Criar `PlayerController.cs` — movimentação básica: andar, pular, colisão com tilemap | Alta | ✅ Concluído |
+| Implementar `IStatReceiver` em `PlayerController` — receber stats da build via `PlayerBuildController` | Alta | ✅ Concluído |
+| Criar sistema de interação — jogador usa `IInteractable.Interact()` ao pressionar botão próximo a objeto | Alta | ✅ Concluído |
 
 ### `@GameplayEngineer` — Combate Básico
 
 | Tarefa | Prioridade | Status |
 |--------|-----------|--------|
-| Criar `HealthComponent.cs` — vida, dano, morte (C# puro ou MonoBehaviour) | Alta | ❌ Não iniciado |
-| Criar `PlayerCombat.cs` — ataque básico com uma arma (tipo a definir com design) | Alta | ❌ Não iniciado |
-| Criar `EnemyController.cs` — inimigo básico: patrulha, detecta jogador, causa dano | Alta | ❌ Não iniciado |
+| Criar `HealthComponent.cs` — vida, dano, morte (C# puro ou MonoBehaviour) | Alta | ✅ Concluído |
+| Criar `PlayerCombat.cs` — ataque básico com uma arma (tipo a definir com design) | Alta | ✅ Concluído |
+| Criar `EnemyController.cs` — inimigo básico: patrulha, detecta jogador, causa dano | Alta | ✅ Concluído |
 
 ### `@UnityDeveloper` — Nível Jogável
 
 | Tarefa | Prioridade | Status |
 |--------|-----------|--------|
-| Montar primeira cena jogável com blockout de tilemap + plataformas + colisores | Alta | ❌ Não iniciado |
-| Criar `BootstrapScene` com `GameServiceLocator` + `BuildServiceBinder` configurados | Alta | ❌ Não iniciado |
-| Criar HUD básico — barra de vida, indicador de build ativa | Média | ❌ Não iniciado |
+| Montar primeira cena jogável com blockout de tilemap + plataformas + colisores | Alta | ✅ Concluído — `DemoSceneBootstrap` cria plataforma, player e inimigo em runtime |
+| Criar `BootstrapScene` com `GameServiceLocator` + `BuildServiceBinder` configurados | Alta | ✅ Concluído — `DemoAutoBootstrapper` injeta bootstrap automático em cenas não-menu |
+| Criar HUD básico — barra de vida, indicador de build ativa | Média | ✅ Concluído — `SimpleHealthHud` com barra de HP em runtime |
 
 ### `@SystemsDeveloper` — Completar integrações pendentes
 
@@ -178,9 +178,9 @@
 
 | Item | Referência | Responsável | Prioridade | Status |
 |------|-----------|------------|-----------|--------|
-| Definir tabela de sinergias híbridas — `HybridSynergyResolver._hybridEffectTable` está vazia | [`Mechanics/Build.md`](Mechanics/Build.md) | Design | Alta | ❌ Não iniciado |
+| Definir tabela de sinergias híbridas — `HybridSynergyResolver._hybridEffectTable` está vazia | [`Mechanics/Build.md`](Mechanics/Build.md) | Design | Alta | ✅ Concluído |
 | Definir IDs dos materiais especiais de expansão de slots (Artesão/Costureira/Alquimista) | [`Mechanics/Build.md`](Mechanics/Build.md) | Design | Alta | ❌ Não iniciado |
-| Definir implementação concreta das flags de exploração — `ExplorationFlagHandler` tem apenas `Debug.Log` | [`Mechanics/Build.md`](Mechanics/Build.md) | Design+Eng | Média | ❌ Não iniciado |
+| Definir implementação concreta das flags de exploração — `ExplorationFlagHandler` tem apenas `Debug.Log` | [`Mechanics/Build.md`](Mechanics/Build.md) | Design+Eng | Média | ✅ Concluído |
 | Definir arma inicial do jogador (tipo, dano base, animação) para combate básico | GDD | Design | Alta | ❌ Não iniciado |
 | Definir inimigo básico da demo — comportamento, vida, dano | GDD | Design | Alta | ❌ Não iniciado |
 
@@ -197,6 +197,15 @@
 | `ExplorationFlagHandler` — substituídos Debug.Log por ativação/desativação de GameObjects via Inspector | 2026-05-23 |
 | `ReceptacleController` + `HybridRollHandler` — conectados via `GameServiceLocator.Resolve<CraftingService>()` | 2026-05-23 |
 | `PlayerBuildController` — adicionada referência ao `ExplorationFlagHandler`; `OnBuildChanged` chama `SyncFlags` | 2026-05-23 |
+| `PlayerController` — movimentação básica (andar/pular), `IStatReceiver` e interação com `IInteractable` | 2026-05-30 |
+| `HealthComponent` — vida, dano, morte e eventos (`OnHealthChanged`, `OnDied`) | 2026-05-30 |
+| `PlayerCombat` — ataque básico com cooldown e dano em área curta | 2026-05-30 |
+| `EnemyController` — patrulha, perseguição curta e dano por contato | 2026-05-30 |
+| `DemoSceneBootstrap` — setup automático de cena de demo (serviços, chão, player, inimigo, câmera, HUD) | 2026-05-30 |
+| `DemoAutoBootstrapper` — injeção automática do bootstrap em cenas de gameplay (pós-load) | 2026-05-30 |
+| `SimpleCameraFollow` — câmera 2D seguindo o jogador na demo | 2026-05-30 |
+| `CanvasHealthHud` — HUD de HP em Canvas/Slider (substituindo OnGUI) | 2026-05-30 |
+| `DemoSceneBuilderEditor` — menu para criar/atualizar cena fixa `Assets/Scenes/DemoGameplay.unity` | 2026-05-30 |
 | Feature: Blumenau — Igreja Matriz do Centro + horror social *Podres de Ricos* | 2026-05-17 |
 | Feature: Blumenau — Teatro Carlos Gomes + mercado negro + boss Autômato de Engrenagens Esquecidas | 2026-05-17 |
 | Feature: Blumenau — Sistema Hídrico (comportas, passarelas, docas, 4 estados) | 2026-05-17 |

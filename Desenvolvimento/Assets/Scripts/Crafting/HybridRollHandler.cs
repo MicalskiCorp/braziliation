@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Braziliation.Crafting;
+using Braziliation.Core;
 
 namespace Braziliation.Crafting
 {
