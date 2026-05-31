@@ -22,14 +22,13 @@ namespace Braziliation.Crafting
         // TODO-DESIGN: valor da seed fixa a definir pelo game design
         [SerializeField] private int _seedFixa = 0;
 
-        // TODO: conectar via GameServiceLocator
         private CraftingService _craftingService;
 
         private void Awake()
         {
-            // TODO: conectar via GameServiceLocator
-            // _craftingService = GameServiceLocator.Instance.CraftingService;
-            _craftingService = new CraftingService();
+            _craftingService = GameServiceLocator.Instance != null
+                ? GameServiceLocator.Instance.Resolve<CraftingService>()
+                : new CraftingService();
         }
 
         /// <summary>

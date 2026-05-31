@@ -18,7 +18,6 @@ namespace Braziliation.Crafting
     public sealed class ReceptacleController : MonoBehaviour
     {
         [Header("Referências")]
-        // TODO: conectar via GameServiceLocator
         [SerializeField] private PlayerInventory _playerInventory;
 
         [Header("Eventos")]
@@ -28,8 +27,7 @@ namespace Braziliation.Crafting
         /// <summary>Disparado ao remover um item. Parâmetros: receptáculo, índice do slot.</summary>
         public UnityEvent<ReceptacleType, int> OnItemUnequipped;
 
-        // TODO: conectar via GameServiceLocator
-        // private CraftingService _craftingService;
+        private CraftingService _craftingService;
 
         // Dados de runtime dos três receptáculos — inicializados em Awake
         private readonly Dictionary<ReceptacleType, ReceptacleData> _receptaculos =
@@ -37,6 +35,10 @@ namespace Braziliation.Crafting
 
         private void Awake()
         {
+            _craftingService = GameServiceLocator.Instance != null
+                ? GameServiceLocator.Instance.Resolve<CraftingService>()
+                : new CraftingService();
+
             // Inicializa os receptáculos com configuração base conforme a spec (Build.md)
             _receptaculos[ReceptacleType.Exoskeleton] = new ReceptacleData
             {
@@ -56,9 +58,6 @@ namespace Braziliation.Crafting
                 Type        = ReceptacleType.Spine,
                 Pillar      = PillarType.Biological
             };
-
-            // TODO: conectar via GameServiceLocator
-            // _craftingService = GameServiceLocator.Instance.CraftingService;
         }
 
         /// <summary>
