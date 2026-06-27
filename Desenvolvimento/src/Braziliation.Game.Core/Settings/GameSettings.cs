@@ -1,9 +1,9 @@
 namespace Braziliation.Settings;
 
 /// <summary>
-/// Pure-data settings model for audio volumes.
-/// All volumes are clamped to [0, 1] on assignment; NaN is treated as 0.
-/// Serializable via System.Text.Json with no Unity dependency.
+/// Modelo de dados puro para volumes de áudio.
+/// Todos os volumes são limitados para [0, 1] na atribuição; NaN é tratado como 0.
+/// Serializável via System.Text.Json sem dependência de Unity.
 /// </summary>
 public sealed class GameSettings
 {

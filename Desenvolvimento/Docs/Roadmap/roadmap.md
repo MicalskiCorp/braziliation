@@ -7,10 +7,12 @@ High-level roadmap for technical and content work. Update as priorities change. 
 - [x] Unity 6 + URP 2D + Pixel Perfect (320×180, 16 PPU)
 - [x] GameInitializer, CameraScaler
 - [x] Input System setup
-- [ ] Recommended Assets/Scripts structure adopted (see Docs/Architecture/AssetsStructure.md)
-- [ ] Core player movement (run, jump) and basic collision
-- [ ] Basic combat (health, damage, one weapon type)
-- [ ] One playable level (blockout + placeholders)
+- [x] Recommended Assets/Scripts structure adopted (see Docs/Architecture/AssetsStructure.md)
+- [x] Core player movement (run, jump) and basic collision
+- [x] Basic combat (health, damage, one weapon type)
+- [x] One playable level (blockout + placeholders)
+
+Status note (2026-05-31): a base da demo foi consolidada com cena fixa em Assets/Scenes/DemoGameplay.unity e bootstrap de runtime/editor.
 
 ## Phase: Gameplay loop
 

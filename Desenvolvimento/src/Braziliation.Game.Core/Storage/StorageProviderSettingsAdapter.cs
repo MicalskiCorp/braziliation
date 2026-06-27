@@ -4,10 +4,10 @@ using Braziliation.Settings;
 namespace Braziliation.Storage;
 
 /// <summary>
-/// Adapts an <see cref="IStorageProvider"/> into the <see cref="ISettingsStorage"/> interface.
-/// Settings are stored under the fixed key <c>"settings"</c>.
-/// Byte arrays produced by the serialization layer are bridged to UTF-8 JSON strings
-/// expected by <see cref="IStorageProvider"/>.
+/// Adapta um <see cref="IStorageProvider"/> para a interface <see cref="ISettingsStorage"/>.
+/// Configurações são armazenadas sob a chave fixa <c>"settings"</c>.
+/// Arrays de bytes produzidos pela camada de serialização são convertidos para strings JSON UTF-8
+/// esperadas por <see cref="IStorageProvider"/>.
 /// </summary>
 public sealed class StorageProviderSettingsAdapter : ISettingsStorage
 {

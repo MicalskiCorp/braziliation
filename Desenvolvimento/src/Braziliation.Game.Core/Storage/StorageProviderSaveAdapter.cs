@@ -4,11 +4,11 @@ using Braziliation.SaveSystem;
 namespace Braziliation.Storage;
 
 /// <summary>
-/// Adapts an <see cref="IStorageProvider"/> into the <see cref="ISaveStorage"/> interface.
-/// Slot indices are mapped to provider keys using the <c>save_N</c> convention
-/// (e.g. slot 0 → key <c>"save_0"</c>).
-/// Byte arrays produced by the serialization layer are bridged to UTF-8 JSON strings
-/// expected by <see cref="IStorageProvider"/>.
+/// Adapta um <see cref="IStorageProvider"/> para a interface <see cref="ISaveStorage"/>.
+/// Índices de slot são mapeados para chaves do provedor usando a convenção <c>save_N</c>
+/// (ex.: slot 0 → chave <c>"save_0"</c>).
+/// Arrays de bytes produzidos pela camada de serialização são convertidos para strings JSON UTF-8
+/// esperadas por <see cref="IStorageProvider"/>.
 /// </summary>
 public sealed class StorageProviderSaveAdapter : ISaveStorage
 {

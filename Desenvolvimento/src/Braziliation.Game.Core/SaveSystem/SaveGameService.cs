@@ -4,8 +4,8 @@ using Braziliation.Serialization;
 namespace Braziliation.SaveSystem;
 
 /// <summary>
-/// Saves and loads <see cref="SaveSlot"/> instances through a pluggable storage backend.
-/// Each slot is independent; corrupted or missing slots return null rather than throwing.
+/// Salva e carrega instâncias de <see cref="SaveSlot"/> por meio de um backend de armazenamento plugável.
+/// Cada slot é independente; slots corrompidos ou ausentes retornam null em vez de lançar exceção.
 /// </summary>
 public sealed class SaveGameService
 {

@@ -1,19 +1,19 @@
 namespace Braziliation.SaveSystem;
 
 /// <summary>
-/// Persistent data for a single save slot.
-/// All fields must be JSON-serializable and free of Unity types
-/// to ensure Steam Cloud compatibility and deterministic round-trips.
+/// Dados persistentes de um único slot de save.
+/// Todos os campos devem ser serializáveis em JSON e sem tipos Unity
+/// para garantir compatibilidade com Steam Cloud e round-trips determinísticos.
 /// </summary>
 public sealed class SaveSlot
 {
     /// <summary>
-    /// Increment whenever a breaking change is made to the save schema.
-    /// <see cref="SaveGameService"/> rejects slots whose version does not match.
+    /// Incrementar sempre que houver mudança incompatível no schema de save.
+    /// <see cref="SaveGameService"/> rejeita slots cuja versão não corresponda.
     /// </summary>
     public const int CurrentSchemaVersion = 1;
 
-    /// <summary>Schema version written at save time. Validated on load.</summary>
+    /// <summary>Versão de schema gravada no momento do save. Validada no carregamento.</summary>
     public int SchemaVersion { get; set; } = CurrentSchemaVersion;
 
     public int SlotIndex { get; set; }

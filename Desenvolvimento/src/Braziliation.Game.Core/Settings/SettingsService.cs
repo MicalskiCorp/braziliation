@@ -4,8 +4,8 @@ using Braziliation.Serialization;
 namespace Braziliation.Settings;
 
 /// <summary>
-/// Saves and loads <see cref="GameSettings"/> through a pluggable storage backend.
-/// Corrupted or missing data silently returns default settings (all volumes = 1).
+/// Salva e carrega <see cref="GameSettings"/> por meio de um backend de armazenamento plugável.
+/// Dados corrompidos ou ausentes retornam silenciosamente as configurações padrão (todos os volumes = 1).
 /// </summary>
 public sealed class SettingsService
 {

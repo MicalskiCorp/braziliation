@@ -1,6 +1,6 @@
 namespace Braziliation.Settings;
 
-/// <summary>Abstraction over the persistence layer for game settings.</summary>
+/// <summary>Abstração da camada de persistência para configurações do jogo.</summary>
 public interface ISettingsStorage
 {
     void Write(byte[] data);

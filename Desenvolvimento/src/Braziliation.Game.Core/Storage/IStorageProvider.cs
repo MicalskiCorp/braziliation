@@ -1,27 +1,27 @@
 namespace Braziliation.Storage;
 
 /// <summary>
-/// Key/value string persistence abstraction for the save and settings systems.
-/// Data is a JSON string, making it portable across local disk and future Steam Cloud.
-/// Keys must be valid file-name tokens (no path separators or special characters).
-/// Swap the implementation to change the backend without touching any service code.
+/// Abstração de persistência chave/valor em string para os sistemas de save e settings.
+/// Os dados são strings JSON, mantendo portabilidade entre disco local e futuro Steam Cloud.
+/// As chaves devem ser tokens válidos para nome de arquivo (sem separadores de caminho ou caracteres especiais).
+/// Trocar a implementação muda o backend sem alterar o código dos serviços.
 /// </summary>
 public interface IStorageProvider
 {
     /// <summary>
-    /// Persists <paramref name="data"/> under <paramref name="key"/>, overwriting any existing entry.
+    /// Persiste <paramref name="data"/> em <paramref name="key"/>, sobrescrevendo qualquer entrada existente.
     /// </summary>
     void Save(string key, string data);
 
     /// <summary>
-    /// Returns the string stored under <paramref name="key"/>,
-    /// or <see langword="null"/> when the entry is absent or unreadable.
+    /// Retorna a string armazenada em <paramref name="key"/>,
+    /// ou <see langword="null"/> quando a entrada estiver ausente ou ilegível.
     /// </summary>
     string? Load(string key);
 
-    /// <summary>Returns <see langword="true"/> when an entry for <paramref name="key"/> exists.</summary>
+    /// <summary>Retorna <see langword="true"/> quando existe uma entrada para <paramref name="key"/>.</summary>
     bool Exists(string key);
 
-    /// <summary>Removes the entry for <paramref name="key"/>. No-op if the entry does not exist.</summary>
+    /// <summary>Remove a entrada de <paramref name="key"/>. Não faz nada se a entrada não existir.</summary>
     void Delete(string key);
 }

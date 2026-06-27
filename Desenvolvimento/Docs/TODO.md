@@ -33,6 +33,35 @@
 
 ---
 
+## Pendências Atuais Consolidadas (Docs + Código)
+
+> Foto única do estado atual para execução da primeira demo. Consolidado em 2026-05-31 com base neste arquivo e nos TODOs inline de `Assets/Scripts/` e `src/`.
+
+| Frente | Pendência ativa | Prioridade | Fonte |
+|-------|------------------|-----------|-------|
+| Design | Definir arma inicial do jogador (tipo, dano base, animação) | Alta | Seção “TODOs de Design — Bloqueadores de Implementação (Build)” |
+| Design | Definir inimigo básico da demo (comportamento, vida, dano) | Alta | Seção “TODOs de Design — Bloqueadores de Implementação (Build)” |
+| Design | Definir IDs dos materiais especiais para expansão de slots | Alta | Seção “TODOs de Design — Bloqueadores de Implementação (Build)” |
+| Design | Definir parâmetros numéricos de Crafting (slots, expansões, combinações híbridas) | Alta | Seção “TODOs de Design — Crafting & Build” |
+| Design | Definir parâmetros numéricos de Build (habilidades máximas, resistências, estágios visuais) | Alta | Seção “TODOs de Design — Crafting & Build” |
+| Design | Definir localização e quantidade de totens no mapa | Média | Seção “TODOs de Design — Crafting & Build” |
+| Gameplay | Implementar lógica completa de inventário (capacidade, categorias, integração de UI) | Média | `Assets/Scripts/Core/PlayerInventory.cs` |
+| UI/Arte | Criar prefab final do painel de crafting e vincular no Inspector | Média | `Assets/Scripts/UI/CraftingPanelController.cs` |
+| UI/Arte | Finalizar pipeline de sprites/partes corporais para progressão visual da build | Média | `Assets/Scripts/UI/BuildProgressionView.cs` |
+| UI/Arte | Implementar VFX/feedback visual completo de sinergias híbridas | Média | `Assets/Scripts/UI/HybridSynergyFeedbackView.cs` |
+| Design+Tech | Definir política de seed do sorteio híbrido (determinístico vs aleatório) e efeitos de roleta | Média | `Assets/Scripts/Crafting/HybridRollHandler.cs` |
+| Core Design | Fechar regras de compatibilidade/composição final de itens híbridos e tuning de slots iniciais | Alta | `src/Braziliation.Game.Core/Crafting/*.cs` |
+
+### Sequência recomendada para fechar a primeira demo
+
+1. Fechar decisões de design críticas (arma, inimigo, parâmetros de crafting/build, IDs de materiais).
+2. Implementar inventário completo e amarrar fluxo com crafting/build.
+3. Finalizar UI/arte pendente (prefab crafting, progressão visual e feedback de sinergia).
+4. Revisar documentação de cenas/assets e atualizar índices técnicos.
+5. Rodar checklist final da demo com validação de loop jogável completo (combate + progressão + feedback).
+
+---
+
 ## TODOs de Implementação — Sistema de Crafting
 
 > Gerados pelo `@GameArchitect` em 2026-05-10. Referência: [`Mechanics/Crafting.md`](Mechanics/Crafting.md)

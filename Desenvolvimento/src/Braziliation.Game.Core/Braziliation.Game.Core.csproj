@@ -5,25 +5,25 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Braziliation</RootNamespace>
-    <!-- Copy NuGet dependency DLLs to build output so the PostBuild target can deploy them to Unity -->
+    <!-- Copia DLLs de dependências NuGet para a saída de build para que o alvo de pós-build possa implantá-las no Unity -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
   </ItemGroup>
   <!--
-    After every build, sync the plugin DLL and its NuGet dependencies that are NOT
-    provided by Unity 6's .NET 6 (CoreCLR) runtime into the Unity Plugins folder.
+    Após cada build, sincroniza a DLL do plugin e suas dependências NuGet que NÃO
+    são fornecidas pelo runtime .NET 6 (CoreCLR) do Unity 6 para a pasta de Plugins do Unity.
 
-    Excluded (already in Unity 6 .NET 6 BCL):
+    Excluídas (já presentes no BCL do Unity 6 .NET 6):
       System.Memory, System.Buffers, System.Numerics.Vectors,
       System.Threading.Tasks.Extensions
 
-    Included (missing from Unity 6 scripting path or need a newer version):
-      System.Text.Json           � Unity 6 has v6.0.0; plugin needs v8.0.0
-      System.Text.Encodings.Web  � direct dep of System.Text.Json 8.x
-      System.Runtime.CompilerServices.Unsafe � required by Encodings.Web 8.x
-      Microsoft.Bcl.AsyncInterfaces � not in Mono; needed for async iterators
+    Incluídas (ausentes no caminho de script do Unity 6 ou que exigem versão mais nova):
+      System.Text.Json           � Unity 6 possui v6.0.0; o plugin precisa de v8.0.0
+      System.Text.Encodings.Web  � dependência direta de System.Text.Json 8.x
+      System.Runtime.CompilerServices.Unsafe � exigida por Encodings.Web 8.x
+      Microsoft.Bcl.AsyncInterfaces � ausente no Mono; necessária para iteradores assíncronos
   -->
   <Target Name="CopyToUnityPlugins" AfterTargets="Build">
     <ItemGroup>

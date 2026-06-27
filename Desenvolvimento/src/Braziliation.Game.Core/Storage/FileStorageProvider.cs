@@ -1,22 +1,22 @@
 namespace Braziliation.Storage;
 
 /// <summary>
-/// File-system implementation of <see cref="IStorageProvider"/>.
-/// Each key maps to a UTF-8 <c>.json</c> file inside the injected base directory.
-/// The directory is created lazily on the first write — no hardcoded paths are used.
-/// Missing and unreadable files are handled safely by returning <see langword="null"/>.
+/// Implementação em sistema de arquivos de <see cref="IStorageProvider"/>.
+/// Cada chave mapeia para um arquivo <c>.json</c> UTF-8 dentro do diretório base injetado.
+/// O diretório é criado sob demanda na primeira gravação — sem uso de caminhos fixos no código.
+/// Arquivos ausentes ou ilegíveis são tratados com segurança retornando <see langword="null"/>.
 /// </summary>
 /// <remarks>
-/// To target Steam Cloud in the future, implement <see cref="IStorageProvider"/>
-/// with the Steam Remote Storage API and inject it in place of this class.
+/// Para suportar Steam Cloud no futuro, implemente <see cref="IStorageProvider"/>
+/// com a API de Steam Remote Storage e injete essa implementação no lugar desta classe.
 /// </remarks>
 public sealed class FileStorageProvider : IStorageProvider
 {
     private readonly string _basePath;
 
     /// <param name="basePath">
-    /// Directory that will hold all managed <c>.json</c> files.
-    /// Injected at construction time — never hardcoded.
+    /// Diretório que armazenará todos os arquivos <c>.json</c> gerenciados.
+    /// Injetado no momento da construção — nunca fixo em código.
     /// </param>
     public FileStorageProvider(string basePath)
     {
@@ -35,8 +35,8 @@ public sealed class FileStorageProvider : IStorageProvider
 
     /// <inheritdoc/>
     /// <returns>
-    /// The file contents as a UTF-8 string, or <see langword="null"/> when the file
-    /// does not exist or cannot be read (e.g. locked, corrupted).
+    /// Conteúdo do arquivo como string UTF-8, ou <see langword="null"/> quando o arquivo
+    /// não existir ou não puder ser lido (ex.: bloqueado, corrompido).
     /// </returns>
     public string? Load(string key)
     {
@@ -71,7 +71,7 @@ public sealed class FileStorageProvider : IStorageProvider
             File.Delete(path);
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
+    // ── Auxiliares ────────────────────────────────────────────────────────────
 
     private string FilePath(string key) => Path.Combine(_basePath, key + ".json");
 
