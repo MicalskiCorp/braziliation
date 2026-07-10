@@ -10,7 +10,7 @@
 | Código puro (C#) | `src/**/*.cs` | Todos |
 | Cenas Unity | `Assets/Scenes/**/*.unity` | Todas |
 | Tilemaps | `Assets/Tilemaps/` | Por referência em sistema |
-| Prefabs relevantes | `Assets/Art/**/*.prefab` | Quando ligados a sistema documentado |
+| Prefabs relevantes | `Assets/Prefabs/**/*.prefab` | Quando ligados a sistema documentado |
 
 ## Ignorar no Índice
 

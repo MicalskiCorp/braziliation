@@ -81,4 +81,4 @@ Cada entrega faz um ou mais gatos espectrais reaparecerem no jardim, tornando o 
 ---
 
 > **Item de recompensa da quest:** **Guizo de Edith** — relíquia passiva que suaviza a presença hostil de espectros menores e denuncia segredos próximos com um leve tilintar.
-> **Arte conceitual:** {TODO} — criar em `Design/Arts Conceituas/Personagens/`
+> **Arte conceitual:** {TODO} — criar em `Design/ArteConceitual/Personagens/`

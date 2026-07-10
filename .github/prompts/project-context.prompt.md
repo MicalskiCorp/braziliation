@@ -50,7 +50,9 @@ Design/                        ← camada criativa (pasta irmã ao repo)
 │   ├── Historia/          → premissa, arcos narrativos, personagens
 │   ├── Ideias/            → pool de ideias brutas
 │   └── Brainstorm/        → sessões de brainstorm
-└── Arts Conceituas/       → arte conceitual (cidades, monstros)
+├── ArteConceitual/        → arte conceitual (cidades, criaturas, personagens, props)
+├── ArteFonte/             → fontes editáveis e estudos de IA/Aseprite
+└── GuiasDeArte/           → bíblia visual, paletas, escala e pipeline de sprites
 ```
 
 ## Pipeline de agentes (VS Code Copilot)

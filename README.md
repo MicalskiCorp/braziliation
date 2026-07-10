@@ -23,8 +23,10 @@ Braziliation/                   ← raiz do repositório
 │   └── README.md               ← README do projeto Unity
 ├── Design/                     ← camada criativa (lore, brainstorm, arte conceitual)
 │   ├── Criativo/               ← lendas, cidades por estado, ideias, personagens
-│   ├── Models/                 ← templates de documentação criativa
-│   └── Arts Conceituas/        ← referências visuais para assets
+│   ├── ArteConceitual/         ← referências visuais para assets
+│   ├── ArteFonte/              ← fontes editáveis e estudos de IA/Aseprite
+│   ├── GuiasDeArte/            ← bíblia visual, paletas, escala e pipeline de IA
+│   └── Models/                 ← templates de documentação criativa
 ├── .github/                    ← CI/CD + agentes e instruções de IA (VS Code Copilot)
 │   ├── agents/                 ← 10 agentes especializados
 │   ├── instructions/           ← instruções auto-injetadas pelo Copilot
@@ -126,7 +128,7 @@ O repositório usa **VS Code Copilot** com agentes, instructions e prompts custo
 
 ## 🎨 Camada criativa
 
-Lendas, cidades, personagens e brainstorm vivem em `Design/Criativo/` — separados do código Unity, versionados no mesmo repositório.
+Lendas, cidades, personagens e brainstorm vivem em `Design/Criativo/` — separados do código Unity, versionados no mesmo repositório. Referências visuais e fontes de arte vivem em `Design/ArteConceitual/`, `Design/ArteFonte/` e `Design/GuiasDeArte/`.
 
 ```
 Design/Criativo/
