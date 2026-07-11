@@ -11,4 +11,4 @@
 | [`indices/`](indices/index.md) | Índice técnico de scripts e assets por sistema | Índices |
 | [`motor/`](motor/index.md) | Metodologia de indexação | Motor |
 | [`architecture_decisions.md`](architecture_decisions.md) | ADRs — decisões de arquitetura aceitas | ADRs |
-| [`AssetsStructure.md`](AssetsStructure.md) | Layout recomendado de Assets/Scripts/ | Assets |
+| [`Assets/AssetsStructure.md`](Assets/AssetsStructure.md) | Layout recomendado de Assets/Scripts/ | Assets |

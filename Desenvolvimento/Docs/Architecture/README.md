@@ -6,18 +6,18 @@ This folder holds **technical architecture** documentation: system boundaries, d
 
 - Define **module boundaries**: Core, Player, Enemies, Combat, Inventory, World, UI, Utils.
 - Document **data flow** and dependencies (who calls whom, events, interfaces).
-- Describe **recommended Unity project structure** (see AssetsStructure.md).
+- Describe **recommended Unity project structure** (see Assets/AssetsStructure.md).
 - Support **AI agents** and future developers with a clear “map” of the codebase.
 
 ## Suggested files
 
 - `README.md` (this file) – Overview and index.
-- `AssetsStructure.md` – Recommended layout under Assets/ and what each folder contains.
+- `Assets/AssetsStructure.md` – Recommended layout under Assets/ and what each folder contains.
 - `systems_overview.md` – High-level system map and dependencies.
 - `data_flow.md` – Input → Player → Combat → World → UI (to be filled as systems are added).
 
 ## Usage
 
 - **Architect** and **Tech Lead** maintain these docs.
-- **Unity Engineer** and **Gameplay Engineer** place new code according to AssetsStructure.md and system boundaries.
+- **Unity Engineer** and **Gameplay Engineer** place new code according to Assets/AssetsStructure.md and system boundaries.
 - **ADR** entries for big structural decisions live in `Docs/Architecture/architecture_decisions.md`.

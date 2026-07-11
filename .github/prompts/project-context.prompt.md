@@ -35,7 +35,7 @@ Braziliation/                  ← repositório Unity
 ├── Assets/Scripts/        → Código Unity (Core, Player, Enemies, Combat, UI, etc.)
 ├── src/                   → Braziliation.Game.Core (C# puro, sem Unity)
 ├── dotnet-tests/          → Testes xUnit .NET
-├── Docs/Architecture/     → architecture_decisions (ADRs), AssetsStructure
+├── Docs/Architecture/     → architecture_decisions (ADRs), Assets/AssetsStructure
 ├── Docs/Roadmap/          → roadmap
 ├── Docs/Tech/             → tech_debt, DevelopmentRules
 ├── Docs/                  → GDD, Architecture, Mechanics, Tech

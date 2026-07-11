@@ -4,7 +4,7 @@ Projeto **Unity 6** (2D, URP, C#): jogo plataforma pixel art, tema dieselpunk p�
 
 ## Onde está o código
 - **Core**: `Desenvolvimento/Assets/Scripts/Core/` — GameInitializer, CameraScaler
-- **Outros scripts**: `Desenvolvimento/Assets/Scripts/` (ex.: `UI/`; ver `Desenvolvimento/Docs/Architecture/AssetsStructure.md`)
+- **Outros scripts**: `Desenvolvimento/Assets/Scripts/` (ex.: `UI/`; ver `Desenvolvimento/Docs/Architecture/Assets/AssetsStructure.md`)
 - **Cenas**: `Desenvolvimento/Assets/Scenes/` (SampleScene.unity, teste1.unity)
 - **Configuração**: `Desenvolvimento/ProjectSettings/`, `Desenvolvimento/Packages/manifest.json`
 - **Sistemas C# puros**: `Desenvolvimento/src/Braziliation.Game.Core/`
@@ -27,6 +27,7 @@ A 1ª camada (personas) vive em `.github/agents/` na raiz do workspace — cada 
 | `@Historiador` | Pesquisa histórica e folclórica via web; organização em `Design/Pesquisa/`; gera TODOs em `Design/Criativo/TODO.md` — nunca invoca @GameCreative |
 | `@GameCreative` | Lendas, brainstorm, personagens, lore em `Design/Criativo/`; lê `Design/Pesquisa/` como contexto; gera TODOs em `Desenvolvimento/Docs/TODO.md` — nunca invoca @GameArchitect |
 | `@AgentArchitect` | **Orquestrador Swarm** — abre sessões de desenvolvimento, lê TODO.md e roadmap, classifica tarefas, distribui comandos para agentes especializados, consolida resultados e documenta decisões; também cria, refatora e valida agentes `.agent.md` |
+| `@SpriteArtist` | Geração programática de sprites pixel art (specs JSON, geradores procedurais) com ciclo de crítica visual contra a style-bible; segue `Design/GuiasDeArte/pipeline-sprites-programaticos.md` — não decide direção de arte nem faz wiring Unity |
 
 ## Fluxo entre Camadas (Modelo Reativo)
 

@@ -33,6 +33,7 @@ description: "Direção de arte do Braziliation: pixel art dieselpunk, paleta re
 - Novos personagens ou cenários devem se encaixar em `Desenvolvimento/Docs/Lore/` e o mundo estabelecido.
 - Para detalhes de implementação (import settings, atlases), alinhe com `Desenvolvimento/Docs/Architecture/` e as configurações do projeto Unity.
 - Para sprites e assets gerados com IA, siga `Design/GuiasDeArte/pipeline-ia-sprites.md`, `Design/GuiasDeArte/style-bible.md`, `Design/GuiasDeArte/palette-guide.md` e `Design/GuiasDeArte/sprite-scale-guide.md`.
+- Para sprites gerados por código/agente (props, tiles, ícones), siga `Design/GuiasDeArte/pipeline-sprites-programaticos.md` e use as ferramentas de `Design/ArteFonte/Ferramentas/`.
 
 ## Prompt template para geração de arte
 

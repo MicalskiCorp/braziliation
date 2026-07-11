@@ -7,7 +7,7 @@ High-level roadmap for technical and content work. Update as priorities change. 
 - [x] Unity 6 + URP 2D + Pixel Perfect (320×180, 16 PPU)
 - [x] GameInitializer, CameraScaler
 - [x] Input System setup
-- [x] Recommended Assets/Scripts structure adopted (see Docs/Architecture/AssetsStructure.md)
+- [x] Recommended Assets/Scripts structure adopted (see Docs/Architecture/Assets/AssetsStructure.md)
 - [x] Core player movement (run, jump) and basic collision
 - [x] Basic combat (health, damage, one weapon type)
 - [x] One playable level (blockout + placeholders)

@@ -37,7 +37,7 @@ Format per entry:
 - **Date:** (fill when accepted)
 - **Status:** Proposed
 - **Context:** Scalable structure for Core, Player, Enemies, Combat, Inventory, World, UI, Utils.
-- **Decision:** Document and adopt folder layout under Assets/Scripts/ as in Docs/Architecture/AssetsStructure.md. Namespaces match folders.
+- **Decision:** Document and adopt folder layout under Assets/Scripts/ as in Docs/Architecture/Assets/AssetsStructure.md. Namespaces match folders.
 - **Consequences:** New scripts go in the correct subfolder; existing Core, Tools, UI can be merged into this layout over time.
 
 ---

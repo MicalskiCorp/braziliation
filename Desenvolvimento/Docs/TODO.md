@@ -51,6 +51,11 @@
 | UI/Arte | Implementar VFX/feedback visual completo de sinergias híbridas | Média | `Assets/Scripts/UI/HybridSynergyFeedbackView.cs` |
 | Design+Tech | Definir política de seed do sorteio híbrido (determinístico vs aleatório) e efeitos de roleta | Média | `Assets/Scripts/Crafting/HybridRollHandler.cs` |
 | Core Design | Fechar regras de compatibilidade/composição final de itens híbridos e tuning de slots iniciais | Alta | `src/Braziliation.Game.Core/Crafting/*.cs` |
+| UI/Arte | PoC do pipeline programático de sprites: prop comporta Blumenau 32×32 via spec JSON + ciclo de crítica (@SpriteArtist) | Média | `Design/GuiasDeArte/pipeline-sprites-programaticos.md` |
+| UI/Arte | Implementar geradores procedurais (Opção B): `gen_tileset.py` parametrizado por paleta JSON com seed | Média | `Design/ArteFonte/Ferramentas/index.md` |
+| UI/Arte | Operacionalizar pipeline ComfyUI (Opção C): instalar, montar workflow e validar 1 lote de thumbnails | Baixa | `Design/GuiasDeArte/pipeline-ia-sprites.md` |
+| Infra | Instalar Python 3.10+ + Pillow na máquina de desenvolvimento (pré-requisito das ferramentas de sprite) | Média | `Design/ArteFonte/Ferramentas/index.md` |
+| Infra | Aprovar paleta proposta `Design/ArteConceitual/Paletas/blumenau.json` e salvar como paleta Aseprite | Média | `Design/GuiasDeArte/palette-guide.md` |
 
 ### Sequência recomendada para fechar a primeira demo
 

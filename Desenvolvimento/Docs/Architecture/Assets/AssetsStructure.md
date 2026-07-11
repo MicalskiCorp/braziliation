@@ -10,6 +10,8 @@ Este documento define a estrutura-alvo dentro de `Desenvolvimento/Assets/`. A or
 
 ```text
 Assets/
+├── Animations/
+│   └── Menu/
 ├── Art/
 │   ├── Characters/
 │   ├── Enemies/
@@ -26,6 +28,10 @@ Assets/
 ├── Audio/
 │   ├── Music/
 │   └── SFX/
+├── Editor/
+│   ├── Art/
+│   ├── Gameplay/
+│   └── Menu/
 ├── Prefabs/
 │   ├── Enemies/
 │   ├── Interactables/
@@ -44,6 +50,7 @@ Assets/
 │   ├── Levels/
 │   └── Palettes/
 ├── Scripts/
+│   ├── Build/
 │   ├── Combat/
 │   ├── Core/
 │   ├── Crafting/
@@ -62,9 +69,13 @@ Assets/
 
 ## Regras por Pasta
 
+### Animations/
+
+Guarda Animation Clips e Animator Controllers organizados por contexto (`Menu/`, e por domínio conforme crescer: `Player/`, `Enemies/`). Spritesheets fonte das animações vivem em `Art/`; aqui ficam apenas os assets de animação do Unity.
+
 ### Art/
 
-Guarda todo asset visual final importado no Unity: sprites, tilesets, backgrounds, UI, VFX e spritesheets. `Assets/Sprites/` fica como legado e não deve receber assets novos; novos sprites entram em `Assets/Art/`.
+Guarda todo asset visual final importado no Unity: sprites, tilesets, backgrounds, UI, VFX e spritesheets. `Assets/Sprites/` e `Assets/UI/` (raiz) ficam como legado e não devem receber assets novos; novos sprites entram em `Assets/Art/`.
 
 - `Characters/`: jogador e NPCs.
 - `Enemies/`: inimigos comuns, criaturas e bosses.
@@ -75,9 +86,19 @@ Guarda todo asset visual final importado no Unity: sprites, tilesets, background
 - `UI/`: ícones, molduras, barras, botões e sprites de interface.
 - `VFX/`: fumaça, faísca, vapor, impactos e feedbacks visuais.
 
+> Import automático: `Assets/Editor/Art/SpriteImportPostprocessor.cs` força 16 PPU, Filter Point, sem compressão e sem mipmap em toda textura que entrar em `Assets/Art/`. Não configure import settings de sprite manualmente, salvo exceção documentada.
+
 ### Audio/
 
 Guarda música e efeitos sonoros finais. Use `Music/` e `SFX/` quando o volume crescer.
+
+### Editor/
+
+Guarda ferramentas de editor (scripts que só rodam no Unity Editor). Organize por domínio:
+
+- `Art/`: automação de import de arte (postprocessors, presets).
+- `Gameplay/`: utilitários de edição de gameplay.
+- `Menu/`: utilitários de edição de menus.
 
 ### Prefabs/
 
@@ -104,11 +125,20 @@ Guarda dados de design versionáveis: stats, configurações de inimigos, itens,
 
 ### Scripts/
 
-Guarda código Unity. A estrutura atual preserva `Core`, `Crafting`, `Gameplay` e `UI`, e já reserva `Player`, `Enemies`, `Combat`, `World` e `Utils` para novos scripts por domínio.
+Guarda código Unity. A estrutura atual preserva `Core`, `Crafting`, `Gameplay` e `UI`, e já reserva `Player`, `Enemies`, `Combat`, `World` e `Utils` para novos scripts por domínio. `Build/` guarda scripts de build/CI que precisam viver dentro de Assets.
 
 ### Settings/, Plugins/, Tilemaps/
 
 Pastas especiais ou existentes do Unity. Mantenha como estão, salvo decisão documentada em ADR.
+
+### Pastas legadas e de terceiros
+
+| Pasta | Status |
+|-------|--------|
+| `Assets/Sprites/` | Legado — não receber assets novos; migrar para `Art/` pelo Editor |
+| `Assets/UI/` (raiz) | Legado — novos sprites de UI vão para `Art/UI/` |
+| `Assets/_Recovery/` | Temporária do Unity — não versionar conteúdo novo nela |
+| `Assets/TextMesh Pro/` | Pacote de terceiros — não modificar |
 
 ---
 
@@ -133,9 +163,9 @@ Use nomes sem espaços e com prefixo funcional:
 ## Fluxo de Arte
 
 1. Ideia e pesquisa vivem em `Design/Criativo/` e `Design/Pesquisa/`.
-2. Conceitos e referências visuais vivem em `Design/ArteConceitual/`.
-3. Fontes editáveis, estudos e material de IA vivem em `Design/ArteFonte/`.
+2. Conceitos e referências visuais vivem em `Design/ArteConceitual/`; paletas machine-readable em `Design/ArteConceitual/Paletas/*.json`.
+3. Fontes editáveis, estudos e material de IA vivem em `Design/ArteFonte/`; specs e sprites programáticos seguem `Design/GuiasDeArte/pipeline-sprites-programaticos.md` usando as ferramentas de `Design/ArteFonte/Ferramentas/`.
 4. Regras de estilo vivem em `Design/GuiasDeArte/`.
-5. Assets finais exportados entram em `Desenvolvimento/Assets/Art/`.
+5. Assets finais exportados entram em `Desenvolvimento/Assets/Art/` (import settings aplicados automaticamente pelo `SpriteImportPostprocessor`).
 6. Prefabs montados no Unity entram em `Desenvolvimento/Assets/Prefabs/`.
 7. Assets relevantes devem ser registrados em `Docs/Architecture/indices/assets.md`.
