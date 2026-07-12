@@ -46,6 +46,13 @@
 | DemoGameplay | `Assets/Scenes/DemoGameplay.unity` | Cena jogável atual de demonstração |
 | SampleScene | `Assets/Scenes/SampleScene.unity` | Cena padrão/legado |
 
+## Assets Registrados
+
+| Asset | Caminho | Fonte | Paleta | Observação |
+|-------|---------|-------|--------|------------|
+| `prop_blumenau_floodgate_lever.png` | `Assets/Art/Environments/Blumenau/Props/` | Spec JSON em `Design/ArteFonte/IA/ContextPacks/exemplo-prop-comporta-blumenau/` | Blumenau (proposta-inicial) | Prop 32×32 do sistema hídrico; gerado via pipeline programático (2 iterações) |
+| `prop_blumenau_floodgate_lever_activate_sheet.png` | `Assets/Art/Environments/Blumenau/Props/` | Specs `_f2`/`_f3` no mesmo context pack | Blumenau (proposta-inicial) | Sheet 96×32, 3 frames de acionamento; requer Sprite Mode Multiple + slicing 32×32 (wiring pendente) |
+
 ## Arte Conceitual e Fontes
 
 | Categoria | Caminho | Uso |

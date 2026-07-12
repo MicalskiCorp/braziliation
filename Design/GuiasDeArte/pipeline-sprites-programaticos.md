@@ -54,6 +54,20 @@ Qualquer modelo multimodal num harness agêntico (Claude, Copilot, Cursor) execu
 - [ ] Clusters de pixel limpos, outline/sombra de contato onde a style-bible pede?
 - [ ] Todas as cores pertencem à paleta da região (máx. 16)?
 
+## Animação na rota programática
+
+Quando o brief pede animação (ver contagens em [`animation-guide.md`](animation-guide.md)):
+
+1. **O frame 1 é o idle** — deve funcionar como sprite parado (regra do animation-guide). É o sprite base já aprovado no ciclo.
+2. **Uma spec por frame**: `{asset}_f2.spec.json`, `{asset}_f3.spec.json`… no mesmo context pack. Canvas, base e elementos estáticos **idênticos entre frames**; anima apenas o que se move (em pixel art, 1–2 px de deslocamento já são muito).
+3. **Cada frame passa pelo ciclo visual** individualmente (preview ampliado + crítica).
+4. **Empacotar**: `python sheet_pack.py -o {asset}_{acao}_sheet.png f1.png f2.png f3.png` — nome no padrão do animation-guide (`*_sheet.png`).
+5. **Validar o sheet**: `palette_check.py` no sheet final; inspecionar o preview do sheet para conferir a leitura do arco de movimento.
+6. **Export e registro** normais (passos 9–10). No Unity, o wiring é automatizado:
+   - **Slicing automático**: `Assets/Editor/Art/SheetAutoSlicer.cs` detecta `*_sheet.png` em `Assets/Art/` e aplica `Sprite Mode: Multiple` + grid de frames quadrados (frame = altura do sheet), pivot bottom-center, preservando IDs em reimports;
+   - **Clip + Animator**: selecionar o sheet fatiado no Project e rodar `Assets > Braziliation > Criar Animação do Spritesheet` — gera `.anim` (8 fps, sem loop) + `.controller` em `Assets/Animations/World/`;
+   - Ligar o Animator ao GameObject/prefab do prop continua sendo wiring de cena do `@UnityDeveloper`.
+
 ## Fluxo da Opção B — geradores procedurais
 
 Geradores paramétricos vivem em `Design/ArteFonte/Ferramentas/` com prefixo `gen_` (ex.: `gen_tileset.py`). Regras:

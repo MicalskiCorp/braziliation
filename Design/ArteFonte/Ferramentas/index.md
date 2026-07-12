@@ -4,6 +4,8 @@ Scripts que sustentam o pipeline descrito em [`../../GuiasDeArte/pipeline-sprite
 
 **Dependência única:** `pip install pillow` (Python 3.10+).
 
+> No Windows desta máquina, o comando é `py` (launcher), não `python` — ex.: `py render_spec.py spec.json` e `py -m pip install pillow`.
+
 ## Scripts
 
 | Script | Função | Uso típico |
@@ -12,6 +14,7 @@ Scripts que sustentam o pipeline descrito em [`../../GuiasDeArte/pipeline-sprite
 | [`palette_check.py`](palette_check.py) | Valida PNG contra paleta oficial (cores permitidas + limite de 16) | `python palette_check.py sprite.png paleta.json` |
 | [`mock_scene.py`](mock_scene.py) | Compõe sprite em cena mock 320×180 para teste de leitura 1x | `python mock_scene.py sprite.png paleta.json` |
 | [`upscale_preview.py`](upscale_preview.py) | Amplia PNG (nearest-neighbor, grade opcional) para crítica visual | `python upscale_preview.py sprite.png -s 8 --grid` |
+| [`sheet_pack.py`](sheet_pack.py) | Empacota frames em spritesheet horizontal (canvas estável obrigatório) | `python sheet_pack.py -o sheet.png f1.png f2.png f3.png` |
 
 ## Onde vive o quê
 

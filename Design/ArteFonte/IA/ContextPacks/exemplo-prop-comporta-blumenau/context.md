@@ -81,20 +81,25 @@ photorealistic, 3D render, vector art, smooth gradient, anti-aliased illustratio
 
 ## 10. Resultado e Decisão
 
-- Outputs salvos em: `Design/ArteFonte/IA/Outputs/prop_blumenau_floodgate_lever/`
-- Selecionados: `Design/ArteFonte/IA/Selected/prop_blumenau_floodgate_lever/`
-- Rejeitados: `Design/ArteFonte/IA/Rejected/prop_blumenau_floodgate_lever/`
-- Motivo da escolha: silhueta, leitura em 32x32, aderência à paleta e materiais
-- Ajustes necessários no Aseprite: reduzir cores, limpar clusters, reforçar base e cabo, alinhar ao grid
+- **Rota executada:** pipeline programático (`pipeline-sprites-programaticos.md`, Opção A) — 2026-07-11
+- Fonte: `prop_blumenau_floodgate_lever.spec.json` (neste context pack) + paleta `Design/ArteConceitual/Paletas/blumenau.json`
+- Output: `Design/ArteFonte/IA/Outputs/prop_blumenau_floodgate_lever.png` (+ previews e mocks 320×180)
+- Selecionado: `Design/ArteFonte/IA/Selected/prop_blumenau_floodgate_lever.png`
+- Iterações do ciclo de crítica: 2 (iteração 2 corrigiu o encaixe de ferro que sumia contra fundo grafite em 1x — corpo 3→4 com outline 1)
+- Validação: `palette_check.py` APROVADO — 15/16 cores, todas da paleta Blumenau
+- Motivo da escolha: silhueta da alavanca legível em 1x no mock 320×180; materiais corretos (latão, ferro, madeira úmida, marca de enchente, lama)
+- **Animação (2026-07-11):** acionamento em 3 frames (idle/esquerda → vertical → direita/impacto), engrenagem girando um passo de dente entre frames. Fontes: `_f2.spec.json` e `_f3.spec.json` neste context pack. Sheet: `prop_blumenau_floodgate_lever_activate_sheet.png` (96×32), palette_check APROVADO, exportado para `Assets/Art/Environments/Blumenau/Props/`
+- Pendências: paleta Blumenau ainda em `proposta-inicial`; pixel pass manual opcional para polish; slicing (Sprite Mode Multiple, grid 32×32) e Animator no Unity → @UnityDeveloper
+- **Roteiro completo de retomada:** `Desenvolvimento/Docs/TODO.md` → seção "Pipeline de Sprites — Roteiro de Continuação" (passos 1–4 = wiring Unity deste asset; 5–6 = paleta e polish; 7–8 = evolução do pipeline)
 
 ## 11. Checklist
 
-- [ ] Contexto criativo preenchido
-- [ ] Paleta definida
-- [ ] Prompt salvo
-- [ ] Seed/modelo/configuração salvos
-- [ ] Referências autorizadas listadas
-- [ ] Seleção salva em `Design/ArteFonte/IA/Selected/`
-- [ ] Pixel pass feito em Aseprite
-- [ ] Export final salvo em `Desenvolvimento/Assets/Art/`
-- [ ] Asset registrado no índice técnico
+- [x] Contexto criativo preenchido
+- [x] Paleta definida
+- [x] Prompt salvo (rota programática: spec JSON é a fonte)
+- [x] Seed/modelo/configuração salvos (spec determinística — sem seed)
+- [x] Referências autorizadas listadas
+- [x] Seleção salva em `Design/ArteFonte/IA/Selected/`
+- [ ] Pixel pass feito em Aseprite (opcional — polish futuro)
+- [x] Export final salvo em `Desenvolvimento/Assets/Art/Environments/Blumenau/Props/`
+- [x] Asset registrado no índice técnico

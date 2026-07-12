@@ -86,7 +86,7 @@ Guarda todo asset visual final importado no Unity: sprites, tilesets, background
 - `UI/`: ícones, molduras, barras, botões e sprites de interface.
 - `VFX/`: fumaça, faísca, vapor, impactos e feedbacks visuais.
 
-> Import automático: `Assets/Editor/Art/SpriteImportPostprocessor.cs` força 16 PPU, Filter Point, sem compressão e sem mipmap em toda textura que entrar em `Assets/Art/`. Não configure import settings de sprite manualmente, salvo exceção documentada.
+> Import automático: `Assets/Editor/Art/SpriteImportPostprocessor.cs` força 16 PPU, Filter Point, sem compressão e sem mipmap em toda textura que entrar em `Assets/Art/`. Spritesheets `*_sheet.png` são fatiados automaticamente pelo `SheetAutoSlicer.cs` (Multiple + grid quadrado + pivot bottom-center); o clip/controller é gerado via menu `Assets > Braziliation > Criar Animação do Spritesheet` (`SheetAnimationTool.cs`, saída em `Animations/World/`). Não configure import settings de sprite manualmente, salvo exceção documentada.
 
 ### Audio/
 

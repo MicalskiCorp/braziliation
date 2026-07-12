@@ -51,11 +51,32 @@
 | UI/Arte | Implementar VFX/feedback visual completo de sinergias híbridas | Média | `Assets/Scripts/UI/HybridSynergyFeedbackView.cs` |
 | Design+Tech | Definir política de seed do sorteio híbrido (determinístico vs aleatório) e efeitos de roleta | Média | `Assets/Scripts/Crafting/HybridRollHandler.cs` |
 | Core Design | Fechar regras de compatibilidade/composição final de itens híbridos e tuning de slots iniciais | Alta | `src/Braziliation.Game.Core/Crafting/*.cs` |
-| UI/Arte | PoC do pipeline programático de sprites: prop comporta Blumenau 32×32 via spec JSON + ciclo de crítica (@SpriteArtist) | Média | `Design/GuiasDeArte/pipeline-sprites-programaticos.md` |
-| UI/Arte | Implementar geradores procedurais (Opção B): `gen_tileset.py` parametrizado por paleta JSON com seed | Média | `Design/ArteFonte/Ferramentas/index.md` |
-| UI/Arte | Operacionalizar pipeline ComfyUI (Opção C): instalar, montar workflow e validar 1 lote de thumbnails | Baixa | `Design/GuiasDeArte/pipeline-ia-sprites.md` |
-| Infra | Instalar Python 3.10+ + Pillow na máquina de desenvolvimento (pré-requisito das ferramentas de sprite) | Média | `Design/ArteFonte/Ferramentas/index.md` |
-| Infra | Aprovar paleta proposta `Design/ArteConceitual/Paletas/blumenau.json` e salvar como paleta Aseprite | Média | `Design/GuiasDeArte/palette-guide.md` |
+| UI/Arte | ~~PoC do pipeline programático de sprites: prop comporta Blumenau 32×32 via spec JSON + ciclo de crítica~~ ✅ Concluído 2026-07-11 — asset + sheet de acionamento (3 frames, 96×32) em `Assets/Art/Environments/Blumenau/Props/`, palette_check aprovado | Média | `Design/GuiasDeArte/pipeline-sprites-programaticos.md` |
+| Infra | ~~Instalar Python 3.10+ + Pillow na máquina de desenvolvimento~~ ✅ Concluído 2026-07-11 — Python 3.13 já existia via launcher `py`; Pillow 12.3.0 instalado (usar `py`, não `python`) | Média | `Design/ArteFonte/Ferramentas/index.md` |
+| UI/Arte | Pendências do pipeline de sprites | Média | Ver seção **"Pipeline de Sprites — Roteiro de Continuação"** abaixo |
+
+### Pipeline de Sprites — Roteiro de Continuação (2026-07-11)
+
+> **Estado:** pipeline programático operacional — guia canônico em `Design/GuiasDeArte/pipeline-sprites-programaticos.md`, ferramentas em `Design/ArteFonte/Ferramentas/` (rodar com `py`, não `python`). Primeiro asset entregue: comporta de Blumenau (idle 32×32 + sheet de acionamento 3 frames 96×32) em `Assets/Art/Environments/Blumenau/Props/`, fontes (specs JSON) no context pack `Design/ArteFonte/IA/ContextPacks/exemplo-prop-comporta-blumenau/`. Ferramentas de editor Unity (`SheetAutoSlicer.cs`, `SheetAnimationTool.cs`) criadas mas **ainda não compiladas/testadas dentro do Unity**.
+
+| # | Passo | Responsável | Status |
+|---|-------|-------------|--------|
+| 1 | Abrir o Unity: compilar `Assets/Editor/Art/*.cs` (corrigir ajuste pontual de API se o console reclamar) e confirmar que o reimport fatiou o sheet em 3 sprites 32×32 com pivot bottom-center | `@UnityDeveloper` | ❌ Não iniciado |
+| 2 | Selecionar o sheet e rodar `Assets > Braziliation > Criar Animação do Spritesheet` → confere `.anim` (8 fps, sem loop) + `.controller` em `Assets/Animations/World/` | `@UnityDeveloper` | ❌ Não iniciado |
+| 3 | Criar prefab `Prop_FloodgateLever` em `Assets/Prefabs/Interactables/` (SpriteRenderer + Animator com o controller + collider de interação; pivot já é base central inferior) | `@UnityDeveloper` | ❌ Não iniciado |
+| 4 | Integrar a alavanca ao sistema hídrico de Blumenau: interação do player dispara a animação e alterna estado da comporta (ver feature em `Docs/GDD/Features/`) | `@GameplayEngineer` | ❌ Não iniciado |
+| 5 | Aprovar direção da paleta `Design/ArteConceitual/Paletas/blumenau.json` (mudar `status` para `aprovada`) e salvar paleta Aseprite equivalente em `Design/ArteFonte/Aseprite/` | Usuário (direção de arte) | ❌ Não iniciado |
+| 6 | Polish opcional: pixel pass manual no Aseprite para dentes de engrenagem mais legíveis (sprite atual = qualidade "placeholder bom") | Usuário (arte) | ❌ Opcional |
+| 7 | Opção B: implementar primeiro gerador procedural `gen_tileset.py` (paleta JSON + seed registrada, prefixo `gen_`) | `@SpriteArtist` | ❌ Não iniciado |
+| 8 | Opção C: operacionalizar ComfyUI local (instalar, montar workflow JSON, validar 1 lote de 6–12 thumbnails) conforme `pipeline-ia-sprites.md` | Usuário + `@SpriteArtist` | ❌ Não iniciado |
+
+### Ecossistema de Agentes — Pendências (2026-07-11)
+
+| Item | Tipo | Prioridade | Observação |
+|------|------|-----------|------------|
+| Atualizar corpo do `AgentArchitect` para a convenção dupla Copilot+Claude (hoje o corpo instrui criar apenas `.agent.md`; a skill `novo-agente` em `Braziliation/.claude/skills/` já codifica o processo correto — alinhar o agente a ela) | Agentes | Média | ❌ Não iniciado |
+| Versionar a 1ª camada de personas (raiz `d:\Backup\Projetos\Games\.github/agents/` e `.claude/agents/` estão **fora** do repo git — risco de perda de Jarvis/Computador/wrappers) | Agentes | Média | ❌ Não iniciado |
+| Descoberta por cwd no Claude Code: 1ª camada só ativa abrindo da raiz do workspace; 2ª camada só abrindo de `Braziliation/` — documentar no AGENTS.md qual cwd usar por fluxo de trabalho | Agentes | Baixa | ❌ Não iniciado |
 
 ### Sequência recomendada para fechar a primeira demo
 
