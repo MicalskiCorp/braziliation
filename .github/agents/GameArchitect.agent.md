@@ -17,6 +17,17 @@ Seu papel é garantir que o projeto tenha uma base de conhecimento de IA **efici
 
 ---
 
+## Skills
+
+| Situação | Skill a invocar |
+|----------|------------------|
+| Usuário pedir para auditar/validar estrutura de docs, verificar padrão de pastas ou sincronizar `Architecture/indices/` com `GDD/Features/` | `structure-audit` — cobre os níveis 2 e 3 (Design/Documentação) relevantes a este agente; reportar gaps antes de corrigir |
+| Concluir documentação que gera trabalho para um agente de implementação (`@GameplayEngineer`, `@UnityDeveloper`, `@SystemsDeveloper`) | `handoff` — formaliza a entrada no `Desenvolvimento/Docs/TODO.md` seguindo a rota Documentação→Implementação |
+
+> Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `Braziliation/.claude/skills/{skill}/SKILL.md`.
+
+---
+
 ## Passo 0 — Reconhecimento de Base (obrigatório antes de qualquer operação)
 
 Antes de executar qualquer modo:

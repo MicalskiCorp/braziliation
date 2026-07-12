@@ -1,23 +1,26 @@
-# Architecture – Braziliation
+# Architecture — Braziliation
 
-This folder holds **technical architecture** documentation: system boundaries, data flow, and recommended project structure.
+Esta pasta guarda a documentação de **arquitetura técnica**: limites de sistema, fluxo de dados e estrutura recomendada do projeto.
 
-## Purpose
+> Índice navegável completo em [`index.md`](index.md) — este arquivo é uma visão geral introdutória.
 
-- Define **module boundaries**: Core, Player, Enemies, Combat, Inventory, World, UI, Utils.
-- Document **data flow** and dependencies (who calls whom, events, interfaces).
-- Describe **recommended Unity project structure** (see Assets/AssetsStructure.md).
-- Support **AI agents** and future developers with a clear “map” of the codebase.
+## Propósito
 
-## Suggested files
+- Definir **limites de módulo**: Core, Player, Enemies, Combat, Inventory, World, UI, Utils.
+- Documentar **fluxo de dados** e dependências (quem chama quem, eventos, interfaces).
+- Descrever a **estrutura recomendada do projeto Unity** (ver `Assets/AssetsStructure.md`).
+- Apoiar **agentes de IA** e futuros desenvolvedores com um "mapa" claro do código.
 
-- `README.md` (this file) – Overview and index.
-- `Assets/AssetsStructure.md` – Recommended layout under Assets/ and what each folder contains.
-- `systems_overview.md` – High-level system map and dependencies.
-- `data_flow.md` – Input → Player → Combat → World → UI (to be filled as systems are added).
+## Conteúdo
 
-## Usage
+- [`index.md`](index.md) — índice navegável desta pasta (Sistemas, indices, motor, ADRs, Assets).
+- [`Assets/AssetsStructure.md`](Assets/AssetsStructure.md) — layout recomendado sob `Assets/` e o que cada pasta contém.
+- [`Sistemas/`](Sistemas/index.md) — fichas técnicas de cada sistema do jogo.
+- [`architecture_decisions.md`](architecture_decisions.md) — ADRs (decisões de arquitetura aceitas).
 
-- **Architect** and **Tech Lead** maintain these docs.
-- **Unity Engineer** and **Gameplay Engineer** place new code according to Assets/AssetsStructure.md and system boundaries.
-- **ADR** entries for big structural decisions live in `Docs/Architecture/architecture_decisions.md`.
+## Uso
+
+- `@TechLead` mantém estes docs, define limites de sistema e registra ADRs.
+- `@UnityDeveloper` e `@GameplayEngineer` posicionam código novo conforme `Assets/AssetsStructure.md` e os limites de sistema definidos aqui.
+- `@GameArchitect` mantém `Sistemas/` e `indices/` sincronizados com o código-fonte (ver `indices/protocolo-comunicacao.md`).
+- Decisões estruturais significativas viram entrada em `Docs/Architecture/architecture_decisions.md`.

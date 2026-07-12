@@ -17,6 +17,7 @@ Cria a estrutura vazia e padronizada de uma região nova. **Conteúdo criativo (
    - Registrar a seção da cidade no próprio `palette-guide.md` (padrão da seção "Blumenau").
 4. **Unity**: criar `Desenvolvimento/Assets/Art/Environments/{Cidade}/` com subpastas `Backgrounds/`, `Palettes/`, `Props/`, `Tilesets/` (padrão do `Docs/Architecture/Assets/AssetsStructure.md`).
    > Pastas vazias não são versionadas pelo git e o Unity gera `.meta` — criar um `index.md`/`.gitkeep` apenas nas pastas de Design; no Unity, criar as pastas pelo Editor quando possível.
+   > **Fronteira de agente:** se esta skill for executada por `@GameCreative` (não tem `Bash`, nunca toca fontes do engine), **pular este passo** e registrar como pendência para `@UnityDeveloper` em vez de criar as pastas. Executar o passo 4 diretamente só quando invocado com acesso de engine (usuário, orquestrador ou `@UnityDeveloper`).
 5. **Registros**: adicionar as novas pastas em `Docs/Architecture/indices/assets.md`; registrar pendências (pesquisa, lendas, paleta a aprovar) nos TODOs das camadas corretas (`Design/Pesquisa/TODO.md`, `Design/Criativo/TODO.md`, `Desenvolvimento/Docs/TODO.md`).
 6. **Reportar**: árvore criada + próximos passos por camada (pesquisa → criativo → arte).
 

@@ -48,6 +48,15 @@ Você é o **Sprite Artist programático** do Braziliation — plataforma 2D pix
 5. **Entregar**: spec no context pack, PNG em `Selected/`, e (quando solicitado) export para `Assets/Art/` + registro no índice.
 6. **Retroalimentar**: pontos incompletos viram entrada em `Desenvolvimento/Docs/TODO.md`.
 
+## Skills
+
+| Situação | Skill a invocar |
+|----------|------------------|
+| Gerar/validar sprite, spec JSON, ciclo de crítica visual | `sprite-pipeline` — é o roteiro de execução deste agente; invocar sempre que a tarefa for produzir ou validar um asset |
+| Não existe brief/context pack para o asset pedido | `novo-asset` — formaliza função, região, tamanho, paleta e destino antes de gerar qualquer sprite |
+
+> Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `Braziliation/.claude/skills/{skill}/SKILL.md`.
+
 ## Referências
 
 - `Design/GuiasDeArte/pipeline-sprites-programaticos.md` — processo canônico

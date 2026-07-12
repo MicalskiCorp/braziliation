@@ -26,6 +26,7 @@ Valida que o estado real do disco corresponde ao estado documentado. Não corrig
 - Tabela do `Braziliation/AGENTS.md` vs. arquivos reais em `Braziliation/.github/agents/` E `Braziliation/.claude/agents/` (2ª camada, 2 formatos).
 - Wrappers da 1ª camada na raiz (`.github/agents/` e `.claude/agents/`) apontando para agentes de referência existentes.
 - Paridade Copilot↔Claude: mesmo agente presente nos dois formatos, corpo equivalente.
+  > **Cuidado com falso positivo:** os `.agent.md` Copilot mantêm BOM UTF-8 + CRLF de propósito (não tocar); os `.md` Claude não têm BOM e usam LF. Um `diff` bruto entre os dois mostra o arquivo inteiro como diferente por causa disso — sempre normalizar (remover BOM, `\r\n`→`\n`) antes de comparar corpo, senão gera um gap falso.
 
 ### 5. Skills
 - Toda skill em `Braziliation/.claude/skills/` referencia docs canônicos que existem.

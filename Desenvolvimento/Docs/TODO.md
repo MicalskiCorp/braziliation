@@ -26,8 +26,6 @@
 | Item | Tipo | Prioridade | Observação |
 |------|------|-----------|------------|
 | Preencher parâmetros configuráveis dos sistemas | Sistemas | Média | Todos os 6 sistemas têm `*(a documentar)*` |
-| Documentar cenas Unity | Motor | Média | `Assets/Scenes/` ainda não mapeado |
-| Preencher índice de assets | Motor | Baixa | `Docs/Architecture/indices/assets.md` vazio |
 | Documentar features do jogo | Features | Alta | Nenhuma feature documentada ainda |
 | Mapear pasta `AI/` na estrutura Docs/ | Agentes | Baixa | **Concluído** — AI/ migrada para .github/ e Docs/ |
 
@@ -70,13 +68,18 @@
 | 7 | Opção B: implementar primeiro gerador procedural `gen_tileset.py` (paleta JSON + seed registrada, prefixo `gen_`) | `@SpriteArtist` | ❌ Não iniciado |
 | 8 | Opção C: operacionalizar ComfyUI local (instalar, montar workflow JSON, validar 1 lote de 6–12 thumbnails) conforme `pipeline-ia-sprites.md` | Usuário + `@SpriteArtist` | ❌ Não iniciado |
 
-### Ecossistema de Agentes — Pendências (2026-07-11)
+### Ecossistema de Agentes — Pendências (2026-07-11, atualizado 2026-07-11)
 
 | Item | Tipo | Prioridade | Observação |
 |------|------|-----------|------------|
-| Atualizar corpo do `AgentArchitect` para a convenção dupla Copilot+Claude (hoje o corpo instrui criar apenas `.agent.md`; a skill `novo-agente` em `Braziliation/.claude/skills/` já codifica o processo correto — alinhar o agente a ela) | Agentes | Média | ❌ Não iniciado |
+| Atualizar corpo do `AgentArchitect` para a convenção dupla Copilot+Claude (PAPEL 2 / "Convenções de Arquivo" ainda instrui criar só `.agent.md`) | Agentes | Média | 🔨 Em andamento — nova seção "Skills" no corpo (ambos formatos) já aponta para a skill `novo-agente` como protocolo prevalecente; PAPEL 2 em si segue não reescrito |
 | Versionar a 1ª camada de personas (raiz `d:\Backup\Projetos\Games\.github/agents/` e `.claude/agents/` estão **fora** do repo git — risco de perda de Jarvis/Computador/wrappers) | Agentes | Média | ❌ Não iniciado |
-| Descoberta por cwd no Claude Code: 1ª camada só ativa abrindo da raiz do workspace; 2ª camada só abrindo de `Braziliation/` — documentar no AGENTS.md qual cwd usar por fluxo de trabalho | Agentes | Baixa | ❌ Não iniciado |
+| Descoberta por cwd no Claude Code: 1ª camada só ativa abrindo da raiz do workspace; 2ª camada só abrindo de `Braziliation/` — documentar no AGENTS.md qual cwd usar por fluxo de trabalho | Agentes | Baixa | ✅ Concluído 2026-07-11 — seção "Processos do Projeto → 2. Descoberta de agentes por cwd" em `AGENTS.md` |
+| Adicionar `Skill` tool + roteamento de skills aos agentes funcionais cuja tarefa corresponde a uma skill existente (`sprite-artist`, `game-architect`, `game-creative`, `agent-architect`, `historiador`) — skills tinham triggers bons na `description` mas os agentes não tinham a ferramenta `Skill` habilitada para de fato invocá-las | Agentes | Alta | ✅ Concluído 2026-07-11 — seção "## Skills" adicionada nos 2 formatos (Claude+Copilot) dos 5 agentes; catálogo completo em `AGENTS.md` → "Processos do Projeto → 3" |
+| `nova-cidade` (skill) tinha um passo (criação de pastas `Assets/Art/`) que nenhum dono natural (`@GameCreative`) consegue executar — sem `Bash` e proibido de tocar fontes do engine | Agentes | Média | ✅ Concluído 2026-07-11 — skill e agente atualizados: passo 4 delegado a `@UnityDeveloper` via TODO em vez de execução direta |
+| `Docs/Architecture/indices/assets.md` não registrava os 8 frames de `Assets/Art/Menu/Background/Frames/` (existem no disco, sem entrada no índice) | Motor | Baixa | ✅ Concluído 2026-07-11 — linha adicionada à tabela "Assets Registrados" |
+| `Docs/Architecture/README.md` citava agentes inexistentes ("Architect", "Unity Engineer") em inglês, fora de `index.md` | Documentação | Baixa | ✅ Concluído 2026-07-11 — traduzido, refs corrigidas para `@TechLead`/`@UnityDeveloper`, linkado em `index.md` |
+| `Design/Pesquisa/Handoffs/` e `Temas/` documentados na estrutura operacional do Historiador mas nunca criados no disco (nenhum handoff/tema gerado ainda) | Design | Baixa | ✅ Concluído 2026-07-11 — `.gitkeep` adicionado em ambas para consistência com o resto do projeto |
 
 ### Sequência recomendada para fechar a primeira demo
 
@@ -269,5 +272,7 @@
 | Feature: Blumenau — Morro do Zendron + mapas periféricos pós-enchente | 2026-05-17 |
 | Documentar mecânica principal — Sistema de Crafting (Receptáculos) | 2026-05-10 |
 | Documentar mecânica — Build do Personagem (separação de Crafting.md) | 2026-05-10 |
+| Documentar cenas Unity — `assets.md` tem tabela de Cenas (Bootstrap, Levels, Menus, Sandbox, DemoGameplay, SampleScene) | 2026-07-11 |
+| Preencher índice de assets — `Docs/Architecture/indices/assets.md` populado com pastas de arte, prefabs, ScriptableObjects, cenas e assets registrados | 2026-07-11 |
 | Bootstrap da estrutura unificada `Docs/` | 2026-04-25 |
 | Stubs de 6 sistemas: Core, UI, SaveSystem, Serialization, Settings, Storage | 2026-04-25 |
