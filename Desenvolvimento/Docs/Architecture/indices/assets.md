@@ -42,10 +42,10 @@
 |------------|---------|-----------|
 | Bootstrap | `Assets/Scenes/Bootstrap/` | Inicialização global e serviços |
 | Levels | `Assets/Scenes/Levels/` | Fases jogáveis |
-| Menus | `Assets/Scenes/Menus/` | Menu principal e telas auxiliares |
+| Menus | `Assets/Scenes/Menus/MainMenu.unity` | Menu principal — primeira cena do build (movida de `Animations/Menu/` em 2026-09-13) |
 | Sandbox | `Assets/Scenes/Sandbox/` | Protótipos e testes |
-| DemoGameplay | `Assets/Scenes/DemoGameplay.unity` | Cena jogável atual de demonstração |
-| SampleScene | `Assets/Scenes/SampleScene.unity` | Cena padrão/legado |
+| DemoGameplay | `Assets/Scenes/DemoGameplay.unity` | Cena jogável atual de demonstração — segunda do build |
+| SampleScene | `Assets/Scenes/SampleScene.unity` | Template do Unity, desativada no build |
 
 ## Backlog por Asset (fluxo concept art → sprite)
 
@@ -53,7 +53,8 @@
 
 | Asset | Ideia (P1) | Concept Art (P2) | Especificação (P3) | Spec JSON (P4) | Sprite (P5) |
 |-------|:---:|:---:|:---:|:---:|:---:|
-| *(nenhum em andamento)* | | | | | |
+| Edith Gaertner — NPC da SQ-01 ([context pack](../../../../Design/ArteFonte/IA/ContextPacks/chr-blumenau-edith-gaertner/context.md)) | ✅ | 🔨 lote 12 sem veredito (teto de 3 lotes por ajuste) | ❌ | ❌ | ❌ |
+| Soldado Mercenário Clérico — inimigo de Blumenau | ✅ | ⏸ 6 thumbnails em `IA/Outputs/soldado-clerico-thumbs/` aguardando curadoria | ❌ | ❌ | ❌ |
 
 Legenda de status por célula: ❌ não iniciado · 🔨 em andamento · ⏸ aguardando aprovação do usuário · ✅ concluído.
 

@@ -1,6 +1,8 @@
 # Context Pack — Prop Comporta de Blumenau
 
 > **✅ ADR-004 — re-autoria concluída (2026-07-12):** specs 2× (`*.2x.spec.json`, geradas via `spec_redetail.py` — EPX + textura) são a **fonte atual** dos PNGs entregues; as specs 1× ficam como histórico. Retoques futuros: editar as specs 2×.
+>
+> **Registro histórico:** a seção 3 e os prompts abaixo descrevem o contexto da época (320×180, 16 PPU, leitura SNES), anterior ao ADR-004. Não copiar para asset novo — usar o [`context-pack-template.md`](../../../../GuiasDeArte/context-pack-template.md), já em 640×360 / 32 PPU.
 
 ## 1. Identificação
 

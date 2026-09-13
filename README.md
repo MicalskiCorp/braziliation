@@ -14,30 +14,34 @@ Braziliation/                   ← raiz do repositório
 │   ├── Docs/                   ← documentação técnica (GDD, arquitetura, roadmap)
 │   ├── src/                    ← sistemas C# puros (sem Unity)
 │   ├── Tests/                  ← testes xUnit .NET (rodam no CI, sem Unity)
-│   ├── scripts/                ← scripts de setup/versionamento
+│   ├── scripts/                ← update_version.ps1 (VERSION + bundleVersion do Unity)
 │   ├── ProjectSettings/        ← configuração Unity (não mover)
 │   ├── Packages/               ← pacotes Unity (não mover)
 │   ├── Braziliation.slnx       ← solution principal
 │   ├── Braziliation.CI.slnx    ← solution para CI (testes .NET)
-│   ├── AGENTS.md               ← guia de agentes de IA para o projeto Unity
 │   └── README.md               ← README do projeto Unity
-├── Design/                     ← camada criativa (lore, brainstorm, arte conceitual)
-│   ├── Criativo/               ← lendas, cidades por estado, ideias, personagens
-│   ├── ArteConceitual/         ← referências visuais para assets
-│   ├── ArteFonte/              ← fontes editáveis e estudos de IA/Aseprite
-│   ├── GuiasDeArte/            ← bíblia visual, paletas, escala e pipeline de IA
+├── Design/                     ← camadas de pesquisa, criativa e de arte
+│   ├── Pesquisa/               ← pesquisa histórica e folclórica com fonte (@Historiador)
+│   ├── Criativo/               ← cidades por estado, lendas, história, ideias (@GameCreative)
+│   ├── BackLog/                ← operações do TODO criativo
+│   ├── ArteConceitual/         ← concept art, referências visuais e paletas
+│   ├── ArteFonte/              ← ferramentas de arte, context packs e saídas de IA
+│   ├── GuiasDeArte/            ← bíblia visual, paletas, escala e pipelines de sprite
 │   └── Models/                 ← templates de documentação criativa
-├── .github/                    ← CI/CD + agentes e instruções de IA (VS Code Copilot)
+├── .claude/                    ← Claude Code: 11 agentes, 13 skills, hooks, rules, settings
+├── .github/                    ← agentes e instruções do Copilot + CI
 │   ├── agents/                 ← 11 agentes (formato Copilot)
 │   ├── instructions/           ← instruções auto-injetadas pelo Copilot
 │   ├── prompts/                ← templates de prompt (/create-feature, etc.)
-│   ├── workflows/              ← GitHub Actions (ci.yml)
+│   ├── workflows/              ← GitHub Actions (ci.yml, unity-ci.yml)
 │   ├── ISSUE_TEMPLATE/         ← templates de issue
 │   └── PULL_REQUEST_TEMPLATE.md
+├── .githooks/                  ← pre-commit versionado (testes, meta-check, paletas)
+├── AGENTS.md                   ← guia canônico de agentes, skills e processos
 ├── CLAUDE.md                   ← entrada do Claude Code (importa AGENTS.md)
+├── .mcp.json                   ← servidores MCP do projeto (aseprite, unity)
 ├── .gitignore
-├── .gitattributes              ← Git LFS para assets binários
-└── .gitlab-ci.yml              ← CI GitLab (alternativo ao GitHub Actions)
+└── .gitattributes              ← Git LFS para assets binários; LF nos hooks
 ```
 
 ---
@@ -82,7 +86,13 @@ cd Desenvolvimento
 dotnet test Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj
 ```
 
-O CI (GitHub Actions e GitLab CI) executa esses mesmos comandos automaticamente em push/PR para `main` e `develop`.
+O CI (GitHub Actions) executa esses mesmos comandos automaticamente em push/PR para `main` e `develop`, mais o meta-check e a checagem de paleta.
+
+Antes de commitar, ative o pre-commit uma vez por clone — ele roda as mesmas travas localmente:
+
+```bash
+git config core.hooksPath .githooks
+```
 
 ---
 
@@ -138,9 +148,10 @@ Design/Criativo/
 ├── Estados/                ← cidades organizadas por estado brasileiro
 │   └── SantaCatarina/      ← Florianópolis, Blumenau, Lages, Guabiruba...
 ├── Lendas/                 ← catálogo de lendas mapeadas para monstros/cenários
-├── Personagens/
-├── Arcos/
-└── Ideias/
+├── Historia/               ← premissa, arcos e personagens (personagens/)
+├── Ideias/                 ← pool de ideias brutas
+├── Brainstorm/             ← sessões de brainstorm
+└── TODO.md                 ← pendências da camada criativa
 ```
 
 Use `@GameCreative` para popular e navegar esta camada.

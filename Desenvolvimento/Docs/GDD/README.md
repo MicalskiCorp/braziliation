@@ -1,23 +1,25 @@
 # Game Design Document (GDD) – Braziliation
 
-This folder holds the **Game Design Document** and related design specs for Braziliation.
+Esta pasta guarda o que o jogo **é**: features, decisões de design e, quando a premissa for fechada, a visão e o loop principal. É a referência de `@GameplayEngineer`, `@TechLead` e `@GameArchitect` ao implementar ou revisar.
 
-## Purpose
+## O que existe hoje
 
-- Define **vision**, **pillars**, and **target experience** (see also `.github/instructions/game-vision.instructions.md`).
-- Describe **features**, **modes**, and **content** (levels, characters, items).
-- Provide a single source of truth for “what the game is” so implementation and AI agents stay aligned.
+| Onde | Conteúdo |
+|------|----------|
+| [`Features/`](Features/index.md) | 7 features de Blumenau (igrejas, teatro, sistema hídrico, Jardim de Edith, mausoléu, Morro do Zendron), todas documentadas e ainda não implementadas |
+| `Decisoes/` | Registros de Decisão de Design (DDR), criados pela skill `fechar-decisao` — a pasta nasce com o primeiro DDR |
 
-## Suggested files
+## Onde vive a visão enquanto a premissa não fecha
 
-- `vision.md` – High-level pitch, pillars, and target audience.
-- `core_loop.md` – Core gameplay loop (e.g. explore → combat → progress → repeat).
-- `features.md` – Feature list and priority (MVP vs later).
-- `levels.md` – Level/world structure (hub, linear, etc.).
-- `characters.md` – Player and key NPCs (brief).
-- `content_checklist.md` – Tracks which content is designed vs implemented.
+- **Pilares e experiência-alvo:** `.github/instructions/game-vision.instructions.md`
+- **Premissa, mundo e protagonista:** `Design/Criativo/Historia/premissa.md` — ainda com placeholders
+- **Mecânicas e sistemas:** [`../Mechanics/`](../Mechanics/index.md) e [`../Architecture/Sistemas/`](../Architecture/Sistemas/index.md)
 
-## Usage
+## O que ainda vai existir
 
-- **Gameplay Engineer** and **Tech Lead** should reference GDD when implementing or reviewing features.
-- Update GDD when design decisions change; keep `.github/instructions/game-vision.instructions.md` in sync for high-level direction.
+`vision.md` (pitch, pilares, público) e `core_loop.md` (explorar → combater → progredir) serão escritos a partir do DDR da premissa, não antes: sem premissa fechada, eles só repetiriam placeholders. Depois deles, conforme a demo avançar: `levels.md` (estrutura de mundo) e `content_checklist.md` (o que está desenhado × implementado).
+
+## Uso
+
+- Decisão de design mudou? Registrar num DDR (`fechar-decisao`) e atualizar a feature ou a mecânica afetada.
+- Mudança na visão de alto nível: manter `game-vision.instructions.md` em sincronia.
