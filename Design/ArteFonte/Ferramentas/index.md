@@ -10,18 +10,23 @@ Scripts que sustentam o pipeline descrito em [`../../GuiasDeArte/pipeline-sprite
 
 | Script | Função | Uso típico |
 |--------|--------|-----------|
-| [`render_spec.py`](render_spec.py) | Transforma spec JSON (matriz de chars + paleta) em PNG — spec consolidada (multi-output + sheets) ou legada (1 arquivo por frame) | `python render_spec.py spec.json` |
-| [`palette_check.py`](palette_check.py) | Valida PNG contra paleta oficial (cores permitidas + limite de 16) | `python palette_check.py sprite.png paleta.json` |
-| [`mock_scene.py`](mock_scene.py) | Compõe sprite em cena mock 640×360 para teste de leitura 1x | `python mock_scene.py sprite.png paleta.json` |
-| [`upscale_preview.py`](upscale_preview.py) | Amplia PNG (nearest-neighbor, grade opcional) para crítica visual | `python upscale_preview.py sprite.png -s 8 --grid` |
-| [`sheet_pack.py`](sheet_pack.py) | Empacota frames em spritesheet horizontal (canvas estável obrigatório) | `python sheet_pack.py -o sheet.png f1.png f2.png f3.png` |
-| [`gen_tileset.py`](gen_tileset.py) | Gera tilesets 16×16 procedurais (famílias: enxaimel, metal, agua) com seed determinística + manifest | `python gen_tileset.py enxaimel --palette paleta.json --seed 42 -o out.png` |
+| [`render_spec.py`](render_spec.py) | Transforma spec JSON (matriz de chars + paleta) em PNG — spec consolidada (multi-output + sheets) ou legada (1 arquivo por frame) | `py render_spec.py spec.json` |
+| [`palette_check.py`](palette_check.py) | Valida PNG contra paleta oficial (cores permitidas + limite `max_colors_per_sprite` da paleta — 32 no ADR-004) | `py palette_check.py sprite.png paleta.json` |
+| [`mock_scene.py`](mock_scene.py) | Compõe sprite em cena mock 640×360 para teste de leitura 1x | `py mock_scene.py sprite.png paleta.json` |
+| [`upscale_preview.py`](upscale_preview.py) | Amplia PNG (nearest-neighbor, grade opcional) para crítica visual | `py upscale_preview.py sprite.png -s 8 --grid` |
+| [`sheet_pack.py`](sheet_pack.py) | Empacota frames em spritesheet horizontal (canvas estável obrigatório) | `py sheet_pack.py -o sheet.png f1.png f2.png f3.png` |
+| [`gen_tileset.py`](gen_tileset.py) | Gera tilesets procedurais (famílias: enxaimel, metal, agua) com seed determinística + manifest; `--scale 2` produz o tile 32×32 do ADR-004 | `py gen_tileset.py enxaimel --palette paleta.json --seed 42 -o out.png` |
 | [`gen_map_wfc.py`](gen_map_wfc.py) | **Monta** os tiles em mapa por Wave Function Collapse: preview PNG + `.map.json` para o Unity + manifest. Adjacência escrita à mão no ruleset ou derivada de um exemplo desenhado (`--learn`); `--pin` fixa marcos autorais | `py gen_map_wfc.py rulesets/blumenau-fachada.json --seed 42 -w 20 -H 12 -o ../IA/Outputs/mapa.png` |
-| [`comfy_batch.py`](comfy_batch.py) | Submete lote de thumbnails ao ComfyUI local via API e registra prompt/seed (`.lote.json`); com `--reference-image` usa concept art aprovado (Passo 2) como base image-to-image | `python comfy_batch.py --asset x --seed N --positive "..." --negative "..." [--reference-image concept.png --denoise 0.55]` |
-| [`spec_redetail.py`](spec_redetail.py) | Re-autoria assistida 1×→2× (ADR-004): EPX suaviza curvas + textura de material com seed; emite spec 2× versionada + PNG | `python spec_redetail.py spec1x.json -o out.png` |
+| [`comfy_batch.py`](comfy_batch.py) | Submete lote de thumbnails ao ComfyUI local via API e registra prompt/seed (`.lote.json`); com `--reference-image` usa concept art aprovado (Passo 2) como base image-to-image | `py comfy_batch.py --asset x --seed N --positive "..." --negative "..." [--reference-image concept.png --denoise 0.55]` |
+| [`spec_redetail.py`](spec_redetail.py) | Re-autoria assistida 1×→2× (ADR-004): EPX suaviza curvas + textura de material com seed; emite spec 2× versionada + PNG | `py spec_redetail.py spec1x.json -o out.png` |
 | [`prepare_thirdparty_gothicvania.py`](prepare_thirdparty_gothicvania.py) | Baixa, prepara e instala os placeholders CC0 do Gothicvania (ansimuz) em `Assets/Art/ThirdParty/` — upscale ×2, recorte por bbox de união por animação, sheets em células quadradas e `.meta` com GUID fixo | `py prepare_thirdparty_gothicvania.py [--dry-run]` |
 | [`palette_swatch.py`](palette_swatch.py) | Converte a paleta JSON da região em imagem de amostras — ponte para os nós do ComfyUI que recebem paleta como IMAGEM (`DNFReferencePaletteFinalize`, `DNFSpatialChromaLock`) | `py palette_swatch.py ../../ArteConceitual/Paletas/blumenau.json -o D:/Tools/ComfyUI/input/blumenau_swatch.png` |
-| [`pixelize.py`](pixelize.py) | Reduz saída crua de difusão (Rota C) à paleta oficial da região no canvas alvo — downscale por cor dominante por bloco + `Image.quantize` na paleta exata; ponto de partida pro pixel pass manual, não substitui | `python pixelize.py concept_raw.png paleta.json --size 64x64` |
+| [`check_art_palettes.py`](check_art_palettes.py) | Gate em lote: todo PNG próprio de `Assets/Art/` contra a paleta indicada em `ArteConceitual/Paletas/regras-assets.json`; PNG sem regra reprova. Roda no pre-commit e no CI | `py check_art_palettes.py` |
+| [`pixelize.py`](pixelize.py) | Reduz saída crua de difusão (Rota C) à paleta oficial da região no canvas alvo — downscale por cor dominante por bloco + `Image.quantize` na paleta exata; ponto de partida pro pixel pass manual, não substitui | `py pixelize.py concept_raw.png paleta.json --size 64x64` |
+
+## Aseprite via MCP
+
+Para retoque fino e pixel pass, o `@SpriteArtist` usa o servidor MCP `aseprite` (pixel-mcp sobre o Aseprite local). Setup, localização dos arquivos e o motivo do perfil limpo: [`../IA/Models/aseprite-mcp.md`](../IA/Models/aseprite-mcp.md).
 
 ## Onde vive o quê
 

@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "aseprite": {
+      "type": "stdio",
+      "command": "D:/Tools/pixel-mcp/pixel-mcp.exe",
+      "args": [],
+      "env": {
+        "PIXEL_MCP_CONFIG": "C:/Users/Usuario/.config/pixel-mcp/config.json",
+        "APPDATA": "D:/Tools/pixel-mcp/aseprite-perfil"
+      }
+    },
+    "unity": {
+      "type": "stdio",
+      "command": "C:/Users/Usuario/AppData/Local/Unity/bin/unity.exe",
+      "args": ["mcp", "--project-path", "D:/Backup/Projetos/Games/Braziliation/Desenvolvimento"]
+    }
+  }
+}

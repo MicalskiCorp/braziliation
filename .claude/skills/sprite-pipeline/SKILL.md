@@ -1,6 +1,7 @@
 ---
 name: sprite-pipeline
 description: Gera um sprite pixel art programático seguindo o pipeline do Braziliation — spec JSON, ciclo gerar→visualizar→criticar→refinar, validação de paleta e mock 640x360. Use quando o usuário pedir para gerar/criar sprite, placeholder, prop pixel art ou validar um sprite existente.
+allowed-tools: Bash(py Design/ArteFonte/Ferramentas/*)
 ---
 
 # Skill: sprite-pipeline
@@ -13,12 +14,13 @@ Processo canônico: **`Design/GuiasDeArte/pipeline-sprites-programaticos.md`** �
 2. Carregar a paleta da região: `Design/ArteConceitual/Paletas/{regiao}.json`. Se não existir, derivar do `palette-guide.md` com `"status": "proposta-inicial"` e avisar o usuário.
 3. Criar/confirmar brief e context pack em `Design/ArteFonte/IA/ContextPacks/{asset}/` (templates em `GuiasDeArte/`; usar a skill `novo-asset` se não existirem). Se o asset tiver múltiplas ações, confirmar que `variations.md` (Passo 3, `variation-spec-template.md`) já mapeia cada ação para um id de `outputs`/`sheets`.
 4. Escrever a spec **consolidada** `{asset}.spec.json` (um JSON por objeto — ver `pipeline-sprites-programaticos.md#formato-da-spec-consolidada`): um `output` por frame/variação, e uma entrada em `sheets` para cada animação. **Silhueta primeiro** (1 cor) no output `idle`, depois detalhe e demais outputs.
-5. Executar o ciclo com as ferramentas de `Design/ArteFonte/Ferramentas/` (requer Python + Pillow):
-   - `python render_spec.py {spec}` → renderiza todos os `outputs` + monta `sheets` automaticamente em `ArteFonte/IA/Outputs/`; use `--only {id} -o {out}.png` para iterar um output isolado durante a crítica
-   - `python upscale_preview.py {png} -s 8 --grid` → **abrir a imagem com Read e criticar** (repetir por output/sheet relevante)
-   - `python mock_scene.py {png} {paleta}` → **abrir o mock e validar leitura em 1x**
+5. Executar o ciclo com as ferramentas de `Design/ArteFonte/Ferramentas/` (requer Python + Pillow; nesta máquina o comando é **`py`**, não `python`):
+   - `py Design/ArteFonte/Ferramentas/render_spec.py {spec}` → renderiza todos os `outputs` + monta `sheets` automaticamente em `ArteFonte/IA/Outputs/`; use `--only {id} -o {out}.png` para iterar um output isolado durante a crítica
+   - `py Design/ArteFonte/Ferramentas/upscale_preview.py {png} -s 8 --grid` → **abrir a imagem com Read e criticar** (repetir por output/sheet relevante)
+   - `py Design/ArteFonte/Ferramentas/mock_scene.py {png} {paleta}` → **abrir o mock e validar leitura em 1x**
    - Critérios: checklist de crítica visual do guia canônico. Reprovou → ajustar a spec (o output/frame específico) e repetir.
-6. Gate final: `python palette_check.py {png} {paleta}` deve APROVAR para cada output/sheet relevante.
+   - **Retoque fino (opcional):** para ajustes que ficam melhores à mão do que na spec (anti-alias pontual, sombreamento com rampa, dithering), usar o MCP `aseprite` (pixel-mcp, Aseprite local). O resultado volta como PNG e passa pelo mesmo gate abaixo; registrar na spec/`lotes.md` o que foi retocado fora dela.
+6. Gate final: `py Design/ArteFonte/Ferramentas/palette_check.py {png} {paleta}` deve APROVAR para cada output/sheet relevante.
 7. Entregar: PNG aprovado em `ArteFonte/IA/Selected/`; se solicitado export, copiar para `Desenvolvimento/Assets/Art/{destino}` (nomes conforme `Docs/Architecture/Assets/AssetsStructure.md`) e registrar em `Docs/Architecture/indices/assets.md` (mover a linha do asset de "Backlog por Asset" para "Assets Registrados").
 8. Retroalimentar pendências em `Desenvolvimento/Docs/TODO.md`.
 

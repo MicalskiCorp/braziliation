@@ -1,0 +1,12 @@
+{
+  "descricao": "Qual paleta cada PNG de Desenvolvimento/Assets/Art/ deve respeitar. Lido por Design/ArteFonte/Ferramentas/check_art_palettes.py (pre-commit e CI). Globs relativos a Assets/Art/, estilo fnmatch (* atravessa pastas). A primeira regra que casar vence. PNG sem regra reprova — asset novo precisa ganhar paleta de propósito.",
+  "ignorar": [
+    "ThirdParty/*",
+    "Menu/*"
+  ],
+  "regras": [
+    { "glob": "Environments/Blumenau/*", "paleta": "blumenau.json" },
+    { "glob": "Enemies/enm_automato_*", "paleta": "blumenau.json" },
+    { "glob": "UI/ui_item_pingente_gato*", "paleta": "blumenau.json" }
+  ]
+}

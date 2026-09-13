@@ -100,6 +100,7 @@ Este é o fluxo que deve ser usado para cada asset novo:
    - **Aprovar:** mover para `Design/ArteFonte/IA/Selected/` e seguir para o passo 6b.
    - **Descartar:** mover para `Design/ArteFonte/IA/Rejected/` (arquivo, não deleção — é para isso que a pasta existe).
    - **Iterar:** voltar ao passo 5 com a mudança anotada no `lotes.md` antes de gerar o próximo lote.
+   - **Teto de iteração:** no máximo **3 lotes por pedido de ajuste**. Se o terceiro não resolver, parar a difusão e levar o melhor candidato para o pixel pass (passo 7, ou o MCP `aseprite`) — o lote 11 da Edith mostrou que img2img não acrescenta elemento que a imagem-base não tem, e insistir só queima tempo de GPU.
 6b. **Pixelizar assistido:** `python pixelize.py candidato.png {regiao}.json --size {canvas do brief}` (ver [`pixelize.py`](../ArteFonte/Ferramentas/pixelize.py)) — downscale por cor dominante + paleta exata do projeto, ponto de partida pro passo 7, não substitui.
 7. **Redesenhar no Aseprite:** faça pixel pass manual em tamanho real a partir do resultado do 6b — corrigir bandas de sombra, outline e highlight direcional (ver `style-bible.md#densidade-alvo`), não redesenhar do zero.
 8. **Animar se necessário:** use tags do Aseprite e siga [`animation-guide.md`](animation-guide.md).
