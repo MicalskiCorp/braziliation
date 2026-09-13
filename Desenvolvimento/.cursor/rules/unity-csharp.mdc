@@ -16,7 +16,7 @@ alwaysApply: false
 - 2D: usar `UnityEngine` e `UnityEngine.Rendering.Universal` quando for URP 2D; física com `Rigidbody2D`/`Collider2D`.
 
 ## Resolução e câmera
-- Projeto usa **Pixel Perfect**: ref 320×180, 16 PPU (definido em `CameraScaler`). Manter consistência em arte e tiles.
+- Projeto usa **Pixel Perfect**: ref 640×360, 32 PPU (definido em `CameraScaler`). Manter consistência em arte e tiles.
 
 ## Exemplo de inicializador
 ```csharp

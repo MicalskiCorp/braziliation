@@ -11,9 +11,9 @@ Jogo **plataforma 2D** em pixel art (C#), ambientação **dieselpunk pós-apocal
 - **Engine**: Unity 6000.2 (Unity 6)
 - **Render**: URP 2D (Universal Render Pipeline)
 - **Linguagem**: C#
-- **Estilo**: Pixel Art, paleta restrita estilo SNES
+- **Estilo**: Pixel Art de alta densidade (Blasphemous-like — 640×360, 32 PPU, ADR-004)
 - **Input**: com.unity.inputsystem (Input System)
-- **Plataforma alvo**: PC / SNES (EverDrive) conforme build
+- **Plataforma alvo**: PC (Steam) — ver ADR-004 para histórico de plataformas descartadas
 
 ## Estrutura de pastas
 - `Assets/` – Arte, áudio, sprites, cenas, prefabs
@@ -29,7 +29,7 @@ Jogo **plataforma 2D** em pixel art (C#), ambientação **dieselpunk pós-apocal
 
 ## Base do jogo já presente
 - **GameInitializer** (`Assets/Scripts/Core/GameInitializer.cs`): inicialização antes da cena (60 FPS, vSync 0).
-- **CameraScaler** (`Assets/Scripts/Core/CameraScaler.cs`): PixelPerfectCamera 320×180, 16 PPU.
+- **CameraScaler** (`Assets/Scripts/Core/CameraScaler.cs`): PixelPerfectCamera 640×360, 32 PPU (ADR-004).
 
 ## Convenções (Docs/Tech/DevelopmentRules.md)
 - Branches: `main`, `develop`, `feature/*`, `hotfix/*`, `chore/*`

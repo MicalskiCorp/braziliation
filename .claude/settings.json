@@ -1,0 +1,51 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test:*)",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet --version)",
+      "Bash(py Design/ArteFonte/Ferramentas/:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git ls-files:*)",
+      "Bash(git branch:*)",
+      "Bash(git lfs ls-files:*)"
+    ],
+    "deny": [
+      "Read(Desenvolvimento/Library/**)",
+      "Read(Desenvolvimento/Temp/**)",
+      "Read(Desenvolvimento/Logs/**)",
+      "Read(Desenvolvimento/.vs/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/block_generated_dirs.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/build_game_core.py\"",
+            "timeout": 60,
+            "statusMessage": "dotnet build Braziliation.Game.Core..."
+          }
+        ]
+      }
+    ]
+  }
+}

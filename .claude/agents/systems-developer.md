@@ -2,6 +2,7 @@
 name: systems-developer
 description: "Systems Developer do Braziliation — sistemas C# puros, sem dependência Unity. Use para: implementar SaveGameService, SettingsService, IStorageProvider, FileStorageProvider, domain models (SaveSlot, GameSettings), serialização JSON, adapters de storage, schema versioning. TODO o código deste agente vai em src/Braziliation.Game.Core/. Acionado por: 'save system', 'settings', 'storage', 'serialização', 'pure C#', 'ISaveStorage', 'FileStorageProvider', 'schema version'."
 tools: Read, Edit, Write, Grep, Glob, Bash, TodoWrite
+model: sonnet
 ---
 
 # Agente Systems Developer – Braziliation

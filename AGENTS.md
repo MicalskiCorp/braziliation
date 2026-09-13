@@ -63,13 +63,13 @@ O Claude Code só descobre `.claude/agents/` (e `.claude/skills/`) relativos ao 
 | Abrir o workspace em... | Camada ativa | O que fica disponível |
 |--------------------------|---------------|------------------------|
 | `d:\Backup\Projetos\Games` (raiz) | 1ª camada (personas: Jarvis, Computador, wrappers finos) | Só as personas — elas leem o `.agent.md` de referência via caminho de arquivo, então funcionam mesmo sem a 2ª camada carregada |
-| `Braziliation/` | 2ª camada (agentes funcionais + as 7 skills) | Agentes funcionais completos e as skills descritas na seção 3 — **use este cwd para qualquer trabalho real no projeto** |
+| `Braziliation/` | 2ª camada (agentes funcionais + as 9 skills) | Agentes funcionais completos e as skills descritas na seção 3 — **use este cwd para qualquer trabalho real no projeto** |
 
 No formato Copilot (VS Code), `@Agente` funciona a partir de qualquer cwd dentro do repositório, já que a descoberta não é escopada por diretório da mesma forma.
 
 ### 3. Skills — catálogo por situação
 
-As 7 skills em `Braziliation/.claude/skills/` só existem no formato Claude (sem equivalente Copilot) e só são chamáveis por um agente se `Skill` estiver na lista `tools:` do seu frontmatter. Mapeamento atual — agente dono × skill × quando usar:
+As 9 skills em `Braziliation/.claude/skills/` só existem no formato Claude (sem equivalente Copilot) e só são chamáveis por um agente se `Skill` estiver na lista `tools:` do seu frontmatter. Mapeamento atual — agente dono × skill × quando usar:
 
 | Skill | Agente(s) | Quando invocar |
 |-------|-----------|-----------------|
@@ -80,6 +80,8 @@ As 7 skills em `Braziliation/.claude/skills/` só existem no formato Claude (sem
 | [`novo-agente`](.claude/skills/novo-agente/SKILL.md) | `@AgentArchitect` (Papel 2) | Criar, refatorar ou sincronizar um agente nas 2 camadas × 2 formatos |
 | [`validar-todos`](.claude/skills/validar-todos/SKILL.md) | `@AgentArchitect` (Papel 3) | Auditar TODOs concluídos, cobertura de testes e gaps de milestone |
 | [`structure-audit`](.claude/skills/structure-audit/SKILL.md) | `@AgentArchitect` (nível 4 — ecossistema) · `@GameArchitect` (níveis 2-3 — Design/Documentação) | Auditar disco vs. docs em qualquer nível; nunca corrige sem aprovação, só reporta |
+| [`hemeroteca-blumenau`](.claude/skills/hemeroteca-blumenau/SKILL.md) | `@Historiador` | Verificar fato/data/nome específico de Blumenau em fonte primária (revista "Blumenau em Cadernos", Hemeroteca CIASC) |
+| [`meta-check`](.claude/skills/meta-check/SKILL.md) | `@UnityDeveloper` · `@SpriteArtist` (após entregar em `Assets/Art/`) | Auditar pares asset/.meta em `Desenvolvimento/Assets/` — assets sem `.meta` (GUID instável) ou `.meta` órfãos |
 
 ### 4. Gestão de TODOs (3 índices vivos)
 
@@ -105,9 +107,9 @@ Duas frentes complementares, ambas reportam antes de corrigir:
 
 `@AgentArchitect` (Papel 2) via skill [`novo-agente`](.claude/skills/novo-agente/SKILL.md) — sempre varre o inventário existente antes de criar, produz os 4 arquivos (2 camadas × 2 formatos) e atualiza a tabela abaixo.
 
-### 8. Processo de asset/sprite
+### 8. Processo de asset/sprite (5 etapas: ideia → concept art → especificação → spec JSON → sprite)
 
-`Design/Criativo/` (conceito) → skill [`novo-asset`](.claude/skills/novo-asset/SKILL.md) (brief + context pack) → skill [`sprite-pipeline`](.claude/skills/sprite-pipeline/SKILL.md) via `@SpriteArtist` (geração + validação) → registro em `Docs/Architecture/indices/assets.md`. Guia canônico completo: [`Design/GuiasDeArte/pipeline-sprites-programaticos.md`](Design/GuiasDeArte/pipeline-sprites-programaticos.md).
+`Design/Criativo/` (ideia/lore, `@GameCreative`) → **concept art aprovado** em `Design/ArteConceitual/{categoria}/{asset}/` (`@SpriteArtist`, rota C) → **especificação de variações** (`variation-spec-template.md`, para personagens/inimigos complexos) → skill [`novo-asset`](.claude/skills/novo-asset/SKILL.md) (brief + context pack) → skill [`sprite-pipeline`](.claude/skills/sprite-pipeline/SKILL.md) via `@SpriteArtist` (spec JSON consolidada + geração + validação) → registro em `Docs/Architecture/indices/assets.md` (seção "Backlog por Asset" rastreia as 5 etapas até o asset ser registrado). Para props simples, concept art e especificação são opcionais — segue direto para `novo-asset`. Guia canônico completo: [`Design/GuiasDeArte/pipeline-sprites-programaticos.md`](Design/GuiasDeArte/pipeline-sprites-programaticos.md).
 
 ### 9. Processo de nova cidade/estado
 

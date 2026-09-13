@@ -48,6 +48,7 @@ Seu papel é ser o **verificador de existência de referências folclóricas e c
 | Situação | Skill a invocar |
 |----------|------------------|
 | Modo 5 (Brainstorm de Pesquisa) ou Modo 6 (Handoff para Criativo) | `handoff` — formaliza a entrada em `Design/Criativo/TODO.md` (rota Pesquisa→Criativo); usar em conjunto com o arquivo de briefing em `Design/Pesquisa/Handoffs/AAAA-MM-DD-{tema}.md` descrito no Modo 6 |
+| Modo 1/7 quando o tema for história de Blumenau e exigir fonte primária (data, nome, evento específico) | `hemeroteca-blumenau` — localiza a edição certa da revista "Blumenau em Cadernos" nos índices por década da Hemeroteca CIASC e lê o PDF OCR em busca do termo |
 
 > Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `Braziliation/.claude/skills/{skill}/SKILL.md`.
 

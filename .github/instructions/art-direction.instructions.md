@@ -1,12 +1,12 @@
 ---
-description: "Direção de arte do Braziliation: pixel art dieselpunk, paleta restrita, resolução 320x180 16 PPU, direção de áudio e referências visuais. Use quando propor ou revisar assets, sprites, tiles, animações ou descrições de arte."
+description: "Direção de arte do Braziliation: pixel art dieselpunk, paleta restrita, resolução 640x360 32 PPU (Blasphemous-like, ADR-004), direção de áudio e referências visuais. Use quando propor ou revisar assets, sprites, tiles, animações ou descrições de arte."
 ---
 # Art Direction – Braziliation
 
 ## Visual style
 
 - **Pixel art** — Arte desenhada em pixel; sem texturas hi-res ou arte vetorial no jogo.
-- **Inspiração SNES-era** — Restrições de resolução e paleta similares a consoles 16-bit. Leitura clara em 320×180 (16 PPU).
+- **Inspiração Blasphemous-era (ADR-004)** — Densidade de pixel de metroidvanias modernos (Blasphemous, SOTN). Leitura clara em 640×360 (32 PPU); personagem ~17% da altura da tela.
 - **Paleta restrita** — Paleta coesa por ambiente; evite "arco-íris" ou tons conflitantes. Defina paletas-chave por ambiente (ex: wasteland, selva, industrial).
 - **Dieselpunk brasileiro** — Industrial, mecânico, enferrujado, oleoso. Engrenagens, canos, vapor, tecnologia improvisada. Sabor brasileiro na arquitetura e props (ex: favela meets fábrica).
 
@@ -14,17 +14,18 @@ description: "Direção de arte do Braziliation: pixel art dieselpunk, paleta re
 
 | Atributo | Valor |
 |----------|-------|
-| Resolução de referência | 320×180 (CameraScaler) |
-| PPU (pixels per unit) | 16 |
+| Resolução de referência | 640×360 (CameraScaler; escala inteira ×3 → 1080p) — ADR-004 |
+| PPU (pixels per unit) | 32 |
 | Pipeline | URP 2D — apenas sprites e tilemaps; sem modelos 3D no gameplay |
-| Tamanho base de sprite | 16×16 a 32×32 px (1 tile = 16×16 @ 16 PPU = 1 unidade Unity) |
-| Animação | Sprite-based (2D Animation, Aseprite); contagens de frame razoáveis |
-| Paleta máxima por sprite | ~16 cores (estilo SNES) |
+| Tamanho base de sprite | 32×32 a 64×64 px (1 tile = 32×32 @ 32 PPU = 1 unidade Unity) |
+| Animação | Sprite-based (2D Animation, Aseprite); run 8-12 frames, attack 6-10 |
+| Paleta máxima por sprite | ~32 cores (base regional de 16 + rampas estendidas conforme necessário) |
+| Assets legados (pré-ADR-004) | Upscale ×2 nearest — funcionais, aguardam re-autoria em densidade nova |
 
 ## Audio direction
 
 - **Música:** Mood que combina dieselpunk + identidade brasileira. Pode ser chiptune, industrial ou híbrido; evite "épico orquestral" genérico.
-- **SFX:** Impactante e legível. Hits, pulos e UI devem se sentir satisfatórios em volume baixo. Considere canais limitados estilo SNES para autenticidade.
+- **SFX:** Impactante e legível. Hits, pulos e UI devem se sentir satisfatórios em volume baixo. Considere uma estética retrô de canais limitados para autenticidade.
 - **Idioma:** Português (BR) para diálogo e UI é preferido; documente qualquer abordagem de localização no GDD.
 
 ## References for AI

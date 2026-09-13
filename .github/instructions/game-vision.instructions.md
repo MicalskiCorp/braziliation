@@ -5,13 +5,13 @@ description: "Visão geral do Braziliation: pitch, pilares de design, experiênc
 
 ## One-line pitch
 
-**Braziliation** é um jogo de plataforma/ação 2D em pixel art ambientado em um mundo pós-apocalíptico brasileiro, com estética dieselpunk, estilo visual SNES-era e gameplay responsivo e satisfatório.
+**Braziliation** é um jogo de plataforma/ação 2D em pixel art ambientado em um mundo pós-apocalíptico brasileiro, com estética dieselpunk, pixel art de alta densidade e gameplay responsivo e satisfatório.
 
 ## Core pillars
 
 1. **Identidade brasileira** – Cenário, lore e tom enraizados no Brasil: paisagens, cultura, língua e facções pós-colapso. Não é pós-apocalipso genérico.
 2. **Estética dieselpunk** – Tech industrial e mecânico; maquinário enferrujado, armas improvisadas e máquinas pesadas em um mundo destruído.
-3. **Pixel art estilo SNES** – Paleta restrita, silhuetas claras, animação legível. Cada pixel importa.
+3. **Pixel art de alta densidade** – Paleta restrita, silhuetas claras, animação legível (referência  ADR-004). Cada pixel importa.
 4. **Plataforma/ação** – Movimento e combate precisam se sentir bem primeiro; design de níveis e sistemas apoiam maestria e exploração.
 5. **Solo dev + IA** – Arquitetura e documentação devem suportar um desenvolvedor e agentes IA trabalhando juntos sem confusão.
 

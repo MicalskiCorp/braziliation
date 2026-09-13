@@ -194,9 +194,10 @@ Quando o usuário iniciar um brainstorm:
 ### Modo 6 — Novo Personagem
 
 1. **Ler** `Design/Criativo/Historia/personagens/index.md`
-2. **Criar** `Design/Criativo/Historia/personagens/{Nome}.md` com: papel, lenda associada, motivação, aparência, mecânica especial
+2. **Criar** `Design/Criativo/Historia/personagens/{Nome}.md` usando `Design/Models/ModelPersonagem.md` — preencher a seção "Aparência" com detalhe suficiente para servir de matriz do concept art (Passo 2 do fluxo em `Design/GuiasDeArte/pipeline-sprites-programaticos.md`), não deixar genérico
 3. **Atualizar** `personagens/index.md`
 4. **Verificar** se lenda associada está em `catalogo.md` — catalogar se não
+5. **Registrar pendência de concept art**: aplicar operação `concept-art: {Nome} — Historia/personagens/{Nome}.md — Personagens — {prioridade}` do `Design/BackLog/BackLog.md` em `Design/Criativo/TODO.md`
 
 **Exemplo:**
 ```
@@ -229,6 +230,7 @@ Quando o usuário pedir para criar uma nova cidade:
 5. **Atualizar** `Design/Criativo/Estados/{Estado}/cidades/index.md`
 6. **Atualizar** `Design/Criativo/Estados/{Estado}/index.md`
 7. **Catalogar** novas lendas identificadas em `Design/Criativo/Lendas/catalogo.md` com status `🔨`
+8. **Registrar pendência de concept art** para cada monstro/criatura novo catalogado no passo 4: operação `concept-art: {NomeMonstro} — Estados/{Estado}/cidades/{Cidade}/index.md — Criaturas — {prioridade}` do `Design/BackLog/BackLog.md`
 
 **Campos obrigatórios para solicitar ao usuário se não fornecidos:**
 - Nome da cidade (real) e nome no game
@@ -286,6 +288,7 @@ Ativado quando o usuário usar prefixo `TODOs:` ou pedir explicitamente sobre pe
 | Catalogar lenda | Modo 1 — Catalogar Lenda |
 | Registrar ideia | Modo 3 — Registrar Ideia |
 | Popular premissa/conteúdo livre | Editar diretamente o arquivo indicado |
+| Concept Art Pendente | Fora do escopo deste agente (não gera imagem) — confirmar ao usuário que o item está pronto e sugerir acionar `@SpriteArtist` manualmente (Passo 2 do fluxo) |
 
 **Exemplo:**
 ```

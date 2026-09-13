@@ -22,9 +22,9 @@ Leia os arquivos de contexto abaixo e absorva o estado atual do projeto **Brazil
 |------|-------|
 | Engine | Unity 6 (6000.2) + URP 2D |
 | Linguagem | C# (.NET no Unity / .NET 8 nos testes .NET) |
-| Resolução | 320×180 @ 16 PPU (Pixel Perfect) |
+| Resolução | 640×360 @ 32 PPU (Pixel Perfect) |
 | Input | com.unity.inputsystem (New Input System) |
-| Estilo visual | Pixel Art, paleta restrita estilo SNES |
+| Estilo visual | Pixel Art de alta densidade (ADR-004) |
 | Tema | Plataforma/ação 2D, Brasil pós-apocalíptico dieselpunk |
 | Branch atual | [preencha antes de enviar] |
 
@@ -73,7 +73,7 @@ Design/                        ← camada criativa (pasta irmã ao repo)
 ## Scripts implementados até agora
 
 - `Assets/Scripts/Core/GameInitializer.cs` — targetFrameRate=60, vSyncCount=0
-- `Assets/Scripts/Core/CameraScaler.cs` — PixelPerfectCamera 16 PPU, 320×180
+- `Assets/Scripts/Core/CameraScaler.cs` — PixelPerfectCamera 32 PPU, 640×360
 
 ---
 

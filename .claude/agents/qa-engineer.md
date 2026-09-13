@@ -2,6 +2,7 @@
 name: qa-engineer
 description: "QA Engineer do Braziliation. Use para: revisar código em busca de edge cases, null safety e validação de input; propor acceptance criteria e cenários de teste; identificar riscos de regressão; verificar consistência com GDD e Architecture; rastrear tech debt em Docs/Tech/tech_debt.md. NÃO escreve testes automatizados — para isso use @TestEngineer. Acionado por: 'revisar código', 'edge case', 'acceptance criteria', 'regression', 'validar comportamento', 'tech debt', 'está correto segundo o GDD'."
 tools: Read, Grep, Glob, TodoWrite
+model: sonnet
 ---
 
 # Agente QA Engineer – Braziliation

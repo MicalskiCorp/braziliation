@@ -8,23 +8,27 @@ applyTo: "Desenvolvimento/Assets/**/*.cs"
 
 - **Language:** C#
 - **Engine:** Unity 6 (6000.2), URP 2D
-- **Input:** com.unity.inputsystem (New Input System)
-- **Target:** PC; port SNES (EverDrive) por build configuration
+- **Input:** com.unity.inputsystem via `Braziliation.Core.GameInput` — ADR-006.
+  Nunca leia `Keyboard.current`/`Mouse.current`/`Gamepad.current` em gameplay.
+- **Target:** PC (Steam)
 
 ## Namespaces
 
-Namespace raiz: `Braziliation`. Subnamespaces espelham pastas em `Assets/Scripts/`:
+Namespace raiz: `Braziliation`. Subnamespaces espelham pastas em `Assets/Scripts/`.
+Organização por **domínio de sistema**, não por tipo de entidade — ver ADR-005:
 
 | Pasta | Namespace |
 |-------|-----------|
 | `Core/` | `Braziliation.Core` |
-| `Player/` | `Braziliation.Player` |
+| `Gameplay/` | `Braziliation.Gameplay` |
+| `Build/` | `Braziliation.Build` |
+| `Crafting/` | `Braziliation.Crafting` |
 | `Enemies/` | `Braziliation.Enemies` |
-| `Combat/` | `Braziliation.Combat` |
-| `Inventory/` | `Braziliation.Inventory` |
-| `World/` | `Braziliation.World` |
 | `UI/` | `Braziliation.UI` |
-| `Utils/` | `Braziliation.Utils` |
+
+`Braziliation.Build` e `Braziliation.Crafting` existem também em
+`src/Braziliation.Game.Core/` (adaptador Unity × lógica pura). Nomes de tipo não podem
+colidir entre as duas camadas.
 
 ## Script layout
 
@@ -35,7 +39,7 @@ Namespace raiz: `Braziliation`. Subnamespaces espelham pastas em `Assets/Scripts
 
 ## Unity conventions
 
-- **Pixel Perfect:** Respeite 320×180 e 16 PPU. Nenhum scaling arbitrário que quebre alinhamento de pixel.
+- **Pixel Perfect:** Respeite 640×360 e 32 PPU. Nenhum scaling arbitrário que quebre alinhamento de pixel.
 - **Physics 2D:** Use `Rigidbody2D` e `Collider2D`; configure layers e matrix em Project Settings.
 - **Prefabs:** Um prefab por entidade lógica (player, tipo de inimigo, projétil). Variants para tuning.
 - **ScriptableObjects:** Para dados em tempo de design (stats, definições de item, wave configs). Estado de runtime fica em components.
@@ -47,6 +51,8 @@ Namespace raiz: `Braziliation`. Subnamespaces espelham pastas em `Assets/Scripts
 - Serviços recebem todas as dependências via construtor (sem estado estático).
 - Caminhos de arquivo nunca hardcoded — sempre injetados na construção.
 - Serialização com `System.Text.Json` + `SaveJsonOptions.Default`.
+- Mudou o schema de save? Suba `SaveSlot.CurrentSchemaVersion` **e** registre o degrau
+  em `SaveMigrations.All` — ADR-007. Há teste que trava o esquecimento.
 
 ## Git and workflow
 

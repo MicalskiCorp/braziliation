@@ -302,7 +302,7 @@ Concluir a auditoria com um relatório estruturado:
 | `@TestEngineer` | `TestEngineer.agent.md` | Testes xUnit automatizados |
 | `@GameArchitect` | `GameArchitect.agent.md` | Estrutura de documentação Markdown e índices |
 | `@GameCreative` | `GameCreative.agent.md` | Lore, brainstorm, personagens, escrita criativa |
-| `@Historiador` | `Historian.agent.md` | Pesquisa histórica e folclórica via web |
+| `@Historiador` | `Historiador.agent.md` | Pesquisa histórica e folclórica via web |
 | `@AgentArchitect` | `AgentArchitect.agent.md` | Orquestração swarm + auditoria + criação e gestão do ecossistema de agentes |
 
 ---
