@@ -55,11 +55,28 @@ namespace Braziliation.Core
             var saveProvider   = new FileStorageProvider(Path.Combine(Application.persistentDataPath, "saves"));
             var configProvider = new FileStorageProvider(Path.Combine(Application.persistentDataPath, "config"));
 
-            SaveGameService = new SaveGameService(new StorageProviderSaveAdapter(saveProvider));
+            // SaveMigrations.All é o registro único de degraus de schema. Passar aqui é o
+            // que faz um save de build anterior ser migrado em vez de virar "slot vazio".
+            SaveGameService = new SaveGameService(
+                new StorageProviderSaveAdapter(saveProvider),
+                SaveMigrations.All);
             SettingsService = new SettingsService(new StorageProviderSettingsAdapter(configProvider));
 
             if (initializeCraftingService)
                 Register(new CraftingService());
+        }
+
+        /// <summary>
+        /// Libera o singleton quando esta instância morre. Sem isso, com Domain Reload
+        /// desativado (Enter Play Mode Options), <see cref="Instance"/> sobrevive à saída
+        /// do Play Mode apontando para um GameObject destruído — e o Play seguinte resolve
+        /// serviços de uma sessão morta. Só limpa se a instância que morre é a atual: um
+        /// duplicado sendo destruído no Awake não pode derrubar o titular.
+        /// </summary>
+        private void OnDestroy()
+        {
+            if (ReferenceEquals(Instance, this))
+                Instance = null;
         }
 
         /// <summary>
