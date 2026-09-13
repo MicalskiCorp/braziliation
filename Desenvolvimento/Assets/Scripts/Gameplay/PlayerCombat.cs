@@ -1,6 +1,5 @@
 using Braziliation.Core;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Braziliation.Gameplay
 {
@@ -20,7 +19,7 @@ namespace Braziliation.Gameplay
 
         private void Update()
         {
-            if (WasAttackPressedThisFrame())
+            if (GameInput.AttackPressedThisFrame)
                 TryAttack();
         }
 
@@ -32,11 +31,19 @@ namespace Braziliation.Gameplay
             _nextAttackTime = Time.time + _attackCooldown;
 
             var origin = _attackOrigin != null ? _attackOrigin.position : transform.position;
-            var hits = _enemyMask.value == 0
-                ? Physics2D.OverlapCircleAll(origin, _attackRadius)
-                : Physics2D.OverlapCircleAll(origin, _attackRadius, _enemyMask);
+            var mask = _enemyMask.value != 0 ? _enemyMask : GameLayers.EnemyMask;
+
+            var hits = mask.value != 0
+                ? Physics2D.OverlapCircleAll(origin, _attackRadius, mask)
+                : Physics2D.OverlapCircleAll(origin, _attackRadius);
+
             foreach (var hit in hits)
             {
+                // Sem esse filtro o golpe pega o próprio colisor do jogador e ele
+                // se machuca a cada ataque.
+                if (hit == null || hit.transform.IsChildOf(transform))
+                    continue;
+
                 var damageable = hit.GetComponent<IDamageable>();
                 if (damageable == null)
                     damageable = hit.GetComponentInParent<IDamageable>();
@@ -48,20 +55,6 @@ namespace Braziliation.Gameplay
         public void SetAttackDamage(float damage)
         {
             _attackDamage = Mathf.Max(0f, damage);
-        }
-
-        private static bool WasAttackPressedThisFrame()
-        {
-            var mouse = Mouse.current;
-            if (mouse != null && mouse.leftButton.wasPressedThisFrame)
-                return true;
-
-            var keyboard = Keyboard.current;
-            if (keyboard != null && keyboard.fKey.wasPressedThisFrame)
-                return true;
-
-            var gamepad = Gamepad.current;
-            return gamepad != null && gamepad.rightShoulder.wasPressedThisFrame;
         }
 
 #if UNITY_EDITOR

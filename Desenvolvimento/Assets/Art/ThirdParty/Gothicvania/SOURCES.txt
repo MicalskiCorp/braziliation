@@ -1,0 +1,62 @@
+GOTHICVANIA (ansimuz) — ASSETS DE TERCEIROS / PLACEHOLDER
+=========================================================
+
+Autor .......... Luis Zuno (@ansimuz) — https://ansimuz.com
+Licenca ........ CC0 1.0 Universal (dominio publico)
+Credito ........ nao obrigatorio, mas creditamos mesmo assim (ver Desenvolvimento/CREDITS.md)
+Baixado em ..... 2026-07-27
+
+PACOTES DE ORIGEM
+-----------------
+1) GothicVania - Church Pack
+   https://opengameart.org/content/gothicvania-church-pack
+   arquivo: gothicvania church files.zip (732.593 bytes)
+   -> usado apenas o texto de licenca (LICENSE-ansimuz.txt)
+
+2) Gothicvania Patreon's Collection
+   https://opengameart.org/content/gothicvania-patreons-collection
+   arquivo: gothicvania patreon collection.zip (4.001.163 bytes)
+   -> origem de todos os PNGs desta pasta
+
+ARQUIVOS E PROCEDENCIA EXATA
+----------------------------
+Resources/Demo/chr_placeholder_heroi_idle.png ...... Gothic-hero-Files/PNG/gothic-hero-idle.png (frame 0)
+Resources/Demo/enm_placeholder_cao_idle.png ........ Hell-Hound-Files/PNG/hell-hound-idle.png (frame 0)
+Resources/Demo/env_placeholder_chao_tile.png ....... Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-tileset.png
+                                                     (recorte 16x32 em x=432,y=144 — topo de plataforma que repete sem costura)
+Resources/Demo/env_placeholder_fundo_castelo.png ... Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-background.png
+                                                     (metade esquerda, 480x304)
+Resources/Demo/Sheets/chr_placeholder_heroi_idle_sheet.png . Gothic-hero-Files/PNG/gothic-hero-idle.png (4 frames)
+Resources/Demo/Sheets/chr_placeholder_heroi_run_sheet.png .. Gothic-hero-Files/PNG/gothic-hero-run.png (12 frames)
+Resources/Demo/Sheets/enm_placeholder_cao_idle_sheet.png ... Hell-Hound-Files/PNG/hell-hound-idle.png (6 frames)
+Resources/Demo/Sheets/enm_placeholder_cao_walk_sheet.png ... Hell-Hound-Files/PNG/hell-hound-walk.png (12 frames)
+Environments/env_placeholder_castelo_tileset.png ... Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-tileset.png (completo)
+
+Os sheets ficam dentro de Resources/ porque o SpriteSheetAnimator carrega os quadros
+em runtime via Resources.LoadAll, sem precisar de referencia na cena.
+
+Orientacao nativa da arte: o heroi olha para a DIREITA, o cao olha para a ESQUERDA.
+O espelhamento e controlado por "_spriteFacesRight" no EnemyController e no
+PlayerSpriteAnimation.
+
+MODIFICACOES APLICADAS (permitidas pela CC0)
+--------------------------------------------
+- Upscale x2 nearest-neighbor. Motivo: ADR-004 fixou 32 PPU / 1 tile = 32px, e a arte
+  propria do projeto ja foi reautorada em 2x. Sem isso o pixel de terceiro ficaria com
+  metade do tamanho do pixel proprio na mesma tela.
+- Recorte por bbox de uniao POR ANIMACAO (nao por frame), preservando o alinhamento
+  original entre os frames.
+- Reempacotamento dos sheets em celulas quadradas com o personagem ancorado no
+  centro-inferior, para casar com Assets/Editor/Art/SheetAutoSlicer.cs
+  (convencao "*_sheet.png" = grid quadrado + pivot bottom-center).
+- Sem alteracao de paleta, forma ou conteudo dos sprites.
+
+Script de preparacao: Design/ArteFonte/Ferramentas/prepare_thirdparty_gothicvania.py
+
+STATUS NO PROJETO
+-----------------
+PLACEHOLDER. Estes assets existem para destravar o desenvolvimento de mecanicas
+enquanto o pipeline proprio (concept art -> spec JSON -> sprite) produz a arte final
+de Braziliation. Nao sao arte definitiva e nao seguem a paleta de Blumenau nem a
+style-bible. Ao substituir por arte propria, remova a pasta inteira
+Assets/Art/ThirdParty/Gothicvania/ e a entrada correspondente em CREDITS.md.

@@ -18,8 +18,8 @@ namespace Braziliation.Gameplay
         [SerializeField] private bool _autoCreateIfMissing = true;
 
         [Header("Spawn")]
-        [SerializeField] private Vector2 _playerSpawn = new Vector2(-3f, 1f);
-        [SerializeField] private Vector2 _enemySpawn = new Vector2(3f, 1f);
+        [SerializeField] private Vector2 _playerSpawn = new Vector2(-3f, DemoSceneVisuals.GroundSurfaceY);
+        [SerializeField] private Vector2 _enemySpawn = new Vector2(3f, DemoSceneVisuals.GroundSurfaceY);
 
         private void Start()
         {
@@ -27,7 +27,9 @@ namespace Braziliation.Gameplay
                 return;
 
             EnsureCoreServices();
+            EnsureBackground();
             EnsureGround();
+            EnsureBounds();
 
             var player = EnsurePlayer();
             var enemy = EnsureEnemy(player.transform);
@@ -55,21 +57,28 @@ namespace Braziliation.Gameplay
             }
         }
 
+        private static void EnsureBackground()
+        {
+            if (GameObject.Find("Background_Demo") != null)
+                return;
+
+            DemoSceneVisuals.CreateBackground(null, new Vector3(0f, 1f, 0f));
+        }
+
         private static void EnsureGround()
         {
             if (GameObject.Find("Ground_Demo") != null)
                 return;
 
-            var ground = new GameObject("Ground_Demo");
-            ground.transform.position = new Vector3(0f, -1.5f, 0f);
+            DemoSceneVisuals.ConfigureGround(new GameObject("Ground_Demo"));
+        }
 
-            var collider = ground.AddComponent<BoxCollider2D>();
-            collider.size = new Vector2(24f, 1f);
+        private static void EnsureBounds()
+        {
+            if (GameObject.Find("Bound_Left") != null)
+                return;
 
-            var renderer = ground.AddComponent<SpriteRenderer>();
-            renderer.sprite = CreateSquareSprite();
-            renderer.color = new Color(0.18f, 0.22f, 0.28f, 1f);
-            ground.transform.localScale = new Vector3(24f, 1f, 1f);
+            DemoSceneVisuals.CreateBounds(null);
         }
 
         private GameObject EnsurePlayer()
@@ -97,17 +106,22 @@ namespace Braziliation.Gameplay
                 Debug.LogWarning("[DemoSceneBootstrap] Tag 'Player' não existe no projeto. O HUD fará bind por referência direta.");
             }
             player.transform.position = new Vector3(_playerSpawn.x, _playerSpawn.y, 0f);
+            GameLayers.Apply(player, GameLayers.PlayerName);
 
-            var sprite = player.AddComponent<SpriteRenderer>();
-            sprite.sprite = CreateSquareSprite();
-            sprite.color = new Color(0.15f, 0.75f, 0.95f, 1f);
-            player.transform.localScale = new Vector3(0.8f, 1.2f, 1f);
+            DemoSceneVisuals.ApplyCharacterSprite(
+                player,
+                DemoSceneVisuals.PlayerSpritePath,
+                DemoSceneVisuals.PlayerFallbackColor);
+            DemoSceneVisuals.ConfigurePlayerAnimation(player);
+            player.AddComponent<FallRespawn>();
 
             var body = player.AddComponent<Rigidbody2D>();
             body.freezeRotation = true;
             body.gravityScale = 3f;
 
-            player.AddComponent<BoxCollider2D>();
+            var playerCollider = player.AddComponent<BoxCollider2D>();
+            playerCollider.size = DemoSceneVisuals.PlayerColliderSize;
+            playerCollider.offset = DemoSceneVisuals.PlayerColliderOffset;
 
             var health = player.AddComponent<HealthComponent>();
             health.SetMaxHealth(100f, true);
@@ -140,29 +154,35 @@ namespace Braziliation.Gameplay
 
             var enemy = new GameObject("Enemy_Demo");
             enemy.transform.position = new Vector3(_enemySpawn.x, _enemySpawn.y, 0f);
+            GameLayers.Apply(enemy, GameLayers.EnemyName);
 
-            var sprite = enemy.AddComponent<SpriteRenderer>();
-            sprite.sprite = CreateSquareSprite();
-            sprite.color = new Color(0.95f, 0.3f, 0.25f, 1f);
-            enemy.transform.localScale = new Vector3(0.8f, 1.2f, 1f);
+            DemoSceneVisuals.ApplyCharacterSprite(
+                enemy,
+                DemoSceneVisuals.EnemySpritePath,
+                DemoSceneVisuals.EnemyFallbackColor);
+            DemoSceneVisuals.ConfigureEnemyAnimation(enemy);
+            enemy.AddComponent<FallRespawn>();
 
             var body = enemy.AddComponent<Rigidbody2D>();
             body.freezeRotation = true;
             body.gravityScale = 3f;
 
-            enemy.AddComponent<BoxCollider2D>();
+            var enemyCollider = enemy.AddComponent<BoxCollider2D>();
+            enemyCollider.size = DemoSceneVisuals.EnemyColliderSize;
+            enemyCollider.offset = DemoSceneVisuals.EnemyColliderOffset;
             enemy.AddComponent<HealthComponent>();
 
             var controller = enemy.AddComponent<EnemyController>();
             controller.SetTarget(playerTarget);
+            controller.SetSpriteFacesRight(DemoSceneVisuals.EnemySpriteFacesRight);
 
+            // Os marcadores NÃO são filhos do inimigo: presos a ele, andavam junto e a
+            // ponta da patrulha nunca era alcançada — o inimigo caminhava até cair do mapa.
             var left = new GameObject("EnemyPatrolLeft");
             left.transform.position = new Vector3(_enemySpawn.x - 2f, _enemySpawn.y, 0f);
-            left.transform.SetParent(enemy.transform);
 
             var right = new GameObject("EnemyPatrolRight");
             right.transform.position = new Vector3(_enemySpawn.x + 2f, _enemySpawn.y, 0f);
-            right.transform.SetParent(enemy.transform);
 
             controller.SetPatrolPoints(left.transform, right.transform);
 
@@ -293,12 +313,6 @@ namespace Braziliation.Gameplay
 
             var hud = hudObj.AddComponent<CanvasHealthHud>();
             hud.Configure(playerHealth, slider, label);
-        }
-
-        private static Sprite CreateSquareSprite()
-        {
-            var texture = Texture2D.whiteTexture;
-            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
         }
     }
 }

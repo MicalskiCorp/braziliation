@@ -34,7 +34,9 @@ namespace Braziliation.Editor.Gameplay
             binderObj.transform.SetParent(root.transform);
             var binder = binderObj.AddComponent<BuildServiceBinder>();
 
+            DemoSceneVisuals.CreateBackground(root.transform, new Vector3(0f, 1f, 0f));
             CreateGround(root.transform);
+            DemoSceneVisuals.CreateBounds(root.transform);
             var player = CreatePlayer(root.transform, binder);
             CreateEnemy(root.transform, player.transform);
             CreateCamera(root.transform, player.transform);
@@ -50,23 +52,15 @@ namespace Braziliation.Editor.Gameplay
         {
             var ground = new GameObject("Ground_Demo");
             ground.transform.SetParent(parent);
-            ground.transform.position = new Vector3(0f, -1.5f, 0f);
-            ground.transform.localScale = new Vector3(24f, 1f, 1f);
-
-            var collider = ground.AddComponent<BoxCollider2D>();
-            collider.size = new Vector2(24f, 1f);
-
-            var renderer = ground.AddComponent<SpriteRenderer>();
-            renderer.sprite = CreateSquareSprite();
-            renderer.color = new Color(0.18f, 0.22f, 0.28f, 1f);
+            DemoSceneVisuals.ConfigureGround(ground);
         }
 
         private static GameObject CreatePlayer(Transform parent, BuildServiceBinder binder)
         {
             var player = new GameObject("Player_Demo");
             player.transform.SetParent(parent);
-            player.transform.position = new Vector3(-3f, 1f, 0f);
-            player.transform.localScale = new Vector3(0.8f, 1.2f, 1f);
+            player.transform.position = DemoSceneVisuals.PlayerSpawn;
+            GameLayers.Apply(player, GameLayers.PlayerName);
 
             try
             {
@@ -77,15 +71,20 @@ namespace Braziliation.Editor.Gameplay
                 Debug.LogWarning("[DemoSceneBuilderEditor] Tag 'Player' não encontrada. A cena ainda funciona sem ela.");
             }
 
-            var sprite = player.AddComponent<SpriteRenderer>();
-            sprite.sprite = CreateSquareSprite();
-            sprite.color = new Color(0.15f, 0.75f, 0.95f, 1f);
+            DemoSceneVisuals.ApplyCharacterSprite(
+                player,
+                DemoSceneVisuals.PlayerSpritePath,
+                DemoSceneVisuals.PlayerFallbackColor);
+            DemoSceneVisuals.ConfigurePlayerAnimation(player);
+            player.AddComponent<FallRespawn>();
 
             var body = player.AddComponent<Rigidbody2D>();
             body.freezeRotation = true;
             body.gravityScale = 3f;
 
-            player.AddComponent<BoxCollider2D>();
+            var playerCollider = player.AddComponent<BoxCollider2D>();
+            playerCollider.size = DemoSceneVisuals.PlayerColliderSize;
+            playerCollider.offset = DemoSceneVisuals.PlayerColliderOffset;
 
             var health = player.AddComponent<HealthComponent>();
             health.SetMaxHealth(100f, true);
@@ -108,30 +107,40 @@ namespace Braziliation.Editor.Gameplay
         {
             var enemy = new GameObject("Enemy_Demo");
             enemy.transform.SetParent(parent);
-            enemy.transform.position = new Vector3(3f, 1f, 0f);
-            enemy.transform.localScale = new Vector3(0.8f, 1.2f, 1f);
+            enemy.transform.position = DemoSceneVisuals.EnemySpawn;
+            GameLayers.Apply(enemy, GameLayers.EnemyName);
 
-            var sprite = enemy.AddComponent<SpriteRenderer>();
-            sprite.sprite = CreateSquareSprite();
-            sprite.color = new Color(0.95f, 0.3f, 0.25f, 1f);
+            DemoSceneVisuals.ApplyCharacterSprite(
+                enemy,
+                DemoSceneVisuals.EnemySpritePath,
+                DemoSceneVisuals.EnemyFallbackColor);
+            DemoSceneVisuals.ConfigureEnemyAnimation(enemy);
+            enemy.AddComponent<FallRespawn>();
 
             var body = enemy.AddComponent<Rigidbody2D>();
             body.freezeRotation = true;
             body.gravityScale = 3f;
 
-            enemy.AddComponent<BoxCollider2D>();
+            var enemyCollider = enemy.AddComponent<BoxCollider2D>();
+            enemyCollider.size = DemoSceneVisuals.EnemyColliderSize;
+            enemyCollider.offset = DemoSceneVisuals.EnemyColliderOffset;
             enemy.AddComponent<HealthComponent>();
 
             var enemyController = enemy.AddComponent<EnemyController>();
             enemyController.SetTarget(playerTarget);
+            enemyController.SetSpriteFacesRight(DemoSceneVisuals.EnemySpriteFacesRight);
 
+            // Os marcadores ficam FORA do inimigo: presos a ele, andavam junto e a ponta
+            // da patrulha nunca era alcançada — o inimigo caminhava até cair do mapa.
             var left = new GameObject("EnemyPatrolLeft");
-            left.transform.SetParent(enemy.transform);
-            left.transform.position = new Vector3(1f, 1f, 0f);
+            left.transform.SetParent(parent);
+            left.transform.position = new Vector3(DemoSceneVisuals.EnemySpawn.x - 2f,
+                                                  DemoSceneVisuals.GroundSurfaceY, 0f);
 
             var right = new GameObject("EnemyPatrolRight");
-            right.transform.SetParent(enemy.transform);
-            right.transform.position = new Vector3(5f, 1f, 0f);
+            right.transform.SetParent(parent);
+            right.transform.position = new Vector3(DemoSceneVisuals.EnemySpawn.x + 2f,
+                                                  DemoSceneVisuals.GroundSurfaceY, 0f);
 
             enemyController.SetPatrolPoints(left.transform, right.transform);
         }
@@ -255,12 +264,6 @@ namespace Braziliation.Editor.Gameplay
 
             var hud = canvasObj.AddComponent<CanvasHealthHud>();
             hud.Configure(playerHealth, slider, label);
-        }
-
-        private static Sprite CreateSquareSprite()
-        {
-            var texture = Texture2D.whiteTexture;
-            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
         }
     }
 }
