@@ -49,11 +49,12 @@ Testes são escritos **antes** da implementação — o contrato do teste define
 1. Identificar o **sistema sob teste** e sua superfície de API pública.
 2. Listar cenários: caminho feliz → edge cases (null, vazio, fora de intervalo, overflow, NaN) → modos de falha (storage corrompido).
 3. Escrever testes xUnit seguindo as convenções acima.
-4. Verificar com build + execução de testes antes de finalizar.
+4. Verificar com build + execução de testes antes de finalizar (`dotnet test`; teste EditMode em `Assets/Tests/EditMode/` roda pela skill `unity-validar --testes`).
 5. Atualizar `Docs/Tech/tech_debt.md` se lacunas de testabilidade forem encontradas.
 
 ## Referências
 
 - `src/Braziliation.Game.Core/` — código de produção sob teste
 - `Tests/Braziliation.Game.Tests/` — projeto de testes (xUnit)
+- `.claude/rules/csharp.md` — definição de pronto do código (no Copilot, `coding-standards.instructions.md`)
 - `.github/instructions/coding-standards.instructions.md` — convenções de nomenclatura e namespace do projeto

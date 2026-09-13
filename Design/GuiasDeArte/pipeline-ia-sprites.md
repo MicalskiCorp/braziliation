@@ -88,6 +88,8 @@ O roteiro numerado abaixo continua válido — a mudança é o *conteúdo* do qu
 
 ### Roteiro Recomendado
 
+> Roteiro executável da etapa 2 (concept art de personagem, criatura ou cena): skill `concept-art`. Este guia continua sendo o canônico — racional, stack e detalhes de cada passo.
+
 Este é o fluxo que deve ser usado para cada asset novo:
 
 1. **Escolher a origem criativa:** pegue a feature em `Design/Criativo/` ou `Desenvolvimento/Docs/GDD/Features/`.

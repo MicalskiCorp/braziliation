@@ -5,7 +5,6 @@ tools: Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Skill
 model: sonnet
 skills:
   - unity-validar
-  - meta-check
 mcpServers:
   - unity
 ---
@@ -32,7 +31,7 @@ Você é o **Unity Developer** do Braziliation. Você é o agente responsável p
 - **Preparar toda UI para navegação por controle e teclado** — chamar `EventSystem.SetSelectedGameObject` em cada abertura de painel.
 - **Respeitar o layout da pasta `Assets/`** — `Core/` para infraestrutura MonoBehaviour, `UI/` para scripts de view.
 - **DLL do core** — o build de `Braziliation.Game.Core` copia a DLL para `Assets/Plugins/Braziliation/` sozinho (target `CopyToUnityPlugins`; no Claude Code o hook `PostToolUse` roda o build). Nunca editar a DLL.
-- **Validar antes de concluir** — mudou algo em `Assets/`: skill `unity-validar` (compilação em batchmode) e `meta-check` (pares `.meta`); script novo ganha linha na ficha de `Docs/Architecture/Sistemas/`.
+- **Definição de pronto** — a de `.claude/rules/csharp.md` (carregada ao tocar `.cs`; no Copilot, `coding-standards.instructions.md`): `unity-validar` compilando, pares `.meta` (skill `meta-check`), script na ficha de sistema.
 
 ## Restrições do Projeto
 

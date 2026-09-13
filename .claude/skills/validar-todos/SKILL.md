@@ -7,18 +7,68 @@ agent: agent-architect
 
 # Skill: validar-todos
 
-Executa o **Papel 3 (Auditoria)** do `@AgentArchitect` — protocolo canônico completo em `.claude/agents/agent-architect.md` (idêntico em `.github/agents/AgentArchitect.agent.md`), seção "PAPEL 3". Esta skill é o roteiro executável; em divergência, o protocolo canônico manda.
+Protocolo canônico do **Papel 3 (Auditoria)** do `@AgentArchitect` — roda num fork desse agente, que também a pré-carrega. Objetivo: o estado real do código corresponde ao que os TODOs dizem, e nenhum ponto incompleto fica sem registro.
 
-## Roteiro
+## A — Contexto
 
-1. **Contexto** (ler antes de tudo): `Desenvolvimento/Docs/TODO.md`, `Docs/Roadmap/roadmap.md`, `Docs/Roadmap/backlog.md`.
-2. **Auditar itens "✅ Concluído"** — para cada um: o arquivo `.cs` existe? tem teste cobrindo o comportamento principal? está integrado (ServiceLocator/Inspector) ou tem TODO de wiring rastreado? tem `// TODO` inline não rastreado?
-3. **Cobertura de testes** — varrer `src/Braziliation.Game.Core/`: todo `*Service.cs` e modelo com lógica precisa de teste. O CI roda direto `Desenvolvimento/Tests/Braziliation.Game.Tests/` — não existe cópia paralela de testes para sincronizar (o `RepositoryLayoutTests` impede a volta da pasta antiga). Para o lado Unity, conferir o resultado da skill `unity-validar` (compilação + EditMode).
-4. **TODOs inline** — `Grep` por `// TODO` e `// TODO-DESIGN` em `src/` e `Assets/Scripts/`; cada um sem entrada no `TODO.md` gera entrada nova imediatamente (regra de retroalimentação obrigatória).
-5. **Gaps de milestone** — comparar estado real com a milestone ativa do roadmap; classificar: Bloqueador de Demo / Funcionalidade Incompleta / Cobertura Ausente / CI Desincronizado / TODO Inline Não Rastreado / Design Pendente / Doc Desatualizada.
-6. **Relatório** — usar o formato "Relatório de Auditoria" do protocolo canônico: resumo (aprovados/parciais/reprovados), ações geradas (TODOs criados, status corrigidos) e próxima ação recomendada com agente e comando exato.
+Ler: `Desenvolvimento/Docs/TODO.md`, `Docs/Roadmap/roadmap.md`, `Docs/Roadmap/backlog.md`, `Docs/Architecture/Sistemas/index.md` (cada ficha lista seus scripts) e `.claude/state/unity-validar.json`. Código e testes **não** são lidos em bloco: `Glob` lista, `Grep` acha (`// TODO`, classe, teste) e só então o arquivo é aberto.
+
+## B — Itens dados como concluídos
+
+Para cada item ✅ no backlog, no roadmap ou num TODO:
+
+- o `.cs` existe e compila?
+- há teste cobrindo o comportamento principal?
+- está integrado (`GameServiceLocator`, Inspector) ou há pendência de wiring registrada?
+- há `// TODO` ou `// TODO-DESIGN` sem rastreio?
+
+Aprovado só com as quatro respostas satisfeitas; senão, parcial ou reprovado.
+
+## C — Cobertura de testes
+
+Em `src/Braziliation.Game.Core/`: todo `*Service.cs` tem arquivo de teste dedicado; todo modelo com lógica (`BuildState`, `CraftingService`…) tem teste; modelo só de dados (`SaveSlot`, `SlotData`) é opcional. O CI roda `Tests/Braziliation.Game.Tests/` direto; o lado Unity é validado pela skill `unity-validar`.
+
+Saída: `Classe | Tem teste? | Arquivo de teste | Gap`.
+
+## D — Gaps da milestone
+
+Comparar o estado real com a fase atual do `roadmap.md`. Item da milestone sem TODO → criar na seção da área. Classificar:
+
+| Categoria | Critério | Urgência |
+|-----------|---------|----------|
+| Bloqueador de demo | Sem isso a demo não é jogável | Crítico |
+| Funcionalidade incompleta | Marcada ✅ com partes faltando | Alta |
+| Cobertura ausente | Classe testável sem teste | Alta |
+| CI desincronizado | Checagem que roda local mas não no CI (ou o inverso) | Alta |
+| TODO inline não rastreado | `// TODO` sem entrada no TODO | Média |
+| Design pendente bloqueador | `TODO-DESIGN` que bloqueia gameplay | Média |
+| Documentação desatualizada | Status no backlog ou TODO diverge do código | Baixa |
+
+## E — Retroalimentação obrigatória
+
+Todo `// TODO` e `// TODO-DESIGN` de `src/` e `Assets/Scripts/` sem entrada no TODO ganha entrada, pela skill `gerir-todo`:
+`| {ponto faltante, extraído do comentário} | {arquivo} | @{agente} | {prioridade} | ❌ Não iniciado |`
+
+## F — Relatório
+
+```
+## Relatório de Auditoria — {data}
+
+### Resumo
+- TODOs verificados: {N} ✅ aprovados / {N} ⚠️ parciais / {N} ❌ reprovados
+- Classes sem teste: {lista}
+- Checagens fora do CI: {lista}
+- TODOs inline não rastreados: {N}
+- Gaps bloqueadores de demo: {lista}
+
+### Ações geradas
+- {N} TODOs novos · {N} status corrigidos · {N} TODOs inline agora rastreados
+
+### Próxima ação recomendada
+@{Agente}: {comando exato}
+```
 
 ## Regras
 
-- Auditoria **escreve TODOs e corrige status**, mas não implementa nem corrige código.
-- Nenhum ponto faltante encontrado pode ficar sem registro no `TODO.md`.
+- A auditoria **escreve TODOs e corrige status**; não implementa nem corrige código.
+- Nenhum ponto faltante encontrado fica sem registro.

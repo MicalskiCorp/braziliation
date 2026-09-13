@@ -41,4 +41,5 @@ ideia (`Design/Criativo/`) → concept aprovado (`Design/ArteConceitual/`) → e
 de variações → spec JSON (`ContextPacks/{asset}/{asset}.spec.json`) → sprite
 (`Assets/Art/`) → registro em `Docs/Architecture/indices/assets.md`.
 
-Cada etapa é acionada manualmente. Nenhuma pula a anterior.
+Cada etapa é acionada manualmente. Nenhuma pula a anterior. Roteiros executáveis: skill
+`concept-art` (etapa 2), `novo-asset` (brief) e `sprite-pipeline` (etapas 4-5).

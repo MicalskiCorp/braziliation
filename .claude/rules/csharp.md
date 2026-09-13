@@ -59,6 +59,18 @@ com um tipo da DLL — a ambiguidade só aparece em tempo de compilação no Uni
 xUnit (`[Fact]` / `[Theory]`). NUnit foi removido. Test doubles em `TestDoubles.cs`.
 Todo serviço novo em `src/` nasce com teste de happy path + edge case + falha.
 
+## Definição de pronto (qualquer mudança em `.cs`)
+
+Vale para qualquer agente ou sessão que toque código — por isso vive aqui, e não repetida em
+cada agente.
+
+- **Core puro:** teste xUnit primeiro (contrato → falha → implementação → passa); `dotnet test` verde.
+- **Script em `Assets/`:** skill `unity-validar` compilando; `.meta` dos arquivos novos no commit (`meta-check`).
+- **Script novo, renomeado ou movido:** linha na "Fontes Técnicas" da ficha em
+  `Desenvolvimento/Docs/Architecture/Sistemas/` — o `DocsConsistencyTests` cobra.
+- **Atalho tomado** → `Docs/Tech/tech_debt.md`; **ponto incompleto** → `Docs/TODO.md` (nunca só `// TODO`).
+- **Decisão estrutural** → ADR pela skill `novo-adr`.
+
 ## Unity
 
 - Pixel perfect: 640×360, 32 PPU. Nenhum scaling arbitrário que quebre alinhamento.

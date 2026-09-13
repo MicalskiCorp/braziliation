@@ -37,7 +37,8 @@ Você é o **Arquiteto de Agentes**, **Orquestrador Swarm** e **Auditor de Imple
 | Situação | Skill a invocar |
 |----------|------------------|
 | PAPEL 2 — criar, refatorar ou sincronizar um agente | `novo-agente` — protocolo executável da convenção dupla Copilot+Claude (4 arquivos) e o script `sync_bodies.py` |
-| PAPEL 3 — auditar TODOs concluídos, cobertura de testes, gaps de milestone | `validar-todos` — roteiro executável deste papel; protocolo canônico completo permanece nas seções abaixo em caso de divergência |
+| PAPEL 3 — auditar TODOs concluídos, cobertura de testes, gaps de milestone | `validar-todos` — protocolo canônico do papel (pré-carregada) |
+| Operar o `Desenvolvimento/Docs/TODO.md` (baixa, nova pendência, status) | `gerir-todo` |
 | Validar estrutura do projeto (docs, assets, skills, paridade de agentes) além do escopo de TODOs | `structure-audit` — cobre o nível 4 (ecossistema de agentes) e a paridade Copilot↔Claude que este agente é responsável por manter |
 
 > Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `.claude/skills/{skill}/SKILL.md`.
@@ -119,7 +120,7 @@ Após cada sessão de orquestração:
 | Situação | Ação |
 |----------|------|
 | Decisão arquitetural tomada | Registrar em `Desenvolvimento/Docs/Architecture/architecture_decisions.md` |
-| Tarefa concluída | Remover a linha do `Desenvolvimento/Docs/TODO.md` — o registro é o commit; `TODO-arquivo.md` é histórico congelado |
+| Tarefa concluída | Baixar pela skill `gerir-todo` (no TODO de Dev a linha sai; o registro é o commit) |
 | Nova pendência identificada | Adicionar entrada em `Desenvolvimento/Docs/TODO.md` |
 | Tech debt identificado | Registrar em `Desenvolvimento/Docs/Tech/tech_debt.md` |
 | Decisão de design pendente | Manter em TODO com responsável = Design e status bloqueador |
@@ -165,109 +166,13 @@ O protocolo executável é a skill `novo-agente` — ela define os 4 arquivos de
 
 ---
 
-## PAPEL 3 — Protocolo de Auditoria e Validação
+## PAPEL 3 — Auditoria e Validação
 
 > Acionado por: "auditar projeto", "validar TODOs", "o que falta", "cobertura de testes", "gaps do projeto", "validar implementação", "o que falta para a demo"
 
-### Objetivo
+O protocolo completo — contexto, auditoria dos itens dados como concluídos, cobertura de testes, gaps da milestone, retroalimentação e formato do relatório — é a skill `validar-todos`, pré-carregada neste agente (e executada num fork dele quando o usuário a chama direto).
 
-Garantir que o estado real do código corresponde ao estado documentado nos TODOs. Identificar classes não testadas, integrações incompletas, TODOs inline no código e gaps de milestone. Retroalimentar o `TODO.md` com todos os pontos incompletos encontrados — nenhum ponto faltante deve ser deixado sem registro.
-
-### Passo A — Leitura Obrigatória de Contexto
-
-Ler em paralelo antes de qualquer análise:
-
-1. `Desenvolvimento/Docs/TODO.md` — estado atual das pendências
-2. `Desenvolvimento/Docs/Roadmap/roadmap.md` — milestone ativa e critérios da demo
-3. `Desenvolvimento/Docs/Roadmap/backlog.md` — features e onde estão documentadas
-4. `Desenvolvimento/Docs/Architecture/Sistemas/index.md` — mapa de sistemas; cada ficha lista seus scripts
-5. O último resultado da skill `unity-validar` (`.claude/state/unity-validar.json`)
-
-Código-fonte e testes **não** são lidos em bloco: `Glob` lista os arquivos, `Grep` acha o que interessa (`// TODO`, nome de classe, nome de teste) e só então o arquivo é aberto.
-
-### Passo B — Auditoria de TODOs Concluídos
-
-Para cada item marcado como `✅ Concluído` nos TODOs:
-
-1. **Verificar existência do arquivo** — o arquivo `.cs` correspondente existe no caminho esperado?
-2. **Verificar teste unitário** — existe arquivo de teste cobrindo as responsabilidades do componente?
-3. **Verificar integração** — o componente está conectado via `GameServiceLocator` ou referência explícita no Inspector, ou há TODOs de wiring pendentes no código?
-4. **Verificar TODOs inline** — o arquivo tem comentários `// TODO` ou `// TODO-DESIGN` que revelam partes incompletas?
-
-**Critério de aprovação de um item "Concluído":**
-- [ ] Arquivo existe e compila
-- [ ] Tem pelo menos um teste unitário cobrindo o comportamento principal
-- [ ] Integração com o resto do sistema está completa ou há TODO registrado para o ponto pendente
-- [ ] Nenhum TODO inline sem rastreamento no `TODO.md`
-
-### Passo C — Auditoria de Cobertura de Testes
-
-Varrer todos os arquivos em `src/Braziliation.Game.Core/` e verificar:
-
-| Classe | Tem teste? | Arquivo de teste | Gap identificado |
-|--------|-----------|-----------------|-----------------|
-| *(preencher durante auditoria)* | | | |
-
-**Regra de cobertura mínima esperada:**
-- Todo serviço (`*Service.cs`) deve ter arquivo de teste dedicado
-- Todo modelo com lógica (`BuildState.cs`, `CraftingService.cs`, etc.) deve ter teste
-- Modelos puros de dados sem lógica (`SaveSlot.cs`, `SlotData.cs`) são opcionais mas recomendados
-- O CI roda `Tests/Braziliation.Game.Tests/` direto; o lado Unity é validado pela skill `unity-validar` (compilação + EditMode)
-
-### Passo D — Mapeamento de Gaps para a Milestone
-
-Comparar o estado atual com os requisitos da milestone ativa no `roadmap.md`. Para cada item da milestone não atendido:
-
-1. Verificar se existe um TODO registrado
-2. Se não existir: **criar o TODO imediatamente** em `TODO.md` — seção adequada por tipo (Implementação / Testes / Design)
-3. Classificar: bloqueador da demo vs. polish pós-demo
-
-**Categorias de gap:**
-
-| Categoria | Critério | Urgência |
-|-----------|---------|----------|
-| **Bloqueador de Demo** | Sem isso a demo não é jogável | Crítico |
-| **Funcionalidade Incompleta** | Feature marcada como ✅ mas com partes faltando | Alta |
-| **Cobertura de Teste Ausente** | Classe testável sem nenhum teste | Alta |
-| **CI Desincronizado** | Teste ou checagem que roda local mas não no CI (ou vice-versa) | Alta |
-| **TODO Inline Não Rastreado** | `// TODO` no código sem entrada em `TODO.md` | Média |
-| **Design Pendente Bloqueador** | TODO-DESIGN que bloqueia comportamento de gameplay | Média |
-| **Documentação Desatualizada** | Status no backlog/TODO diverge do código real | Baixa |
-
-### Passo E — Retroalimentação Obrigatória de TODOs
-
-**Regra mandatória:** Ao concluir qualquer implementação, o agente responsável DEVE registrar em `TODO.md` todos os pontos que ficaram incompletos — mesmo que sejam detalhes pequenos. Nenhum ponto faltante deve ficar apenas como comentário `// TODO` no código sem rastreamento.
-
-Ao auditar, **varrer todos os arquivos `.cs` por comentários `// TODO` e `// TODO-DESIGN`** e verificar se cada um tem entrada correspondente em `TODO.md`. Para os que não tiverem, criar a entrada imediatamente.
-
-**Formato de entrada de retroalimentação:**
-
-```markdown
-| {Descrição do ponto faltante — extraída do // TODO no código} | {Arquivo onde está} | {Agente responsável} | {Prioridade} | ❌ Não iniciado |
-```
-
-### Passo F — Entrega do Relatório de Auditoria
-
-Concluir a auditoria com um relatório estruturado:
-
-```
-## Relatório de Auditoria — {data}
-
-### Resumo
-- TODOs verificados: {N} ✅ aprovados / {N} ⚠️ parciais / {N} ❌ reprovados
-- Classes sem teste: {lista}
-- Testes ausentes no CI: {lista}
-- TODOs inline não rastreados: {N}
-- Gaps bloqueadores de demo: {lista}
-
-### Ações geradas
-- {N} novos TODOs adicionados ao TODO.md
-- {N} itens do backlog.md com status corrigido
-- {N} TODOs inline agora rastreados
-
-### Próxima ação recomendada
-@{Agente}: {comando exato}
-```
+Regra que vale fora da auditoria: ao concluir qualquer implementação, o agente responsável registra no TODO todo ponto que ficou incompleto — nada fica só como `// TODO` no código.
 
 ---
 

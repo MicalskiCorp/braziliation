@@ -8,7 +8,6 @@
 |-------|-----------|------|
 | [`Pesquisa/`](Pesquisa/index.md) | Pesquisa histórica e folclórica aprovada, com fonte | `@Historiador` |
 | [`Criativo/`](Criativo/index.md) | Lendas, cidades, personagens, arcos, ideias e brainstorm | `@GameCreative` |
-| [`BackLog/`](BackLog/BackLog.md) | Lógica de operação do `Criativo/TODO.md` | `@GameCreative` |
 | [`Models/`](Models/index.md) | Templates de cidade e personagem | `@GameCreative` |
 | [`ArteConceitual/`](ArteConceitual/index.md) | Concept art aprovado, referências visuais e paletas | `@SpriteArtist` + usuário |
 | [`ArteFonte/`](ArteFonte/index.md) | Ferramentas do pipeline, context packs e saídas de IA | `@SpriteArtist` |

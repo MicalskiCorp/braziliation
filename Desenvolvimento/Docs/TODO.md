@@ -83,7 +83,7 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
-| Avaliar as 13 skills com o plugin `skill-creator` (modo Eval) | `@AgentArchitect` | Baixa | ❌ |
+| Avaliar as 15 skills com o plugin `skill-creator` (modo Eval) | `@AgentArchitect` | Baixa | ❌ |
 ---
 
 ## Sequência recomendada para a demo

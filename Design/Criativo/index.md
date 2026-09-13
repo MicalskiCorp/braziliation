@@ -3,7 +3,7 @@
 > Hub de gestão criativa do projeto. Centraliza lendas, narrativa, ideias e brainstorms.
 > Alimenta o desenvolvimento de mapas, cenários, monstros e personagens.
 > Agente responsável: `@GameCreative` (definição em `.claude/agents/game-creative.md` · `.github/agents/GameCreative.agent.md`)
-> Pendências: [`TODO.md`](TODO.md) · lógica de operação: [`../BackLog/BackLog.md`](../BackLog/BackLog.md)
+> Pendências: [`TODO.md`](TODO.md) · operações: skill [`gerir-todo`](../../.claude/skills/gerir-todo/SKILL.md)
 
 ## Navegação
 

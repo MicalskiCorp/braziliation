@@ -15,14 +15,16 @@ A 1ª camada vive **fora do repositório, por decisão do usuário (2026-09-13)*
 
 ## 2. Skills — catálogo por situação
 
-As skills em `.claude/skills/` só existem no Claude Code. Cada agente dono tem `Skill` em `tools:` e pré-carrega suas skills pelo campo `skills:`; no Copilot o agente lê o `SKILL.md` por caminho. O `DocsConsistencyTests` falha se uma skill não aparecer nesta tabela.
+As skills em `.claude/skills/` só existem no Claude Code; no Copilot o agente lê o `SKILL.md` por caminho. Cada agente dono tem `Skill` em `tools:` e uma tabela "Situação → skill" no corpo. **Pré-carregamento (`skills:` no frontmatter) só para a skill que o agente usa em toda invocação** — `gerir-todo` no GameArchitect e no GameCreative, `sprite-pipeline` no SpriteArtist, `unity-validar` no UnityDeveloper e no GameplayEngineer, `validar-todos` e `structure-audit` no AgentArchitect (são forks dele). As demais carregam sob demanda: pré-carregar skill situacional põe o texto dela em toda execução do agente. O `DocsConsistencyTests` falha se uma skill não aparecer nesta tabela.
 
 | Skill | Agente(s) | Quando invocar |
 |-------|-----------|-----------------|
+| [`gerir-todo`](../../../.claude/skills/gerir-todo/SKILL.md) | `@GameArchitect`, `@GameCreative`, `@Historiador`, `@AgentArchitect` | Operar o TODO da própria camada: listar, adicionar, status, concluir (regra de baixa de cada TODO), `concept-art`, varredura |
+| [`concept-art`](../../../.claude/skills/concept-art/SKILL.md) | `@SpriteArtist` | Etapa 2 (rota C): concept de personagem, criatura ou cena no ComfyUI, com log de lote, gate e aprovação |
 | [`sprite-pipeline`](../../../.claude/skills/sprite-pipeline/SKILL.md) | `@SpriteArtist` | Gerar ou validar um sprite programático (spec JSON, ciclo de crítica visual, `palette_check`) |
 | [`novo-asset`](../../../.claude/skills/novo-asset/SKILL.md) | `@SpriteArtist` | Asset novo sem brief/context pack |
-| [`nova-cidade`](../../../.claude/skills/nova-cidade/SKILL.md) | `@GameCreative` (passos 1-3, 5-6) · `@UnityDeveloper` (passo 4) | Cidade/estado novo; o passo 4 (pastas em `Assets/Art/`) vira pendência para `@UnityDeveloper` |
-| [`handoff`](../../../.claude/skills/handoff/SKILL.md) | `@Historiador`, `@GameCreative`, `@GameArchitect` | Fechar item de uma camada e escrever a entrada no TODO da seguinte |
+| [`nova-cidade`](../../../.claude/skills/nova-cidade/SKILL.md) | `@GameCreative` (Modo 6) · `@UnityDeveloper` (passo 5) | Estrutura de cidade ou estado novo; o passo das pastas em `Assets/Art/` vira pendência para `@UnityDeveloper` |
+| [`handoff`](../../../.claude/skills/handoff/SKILL.md) | `@Historiador`, `@GameCreative`, `@GameArchitect` | Escrever no TODO da camada seguinte — inclui o briefing da rota Pesquisa→Criativo (processar, brainstorm, revisão) |
 | [`novo-agente`](../../../.claude/skills/novo-agente/SKILL.md) | `@AgentArchitect` (Papel 2) | Criar, refatorar ou sincronizar agente (2 camadas × 2 formatos, `sync_bodies.py`) |
 | [`validar-todos`](../../../.claude/skills/validar-todos/SKILL.md) | `@AgentArchitect` (Papel 3) | Auditar TODOs concluídos, cobertura de testes e gaps de milestone |
 | [`structure-audit`](../../../.claude/skills/structure-audit/SKILL.md) | `@AgentArchitect` (nível 4) · `@GameArchitect` (níveis 2-3) | Auditar disco × docs; só reporta, não corrige sem aprovação |
@@ -37,11 +39,13 @@ As skills em `.claude/skills/` só existem no Claude Code. Cada agente dono tem 
 
 ## 3. Gestão de TODOs
 
-| TODO | Dono | Lógica de operação |
-|------|------|---------------------|
-| `Design/Pesquisa/TODO.md` | `@Historiador` | No corpo do agente (Modos 1-7) |
-| `Design/Criativo/TODO.md` | `@GameCreative` | [`Design/BackLog/BackLog.md`](../../../Design/BackLog/BackLog.md) — `listar` / `concluído` / `adicionar` / `atualizar-status` / `concept-art` / `varredura` |
-| `Desenvolvimento/Docs/TODO.md` | `@GameArchitect` | Só itens abertos; concluído sai da tabela e o registro é o commit. `TODO-arquivo.md` é histórico congelado |
+| TODO | Dono | Item concluído |
+|------|------|----------------|
+| `Design/Pesquisa/TODO.md` | `@Historiador` | Vai para `## Concluído` com a data |
+| `Design/Criativo/TODO.md` | `@GameCreative` | Vai para `## Concluído` com a data |
+| `Desenvolvimento/Docs/TODO.md` | `@GameArchitect` | A linha sai; o registro é o commit. `TODO-arquivo.md` é histórico congelado |
+
+Operações nos três (`listar`, `adicionar`, `atualizar-status`, `concluído`, `concept-art`, `varredura`): skill `gerir-todo`. Escrita no TODO da camada seguinte: skill `handoff`.
 
 **Fonte única de status:** a pendência vive só no TODO da camada. `Roadmap/roadmap.md` e `Roadmap/backlog.md` descrevem fases e features e **linkam** o TODO — não repetem status de pendência.
 
@@ -89,3 +93,16 @@ Guardas dentro do `dotnet test`: `GitIgnoreGuardTests`, `DocsConsistencyTests` (
 | `.github/instructions/art-direction.instructions.md` · `.claude/rules/arte.md` | Direção de arte | Copilot on-demand · Claude em `Design/**` e `Assets/Art/**` |
 | `Desenvolvimento/Docs/Architecture/architecture_decisions.md` | ADRs | Referenciado pelos agentes |
 | `Desenvolvimento/Docs/Tech/tech_debt.md` | Dívida técnica | Referenciado pelos agentes |
+
+## 11. Modo, skill ou regra — onde cada procedimento mora
+
+Critério aplicado na consolidação de 2026-09-13 (Historiador 7→4 modos, GameCreative 10→7, GameArchitect 6→4, skills `gerir-todo` e `concept-art`, definição de pronto em regra). Seguir ao criar ou refatorar agente:
+
+| Vira… | Quando | Exemplo |
+|-------|--------|---------|
+| **Modo do agente** | O procedimento é o núcleo daquele agente e depende das barreiras e ferramentas dele | Pesquisar tema (Historiador), Nova feature (GameArchitect) |
+| **Um modo com parâmetro** | Vários gatilhos disparam o mesmo procedimento com saída diferente | "Pesquisar" e "Fontes sobre"; "Listar" e "Compilar estado" |
+| **Skill** | O procedimento é usado por mais de um agente, carrega script ou gate próprio, ou é longo e raro (carga sob demanda) | `gerir-todo`, `handoff`, `concept-art`, `hemeroteca-blumenau` |
+| **Regra por caminho** (`.claude/rules/` + `.github/instructions/`) | Vale sempre que alguém toca um tipo de arquivo, qualquer que seja o agente | Definição de pronto do código em `csharp.md` |
+
+Não vira skill: gatilho que só roteia para um agente — o agente já é o ponto de entrada (`@agent-{nome}` no Claude Code, `@{Nome}` no Copilot), e cada skill a mais põe sua descrição em toda sessão.

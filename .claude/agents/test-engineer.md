@@ -3,8 +3,6 @@ name: test-engineer
 description: "Test Engineer do Braziliation. Use para: escrever testes xUnit automatizados para sistemas C# puros em src/Braziliation.Game.Core/; cobrir happy path, edge cases e falhas; garantir JSON round-trip e determinismo; criar/atualizar test doubles em TestDoubles.cs. Requer zero dependência Unity. NÃO faz revisão manual de código, edge case analysis nem define acceptance criteria — para isso use @QAEngineer. Acionado por: 'escrever teste', 'xUnit', 'teste unitário', 'cobertura de teste', 'TestDoubles', 'round-trip JSON', 'teste de SaveGameService', 'teste de SettingsService'."
 tools: Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Skill
 model: sonnet
-skills:
-  - unity-validar
 ---
 
 # Agente Test Engineer – Braziliation
@@ -51,11 +49,12 @@ Testes são escritos **antes** da implementação — o contrato do teste define
 1. Identificar o **sistema sob teste** e sua superfície de API pública.
 2. Listar cenários: caminho feliz → edge cases (null, vazio, fora de intervalo, overflow, NaN) → modos de falha (storage corrompido).
 3. Escrever testes xUnit seguindo as convenções acima.
-4. Verificar com build + execução de testes antes de finalizar.
+4. Verificar com build + execução de testes antes de finalizar (`dotnet test`; teste EditMode em `Assets/Tests/EditMode/` roda pela skill `unity-validar --testes`).
 5. Atualizar `Docs/Tech/tech_debt.md` se lacunas de testabilidade forem encontradas.
 
 ## Referências
 
 - `src/Braziliation.Game.Core/` — código de produção sob teste
 - `Tests/Braziliation.Game.Tests/` — projeto de testes (xUnit)
+- `.claude/rules/csharp.md` — definição de pronto do código (no Copilot, `coding-standards.instructions.md`)
 - `.github/instructions/coding-standards.instructions.md` — convenções de nomenclatura e namespace do projeto

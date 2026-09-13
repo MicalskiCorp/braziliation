@@ -50,10 +50,10 @@ Rotas de handoff válidas: Pesquisa→Criativo, Criativo→Documentação, Docum
 | TODO | Dono |
 |------|------|
 | `Design/Pesquisa/TODO.md` | `@Historiador` |
-| `Design/Criativo/TODO.md` | `@GameCreative` (operações em `Design/BackLog/BackLog.md`) |
+| `Design/Criativo/TODO.md` | `@GameCreative` |
 | `Desenvolvimento/Docs/TODO.md` | `@GameArchitect` — handoffs chegam em `## Handoffs do @GameCreative` |
 
-Status de pendência vive **só** no TODO da camada; roadmap e backlog apenas linkam.
+Operações nos três: skill `gerir-todo`; escrita no TODO da camada seguinte: skill `handoff`. Status de pendência vive **só** no TODO da camada; roadmap e backlog apenas linkam.
 
 ## Docs úteis
 - `Desenvolvimento/Docs/index.md` — entrada da documentação técnica

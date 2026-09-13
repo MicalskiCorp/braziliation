@@ -1,6 +1,6 @@
 ---
 description: "Padrões de código C# do Braziliation: namespaces, convenções Unity, lifecycle, prefabs, ScriptableObjects e Git. Aplicado automaticamente a todos os arquivos .cs do projeto."
-applyTo: "Desenvolvimento/Assets/**/*.cs"
+applyTo: "Desenvolvimento/Assets/**/*.cs,Desenvolvimento/src/**/*.cs,Desenvolvimento/Tests/**/*.cs"
 ---
 # Coding Standards – Braziliation
 
@@ -53,6 +53,16 @@ colidir entre as duas camadas.
 - Serialização com `System.Text.Json` + `SaveJsonOptions.Default`.
 - Mudou o schema de save? Suba `SaveSlot.CurrentSchemaVersion` **e** registre o degrau
   em `SaveMigrations.All` — ADR-007. Há teste que trava o esquecimento.
+
+## Definição de pronto (qualquer mudança em `.cs`)
+
+Espelho de `.claude/rules/csharp.md`. Vale para qualquer agente que toque código.
+
+- **Core puro:** teste xUnit primeiro (contrato → falha → implementação → passa); `dotnet test` verde.
+- **Script em `Assets/`:** `py .claude/skills/unity-validar/scripts/validar.py` compilando; `.meta` dos arquivos novos no commit.
+- **Script novo, renomeado ou movido:** linha na "Fontes Técnicas" da ficha em `Desenvolvimento/Docs/Architecture/Sistemas/` — o `DocsConsistencyTests` cobra.
+- **Atalho tomado** → `Docs/Tech/tech_debt.md`; **ponto incompleto** → `Docs/TODO.md` (nunca só `// TODO`).
+- **Decisão estrutural** → ADR em `Docs/Architecture/architecture_decisions.md`.
 
 ## Git and workflow
 

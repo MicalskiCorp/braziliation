@@ -23,12 +23,11 @@ Braziliation/                   ← raiz do repositório
 ├── Design/                     ← camadas de pesquisa, criativa e de arte
 │   ├── Pesquisa/               ← pesquisa histórica e folclórica com fonte (@Historiador)
 │   ├── Criativo/               ← cidades por estado, lendas, história, ideias (@GameCreative)
-│   ├── BackLog/                ← operações do TODO criativo
 │   ├── ArteConceitual/         ← concept art, referências visuais e paletas
 │   ├── ArteFonte/              ← ferramentas de arte, context packs e saídas de IA
 │   ├── GuiasDeArte/            ← bíblia visual, paletas, escala e pipelines de sprite
 │   └── Models/                 ← templates de documentação criativa
-├── .claude/                    ← Claude Code: 11 agentes, 13 skills, hooks, rules, settings
+├── .claude/                    ← Claude Code: 11 agentes, 15 skills, hooks, rules, settings
 ├── .github/                    ← agentes e instruções do Copilot + CI
 │   ├── agents/                 ← 11 agentes (formato Copilot)
 │   ├── instructions/           ← instruções auto-injetadas pelo Copilot

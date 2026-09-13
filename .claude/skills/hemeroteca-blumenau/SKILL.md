@@ -7,7 +7,7 @@ description: Pesquisa e localiza informações históricas de Blumenau nos PDFs 
 
 Fonte primária: **Hemeroteca Digital Catarinense (CIASC)**, acervo da revista histórico-cultural **"Blumenau em Cadernos"**. Todo o acervo está em `https://hemeroteca.ciasc.sc.gov.br/blumenau%20em%20cadernos/`, organizado em **páginas-índice por década** (HTML, cada uma lista os links das edições daquele período) e **PDFs OCR individuais** (um por edição).
 
-> Esta skill serve para *localizar e ler fontes primárias*, não para decidir se uma referência folclórica existe (isso é o Modo 1/7 do Historiador). Use-a quando precisar checar um fato, data, nome ou evento específico de Blumenau contra o texto real de uma edição.
+> Esta skill serve para *localizar e ler fontes primárias*, não para decidir se uma referência folclórica existe (isso é o Modo 1 do Historiador). Use-a quando precisar checar um fato, data, nome ou evento específico de Blumenau contra o texto real de uma edição.
 
 ## Índices por década (fonte da verdade dos links)
 
