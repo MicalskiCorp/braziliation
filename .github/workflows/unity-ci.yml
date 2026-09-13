@@ -1,0 +1,51 @@
+name: Unity (compilação + EditMode)
+
+# Compila o projeto Unity inteiro e roda os testes de Assets/Tests/EditMode/ via GameCI.
+# Fica em espera até os secrets de licença existirem — ver Desenvolvimento/Docs/Tech/unity-ci.md.
+# Localmente, o equivalente é a skill unity-validar.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Desenvolvimento/Assets/**'
+      - 'Desenvolvimento/Packages/**'
+      - 'Desenvolvimento/ProjectSettings/**'
+
+jobs:
+  editmode:
+    runs-on: ubuntu-latest
+    env:
+      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+    steps:
+      - name: Licença ausente — job em espera
+        if: env.UNITY_LICENSE == ''
+        run: echo "::notice::Configure os secrets UNITY_LICENSE, UNITY_EMAIL e UNITY_PASSWORD para habilitar este job (Desenvolvimento/Docs/Tech/unity-ci.md)."
+
+      - name: Checkout repository
+        if: env.UNITY_LICENSE != ''
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Cache da Library
+        if: env.UNITY_LICENSE != ''
+        uses: actions/cache@v4
+        with:
+          path: Desenvolvimento/Library
+          key: Library-${{ hashFiles('Desenvolvimento/Packages/packages-lock.json') }}
+          restore-keys: Library-
+
+      - name: Testes EditMode (GameCI)
+        if: env.UNITY_LICENSE != ''
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: Desenvolvimento
+          testMode: editmode
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
