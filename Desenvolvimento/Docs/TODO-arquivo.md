@@ -1,0 +1,367 @@
+# TODO — Arquivo histórico (até 2026-09-13)
+
+> Cópia integral do `TODO.md` como estava em 2026-09-13, antes de ele passar a conter só pendências vivas.
+> Não editar: é registro. O que ainda estava aberto aqui foi levado para o [`TODO.md`](TODO.md).
+
+---
+
+## Conteúdo original
+
+> Itens pendentes de documentação na camada IA. Atualizar a cada sessão de trabalho.
+> **Modelo reativo:** o @GameArchitect lê este arquivo no Passo 0 de cada sessão. Handoffs do @GameCreative chegam na seção abaixo e são processados manualmente pelo usuário acionando @GameArchitect.
+
+---
+
+## Handoffs do @GameCreative
+
+> Itens criativos aprovados aguardando documentação técnica. O @GameArchitect é acionado **manualmente** pelo usuário para processar estes itens.
+
+| Feature/Sistema | Referência Criativa | Prioridade | Status |
+|----------------|---------------------|-----------|--------|
+| Criar feature: Blumenau — Igreja Luterana Matriz, cemitério histórico e linha de quests do Hermann | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Alta | ✅ Concluído |
+| Criar feature: Blumenau — Igreja Matriz do Centro e horror social de Podres de Ricos | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Alta | ✅ Concluído |
+| Criar feature: Blumenau — Teatro Carlos Gomes como mercado negro e boss Autômato de Engrenagens Esquecidas | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Alta | ✅ Concluído |
+| Criar feature: Blumenau — sistema hídrico com comportas, passarelas, docas e estados de cheia | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Alta | ✅ Concluído |
+| Criar feature: Blumenau — Jardim de Edith, SQ-01 e relíquia Guizo de Edith | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Alta | ✅ Concluído |
+| Criar feature: Blumenau — Mausoléu do Fundador como área de culto político com catacumba inferior | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Média | ✅ Concluído |
+| Criar feature: Blumenau — Morro do Zendron e mapas periféricos pós-enchente | Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md | Média | ✅ Concluído |
+
+---
+
+## Pendências
+
+| Item | Tipo | Prioridade | Observação |
+|------|------|-----------|------------|
+| Preencher parâmetros configuráveis dos sistemas | Sistemas | Média | Todos os 6 sistemas têm `*(a documentar)*` |
+| Documentar features do jogo | Features | Alta | Nenhuma feature documentada ainda |
+| Mapear pasta `AI/` na estrutura Docs/ | Agentes | Baixa | **Concluído** — AI/ migrada para .github/ e Docs/ |
+
+---
+
+## Pendências Atuais Consolidadas (Docs + Código)
+
+> Foto única do estado atual para execução da primeira demo. Consolidado em 2026-05-31 com base neste arquivo e nos TODOs inline de `Assets/Scripts/` e `src/`.
+
+| Frente | Pendência ativa | Prioridade | Fonte |
+|-------|------------------|-----------|-------|
+| Design | Definir arma inicial do jogador (tipo, dano base, animação) | Alta | Seção “TODOs de Design — Bloqueadores de Implementação (Build)” |
+| Design | Definir inimigo básico da demo (comportamento, vida, dano) | Alta | Seção “TODOs de Design — Bloqueadores de Implementação (Build)” |
+| Design | Definir IDs dos materiais especiais para expansão de slots | Alta | Seção “TODOs de Design — Bloqueadores de Implementação (Build)” |
+| Design | Definir parâmetros numéricos de Crafting (slots, expansões, combinações híbridas) | Alta | Seção “TODOs de Design — Crafting & Build” |
+| Design | Definir parâmetros numéricos de Build (habilidades máximas, resistências, estágios visuais) | Alta | Seção “TODOs de Design — Crafting & Build” |
+| Design | Definir localização e quantidade de totens no mapa | Média | Seção “TODOs de Design — Crafting & Build” |
+| Gameplay | Implementar lógica completa de inventário (capacidade, categorias, integração de UI) | Média | `Assets/Scripts/Core/PlayerInventory.cs` |
+| UI/Arte | Criar prefab final do painel de crafting e vincular no Inspector | Média | `Assets/Scripts/UI/CraftingPanelController.cs` |
+| UI/Arte | Finalizar pipeline de sprites/partes corporais para progressão visual da build | Média | `Assets/Scripts/UI/BuildProgressionView.cs` |
+| UI/Arte | Implementar VFX/feedback visual completo de sinergias híbridas | Média | `Assets/Scripts/UI/HybridSynergyFeedbackView.cs` |
+| Design+Tech | Definir política de seed do sorteio híbrido (determinístico vs aleatório) e efeitos de roleta | Média | `Assets/Scripts/Crafting/HybridRollHandler.cs` |
+| Core Design | Fechar regras de compatibilidade/composição final de itens híbridos e tuning de slots iniciais | Alta | `src/Braziliation.Game.Core/Crafting/*.cs` |
+| UI/Arte | ~~PoC do pipeline programático de sprites: prop comporta Blumenau 32×32 via spec JSON + ciclo de crítica~~ ✅ Concluído 2026-07-11 — asset + sheet de acionamento (3 frames, 96×32) em `Assets/Art/Environments/Blumenau/Props/`, palette_check aprovado | Média | `Design/GuiasDeArte/pipeline-sprites-programaticos.md` |
+| Infra | ~~Instalar Python 3.10+ + Pillow na máquina de desenvolvimento~~ ✅ Concluído 2026-07-11 — Python 3.13 já existia via launcher `py`; Pillow 12.3.0 instalado (usar `py`, não `python`) | Média | `Design/ArteFonte/Ferramentas/index.md` |
+| UI/Arte | Pendências do pipeline de sprites | Média | Ver seção **"Pipeline de Sprites — Roteiro de Continuação"** abaixo |
+
+### Pipeline de Sprites — Roteiro de Continuação (2026-07-11)
+
+> **Estado:** pipeline programático operacional — guia canônico em `Design/GuiasDeArte/pipeline-sprites-programaticos.md`, ferramentas em `Design/ArteFonte/Ferramentas/` (rodar com `py`, não `python`). Primeiro asset entregue: comporta de Blumenau (idle 32×32 + sheet de acionamento 3 frames 96×32) em `Assets/Art/Environments/Blumenau/Props/`, fontes (specs JSON) no context pack `Design/ArteFonte/IA/ContextPacks/exemplo-prop-comporta-blumenau/`. Ferramentas de editor Unity (`SheetAutoSlicer.cs`, `SheetAnimationTool.cs`) criadas mas **ainda não compiladas/testadas dentro do Unity**.
+
+| # | Passo | Responsável | Status |
+|---|-------|-------------|--------|
+| 1 | Abrir o Unity: compilar `Assets/Editor/Art/*.cs` (corrigir ajuste pontual de API se o console reclamar) e confirmar que o reimport fatiou o sheet em 3 sprites 32×32 com pivot bottom-center | `@UnityDeveloper` | ❌ Não iniciado |
+| 2 | Selecionar o sheet e rodar `Assets > Braziliation > Criar Animação do Spritesheet` → confere `.anim` (8 fps, sem loop) + `.controller` em `Assets/Animations/World/` | `@UnityDeveloper` | ❌ Não iniciado |
+| 3 | Criar prefab `Prop_FloodgateLever` em `Assets/Prefabs/Interactables/` (SpriteRenderer + Animator com o controller + collider de interação; pivot já é base central inferior) | `@UnityDeveloper` | ❌ Não iniciado |
+| 4 | Integrar a alavanca ao sistema hídrico de Blumenau: interação do player dispara a animação e alterna estado da comporta (ver feature em `Docs/GDD/Features/`) | `@GameplayEngineer` | ❌ Não iniciado |
+| 5 | Aprovar direção da paleta `Design/ArteConceitual/Paletas/blumenau.json` (mudar `status` para `aprovada`) e salvar paleta Aseprite equivalente em `Design/ArteFonte/Aseprite/` | Usuário (direção de arte) | ✅ Concluído 2026-07-11 — aprovada pelo usuário; `blumenau.json` status `aprovada` + `blumenau.gpl` criada + referência no `palette-guide.md` |
+| 6 | Polish opcional: pixel pass manual no Aseprite para dentes de engrenagem mais legíveis (sprite atual = qualidade "placeholder bom") | Usuário (arte) | ❌ Opcional |
+| 7 | Opção B: implementar primeiro gerador procedural `gen_tileset.py` (paleta JSON + seed registrada, prefixo `gen_`) | `@SpriteArtist` | ✅ Concluído 2026-07-11 — `Ferramentas/gen_tileset.py` com 3 famílias (enxaimel 4 tipos, metal 3, agua 3), seed determinística + manifest JSON; 3 tilesets gerados (seed 42), palette_check aprovado, entregues em `Assets/Art/Environments/Blumenau/Tilesets/` |
+| 8 | Opção C: operacionalizar ComfyUI local (instalar, montar workflow JSON, validar 1 lote de 6–12 thumbnails) conforme `pipeline-ia-sprites.md` | Usuário + `@SpriteArtist` | ✅ Concluído 2026-07-12 — ComfyUI em `D:\Tools\ComfyUI` (RTX 2060 SUPER, torch 2.8+cu129, SDXL base); lote de validação de 6 thumbnails (Soldado Clérico, seed 20260712) gerado via `Ferramentas/comfy_batch.py` e salvo em `IA/Outputs/soldado-clerico-thumbs/` com registro `.lote.json`; setup e workflow documentados em `IA/Models/` |
+
+### Geração de Sprites por Ondas — Status (2026-07-12)
+
+> Mapeamento sistêmico completo (~65 assets) feito em sessão de 2026-07-11; geração segue a ordem de ondas. Fontes: specs JSON nos context packs de `Design/ArteFonte/IA/ContextPacks/`; tudo validado por `palette_check` + ciclo de crítica visual; registro em `Docs/Architecture/indices/assets.md`.
+
+| Onda | Escopo | Status |
+|------|--------|--------|
+| 1 | Lote Sistema Hídrico (4 marcadores de pilar, sino + sheet badalada, sirene, sinalizador ×2 estados) | ✅ Entregue 2026-07-12 — `Environments/Blumenau/Props/` |
+| 1 | Lote Jardim de Edith (lápide base, estátua de gato, pingente SQ-01) | ✅ Entregue 2026-07-12 — Props/ + `Art/UI/` |
+| 1 | Autômato Abandonado placeholder (`enm_automato_idle_sheet` 3 frames) | ✅ Entregue 2026-07-12 — `Art/Enemies/` |
+| 2 | Tilesets procedurais enxaimel/metal/água-lama (`gen_tileset.py` seed 42) | ✅ Entregue 2026-07-12 — `Environments/Blumenau/Tilesets/` |
+| 2 (restante) | Tilesets pedra portuguesa (túnel), cemitério/terra, mármore, periferia pós-enchente — novas famílias no `gen_tileset.py` | ❌ Não iniciado |
+| 3 | Personagens/monstros orgânicos via ComfyUI (Edith, Hermann, Soldado Clérico, mutantes) + pixel pass | 🔓 Desbloqueada 2026-07-12 — ComfyUI validado; primeiros 6 thumbnails do Soldado Clérico em `IA/Outputs/soldado-clerico-thumbs/` aguardando curadoria (selecionar 1-2 → `Selected/` → pixel pass) |
+| Contínuo | Props narrativos restantes (engrenagens do boss, relíquias, caixões, altar), ícones de crafting, VFX | ❌ Não iniciado — specs sob demanda via `@SpriteArtist`/skill `sprite-pipeline` |
+
+**Wiring novo p/ @UnityDeveloper:** `prop_blumenau_sino_alerta_ring_sheet` e `enm_automato_idle_sheet` serão fatiados automaticamente na abertura do Unity; gerar Animators via menu Braziliation; prefab do Autômato → handoff p/ `@GameplayEngineer` quando design definir o inimigo básico da demo.
+
+### Migração ADR-004 — 640×360 / 32 PPU (Blasphemous-like) — Status (2026-07-12)
+
+> Decisão do usuário em 2026-07-12; ADR em `Docs/Architecture/architecture_decisions.md` (ADR-004). Executado: `CameraScaler` e `SpriteImportPostprocessor` (32 PPU, Menu excluído como legado 16 PPU), guias de arte todos atualizados (escala, paleta 32 cores, animação, pipelines, templates), ferramentas com `--scale`, mock 640×360, 36 PNGs legados convertidos ×2 nearest (mesma leitura em tela; specs 1× anotadas nos context packs — re-render exige `--scale 2`), agentes/skills/rules atualizados, alvo SNES/EverDrive formalmente descartado.
+
+| Pendência da migração | Responsável | Status |
+|------------------------|-------------|--------|
+| Abrir o Unity: reimport aplica 32 PPU; validar cena demo (posições/colisores assumem 1 tile=1 unidade — sprites ×2 c/ PPU ×2 mantêm tamanho de mundo, mas conferir visualmente) e o menu (frames agora 640×360; orthoSize 5.625 permanece correto) | `@UnityDeveloper` | ❌ Não iniciado — **único passo restante da migração; exige abrir o Unity** |
+| ~~Re-autoria do menu para 640×360~~ ✅ Concluído 2026-07-12 — frames ×2 (640×360), exclusão do postprocessor removida (32 PPU), comentários dos editores atualizados; orthoSize 5.625 é invariante. Layout do UI canvas (320×180) mantido — CanvasScaler é independente de PPU; migrar é cosmético | `@UnityDeveloper` | ✅ |
+| ~~Re-autoria dos assets legados em densidade nova~~ ✅ Concluído 2026-07-12 — 19 specs re-autoradas via `spec_redetail.py` (EPX + textura, specs 2× versionadas como fonte atual), 3 sheets reempacotados, 3 tilesets regenerados com detail pass; crítica visual aprovada, 22/22 gates de paleta APROVADOS, entregas sobrescritas em `Assets/Art/` + `Selected/` | `@SpriteArtist` | ✅ |
+| Rampas estendidas da paleta Blumenau (16 → até 32 cores) — a re-autoria atual não exigiu (EPX+textura ficam na paleta base); adicionar quando arte final de personagens pedir | Usuário (arte) | ⏸ Não exigido ainda |
+| Onda 3 passa a mirar player ~64px (proporção Blasphemous) — thumbnails do Soldado Clérico já servem (concepts 1024², pixel pass agora para 64px, não 32) | `@SpriteArtist` | 🔓 Beneficiada pela migração |
+
+### Placeholders de Terceiros na Cena de Demo (2026-07-27)
+
+> **O que mudou:** a `DemoGameplay` deixou de ser quadrados brancos coloridos. Player, inimigo,
+> chão e um fundo novo agora usam sprites CC0 do Gothicvania (ansimuz), instalados em
+> `Assets/Art/ThirdParty/Gothicvania/`. Objetivo: destravar o desenvolvimento de mecânicas em
+> paralelo à criação de arte própria. **É placeholder** — não segue paleta de Blumenau nem a
+> style-bible. Créditos em `Desenvolvimento/CREDITS.md`, procedência em `SOURCES.txt` do pacote,
+> reprodução por `Design/ArteFonte/Ferramentas/prepare_thirdparty_gothicvania.py`.
+>
+> Aparência e geometria da demo agora saem de um único lugar,
+> `Assets/Scripts/Gameplay/DemoSceneVisuals.cs`, consumido pelo `DemoSceneBootstrap` (runtime) e
+> pelo `DemoSceneBuilderEditor` (cena fixa), e espelhado na `DemoGameplay.unity`. Sem sprite no
+> disco, tudo cai no quadrado branco de antes.
+
+| Pendência | Responsável | Status |
+|-----------|-------------|--------|
+| ~~Abrir o Unity e validar a `DemoGameplay`~~ | `@UnityDeveloper` | ✅ Validado pelo usuário em 2026-07-27 — cena carrega e roda sem erro |
+| Trocar o inimigo placeholder pelo `enm_automato_idle_sheet.png` (arte própria já entregue) quando o design fechar o inimigo básico da demo | `@GameplayEngineer` | ❌ Bloqueado por decisão de design |
+| Fatiar `env_placeholder_castelo_tileset.png` em grid 32×32 e montar um blockout de nível com Tilemap | `@UnityDeveloper` | ❌ Não iniciado — opcional |
+| Substituir os placeholders por arte própria e remover `Assets/Art/ThirdParty/Gothicvania/` + entrada em `CREDITS.md` | `@SpriteArtist` | ⏸ Quando a Onda 3 entregar personagens |
+
+### Física, IA e Animação da Demo (2026-07-27)
+
+> Segunda rodada, a partir do play-teste do usuário. Todos os defeitos relatados tinham causa
+> identificada; correções abaixo. A IA de inimigos virou motor genérico — ver
+> [`Mechanics/InimigosIA.md`](Mechanics/InimigosIA.md).
+
+**Camadas de física criadas** em `ProjectSettings/TagManager.asset`: `8 = Ground`,
+`9 = Player`, `10 = Enemy`. Centralizadas em `Assets/Scripts/Core/GameLayers.cs`.
+Sem máscara, `Physics2D.OverlapCircle` devolve o colisor do próprio objeto que perguntou —
+era a causa de dois bugs de uma vez.
+
+| Defeito relatado | Causa | Correção |
+|------------------|-------|----------|
+| Pulo repetido no ar | `GroundCheck` na base do collider encostava no **próprio corpo** do player, então `IsGrounded()` era sempre verdadeiro (regressão introduzida na rodada anterior) | Máscara `Ground` + filtro de colisores do próprio objeto em `PlayerController.IsGrounded` |
+| Personagens nascem voando | Spawn em y=1 com pivot no pé, 2 unidades acima do chão | Spawns em `DemoSceneVisuals.GroundSurfaceY` (y=−1) |
+| Cai no vazio no fim do mapa | Não havia limite de nível | `Bound_Left`/`Bound_Right` (colisores invisíveis em x=±12,5, camada `Ground`) + `FallRespawn` como rede de segurança abaixo de y=−12 |
+| Inimigo caminha para sempre até cair | Os marcadores de patrulha eram **filhos do inimigo**: andavam junto, a ponta nunca era alcançada | Marcadores soltos na raiz + faixa de patrulha capturada uma vez no `Start` + sensores de precipício/parede |
+| *(não relatado, encontrado no caminho)* Player se machucava ao atacar | `PlayerCombat` sem máscara atingia o próprio colisor | Máscara `Enemy` + filtro de si mesmo |
+
+**Animação:** `SpriteSheetAnimator` monta os clipes em runtime a partir dos spritesheets
+fatiados (`Resources.LoadAll`), sem `.anim`/`.controller`. Player: `idle` (6 fps) e `run`
+(12 fps); inimigo: `idle` (6 fps) e `walk` (10 fps), escolhidos pelo estado da IA.
+Migrar para Animator (`Assets > Braziliation > Criar Animação do Spritesheet`) quando a arte
+final entrar — o caminho continua aberto.
+
+| Pendência | Responsável | Status |
+|-----------|-------------|--------|
+| Validar no Unity: animação trocando de quadro, pulo só no chão, inimigo virando na ponta e nas paredes, ataque sem dano em si mesmo | `@UnityDeveloper` | ❌ **Exige abrir o Unity** |
+| Conferir a matriz de colisão 2D (Project Settings > Physics 2D) para as 3 camadas novas | `@UnityDeveloper` | ❌ Não iniciado — o padrão (tudo colide) funciona |
+| Criar os `EnemyProfileAsset` dos arquétipos reais de Blumenau | `@GameCreative` + `@GameplayEngineer` | ❌ Bloqueado por decisão de design |
+| Reação a dano (stagger) e percepção por linha de visão | `@GameplayEngineer` | ❌ Não iniciado — ver pendências em `Mechanics/InimigosIA.md` |
+| Clipes de ataque/dano/morte (o pacote placeholder só tem idle/run/walk) | `@SpriteArtist` | ⏸ Junto da arte própria |
+
+### Ecossistema de Agentes — Pendências (2026-07-11, atualizado 2026-07-11)
+
+| Item | Tipo | Prioridade | Observação |
+|------|------|-----------|------------|
+| Atualizar corpo do `AgentArchitect` para a convenção dupla Copilot+Claude (PAPEL 2 / "Convenções de Arquivo" ainda instrui criar só `.agent.md`) | Agentes | Média | 🔨 Em andamento — nova seção "Skills" no corpo (ambos formatos) já aponta para a skill `novo-agente` como protocolo prevalecente; PAPEL 2 em si segue não reescrito |
+| Versionar a 1ª camada de personas (raiz `d:\Backup\Projetos\Games\.github/agents/` e `.claude/agents/` estão **fora** do repo git — risco de perda de Jarvis/Computador/wrappers) | Agentes | Média | ❌ Não iniciado |
+| Descoberta por cwd no Claude Code: 1ª camada só ativa abrindo da raiz do workspace; 2ª camada só abrindo de `Braziliation/` — documentar no AGENTS.md qual cwd usar por fluxo de trabalho | Agentes | Baixa | ✅ Concluído 2026-07-11 — seção "Processos do Projeto → 2. Descoberta de agentes por cwd" em `AGENTS.md` |
+| Adicionar `Skill` tool + roteamento de skills aos agentes funcionais cuja tarefa corresponde a uma skill existente (`sprite-artist`, `game-architect`, `game-creative`, `agent-architect`, `historiador`) — skills tinham triggers bons na `description` mas os agentes não tinham a ferramenta `Skill` habilitada para de fato invocá-las | Agentes | Alta | ✅ Concluído 2026-07-11 — seção "## Skills" adicionada nos 2 formatos (Claude+Copilot) dos 5 agentes; catálogo completo em `AGENTS.md` → "Processos do Projeto → 3" |
+| `nova-cidade` (skill) tinha um passo (criação de pastas `Assets/Art/`) que nenhum dono natural (`@GameCreative`) consegue executar — sem `Bash` e proibido de tocar fontes do engine | Agentes | Média | ✅ Concluído 2026-07-11 — skill e agente atualizados: passo 4 delegado a `@UnityDeveloper` via TODO em vez de execução direta |
+| `Docs/Architecture/indices/assets.md` não registrava os 8 frames de `Assets/Art/Menu/Background/Frames/` (existem no disco, sem entrada no índice) | Motor | Baixa | ✅ Concluído 2026-07-11 — linha adicionada à tabela "Assets Registrados" |
+| `Docs/Architecture/README.md` citava agentes inexistentes ("Architect", "Unity Engineer") em inglês, fora de `index.md` | Documentação | Baixa | ✅ Concluído 2026-07-11 — traduzido, refs corrigidas para `@TechLead`/`@UnityDeveloper`, linkado em `index.md` |
+| `Design/Pesquisa/Handoffs/` e `Temas/` documentados na estrutura operacional do Historiador mas nunca criados no disco (nenhum handoff/tema gerado ainda) | Design | Baixa | ✅ Concluído 2026-07-11 — `.gitkeep` adicionado em ambas para consistência com o resto do projeto |
+
+### Sequência recomendada para fechar a primeira demo
+
+1. Fechar decisões de design críticas (arma, inimigo, parâmetros de crafting/build, IDs de materiais).
+2. Implementar inventário completo e amarrar fluxo com crafting/build.
+3. Finalizar UI/arte pendente (prefab crafting, progressão visual e feedback de sinergia).
+4. Revisar documentação de cenas/assets e atualizar índices técnicos.
+5. Rodar checklist final da demo com validação de loop jogável completo (combate + progressão + feedback).
+
+---
+
+## TODOs de Implementação — Sistema de Crafting
+
+> Gerados pelo `@GameArchitect` em 2026-05-10. Referência: [`Mechanics/Crafting.md`](Mechanics/Crafting.md)
+> Acionar cada agente **manualmente** quando pronto para implementar.
+
+### `@SystemsDeveloper` — Modelos C# puros (Crafting)
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Criar `ItemComponent.cs` — modelo de componente com tipo de pilar (Mecânico/Místico/Biológico), stats e lore | Alta | ✅ Concluído |
+| Criar `SlotData.cs` — modelo de slot com tipo aceito, item equipado e estado (vazio/preenchido) | Alta | ✅ Concluído |
+| Criar `ReceptacleData.cs` — modelo de receptáculo com lista de slots, pilar e nível de expansão | Alta | ✅ Concluído |
+| Criar `CraftingRecipe.cs` — modelo de receita com lista de componentes e resultado (item + flag de sinergia híbrida) | Alta | ✅ Concluído |
+| Criar `CraftingService.cs` — resolução de receitas, validação de compatibilidade de slot e detecção de combinações híbridas | Alta | ✅ Concluído |
+
+### `@GameplayEngineer` — Mecânicas Unity (Crafting)
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Implementar `ReceptacleController.cs` — gerencia slots dos 3 receptáculos, equipa/desequipa componentes | Alta | ✅ Concluído |
+| Implementar lógica de sorteio 50/50 ao craftar item híbrido + componente de 3º tipo | Alta | ✅ Concluído |
+
+### `@UnityDeveloper` — UI e Wiring
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Criar painel de crafting — visualização dos 3 receptáculos com seus slots e componentes disponíveis | Alta | ✅ Concluído |
+| Conectar `CraftingService` ao Unity via `GameServiceLocator` | Alta | ✅ Concluído |
+
+---
+
+## TODOs de Implementação — Build do Personagem
+
+> Gerados pelo `@GameArchitect` em 2026-05-10. Referência: [`Mechanics/Build.md`](Mechanics/Build.md)
+> Concluído em 2026-05-17 via sessão de orquestração swarm.
+
+### `@SystemsDeveloper` — Modelos C# puros (Build)
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Criar `BuildState.cs` — estado atual da build: habilidades ativas, resistências, flags de exploração desbloqueadas | Alta | ✅ Concluído |
+| Criar `HybridSynergyResolver.cs` — detecta combinações híbridas válidas e retorna efeitos especiais | Média | ✅ Concluído |
+
+### `@GameplayEngineer` — Mecânicas Unity (Build)
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Implementar `PlayerBuildController.cs` — aplica stats e habilidades ao jogador conforme `BuildState` | Alta | ✅ Concluído |
+| Implementar expansão de slots via interação com NPC específico (Artesão, Costureira, Alquimista) | Alta | ✅ Concluído |
+| Implementar totem de troca de itens — permitir substituir item do slot sem custo, retornar item ao inventário | Alta | ✅ Concluído |
+| Implementar efeitos de exploração por pilar (visão noturna, passagens ocultas, respiração submersa, etc.) | Alta | ✅ Concluído |
+| Implementar ativação de sinergias híbridas via `HybridSynergyResolver` | Média | ✅ Concluído |
+
+### `@UnityDeveloper` — UI e Wiring (Build)
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Implementar progressão visual do personagem — atualizar sprite/aparência por estágio de cada receptáculo | Média | ✅ Concluído |
+| Criar feedback visual de sinergias híbridas desbloqueadas | Média | ✅ Concluído |
+| Conectar `BuildState` ao Unity via `GameServiceLocator` | Alta | ✅ Concluído |
+
+---
+
+## TODOs de Design — Crafting & Build
+
+> Decisões de design pendentes. Não são de implementação — requerem definição pelo usuário ou `@GameCreative` antes de serem passados aos agentes.
+
+| Item | Referência | Responsável | Prioridade | Status |
+|------|-----------|------------|-----------|--------|
+| Localização exata dos totens no mapa — quantidade, cidades e áreas | [`Mechanics/Build.md`](Mechanics/Build.md) | Design | Média | ❌ Não iniciado |
+| Parâmetros numéricos de Crafting — slots iniciais/máximos, número de expansões, combinações híbridas únicas | [`Mechanics/Crafting.md`](Mechanics/Crafting.md) | Design | Alta | ❌ Não iniciado |
+| Parâmetros numéricos de Build — habilidades máximas por receptáculo, escala de resistências, estágios visuais | [`Mechanics/Build.md`](Mechanics/Build.md) | Design | Alta | ❌ Não iniciado |
+
+---
+
+---
+
+## TODOs de Testes — Cobertura Faltante
+
+> Identificados pela auditoria de 2026-05-23. Acionar `@TestEngineer` para implementar.
+
+### `@TestEngineer` — Testes ausentes no `src/` (Build)
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Criar `BuildStateTests.cs` — testar `GetEquippedItems()`, `HasAbility()`, `UnlockedExplorationFlags` | Alta | ✅ Concluído |
+| Criar `HybridSynergyResolverTests.cs` — testar `HasHybridSynergy()`, `GetActiveHybridEffects()`, chave simétrica, tabela vazia | Alta | ✅ Concluído |
+
+### `@TestEngineer` — Sincronização CI (`dotnet-tests/`)
+
+> Os testes abaixo existem apenas em `Tests/Braziliation.Game.Tests/` e **não rodam no CI** (`Braziliation.CI.slnx` usa `dotnet-tests/`).
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Copiar/vincular `CraftingServiceTests.cs` para `dotnet-tests/Braziliation.Game.Tests/` | Alta | ℹ️ N/A — CI usa `Tests/` diretamente via `Braziliation.CI.slnx` |
+| Copiar/vincular `SettingsServiceTests.cs` para `dotnet-tests/Braziliation.Game.Tests/` | Alta | ℹ️ N/A — CI usa `Tests/` diretamente via `Braziliation.CI.slnx` |
+| Verificar se `Braziliation.CI.slnx` inclui o projeto `src/Braziliation.Game.Core/Build/` | Alta | ✅ Confirmado — CI aponta para `Tests/Braziliation.Game.Tests/` que já referencia `Braziliation.Game.Core` |
+
+---
+
+## TODOs de Implementação — Primeira Demo (Foundation)
+
+> Identificados pela auditoria de 2026-05-23 como requisitos bloqueadores da primeira demo jogável.
+> Referência: `Desenvolvimento/Docs/Roadmap/roadmap.md` — fase Foundation.
+
+### `@GameplayEngineer` — Jogador (Player)
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Criar `PlayerController.cs` — movimentação básica: andar, pular, colisão com tilemap | Alta | ✅ Concluído |
+| Implementar `IStatReceiver` em `PlayerController` — receber stats da build via `PlayerBuildController` | Alta | ✅ Concluído |
+| Criar sistema de interação — jogador usa `IInteractable.Interact()` ao pressionar botão próximo a objeto | Alta | ✅ Concluído |
+
+### `@GameplayEngineer` — Combate Básico
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Criar `HealthComponent.cs` — vida, dano, morte (C# puro ou MonoBehaviour) | Alta | ✅ Concluído |
+| Criar `PlayerCombat.cs` — ataque básico com uma arma (tipo a definir com design) | Alta | ✅ Concluído |
+| Criar `EnemyController.cs` — inimigo básico: patrulha, detecta jogador, causa dano | Alta | ✅ Concluído |
+
+### `@UnityDeveloper` — Nível Jogável
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Montar primeira cena jogável com blockout de tilemap + plataformas + colisores | Alta | ✅ Concluído — `DemoSceneBootstrap` cria plataforma, player e inimigo em runtime |
+| Criar `BootstrapScene` com `GameServiceLocator` + `BuildServiceBinder` configurados | Alta | ✅ Concluído — `DemoAutoBootstrapper` injeta bootstrap automático em cenas não-menu |
+| Criar HUD básico — barra de vida, indicador de build ativa | Média | ✅ Concluído — `SimpleHealthHud` com barra de HP em runtime |
+
+### `@SystemsDeveloper` — Completar integrações pendentes
+
+| Tarefa | Prioridade | Status |
+|--------|-----------|--------|
+| Completar registro de `CraftingService` no `GameServiceLocator` (flag `initializeCraftingService` existe mas wiring estava comentado) | Alta | ✅ Concluído |
+| Conectar `ReceptacleController` e `HybridRollHandler` via `GameServiceLocator` | Alta | ✅ Concluído |
+| Implementar lógica completa de `PlayerInventory` — limites de capacidade, categorias por `PillarType` | Média | ❌ Não iniciado |
+
+---
+
+## TODOs de Design — Bloqueadores de Implementação (Build)
+
+> Decisões de design que bloqueiam a finalização funcional do sistema de Build.
+
+| Item | Referência | Responsável | Prioridade | Status |
+|------|-----------|------------|-----------|--------|
+| Definir tabela de sinergias híbridas — `HybridSynergyResolver._hybridEffectTable` está vazia | [`Mechanics/Build.md`](Mechanics/Build.md) | Design | Alta | ✅ Concluído |
+| Definir IDs dos materiais especiais de expansão de slots (Artesão/Costureira/Alquimista) | [`Mechanics/Build.md`](Mechanics/Build.md) | Design | Alta | ❌ Não iniciado |
+| Definir implementação concreta das flags de exploração — `ExplorationFlagHandler` tem apenas `Debug.Log` | [`Mechanics/Build.md`](Mechanics/Build.md) | Design+Eng | Média | ✅ Concluído |
+| Definir arma inicial do jogador (tipo, dano base, animação) para combate básico | GDD | Design | Alta | ❌ Não iniciado |
+| Definir inimigo básico da demo — comportamento, vida, dano | GDD | Design | Alta | ❌ Não iniciado |
+
+---
+
+## Concluído
+
+| Item | Data |
+|------|------|
+| Feature: Blumenau — Igreja Luterana Matriz + cemitério + linha de quests do Hermann | 2026-05-17 |
+| `BuildStateTests.cs` — 14 testes cobrindo defaults, GetEquippedItems, HasAbility, flags | 2026-05-23 |
+| `HybridSynergyResolverTests.cs` — 11 testes cobrindo simetria, tabela, 3 sinergias, sem duplicatas | 2026-05-23 |
+| `HybridSynergyResolver` — tabela populada: PrótesisViva, MutaçãoArcana, ArmaduraEncantada | 2026-05-23 |
+| `ExplorationFlagHandler` — substituídos Debug.Log por ativação/desativação de GameObjects via Inspector | 2026-05-23 |
+| `ReceptacleController` + `HybridRollHandler` — conectados via `GameServiceLocator.Resolve<CraftingService>()` | 2026-05-23 |
+| `PlayerBuildController` — adicionada referência ao `ExplorationFlagHandler`; `OnBuildChanged` chama `SyncFlags` | 2026-05-23 |
+| `PlayerController` — movimentação básica (andar/pular), `IStatReceiver` e interação com `IInteractable` | 2026-05-30 |
+| `HealthComponent` — vida, dano, morte e eventos (`OnHealthChanged`, `OnDied`) | 2026-05-30 |
+| `PlayerCombat` — ataque básico com cooldown e dano em área curta | 2026-05-30 |
+| `EnemyController` — patrulha, perseguição curta e dano por contato | 2026-05-30 |
+| `DemoSceneBootstrap` — setup automático de cena de demo (serviços, chão, player, inimigo, câmera, HUD) | 2026-05-30 |
+| `DemoAutoBootstrapper` — injeção automática do bootstrap em cenas de gameplay (pós-load) | 2026-05-30 |
+| `SimpleCameraFollow` — câmera 2D seguindo o jogador na demo | 2026-05-30 |
+| `CanvasHealthHud` — HUD de HP em Canvas/Slider (substituindo OnGUI) | 2026-05-30 |
+| `DemoSceneBuilderEditor` — menu para criar/atualizar cena fixa `Assets/Scenes/DemoGameplay.unity` | 2026-05-30 |
+| Feature: Blumenau — Igreja Matriz do Centro + horror social *Podres de Ricos* | 2026-05-17 |
+| Feature: Blumenau — Teatro Carlos Gomes + mercado negro + boss Autômato de Engrenagens Esquecidas | 2026-05-17 |
+| Feature: Blumenau — Sistema Hídrico (comportas, passarelas, docas, 4 estados) | 2026-05-17 |
+| Feature: Blumenau — Jardim de Edith + SQ-01 + relíquia Guizo de Edith | 2026-05-17 |
+| Feature: Blumenau — Mausoléu do Fundador + catacumba + culto político | 2026-05-17 |
+| Feature: Blumenau — Morro do Zendron + mapas periféricos pós-enchente | 2026-05-17 |
+| Documentar mecânica principal — Sistema de Crafting (Receptáculos) | 2026-05-10 |
+| Documentar mecânica — Build do Personagem (separação de Crafting.md) | 2026-05-10 |
+| Documentar cenas Unity — `assets.md` tem tabela de Cenas (Bootstrap, Levels, Menus, Sandbox, DemoGameplay, SampleScene) | 2026-07-11 |
+| Preencher índice de assets — `Docs/Architecture/indices/assets.md` populado com pastas de arte, prefabs, ScriptableObjects, cenas e assets registrados | 2026-07-11 |
+| Bootstrap da estrutura unificada `Docs/` | 2026-04-25 |
+| Stubs de 6 sistemas: Core, UI, SaveSystem, Serialization, Settings, Storage | 2026-04-25 |

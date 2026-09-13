@@ -36,8 +36,8 @@ Ao processar este prompt:
 4. Se a feature introduzir novos limites de sistema, sugira ADR em `Desenvolvimento/Docs/Architecture/architecture_decisions.md`.
 
 **Agentes por escopo:**
-- Estrutura / limites: `@Architect`
+- Estrutura / limites / ADR: `@TechLead`
 - Mecânica de gameplay: `@GameplayEngineer`
-- Setup Unity / Input / câmera: `@UnityEngineer`
-- UI / ServiceLocator / MonoBehaviours: `@UnityDeveloper`
+- Tudo Unity (setup, Input, câmera, UI, ServiceLocator, MonoBehaviours): `@UnityDeveloper`
 - Sistemas C# puros: `@SystemsDeveloper`
+- Documentação da feature: `@GameArchitect`

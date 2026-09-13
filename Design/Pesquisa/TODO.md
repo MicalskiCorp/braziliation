@@ -1,7 +1,7 @@
 # TODO — Pendências de Pesquisa do Braziliation
 
-> Índice central de tarefas pendentes na camada Pesquisa. Atualizado pelo `@Computador` a cada sessão.
-> **Modelo reativo:** o @Computador lê este arquivo no início de cada sessão e escreve handoffs em `Design/Criativo/TODO.md` — nunca chama @GameCreative diretamente.
+> Índice central de tarefas pendentes na camada Pesquisa. Atualizado pelo `@Historiador` a cada sessão.
+> **Modelo reativo:** o @Historiador lê este arquivo no início de cada sessão e escreve handoffs em `Design/Criativo/TODO.md` — nunca chama @GameCreative diretamente.
 
 ---
 

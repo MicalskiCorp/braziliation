@@ -31,7 +31,7 @@ description: "Direção de arte do Braziliation: pixel art dieselpunk, paleta re
 ## References for AI
 
 - Ao propor assets ou descrições, mantenha dentro de **pixel art** e **dieselpunk**.
-- Novos personagens ou cenários devem se encaixar em `Desenvolvimento/Docs/Lore/` e o mundo estabelecido.
+- Novos personagens ou cenários devem se encaixar em `Design/Criativo/` (cidades, lendas, personagens) e no mundo estabelecido.
 - Para detalhes de implementação (import settings, atlases), alinhe com `Desenvolvimento/Docs/Architecture/` e as configurações do projeto Unity.
 - Para sprites e assets gerados com IA, siga `Design/GuiasDeArte/pipeline-ia-sprites.md`, `Design/GuiasDeArte/style-bible.md`, `Design/GuiasDeArte/palette-guide.md` e `Design/GuiasDeArte/sprite-scale-guide.md`.
 - Para sprites gerados por código/agente (props, tiles, ícones), siga `Design/GuiasDeArte/pipeline-sprites-programaticos.md` e use as ferramentas de `Design/ArteFonte/Ferramentas/`.
@@ -39,7 +39,7 @@ description: "Direção de arte do Braziliation: pixel art dieselpunk, paleta re
 ## Prompt template para geração de arte
 
 Ao gerar prompts para ferramentas de arte (Midjourney, Stable Diffusion etc.), inclua:
-- Paleta restrita (max 16 cores)
-- 16 PPU, resolução específica
+- Paleta restrita da região (`Design/ArteConceitual/Paletas/{regiao}.json`; até ~32 cores por sprite — ADR-004)
+- Leitura em 640×360 @ 32 PPU (tile 32×32, player ~64 px de altura)
 - Pose e contexto
 - Referência cultural brasileira / dieselpunk

@@ -14,3 +14,8 @@
 | [`Serialization.md`](Serialization.md) | Serialização JSON dos dados de jogo | 🔨 Em Desenvolvimento |
 | [`Settings.md`](Settings.md) | Configurações persistentes do jogador | 🔨 Em Desenvolvimento |
 | [`Storage.md`](Storage.md) | Abstração de leitura/escrita em disco | 🔨 Em Desenvolvimento |
+| [`Build.md`](Build.md) | Estado da build do personagem e sinergias híbridas | 🔨 Em Desenvolvimento |
+| [`Crafting.md`](Crafting.md) | Componentes, receitas, receptáculos e itens híbridos | 🔨 Em Desenvolvimento |
+| [`Enemies.md`](Enemies.md) | Motor de IA de inimigos por perfil | ✅ Motor implementado |
+
+> Cada pasta de `src/Braziliation.Game.Core/` precisa de uma página aqui — o `DocsConsistencyTests` falha se faltar.

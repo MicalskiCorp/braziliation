@@ -200,7 +200,7 @@ Ler em paralelo antes de qualquer análise:
 3. `Braziliation/Desenvolvimento/Docs/Roadmap/backlog.md` — features e status
 4. Todos os arquivos `.cs` em `src/Braziliation.Game.Core/` — lógica pura testável
 5. Todos os arquivos `.cs` em `Assets/Scripts/` — MonoBehaviours e wiring Unity
-6. Todos os arquivos de teste em `Tests/` e `dotnet-tests/`
+6. Todos os arquivos de teste em `Tests/Braziliation.Game.Tests/` e o último resultado da skill `unity-validar` (`.claude/state/unity-validar.json`)
 
 ### Passo B — Auditoria de TODOs Concluídos
 
@@ -229,7 +229,7 @@ Varrer todos os arquivos em `src/Braziliation.Game.Core/` e verificar:
 - Todo serviço (`*Service.cs`) deve ter arquivo de teste dedicado
 - Todo modelo com lógica (`BuildState.cs`, `CraftingService.cs`, etc.) deve ter teste
 - Modelos puros de dados sem lógica (`SaveSlot.cs`, `SlotData.cs`) são opcionais mas recomendados
-- Todo teste em `Tests/` deve estar sincronizado em `dotnet-tests/` para rodar no CI
+- O CI roda `Tests/Braziliation.Game.Tests/` direto; o lado Unity é validado pela skill `unity-validar` (compilação + EditMode)
 
 ### Passo D — Mapeamento de Gaps para a Milestone
 
@@ -246,7 +246,7 @@ Comparar o estado atual com os requisitos da milestone ativa no `roadmap.md`. Pa
 | **Bloqueador de Demo** | Sem isso a demo não é jogável | Crítico |
 | **Funcionalidade Incompleta** | Feature marcada como ✅ mas com partes faltando | Alta |
 | **Cobertura de Teste Ausente** | Classe testável sem nenhum teste | Alta |
-| **CI Desincronizado** | Teste em `Tests/` que não está em `dotnet-tests/` | Alta |
+| **CI Desincronizado** | Teste ou checagem que roda local mas não no CI (ou vice-versa) | Alta |
 | **TODO Inline Não Rastreado** | `// TODO` no código sem entrada em `TODO.md` | Média |
 | **Design Pendente Bloqueador** | TODO-DESIGN que bloqueia comportamento de gameplay | Média |
 | **Documentação Desatualizada** | Status no backlog/TODO diverge do código real | Baixa |

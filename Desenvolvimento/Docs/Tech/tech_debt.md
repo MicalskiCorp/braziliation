@@ -31,6 +31,16 @@ Format:
   parou aí. Steam Deck Verified exige suporte a controle e glifos corretos.
 - **Fix:** tela de rebind sobre `InputActionRebindingExtensions`; avaliar Steam Input API.
 
+- **Item:** Testes EditMode escritos mas nunca executados
+- **Where:** `Assets/Tests/EditMode/ProjectSetupTests.cs`, skill `unity-validar --testes`
+- **Why:** O assembly compila (batchmode 2026-09-13), mas rodar testes exige licença Unity
+  ativada na máquina: a licença Personal só via Hub dá 198 `No valid Unity Editor license
+  found` para o Editor aberto por linha de comando — com `-batchmode`, sem ele e pela CLI
+  oficial (`unity license status`: "nenhuma ativa"). Até lá, as mesmas verificações rodam
+  pelo lado de fora em `UnityAssetConsistencyTests` (xUnit, no CI).
+- **Fix:** Unity Hub → Preferences → Licenses → Add → licença Personal; depois
+  `py .claude/skills/unity-validar/scripts/validar.py --testes`.
+
 ### Média
 
 - **Item:** Ruleset WFC de Blumenau é primeira versão — lâmina d'água serrilhada
@@ -43,11 +53,12 @@ Format:
   e variadas, e passar a usar o ruleset derivado como padrão. É edição de uma grade de texto de
   12 linhas, não reescrita de regras — decisão de direção de arte, não de código.
 
-- **Item:** `WfcMapImporter` nunca foi compilado nem executado dentro do Unity
+- **Item:** `WfcMapImporter` compila, mas nunca foi executado
 - **Where:** `Assets/Editor/Art/WfcMapImporter.cs`
-- **Why:** Escrito em 2026-09-03 contra a API do Editor, mas a licença Personal não permite
-  `-batchmode`, então não houve como compilar nem rodar daqui. Mesma situação de
-  `SheetAutoSlicer.cs` e `SheetAnimationTool.cs`.
+- **Why:** Compilou no primeiro batchmode (2026-09-13, skill `unity-validar`). A premissa
+  anterior — "a licença Personal não permite `-batchmode`" — estava errada: a Personal só não
+  pode ser *ativada* pela linha de comando; ativada pelo Hub, batchmode funciona. Executar o
+  importador ainda exige o menu do Editor.
 - **Fix:** Abrir o Editor, rodar `Assets > Braziliation > Importar Mapa WFC...` apontando para
   `Design/ArteFonte/IA/Outputs/wfc-teste/blumenau_s42.unity.json` e conferir o Tilemap.
 
@@ -56,9 +67,10 @@ Format:
 - **Why:** stub para destravar crafting.
 - **Fix:** definir regras no GDD antes de implementar; inventário não entra no save hoje.
 
-- **Item:** Ferramentas de editor de sprite nunca foram compiladas dentro do Unity
+- **Item:** Ferramentas de editor de sprite compilam, mas nunca foram exercitadas
 - **Where:** `Assets/Editor/Art/SheetAutoSlicer.cs`, `SheetAnimationTool.cs`
-- **Why:** criadas junto com o pipeline programático; validadas só por leitura.
+- **Why:** compilaram no batchmode de 2026-09-13; o slicing e a geração de `.anim` ainda não
+  foram conferidos num sheet real.
 - **Fix:** abrir o Unity, reimportar um `*_sheet.png` e confirmar slicing + `.anim`.
 
 - **Item:** Efeito híbrido nomeado `"PrótesisViva"` (espanhol) entre nomes PT-BR

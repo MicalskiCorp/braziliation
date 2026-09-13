@@ -4,7 +4,7 @@
 > **Status:** 📋 Planejado
 > **Sistema(s) envolvido(s):** Exploração, Coleta/Inventário, Diálogo/NPC, Side-Quests
 > **Prioridade:** Alta
-> **Referência criativa:** [`Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md`](../../../../../Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md)
+> **Referência criativa:** [`Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md`](../../../../Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md)
 
 ---
 

@@ -4,7 +4,7 @@
 > **Status:** 📋 Planejado
 > **Sistema(s) envolvido(s):** Exploração, Economia, Combate, Progressão de Bosses
 > **Prioridade:** Alta
-> **Referência criativa:** [`Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md`](../../../../../Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md)
+> **Referência criativa:** [`Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md`](../../../../Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md)
 
 ---
 

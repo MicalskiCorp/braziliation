@@ -14,8 +14,9 @@ Format per entry:
 
 ## ADR-001: Unity 6 + URP 2D + 320×180 @ 16 PPU
 
-- **Date:** (fill when accepted)
-- **Status:** Accepted
+- **Date:** (nunca registrada)
+- **Status:** **Superseded por ADR-004** (2026-07-12). Unity 6 + URP 2D continuam valendo;
+  a resolução e o PPU passaram a 640×360 @ 32 PPU.
 - **Context:** Need stable resolution and pixel-perfect rendering for SNES-style pixel art.
 - **Decision:** Use Unity 6, URP 2D, reference resolution 320×180, 16 pixels per unit. CameraScaler and GameInitializer enforce this.
 - **Consequences:** All art and tiles must be authored for 16 PPU; scaling handled by pipeline. Documented in `.github/instructions/art-direction.instructions.md`.

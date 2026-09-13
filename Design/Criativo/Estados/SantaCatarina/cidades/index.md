@@ -1,6 +1,6 @@
 ﻿# Cidades — Santa Catarina
 
-> Cidades mapeadas para o jogo. Template: [`../../../Models/ModelCidade.md`](../../../Models/ModelCidade.md)
+> Cidades mapeadas para o jogo. Template: [`../../../Models/ModelCidade.md`](../../../../Models/ModelCidade.md)
 
 ## Cidades
 

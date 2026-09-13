@@ -4,7 +4,7 @@
 > **Status:** 📋 Planejado
 > **Sistema(s) envolvido(s):** Diálogo/NPC, Exploração, Sistema Hídrico
 > **Prioridade:** Alta
-> **Referência criativa:** [`Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md`](../../../../../Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md)
+> **Referência criativa:** [`Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md`](../../../../Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md)
 
 ---
 

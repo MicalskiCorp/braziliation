@@ -2,7 +2,7 @@
 Jogo plataforma 2D em pixel art (C#) — ambientação dieselpunk pós-apocalíptica brasileira.
 
 ## 🧱 Estrutura
-- Engine: Unity / MonoGame (C#)
+- Engine: Unity 6 (6000.2) + URP 2D
 - Linguagem: C#
 - Estilo: Pixel Art de alta densidade (ADR-004)
 - Plataforma alvo: PC (Steam)
@@ -14,8 +14,9 @@ Jogo plataforma 2D em pixel art (C#) — ambientação dieselpunk pós-apocalíp
 - `Packages/` / `ProjectSettings/` → Unity (não mover)
 - `Braziliation.slnx` → solution principal (Assembly-CSharp + Core + Tests)
 - `Braziliation.CI.slnx` → solution opcional com os testes .NET (útil no IDE)
-- **`dotnet-tests/Braziliation.Game.Tests/`** → testes .NET para o CI
-- **CI (GitHub / GitLab)** → `dotnet restore/build/test` nesse `.csproj`; caminhos prefixados com `Desenvolvimento/` no workflow
+- **`Tests/Braziliation.Game.Tests/`** → testes xUnit .NET (rodam no CI, sem Unity)
+- **`Assets/Tests/EditMode/`** → testes EditMode do Unity (skill `unity-validar`)
+- **CI (GitHub / GitLab)** → `dotnet restore/build/test` no `.csproj` de testes; caminhos prefixados com `Desenvolvimento/` no workflow
 
 > 📁 **Estrutura do repositório:** o projeto Unity vive em `Desenvolvimento/`. A camada criativa (lore, lendas, brainstorm) vive em `Design/Criativo/`. Agents e instructions em `.github/`.
 
@@ -50,7 +51,7 @@ O repositório usa **VS Code Copilot** com agentes, instructions e prompts custo
 3. **Calibrar sessão** — Use `/project-context` para carregar todo o contexto do projeto.
 4. **Atualizar docs** — Decisões de arquitetura → `Docs/Architecture/architecture_decisions.md`; tech debt → `Docs/Tech/tech_debt.md`.
 
-**Guia completo:** [AGENTS.md](AGENTS.md) | [Docs/index.md](Docs/index.md)
+**Guia completo:** [AGENTS.md](../AGENTS.md) | [Docs/index.md](Docs/index.md)
 
 > 🎨 **Camada criativa:** `Design/Criativo/` na raiz do repo — gerida por `@GameCreative`.
 

@@ -1,5 +1,5 @@
 ---
-description: "Refatorar um sistema existente no Braziliation: reduzir acoplamento, alinhar com arquitetura, melhorar performance ou preparar para nova feature. Use com @Architect para plano estrutural ou @TechLead para priorização."
+description: "Refatorar um sistema existente no Braziliation: reduzir acoplamento, alinhar com arquitetura, melhorar performance ou preparar para nova feature. Use com @TechLead para plano estrutural e priorização."
 argument-hint: "Sistema a refatorar (ex: 'PlayerMovement', 'Combat damage flow', 'Enemy spawner')"
 agent: agent
 tools: [read, edit, search, todo]
@@ -32,6 +32,6 @@ Ao processar este prompt:
 4. Registre qualquer tech debt identificado em `Desenvolvimento/Docs/Tech/tech_debt.md`.
 
 **Agentes por escopo:**
-- `@Architect` — "como deve ser dividido?" e decisões de limite
-- `@TechLead` — "vale a pena refatorar?" e atualização de docs/ADR
-- `@UnityEngineer` / `@GameplayEngineer` — código concreto e mudanças de prefab
+- `@TechLead` — "como deve ser dividido?", "vale a pena refatorar?", decisões de limite e ADR
+- `@UnityDeveloper` / `@GameplayEngineer` — código concreto e mudanças de prefab
+- `@SystemsDeveloper` — quando o sistema vive em `src/Braziliation.Game.Core/`
