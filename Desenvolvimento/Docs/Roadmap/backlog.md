@@ -1,24 +1,24 @@
-﻿# Backlog — Braziliation
+# Backlog — Braziliation
 
-> Rastreamento de todas as features planejadas, em desenvolvimento e concluídas.
-> Atualizado pelo `@GameArchitect` a cada nova feature documentada.
+> Features e onde cada uma está documentada. Atualizado pelo `@GameArchitect` a cada feature nova.
+> **Pendências e decisões abertas não ficam aqui** — vivem no [`TODO.md`](../TODO.md). Esta tabela diz só em que estágio a feature está.
 
-## Features
+## Features do núcleo
 
-| Feature | Prioridade | Status | Arquivo |
+| Feature | Prioridade | Estágio | Documento |
 |---------|-----------|--------|---------|
-| Sistema de Crafting — Receptáculos | Alta | 🔁 Em Revisão | [`Mechanics/Crafting.md`](../Mechanics/Crafting.md) |
-| Build do Personagem — Receptáculos e Identidade | Alta | 🔁 Em Revisão | [`Mechanics/Build.md`](../Mechanics/Build.md) |
-| Player — Movimentação Básica (run, jump, colisão) | Alta | ✅ Concluído | — |
-| Combate Básico (vida, dano, uma arma) | Alta | ✅ Concluído | — |
-| Primeira Cena Jogável (blockout + tilemap) | Alta | ✅ Concluído | — |
-| HUD Básico (barra de vida, build ativa) | Média | ✅ Concluído | — |
-| Bootstrap Scene (GameServiceLocator + serviços) | Alta | ✅ Concluído | — |
-| Inimigo Básico (patrulha, detecção, dano) | Alta | ✅ Concluído | — |
+| Sistema de Crafting — Receptáculos | Alta | 🔁 Lógica pronta, números em aberto | [`Mechanics/Crafting.md`](../Mechanics/Crafting.md) |
+| Build do Personagem — Receptáculos e Identidade | Alta | 🔁 Lógica pronta, números em aberto | [`Mechanics/Build.md`](../Mechanics/Build.md) |
+| Player — Movimentação Básica (andar, pular, colisão) | Alta | ✅ Versão da demo | [`Sistemas/Gameplay.md`](../Architecture/Sistemas/Gameplay.md) |
+| Combate Básico (vida, dano, ataque corpo a corpo) | Alta | ✅ Versão da demo — arma inicial definitiva é decisão aberta | [`Sistemas/Gameplay.md`](../Architecture/Sistemas/Gameplay.md) |
+| Inimigo Básico (patrulha, detecção, dano) | Alta | ✅ Motor `EnemyBrain` + inimigo placeholder — inimigo base definitivo é decisão aberta | [`Mechanics/InimigosIA.md`](../Mechanics/InimigosIA.md) |
+| Primeira Cena Jogável (blockout + tilemap) | Alta | ✅ Versão da demo | [`Sistemas/Gameplay.md`](../Architecture/Sistemas/Gameplay.md) |
+| HUD Básico (barra de vida, build ativa) | Média | ✅ Versão da demo | [`Sistemas/UI.md`](../Architecture/Sistemas/UI.md) |
+| Bootstrap Scene (GameServiceLocator + serviços) | Alta | ✅ Concluído | [`Sistemas/Core.md`](../Architecture/Sistemas/Core.md) |
 
-## Features de Conteúdo (Blumenau — Design Concluído, Implementação Futura)
+## Features de Conteúdo (Blumenau — design pronto, implementação futura)
 
-| Feature | Prioridade | Status | Arquivo |
+| Feature | Prioridade | Estágio | Documento |
 |---------|-----------|--------|---------|
 | Blumenau — Igreja Luterana Matriz + SQ Hermann | Alta | 📋 Planejado | [`GDD/Features/Blumenau-IgrejaLuterana.md`](../GDD/Features/Blumenau-IgrejaLuterana.md) |
 | Blumenau — Igreja Matriz do Centro + Podres de Ricos | Alta | 📋 Planejado | [`GDD/Features/Blumenau-IgrejaMatriz.md`](../GDD/Features/Blumenau-IgrejaMatriz.md) |
@@ -28,16 +28,16 @@
 | Blumenau — Mausoléu do Fundador + catacumba | Média | 📋 Planejado | [`GDD/Features/Blumenau-MausoleumFundador.md`](../GDD/Features/Blumenau-MausoleumFundador.md) |
 | Blumenau — Morro do Zendron + mapas periféricos | Média | 📋 Planejado | [`GDD/Features/Blumenau-MorroZendron.md`](../GDD/Features/Blumenau-MorroZendron.md) |
 
-## Legenda de Status
+## Legenda de Estágio
 
-| Ícone | Status |
+| Ícone | Estágio |
 |-------|--------|
 | 📋 | Planejado |
-| 🔨 | Em Desenvolvimento |
-| 🔁 | Em Revisão |
-| ✅ | Concluído |
+| 🔨 | Em desenvolvimento |
+| 🔁 | Em revisão |
+| ✅ | Concluído (a coluna diz se é versão da demo) |
 | ⏸️ | Pausado |
 
 ---
 
-> Ao documentar nova feature: adicionar linha com status `📋 Planejado` e link para `Features/{Nome}/{Nome}.md`.
+> Ao documentar feature nova: linha com `📋 Planejado` e link para `GDD/Features/{Contexto}-{Nome}.md`.

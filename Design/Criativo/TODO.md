@@ -18,18 +18,19 @@
 | Listar referências de obras | [`Historia/premissa.md`](Historia/premissa.md) | Baixa | 📋 Rascunho |
 | Criar arco: *A Rede Esquecida* — meta-arco dos túneis intercidades | [`Historia/arcos.md`](Historia/arcos.md) | Alta | ❌ Não iniciado |
 | Criar primeiro personagem (protagonista) | [`Historia/personagens/index.md`](Historia/personagens/index.md) | Média | ❌ Não iniciado |
-| Criar arte conceitual de Edith Gaertner | [`Historia/personagens/Edith-Gaertner.md`](Historia/personagens/Edith-Gaertner.md) | Média | ❌ Não iniciado |
 
 ### Lendas
 
 | Item | Arquivo | Prioridade | Status |
 |------|---------|-----------|--------|
-| Criar ficha individual: Bruxas Açorianas | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Alta | 🔨 Em andamento |
-| Criar ficha individual: Lobisomem de Ratones | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Alta | 🔨 Em andamento |
-| Criar ficha individual: Enterrado Vivo (Catalepsia) | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | 🔨 Em andamento |
-| Criar ficha individual: Minhocão | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | 🔨 Em andamento |
-| Criar ficha individual: Pelznickel | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | 🔨 Em andamento |
-| Criar ficha individual: Dragão do Encano Alto | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | 🔨 Em andamento |
+> Status revisado em 2026-09-13: as seis estavam "🔨 Em andamento" desde abril, mas `por-categoria/criaturas.md` não tem nenhuma ficha — as lendas existem só no catálogo e nas fichas de cidade.
+
+| Criar ficha individual: Bruxas Açorianas | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Alta | ❌ Não iniciado |
+| Criar ficha individual: Lobisomem de Ratones | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Alta | ❌ Não iniciado |
+| Criar ficha individual: Enterrado Vivo (Catalepsia) | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | ❌ Não iniciado |
+| Criar ficha individual: Minhocão | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | ❌ Não iniciado |
+| Criar ficha individual: Pelznickel | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | ❌ Não iniciado |
+| Criar ficha individual: Dragão do Encano Alto | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | ❌ Não iniciado |
 | Popular `por-categoria/lugares.md` | [`Lendas/por-categoria/lugares.md`](Lendas/por-categoria/lugares.md) | Baixa | 📋 Rascunho |
 | Popular `por-categoria/personagens.md` | [`Lendas/por-categoria/personagens.md`](Lendas/por-categoria/personagens.md) | Baixa | 📋 Rascunho |
 
@@ -58,6 +59,7 @@
 | Criar estado: Amazônia | Alta | ❌ Não iniciado |
 | Criar estado: São Paulo | Média | ❌ Não iniciado |
 | Criar estado: Minas Gerais | Média | ❌ Não iniciado |
+| Criar estado: Bahia | Média | ❌ Não iniciado |
 
 ### Crafting & Build — Conteúdo Criativo
 
@@ -67,7 +69,6 @@
 |------|-----------------|-----------|--------|
 | Catálogo de componentes — definir nomes, tipos (Mecânico/Místico/Biológico) e lore de cada componente | [`Mechanics/Crafting.md`](../../Desenvolvimento/Docs/Mechanics/Crafting.md) | Alta | ❌ Não iniciado |
 | Lore da mesa de crafting — origem narrativa e funcionamento no mundo do jogo | [`Mechanics/Crafting.md`](../../Desenvolvimento/Docs/Mechanics/Crafting.md) | Média | ❌ Não iniciado |
-| Criar estado: Bahia | Média | ❌ Não iniciado |
 
 ### Ideias
 
@@ -81,7 +82,8 @@
 
 | Asset | Referência criativa (lore/ideia) | Categoria destino em ArteConceitual | Prioridade | Status |
 |-------|-----------------------------------|--------------------------------------|-----------|--------|
-| *(preencher ao fechar a ideia de um asset)* | | `Personagens/` \| `Criaturas/` \| `Props/` \| `Cidades/` | | ❌ Não iniciado |
+| Edith Gaertner (NPC, SQ-01) | [`Historia/personagens/Edith-Gaertner.md`](Historia/personagens/Edith-Gaertner.md) | `Personagens/` | Média | 🔨 Lote 12 aguardando veredito — [`lotes.md`](../ArteFonte/IA/ContextPacks/chr-blumenau-edith-gaertner/lotes.md) |
+| Soldado Mercenário Clérico (inimigo de Blumenau) | [`Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) — seção Monstros | `Criaturas/` | Média | 🔨 6 thumbnails em `ArteFonte/IA/Outputs/soldado-clerico-thumbs/` aguardando curadoria |
 
 ## Handoffs de Pesquisa
 

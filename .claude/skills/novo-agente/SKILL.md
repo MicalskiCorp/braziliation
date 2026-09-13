@@ -6,11 +6,11 @@ disable-model-invocation: true
 
 # Skill: novo-agente
 
-Segue o protocolo do `@AgentArchitect` (Papel 2, em `Braziliation/.github/agents/AgentArchitect.agent.md`) estendido para o formato duplo Copilot+Claude.
+Protocolo executável do Papel 2 do `@AgentArchitect` para o formato duplo Copilot+Claude.
 
 ## Antes de criar (obrigatório)
 
-1. Varrer TODOS os agentes existentes em `Braziliation/.github/agents/` e ler a tabela do `Braziliation/AGENTS.md`.
+1. Inventário: tabela de agentes do `AGENTS.md` + `Grep "^description:" .claude/agents`. Abrir o corpo de um agente só se ele for vizinho direto da proposta.
 2. Se a responsabilidade proposta estiver ≥50% coberta por agente existente: reportar o conflito e propor estender o existente ou estreitar o escopo. **Nunca criar duplicado.**
 3. Definir limites: o que o agente possui e o que delega (tabela "Limites" no corpo).
 
@@ -18,23 +18,35 @@ Segue o protocolo do `@AgentArchitect` (Papel 2, em `Braziliation/.github/agents
 
 | Arquivo | Camada | Formato | Conteúdo |
 |---------|--------|---------|----------|
-| `Braziliation/.github/agents/{Nome}.agent.md` | 2ª (funcional) | Copilot | **Fonte de verdade** — corpo completo |
-| `Braziliation/.claude/agents/{nome-kebab}.md` | 2ª (funcional) | Claude | Mesmo corpo, frontmatter Claude |
-| `{raiz}/.github/agents/{Nome}.agent.md` | 1ª (persona) | Copilot | Wrapper fino → "leia o agente de referência" |
-| `{raiz}/.claude/agents/{nome-kebab}.md` | 1ª (persona) | Claude | Wrapper fino, frontmatter Claude |
+| `.claude/agents/{nome-kebab}.md` | 2ª (funcional) | Claude | **Onde se edita o corpo** |
+| `.github/agents/{Nome}.agent.md` | 2ª (funcional) | Copilot | Mesmo corpo (propagado pelo script), frontmatter Copilot |
+| `{raiz do workspace}/.claude/agents/{nome-kebab}.md` | 1ª (persona) | Claude | Wrapper fino → "leia o agente de referência" — fora do repositório |
+| `{raiz do workspace}/.github/agents/{Nome}.agent.md` | 1ª (persona) | Copilot | Wrapper fino — fora do repositório |
 
-## Conversão de frontmatter Copilot → Claude
+## Sincronizar o corpo
 
-- `name`: PascalCase → kebab-case; `argument-hint`: remover;
-- `tools`: lista YAML → string CSV com mapeamento `read→Read` · `edit→Edit, Write` · `search→Grep, Glob` · `execute→Bash` · `web→WebSearch, WebFetch` · `todo→TodoWrite` · `agent→Task` · `vscode/browser/mermaid→remover`;
-- `model`: nomes longos → `sonnet`|`opus`|`haiku` (só na 1ª camada);
-- `description`: manter idêntica (serve de auto-delegação no Claude);
-- **Corpo: idêntico nos dois formatos** — sem BOM UTF-8.
+Editar só o arquivo Claude e rodar:
+
+```
+py .claude/skills/novo-agente/sync_bodies.py          # propaga o corpo para o .agent.md
+py .claude/skills/novo-agente/sync_bodies.py --check  # só lista divergências
+```
+
+O script preserva o frontmatter Copilot, o BOM UTF-8 e o CRLF dos `.agent.md`. O `AgentParityTests` compara os corpos normalizados e falha na divergência.
+
+## Conversão de frontmatter Claude → Copilot
+
+- `name`: kebab-case → PascalCase; acrescentar `argument-hint` em português;
+- `tools`: CSV → lista YAML com o mapeamento `Read→read` · `Edit, Write→edit` · `Grep, Glob→search` · `Bash→execute` · `WebSearch, WebFetch→web` · `TodoWrite→todo` · `Task, Agent→agent`; `Skill`, `model:`, `skills:` e `mcpServers:` não existem no Copilot;
+- `model`: obrigatório no Claude (`sonnet`|`opus`|`haiku`), verificado pelo `AgentParityTests`;
+- `description`: idêntica nos dois (serve de auto-delegação no Claude).
 
 ## Estrutura do corpo (convenção do projeto)
 
-`## Papel` → `## Responsabilidades` → seções de domínio → `## Limites` → `## Como Responder Requisições` → `## Referências`. Português, padrão de description `"X do Braziliation. Use para: … Acionado por: '…'."`.
+`## Papel` → `## Responsabilidades` → seções de domínio → `## Limites` → `## Como Responder Requisições` → `## Referências`. Português, padrão de description `"X do Braziliation. Use para: … Acionado por: '…'."`. Orçamento: 5.000 tokens por prompt (`TokenBudgetTests`).
 
 ## Registro (obrigatório)
 
-Adicionar/atualizar a linha do agente na tabela do `Braziliation/AGENTS.md`. Reportar os 4 caminhos criados + resumo do escopo.
+1. Par novo no dicionário `AgentPairs` do `AgentParityTests` e no `PARES` do `sync_bodies.py`.
+2. Linha do agente na tabela do `AGENTS.md`.
+3. Reportar os caminhos criados + resumo do escopo.

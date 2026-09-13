@@ -26,7 +26,7 @@ Ver [`ideias.md`](ideias.md) para ideias de conexão entre cidades, mecânicas r
 
 ## Lendas Locais Mapeadas
 
-As lendas específicas de Santa Catarina estão registradas em [`../../../Lendas/catalogo.md`](../../Lendas/catalogo.md) com origem `SC`.
+As lendas específicas de Santa Catarina estão registradas em [`Lendas/catalogo.md`](../../Lendas/catalogo.md) com origem `SC`.
 
 ---
 

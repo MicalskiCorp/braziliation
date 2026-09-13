@@ -5,7 +5,7 @@ description: Executa um handoff entre as camadas do fluxo reativo do Braziliatio
 
 # Skill: handoff
 
-O modelo do projeto é **reativo**: nenhuma camada invoca a seguinte — ela escreve no TODO da próxima e o usuário aciona quando quiser. Fluxo canônico no `Braziliation/AGENTS.md` (seção "Fluxo entre Camadas").
+O modelo do projeto é **reativo**: nenhuma camada invoca a seguinte — ela escreve no TODO da próxima e o usuário aciona quando quiser. Fluxo canônico no `AGENTS.md` (seção "Fluxo entre Camadas").
 
 ## Rotas válidas
 
@@ -24,7 +24,7 @@ O modelo do projeto é **reativo**: nenhuma camada invoca a seguinte — ela esc
    - Docs→Implementação: spec/feature documentada em `Docs/GDD/Features/` ou `Docs/Mechanics/`.
 3. Ler o TODO de destino e **seguir o formato das entradas existentes** (tabela/seção usada no arquivo).
 4. Escrever a entrada com: descrição acionável, referência ao material de origem (caminho), agente sugerido, prioridade.
-5. Respeitar os guardrails de `Braziliation/memories/repo/historian-guardrails.md` quando a origem for a camada de Pesquisa (não editar conteúdo criativo; exceção única: `Design/Criativo/TODO.md`).
+5. Respeitar os guardrails de `memories/repo/historian-guardrails.md` quando a origem for a camada de Pesquisa (não editar conteúdo criativo; exceção única: `Design/Criativo/TODO.md`).
 6. Reportar ao usuário: entrada criada, camada seguinte e comando sugerido para acionar.
 
 ## Regras

@@ -1,20 +1,19 @@
 # Architecture Decision Records (ADRs) – Braziliation
 
-This file records **significant architecture and structure decisions** so future work and AI agents stay consistent.
+Registro das **decisões significativas de arquitetura e estrutura**, para que trabalho futuro e agentes de IA sigam consistentes. Nova entrada: skill `novo-adr`.
 
-Format per entry:
-- **Title:** Short name
-- **Date:** YYYY-MM-DD
-- **Status:** Proposed | Accepted | Deprecated
-- **Context:** What problem or option we faced
-- **Decision:** What we chose
-- **Consequences:** Trade-offs, follow-ups
+Formato de cada entrada (os rótulos ficam em inglês — o `DocsConsistencyTests` e a skill leem `**Status:**`):
+- **Date:** AAAA-MM-DD
+- **Status:** Proposed | Accepted | Superseded por ADR-NNN
+- **Context:** o problema ou a opção que se apresentou
+- **Decision:** o que foi escolhido
+- **Consequences:** trade-offs e desdobramentos
 
 ---
 
 ## ADR-001: Unity 6 + URP 2D + 320×180 @ 16 PPU
 
-- **Date:** (nunca registrada)
+- **Date:** não registrada — anterior a 2026-04 (início do projeto)
 - **Status:** **Superseded por ADR-004** (2026-07-12). Unity 6 + URP 2D continuam valendo;
   a resolução e o PPU passaram a 640×360 @ 32 PPU.
 - **Context:** Need stable resolution and pixel-perfect rendering for SNES-style pixel art.
@@ -25,7 +24,7 @@ Format per entry:
 
 ## ADR-002: Input System (com.unity.inputsystem)
 
-- **Date:** (fill when accepted)
+- **Date:** não registrada — anterior a 2026-09-02 (o ADR-006 parte dela)
 - **Status:** Accepted
 - **Context:** Modern input with actions and rebinding; replace legacy Input Manager.
 - **Decision:** Use com.unity.inputsystem; single Input Actions asset (e.g. InputSystem_Actions.inputactions) for player and UI.
@@ -124,4 +123,4 @@ Format per entry:
 
 ---
 
-*(Add new ADRs below. Keep entries short and link to Docs/Architecture or code when relevant.)*
+*(Novos ADRs abaixo. Entradas curtas, com link para `Docs/Architecture/` ou para o código quando ajudar.)*

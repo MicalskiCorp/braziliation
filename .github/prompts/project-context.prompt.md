@@ -10,7 +10,7 @@ Leia os arquivos de contexto abaixo e absorva o estado atual do projeto **Brazil
 
 ## Arquivos a ler (em ordem)
 
-1. `AGENTS.md` — agentes, skills e processos (fonte canônica)
+1. `AGENTS.md` — agentes, camadas e TODOs (mapa) · `Desenvolvimento/Docs/Tech/processos.md` — skills, travas e processos
 2. `.github/instructions/game-vision.instructions.md` — visão, pilares, experiência-alvo
 3. `.github/instructions/coding-standards.instructions.md` — padrões de código C# e Unity
 4. `.github/instructions/art-direction.instructions.md` — direção de arte e restrições técnicas

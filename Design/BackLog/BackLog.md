@@ -1,13 +1,13 @@
 ﻿---
 name: BackLog
-description: "Lógica de gerência de TODOs criativos do Braziliation. Lida diretamente pelo agente @GameCreative (Braziliation/.github/agents/GameCreative.agent.md) nas etapas Passo 0, Passo Final e Modo 10."
+description: "Lógica de gerência de TODOs criativos do Braziliation. Lida diretamente pelo agente @GameCreative nas etapas Passo 0, Passo Final e Modo 10."
 ---
 
 # BackLog — Lógica de TODOs Criativos
 
 Documento de operações para **ler, atualizar e varrer** o arquivo `Design/Criativo/TODO.md` do projeto Braziliation.
 
-> Este arquivo é lido diretamente pelo agente `@GameCreative` (`Braziliation/.github/agents/GameCreative.agent.md`).
+> Este arquivo é lido diretamente pelo agente `@GameCreative` (`.claude/agents/game-creative.md` · `.github/agents/GameCreative.agent.md`).
 
 ---
 
@@ -35,8 +35,11 @@ Documento de operações para **ler, atualizar e varrer** o arquivo `Design/Cria
 | `Lendas/` | `### Lendas` |
 | `Estados/SantaCatarina/cidades/` | `### Cidades — Santa Catarina` |
 | `Estados/{X}/` (novo estado) | `### Cidades — {X}` (criar se não existir) |
-| `Estados/index.md` | `### Estados Planejados` |
+| `Estados/index.md` ou "Criar estado: …" | `### Estados Planejados` |
 | `Ideias/` ou `Brainstorm/` | `### Ideias` |
+| `Desenvolvimento/Docs/Mechanics/` (pedido do `@GameArchitect`) | `### Crafting & Build — Conteúdo Criativo` |
+| Handoff do `@Historiador` (`Design/Pesquisa/…`) | `## Handoffs de Pesquisa` |
+| Concept art de um asset | `### Concept Art Pendente` — usar a operação `concept-art`, não `adicionar` |
 
 3. Adicionar linha com status `❌ Não iniciado`
 4. Retornar confirmação

@@ -7,7 +7,7 @@ agent: agent-architect
 
 # Skill: validar-todos
 
-Executa o **Papel 3 (Auditoria)** do `@AgentArchitect` — protocolo canônico completo em `Braziliation/.github/agents/AgentArchitect.agent.md`, seção "PAPEL 3". Esta skill é o roteiro executável; em divergência, o protocolo canônico manda.
+Executa o **Papel 3 (Auditoria)** do `@AgentArchitect` — protocolo canônico completo em `.claude/agents/agent-architect.md` (idêntico em `.github/agents/AgentArchitect.agent.md`), seção "PAPEL 3". Esta skill é o roteiro executável; em divergência, o protocolo canônico manda.
 
 ## Roteiro
 

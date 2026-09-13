@@ -20,7 +20,7 @@ public sealed class DocsConsistencyTests
         "TextMesh Pro", "Outputs", "Rejected",
     };
 
-    private static IEnumerable<string> MarkdownFiles()
+    internal static IEnumerable<string> MarkdownFiles()
     {
         var pending = new Stack<string>();
         pending.Push(GitRoot);
@@ -121,6 +121,37 @@ public sealed class DocsConsistencyTests
             "Namespaces do core sem página (ou sem linha no índice) em Docs/Architecture/Sistemas/: " + string.Join(", ", missing));
     }
 
+    /// <summary>
+    /// As fichas de Sistemas/ são o índice de scripts. Antes havia um índice paralelo
+    /// (indices/sistemas.md) mantido à mão que chegou a listar 18 de 71 scripts — e era o
+    /// último passo do fluxo de leitura dos agentes.
+    /// </summary>
+    [Fact]
+    public void Every_Script_Is_Listed_In_A_System_Page()
+    {
+        var sistemas = Path.Combine(UnityRoot, "Docs", "Architecture", "Sistemas");
+        var fichas = string.Concat(Directory.EnumerateFiles(sistemas, "*.md").Select(File.ReadAllText));
+
+        var roots = new[]
+        {
+            Path.Combine(UnityRoot, "Assets", "Scripts"),
+            Path.Combine(UnityRoot, "Assets", "Editor"),
+            Path.Combine(UnityRoot, "src", "Braziliation.Game.Core"),
+        };
+
+        var missing = roots
+            .SelectMany(root => Directory.EnumerateFiles(root, "*.cs", SearchOption.AllDirectories))
+            .Where(f => !f.Split(Path.DirectorySeparatorChar).Any(part => part is "bin" or "obj"))
+            .Select(Path.GetFileName)
+            .Where(name => !fichas.Contains($"`{name}`", StringComparison.Ordinal))
+            .OrderBy(name => name)
+            .ToList();
+
+        Assert.True(missing.Count == 0,
+            "Scripts sem linha na \"Fontes Técnicas\" de nenhuma ficha em Docs/Architecture/Sistemas/: " +
+            string.Join(", ", missing));
+    }
+
     [Fact]
     public void Superseded_Adrs_Name_Their_Replacement()
     {
@@ -144,15 +175,20 @@ public sealed class DocsConsistencyTests
         Assert.True(problems.Count == 0, "ADR substituído sem indicar o substituto: " + string.Join(", ", problems));
     }
 
+    /// <summary>
+    /// O catálogo saiu do AGENTS.md (que entra em toda sessão) para Tech/processos.md,
+    /// lido sob demanda. Continua obrigatório listar toda skill.
+    /// </summary>
     [Fact]
-    public void Every_Skill_Is_Listed_In_Agents_Catalog()
+    public void Every_Skill_Is_Listed_In_Process_Catalog()
     {
-        var catalog = File.ReadAllText(Path.Combine(GitRoot, "AGENTS.md"));
+        var catalog = File.ReadAllText(Path.Combine(UnityRoot, "Docs", "Tech", "processos.md"));
         var missing = Directory.EnumerateDirectories(Path.Combine(GitRoot, ".claude", "skills"))
             .Select(Path.GetFileName)
             .Where(name => !catalog.Contains($"`{name}`", StringComparison.Ordinal))
             .ToList();
 
-        Assert.True(missing.Count == 0, "Skills sem linha no catálogo do AGENTS.md: " + string.Join(", ", missing));
+        Assert.True(missing.Count == 0,
+            "Skills sem linha no catálogo de Desenvolvimento/Docs/Tech/processos.md: " + string.Join(", ", missing));
     }
 }

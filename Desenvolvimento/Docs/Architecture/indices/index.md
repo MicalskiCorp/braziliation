@@ -1,11 +1,11 @@
-# Índices — Referências Técnicas por Sistema
+# Índices — Referências Técnicas
 
-> Índices de scripts, assets e protocolo de comunicação entre camadas.
+> Índice de assets e protocolo de sincronização entre código e documentação.
+> O índice de scripts são as próprias fichas em [`../Sistemas/`](../Sistemas/index.md) — não existe cópia aqui.
 
 ## Conteúdo
 
 | Arquivo | Descrição |
 |---------|-----------|
-| [`sistemas.md`](sistemas.md) | Scripts e módulos por sistema |
-| [`assets.md`](assets.md) | Assets principais referenciados por sistema |
-| [`protocolo-comunicacao.md`](protocolo-comunicacao.md) | Protocolo motor ↔ produto (estrutura ↔ IA) |
+| [`assets.md`](assets.md) | Assets principais e o backlog das 5 etapas de cada asset |
+| [`protocolo-comunicacao.md`](protocolo-comunicacao.md) | Regras de sincronização código ↔ fichas ↔ features |

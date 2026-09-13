@@ -56,13 +56,4 @@ Para retoque fino e pixel pass, o `@SpriteArtist` usa o servidor MCP `aseprite` 
 
 Cada caractere de `rows` é um pixel: `.` = transparente; os demais são a `key` da cor na paleta JSON. `rows` deve ter exatamente `size[1]` linhas de `size[0]` caracteres. `id: "idle"`/`"default"` renderiza para `{name}.png`; outros ids renderizam para `{name}_{id}.png`; cada entrada de `sheets` empacota a sequência em `{name}_{chave}_sheet.png`.
 
-**Formato legado** (specs pré-migração, 1 arquivo por frame — ainda lido por `render_spec.py` para não quebrar assets já entregues; não usar em specs novas):
-
-```json
-{
-  "name": "prop_blumenau_floodgate_lever",
-  "size": [32, 32],
-  "palette": "../../ArteConceitual/Paletas/blumenau.json",
-  "rows": ["...7A...", "..77AA..", "..."]
-}
-```
+**Formato legado** (1 arquivo por frame, `rows` na raiz em vez de `outputs`): o `render_spec.py` ainda lê para não quebrar assets já entregues — não usar em specs novas.

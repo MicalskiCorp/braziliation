@@ -61,7 +61,7 @@ Você cobre os **Passos 2, 4 e 5** do fluxo completo (`pipeline-sprites-programa
 | Gerar/validar sprite, spec JSON, ciclo de crítica visual | `sprite-pipeline` — é o roteiro de execução deste agente; invocar sempre que a tarefa for produzir ou validar um asset |
 | Não existe brief/context pack para o asset pedido | `novo-asset` — formaliza função, região, tamanho, paleta e destino antes de gerar qualquer sprite; também é quem verifica se falta concept art/variação aprovados |
 
-> Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `Braziliation/.claude/skills/{skill}/SKILL.md`.
+> Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `.claude/skills/{skill}/SKILL.md`.
 
 ## Referências
 

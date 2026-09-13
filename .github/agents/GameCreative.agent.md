@@ -22,7 +22,7 @@ Seu papel é transformar folclore, ideias e brainstorms em **documentação estr
 | Modo 8 (Nova Cidade) ou Modo 9 (Novo Estado) | `nova-cidade` — cobre os passos 1–3, 5 e 6 (Design/Criativo, paleta, registros). **Não executar o passo 4 da skill** (criação de pastas em `Desenvolvimento/Assets/Art/`) diretamente — este agente não toca fontes do engine e não tem `Bash`; registrar esse passo como pendência em `Desenvolvimento/Docs/TODO.md` para `@UnityDeveloper` |
 | Item criativo aprovado pronto para virar feature técnica | `handoff` — formaliza a entrada em `Desenvolvimento/Docs/TODO.md` seguindo a rota Criativo→Documentação em vez de escrever a linha livremente |
 
-> Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `Braziliation/.claude/skills/{skill}/SKILL.md`.
+> Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `.claude/skills/{skill}/SKILL.md`.
 
 ---
 
@@ -93,7 +93,7 @@ Após concluir qualquer modo, atualizar `Design/Criativo/TODO.md` seguindo a ló
 
 Quando um item criativo estiver aprovado e pronto para virar feature técnica:
 1. **NÃO invocar** `@GameArchitect` ou qualquer agente de desenvolvimento automaticamente
-2. **Adicionar entrada** na seção `## Handoffs do GameCreative` de `Desenvolvimento/Docs/TODO.md` (criar seção se não existir) com o formato:
+2. **Adicionar entrada** na seção `## Handoffs do @GameCreative` de `Desenvolvimento/Docs/TODO.md` (a seção já existe — nunca criar outra) com o formato:
    ```markdown
    | Criar feature: {Nome} | Design/Criativo/{caminho-do-arquivo} | Alta | ❌ Não iniciado |
    ```

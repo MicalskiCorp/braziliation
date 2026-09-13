@@ -50,7 +50,7 @@ Seu papel é ser o **verificador de existência de referências folclóricas e c
 | Modo 5 (Brainstorm de Pesquisa) ou Modo 6 (Handoff para Criativo) | `handoff` — formaliza a entrada em `Design/Criativo/TODO.md` (rota Pesquisa→Criativo); usar em conjunto com o arquivo de briefing em `Design/Pesquisa/Handoffs/AAAA-MM-DD-{tema}.md` descrito no Modo 6 |
 | Modo 1/7 quando o tema for história de Blumenau e exigir fonte primária (data, nome, evento específico) | `hemeroteca-blumenau` — localiza a edição certa da revista "Blumenau em Cadernos" nos índices por década da Hemeroteca CIASC e lê o PDF OCR em busca do termo |
 
-> Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `Braziliation/.claude/skills/{skill}/SKILL.md`.
+> Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `.claude/skills/{skill}/SKILL.md`.
 
 ---
 
@@ -64,10 +64,11 @@ Antes de pesquisar, responder ou sugerir qualquer coisa, o Historiador deve varr
 |-------|-----------|--------|
 | 1 | `Design/Pesquisa/index.md` | Mapa de cobertura — o que já foi pesquisado e aprovado |
 | 2 | `Design/Criativo/index.md` | Visão geral do material criativo já produzido |
-| 3 | `Design/Criativo/Lendas/` | Lendas já incorporadas ao universo do jogo |
-| 4 | `Design/Criativo/Historia/` | Contexto histórico já usado criativamente |
-| 5 | `Design/Criativo/Estados/` | Conteúdo regional já trabalhado pelo @GameCreative |
-| 6 | `Desenvolvimento/Docs/GDD/index.md` | Referências de lore no design document oficial |
+| 3 | `memories/repo/historian-guardrails.md` | Barreiras da camada e critério de validação de causos e memória oral |
+| 4 | `Grep` pelo tema (lenda, cidade, personagem, evento) em `Design/Pesquisa/`, `Design/Criativo/` e `Desenvolvimento/Docs/GDD/` | Achar só os arquivos que já citam o tema |
+| 5 | Apenas os arquivos encontrados no passo 4 | Contexto do tema sem ler pastas inteiras |
+
+> **Economia de contexto:** nunca abrir uma pasta inteira de `Design/Criativo/` — as fichas de cidade passam de 20 KB. Pedido sem tema específico (ex.: "listar pesquisas") usa só os passos 1 a 3.
 
 Após a leitura, o agente deve:
 

@@ -79,6 +79,16 @@ Format:
 - **Fix:** renomear para `"ProteseViva"` **junto com** um degrau `ISaveMigration`, se o
   identificador chegar a ser persistido — hoje ainda não é. Fazer antes que seja.
 
+- **Item:** `MainMenuUISetupEditor` calcula a câmera do menu para 320×180 @ 16 PPU
+- **Where:** `Assets/Editor/Menu/MainMenuUISetupEditor.cs` (comentário e cálculo de `orthographicSize`)
+- **Why:** anterior ao ADR-004 (640×360 @ 32 PPU). Encontrado ao indexar os scripts em 2026-09-13.
+- **Fix:** recalcular com 640×360 / 32 PPU (mesmo `orthographicSize` 5,625 se o fundo for re-autorado em 32 PPU) e conferir o menu no Editor.
+
+- **Item:** Dois documentos acima do teto de 5 mil tokens
+- **Where:** `Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md` (~5,8k) · `Design/GuiasDeArte/pipeline-ia-sprites.md` (~5,8k)
+- **Why:** crescem por acréscimo; são lidos inteiros pelo `@GameCreative` e pelo `@SpriteArtist`. Estão como exceção explícita no `TokenBudgetTests`.
+- **Fix:** dividir a ficha de Blumenau por seção (características, monstros, lugares, missões) com o `index.md` virando roteador — muda o template `ModelCidade`, então é decisão do usuário; dividir o guia de IA por rota. Ao dividir, remover a exceção (o teste acusa exceção sobrando).
+
 - **Item:** `HealthComponent` dispara `OnHealthChanged` no `Awake`
 - **Where:** `Assets/Scripts/Gameplay/HealthComponent.cs`
 - **Why:** ouvinte registrado por código em outro `Awake` pode não estar inscrito ainda.
@@ -86,11 +96,9 @@ Format:
 
 ### Baixa
 
-- **Item:** 11 agentes duplicados em 2 formatos (22 arquivos que diferem em ~1 linha)
-- **Where:** `.claude/agents/` × `.github/agents/`
-- **Why:** Copilot e Claude Code usam formatos diferentes; a sincronia depende de
-  disciplina via skill `novo-agente`.
-- **Fix:** gerar o formato Copilot a partir do Claude + teste de CI que falha na divergência.
+- *(nenhum item — o dos 11 agentes duplicados em 2 formatos foi pago em 2026-09-13: o corpo se
+  edita no formato Claude e `.claude/skills/novo-agente/sync_bodies.py` propaga ao Copilot; o
+  `AgentParityTests` falha na divergência.)*
 
 ---
 

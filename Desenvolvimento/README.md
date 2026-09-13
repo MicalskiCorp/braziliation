@@ -27,31 +27,22 @@ A pasta `Logs/` na raiz é gerada pelo Unity e está no `.gitignore`. Se quiser 
 1. Clone o repositório.
 2. Instale Git LFS: `git lfs install`
 3. Configure o remote: `git remote add origin git@github.com:<org>/Braziliation.git`
-4. Push inicial: `git push -u origin develop`
+4. Push inicial: `git push -u origin main` (commits vão direto no `main` até a v1 — ver `Docs/Tech/DevelopmentRules.md`)
 
-## 🚀 Roadmap inicial
-Consulte o ClickUp: (link do espaço do projeto)
+## 🚀 Roadmap
+Fases em [`Docs/Roadmap/roadmap.md`](Docs/Roadmap/roadmap.md); pendências vivas em [`Docs/TODO.md`](Docs/TODO.md).
 
 ---
 
-## 🤖 Desenvolvimento assistido por IA (VS Code Copilot)
+## 🤖 Desenvolvimento assistido por IA
 
-O repositório usa **VS Code Copilot** com agentes, instructions e prompts customizados em `.github/`.
+O repositório funciona com **Claude Code** e **VS Code Copilot**. Os 11 agentes têm o mesmo corpo nos dois formatos: `.claude/agents/` (Claude Code) e `.github/agents/` (Copilot).
 
-### Estrutura em `.github/`
-
-- **`.github/agents/`** — 10 agentes especializados: `@TechLead`, `@Architect`, `@UnityEngineer`, `@UnityDeveloper`, `@SystemsDeveloper`, `@GameplayEngineer`, `@QAEngineer`, `@TestEngineer`, `@GameArchitect`, `@GameCreative`.
-- **`.github/instructions/`** — 3 instruções: `game-vision` (on-demand), `coding-standards` (auto-injetada em `.cs`), `art-direction` (on-demand).
-- **`.github/prompts/`** — 5 templates: `/create-feature`, `/design-enemy`, `/refactor-system`, `/review-code`, `/project-context`.
-
-### Como usar
-
-1. **Acionar agente** — Digite `@NomeDoAgente` no chat do Copilot.
-2. **Usar template** — Digite `/` no chat e selecione o prompt.
-3. **Calibrar sessão** — Use `/project-context` para carregar todo o contexto do projeto.
-4. **Atualizar docs** — Decisões de arquitetura → `Docs/Architecture/architecture_decisions.md`; tech debt → `Docs/Tech/tech_debt.md`.
-
-**Guia completo:** [AGENTS.md](../AGENTS.md) | [Docs/index.md](Docs/index.md)
+- **Agentes e fluxo entre camadas:** [AGENTS.md](../AGENTS.md) — a lista de agentes vive só lá.
+- **Skills, travas automáticas e processos:** [Docs/Tech/processos.md](Docs/Tech/processos.md).
+- **Copilot:** instruções em `.github/instructions/` e prompts em `.github/prompts/` (`/project-context` calibra a sessão).
+- **Claude Code:** o hook `SessionStart` injeta a foto do projeto; regras por caminho em `.claude/rules/`.
+- **Atualizar docs:** decisão de arquitetura → `Docs/Architecture/architecture_decisions.md`; dívida técnica → `Docs/Tech/tech_debt.md`.
 
 > 🎨 **Camada criativa:** `Design/Criativo/` na raiz do repo — gerida por `@GameCreative`.
 

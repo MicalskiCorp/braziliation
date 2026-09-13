@@ -1,37 +1,29 @@
-﻿# Design — Camada Criativa do Braziliation
+# Design — Camadas de Pesquisa, Criativo e Arte do Braziliation
 
-> Camada criativa e conceitual do projeto Braziliation — separada do repositório Unity para ciclo de vida independente.
-> Agente responsável: `@GameCreative`
+> Tudo que vem antes do código: pesquisa com fonte, lore, direção e fonte de arte. Mesmo repositório do projeto Unity (`Desenvolvimento/`), com dono por pasta.
 
 ## Estrutura
 
-| Pasta | Descrição | Agente |
-|-------|-----------|--------|
-| [`Criativo/`](Criativo/index.md) | Lendas, narrativa, ideias e brainstorm | `@GameCreative` |
-| [`ArteConceitual/`](ArteConceitual/index.md) | Referências visuais de cidades, personagens, criaturas, props e paletas | Referência visual |
-| [`ArteFonte/`](ArteFonte/index.md) | Arquivos editáveis, estudos, exports e materiais de IA/Aseprite | Arte |
-| [`GuiasDeArte/`](GuiasDeArte/index.md) | Bíblia visual, escala, paletas, animação e pipeline de sprites com IA | Arte + IA |
+| Pasta | Descrição | Dono |
+|-------|-----------|------|
+| [`Pesquisa/`](Pesquisa/index.md) | Pesquisa histórica e folclórica aprovada, com fonte | `@Historiador` |
+| [`Criativo/`](Criativo/index.md) | Lendas, cidades, personagens, arcos, ideias e brainstorm | `@GameCreative` |
+| [`BackLog/`](BackLog/BackLog.md) | Lógica de operação do `Criativo/TODO.md` | `@GameCreative` |
+| [`Models/`](Models/index.md) | Templates de cidade e personagem | `@GameCreative` |
+| [`ArteConceitual/`](ArteConceitual/index.md) | Concept art aprovado, referências visuais e paletas | `@SpriteArtist` + usuário |
+| [`ArteFonte/`](ArteFonte/index.md) | Ferramentas do pipeline, context packs e saídas de IA | `@SpriteArtist` |
+| [`GuiasDeArte/`](GuiasDeArte/index.md) | Style bible, escala, paletas, animação e pipelines de sprite | Usuário (direção de arte) |
 
-## Conexão com o Projeto Técnico
-
-Quando uma ideia criativa virar feature de jogo:
+## Fluxo até o código
 
 ```
-@GameCreative ideia aprovada
-    ↓
-@GameArchitect Nova feature: {Nome}  →  Desenvolvimento/Docs/GDD/Features/
+@Historiador   Pesquisa/  → handoff em Criativo/TODO.md
+@GameCreative  Criativo/  → handoff em Desenvolvimento/Docs/TODO.md
+@GameArchitect Desenvolvimento/Docs/GDD/Features/
 ```
 
-| Camada | Pasta | Propósito |
-|--------|-------|-----------|
-| Criativa (aqui) | `Design/Criativo/` | Lendas, personagens, arcos, brainstorm |
-| Arte conceitual | `Design/ArteConceitual/` | Referências visuais para assets |
-| Fonte de arte | `Design/ArteFonte/` | Arquivos editáveis e material de geração |
-| Guias de arte | `Design/GuiasDeArte/` | Regras para manter estilo e consistência |
-| Técnica (repo Unity) | `Desenvolvimento/Docs/` | Features, sistemas, ADRs, roadmap |
+Cada passo é acionado manualmente pelo usuário — mapa completo no [`AGENTS.md`](../AGENTS.md).
 
 ---
 
-> Para catalogar lenda: `@GameCreative Catalogar lenda: {Nome}`
-> Para iniciar brainstorm: `@GameCreative Brainstorm: {tema}`
-> Para criar feature técnica a partir de ideia: `@GameArchitect Nova feature: {Nome}`
+> Catalogar lenda: `@GameCreative Catalogar lenda: {Nome}` · pesquisar tema: `@Historiador Pesquisar: {tema}`
