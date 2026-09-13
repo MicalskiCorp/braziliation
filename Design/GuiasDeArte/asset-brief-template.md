@@ -17,10 +17,11 @@ Use este modelo antes de criar concept art, sprite final ou prompt de IA.
 - Papel narrativo:
 - Materiais principais:
 - Emoção/sensação:
+- Referência visual de apoio em `Design/ArteConceitual/ReferenciasVisuais/`, se houver (real ou material/mood/anatomia):
 
 ## Restrições Técnicas
 - Tamanho:
-- PPU: 16
+- PPU: 32
 - Paleta:
 - Animações necessárias:
 - Pivot/hitbox esperado:
@@ -39,9 +40,9 @@ Use este modelo antes de criar concept art, sprite final ou prompt de IA.
 - Referências autorizadas usadas:
 
 ## Checklist de Aprovação
-- [ ] Lê em 320x180
+- [ ] Lê em 640x360
 - [ ] Usa paleta aprovada
-- [ ] Está alinhado ao grid de 16 px
+- [ ] Está alinhado ao grid de 32 px
 - [ ] Mantém estilo pixel art, sem cara de imagem reduzida
 - [ ] Combina com os sprites âncora do projeto
 - [ ] Export final está em `Desenvolvimento/Assets/Art/`

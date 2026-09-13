@@ -11,13 +11,15 @@
 
 | Animação | Frames | Observação |
 |----------|--------|------------|
-| Idle simples | 2 a 4 | Respiração, vapor ou oscilação pequena |
-| Run | 6 a 8 | Priorizar leitura dos pés e centro de massa |
-| Jump/Fall | 1 a 3 cada | Poses fortes importam mais que fluidez |
-| Attack básico | 4 a 6 | Antecipação curta, frame de impacto claro |
-| Hit | 1 a 3 | Flash, recuo ou pose quebrada |
-| Death | 4 a 8 | Pode variar por inimigo |
-| VFX pequeno | 3 a 6 | Fumaça, faísca, impacto |
+| Idle simples | 4 a 6 | Respiração, vapor ou oscilação pequena |
+| Run | 8 a 12 | Priorizar leitura dos pés e centro de massa |
+| Jump/Fall | 2 a 4 cada | Poses fortes importam mais que fluidez |
+| Attack básico | 6 a 10 | Antecipação curta, frame de impacto claro |
+| Hit | 2 a 4 | Flash, recuo ou pose quebrada |
+| Death | 6 a 12 | Pode variar por inimigo |
+| VFX pequeno | 4 a 8 | Fumaça, faísca, impacto |
+
+> Contagens elevadas pelo ADR-004 (densidade Blasphemous-like pede fluidez maior). Assets legados com contagens antigas seguem válidos até re-autoria.
 
 ## Export
 

@@ -22,7 +22,7 @@ Use este modelo dentro de `Design/ArteFonte/IA/ContextPacks/{nome-do-asset}/cont
 - Elementos proibidos:
 
 ## 3. Contexto Visual do Projeto
-Braziliation é um jogo de plataforma/ação 2D em pixel art, leitura SNES-era, 320x180, 16 PPU, paleta restrita, pós-apocalipse brasileiro e estética dieselpunk/clockpunk regional.
+Braziliation é um jogo de plataforma/ação 2D em pixel art, leitura Blasphemous-like (ADR-004), 640x360, 32 PPU, paleta restrita, pós-apocalipse brasileiro e estética dieselpunk/clockpunk regional.
 
 ## 4. Contexto Regional
 Descrever aqui a região/cidade. Exemplo para Blumenau:
@@ -31,7 +31,7 @@ Blumenau em Braziliation é clockpunk, com arquitetura enxaimel, engrenagens, fo
 
 ## 5. Restrições Técnicas
 - Canvas/tamanho final:
-- PPU: 16
+- PPU: 32
 - Orientação: side-view | front-view | top-down | UI
 - Fundo: transparente | cenário | estudo
 - Paleta:
@@ -40,6 +40,7 @@ Blumenau em Braziliation é clockpunk, com arquitetura enxaimel, engrenagens, fo
 - Pivot/hitbox:
 
 ## 6. Referências Autorizadas
+- Referências visuais de apoio (`Design/ArteConceitual/ReferenciasVisuais/`), se houver:
 - Sprites âncora:
 - Paleta:
 - Silhueta própria:
