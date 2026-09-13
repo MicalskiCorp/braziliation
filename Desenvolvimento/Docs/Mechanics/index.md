@@ -9,6 +9,7 @@
 |---------|-----------|--------|
 | [Crafting.md](Crafting.md) | Sistema de Crafting — coleta, compatibilidade de slots e expansão via NPC | 📋 Conceito |
 | [Build.md](Build.md) | Build do Personagem — receptáculos, habilidades, progressão visual e exploração | 📋 Conceito |
+| [InimigosIA.md](InimigosIA.md) | IA de Inimigos — motor genérico por perfil, estados, estilos de agressão e como criar um inimigo novo | ✅ Implementado |
 
 ---
 
