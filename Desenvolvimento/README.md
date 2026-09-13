@@ -10,13 +10,13 @@ Jogo plataforma 2D em pixel art (C#) — ambientação dieselpunk pós-apocalíp
 ## 📂 Pastas principais (dentro de `Desenvolvimento/`)
 - `Assets/` → Cenas, arte, áudio, scripts C# (`Assets/Scripts/`), configuração URP
 - `Docs/` → GDD, arquitetura, lore, mecânicas, roadmap e docs técnicos
-- `scripts/` → Scripts de setup/versionamento (PowerShell, shell)
+- `scripts/` → `update_version.ps1` (atualiza `VERSION` e o `bundleVersion` do Unity juntos)
 - `Packages/` / `ProjectSettings/` → Unity (não mover)
 - `Braziliation.slnx` → solution principal (Assembly-CSharp + Core + Tests)
 - `Braziliation.CI.slnx` → solution opcional com os testes .NET (útil no IDE)
 - **`Tests/Braziliation.Game.Tests/`** → testes xUnit .NET (rodam no CI, sem Unity)
 - **`Assets/Tests/EditMode/`** → testes EditMode do Unity (skill `unity-validar`)
-- **CI (GitHub / GitLab)** → `dotnet restore/build/test` no `.csproj` de testes; caminhos prefixados com `Desenvolvimento/` no workflow
+- **CI (GitHub Actions)** → `dotnet restore/build/test` no `.csproj` de testes, meta-check e paletas; caminhos prefixados com `Desenvolvimento/` no workflow
 
 > 📁 **Estrutura do repositório:** o projeto Unity vive em `Desenvolvimento/`. A camada criativa (lore, lendas, brainstorm) vive em `Design/Criativo/`. Agents e instructions em `.github/`.
 

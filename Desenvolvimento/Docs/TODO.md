@@ -85,8 +85,6 @@
 |------|-------------|-----------|--------|
 | Reescrever o PAPEL 2 do `@AgentArchitect` para a convenção dupla Copilot + Claude | `@AgentArchitect` | Média | 🔨 |
 | Avaliar as 13 skills com o plugin `skill-creator` (modo Eval) | `@AgentArchitect` | Baixa | ❌ |
-| Decidir se o GitLab CI continua (o remoto é GitHub e o arquivo duplica o workflow) | Usuário | Baixa | ❌ |
-
 ---
 
 ## Sequência recomendada para a demo

@@ -15,7 +15,8 @@ All notable changes to this project will be documented in this file.
 - Skills `unity-validar`, `fechar-decisao`, `novo-adr`, `novo-inimigo`; MCP do Aseprite (pixel-mcp); plugin oficial da Unity.
 
 ### Changed
-- CI (GitHub e GitLab) com alvo único `Desenvolvimento/Tests/Braziliation.Game.Tests/`, sem fallback.
+- CI com alvo único `Desenvolvimento/Tests/Braziliation.Game.Tests/`, sem fallback.
+- `companyName` do Unity passa de `DefaultCompany` para `MicalskiCorp`; `bundleVersion` alinhado ao `VERSION` (0.1.0-alpha) e mantido pelo `update_version.ps1`, que não faz mais commit/tag/push sozinho.
 - Layout de `Assets/Scripts/` por domínio (ADR-005, substitui o ADR-003).
 - Testes só em **xUnit** (NUnit removido).
 
@@ -23,6 +24,8 @@ All notable changes to this project will be documented in this file.
 - Pasta `Desenvolvimento/dotnet-tests/` (cópia obsoleta que o CI rodava por fallback).
 - 209 artefatos de build que estavam versionados (`bin/`, `obj/`, `__pycache__/`, `Assembly-CSharp.csproj`).
 - Pastas vazias do ADR-003 e o `_Recovery` do Unity.
+- GitLab CI (o remoto é o GitHub; o arquivo só duplicava o workflow).
+- `setup_project.ps1`/`.sh` e as pastas vazias `scripts/{Enemies,Managers,Player,UI}` e `Tests/Unit/` — recriavam a estrutura anterior ao ADR-005.
 
 ### Fixed
 - Regra `Build/` do `.gitignore` escondia código-fonte de Build: o commit publicado não compilava.

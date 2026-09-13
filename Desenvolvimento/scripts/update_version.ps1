@@ -1,17 +1,25 @@
-\
-        Param (
-            [Parameter(Mandatory=$true)]
-            [string]$NewVersion
-        )
+Param(
+    [Parameter(Mandatory = $true)]
+    [string]$NewVersion
+)
 
-        # Update VERSION file
-        Set-Content -Path "./VERSION" -Value $NewVersion
-        Write-Host "✅ Versão atualizada para $NewVersion"
+# Atualiza a versão do jogo nos dois lugares que precisam concordar:
+#   - Desenvolvimento/VERSION  (fonte da verdade, lida por scripts e docs)
+#   - bundleVersion em ProjectSettings/ProjectSettings.asset (versão gravada no build do Unity)
+# O RepositoryLayoutTests falha se os dois divergirem.
+#
+# Não faz commit, tag nem push: fechar uma versão é decisão de release, feita à mão.
+# Uso: pwsh Desenvolvimento/scripts/update_version.ps1 -NewVersion 0.2.0-alpha
 
-        # Commit, tag and push (assumes git remote 'origin' is configured and user has permissions)
-        git add VERSION
-        git commit -m "chore: atualiza versão para $NewVersion"
-        git tag "v$NewVersion"
-        git push origin --tags
+$ErrorActionPreference = "Stop"
+$projeto = Split-Path -Parent $PSScriptRoot
 
-        Write-Host "✅ Commit e tag enviados para o remoto (v$NewVersion)"
+[IO.File]::WriteAllText((Join-Path $projeto "VERSION"), "$NewVersion`n", (New-Object Text.UTF8Encoding($false)))
+
+$settings = Join-Path $projeto "ProjectSettings/ProjectSettings.asset"
+$texto = [IO.File]::ReadAllText($settings)
+$novo = [regex]::Replace($texto, '(?m)^(\s*bundleVersion:\s*)\S+', "`${1}$NewVersion")
+[IO.File]::WriteAllText($settings, $novo, (New-Object Text.UTF8Encoding($false)))
+
+Write-Host "Versão atualizada para $NewVersion (VERSION + bundleVersion)."
+Write-Host "Próximos passos, à mão: git commit, git tag v$NewVersion, git push --tags."

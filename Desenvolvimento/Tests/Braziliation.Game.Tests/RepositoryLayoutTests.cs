@@ -72,7 +72,6 @@ public sealed class RepositoryLayoutTests
 
     [Theory]
     [InlineData(".github/workflows/ci.yml")]
-    [InlineData(".gitlab-ci.yml")]
     public void CiConfig_Targets_The_Real_Test_Project(string relativePath)
     {
         var path = Path.Combine(RepoRootFinder.FindGitRoot(), relativePath);
@@ -86,11 +85,28 @@ public sealed class RepositoryLayoutTests
 
     [Theory]
     [InlineData(".github/workflows/ci.yml")]
-    [InlineData(".gitlab-ci.yml")]
     public void CiConfig_Does_Not_Reference_Retired_DotnetTests_Folder(string relativePath)
     {
         var path = Path.Combine(RepoRootFinder.FindGitRoot(), relativePath);
         var text = File.ReadAllText(path);
         Assert.DoesNotContain("dotnet-tests", text);
+    }
+
+    /// <summary>
+    /// VERSION e o bundleVersion do Unity chegaram a divergir (0.1.0-alpha × 1.0) sem que
+    /// nada avisasse. scripts/update_version.ps1 atualiza os dois; este teste trava.
+    /// </summary>
+    [Fact]
+    public void Version_File_Matches_Unity_Bundle_Version()
+    {
+        var root = RepoRootFinder.FindRepositoryRoot();
+        var version = File.ReadAllText(Path.Combine(root, "VERSION")).Trim();
+        var settings = File.ReadAllText(Path.Combine(root, "ProjectSettings", "ProjectSettings.asset"));
+        var match = Regex.Match(settings, @"^\s*bundleVersion:\s*(\S+)\s*$", RegexOptions.Multiline);
+
+        Assert.True(match.Success, "bundleVersion não encontrado em ProjectSettings.asset.");
+        Assert.True(version == match.Groups[1].Value,
+            $"VERSION ({version}) diverge do bundleVersion do Unity ({match.Groups[1].Value}). " +
+            "Use Desenvolvimento/scripts/update_version.ps1.");
     }
 }

@@ -23,7 +23,7 @@ internal static class RepoRootFinder
 
     /// <summary>
     /// Raiz do repositório git — um nível acima da raiz do projeto Unity
-    /// (<c>Desenvolvimento/</c>). É onde vivem .github/, .gitlab-ci.yml e Design/.
+    /// (<c>Desenvolvimento/</c>). É onde vivem .github/, .claude/ e Design/.
     /// </summary>
     internal static string FindGitRoot()
     {
