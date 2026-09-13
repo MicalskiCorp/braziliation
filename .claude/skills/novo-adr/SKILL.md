@@ -15,7 +15,7 @@ Os ADR-001 e ADR-003 ficaram meses com status errado depois de serem substituíd
    - **decisão** — o que foi escolhido, em uma ou duas frases;
    - **consequências** — trade-offs e o que muda para quem escreve código/asset;
    - **substitui algum ADR?** Procurar ativamente ADRs cujo tema conflite (mesmo sistema, mesmo parâmetro).
-3. Escrever o ADR **antes** da linha `*(Add new ADRs below...)*`, no formato dos existentes:
+3. Escrever o ADR **antes** da linha final `*(Novos ADRs entram acima desta linha...)*`, no formato dos existentes:
    `## ADR-NNN: Título` · `- **Date:**` (AAAA-MM-DD) · `- **Status:** Accepted` · `- **Context:**` · `- **Decision:**` · `- **Consequences:**`.
 4. Para cada ADR substituído: trocar o status para `**Superseded por ADR-NNN** (data). {o que continua valendo, se algo}`. O `DocsConsistencyTests` falha se um ADR substituído não indicar o substituto.
 5. Atualizar os pontos que repetem a decisão: `CLAUDE.md` (seção "Estado conhecido"), `.claude/rules/*.md` e `.github/instructions/*.md` se tratarem do tema. Se a decisão tiver consequência de código, registrar a pendência em `Desenvolvimento/Docs/TODO.md`.

@@ -226,7 +226,7 @@ Quando o usuário pedir para criar uma nova cidade:
 1. **Ler** `Design/Criativo/Estados/{Estado}/cidades/index.md` — verificar se cidade já existe
 2. **Criar** `Design/Criativo/Estados/{Estado}/cidades/{Cidade}/index.md` usando `Design/Models/ModelCidade.md`
 3. **Preencher** Características (Estrutura, Tipo, Descrição) com o que o usuário fornecer
-4. **Pesquisar contexto** (lendas, folclore, arquitetura da cidade real) e popular Monstros, Lugares e Ideias/EasterEggs
+4. **Usar a pesquisa aprovada** em `Design/Pesquisa/` (lendas, folclore, arquitetura da cidade real) para popular Monstros, Lugares e Ideias/EasterEggs. Este agente não pesquisa na web nem inventa fato: lacuna factual é reportada ao usuário com a sugestão `@Historiador Pesquisar: {tema}`
 5. **Atualizar** `Design/Criativo/Estados/{Estado}/cidades/index.md`
 6. **Atualizar** `Design/Criativo/Estados/{Estado}/index.md`
 7. **Catalogar** novas lendas identificadas em `Design/Criativo/Lendas/catalogo.md` com status `🔨`

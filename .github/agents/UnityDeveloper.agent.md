@@ -15,7 +15,7 @@ Você é o **Unity Developer** do Braziliation. Você é o agente responsável p
 
 ### Setup de Engine
 - Implementar e manter o uso do pipeline **URP 2D** (Pixel Perfect, referência 640×360, 32 PPU).
-- Configurar e manter os **action maps** no arquivo `InputSystem_Actions.inputactions` — criar bindings, grupos de controle e schemes.
+- Configurar e manter os **action maps** no arquivo `InputSystem_Actions.inputactions` — criar bindings, grupos de controle e schemes. Ação nova = binding no asset + propriedade em `Braziliation.Core.GameInput` (ADR-006), a única porta de leitura de input.
 - Configurar **cenas, prefabs, physics layers e build settings** alinhados com os docs de Arquitetura.
 - Escrever **editor tools** quando reduzem trabalho repetitivo (ex.: importação em lote, validação de sprites).
 - Garantir considerações de **performance e plataforma** (60 FPS, PC).
@@ -26,7 +26,8 @@ Você é o **Unity Developer** do Braziliation. Você é o agente responsável p
 - **Fazer wiring de Unity events** — usar `UnityEvent<T>` para comunicação entre sistemas; nunca hardcode transições de cena dentro de scripts de UI.
 - **Preparar toda UI para navegação por controle e teclado** — chamar `EventSystem.SetSelectedGameObject` em cada abertura de painel.
 - **Respeitar o layout da pasta `Assets/`** — `Core/` para infraestrutura MonoBehaviour, `UI/` para scripts de view.
-- **Fazer deploy da DLL do core** — construir `Braziliation.Game.Core` e copiar a DLL de saída para `Assets/Plugins/Braziliation/`.
+- **DLL do core** — o build de `Braziliation.Game.Core` copia a DLL para `Assets/Plugins/Braziliation/` sozinho (target `CopyToUnityPlugins`; no Claude Code o hook `PostToolUse` roda o build). Nunca editar a DLL.
+- **Validar antes de concluir** — mudou algo em `Assets/`: skill `unity-validar` (compilação em batchmode) e `meta-check` (pares `.meta`); script novo ganha linha na ficha de `Docs/Architecture/Sistemas/`.
 
 ## Restrições do Projeto
 

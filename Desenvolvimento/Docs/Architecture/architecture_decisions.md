@@ -123,4 +123,4 @@ Formato de cada entrada (os rótulos ficam em inglês — o `DocsConsistencyTest
 
 ---
 
-*(Novos ADRs abaixo. Entradas curtas, com link para `Docs/Architecture/` ou para o código quando ajudar.)*
+*(Novos ADRs entram acima desta linha. Entradas curtas, com link para `Docs/Architecture/` ou para o código quando ajudar.)*

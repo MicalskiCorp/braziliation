@@ -18,7 +18,7 @@ Cria a estrutura vazia e padronizada de uma região nova. **Conteúdo criativo (
 4. **Unity**: criar `Desenvolvimento/Assets/Art/Environments/{Cidade}/` com subpastas `Backgrounds/`, `Palettes/`, `Props/`, `Tilesets/` (padrão do `Docs/Architecture/Assets/AssetsStructure.md`).
    > Pastas vazias não são versionadas pelo git e o Unity gera `.meta` — criar um `index.md`/`.gitkeep` apenas nas pastas de Design; no Unity, criar as pastas pelo Editor quando possível.
    > **Fronteira de agente:** se esta skill for executada por `@GameCreative` (não tem `Bash`, nunca toca fontes do engine), **pular este passo** e registrar como pendência para `@UnityDeveloper` em vez de criar as pastas. Executar o passo 4 diretamente só quando invocado com acesso de engine (usuário, orquestrador ou `@UnityDeveloper`).
-5. **Registros**: adicionar as novas pastas em `Docs/Architecture/indices/assets.md`; registrar pendências (pesquisa, lendas, paleta a aprovar) nos TODOs das camadas corretas (`Design/Pesquisa/TODO.md`, `Design/Criativo/TODO.md`, `Desenvolvimento/Docs/TODO.md`).
+5. **Registros**: adicionar as novas pastas em `Docs/Architecture/indices/assets.md`; registrar pendências no TODO de quem executa e no da camada seguinte (lendas e paleta a aprovar → `Design/Criativo/TODO.md`; pastas Unity → `Desenvolvimento/Docs/TODO.md`). Lacuna de **pesquisa** não é escrita no TODO de Pesquisa pela camada criativa (rota invertida): é reportada ao usuário para acionar o `@Historiador`.
 6. **Reportar**: árvore criada + próximos passos por camada (pesquisa → criativo → arte).
 
 ## Regras

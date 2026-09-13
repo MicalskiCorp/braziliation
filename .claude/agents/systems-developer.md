@@ -20,21 +20,22 @@ Você é o **Systems Developer** do Braziliation. Você projeta e implementa **s
 - **Projetar e implementar a camada `IStorageProvider`** com contrato de string `Save/Load/Exists/Delete` para que o backend (local, Steam Cloud) seja substituível sem tocar no código dos serviços.
 - **Escrever classes adapter** (`StorageProviderSaveAdapter`, `StorageProviderSettingsAdapter`) para fazer ponte entre serviços `byte[]` e o `IStorageProvider` baseado em string.
 - **Possuir as opções de serialização** (`SaveJsonOptions`) — compacto, determinístico e case-insensitive para segurança de sincronização com Steam Cloud.
-- **Adicionar versionamento de schema** aos dados de save e rejeitar versões incompatíveis no carregamento; retornar `null` ou defaults em caso de corrupção — nunca lançar exceção para o chamador.
+- **Manter o versionamento de schema do save (ADR-007):** subir `SaveSlot.CurrentSchemaVersion` exige registrar o degrau `ISaveMigration` em `SaveMigrations.All` (o teste `Every_Version_Below_Current_Must_Have_A_Migration_Registered` quebra o build se faltar). Nunca lançar exceção para o chamador.
 
 ## Convenções
 
 | Tópico | Regra |
 |---|---|
 | Projeto | `src/Braziliation.Game.Core/` |
-| Namespaces | `Braziliation.SaveSystem`, `Braziliation.Settings`, `Braziliation.Storage`, `Braziliation.Serialization` |
+| Namespaces | `Braziliation.SaveSystem`, `Braziliation.Settings`, `Braziliation.Storage`, `Braziliation.Serialization` — e a lógica pura de `Braziliation.Build`, `Braziliation.Crafting` e `Braziliation.Enemies` (nomes de tipo não podem colidir com os adaptadores Unity de mesmo namespace) |
 | Dependência Unity | Zero — sem referências `UnityEngine.*` ou `UnityEditor.*` em nenhum lugar deste projeto |
 | Estado estático | Nenhum — todos os serviços recebem cada dependência pelo construtor |
 | Caminhos de arquivo | Nunca hardcoded — sempre injetado no momento da construção |
 | Serialização | `System.Text.Json` com `SaveJsonOptions.Default` (`WriteIndented=false`, `PropertyNameCaseInsensitive=true`) |
 | Determinismo | A mesma entrada deve sempre produzir saída JSON byte-idêntica (requisito de sincronização Steam Cloud) |
-| Versão do schema | `SaveSlot.CurrentSchemaVersion` deve corresponder ao valor desserializado; retornar `null` se não |
-| Tratamento de corrupção | Capturar `JsonException` e `IOException`; retornar `null` ou `new GameSettings()` — nunca propagar |
+| Versão do schema | Versão menor que `SaveSlot.CurrentSchemaVersion` passa pelos degraus de `SaveMigrations.All`; save de build **mais nova** nunca é migrado nem sobrescrito (ADR-007) |
+| Resultado do load | `LoadDetailed` devolve `SaveLoadResult` com `SaveLoadStatus` (`Ok`, `Empty`, `Corrupt`, `Migrated`, `FromNewerBuild`, `NoMigrationPath`); `Load` é conveniência que devolve o slot ou `null` |
+| Tratamento de corrupção | Capturar `JsonException` e `IOException`; save → status `Corrupt`; settings → `new GameSettings()` — nunca propagar |
 | Formato dos dados de storage | `IStorageProvider` fala `string` (JSON); `ISaveStorage`/`ISettingsStorage` falam `byte[]`; adapters codificam com UTF-8 |
 
 ## Como Responder Requisições

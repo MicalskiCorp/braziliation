@@ -101,7 +101,7 @@ Este é o fluxo que deve ser usado para cada asset novo:
    - **Descartar:** mover para `Design/ArteFonte/IA/Rejected/` (arquivo, não deleção — é para isso que a pasta existe).
    - **Iterar:** voltar ao passo 5 com a mudança anotada no `lotes.md` antes de gerar o próximo lote.
    - **Teto de iteração:** no máximo **3 lotes por pedido de ajuste**. Se o terceiro não resolver, parar a difusão e levar o melhor candidato para o pixel pass (passo 7, ou o MCP `aseprite`) — o lote 11 da Edith mostrou que img2img não acrescenta elemento que a imagem-base não tem, e insistir só queima tempo de GPU.
-6b. **Pixelizar assistido:** `python pixelize.py candidato.png {regiao}.json --size {canvas do brief}` (ver [`pixelize.py`](../ArteFonte/Ferramentas/pixelize.py)) — downscale por cor dominante + paleta exata do projeto, ponto de partida pro passo 7, não substitui.
+6b. **Pixelizar assistido:** `py pixelize.py candidato.png {regiao}.json --size {canvas do brief}` (ver [`pixelize.py`](../ArteFonte/Ferramentas/pixelize.py)) — downscale por cor dominante + paleta exata do projeto, ponto de partida pro passo 7, não substitui.
 7. **Redesenhar no Aseprite:** faça pixel pass manual em tamanho real a partir do resultado do 6b — corrigir bandas de sombra, outline e highlight direcional (ver `style-bible.md#densidade-alvo`), não redesenhar do zero.
 8. **Animar se necessário:** use tags do Aseprite e siga [`animation-guide.md`](animation-guide.md).
 9. **Exportar para Unity:** salve PNG/spritesheet em `Desenvolvimento/Assets/Art/`.
@@ -228,7 +228,7 @@ Registrar a decisão desta seleção no `lotes.md` do context pack e mover os ar
 
 ### 4b. Pixelizar assistido (novo — 2026-07-24)
 
-Antes de abrir o Aseprite, rodar [`pixelize.py`](../ArteFonte/Ferramentas/pixelize.py) no candidato aprovado: `python pixelize.py candidato.png {regiao}.json --size {canvas do brief}`. Faz downscale por cor dominante por bloco (não nearest-neighbor cru, que perde a silhueta) e já entrega o resultado na paleta exata do projeto — quem for pro Aseprite corrige bandas de sombra, outline e highlight direcional em cima de um rascunho já paletizado e no tamanho certo, em vez de reconstruir do zero a partir da imagem "pintada". **Isto não é o sprite aprovado** — é insumo pro passo 5, que continua obrigatório.
+Antes de abrir o Aseprite, rodar [`pixelize.py`](../ArteFonte/Ferramentas/pixelize.py) no candidato aprovado: `py pixelize.py candidato.png {regiao}.json --size {canvas do brief}`. Faz downscale por cor dominante por bloco (não nearest-neighbor cru, que perde a silhueta) e já entrega o resultado na paleta exata do projeto — quem for pro Aseprite corrige bandas de sombra, outline e highlight direcional em cima de um rascunho já paletizado e no tamanho certo, em vez de reconstruir do zero a partir da imagem "pintada". **Isto não é o sprite aprovado** — é insumo pro passo 5, que continua obrigatório.
 
 ### 5. Pixel Pass Manual
 

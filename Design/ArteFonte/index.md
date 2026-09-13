@@ -17,7 +17,7 @@ Arquivos editáveis, estudos e material intermediário de arte. Esta pasta não 
 | `Outputs/` | Gerações brutas da IA |
 | `Selected/` | Variações escolhidas para pixel pass |
 | `Rejected/` | Variações descartadas, úteis para comparação |
-| `Models/` | Notas sobre modelos, workflows, LoRAs e seeds usados |
+| [`Models/`](IA/Models/index.md) | Notas sobre modelos, workflows, LoRAs e seeds usados |
 
 ## Regra de Ouro
 

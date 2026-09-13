@@ -7,7 +7,7 @@ description: Audita pares asset/.meta sob Desenvolvimento/Assets/ — detecta as
 
 Todo asset (arquivo ou pasta) versionado em `Desenvolvimento/Assets/` precisa de um `.meta` correspondente — é ele que guarda o GUID usado por cenas, prefabs e ScriptableObjects para referenciar o asset. Um asset sem `.meta` recebe um GUID novo na próxima vez que o Unity Editor abrir o projeto; se esse asset já for referenciado em algum lugar por GUID antigo (de um `.meta` perdido ou nunca criado), a referência quebra silenciosamente — sem erro de compilação, só um campo vazio no Inspector.
 
-Nenhuma das 8 skills existentes cobre isso: `structure-audit` compara disco vs. documentação, não pares `.meta`.
+Nenhuma outra skill cobre isso: `structure-audit` compara disco vs. documentação, não pares `.meta`.
 
 ## Quando rodar
 

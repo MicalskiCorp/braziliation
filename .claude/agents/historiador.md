@@ -256,7 +256,7 @@ Quando o usuário pedir para passar pesquisa ao `@GameCreative`:
    - Elementos de destaque para uso criativo
    - Sugestões de conexão com arcos/mecânicas (marcadas como sugestões, não fatos)
    - Instrução clara para o @GameCreative
-4. **Adicionar entrada em `Design/Criativo/TODO.md`** na seção `## Handoffs de Pesquisa` (criar a seção se não existir):
+4. **Adicionar entrada em `Design/Criativo/TODO.md`** na seção `## Handoffs de Pesquisa` (a seção já existe — nunca criar outra):
    ```markdown
    | Processar handoff: {tema} | [Design/Pesquisa/Handoffs/AAAA-MM-DD-{tema}.md](...) | Alta | ❌ Não iniciado |
    ```

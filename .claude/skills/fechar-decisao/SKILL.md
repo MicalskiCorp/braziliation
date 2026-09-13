@@ -24,7 +24,7 @@ As camadas criativas têm ferramentas para **gerar** ideias (brainstorm, cidades
 5. **Ao aprovar:**
    - status do DDR → `Aprovada` com data;
    - aplicar a decisão onde ela mora (ex.: preencher `premissa.md`; tabela de `Mechanics/Build.md`; perfil em `Mechanics/InimigosIA.md`);
-   - marcar a pendência como ✅ no TODO de origem com link para o DDR;
+   - baixar a pendência no TODO de origem: em `Desenvolvimento/Docs/TODO.md` a linha **sai** (o DDR e o commit são o registro); em `Design/Criativo/TODO.md` ela vai para `## Concluído` com a data e o link do DDR;
    - fazer o handoff para a implementação com a skill `handoff` (ex.: inimigo base → `novo-inimigo`).
 
 ## Regras

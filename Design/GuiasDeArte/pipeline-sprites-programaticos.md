@@ -48,12 +48,12 @@ Qualquer modelo multimodal num harness agêntico (Claude, Copilot, Cursor) execu
 2. **Escala e paleta**: confirmar tamanho no [`sprite-scale-guide.md`](sprite-scale-guide.md) e paleta JSON da região.
 3. **Silhueta primeiro**: rascunhar a spec só com silhueta (1 cor + transparente) e validar a forma antes de detalhar — regra nº 4 da [`style-bible.md`](style-bible.md).
 4. **Escrever a spec**: `{asset}.spec.json` dentro do context pack — **spec consolidada**: um único JSON por objeto, com um `output` por frame/variação e, se houver animação, uma entrada em `sheets` listando a sequência (ver [formato completo](#formato-da-spec-consolidada) abaixo). Se o passo 3 gerou uma especificação de variações, cada variação vira um `output` aqui.
-5. **Renderizar**: `python render_spec.py {asset}.spec.json` — sem `-o`, renderiza **todos os outputs** (um PNG por id) e monta automaticamente qualquer sheet declarada, tudo em `../../Outputs/`. Para iterar só um frame durante a crítica: `python render_spec.py {asset}.spec.json --only f2 -o ../../Outputs/{asset}_f2.png`.
+5. **Renderizar**: `py render_spec.py {asset}.spec.json` — sem `-o`, renderiza **todos os outputs** (um PNG por id) e monta automaticamente qualquer sheet declarada, tudo em `../../Outputs/`. Para iterar só um frame durante a crítica: `py render_spec.py {asset}.spec.json --only f2 -o ../../Outputs/{asset}_f2.png`.
 6. **Visualizar e criticar** (o coração do ciclo — repetir até aprovar):
-   - `python upscale_preview.py {asset}.png -s 8 --grid` → inspecionar ampliado (repetir por output relevante);
-   - `python mock_scene.py {asset}.png {paleta}.json` → inspecionar leitura em 640×360 real;
+   - `py upscale_preview.py {asset}.png -s 8 --grid` → inspecionar ampliado (repetir por output relevante);
+   - `py mock_scene.py {asset}.png {paleta}.json` → inspecionar leitura em 640×360 real;
    - criticar contra a checklist abaixo; ajustar a spec e voltar ao passo 5.
-7. **Validar paleta**: `python palette_check.py {asset}.png {paleta}.json` deve APROVAR (repetir para cada output e para o sheet, se houver).
+7. **Validar paleta**: `py palette_check.py {asset}.png {paleta}.json` deve APROVAR (repetir para cada output e para o sheet, se houver).
 8. **Curadoria**: mover PNG aprovado para `Design/ArteFonte/IA/Selected/`; a spec permanece no context pack como fonte.
 9. **Export**: copiar para `Desenvolvimento/Assets/Art/{destino}` conforme convenções de nome do `Docs/Architecture/Assets/AssetsStructure.md` — import settings são automáticos (`SpriteImportPostprocessor`).
 10. **Registrar**: atualizar `Desenvolvimento/Docs/Architecture/indices/assets.md`.
