@@ -9,15 +9,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Braziliation.Game.Core\Braziliation.Game.Core.csproj" />
   </ItemGroup>
+  <!-- xUnit é o único framework de teste do projeto. NUnit foi removido: o csproj
+       carregava os dois runners ao mesmo tempo (8 arquivos xUnit + 2 NUnit), o que
+       é frágil e contradizia o padrão declarado pelos agentes. -->
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-    <PackageReference Include="NUnit" Version="4.2.2" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
-	<PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="xunit" Version="2.5.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
-    <PackageReference Include="NUnit.Analyzers" Version="4.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 </Project>

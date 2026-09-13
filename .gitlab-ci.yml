@@ -1,5 +1,5 @@
 # CI GitLab — testes .NET (sem Unity no runner)
-# Caminho preferencial atual: Desenvolvimento/dotnet-tests/Braziliation.Game.Tests/
+# Alvo: Desenvolvimento/Tests/Braziliation.Game.Tests/
 
 variables:
   DOTNET_CLI_TELEMETRY_OPTOUT: "1"
@@ -16,37 +16,17 @@ dotnet-test:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   before_script:
     - cd "$CI_PROJECT_DIR"
-    - pwd
     - |
       set -euo pipefail
-      CANDIDATES=(
-        "Desenvolvimento/dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
-        "Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
-        "Desenvolvimento/tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
-      )
-      FOUND=""
-      for p in "${CANDIDATES[@]}"; do
-        if [[ -f "$p" ]]; then
-          FOUND="$p"
-          break
-        fi
-      done
-      if [[ -z "$FOUND" ]]; then
-        mapfile -t hits < <(find . -name 'Braziliation.Game.Tests.csproj' -type f ! -path './.git/*' 2>/dev/null || true)
-        if [[ ${#hits[@]} -gt 0 ]]; then
-          FOUND="${hits[0]#./}"
-        fi
-      fi
-      if [[ -z "$FOUND" ]] || [[ ! -f "$FOUND" ]]; then
-        echo "ERRO: Braziliation.Game.Tests.csproj não encontrado — commit Tests/Braziliation.Game.Tests/"
-        ls -la
-        ls -la dotnet-tests 2>/dev/null || true
-        ls -la Tests 2>/dev/null || true
+      # Alvo único e explícito, SEM fallback — ver comentário equivalente em
+      # .github/workflows/ci.yml. O fallback anterior mascarou o CI rodando
+      # um conjunto de testes obsoleto.
+      export TEST_PROJECT="Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+      if [[ ! -f "$TEST_PROJECT" ]]; then
+        echo "ERRO: $TEST_PROJECT não encontrado."
         exit 1
       fi
-      export TEST_PROJECT="$FOUND"
       echo "Using: $TEST_PROJECT"
-    - test -f "Desenvolvimento/ProjectSettings/ProjectVersion.txt" || echo "Aviso: layout Unity não detetado (opcional para estes testes)."
   script:
     - dotnet restore "$TEST_PROJECT"
     - dotnet build "$TEST_PROJECT" --configuration Release --no-restore

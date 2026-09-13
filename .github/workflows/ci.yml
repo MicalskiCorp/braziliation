@@ -30,50 +30,24 @@ jobs:
             echo "unity=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Resolve test project (.csproj)
+      - name: Restore, build and test (.NET)
         shell: bash
         run: |
           set -euo pipefail
-          cd "$GITHUB_WORKSPACE"
-          # Ordem preferencial + compatibilidade com layouts antigos
-          CANDIDATES=(
-            "Desenvolvimento/dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
-            "Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
-            "Desenvolvimento/tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
-          )
-          FOUND=""
-          for p in "${CANDIDATES[@]}"; do
-            if [[ -f "$p" ]]; then
-              FOUND="$p"
-              break
-            fi
-          done
-          if [[ -z "$FOUND" ]]; then
-            mapfile -t hits < <(find . -name 'Braziliation.Game.Tests.csproj' -type f ! -path './.git/*' 2>/dev/null || true)
-            if [[ ${#hits[@]} -gt 0 ]]; then
-              FOUND="${hits[0]#./}"
-            fi
-          fi
-          if [[ -z "$FOUND" ]] || [[ ! -f "$FOUND" ]]; then
-            echo "::error::Braziliation.Game.Tests.csproj não encontrado. Verifique o commit de Tests/Braziliation.Game.Tests/ (ver README)."
-            echo "--- ls -la (raiz) ---"
-            ls -la
-            echo "--- Desenvolvimento/dotnet-tests/ ---"
-            ls -la Desenvolvimento/dotnet-tests 2>/dev/null || echo "(ausente)"
-            echo "--- Desenvolvimento/Tests/ ---"
-            ls -la Desenvolvimento/Tests 2>/dev/null || echo "(ausente)"
-            echo "--- find *Game.Tests*.csproj ---"
-            find . -name '*.Game.Tests.csproj' -type f ! -path './.git/*' 2>/dev/null || true
+          # Alvo único e explícito, SEM fallback: se o projeto sumir de lugar o CI
+          # deve falhar alto, não cair silenciosamente num projeto antigo — foi
+          # exatamente o fallback anterior que fez o CI rodar testes obsoletos.
+          # É o .csproj e não o .slnx porque .slnx só é aceito pelo dotnet CLI a
+          # partir do SDK 9.0.2xx e este job roda em 8.0.x; o ProjectReference do
+          # csproj já arrasta Braziliation.Game.Core.
+          PROJECT="Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj"
+          if [[ ! -f "$PROJECT" ]]; then
+            echo "::error::$PROJECT não encontrado."
             exit 1
           fi
-          echo "TEST_PROJECT=$FOUND" >> "$GITHUB_ENV"
-          echo "Using test project: $FOUND"
-
-      - name: Restore, build and test (.NET tests project)
-        run: |
-          dotnet restore "$TEST_PROJECT"
-          dotnet build "$TEST_PROJECT" --configuration Release --no-restore
-          dotnet test "$TEST_PROJECT" --configuration Release --no-build --verbosity normal
+          dotnet restore "$PROJECT"
+          dotnet build  "$PROJECT" --configuration Release --no-restore
+          dotnet test   "$PROJECT" --configuration Release --no-build --verbosity normal
 
       - name: Post-check
         run: |
