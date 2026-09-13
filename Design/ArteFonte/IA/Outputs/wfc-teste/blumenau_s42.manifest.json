@@ -1,0 +1,14 @@
+{
+  "generator": "gen_map_wfc.py",
+  "ruleset": "rulesets\\blumenau-fachada.json",
+  "ruleset_name": "blumenau-fachada-hidrica",
+  "learned_from": null,
+  "seed": 42,
+  "size": [
+    20,
+    12
+  ],
+  "tile_size": 32,
+  "pins": {},
+  "attempts_used": 1
+}

@@ -1,0 +1,323 @@
+{
+  "name": "blumenau-fachada-hidrica",
+  "note": "Fachada de Blumenau pos-enchente em corte lateral: ceu no topo, corpo de enxaimel e estrutura clockpunk no meio, marca de nivel na transicao e agua/lama embaixo. Consome os tres tilesets ja gerados por gen_tileset.py (seed 42). Adjacencia escrita a mao; para variar o resultado sem reescrever regras, use --learn com um exemplo desenhado.",
+  "tilesets": {
+    "enxaimel": {
+      "sheet": "../../../../Desenvolvimento/Assets/Art/Environments/Blumenau/Tilesets/env_blumenau_enxaimel_tileset.png",
+      "manifest": "../../IA/Outputs/env_blumenau_enxaimel_tileset.manifest.json"
+    },
+    "metal": {
+      "sheet": "../../../../Desenvolvimento/Assets/Art/Environments/Blumenau/Tilesets/env_blumenau_metal_tileset.png",
+      "manifest": "../../IA/Outputs/env_blumenau_metal_tileset.manifest.json"
+    },
+    "agua": {
+      "sheet": "../../../../Desenvolvimento/Assets/Art/Environments/Blumenau/Tilesets/env_blumenau_agua_tileset.png",
+      "manifest": "../../IA/Outputs/env_blumenau_agua_tileset.manifest.json"
+    }
+  },
+  "constraints": {
+    "top_row": "ceu",
+    "bottom_row": "lama"
+  },
+  "tiles": [
+    {
+      "id": "ceu",
+      "source": null,
+      "weight": 8
+    },
+    {
+      "id": "parede",
+      "source": [
+        "enxaimel",
+        "panel"
+      ],
+      "weight": 10
+    },
+    {
+      "id": "viga_v",
+      "source": [
+        "enxaimel",
+        "beam_v"
+      ],
+      "weight": 3
+    },
+    {
+      "id": "viga_h",
+      "source": [
+        "enxaimel",
+        "beam_h"
+      ],
+      "weight": 3
+    },
+    {
+      "id": "diag",
+      "source": [
+        "enxaimel",
+        "diag"
+      ],
+      "weight": 2
+    },
+    {
+      "id": "chapa",
+      "source": [
+        "metal",
+        "plate"
+      ],
+      "weight": 5
+    },
+    {
+      "id": "ferrugem",
+      "source": [
+        "metal",
+        "rusty"
+      ],
+      "weight": 4
+    },
+    {
+      "id": "emenda",
+      "source": [
+        "metal",
+        "seams"
+      ],
+      "weight": 2
+    },
+    {
+      "id": "marca",
+      "source": [
+        "agua",
+        "marca_nivel"
+      ],
+      "weight": 3
+    },
+    {
+      "id": "agua",
+      "source": [
+        "agua",
+        "superficie"
+      ],
+      "weight": 6
+    },
+    {
+      "id": "lama",
+      "source": [
+        "agua",
+        "lama"
+      ],
+      "weight": 6
+    }
+  ],
+  "adjacency": {
+    "ceu": {
+      "_nota": "ceu NAO desce direto em parede/chapa: toda edificacao comeca por uma linha de cobertura (viga_h ou emenda). Sem isso o WFC produz listras verticais de altura total em vez de predios com telhado.",
+      "down": [
+        "ceu",
+        "viga_h",
+        "emenda",
+        "agua",
+        "marca"
+      ],
+      "left": [
+        "ceu",
+        "viga_v",
+        "viga_h",
+        "parede",
+        "diag",
+        "chapa",
+        "emenda"
+      ],
+      "right": [
+        "ceu",
+        "viga_v",
+        "viga_h",
+        "parede",
+        "diag",
+        "chapa",
+        "emenda"
+      ]
+    },
+    "parede": {
+      "down": [
+        "parede",
+        "viga_v",
+        "viga_h",
+        "marca",
+        "emenda",
+        "diag"
+      ],
+      "left": [
+        "parede",
+        "viga_v",
+        "diag",
+        "chapa",
+        "ferrugem"
+      ],
+      "right": [
+        "parede",
+        "viga_v",
+        "diag",
+        "chapa",
+        "ferrugem"
+      ]
+    },
+    "viga_v": {
+      "down": [
+        "viga_v",
+        "parede",
+        "marca"
+      ],
+      "left": [
+        "parede",
+        "viga_v",
+        "chapa"
+      ],
+      "right": [
+        "parede",
+        "viga_v",
+        "chapa"
+      ]
+    },
+    "viga_h": {
+      "down": [
+        "parede",
+        "viga_v",
+        "chapa",
+        "diag"
+      ],
+      "left": [
+        "viga_h",
+        "parede",
+        "chapa",
+        "emenda"
+      ],
+      "right": [
+        "viga_h",
+        "parede",
+        "chapa",
+        "emenda"
+      ]
+    },
+    "diag": {
+      "down": [
+        "parede",
+        "viga_h"
+      ],
+      "left": [
+        "parede",
+        "diag",
+        "viga_v"
+      ],
+      "right": [
+        "parede",
+        "diag",
+        "viga_v"
+      ]
+    },
+    "chapa": {
+      "down": [
+        "chapa",
+        "ferrugem",
+        "emenda",
+        "marca"
+      ],
+      "left": [
+        "chapa",
+        "ferrugem",
+        "emenda",
+        "parede",
+        "viga_v"
+      ],
+      "right": [
+        "chapa",
+        "ferrugem",
+        "emenda",
+        "parede",
+        "viga_v"
+      ]
+    },
+    "ferrugem": {
+      "down": [
+        "ferrugem",
+        "marca",
+        "emenda"
+      ],
+      "left": [
+        "ferrugem",
+        "chapa",
+        "emenda",
+        "parede"
+      ],
+      "right": [
+        "ferrugem",
+        "chapa",
+        "emenda",
+        "parede"
+      ]
+    },
+    "emenda": {
+      "down": [
+        "chapa",
+        "ferrugem",
+        "marca"
+      ],
+      "left": [
+        "emenda",
+        "chapa",
+        "ferrugem",
+        "viga_h"
+      ],
+      "right": [
+        "emenda",
+        "chapa",
+        "ferrugem",
+        "viga_h"
+      ]
+    },
+    "marca": {
+      "down": [
+        "agua",
+        "lama"
+      ],
+      "left": [
+        "marca",
+        "parede",
+        "chapa",
+        "ferrugem"
+      ],
+      "right": [
+        "marca",
+        "parede",
+        "chapa",
+        "ferrugem"
+      ]
+    },
+    "agua": {
+      "down": [
+        "agua",
+        "lama"
+      ],
+      "left": [
+        "agua",
+        "marca",
+        "lama"
+      ],
+      "right": [
+        "agua",
+        "marca",
+        "lama"
+      ]
+    },
+    "lama": {
+      "down": [
+        "lama"
+      ],
+      "left": [
+        "lama",
+        "agua"
+      ],
+      "right": [
+        "lama",
+        "agua"
+      ]
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "_comment": "Workflow API do ComfyUI - lote de thumbnails com Z-Image Turbo (candidato B do bench de modelo base). Placeholders: {POSITIVE}, {NEGATIVE}, {SEED}. Contraparte de workflow-thumbnails.json (SDXL, candidato A) para comparacao A/B com prompt e seed identicos.",
+
+  "_incompatibilidade": "comfy_batch.py NAO patcheia este workflow direto: ele escreve em inputs.text dos nos 6/7, e o TextEncodeZImageOmni usa o campo 'prompt', nao 'text'. Use o bench dedicado ou patcheie 'prompt' a mao. Os ids 3/5/9 seguem a mesma convencao dos outros workflows.",
+
+  "20": {
+    "_note": "Z-Image nao vem como checkpoint unico: difusao, text encoder e VAE sao tres arquivos separados. fp8_e4m3fn e o que cabe nos 8GB desta placa (o bf16 pede 16GB).",
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "z_image_turbo_fp8_e4m3fn.safetensors",
+      "weight_dtype": "fp8_e4m3fn"
+    }
+  },
+
+  "21": {
+    "_note": "Z-Image usa Qwen como text encoder -- dai o type 'qwen_image'.",
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen_3_4b_fp8_mixed.safetensors",
+      "type": "qwen_image"
+    }
+  },
+
+  "22": {
+    "class_type": "VAELoader",
+    "inputs": { "vae_name": "z_image_ae.safetensors" }
+  },
+
+  "5": {
+    "class_type": "EmptySD3LatentImage",
+    "inputs": { "width": 1024, "height": 1024, "batch_size": 4 }
+  },
+
+  "6": {
+    "class_type": "TextEncodeZImageOmni",
+    "inputs": { "clip": ["21", 0], "prompt": "{POSITIVE}", "auto_resize_images": false }
+  },
+
+  "7": {
+    "class_type": "TextEncodeZImageOmni",
+    "inputs": { "clip": ["21", 0], "prompt": "{NEGATIVE}", "auto_resize_images": false }
+  },
+
+  "3": {
+    "_note": "Turbo e modelo destilado: poucos steps e cfg baixo. 25 steps / cfg 6.5 do workflow SDXL queimariam a imagem aqui. Estes valores sao ponto de partida do bench, nao verdade -- ajustar com o resultado na tela.",
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["20", 0],
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "latent_image": ["5", 0],
+      "seed": "{SEED}",
+      "steps": 8,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0
+    }
+  },
+
+  "8": { "class_type": "VAEDecode", "inputs": { "samples": ["3", 0], "vae": ["22", 0] } },
+
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": { "images": ["8", 0], "filename_prefix": "braziliation_zimage" }
+  }
+}

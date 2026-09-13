@@ -1,0 +1,17 @@
+{
+  "note": "Trecho de fachada desenhado a mao, usado como fonte de gramatica para gen_map_wfc.py --learn. A lamina d'agua aqui e PLANA e as edificacoes tem telhado: o WFC vai reproduzir essas duas propriedades porque sao as unicas adjacencias que ele observa. Editar este arquivo e a forma mais rapida de mudar o resultado -- nao precisa mexer em adjacencia a mao.",
+  "grid": [
+    ["ceu",   "ceu",    "ceu",    "ceu",    "ceu",    "ceu",    "ceu",    "ceu",    "ceu",    "ceu",    "ceu",    "ceu"],
+    ["ceu",   "ceu",    "viga_h", "viga_h", "ceu",    "ceu",    "ceu",    "emenda", "emenda", "ceu",    "ceu",    "ceu"],
+    ["ceu",   "viga_h", "parede", "parede", "viga_h", "ceu",    "emenda", "chapa",  "chapa",  "emenda", "ceu",    "ceu"],
+    ["ceu",   "parede", "diag",   "parede", "parede", "ceu",    "chapa",  "ferrugem","chapa", "chapa",  "ceu",    "ceu"],
+    ["ceu",   "parede", "parede", "viga_v", "parede", "ceu",    "chapa",  "chapa",  "ferrugem","chapa", "ceu",    "ceu"],
+    ["ceu",   "viga_v", "parede", "viga_v", "parede", "ceu",    "ferrugem","chapa", "chapa",  "ferrugem","ceu",   "ceu"],
+    ["ceu",   "parede", "parede", "parede", "parede", "ceu",    "chapa",  "ferrugem","chapa", "chapa",  "ceu",    "ceu"],
+    ["marca", "marca",  "marca",  "marca",  "marca",  "marca",  "marca",  "marca",  "marca",  "marca",  "marca",  "marca"],
+    ["agua",  "agua",   "agua",   "agua",   "agua",   "agua",   "agua",   "agua",   "agua",   "agua",   "agua",   "agua"],
+    ["agua",  "agua",   "agua",   "agua",   "agua",   "agua",   "agua",   "agua",   "agua",   "agua",   "agua",   "agua"],
+    ["lama",  "lama",   "lama",   "lama",   "lama",   "lama",   "lama",   "lama",   "lama",   "lama",   "lama",   "lama"],
+    ["lama",  "lama",   "lama",   "lama",   "lama",   "lama",   "lama",   "lama",   "lama",   "lama",   "lama",   "lama"]
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "_comment": "Workflow API do ComfyUI - sprite com ALPHA NATIVO via LayerDiffuse + trava de paleta do projeto (Opcao C, etapa de sprite de producao). Placeholders: {POSITIVE}, {NEGATIVE}, {SEED}. Ids 3/6/7/9 mantidos iguais ao workflow-thumbnails.json para o comfy_batch.py continuar patcheando sem alteracao. Diferenca central para o workflow de thumbnails: la se gera concept opaco em 1024; aqui se gera sprite RECORTADO, ja no canvas alvo e ja na paleta da regiao. Requer os custom nodes ComfyUI-layerdiffuse e ComfyUI-DNF-ColorLock, e o swatch da paleta em ComfyUI/input/ (gerar com Ferramentas/palette_swatch.py). Na primeira execucao o LayerDiffuse baixa layer_xl_transparent_attn.safetensors (~700MB) para models/layer_model/.",
+
+  "4": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": { "ckpt_name": "sd_xl_base_1.0.safetensors" }
+  },
+
+  "12": {
+    "class_type": "LoraLoader",
+    "inputs": {
+      "model": ["4", 0],
+      "clip": ["4", 1],
+      "lora_name": "pixel-art-xl.safetensors",
+      "strength_model": 1.2,
+      "strength_clip": 1.2
+    }
+  },
+
+  "13": {
+    "_note": "Injeta transparencia latente no modelo. E o que faz o sprite nascer recortado em vez de exigir remocao de fundo depois. Config = Conv Injection, NAO Attention Injection: a variante de atencao colide com o LoRA pixel-art-xl, que tambem patcheia atencao -- o log cospe centenas de 'patch type not recognized lora ...attn...' e o LoRA deixa de valer. Conv Injection patcheia convolucao e deixa a atencao livre para o LoRA.",
+    "class_type": "LayeredDiffusionApply",
+    "inputs": {
+      "model": ["12", 0],
+      "config": "SDXL, Conv Injection",
+      "weight": 1.0
+    }
+  },
+
+  "5": {
+    "_note": "1024 e a resolucao nativa do SDXL; o downscale para o canvas do sprite acontece no no 16, com nearest e paleta travada.",
+    "class_type": "EmptyLatentImage",
+    "inputs": { "width": 1024, "height": 1024, "batch_size": 4 }
+  },
+
+  "6": { "class_type": "CLIPTextEncode", "inputs": { "clip": ["12", 1], "text": "{POSITIVE}" } },
+  "7": { "class_type": "CLIPTextEncode", "inputs": { "clip": ["12", 1], "text": "{NEGATIVE}" } },
+
+  "3": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["13", 0],
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "latent_image": ["5", 0],
+      "seed": "{SEED}",
+      "steps": 25,
+      "cfg": 6.5,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1.0
+    }
+  },
+
+  "8": { "class_type": "VAEDecode", "inputs": { "samples": ["3", 0], "vae": ["4", 2] } },
+
+  "14": {
+    "_note": "Reconstroi o canal alpha a partir do latente + do RGB decodificado. Saida: RGBA de verdade, sem chroma key nem recorte manual.",
+    "class_type": "LayeredDiffusionDecodeRGBA",
+    "inputs": {
+      "samples": ["3", 0],
+      "images": ["8", 0],
+      "sd_version": "SDXL",
+      "sub_batch_size": 4
+    }
+  },
+
+  "15": {
+    "_note": "Swatch da paleta da regiao gerado por Ferramentas/palette_swatch.py. E a fonte de verdade de cor deste workflow.",
+    "class_type": "LoadImage",
+    "inputs": { "image": "blumenau_swatch.png" }
+  },
+
+  "16": {
+    "_note": "Downscale para o canvas do sprite + quantizacao TRAVADA no swatch. Substitui o passo pixelize.py da rota antiga: em vez de reduzir e so depois torcer para a cor cair na paleta, a paleta e imposta como referencia. target 64x64 = personagem do ADR-004; use 32x32 para prop. Saidas: (final_image, nearest_preview, reference_palette) -- indice 0 e o sprite.",
+    "class_type": "DNFReferencePaletteFinalize",
+    "inputs": {
+      "image": ["14", 0],
+      "reference": ["15", 0],
+      "target_width": 64,
+      "target_height": 64,
+      "fit_mode": "contain",
+      "background": "green",
+      "downscale": "nearest",
+      "palette_colors": "32",
+      "chroma_colors": 48,
+      "chroma_threshold": 0.06,
+      "dither": "none",
+      "preview_scale": 4
+    }
+  },
+
+  "9": {
+    "_note": "SAIDA SECUNDARIA (opaca). Testado em 2026-09-03: o no 16 quantiza TAMBEM o fundo para dentro da paleta -- o verde vira marrom da paleta e deixa de ser chaveavel, entao esta saida NAO tem alpha. Util so para inspecionar a leitura em paleta travada. A saida de producao e o no 17 (RGBA), pixelizado depois por Ferramentas/pixelize.py, que preserva o alpha. Cadeia verificada: no 17 -> `py pixelize.py {rgba}.png blumenau.json --size 32x32` -> palette_check APROVADO, 8/32 cores, fundo transparente.",
+    "class_type": "SaveImage",
+    "inputs": { "images": ["16", 0], "filename_prefix": "braziliation_sprite_paletatravada" }
+  },
+
+  "17": {
+    "class_type": "SaveImage",
+    "inputs": { "images": ["14", 0], "filename_prefix": "braziliation_sprite_rgba" }
+  }
+}

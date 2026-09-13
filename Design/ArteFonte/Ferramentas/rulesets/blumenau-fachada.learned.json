@@ -1,0 +1,323 @@
+{
+  "name": "blumenau-fachada-hidrica",
+  "note": "Fachada de Blumenau pos-enchente em corte lateral: ceu no topo, corpo de enxaimel e estrutura clockpunk no meio, marca de nivel na transicao e agua/lama embaixo. Consome os tres tilesets ja gerados por gen_tileset.py (seed 42). Adjacencia escrita a mao; para variar o resultado sem reescrever regras, use --learn com um exemplo desenhado.",
+  "tilesets": {
+    "enxaimel": {
+      "sheet": "../../../../Desenvolvimento/Assets/Art/Environments/Blumenau/Tilesets/env_blumenau_enxaimel_tileset.png",
+      "manifest": "../../IA/Outputs/env_blumenau_enxaimel_tileset.manifest.json"
+    },
+    "metal": {
+      "sheet": "../../../../Desenvolvimento/Assets/Art/Environments/Blumenau/Tilesets/env_blumenau_metal_tileset.png",
+      "manifest": "../../IA/Outputs/env_blumenau_metal_tileset.manifest.json"
+    },
+    "agua": {
+      "sheet": "../../../../Desenvolvimento/Assets/Art/Environments/Blumenau/Tilesets/env_blumenau_agua_tileset.png",
+      "manifest": "../../IA/Outputs/env_blumenau_agua_tileset.manifest.json"
+    }
+  },
+  "constraints": {
+    "top_row": "ceu",
+    "bottom_row": "lama"
+  },
+  "tiles": [
+    {
+      "id": "ceu",
+      "source": null,
+      "weight": 40
+    },
+    {
+      "id": "parede",
+      "source": [
+        "enxaimel",
+        "panel"
+      ],
+      "weight": 14
+    },
+    {
+      "id": "viga_v",
+      "source": [
+        "enxaimel",
+        "beam_v"
+      ],
+      "weight": 3
+    },
+    {
+      "id": "viga_h",
+      "source": [
+        "enxaimel",
+        "beam_h"
+      ],
+      "weight": 4
+    },
+    {
+      "id": "diag",
+      "source": [
+        "enxaimel",
+        "diag"
+      ],
+      "weight": 1
+    },
+    {
+      "id": "chapa",
+      "source": [
+        "metal",
+        "plate"
+      ],
+      "weight": 13
+    },
+    {
+      "id": "ferrugem",
+      "source": [
+        "metal",
+        "rusty"
+      ],
+      "weight": 5
+    },
+    {
+      "id": "emenda",
+      "source": [
+        "metal",
+        "seams"
+      ],
+      "weight": 4
+    },
+    {
+      "id": "marca",
+      "source": [
+        "agua",
+        "marca_nivel"
+      ],
+      "weight": 12
+    },
+    {
+      "id": "agua",
+      "source": [
+        "agua",
+        "superficie"
+      ],
+      "weight": 24
+    },
+    {
+      "id": "lama",
+      "source": [
+        "agua",
+        "lama"
+      ],
+      "weight": 24
+    }
+  ],
+  "adjacency": {
+    "ferrugem": {
+      "up": [
+        "chapa"
+      ],
+      "down": [
+        "chapa",
+        "marca"
+      ],
+      "left": [
+        "ceu",
+        "chapa"
+      ],
+      "right": [
+        "ceu",
+        "chapa"
+      ]
+    },
+    "viga_h": {
+      "up": [
+        "ceu"
+      ],
+      "down": [
+        "parede"
+      ],
+      "left": [
+        "ceu",
+        "parede",
+        "viga_h"
+      ],
+      "right": [
+        "ceu",
+        "parede",
+        "viga_h"
+      ]
+    },
+    "marca": {
+      "up": [
+        "ceu",
+        "chapa",
+        "ferrugem",
+        "parede"
+      ],
+      "down": [
+        "agua"
+      ],
+      "left": [
+        "marca"
+      ],
+      "right": [
+        "marca"
+      ]
+    },
+    "emenda": {
+      "up": [
+        "ceu"
+      ],
+      "down": [
+        "chapa"
+      ],
+      "left": [
+        "ceu",
+        "chapa",
+        "emenda"
+      ],
+      "right": [
+        "ceu",
+        "chapa",
+        "emenda"
+      ]
+    },
+    "agua": {
+      "up": [
+        "agua",
+        "marca"
+      ],
+      "down": [
+        "agua",
+        "lama"
+      ],
+      "left": [
+        "agua"
+      ],
+      "right": [
+        "agua"
+      ]
+    },
+    "viga_v": {
+      "up": [
+        "parede",
+        "viga_v"
+      ],
+      "down": [
+        "parede",
+        "viga_v"
+      ],
+      "left": [
+        "ceu",
+        "parede"
+      ],
+      "right": [
+        "parede"
+      ]
+    },
+    "parede": {
+      "up": [
+        "diag",
+        "parede",
+        "viga_h",
+        "viga_v"
+      ],
+      "down": [
+        "diag",
+        "marca",
+        "parede",
+        "viga_v"
+      ],
+      "left": [
+        "ceu",
+        "diag",
+        "parede",
+        "viga_h",
+        "viga_v"
+      ],
+      "right": [
+        "ceu",
+        "diag",
+        "parede",
+        "viga_h",
+        "viga_v"
+      ]
+    },
+    "lama": {
+      "up": [
+        "agua",
+        "lama"
+      ],
+      "down": [
+        "lama"
+      ],
+      "left": [
+        "lama"
+      ],
+      "right": [
+        "lama"
+      ]
+    },
+    "chapa": {
+      "up": [
+        "chapa",
+        "emenda",
+        "ferrugem"
+      ],
+      "down": [
+        "chapa",
+        "ferrugem",
+        "marca"
+      ],
+      "left": [
+        "ceu",
+        "chapa",
+        "emenda",
+        "ferrugem"
+      ],
+      "right": [
+        "ceu",
+        "chapa",
+        "emenda",
+        "ferrugem"
+      ]
+    },
+    "ceu": {
+      "up": [
+        "ceu"
+      ],
+      "down": [
+        "ceu",
+        "emenda",
+        "marca",
+        "viga_h"
+      ],
+      "left": [
+        "ceu",
+        "chapa",
+        "emenda",
+        "ferrugem",
+        "parede",
+        "viga_h"
+      ],
+      "right": [
+        "ceu",
+        "chapa",
+        "emenda",
+        "ferrugem",
+        "parede",
+        "viga_h",
+        "viga_v"
+      ]
+    },
+    "diag": {
+      "up": [
+        "parede"
+      ],
+      "down": [
+        "parede"
+      ],
+      "left": [
+        "parede"
+      ],
+      "right": [
+        "parede"
+      ]
+    }
+  }
+}
