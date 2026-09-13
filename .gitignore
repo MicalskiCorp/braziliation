@@ -8,17 +8,11 @@ Desenvolvimento/.vs/
 .idea/
 .vscode/
 
-# Build outputs
-/bin/
-/obj/
-
-# .NET test project outputs
-Tests/**/bin/
-Tests/**/obj/
-tests/**/bin/
-tests/**/obj/
-dotnet-tests/**/bin/
-dotnet-tests/**/obj/
+# Build outputs (.NET) — recursivos de propósito: os padrões ancorados na raiz
+# (/bin/, Tests/**/bin/) não alcançavam Desenvolvimento/**, e por isso 208
+# artefatos de build acabaram versionados.
+**/bin/
+**/obj/
 /Build/
 /Builds/
 
@@ -26,9 +20,16 @@ dotnet-tests/**/obj/
 Library/
 Temp/
 Obj/
-Build/
-Builds/
+# Saída de player build do Unity. ANCORADO de propósito: "Build/" solto casava com
+# src/Braziliation.Game.Core/Build/ e Assets/Scripts/Build/ — código — e deixou 8
+# arquivos fora do git. GitIgnoreGuardTests falha se isso voltar a acontecer.
+/Desenvolvimento/Build/
+/Desenvolvimento/Builds/
 UserSettings/
+# Projetos gerados pelo Unity a cada abertura do editor (Braziliation.slnx os referencia;
+# o Unity recria). Os .csproj de src/ e Tests/ são escritos à mão e continuam versionados.
+/Desenvolvimento/*.csproj
+*.csproj.user
 MemoryCaptures/
 .unitypackage
 
@@ -43,7 +44,16 @@ ignore.conf
 # Logs
 *.log
 
-# Assets
+# Cache/saída local das ferramentas de arte (o resultado versionado vai para Assets/)
+Design/ArteFonte/Ferramentas/__pycache__/
+Design/ArteFonte/Ferramentas/_gothicvania_cache/
+Design/ArteFonte/Ferramentas/_gothicvania_out/
+
+# Assets binários de trabalho
+# *.psd continua ignorado por padrão: o projeto não versiona nenhum .psd próprio hoje,
+# e o TextMesh Pro traz .psd de exemplo que não queremos no repo. A regra LFS de *.psd
+# em .gitattributes é intencional e complementar — ela só entra em ação para um .psd
+# adicionado de propósito com `git add -f`, e então ele vai para LFS em vez do repo.
 *.psd
 *.ai
 *.tga

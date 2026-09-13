@@ -1,5 +1,3 @@
-using NUnit.Framework;
-
 namespace Braziliation.Game.Tests;
 
 internal static class RepoRootFinder
@@ -19,8 +17,20 @@ internal static class RepoRootFinder
             dir = dir.Parent;
         }
 
-        Assert.Fail(
+        throw new InvalidOperationException(
             "Não foi possível localizar a raiz do repositório (ProjectSettings/ProjectVersion.txt).");
-        throw new InvalidOperationException("Unreachable");
+    }
+
+    /// <summary>
+    /// Raiz do repositório git — um nível acima da raiz do projeto Unity
+    /// (<c>Desenvolvimento/</c>). É onde vivem .github/, .gitlab-ci.yml e Design/.
+    /// </summary>
+    internal static string FindGitRoot()
+    {
+        var unityRoot = new DirectoryInfo(FindRepositoryRoot());
+        var parent = unityRoot.Parent
+            ?? throw new InvalidOperationException(
+                $"Raiz do projeto Unity '{unityRoot.FullName}' não tem diretório pai.");
+        return parent.FullName;
     }
 }
