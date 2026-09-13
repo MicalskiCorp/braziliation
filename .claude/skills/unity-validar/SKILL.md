@@ -29,4 +29,4 @@ Fecha o ciclo que o CI não cobre: o CI roda só o core C# puro (`Tests/Brazilia
 
 - Nunca apagar `Temp/UnityLockfile` para "destravar" — ele existe porque há um Editor aberto no projeto.
 - Import do Unity pode reescrever `.meta` e `ProjectSettings/`: conferir o `git status` depois da execução e explicar qualquer arquivo alterado que não era esperado.
-- Falha de compilação é bloqueadora: não commitar script Unity com esta skill reprovando.
+- Falha de compilação é bloqueadora: não commitar script Unity com esta skill reprovando. O pre-commit cobra isso: script de `Assets/` em stage exige resultado OK gravado **depois** da última edição (`scripts/check_state.py`).

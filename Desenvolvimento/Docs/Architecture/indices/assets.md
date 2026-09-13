@@ -55,6 +55,7 @@
 |-------|:---:|:---:|:---:|:---:|:---:|
 | Edith Gaertner — NPC da SQ-01 ([context pack](../../../../Design/ArteFonte/IA/ContextPacks/chr-blumenau-edith-gaertner/context.md)) | ✅ | 🔨 lote 12 sem veredito (teto de 3 lotes por ajuste) | ❌ | ❌ | ❌ |
 | Soldado Mercenário Clérico — inimigo de Blumenau | ✅ | ⏸ 6 thumbnails em `IA/Outputs/soldado-clerico-thumbs/` aguardando curadoria | ❌ | ❌ | ❌ |
+| Hermann Baumgarten — NPC das quests do cemitério e da Igreja Matriz Luterana (`Design/Criativo/Historia/personagens/Hermann-Baumgarten.md`) | ✅ | ❌ | ❌ | ❌ | ❌ |
 
 Legenda de status por célula: ❌ não iniciado · 🔨 em andamento · ⏸ aguardando aprovação do usuário · ✅ concluído.
 

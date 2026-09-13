@@ -152,6 +152,73 @@ public sealed class DocsConsistencyTests
             string.Join(", ", missing));
     }
 
+    /// <summary>Era o passo manual "features × backlog" da varredura do @GameArchitect.</summary>
+    [Fact]
+    public void Every_Feature_Is_Listed_In_Features_Index_And_Backlog()
+    {
+        var features = Path.Combine(UnityRoot, "Docs", "GDD", "Features");
+        var index = File.ReadAllText(Path.Combine(features, "index.md"));
+        var backlog = File.ReadAllText(Path.Combine(UnityRoot, "Docs", "Roadmap", "backlog.md"));
+
+        var problems = Directory.EnumerateFiles(features, "*.md")
+            .Select(Path.GetFileName)
+            .Where(name => name != "index.md")
+            .SelectMany(name => new[]
+            {
+                index.Contains(name, StringComparison.Ordinal) ? null : $"{name} fora do Features/index.md",
+                backlog.Contains(name, StringComparison.Ordinal) ? null : $"{name} fora do Roadmap/backlog.md",
+            })
+            .Where(p => p is not null)
+            .ToList();
+
+        Assert.True(problems.Count == 0, string.Join("\n", problems));
+    }
+
+    /// <summary>Pastas de conteúdo por asset (um pacote por asset/tema), não roteadas por índice.</summary>
+    private static readonly string[] AssetFolderPrefixes =
+    {
+        "Design/ArteFonte/IA/ContextPacks/",
+        "Design/ArteConceitual/ReferenciasVisuais/",
+    };
+
+    /// <summary>Arquivos de operação conhecidos por nome — não precisam de linha no roteador.</summary>
+    private static readonly HashSet<string> RouterExempt = new(StringComparer.Ordinal) { "TODO.md", "TODO-arquivo.md" };
+
+    /// <summary>
+    /// A navegação por índice só economiza tokens se o índice for completo: arquivo que o
+    /// index.md da pasta não lista só é achado por busca. Era checagem manual da skill
+    /// structure-audit (níveis 2 e 3) e do Modo 4 do @GameArchitect.
+    /// </summary>
+    [Fact]
+    public void Every_Markdown_Folder_Has_A_Complete_Router()
+    {
+        var problems = new List<string>();
+        foreach (var dir in MarkdownFiles().Select(Path.GetDirectoryName).Distinct())
+        {
+            var rel = Relative(dir!) + "/";
+            if (!(rel.StartsWith("Desenvolvimento/Docs/") || rel.StartsWith("Design/")) || AssetFolderPrefixes.Any(rel.StartsWith))
+                continue;
+
+            var siblings = Directory.EnumerateFiles(dir!, "*.md").Select(Path.GetFileName)
+                .Where(n => n != "index.md" && !RouterExempt.Contains(n!)).ToList();
+            var indexPath = Path.Combine(dir!, "index.md");
+
+            if (!File.Exists(indexPath))
+            {
+                if (siblings.Count > 1)
+                    problems.Add($"{rel} tem {siblings.Count} arquivos .md e nenhum index.md");
+                continue;
+            }
+
+            var index = File.ReadAllText(indexPath);
+            problems.AddRange(siblings
+                .Where(n => !index.Contains($"({n}", StringComparison.Ordinal) && !index.Contains($"`{n}`", StringComparison.Ordinal))
+                .Select(n => $"{rel}{n} não aparece no index.md da pasta"));
+        }
+
+        Assert.True(problems.Count == 0, "Roteadores incompletos:\n" + string.Join("\n", problems));
+    }
+
     [Fact]
     public void Superseded_Adrs_Name_Their_Replacement()
     {

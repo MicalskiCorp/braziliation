@@ -17,12 +17,10 @@ Valida que o estado real do disco corresponde ao estado documentado. Não corrig
 
 ### 2. Design
 - `Design/ArteFonte/IA/` deve ter `ContextPacks/`, `Outputs/`, `Selected/`, `Rejected/`, `Models/`.
-- Todo guia em `Design/GuiasDeArte/` deve estar listado em `GuiasDeArte/index.md` (e vice-versa).
-- Paletas JSON em `Design/ArteConceitual/Paletas/` com `"status"` definido.
+- *Já são teste — não conferir à mão:* todo `.md` listado no `index.md` da própria pasta (`DocsConsistencyTests`, roteador completo) e paletas com `"status"` (`ConventionGuardTests`).
 
 ### 3. Documentação
-- Todo arquivo de `Docs/Architecture/` listado em `Architecture/index.md`.
-- Links internos dos `index.md` apontam para arquivos existentes (verificar caminhos relativos).
+- *Já são teste:* links relativos válidos, roteadores completos em `Docs/` e `Design/`, todo `.cs` numa ficha de sistema, feature no índice e no backlog. Aqui fica só o que exige julgamento: o conteúdo de uma ficha ainda descreve o código?
 
 ### 4. Ecossistema de agentes
 - Tabela do `AGENTS.md` vs. arquivos reais em `.github/agents/` E `.claude/agents/` (2ª camada, 2 formatos). A lista e a paridade de corpo já são checadas pelo `AgentParityTests`.

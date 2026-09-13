@@ -101,10 +101,8 @@ Toda pasta tem um `index.md` roteador. Não criar `README.md` paralelo a um `ind
 
 Regras de sincronização em `Architecture/indices/protocolo-comunicacao.md`. Executar sem confirmação por passo e reportar ao final:
 
-1. `dotnet test Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj` — falhas de `DocsConsistencyTests` (script fora de ficha, pasta do core sem ficha, link quebrado) e de `TokenBudgetTests` viram correção.
-2. Pastas de `Docs/` sem `index.md` → criar a partir de `Models/ModelIndice.md`.
-3. `GDD/Features/index.md` × `Roadmap/backlog.md` — feature sem linha no backlog ganha linha.
-4. Relatório: tabela `Item | Ação | Arquivo` + divergências que pedem decisão do usuário.
+1. `dotnet test Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj` — o `DocsConsistencyTests` acusa script fora de ficha, pasta do core sem ficha, link quebrado, roteador incompleto (pasta sem `index.md` ou arquivo que ele não lista) e feature fora do `Features/index.md` ou do backlog; o `TokenBudgetTests`, arquivo acima do teto. Cada falha vira correção — índice novo a partir de `Models/ModelIndice.md`.
+2. Relatório: tabela `Item | Ação | Arquivo` + divergências que pedem decisão do usuário.
 
 > A estrutura já foi montada (bootstrap de 2026-04). Para auditar disco × docs, usar a skill `structure-audit` — não recriar pastas.
 

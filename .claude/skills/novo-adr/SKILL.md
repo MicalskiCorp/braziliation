@@ -19,7 +19,7 @@ Os ADR-001 e ADR-003 ficaram meses com status errado depois de serem substituíd
    `## ADR-NNN: Título` · `- **Date:**` (AAAA-MM-DD) · `- **Status:** Accepted` · `- **Context:**` · `- **Decision:**` · `- **Consequences:**`.
 4. Para cada ADR substituído: trocar o status para `**Superseded por ADR-NNN** (data). {o que continua valendo, se algo}`. O `DocsConsistencyTests` falha se um ADR substituído não indicar o substituto.
 5. Atualizar os pontos que repetem a decisão: `CLAUDE.md` (seção "Estado conhecido"), `.claude/rules/*.md` e `.github/instructions/*.md` se tratarem do tema. Se a decisão tiver consequência de código, registrar a pendência em `Desenvolvimento/Docs/TODO.md`.
-6. Rodar `dotnet test Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj` e reportar.
+6. Rodar `dotnet test Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj` e reportar. O `@TechLead` não tem `Bash`: executado por ele, avisar o usuário que o teste roda no pre-commit — o `DocsConsistencyTests` cobra o ADR substituído sem substituto.
 
 ## Regras
 

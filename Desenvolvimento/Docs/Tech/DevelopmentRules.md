@@ -3,8 +3,8 @@
 ## Fase atual — até a v1 consolidada
 
 - **Commits direto no `main`.** Não há branch de integração nem Pull Request ainda (decisão registrada no `CLAUDE.md` e no roadmap, fase "Preparação da v1").
-- **Pre-commit obrigatório:** ativar uma vez por clone com `git config core.hooksPath .githooks`. Ele roda `dotnet test` (core + guardas de docs, tokens, agentes e `.gitignore`), o meta-check quando `Assets/` muda e o gate de paletas quando arte ou paleta muda.
-- **Mudou algo em `Assets/`?** Rodar `py .claude/skills/unity-validar/scripts/validar.py` antes do commit — é a única checagem local do lado Unity.
+- **Pre-commit obrigatório:** ativar uma vez por clone com `git config core.hooksPath .githooks`. Ele roda `dotnet test` (core + guardas de docs, tokens, convenções, agentes e `.gitignore`), o meta-check quando `Assets/` muda, o gate de paletas quando arte ou paleta muda e o gate do Unity quando há script de `Assets/` em stage.
+- **Mudou script em `Assets/`?** Rodar `py .claude/skills/unity-validar/scripts/validar.py` antes do commit — o pre-commit recusa o commit se a última validação OK for anterior à edição.
 - `--no-verify` só em emergência, dizendo o motivo na mensagem do commit.
 
 ## Depois da v1 (fluxo com PR)

@@ -26,7 +26,7 @@ Aprovado só com as quatro respostas satisfeitas; senão, parcial ou reprovado.
 
 ## C — Cobertura de testes
 
-Em `src/Braziliation.Game.Core/`: todo `*Service.cs` tem arquivo de teste dedicado; todo modelo com lógica (`BuildState`, `CraftingService`…) tem teste; modelo só de dados (`SaveSlot`, `SlotData`) é opcional. O CI roda `Tests/Braziliation.Game.Tests/` direto; o lado Unity é validado pela skill `unity-validar`.
+"Todo `*Service.cs` tem `{Nome}Tests.cs`" já é teste (`ConventionGuardTests`) — não conferir à mão. Julgar o resto em `src/Braziliation.Game.Core/`: todo modelo com lógica (`BuildState`, `HybridSynergyResolver`…) tem teste; modelo só de dados (`SaveSlot`, `SlotData`) é opcional. O CI roda `Tests/Braziliation.Game.Tests/` direto; o lado Unity é validado pela skill `unity-validar`.
 
 Saída: `Classe | Tem teste? | Arquivo de teste | Gap`.
 
@@ -46,7 +46,7 @@ Comparar o estado real com a fase atual do `roadmap.md`. Item da milestone sem T
 
 ## E — Retroalimentação obrigatória
 
-Todo `// TODO` e `// TODO-DESIGN` de `src/` e `Assets/Scripts/` sem entrada no TODO ganha entrada, pela skill `gerir-todo`:
+`py .claude/skills/validar-todos/todos_inline.py` lista todos os `// TODO` e `// TODO-DESIGN` do código já classificados: rastreado pelo arquivo, rastreado pelo domínio (a ficha ou mecânica do sistema é citada no TODO) ou **NÃO**. Só os "NÃO" pedem decisão; os que forem pendência real ganham entrada pela skill `gerir-todo`:
 `| {ponto faltante, extraído do comentário} | {arquivo} | @{agente} | {prioridade} | ❌ Não iniciado |`
 
 ## F — Relatório

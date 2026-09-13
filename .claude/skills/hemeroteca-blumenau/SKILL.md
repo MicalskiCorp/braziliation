@@ -1,6 +1,8 @@
 ---
 name: hemeroteca-blumenau
 description: Pesquisa e localiza informações históricas de Blumenau nos PDFs OCR da revista "Blumenau em Cadernos" hospedados na Hemeroteca Digital de SC (CIASC), navegando os índices por década para achar a edição certa e depois lendo o PDF em busca do termo pedido. Use quando o usuário pedir para verificar/pesquisar algo sobre a história de Blumenau em fonte primária, mencionar "hemeroteca", "Blumenau em Cadernos" ou pedir uma edição específica por data/número.
+context: fork
+agent: historiador
 ---
 
 # Skill: hemeroteca-blumenau
@@ -8,6 +10,8 @@ description: Pesquisa e localiza informações históricas de Blumenau nos PDFs 
 Fonte primária: **Hemeroteca Digital Catarinense (CIASC)**, acervo da revista histórico-cultural **"Blumenau em Cadernos"**. Todo o acervo está em `https://hemeroteca.ciasc.sc.gov.br/blumenau%20em%20cadernos/`, organizado em **páginas-índice por década** (HTML, cada uma lista os links das edições daquele período) e **PDFs OCR individuais** (um por edição).
 
 > Esta skill serve para *localizar e ler fontes primárias*, não para decidir se uma referência folclórica existe (isso é o Modo 1 do Historiador). Use-a quando precisar checar um fato, data, nome ou evento específico de Blumenau contra o texto real de uma edição.
+>
+> **Roda num fork do `@Historiador`**: cada PDF tem 25-30 páginas de OCR, e ler isso na conversa principal a enche de texto que só serve para achar um trecho. O fork lê, e devolve só edição, trecho e fonte.
 
 ## Índices por década (fonte da verdade dos links)
 

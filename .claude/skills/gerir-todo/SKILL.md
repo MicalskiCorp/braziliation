@@ -20,8 +20,7 @@ Status: ❌ não iniciado · 📋 rascunho · 🔨 em andamento · ⏸ bloqueado
 ## Operações
 
 ### listar
-1. Ler o TODO da camada.
-2. Resumir por seção; destacar Alta com ❌ e os itens ⏸ com o bloqueio.
+`py .claude/skills/gerir-todo/todo.py listar {pesquisa|criativo|dev}` devolve as pendências abertas por seção, com contagem por status e os itens Alta. Sem `Bash`: ler o TODO e resumir do mesmo jeito, destacando os ⏸ com o bloqueio.
 
 ### adicionar: {descrição} — {arquivo de referência} — {prioridade}
 1. Ler o TODO e escolher a seção pelo roteamento abaixo. **Nunca criar seção que já existe** — seção nova só para estado novo (`### Cidades — {Estado}`).
@@ -57,9 +56,11 @@ Aplicar a regra da coluna "Item concluído" daquele TODO.
 ### varredura
 Rodar sem confirmar passo a passo e devolver a lista — o usuário decide o que entra no TODO.
 
+A parte mecânica é script: `py .claude/skills/gerir-todo/todo.py varredura {criativo|pesquisa}` faz as checagens abaixo e marca o que já está citado no TODO — o agente não precisa ler a camada inteira. Sem `Bash` (hoje `@GameCreative` e `@Historiador`), seguir a mesma checklist lendo os arquivos.
+
 - **Criativo** (`Design/Criativo/`): marcadores abertos (`{TODO}`, `*(a definir)*`, `*(Escrever aqui)*`, `*(nenhum…*`); lendas ❌ no catálogo sem mapeamento; ideias 💡 paradas desde a sessão anterior; arcos e personagens sem lenda associada; cidades 📋 com Características vazias; personagens ou criaturas com Aparência preenchida sem linha em Concept Art Pendente nem concept aprovado em `Design/ArteConceitual/`. Comparar com o TODO e listar o que falta nele.
 - **Pesquisa**: estados e temas de `Design/Criativo/Estados/index.md` sem cobertura em `Design/Pesquisa/index.md`.
-- **Desenvolvimento**: `dotnet test` (guardas de docs e de orçamento) e features de `GDD/Features/index.md` sem linha no `Roadmap/backlog.md`. Item dado como feito sem implementação e `// TODO` inline são da skill `validar-todos`.
+- **Desenvolvimento**: `dotnet test` — as guardas cobrem feature fora do índice ou do backlog, roteador incompleto, script fora de ficha e orçamento. Item dado como feito sem implementação e `// TODO` inline são da skill `validar-todos`.
 
 ## Regras
 

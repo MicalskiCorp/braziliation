@@ -32,7 +32,7 @@ automaticamente (target `CopyToUnityPlugins`, desativado quando `CI=true`).
 ## Regras de ouro
 
 - **Nunca edite** `Library/`, `Temp/`, `obj/`, `bin/` — gerados. Há um hook `PreToolUse`
-  que bloqueia isso.
+  que bloqueia isso, e também o histórico congelado `Desenvolvimento/Docs/TODO-arquivo.md`.
 - **Nunca edite a DLL** em `Assets/Plugins/Braziliation/` — edite a fonte em
   `Desenvolvimento/src/Braziliation.Game.Core/` e deixe o build copiar.
 - **Todo asset novo em `Assets/` precisa do `.meta`** correspondente, ou o GUID muda a

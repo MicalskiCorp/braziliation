@@ -6,4 +6,4 @@
 
 | Arquivo | Tema | Data |
 |---------|------|------|
-| *(nenhuma sessão criada)* | — | — |
+| [`2026-04-26-blumenau.md`](2026-04-26-blumenau.md) | Expansão de Blumenau — sistema de túneis intercidades | 2026-04-26 |

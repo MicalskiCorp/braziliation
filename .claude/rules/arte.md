@@ -1,6 +1,8 @@
 ---
 paths:
-  - "Design/**"
+  - "Design/ArteConceitual/**"
+  - "Design/ArteFonte/**"
+  - "Design/GuiasDeArte/**"
   - "Desenvolvimento/Assets/Art/**"
 ---
 

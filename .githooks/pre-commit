@@ -42,6 +42,16 @@ if echo "$STAGED" | grep -q '^Desenvolvimento/Assets/'; then
   fi
 fi
 
+# 2b. Script Unity no commit — exige unity-validar OK e posterior à última edição.
+#     Lê o resultado já gravado pela skill; não abre o Unity.
+UNITY_CS=$(git diff --cached --name-only --diff-filter=ACMR | grep '^Desenvolvimento/Assets/.*\.cs$')
+if [ -n "$UNITY_CS" ]; then
+  echo "[pre-commit] unity-validar..."
+  if ! echo "$UNITY_CS" | $PY .claude/skills/unity-validar/scripts/check_state.py >"$LOG" 2>&1; then
+    cat "$LOG"; FALHOU=1
+  fi
+fi
+
 # 3. Paleta da arte própria — só quando PNG de Assets/Art ou uma paleta muda.
 if echo "$STAGED" | grep -qE '^Desenvolvimento/Assets/Art/.*\.png$|^Design/ArteConceitual/Paletas/'; then
   echo "[pre-commit] paletas..."

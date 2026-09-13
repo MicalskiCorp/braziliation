@@ -32,7 +32,7 @@ py .claude/skills/novo-agente/sync_bodies.py          # propaga o corpo para o .
 py .claude/skills/novo-agente/sync_bodies.py --check  # só lista divergências
 ```
 
-O script preserva o frontmatter Copilot, o BOM UTF-8 e o CRLF dos `.agent.md`. O `AgentParityTests` compara os corpos normalizados e falha na divergência.
+O script preserva o frontmatter Copilot, o BOM UTF-8 e o CRLF dos `.agent.md`. No Claude Code ele roda sozinho: o hook `PostToolUse` `sync_agent_bodies.py` dispara a cada edição em `.claude/agents/`. Rodar à mão só fora de sessão (edição no editor, no Copilot). O `AgentParityTests` compara os corpos normalizados e falha na divergência.
 
 ## Conversão de frontmatter Claude → Copilot
 

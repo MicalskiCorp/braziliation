@@ -83,6 +83,7 @@
 | Asset | Referência criativa (lore/ideia) | Categoria destino em ArteConceitual | Prioridade | Status |
 |-------|-----------------------------------|--------------------------------------|-----------|--------|
 | Edith Gaertner (NPC, SQ-01) | [`Historia/personagens/Edith-Gaertner.md`](Historia/personagens/Edith-Gaertner.md) | `Personagens/` | Média | 🔨 Lote 12 aguardando veredito — [`lotes.md`](../ArteFonte/IA/ContextPacks/chr-blumenau-edith-gaertner/lotes.md) |
+| Hermann Baumgarten (NPC, quests do cemitério e da Igreja Matriz Luterana) | [`Historia/personagens/Hermann-Baumgarten.md`](Historia/personagens/Hermann-Baumgarten.md) | `Personagens/` | Média | ❌ Não iniciado |
 | Soldado Mercenário Clérico (inimigo de Blumenau) | [`Blumenau/index.md`](Estados/SantaCatarina/cidades/Blumenau/index.md) — seção Monstros | `Criaturas/` | Média | 🔨 6 thumbnails em `ArteFonte/IA/Outputs/soldado-clerico-thumbs/` aguardando curadoria |
 
 ## Handoffs de Pesquisa
