@@ -12,13 +12,73 @@ Format:
 
 ## Current items
 
-*(None yet. Add as you or agents identify debt.)*
+> Consolidado em 2026-09-02 a partir da auditoria de estrutura. Antes desta data este
+> arquivo dizia "None yet" enquanto ~30 itens de dívida viviam no `Docs/TODO.md` e 29
+> `TODO` inline no código — o processo existia e não era usado. `TODO.md` é pendência de
+> **trabalho planejado**; este arquivo é **atalho que foi tomado** e precisa ser pago.
 
-**Example:**
-- **Item:** Player movement and jump in one large script
-- **Where:** Assets/Scripts/Player/PlayerController.cs
-- **Why:** Quick prototype; now hard to extend (dash, double jump).
-- **Fix:** Split into PlayerMovement, PlayerJump, and optional PlayerAbilities; use same input actions.
+### Alta
+
+- **Item:** UI de slots trata `Corrupt` e `FromNewerBuild` como "slot vazio"
+- **Where:** `Assets/Scripts/UI/SaveSlotsView.cs` (usa `SaveGameService.Load`)
+- **Why:** ADR-007 criou `LoadDetailed` com status distinguíveis, mas a UI ainda chama o
+  `Load` de conveniência. O jogador que abrir um save de build mais nova vê "vazio".
+- **Fix:** trocar por `LoadDetailed` e renderizar estado por `SaveLoadStatus`.
+
+- **Item:** Não há UI de rebind de controles nem integração Steam Input
+- **Where:** `Assets/Scripts/Core/GameInput.cs`, `Assets/InputSystem_Actions.inputactions`
+- **Why:** ADR-006 destravou a possibilidade ao centralizar o input no action map, mas
+  parou aí. Steam Deck Verified exige suporte a controle e glifos corretos.
+- **Fix:** tela de rebind sobre `InputActionRebindingExtensions`; avaliar Steam Input API.
+
+### Média
+
+- **Item:** Ruleset WFC de Blumenau é primeira versão — lâmina d'água serrilhada
+- **Where:** `Design/ArteFonte/Ferramentas/rulesets/blumenau-fachada.json`
+- **Why:** A adjacência escrita à mão deixa `agua`/`lama` variarem de altura livremente, então
+  a superfície da água sobe e desce em degraus em vez de ser plana. O ruleset **derivado**
+  (`--learn` a partir de `exemplos/blumenau-fachada-exemplo.json`) já sai com água plana, mas
+  produz prédios estreitos demais — porque o exemplo desenhado é estreito.
+- **Fix:** Redesenhar `exemplos/blumenau-fachada-exemplo.json` com massas de prédio mais largas
+  e variadas, e passar a usar o ruleset derivado como padrão. É edição de uma grade de texto de
+  12 linhas, não reescrita de regras — decisão de direção de arte, não de código.
+
+- **Item:** `WfcMapImporter` nunca foi compilado nem executado dentro do Unity
+- **Where:** `Assets/Editor/Art/WfcMapImporter.cs`
+- **Why:** Escrito em 2026-09-03 contra a API do Editor, mas a licença Personal não permite
+  `-batchmode`, então não houve como compilar nem rodar daqui. Mesma situação de
+  `SheetAutoSlicer.cs` e `SheetAnimationTool.cs`.
+- **Fix:** Abrir o Editor, rodar `Assets > Braziliation > Importar Mapa WFC...` apontando para
+  `Design/ArteFonte/IA/Outputs/wfc-teste/blumenau_s42.unity.json` e conferir o Tilemap.
+
+- **Item:** `PlayerInventory` é uma lista sem capacidade, categorias nem persistência
+- **Where:** `Assets/Scripts/Core/PlayerInventory.cs` (TODO inline)
+- **Why:** stub para destravar crafting.
+- **Fix:** definir regras no GDD antes de implementar; inventário não entra no save hoje.
+
+- **Item:** Ferramentas de editor de sprite nunca foram compiladas dentro do Unity
+- **Where:** `Assets/Editor/Art/SheetAutoSlicer.cs`, `SheetAnimationTool.cs`
+- **Why:** criadas junto com o pipeline programático; validadas só por leitura.
+- **Fix:** abrir o Unity, reimportar um `*_sheet.png` e confirmar slicing + `.anim`.
+
+- **Item:** Efeito híbrido nomeado `"PrótesisViva"` (espanhol) entre nomes PT-BR
+- **Where:** `src/Braziliation.Game.Core/Build/HybridSynergyResolver.cs`
+- **Why:** erro de digitação que virou identificador.
+- **Fix:** renomear para `"ProteseViva"` **junto com** um degrau `ISaveMigration`, se o
+  identificador chegar a ser persistido — hoje ainda não é. Fazer antes que seja.
+
+- **Item:** `HealthComponent` dispara `OnHealthChanged` no `Awake`
+- **Where:** `Assets/Scripts/Gameplay/HealthComponent.cs`
+- **Why:** ouvinte registrado por código em outro `Awake` pode não estar inscrito ainda.
+- **Fix:** mover a emissão inicial para `Start`, ou expor `EmitCurrent()` para a HUD puxar.
+
+### Baixa
+
+- **Item:** 11 agentes duplicados em 2 formatos (22 arquivos que diferem em ~1 linha)
+- **Where:** `.claude/agents/` × `.github/agents/`
+- **Why:** Copilot e Claude Code usam formatos diferentes; a sincronia depende de
+  disciplina via skill `novo-agente`.
+- **Fix:** gerar o formato Copilot a partir do Claude + teste de CI que falha na divergência.
 
 ---
 

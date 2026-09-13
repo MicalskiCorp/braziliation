@@ -4,8 +4,8 @@ Jogo plataforma 2D em pixel art (C#) — ambientação dieselpunk pós-apocalíp
 ## 🧱 Estrutura
 - Engine: Unity / MonoGame (C#)
 - Linguagem: C#
-- Estilo: Pixel Art (paleta restrita para estilo SNES)
-- Plataforma alvo: PC - dependendo do build target
+- Estilo: Pixel Art de alta densidade (ADR-004)
+- Plataforma alvo: PC (Steam)
 
 ## 📂 Pastas principais (dentro de `Desenvolvimento/`)
 - `Assets/` → Cenas, arte, áudio, scripts C# (`Assets/Scripts/`), configuração URP
@@ -53,3 +53,11 @@ O repositório usa **VS Code Copilot** com agentes, instructions e prompts custo
 **Guia completo:** [AGENTS.md](AGENTS.md) | [Docs/index.md](Docs/index.md)
 
 > 🎨 **Camada criativa:** `Design/Criativo/` na raiz do repo — gerida por `@GameCreative`.
+
+---
+
+## 📜 Licença e créditos
+
+O código é MIT ([`LICENSE`](LICENSE)). Assets de terceiros mantêm as licenças próprias e estão
+listados em [`CREDITS.md`](CREDITS.md) — **todo asset de terceiro que permanecer no projeto precisa
+constar lá**, mesmo quando a licença dispensa atribuição.

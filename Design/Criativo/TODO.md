@@ -75,6 +75,14 @@
 |------|---------|-----------|--------|
 | Registrar primeiras ideias no pool | [`Ideias/pool.md`](Ideias/pool.md) | Baixa | ❌ Não iniciado |
 
+### Concept Art Pendente
+
+> Uma entrada por asset (personagem/objeto/cenário), não por feature — é o Passo 1 do fluxo concept art → spec JSON → sprite (ver [`pipeline-sprites-programaticos.md`](../GuiasDeArte/pipeline-sprites-programaticos.md#fluxo-completo-da-ideia-ao-sprite-5-etapas)). Ao concluir a ideia/lore do asset, adicionar linha aqui apontando para o MD de origem; ao aprovar o concept art gerado a partir dela, mover para "Concluído" e registrar em `Desenvolvimento/Docs/Architecture/indices/assets.md`.
+
+| Asset | Referência criativa (lore/ideia) | Categoria destino em ArteConceitual | Prioridade | Status |
+|-------|-----------------------------------|--------------------------------------|-----------|--------|
+| *(preencher ao fechar a ideia de um asset)* | | `Personagens/` \| `Criaturas/` \| `Props/` \| `Cidades/` | | ❌ Não iniciado |
+
 ## Handoffs de Pesquisa
 
 | Item | Arquivo | Prioridade | Status |

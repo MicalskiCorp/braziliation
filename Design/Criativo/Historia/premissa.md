@@ -2,7 +2,7 @@
 
 > **Gênero:** Plataforma 2D Pixel Art
 > **Estilo:** Dieselpunk Pós-Apocalíptico Brasileiro
-> **Plataforma-alvo:** PC / SNES (EverDrive)
+> **Plataforma-alvo:** PC (Steam)
 
 ---
 
@@ -26,7 +26,7 @@
 
 | Elemento | Descrição |
 |----------|-----------|
-| Visual | Pixel art paleta restrita (estilo SNES) · dieselpunk · tons terrosos e enferrujados |
+| Visual | Pixel art de alta densidade · dieselpunk · tons terrosos e enferrujados |
 | Sonoro | *(a definir)* |
 | Narrativo | *(a definir — sombrio? esperançoso? sarcástico?)* |
 

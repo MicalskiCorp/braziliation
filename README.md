@@ -1,7 +1,7 @@
 ﻿# Braziliation
 
 > Jogo plataforma 2D em pixel art (C#) — ambientação **dieselpunk pós-apocalíptica brasileira**.
-> Engine: Unity 6 · Linguagem: C# · Estilo: Pixel Art (paleta restrita, 16 PPU)
+> Engine: Unity 6 · Linguagem: C# · Estilo: Pixel Art (paleta restrita, 32 PPU)
 
 ---
 
@@ -12,8 +12,8 @@ Braziliation/                   ← raiz do repositório
 ├── Desenvolvimento/            ← projeto Unity (engine, código, assets, testes)
 │   ├── Assets/                 ← cenas, arte, áudio, scripts C#
 │   ├── Docs/                   ← documentação técnica (GDD, arquitetura, roadmap)
-│   ├── dotnet-tests/           ← testes .NET para o CI (sem Unity no runner)
 │   ├── src/                    ← sistemas C# puros (sem Unity)
+│   ├── Tests/                  ← testes xUnit .NET (rodam no CI, sem Unity)
 │   ├── scripts/                ← scripts de setup/versionamento
 │   ├── ProjectSettings/        ← configuração Unity (não mover)
 │   ├── Packages/               ← pacotes Unity (não mover)
@@ -28,13 +28,13 @@ Braziliation/                   ← raiz do repositório
 │   ├── GuiasDeArte/            ← bíblia visual, paletas, escala e pipeline de IA
 │   └── Models/                 ← templates de documentação criativa
 ├── .github/                    ← CI/CD + agentes e instruções de IA (VS Code Copilot)
-│   ├── agents/                 ← 10 agentes especializados
+│   ├── agents/                 ← 11 agentes (formato Copilot)
 │   ├── instructions/           ← instruções auto-injetadas pelo Copilot
 │   ├── prompts/                ← templates de prompt (/create-feature, etc.)
 │   ├── workflows/              ← GitHub Actions (ci.yml)
 │   ├── ISSUE_TEMPLATE/         ← templates de issue
 │   └── PULL_REQUEST_TEMPLATE.md
-├── .vscode/                    ← configurações do VS Code
+├── CLAUDE.md                   ← entrada do Claude Code (importa AGENTS.md)
 ├── .gitignore
 ├── .gitattributes              ← Git LFS para assets binários
 └── .gitlab-ci.yml              ← CI GitLab (alternativo ao GitHub Actions)
@@ -75,12 +75,11 @@ code .
 
 ## 🧪 Testes .NET (CI local)
 
-Os testes unitários vivem em `Desenvolvimento/dotnet-tests/` e rodam **sem precisar do Unity**:
+Os testes unitários vivem em `Desenvolvimento/Tests/` (xUnit) e rodam **sem precisar do Unity**:
 
 ```bash
 cd Desenvolvimento
-dotnet restore dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj
-dotnet test dotnet-tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj --configuration Release
+dotnet test Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj
 ```
 
 O CI (GitHub Actions e GitLab CI) executa esses mesmos comandos automaticamente em push/PR para `main` e `develop`.
@@ -95,16 +94,19 @@ O repositório usa **VS Code Copilot** com agentes, instructions e prompts custo
 
 | Agente | Use para |
 |--------|----------|
-| `@TechLead` | Direção técnica, padrões, routing |
-| `@Architect` | Limites de sistema, interfaces, ADRs |
-| `@UnityEngineer` | Setup de engine: URP, Input System, câmera |
-| `@UnityDeveloper` | UI controllers, ServiceLocator, MonoBehaviours |
+| `@TechLead` | Direção técnica, padrões, routing, interfaces, ADRs |
+| `@UnityDeveloper` | Tudo Unity: setup de engine e wiring de runtime |
 | `@SystemsDeveloper` | Save, Settings, Storage (C# puro, sem Unity) |
 | `@GameplayEngineer` | Player, inimigos, combate, mecânicas |
 | `@QAEngineer` | Revisão, edge cases, acceptance criteria |
 | `@TestEngineer` | Testes xUnit automatizados |
 | `@GameArchitect` | Estrutura Markdown, índices, features, sistemas |
 | `@GameCreative` | Lendas, brainstorm, personagens, lore |
+| `@Historiador` | Pesquisa histórica e folclórica com fonte |
+| `@SpriteArtist` | Sprites programáticos, ciclo de crítica visual |
+| `@AgentArchitect` | Orquestração, criação e auditoria de agentes |
+
+**Guia completo dos 11 agentes, skills e fluxos:** [AGENTS.md](AGENTS.md)
 
 ### Prompts rápidos
 

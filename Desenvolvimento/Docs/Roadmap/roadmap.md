@@ -4,7 +4,7 @@ High-level roadmap for technical and content work. Update as priorities change. 
 
 ## Phase: Foundation (current)
 
-- [x] Unity 6 + URP 2D + Pixel Perfect (320×180, 16 PPU)
+- [x] Unity 6 + URP 2D + Pixel Perfect (640×360, 32 PPU)
 - [x] GameInitializer, CameraScaler
 - [x] Input System setup
 - [x] Recommended Assets/Scripts structure adopted (see Docs/Architecture/Assets/AssetsStructure.md)

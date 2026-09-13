@@ -63,10 +63,92 @@
 | 2 | Selecionar o sheet e rodar `Assets > Braziliation > Criar Animação do Spritesheet` → confere `.anim` (8 fps, sem loop) + `.controller` em `Assets/Animations/World/` | `@UnityDeveloper` | ❌ Não iniciado |
 | 3 | Criar prefab `Prop_FloodgateLever` em `Assets/Prefabs/Interactables/` (SpriteRenderer + Animator com o controller + collider de interação; pivot já é base central inferior) | `@UnityDeveloper` | ❌ Não iniciado |
 | 4 | Integrar a alavanca ao sistema hídrico de Blumenau: interação do player dispara a animação e alterna estado da comporta (ver feature em `Docs/GDD/Features/`) | `@GameplayEngineer` | ❌ Não iniciado |
-| 5 | Aprovar direção da paleta `Design/ArteConceitual/Paletas/blumenau.json` (mudar `status` para `aprovada`) e salvar paleta Aseprite equivalente em `Design/ArteFonte/Aseprite/` | Usuário (direção de arte) | ❌ Não iniciado |
+| 5 | Aprovar direção da paleta `Design/ArteConceitual/Paletas/blumenau.json` (mudar `status` para `aprovada`) e salvar paleta Aseprite equivalente em `Design/ArteFonte/Aseprite/` | Usuário (direção de arte) | ✅ Concluído 2026-07-11 — aprovada pelo usuário; `blumenau.json` status `aprovada` + `blumenau.gpl` criada + referência no `palette-guide.md` |
 | 6 | Polish opcional: pixel pass manual no Aseprite para dentes de engrenagem mais legíveis (sprite atual = qualidade "placeholder bom") | Usuário (arte) | ❌ Opcional |
-| 7 | Opção B: implementar primeiro gerador procedural `gen_tileset.py` (paleta JSON + seed registrada, prefixo `gen_`) | `@SpriteArtist` | ❌ Não iniciado |
-| 8 | Opção C: operacionalizar ComfyUI local (instalar, montar workflow JSON, validar 1 lote de 6–12 thumbnails) conforme `pipeline-ia-sprites.md` | Usuário + `@SpriteArtist` | ❌ Não iniciado |
+| 7 | Opção B: implementar primeiro gerador procedural `gen_tileset.py` (paleta JSON + seed registrada, prefixo `gen_`) | `@SpriteArtist` | ✅ Concluído 2026-07-11 — `Ferramentas/gen_tileset.py` com 3 famílias (enxaimel 4 tipos, metal 3, agua 3), seed determinística + manifest JSON; 3 tilesets gerados (seed 42), palette_check aprovado, entregues em `Assets/Art/Environments/Blumenau/Tilesets/` |
+| 8 | Opção C: operacionalizar ComfyUI local (instalar, montar workflow JSON, validar 1 lote de 6–12 thumbnails) conforme `pipeline-ia-sprites.md` | Usuário + `@SpriteArtist` | ✅ Concluído 2026-07-12 — ComfyUI em `D:\Tools\ComfyUI` (RTX 2060 SUPER, torch 2.8+cu129, SDXL base); lote de validação de 6 thumbnails (Soldado Clérico, seed 20260712) gerado via `Ferramentas/comfy_batch.py` e salvo em `IA/Outputs/soldado-clerico-thumbs/` com registro `.lote.json`; setup e workflow documentados em `IA/Models/` |
+
+### Geração de Sprites por Ondas — Status (2026-07-12)
+
+> Mapeamento sistêmico completo (~65 assets) feito em sessão de 2026-07-11; geração segue a ordem de ondas. Fontes: specs JSON nos context packs de `Design/ArteFonte/IA/ContextPacks/`; tudo validado por `palette_check` + ciclo de crítica visual; registro em `Docs/Architecture/indices/assets.md`.
+
+| Onda | Escopo | Status |
+|------|--------|--------|
+| 1 | Lote Sistema Hídrico (4 marcadores de pilar, sino + sheet badalada, sirene, sinalizador ×2 estados) | ✅ Entregue 2026-07-12 — `Environments/Blumenau/Props/` |
+| 1 | Lote Jardim de Edith (lápide base, estátua de gato, pingente SQ-01) | ✅ Entregue 2026-07-12 — Props/ + `Art/UI/` |
+| 1 | Autômato Abandonado placeholder (`enm_automato_idle_sheet` 3 frames) | ✅ Entregue 2026-07-12 — `Art/Enemies/` |
+| 2 | Tilesets procedurais enxaimel/metal/água-lama (`gen_tileset.py` seed 42) | ✅ Entregue 2026-07-12 — `Environments/Blumenau/Tilesets/` |
+| 2 (restante) | Tilesets pedra portuguesa (túnel), cemitério/terra, mármore, periferia pós-enchente — novas famílias no `gen_tileset.py` | ❌ Não iniciado |
+| 3 | Personagens/monstros orgânicos via ComfyUI (Edith, Hermann, Soldado Clérico, mutantes) + pixel pass | 🔓 Desbloqueada 2026-07-12 — ComfyUI validado; primeiros 6 thumbnails do Soldado Clérico em `IA/Outputs/soldado-clerico-thumbs/` aguardando curadoria (selecionar 1-2 → `Selected/` → pixel pass) |
+| Contínuo | Props narrativos restantes (engrenagens do boss, relíquias, caixões, altar), ícones de crafting, VFX | ❌ Não iniciado — specs sob demanda via `@SpriteArtist`/skill `sprite-pipeline` |
+
+**Wiring novo p/ @UnityDeveloper:** `prop_blumenau_sino_alerta_ring_sheet` e `enm_automato_idle_sheet` serão fatiados automaticamente na abertura do Unity; gerar Animators via menu Braziliation; prefab do Autômato → handoff p/ `@GameplayEngineer` quando design definir o inimigo básico da demo.
+
+### Migração ADR-004 — 640×360 / 32 PPU (Blasphemous-like) — Status (2026-07-12)
+
+> Decisão do usuário em 2026-07-12; ADR em `Docs/Architecture/architecture_decisions.md` (ADR-004). Executado: `CameraScaler` e `SpriteImportPostprocessor` (32 PPU, Menu excluído como legado 16 PPU), guias de arte todos atualizados (escala, paleta 32 cores, animação, pipelines, templates), ferramentas com `--scale`, mock 640×360, 36 PNGs legados convertidos ×2 nearest (mesma leitura em tela; specs 1× anotadas nos context packs — re-render exige `--scale 2`), agentes/skills/rules atualizados, alvo SNES/EverDrive formalmente descartado.
+
+| Pendência da migração | Responsável | Status |
+|------------------------|-------------|--------|
+| Abrir o Unity: reimport aplica 32 PPU; validar cena demo (posições/colisores assumem 1 tile=1 unidade — sprites ×2 c/ PPU ×2 mantêm tamanho de mundo, mas conferir visualmente) e o menu (frames agora 640×360; orthoSize 5.625 permanece correto) | `@UnityDeveloper` | ❌ Não iniciado — **único passo restante da migração; exige abrir o Unity** |
+| ~~Re-autoria do menu para 640×360~~ ✅ Concluído 2026-07-12 — frames ×2 (640×360), exclusão do postprocessor removida (32 PPU), comentários dos editores atualizados; orthoSize 5.625 é invariante. Layout do UI canvas (320×180) mantido — CanvasScaler é independente de PPU; migrar é cosmético | `@UnityDeveloper` | ✅ |
+| ~~Re-autoria dos assets legados em densidade nova~~ ✅ Concluído 2026-07-12 — 19 specs re-autoradas via `spec_redetail.py` (EPX + textura, specs 2× versionadas como fonte atual), 3 sheets reempacotados, 3 tilesets regenerados com detail pass; crítica visual aprovada, 22/22 gates de paleta APROVADOS, entregas sobrescritas em `Assets/Art/` + `Selected/` | `@SpriteArtist` | ✅ |
+| Rampas estendidas da paleta Blumenau (16 → até 32 cores) — a re-autoria atual não exigiu (EPX+textura ficam na paleta base); adicionar quando arte final de personagens pedir | Usuário (arte) | ⏸ Não exigido ainda |
+| Onda 3 passa a mirar player ~64px (proporção Blasphemous) — thumbnails do Soldado Clérico já servem (concepts 1024², pixel pass agora para 64px, não 32) | `@SpriteArtist` | 🔓 Beneficiada pela migração |
+
+### Placeholders de Terceiros na Cena de Demo (2026-07-27)
+
+> **O que mudou:** a `DemoGameplay` deixou de ser quadrados brancos coloridos. Player, inimigo,
+> chão e um fundo novo agora usam sprites CC0 do Gothicvania (ansimuz), instalados em
+> `Assets/Art/ThirdParty/Gothicvania/`. Objetivo: destravar o desenvolvimento de mecânicas em
+> paralelo à criação de arte própria. **É placeholder** — não segue paleta de Blumenau nem a
+> style-bible. Créditos em `Desenvolvimento/CREDITS.md`, procedência em `SOURCES.txt` do pacote,
+> reprodução por `Design/ArteFonte/Ferramentas/prepare_thirdparty_gothicvania.py`.
+>
+> Aparência e geometria da demo agora saem de um único lugar,
+> `Assets/Scripts/Gameplay/DemoSceneVisuals.cs`, consumido pelo `DemoSceneBootstrap` (runtime) e
+> pelo `DemoSceneBuilderEditor` (cena fixa), e espelhado na `DemoGameplay.unity`. Sem sprite no
+> disco, tudo cai no quadrado branco de antes.
+
+| Pendência | Responsável | Status |
+|-----------|-------------|--------|
+| ~~Abrir o Unity e validar a `DemoGameplay`~~ | `@UnityDeveloper` | ✅ Validado pelo usuário em 2026-07-27 — cena carrega e roda sem erro |
+| Trocar o inimigo placeholder pelo `enm_automato_idle_sheet.png` (arte própria já entregue) quando o design fechar o inimigo básico da demo | `@GameplayEngineer` | ❌ Bloqueado por decisão de design |
+| Fatiar `env_placeholder_castelo_tileset.png` em grid 32×32 e montar um blockout de nível com Tilemap | `@UnityDeveloper` | ❌ Não iniciado — opcional |
+| Substituir os placeholders por arte própria e remover `Assets/Art/ThirdParty/Gothicvania/` + entrada em `CREDITS.md` | `@SpriteArtist` | ⏸ Quando a Onda 3 entregar personagens |
+
+### Física, IA e Animação da Demo (2026-07-27)
+
+> Segunda rodada, a partir do play-teste do usuário. Todos os defeitos relatados tinham causa
+> identificada; correções abaixo. A IA de inimigos virou motor genérico — ver
+> [`Mechanics/InimigosIA.md`](Mechanics/InimigosIA.md).
+
+**Camadas de física criadas** em `ProjectSettings/TagManager.asset`: `8 = Ground`,
+`9 = Player`, `10 = Enemy`. Centralizadas em `Assets/Scripts/Core/GameLayers.cs`.
+Sem máscara, `Physics2D.OverlapCircle` devolve o colisor do próprio objeto que perguntou —
+era a causa de dois bugs de uma vez.
+
+| Defeito relatado | Causa | Correção |
+|------------------|-------|----------|
+| Pulo repetido no ar | `GroundCheck` na base do collider encostava no **próprio corpo** do player, então `IsGrounded()` era sempre verdadeiro (regressão introduzida na rodada anterior) | Máscara `Ground` + filtro de colisores do próprio objeto em `PlayerController.IsGrounded` |
+| Personagens nascem voando | Spawn em y=1 com pivot no pé, 2 unidades acima do chão | Spawns em `DemoSceneVisuals.GroundSurfaceY` (y=−1) |
+| Cai no vazio no fim do mapa | Não havia limite de nível | `Bound_Left`/`Bound_Right` (colisores invisíveis em x=±12,5, camada `Ground`) + `FallRespawn` como rede de segurança abaixo de y=−12 |
+| Inimigo caminha para sempre até cair | Os marcadores de patrulha eram **filhos do inimigo**: andavam junto, a ponta nunca era alcançada | Marcadores soltos na raiz + faixa de patrulha capturada uma vez no `Start` + sensores de precipício/parede |
+| *(não relatado, encontrado no caminho)* Player se machucava ao atacar | `PlayerCombat` sem máscara atingia o próprio colisor | Máscara `Enemy` + filtro de si mesmo |
+
+**Animação:** `SpriteSheetAnimator` monta os clipes em runtime a partir dos spritesheets
+fatiados (`Resources.LoadAll`), sem `.anim`/`.controller`. Player: `idle` (6 fps) e `run`
+(12 fps); inimigo: `idle` (6 fps) e `walk` (10 fps), escolhidos pelo estado da IA.
+Migrar para Animator (`Assets > Braziliation > Criar Animação do Spritesheet`) quando a arte
+final entrar — o caminho continua aberto.
+
+| Pendência | Responsável | Status |
+|-----------|-------------|--------|
+| Validar no Unity: animação trocando de quadro, pulo só no chão, inimigo virando na ponta e nas paredes, ataque sem dano em si mesmo | `@UnityDeveloper` | ❌ **Exige abrir o Unity** |
+| Conferir a matriz de colisão 2D (Project Settings > Physics 2D) para as 3 camadas novas | `@UnityDeveloper` | ❌ Não iniciado — o padrão (tudo colide) funciona |
+| Criar os `EnemyProfileAsset` dos arquétipos reais de Blumenau | `@GameCreative` + `@GameplayEngineer` | ❌ Bloqueado por decisão de design |
+| Reação a dano (stagger) e percepção por linha de visão | `@GameplayEngineer` | ❌ Não iniciado — ver pendências em `Mechanics/InimigosIA.md` |
+| Clipes de ataque/dano/morte (o pacote placeholder só tem idle/run/walk) | `@SpriteArtist` | ⏸ Junto da arte própria |
 
 ### Ecossistema de Agentes — Pendências (2026-07-11, atualizado 2026-07-11)
 
