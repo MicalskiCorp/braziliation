@@ -21,15 +21,6 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Detect Unity project layout
-        id: unity
-        run: |
-          if [ -f "Desenvolvimento/ProjectSettings/ProjectVersion.txt" ]; then
-            echo "unity=true" >> $GITHUB_OUTPUT
-          else
-            echo "unity=false" >> $GITHUB_OUTPUT
-          fi
-
       - name: Restore, build and test (.NET)
         shell: bash
         run: |
@@ -49,11 +40,17 @@ jobs:
           dotnet build  "$PROJECT" --configuration Release --no-restore
           dotnet test   "$PROJECT" --configuration Release --no-build --verbosity normal
 
-      - name: Post-check
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Mesmas checagens do .githooks/pre-commit — o CI pega o que escapou dele
+      # (commit com --no-verify ou clone sem o hook ativado).
+      - name: Meta-check (pares asset/.meta)
+        run: python .claude/skills/meta-check/check_meta_pairs.py
+
+      - name: Paletas da arte própria
         run: |
-          if [ "${{ steps.unity.outputs.unity }}" = "true" ]; then
-            echo "Unity project detected — gameplay C# builds in the Unity Editor; CI validated repository layout and .NET tests."
-          else
-            echo "ProjectSettings/ProjectVersion.txt not found — .NET tests ran against the current tree."
-          fi
-          echo "CI completed."
+          python -m pip install --quiet pillow
+          python Design/ArteFonte/Ferramentas/check_art_palettes.py

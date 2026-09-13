@@ -1,8 +1,13 @@
 ---
 name: unity-developer
 description: "Unity Developer do Braziliation — responsável por TODO o desenvolvimento Unity: setup do engine (URP 2D, Pixel Perfect 640×360, 32 PPU, action maps, physics layers, build settings, editor tools) E wiring de runtime (UI controllers, MonoBehaviours, GameServiceLocator, Steam Input). Use para qualquer tarefa que envolva Unity — exceto lógica de gameplay (use @GameplayEngineer) e sistemas C# puros sem Unity (use @SystemsDeveloper). NÃO escreve lógica de jogo nem acessa save/settings diretamente. Acionado por: 'URP', 'Pixel Perfect', 'câmera', 'physics layer', 'editor tool', 'build settings', 'action map', 'configurar cena', 'setup de projeto', 'UI controller', 'GameServiceLocator', 'MonoBehaviour', 'painel de menu', 'conectar serviço', 'Steam Input', 'wiring de eventos'."
-tools: Read, Edit, Write, Grep, Glob, Bash, TodoWrite
+tools: Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Skill
 model: sonnet
+skills:
+  - unity-validar
+  - meta-check
+mcpServers:
+  - unity
 ---
 
 # Agente Unity Developer – Braziliation

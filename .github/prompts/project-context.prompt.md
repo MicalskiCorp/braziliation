@@ -41,7 +41,6 @@ Braziliation/
 │   ├── Tests/Braziliation.Game.Tests/ → testes xUnit (rodam no CI)
 │   └── Docs/                        → GDD, Architecture, Mechanics, Roadmap, Tech
 ├── Design/                          ← Pesquisa, Criativo, ArteConceitual, ArteFonte, GuiasDeArte
-├── personas/                        ← cópia versionada da 1ª camada de agentes
 └── .github/                         → 11 agentes, 3 instruções, prompts, workflows
 ```
 

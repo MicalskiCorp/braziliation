@@ -1,6 +1,7 @@
 ---
 name: novo-agente
 description: Cria ou atualiza um agente do Braziliation nas 2 camadas e nos 2 formatos (Copilot .agent.md + Claude .md) mantendo AGENTS.md sincronizado e sem duplicar responsabilidade. Use quando o usuário pedir para criar novo agente, refatorar agente ou sincronizar os formatos Copilot/Claude.
+disable-model-invocation: true
 ---
 
 # Skill: novo-agente

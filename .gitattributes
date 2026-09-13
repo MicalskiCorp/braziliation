@@ -3,3 +3,7 @@
 *.wav filter=lfs diff=lfs merge=lfs -text
 *.mp3 filter=lfs diff=lfs merge=lfs -text
 *.ogg filter=lfs diff=lfs merge=lfs -text
+
+# Hooks e scripts shell rodam pelo sh do Git for Windows: CRLF quebra o shebang.
+.githooks/* text eol=lf
+*.sh text eol=lf

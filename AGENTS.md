@@ -3,12 +3,12 @@
 Projeto **Unity 6** (2D, URP, C#): jogo plataforma pixel art, tema dieselpunk pós-apocalíptico brasileiro.
 
 ## Onde está o código
-- **Core**: `Desenvolvimento/Assets/Scripts/Core/` — GameInitializer, CameraScaler
-- **Outros scripts**: `Desenvolvimento/Assets/Scripts/` (ex.: `UI/`; ver `Desenvolvimento/Docs/Architecture/Assets/AssetsStructure.md`)
-- **Cenas**: `Desenvolvimento/Assets/Scenes/` (SampleScene.unity, teste1.unity)
+- **Scripts Unity**: `Desenvolvimento/Assets/Scripts/` por domínio (ADR-005) — `Core/` (service locator, `GameInput`, `GameLayers`, interfaces), `Gameplay/`, `Build/`, `Crafting/`, `Enemies/`, `UI/`
+- **Editor tools**: `Desenvolvimento/Assets/Editor/` (`Art/`, `Gameplay/`, `Menu/`)
+- **Cenas**: `Desenvolvimento/Assets/Scenes/` — `Menus/MainMenu.unity` (primeira do build), `DemoGameplay.unity`, `SampleScene.unity` (template, fora do build)
 - **Configuração**: `Desenvolvimento/ProjectSettings/`, `Desenvolvimento/Packages/manifest.json`
 - **Sistemas C# puros**: `Desenvolvimento/src/Braziliation.Game.Core/`
-- **Testes .NET**: `Desenvolvimento/dotnet-tests/Braziliation.Game.Tests/`
+- **Testes .NET (xUnit)**: `Desenvolvimento/Tests/Braziliation.Game.Tests/` — rodam no CI sem Unity
 
 ## Agentes disponíveis (VS Code Copilot)
 
@@ -63,13 +63,15 @@ O Claude Code só descobre `.claude/agents/` (e `.claude/skills/`) relativos ao 
 | Abrir o workspace em... | Camada ativa | O que fica disponível |
 |--------------------------|---------------|------------------------|
 | `d:\Backup\Projetos\Games` (raiz) | 1ª camada (personas: Jarvis, Computador, wrappers finos) | Só as personas — elas leem o `.agent.md` de referência via caminho de arquivo, então funcionam mesmo sem a 2ª camada carregada |
-| `Braziliation/` | 2ª camada (agentes funcionais + as 9 skills) | Agentes funcionais completos e as skills descritas na seção 3 — **use este cwd para qualquer trabalho real no projeto** |
+| `Braziliation/` | 2ª camada (agentes funcionais + as 13 skills) | Agentes funcionais completos e as skills descritas na seção 3 — **use este cwd para qualquer trabalho real no projeto** |
+
+A 1ª camada vive **fora do repositório, por decisão do usuário (2026-09-13)**: as personas ficam só na raiz do workspace e são usadas de lá quando ele quiser. Não versionar personas neste repositório.
 
 No formato Copilot (VS Code), `@Agente` funciona a partir de qualquer cwd dentro do repositório, já que a descoberta não é escopada por diretório da mesma forma.
 
 ### 3. Skills — catálogo por situação
 
-As 9 skills em `Braziliation/.claude/skills/` só existem no formato Claude (sem equivalente Copilot) e só são chamáveis por um agente se `Skill` estiver na lista `tools:` do seu frontmatter. Mapeamento atual — agente dono × skill × quando usar:
+As 13 skills em `Braziliation/.claude/skills/` só existem no formato Claude (sem equivalente Copilot). Cada agente dono tem `Skill` em `tools:` **e** pré-carrega suas skills pelo campo `skills:` do frontmatter — o roteiro entra no contexto desde o início, sem depender do agente lembrar de chamá-lo. O `DocsConsistencyTests` falha se uma skill não aparecer nesta tabela. Mapeamento atual — agente dono × skill × quando usar:
 
 | Skill | Agente(s) | Quando invocar |
 |-------|-----------|-----------------|
@@ -82,6 +84,12 @@ As 9 skills em `Braziliation/.claude/skills/` só existem no formato Claude (sem
 | [`structure-audit`](.claude/skills/structure-audit/SKILL.md) | `@AgentArchitect` (nível 4 — ecossistema) · `@GameArchitect` (níveis 2-3 — Design/Documentação) | Auditar disco vs. docs em qualquer nível; nunca corrige sem aprovação, só reporta |
 | [`hemeroteca-blumenau`](.claude/skills/hemeroteca-blumenau/SKILL.md) | `@Historiador` | Verificar fato/data/nome específico de Blumenau em fonte primária (revista "Blumenau em Cadernos", Hemeroteca CIASC) |
 | [`meta-check`](.claude/skills/meta-check/SKILL.md) | `@UnityDeveloper` · `@SpriteArtist` (após entregar em `Assets/Art/`) | Auditar pares asset/.meta em `Desenvolvimento/Assets/` — assets sem `.meta` (GUID instável) ou `.meta` órfãos |
+| [`unity-validar`](.claude/skills/unity-validar/SKILL.md) | `@UnityDeveloper` · `@GameplayEngineer` · `@TestEngineer` | Compilar o projeto Unity em batchmode antes de commitar qualquer mudança em `Assets/`; `--testes` roda também os EditMode (exige licença ativada na máquina) |
+| [`fechar-decisao`](.claude/skills/fechar-decisao/SKILL.md) | `@GameCreative` (com `@TechLead` revisando números) | Transformar uma pendência de design parada em Registro de Decisão (DDR) aprovado, com handoff |
+| [`novo-adr`](.claude/skills/novo-adr/SKILL.md) | `@TechLead` | Registrar decisão de arquitetura numerada e marcar o ADR que ela substitui |
+| [`novo-inimigo`](.claude/skills/novo-inimigo/SKILL.md) | `@GameplayEngineer` | Criar inimigo como perfil de dados (`EnemyBehaviorProfile`) + teste + catálogo em `InimigosIA.md` |
+
+**Skills de plugins habilitados no projeto** (`.claude/settings.json` → `enabledPlugins`): o plugin oficial `unity` (29 skills da Unity, entre elas `2d-pixel-perfect`, `sprite-editor`, `tilemap-*`, `manage-sprite-atlas` e `unity-cli`) e o `skill-creator` (criar, avaliar e comparar versões das skills acima).
 
 ### 4. Gestão de TODOs (3 índices vivos)
 
@@ -115,6 +123,22 @@ Duas frentes complementares, ambas reportam antes de corrigir:
 
 `@GameCreative` (ou usuário) via skill [`nova-cidade`](.claude/skills/nova-cidade/SKILL.md) — scaffolding em `Design/Criativo/`, paleta em `Design/ArteConceitual/Paletas/`, pastas Unity delegadas a `@UnityDeveloper`.
 
+### 10. Travas automáticas e ferramentas conectadas
+
+Regras que antes eram só texto viraram checagem automática. Ordem em que pegam um problema:
+
+| Onde | O que roda | Pega |
+|------|------------|------|
+| Início de sessão (hook `SessionStart`) | `.claude/hooks/session_snapshot.py` | Injeta git, pendências Alta dos 3 TODOs e o último `unity-validar` — sem número escrito à mão |
+| Ao editar (hooks `PreToolUse`/`PostToolUse`) | `block_generated_dirs.py`, `build_game_core.py` | Escrita em pasta gerada do projeto; core que parou de compilar |
+| Antes do commit (`.githooks/pre-commit`) | `dotnet test`, meta-check, `check_art_palettes.py` | Testes e guardas quebrados, `.meta` faltando, cor fora da paleta. Ativar por clone: `git config core.hooksPath .githooks` |
+| No CI (`.github/workflows/ci.yml`) | os mesmos, no runner | O que escapou do pre-commit (`--no-verify`, clone sem o hook) |
+| No CI Unity (`unity-ci.yml`, GameCI) | compilação + EditMode | Script Unity quebrado — ativo quando os secrets de licença existirem ([`unity-ci.md`](Desenvolvimento/Docs/Tech/unity-ci.md)) |
+
+Guardas que rodam dentro do `dotnet test`: `GitIgnoreGuardTests` (código coberto por `.gitignore`), `DocsConsistencyTests` (links, pastas documentadas, ADR substituído, catálogo de skills), `UnityAssetConsistencyTests` (layers, ações de input, Resources, cenas), `AgentParityTests` e `RepositoryLayoutTests`.
+
+**Servidores MCP** (`.mcp.json` + `enabledMcpjsonServers`): `aseprite` (pixel-mcp sobre o Aseprite local — usado pelo `@SpriteArtist` no retoque fino), `unity` (CLI oficial da Unity; controla um Editor **aberto** com o pacote `com.unity.pipeline` — usado pelo `@UnityDeveloper`) e `comfyui` (configurado no usuário; concept art da rota C). Cada agente declara só os MCPs que usa, no campo `mcpServers:`.
+
 ## Contexto de IA
 
 | Arquivo | Conteúdo | Como é usado |
@@ -129,4 +153,4 @@ Duas frentes complementares, ambas reportam antes de corrigir:
 ## Docs úteis
 - `Desenvolvimento/README.md` — visão geral e roadmap
 - `Desenvolvimento/Docs/Tech/DevelopmentRules.md` — branches, commits, merge, versionamento
-- `Desenvolvimento/Braziliation.CI.slnx` + `Desenvolvimento/dotnet-tests/` — testes .NET no CI (sem Unity no runner)
+- `Desenvolvimento/Braziliation.CI.slnx` + `Desenvolvimento/Tests/` — testes .NET no CI (sem Unity no runner)

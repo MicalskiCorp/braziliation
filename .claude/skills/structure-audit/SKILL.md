@@ -1,6 +1,8 @@
 ---
 name: structure-audit
 description: Audita a estrutura do Braziliation em todos os níveis — disco vs. docs (AssetsStructure, GuiasDeArte, índices, AGENTS.md vs. agentes reais nas 2 camadas/2 formatos) — e reporta gaps com plano de correção. Use quando o usuário pedir para auditar/validar estrutura, verificar padrão de pastas ou sincronizar documentação estrutural.
+context: fork
+agent: agent-architect
 ---
 
 # Skill: structure-audit

@@ -44,6 +44,9 @@ ignore.conf
 # Logs
 *.log
 
+# Estado local das skills/hooks do Claude Code (último unity-validar, logs)
+.claude/state/
+
 # Cache/saída local das ferramentas de arte (o resultado versionado vai para Assets/)
 Design/ArteFonte/Ferramentas/__pycache__/
 Design/ArteFonte/Ferramentas/_gothicvania_cache/

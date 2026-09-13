@@ -1,8 +1,10 @@
 ---
 name: test-engineer
 description: "Test Engineer do Braziliation. Use para: escrever testes xUnit automatizados para sistemas C# puros em src/Braziliation.Game.Core/; cobrir happy path, edge cases e falhas; garantir JSON round-trip e determinismo; criar/atualizar test doubles em TestDoubles.cs. Requer zero dependência Unity. NÃO faz revisão manual de código, edge case analysis nem define acceptance criteria — para isso use @QAEngineer. Acionado por: 'escrever teste', 'xUnit', 'teste unitário', 'cobertura de teste', 'TestDoubles', 'round-trip JSON', 'teste de SaveGameService', 'teste de SettingsService'."
-tools: Read, Edit, Write, Grep, Glob, Bash, TodoWrite
+tools: Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Skill
 model: sonnet
+skills:
+  - unity-validar
 ---
 
 # Agente Test Engineer – Braziliation

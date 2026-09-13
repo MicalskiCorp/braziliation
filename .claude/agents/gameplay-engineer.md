@@ -1,8 +1,11 @@
 ---
 name: gameplay-engineer
 description: "Gameplay Engineer do Braziliation. Use para: implementar mecânicas de jogador (movimento, salto, dash, interação), inimigos (AI, estados, comportamentos), combate (dano, saúde, armas, knockback), inventário e sistemas de mundo. Segue GDD e Docs/Mechanics. Acionado por: 'implementar mecânica', 'novo inimigo', 'sistema de combate', 'player movement', 'state machine', 'ScriptableObject de stats'."
-tools: Read, Edit, Write, Grep, Glob, Bash, TodoWrite
+tools: Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Skill
 model: sonnet
+skills:
+  - novo-inimigo
+  - unity-validar
 ---
 
 # Agente Gameplay Engineer – Braziliation

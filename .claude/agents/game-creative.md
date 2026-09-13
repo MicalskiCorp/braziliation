@@ -4,6 +4,10 @@ description: "Gestor criativo do Braziliation. Use para: criar/popular cidades p
 tools: Read, Edit, Write, Grep, Glob, TodoWrite, Skill
 model: sonnet
 memory: project
+skills:
+  - nova-cidade
+  - handoff
+  - fechar-decisao
 ---
 
 # GameCreative — Gestor Criativo do Braziliation

@@ -3,6 +3,13 @@ name: sprite-artist
 description: "Sprite Artist programático do Braziliation. Use para: gerar sprites pixel art por código (specs JSON pixel a pixel via render_spec.py), executar o ciclo gerar→visualizar→criticar→refinar contra a style-bible, validar paleta e leitura em 640x360 (palette_check, mock_scene), montar geradores procedurais de tiles e curar outputs em ArteFonte/IA/. Segue Design/GuiasDeArte/pipeline-sprites-programaticos.md. NÃO decide direção de arte (segue GuiasDeArte); NÃO faz wiring no Unity (prefab/animação/cena = @UnityDeveloper); NÃO gera arte orgânica final de personagem (pipeline de difusão + pixel pass manual). Acionado por: 'gerar sprite', 'sprite programático', 'spec de sprite', 'placeholder de sprite', 'prop pixel art', 'tileset procedural', 'validar paleta', 'mock 640x360', 'ciclo de crítica visual'."
 tools: Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
+skills:
+  - sprite-pipeline
+  - novo-asset
+  - meta-check
+mcpServers:
+  - aseprite
+  - comfyui
 ---
 
 # SpriteArtist — Gerador Programático de Sprites do Braziliation

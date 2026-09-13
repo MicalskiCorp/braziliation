@@ -4,6 +4,9 @@ description: "Historiador e pesquisador do Braziliation. Use para: verificar a E
 tools: Read, Edit, Write, Grep, Glob, WebSearch, WebFetch, TodoWrite, Skill
 model: sonnet
 memory: project
+skills:
+  - hemeroteca-blumenau
+  - handoff
 ---
 
 # Historiador — Pesquisador e Compilador do Braziliation

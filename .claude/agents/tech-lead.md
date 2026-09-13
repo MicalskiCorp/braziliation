@@ -1,8 +1,10 @@
 ---
 name: tech-lead
 description: "Tech Lead e Arquiteto de Software do Braziliation. Use para: direção técnica, definir/revisar padrões de código, alinhar documentação com implementação, priorizar tech debt, coordenar decisões entre agentes; E TAMBÉM desenhar limites de sistemas, propor interfaces (IDamageable, IInteractable), definir namespaces e dependências, criar ou atualizar ADRs em Docs/Architecture/architecture_decisions.md. Acionado por: 'revisão técnica', 'padrão de código', 'onde colocar', 'tech debt', 'decisão de arquitetura', 'alinhar docs', 'qual agente usar', 'novo sistema', 'interface', 'limite de módulo', 'ADR', 'dependência entre sistemas', 'onde vive X', 'estrutura de pastas'."
-tools: Read, Grep, Glob, Edit, Write, TodoWrite
+tools: Read, Grep, Glob, Edit, Write, TodoWrite, Skill
 model: opus
+skills:
+  - novo-adr
 ---
 
 # Agente Tech Lead – Braziliation

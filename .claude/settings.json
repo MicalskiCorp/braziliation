@@ -6,12 +6,15 @@
       "Bash(dotnet restore:*)",
       "Bash(dotnet --version)",
       "Bash(py Design/ArteFonte/Ferramentas/:*)",
+      "Bash(py .claude/skills/:*)",
+      "Bash(py .claude/hooks/:*)",
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
       "Bash(git show:*)",
       "Bash(git ls-files:*)",
       "Bash(git branch:*)",
+      "Bash(git check-ignore:*)",
       "Bash(git lfs ls-files:*)"
     ],
     "deny": [
@@ -21,7 +24,26 @@
       "Read(Desenvolvimento/.vs/**)"
     ]
   },
+  "enabledPlugins": {
+    "unity@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
+  },
+  "enabledMcpjsonServers": [
+    "aseprite",
+    "unity"
+  ],
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/session_snapshot.py\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Write|Edit",

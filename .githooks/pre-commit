@@ -1,0 +1,57 @@
+#!/bin/sh
+# Pre-commit do Braziliation — roda as travas locais antes de cada commit.
+#
+# Ativar uma vez por clone:   git config core.hooksPath .githooks
+# Pular só em emergência:      git commit --no-verify   (e diga por quê na mensagem)
+#
+# Por que existe: em 2026-09 um .gitignore desancorado escondeu 8 arquivos de código e
+# o commit publicado não compilava. Os testes que pegariam isso só rodavam no CI,
+# depois do push. Aqui eles rodam antes do commit — para qualquer autor, humano ou agente.
+
+ROOT=$(git rev-parse --show-toplevel) || exit 1
+cd "$ROOT" || exit 1
+
+STAGED=$(git diff --cached --name-only --diff-filter=ACMRD)
+[ -z "$STAGED" ] && exit 0
+
+if command -v py >/dev/null 2>&1; then PY=py
+elif command -v python3 >/dev/null 2>&1; then PY=python3
+else PY=python; fi
+
+LOG="$ROOT/.git/pre-commit.log"
+FALHOU=0
+
+# 1. Testes .NET — cobrem o core e as guardas do repositório (.gitignore, docs,
+#    paridade de agentes, CI, consistência de assets Unity). Rodam sempre: ~10 s.
+echo "[pre-commit] dotnet test..."
+# CI=true desliga o CopyToUnityPlugins: a trava não pode alterar arquivo versionado
+# (sem isso cada commit deixava Assets/Plugins/.../Braziliation.Game.Core.dll modificada).
+if CI=true dotnet test Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj --nologo -v quiet >"$LOG" 2>&1; then
+  grep -E "Aprovado!|Passed!" "$LOG" | tail -1
+else
+  echo "[pre-commit] FALHOU: dotnet test"
+  grep -E "error |Com falha|Failed |\[FAIL\]|Assert" "$LOG" | head -25
+  FALHOU=1
+fi
+
+# 2. Pares asset/.meta — só quando algo em Assets/ muda.
+if echo "$STAGED" | grep -q '^Desenvolvimento/Assets/'; then
+  echo "[pre-commit] meta-check..."
+  if ! $PY .claude/skills/meta-check/check_meta_pairs.py >"$LOG" 2>&1; then
+    tail -30 "$LOG"; FALHOU=1
+  fi
+fi
+
+# 3. Paleta da arte própria — só quando PNG de Assets/Art ou uma paleta muda.
+if echo "$STAGED" | grep -qE '^Desenvolvimento/Assets/Art/.*\.png$|^Design/ArteConceitual/Paletas/'; then
+  echo "[pre-commit] paletas..."
+  if ! $PY Design/ArteFonte/Ferramentas/check_art_palettes.py >"$LOG" 2>&1; then
+    tail -30 "$LOG"; FALHOU=1
+  fi
+fi
+
+if [ "$FALHOU" -ne 0 ]; then
+  echo "[pre-commit] Commit bloqueado. Log completo: .git/pre-commit.log"
+  exit 1
+fi
+exit 0
