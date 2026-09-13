@@ -23,6 +23,7 @@ Assets/
 │   │       └── Tilesets/
 │   ├── Menu/
 │   ├── Props/
+│   ├── ThirdParty/
 │   ├── UI/
 │   └── VFX/
 ├── Audio/
@@ -61,7 +62,6 @@ Assets/
 │   ├── Utils/
 │   └── World/
 ├── Settings/
-├── Tilemaps/
 └── Plugins/
 ```
 
@@ -75,18 +75,43 @@ Guarda Animation Clips e Animator Controllers organizados por contexto (`Menu/`,
 
 ### Art/
 
-Guarda todo asset visual final importado no Unity: sprites, tilesets, backgrounds, UI, VFX e spritesheets. `Assets/Sprites/` e `Assets/UI/` (raiz) ficam como legado e não devem receber assets novos; novos sprites entram em `Assets/Art/`.
+Guarda todo asset visual final importado no Unity: sprites, tilesets, backgrounds, UI, VFX e spritesheets. **Todo** asset visual entra aqui — as antigas `Assets/Sprites/`, `Assets/UI/` e `Assets/Tilemaps/` na raiz foram removidas em 2026-09-02 por estarem vazias.
 
 - `Characters/`: jogador e NPCs.
 - `Enemies/`: inimigos comuns, criaturas e bosses.
 - `Environments/{Cidade}/`: assets por região/cidade. Use subpastas `Tilesets`, `Props`, `Backgrounds` e `Palettes`.
-- `Environment/`: legado da estrutura anterior; novos assets por região devem ir para `Environments/`.
 - `Menu/`: fundos e elementos visuais específicos de menu.
 - `Props/`: props globais reutilizáveis entre regiões.
+- `ThirdParty/`: arte **não própria** (ver regras abaixo).
 - `UI/`: ícones, molduras, barras, botões e sprites de interface.
 - `VFX/`: fumaça, faísca, vapor, impactos e feedbacks visuais.
 
-> Import automático: `Assets/Editor/Art/SpriteImportPostprocessor.cs` força 16 PPU, Filter Point, sem compressão e sem mipmap em toda textura que entrar em `Assets/Art/`. Spritesheets `*_sheet.png` são fatiados automaticamente pelo `SheetAutoSlicer.cs` (Multiple + grid quadrado + pivot bottom-center); o clip/controller é gerado via menu `Assets > Braziliation > Criar Animação do Spritesheet` (`SheetAnimationTool.cs`, saída em `Animations/World/`). Não configure import settings de sprite manualmente, salvo exceção documentada.
+#### Art/ThirdParty/ — arte de terceiros
+
+Isolada em um único lugar para que a origem seja sempre rastreável e para que qualquer
+pacote possa ser removido inteiro quando a arte própria o substituir. Um subdiretório por
+pacote (`ThirdParty/{Pacote}/`), contendo obrigatoriamente:
+
+- o **texto de licença original** do pacote, sem alteração;
+- um `SOURCES.txt` com URL de origem, licença, procedência arquivo a arquivo e a lista de
+  modificações aplicadas;
+- entrada correspondente em [`CREDITS.md`](../../../CREDITS.md) (raiz do projeto Unity) e em
+  [`indices/assets.md`](../indices/assets.md).
+
+Regras:
+
+- Só entram assets com licença compatível com uso comercial. Prefira CC0; CC-BY exige
+  atribuição obrigatória. **Não** aceite CC-BY-NC nem "free for non-commercial".
+- Assets de terceiros são **placeholder por padrão**: não seguem a paleta da região nem a
+  style-bible, e não contam como entrega de arte no backlog.
+- Antes de importar, adeque a densidade ao ADR-004 (32 PPU, 1 tile = 32px). Arte externa
+  autorada em 16px normalmente precisa de upscale ×2 nearest para não ficar com metade do
+  tamanho de pixel da arte própria na mesma tela.
+- Se algum asset for referenciado por código em runtime, ele vive em uma subpasta
+  `Resources/` **dentro** do pacote — assim o `SpriteImportPostprocessor` continua valendo
+  (o caminho começa com `Assets/Art/`) e o pacote segue removível em bloco.
+
+> Import automático: `Assets/Editor/Art/SpriteImportPostprocessor.cs` força 32 PPU, Filter Point, sem compressão e sem mipmap em toda textura que entrar em `Assets/Art/`. Spritesheets `*_sheet.png` são fatiados automaticamente pelo `SheetAutoSlicer.cs` (Multiple + grid quadrado + pivot bottom-center); o clip/controller é gerado via menu `Assets > Braziliation > Criar Animação do Spritesheet` (`SheetAnimationTool.cs`, saída em `Animations/World/`). Não configure import settings de sprite manualmente, salvo exceção documentada.
 
 ### Audio/
 
@@ -125,9 +150,11 @@ Guarda dados de design versionáveis: stats, configurações de inimigos, itens,
 
 ### Scripts/
 
-Guarda código Unity. A estrutura atual preserva `Core`, `Crafting`, `Gameplay` e `UI`, e já reserva `Player`, `Enemies`, `Combat`, `World` e `Utils` para novos scripts por domínio. `Build/` guarda scripts de build/CI que precisam viver dentro de Assets.
+Guarda código Unity, organizado por **domínio de sistema** — ver ADR-005. Pastas atuais: `Core/` (infra transversal: service locator, layers, `GameInput`, interfaces), `Gameplay/` (MonoBehaviours de jogo), `Build/` e `Crafting/` (adaptadores Unity dos sistemas homônimos do core puro), `Enemies/` (ScriptableObjects de perfil) e `UI/`.
 
-### Settings/, Plugins/, Tilemaps/
+As pastas reservadas do ADR-003 (`Player/`, `Combat/`, `World/`, `Utils/`) foram removidas em 2026-09-02: ficaram vazias enquanto o código crescia por domínio, e o ADR-003 foi substituído pelo ADR-005. Script novo vai para a pasta do domínio, não do tipo de entidade.
+
+### Settings/ e Plugins/
 
 Pastas especiais ou existentes do Unity. Mantenha como estão, salvo decisão documentada em ADR.
 
@@ -135,10 +162,12 @@ Pastas especiais ou existentes do Unity. Mantenha como estão, salvo decisão do
 
 | Pasta | Status |
 |-------|--------|
-| `Assets/Sprites/` | Legado — não receber assets novos; migrar para `Art/` pelo Editor |
-| `Assets/UI/` (raiz) | Legado — novos sprites de UI vão para `Art/UI/` |
-| `Assets/_Recovery/` | Temporária do Unity — não versionar conteúdo novo nela |
 | `Assets/TextMesh Pro/` | Pacote de terceiros — não modificar |
+| `Assets/Art/ThirdParty/` | Assets licenciados de terceiros — ver `CREDITS.md` |
+
+> Removidas em 2026-09-02 por estarem vazias ou órfãs: `Assets/Sprites/`, `Assets/UI/` (raiz),
+> `Assets/Tilemaps/`, `Assets/Art/Environment/` (singular, legado de `Environments/`) e
+> `Assets/_Recovery/`. Não recriar.
 
 ---
 
