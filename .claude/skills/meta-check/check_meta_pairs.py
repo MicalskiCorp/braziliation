@@ -22,11 +22,26 @@ from pathlib import Path
 IGNORED_NAMES = {".DS_Store", "Thumbs.db"}
 
 
+def is_hidden_from_unity(path: Path, assets_dir: Path) -> bool:
+    """
+    Regra de import do Unity: arquivo ou pasta que começa com '.', termina com '~',
+    se chama 'cvs' ou tem extensão .tmp não é importado e nunca ganha .meta —
+    nem nada dentro de uma pasta assim. Sem este filtro, todo .gitkeep saía como
+    "asset sem .meta" e o gate reprovava um projeto correto.
+    """
+    for part in path.relative_to(assets_dir).parts:
+        if part.startswith(".") or part.endswith("~") or part.lower() == "cvs":
+            return True
+    return path.suffix.lower() == ".tmp"
+
+
 def iter_assets(assets_dir: Path):
     for path in assets_dir.rglob("*"):
         if path.name in IGNORED_NAMES:
             continue
         if path.suffix == ".meta":
+            continue
+        if is_hidden_from_unity(path, assets_dir):
             continue
         yield path
 
