@@ -95,9 +95,9 @@ git config core.hooksPath .githooks
 
 ---
 
-## 🤖 Desenvolvimento assistido por IA (VS Code Copilot)
+## 🤖 Desenvolvimento assistido por IA (Claude Code e VS Code Copilot)
 
-O repositório usa **VS Code Copilot** com agentes, instructions e prompts customizados em `.github/`.
+O repositório funciona com **Claude Code** (`.claude/`: agentes, skills, hooks, regras) e **VS Code Copilot** (`.github/`: agentes, instructions, prompts). Os 11 agentes têm o mesmo corpo nos dois formatos.
 
 ### Agentes disponíveis
 
@@ -137,6 +137,23 @@ O repositório usa **VS Code Copilot** com agentes, instructions e prompts custo
 
 ---
 
+## 📘 Manual de processos
+
+Como o projeto funciona, camada por camada: quem executa cada processo, como se aciona, o passo a passo, o que lê e escreve e onde a entrega é travada. Cada processo aponta a fonte canônica (o agente ou a skill que o executa).
+
+| Camada | Área | Processos | Manual |
+|--------|------|:---------:|--------|
+| Pesquisa | Design | 6 | [pesquisa.md](Desenvolvimento/Docs/Processos/pesquisa.md) |
+| Criativo | Design | 10 | [criativo.md](Desenvolvimento/Docs/Processos/criativo.md) |
+| Arte | Design (lateral) | 7 | [arte.md](Desenvolvimento/Docs/Processos/arte.md) |
+| Documentação | Desenvolvimento | 7 | [documentacao.md](Desenvolvimento/Docs/Processos/documentacao.md) |
+| Implementação | Desenvolvimento | 9 | [implementacao.md](Desenvolvimento/Docs/Processos/implementacao.md) |
+| Orquestração | Transversal | 5 | [orquestracao.md](Desenvolvimento/Docs/Processos/orquestracao.md) |
+
+**Visão geral, encadeamento das camadas e regras comuns:** [Desenvolvimento/Docs/Processos/index.md](Desenvolvimento/Docs/Processos/index.md) · **Onde cada procedimento mora** (modo, skill, script, teste, hook, regra): [modo-skill-ou-regra.md](Desenvolvimento/Docs/Processos/modo-skill-ou-regra.md)
+
+---
+
 ## 🎨 Camada criativa
 
 Lendas, cidades, personagens e brainstorm vivem em `Design/Criativo/` — separados do código Unity, versionados no mesmo repositório. Referências visuais e fontes de arte vivem em `Design/ArteConceitual/`, `Design/ArteFonte/` e `Design/GuiasDeArte/`.
@@ -167,7 +184,8 @@ A documentação técnica do projeto Unity vive em `Desenvolvimento/Docs/`:
 | [`Docs/Architecture/`](Desenvolvimento/Docs/Architecture/) | Sistemas, ADRs, índice de scripts |
 | [`Docs/Mechanics/`](Desenvolvimento/Docs/Mechanics/) | Regras e mecânicas de gameplay |
 | [`Docs/Roadmap/`](Desenvolvimento/Docs/Roadmap/) | Fases e backlog |
-| [`Docs/Tech/`](Desenvolvimento/Docs/Tech/) | Tech debt, regras de desenvolvimento |
+| [`Docs/Tech/`](Desenvolvimento/Docs/Tech/) | Tech debt, regras de desenvolvimento, catálogo de skills e travas |
+| [`Docs/Processos/`](Desenvolvimento/Docs/Processos/index.md) | Manual de processos por camada |
 
 **Hub técnico:** [Desenvolvimento/Docs/index.md](Desenvolvimento/Docs/index.md)
 
@@ -175,11 +193,15 @@ A documentação técnica do projeto Unity vive em `Desenvolvimento/Docs/`:
 
 ## 🌿 Branches
 
+**Até a v1:** commits direto no `main`, com o pre-commit ativo (`git config core.hooksPath .githooks`).
+
+**Depois da v1:**
+
 | Branch | Propósito |
 |--------|-----------|
 | `main` | Produção / releases estáveis |
 | `develop` | Integração contínua |
 | `feature/*` | Novas features |
-| `fix/*` | Correções |
+| `hotfix/*` · `chore/*` | Correções emergenciais · manutenção técnica |
 
-Consulte as regras completas em `Desenvolvimento/Docs/Tech/DevelopmentRules.md`.
+Regras completas: [`Desenvolvimento/Docs/Tech/DevelopmentRules.md`](Desenvolvimento/Docs/Tech/DevelopmentRules.md).

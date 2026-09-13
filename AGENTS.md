@@ -56,6 +56,7 @@ Rotas de handoff válidas: Pesquisa→Criativo, Criativo→Documentação, Docum
 Operações nos três: skill `gerir-todo`; escrita no TODO da camada seguinte: skill `handoff`. Status de pendência vive **só** no TODO da camada; roadmap e backlog apenas linkam.
 
 ## Docs úteis
+- `Desenvolvimento/Docs/Processos/index.md` — manual de processos por camada (para humanos; o canônico é o agente/skill)
 - `Desenvolvimento/Docs/index.md` — entrada da documentação técnica
 - `Desenvolvimento/Docs/Tech/DevelopmentRules.md` — branches, commits, versionamento
 - `Desenvolvimento/Docs/Architecture/architecture_decisions.md` · `Desenvolvimento/Docs/Tech/tech_debt.md` · `Desenvolvimento/Docs/Roadmap/roadmap.md`

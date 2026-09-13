@@ -1,6 +1,6 @@
 # Processos dos Agentes — Braziliation
 
-> Detalhe operacional do ecossistema de agentes. O mapa curto (agentes, camadas, TODOs) está no [`AGENTS.md`](../../../AGENTS.md), que entra em toda sessão; este arquivo é lido **sob demanda** — por isso o detalhe vive aqui.
+> Detalhe operacional do ecossistema de agentes. O mapa curto (agentes, camadas, TODOs) está no [`AGENTS.md`](../../../AGENTS.md), que entra em toda sessão; este arquivo é lido **sob demanda** — por isso o detalhe vive aqui. O passo a passo de cada processo, camada por camada, está no [manual de processos](../Processos/index.md).
 
 ## 1. Descoberta de agentes por cwd
 
@@ -58,7 +58,7 @@ Ambas reportam antes de corrigir.
 
 ## 5. Criação e atualização de agente
 
-`@AgentArchitect` (Papel 2) via skill `novo-agente`: inventário pela tabela do `AGENTS.md`, corpo escrito no formato Claude e propagado ao Copilot por `py .claude/skills/novo-agente/sync_bodies.py`, par registrado no `AgentParityTests` e linha no `AGENTS.md`.
+`@AgentArchitect` (Papel 2) via skill `novo-agente`: inventário pela tabela do `AGENTS.md`, corpo escrito no formato Claude e propagado ao Copilot por `py .claude/skills/novo-agente/sync_bodies.py` (no Claude Code, automático pelo hook), par registrado no `AgentParityTests` e linha no `AGENTS.md`. Mudou um modo ou uma skill? Atualizar o arquivo da camada em `Desenvolvimento/Docs/Processos/`.
 
 ## 6. Asset/sprite (5 etapas)
 

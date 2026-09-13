@@ -21,6 +21,7 @@
 | ADRs | Decisões de arquitetura | [`Architecture/architecture_decisions.md`](Architecture/architecture_decisions.md) |
 | Estrutura de Assets | Layout de `Assets/` | [`Architecture/Assets/AssetsStructure.md`](Architecture/Assets/AssetsStructure.md) |
 | Tech | Regras de desenvolvimento, dívida técnica, CI Unity e processos dos agentes | [`Tech/`](Tech/index.md) |
+| Processos | Manual de processos por camada (Pesquisa → Implementação) | [`Processos/`](Processos/index.md) |
 
 ## Manutenção
 
