@@ -1,0 +1,24 @@
+{
+  "name": "prop_blumenau_marcador_pilar_amarelo",
+  "size": [16, 16],
+  "palette": "../../../../ArteConceitual/Paletas/blumenau.json",
+  "notes": "Pilar de madeira com faixa pintada amarela (estado ALERTA do rio) + escorrido de tinta.",
+  "rows": [
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....FFFFF2.....",
+    ".....FFFFF2.....",
+    ".....FFFFF2.....",
+    ".....FFFFF2.....",
+    ".....FFFFF2.....",
+    ".....CBFBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1....."
+  ]
+}

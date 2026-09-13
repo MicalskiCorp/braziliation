@@ -1,25 +1,90 @@
 {
   "region": "Blumenau",
-  "status": "proposta-inicial",
+  "status": "aprovada",
+  "approved": "2026-07-11",
   "source": "Design/GuiasDeArte/palette-guide.md",
-  "note": "Valores hex derivados das direções do palette-guide (Blumenau clockpunk/hídrico). Sujeitos a aprovação de arte; ao aprovar, salvar também como paleta Aseprite em Design/ArteFonte/Aseprite/.",
-  "max_colors_per_sprite": 16,
+  "note": "Valores hex derivados das direções do palette-guide (Blumenau clockpunk/hídrico). Aprovada em 2026-07-11; paleta Aseprite equivalente em Design/ArteFonte/Aseprite/blumenau.gpl. ADR-004: limite por sprite elevado a 32 (rampas estendidas a adicionar conforme re-autoria).",
+  "max_colors_per_sprite": 32,
   "colors": [
-    { "key": "1", "hex": "#1b1616", "role": "preto quente — outline e sombra profunda" },
-    { "key": "2", "hex": "#232c33", "role": "azul petróleo — sombra" },
-    { "key": "3", "hex": "#3a3f44", "role": "grafite — metal escuro" },
-    { "key": "4", "hex": "#4d5a66", "role": "ferro azulado" },
-    { "key": "5", "hex": "#8a949c", "role": "metal claro — highlight frio" },
-    { "key": "6", "hex": "#6e5424", "role": "latão escuro" },
-    { "key": "7", "hex": "#a07f3a", "role": "latão velho" },
-    { "key": "8", "hex": "#c9a558", "role": "dourado sujo — highlight quente" },
-    { "key": "9", "hex": "#8a4a2b", "role": "cobre queimado" },
-    { "key": "A", "hex": "#4a3226", "role": "madeira escura" },
-    { "key": "B", "hex": "#6b4a33", "role": "madeira úmida" },
-    { "key": "C", "hex": "#8c6b42", "role": "ocre escuro" },
-    { "key": "D", "hex": "#cbb48a", "role": "bege gasto — luz" },
-    { "key": "E", "hex": "#5a6b52", "role": "verde acinzentado — água/lama" },
-    { "key": "F", "hex": "#6d6031", "role": "amarelo sujo — acento pontual de lama" },
-    { "key": "G", "hex": "#7a2e2a", "role": "vermelho escuro dessaturado — sangue/alerta" }
+    {
+      "key": "1",
+      "hex": "#1b1616",
+      "role": "preto quente — outline e sombra profunda"
+    },
+    {
+      "key": "2",
+      "hex": "#232c33",
+      "role": "azul petróleo — sombra"
+    },
+    {
+      "key": "3",
+      "hex": "#3a3f44",
+      "role": "grafite — metal escuro"
+    },
+    {
+      "key": "4",
+      "hex": "#4d5a66",
+      "role": "ferro azulado"
+    },
+    {
+      "key": "5",
+      "hex": "#8a949c",
+      "role": "metal claro — highlight frio"
+    },
+    {
+      "key": "6",
+      "hex": "#6e5424",
+      "role": "latão escuro"
+    },
+    {
+      "key": "7",
+      "hex": "#a07f3a",
+      "role": "latão velho"
+    },
+    {
+      "key": "8",
+      "hex": "#c9a558",
+      "role": "dourado sujo — highlight quente"
+    },
+    {
+      "key": "9",
+      "hex": "#8a4a2b",
+      "role": "cobre queimado"
+    },
+    {
+      "key": "A",
+      "hex": "#4a3226",
+      "role": "madeira escura"
+    },
+    {
+      "key": "B",
+      "hex": "#6b4a33",
+      "role": "madeira úmida"
+    },
+    {
+      "key": "C",
+      "hex": "#8c6b42",
+      "role": "ocre escuro"
+    },
+    {
+      "key": "D",
+      "hex": "#cbb48a",
+      "role": "bege gasto — luz"
+    },
+    {
+      "key": "E",
+      "hex": "#5a6b52",
+      "role": "verde acinzentado — água/lama"
+    },
+    {
+      "key": "F",
+      "hex": "#6d6031",
+      "role": "amarelo sujo — acento pontual de lama"
+    },
+    {
+      "key": "G",
+      "hex": "#7a2e2a",
+      "role": "vermelho escuro dessaturado — sangue/alerta"
+    }
   ]
 }

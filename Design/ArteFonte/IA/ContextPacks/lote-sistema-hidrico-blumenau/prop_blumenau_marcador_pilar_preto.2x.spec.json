@@ -1,0 +1,43 @@
+{
+  "name": "prop_blumenau_marcador_pilar_preto",
+  "size": [
+    32,
+    32
+  ],
+  "palette": "../../../../ArteConceitual/Paletas/blumenau.json",
+  "notes": "Pilar de madeira com faixa pintada preta (estado SATURAÇÃO do rio); borda clara superior para leitura da faixa escura sobre a madeira. [Re-autoria ADR-004: EPX + textura via spec_redetail.py; retoques manuais aplicados sobre esta spec 2x.]",
+  "rows": [
+    "...........CBBBBBBAA1...........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........555555555555..........",
+    "..........555555555555..........",
+    "..........111111111122..........",
+    "..........111111111122..........",
+    "..........111111111122..........",
+    "..........111111111122..........",
+    "..........111111111122..........",
+    "..........111111111122..........",
+    "..........111111111122..........",
+    "..........111111111112..........",
+    "..........CCB1111BA111..........",
+    "..........CCBB11BBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBABAA11..........",
+    "...........CBBBBBBAA1..........."
+  ]
+}

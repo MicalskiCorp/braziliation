@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Compõe um sprite numa cena mock 320x180 para o teste de leitura em 1x.
+"""Compõe um sprite numa cena mock 640x360 para o teste de leitura em 1x.
 
 Implementa o passo "Validar em cena" do pipeline: o sprite precisa ler
-claramente na resolução de referência do jogo (320x180, 16 PPU), sobre
-faixas de valor que simulam céu/fundo/meio/chão da paleta da região.
+claramente na resolução de referência do jogo (640x360, 32 PPU — ADR-004),
+sobre faixas de valor que simulam céu/fundo/meio/chão da paleta da região.
 
-Gera dois arquivos: {nome}_mock.png (320x180 real) e {nome}_mock_3x.png
+Gera dois arquivos: {nome}_mock.png (640x360 real) e {nome}_mock_3x.png
 (ampliado para inspeção visual).
 
 Uso:
@@ -19,7 +19,7 @@ from pathlib import Path
 
 from PIL import Image
 
-REF_W, REF_H = 320, 180
+REF_W, REF_H = 640, 360
 
 
 def hex_to_rgba(h: str) -> tuple:
@@ -31,7 +31,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("png", type=Path)
     ap.add_argument("palette", type=Path)
-    ap.add_argument("-y", "--ground", type=int, default=140, help="Linha do chão em px (default 140)")
+    ap.add_argument("-y", "--ground", type=int, default=280, help="Linha do chão em px (default 280)")
     args = ap.parse_args()
 
     data = json.loads(args.palette.read_text(encoding="utf-8"))
@@ -40,7 +40,7 @@ def main() -> None:
     # Faixas de valor típicas: céu (sombra petróleo), fundo (grafite),
     # meio (madeira escura) e chão (verde acinzentado de lama).
     scene = Image.new("RGBA", (REF_W, REF_H), colors.get("2", (35, 44, 51, 255)))
-    for y in range(60, args.ground):
+    for y in range(120, args.ground):
         for x in range(REF_W):
             scene.putpixel((x, y), colors.get("3", (58, 63, 68, 255)))
     for y in range(args.ground, REF_H):
@@ -55,7 +55,7 @@ def main() -> None:
     out_3x = args.png.with_name(args.png.stem + "_mock_3x.png")
     scene.save(out_1x)
     scene.resize((REF_W * 3, REF_H * 3), Image.NEAREST).save(out_3x)
-    print(f"OK: {out_1x} (320x180 real) e {out_3x} (3x para inspeção)")
+    print(f"OK: {out_1x} ({REF_W}x{REF_H} real) e {out_3x} (3x para inspeção)")
 
 
 if __name__ == "__main__":

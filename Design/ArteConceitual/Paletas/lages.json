@@ -1,0 +1,90 @@
+{
+  "region": "Lages",
+  "status": "proposta-inicial",
+  "approved": null,
+  "source": "Design/GuiasDeArte/palette-guide.md",
+  "note": "Rascunho criado em 2026-07-24 para destravar a produção de arte de Lages (Campos Gelados / Rio Caveiras / Minhocão), que já tinha 7 lotes de geração apontando para este arquivo antes dele existir. Direção: pântano frio, água turva, ferrugem em vez de latão polido (Lages é mais isolado/hostil que o clockpunk de Blumenau). Precisa de aprovação explícita antes de qualquer asset final sair do status proposta-inicial — ver Design/Criativo/Estados/SantaCatarina/cidades/Lages/index.md, que ainda tem Punk Genre e estética de monstros como {TODO}: a paleta pode ser refinada quando esses dois campos forem definidos.",
+  "max_colors_per_sprite": 32,
+  "colors": [
+    {
+      "key": "1",
+      "hex": "#14181a",
+      "role": "preto frio — outline e sombra profunda"
+    },
+    {
+      "key": "2",
+      "hex": "#212a2e",
+      "role": "cinza azulado escuro — sombra"
+    },
+    {
+      "key": "3",
+      "hex": "#3a4448",
+      "role": "cinza pedra — metal/rocha escuro"
+    },
+    {
+      "key": "4",
+      "hex": "#58676a",
+      "role": "cinza esverdeado — névoa, tom médio"
+    },
+    {
+      "key": "5",
+      "hex": "#8fa39f",
+      "role": "cinza claro — highlight frio"
+    },
+    {
+      "key": "6",
+      "hex": "#3d2f22",
+      "role": "ferrugem escura — ferro oxidado de maquinário abandonado"
+    },
+    {
+      "key": "7",
+      "hex": "#6b4326",
+      "role": "ferrugem média"
+    },
+    {
+      "key": "8",
+      "hex": "#a8632f",
+      "role": "ferrugem clara — highlight quente (acento, não predominante)"
+    },
+    {
+      "key": "9",
+      "hex": "#29331f",
+      "role": "verde musgo escuro — vegetação de banhado"
+    },
+    {
+      "key": "A",
+      "hex": "#45542c",
+      "role": "verde musgo médio"
+    },
+    {
+      "key": "B",
+      "hex": "#7c8f5a",
+      "role": "verde acinzentado claro — líquen, highlight"
+    },
+    {
+      "key": "C",
+      "hex": "#362b1f",
+      "role": "marrom lama escura"
+    },
+    {
+      "key": "D",
+      "hex": "#59452f",
+      "role": "marrom lama média"
+    },
+    {
+      "key": "E",
+      "hex": "#8a7350",
+      "role": "bege sujo — luz sobre lama seca"
+    },
+    {
+      "key": "F",
+      "hex": "#2f4a52",
+      "role": "azul petróleo — água turva, névoa fria, acento místico controlado"
+    },
+    {
+      "key": "G",
+      "hex": "#6e2f2a",
+      "role": "vermelho escuro dessaturado — sangue/alerta"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "prop_blumenau_marcador_pilar_vermelho",
+  "size": [16, 16],
+  "palette": "../../../../ArteConceitual/Paletas/blumenau.json",
+  "notes": "Pilar de madeira com faixa pintada vermelha (estado CHEIA do rio) + escorrido de tinta.",
+  "rows": [
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....GGGGG2.....",
+    ".....GGGGG2.....",
+    ".....GGGGG2.....",
+    ".....GGGGG2.....",
+    ".....GGGGG2.....",
+    ".....CBGBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1....."
+  ]
+}

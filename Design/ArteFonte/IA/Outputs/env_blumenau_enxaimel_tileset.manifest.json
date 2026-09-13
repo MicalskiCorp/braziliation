@@ -1,0 +1,17 @@
+{
+  "generator": "gen_tileset.py",
+  "familia": "enxaimel",
+  "seed": 42,
+  "variations": 4,
+  "palette": "..\\ArteConceitual\\Paletas\\blumenau.json",
+  "tile_size": 32,
+  "draw_size": 16,
+  "scale": 2,
+  "rows": [
+    "panel",
+    "beam_v",
+    "beam_h",
+    "diag"
+  ],
+  "layout": "linhas = tipos, colunas = variações"
+}

@@ -10,9 +10,10 @@ public class CameraScaler : MonoBehaviour
     void Start()
     {
         cam = GetComponent<PixelPerfectCamera>();
-        cam.assetsPPU = 16;
-        cam.refResolutionX = 320;
-        cam.refResolutionY = 180;
+        // ADR-004: 640x360 / 32 PPU (Blasphemous-like). 1 tile 32px = 1 unidade.
+        cam.assetsPPU = 32;
+        cam.refResolutionX = 640;
+        cam.refResolutionY = 360;
     }
 
     // Update is called once per frame

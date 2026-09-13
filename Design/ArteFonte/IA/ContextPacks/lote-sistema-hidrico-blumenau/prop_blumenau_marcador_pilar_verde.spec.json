@@ -1,0 +1,24 @@
+{
+  "name": "prop_blumenau_marcador_pilar_verde",
+  "size": [16, 16],
+  "palette": "../../../../ArteConceitual/Paletas/blumenau.json",
+  "notes": "Pilar de madeira com faixa pintada verde (estado ROTINA do rio) + escorrido de tinta.",
+  "rows": [
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....EEEEE2.....",
+    ".....EEEEE2.....",
+    ".....EEEEE2.....",
+    ".....EEEEE2.....",
+    ".....EEEEE2.....",
+    ".....CBEBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1.....",
+    ".....CBBBA1....."
+  ]
+}

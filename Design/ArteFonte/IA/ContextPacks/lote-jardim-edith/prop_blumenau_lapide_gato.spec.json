@@ -1,0 +1,24 @@
+{
+  "name": "prop_blumenau_lapide_gato",
+  "size": [16, 16],
+  "palette": "../../../../ArteConceitual/Paletas/blumenau.json",
+  "notes": "Lápide de concreto arredondada com linhas de nome gravadas (2) e musgo (E) na base. Base para as 9 lápides nomeadas dos gatos de Edith.",
+  "rows": [
+    "................",
+    "................",
+    "................",
+    ".......55.......",
+    "......5554......",
+    ".....554443.....",
+    ".....554443.....",
+    ".....522223.....",
+    ".....554443.....",
+    ".....522223.....",
+    ".....554443.....",
+    ".....554443.....",
+    ".....E544E3.....",
+    "....E554443E....",
+    "................",
+    "................"
+  ]
+}

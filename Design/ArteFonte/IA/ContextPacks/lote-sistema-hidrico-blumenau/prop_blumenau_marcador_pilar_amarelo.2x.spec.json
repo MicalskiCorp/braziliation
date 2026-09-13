@@ -1,0 +1,43 @@
+{
+  "name": "prop_blumenau_marcador_pilar_amarelo",
+  "size": [
+    32,
+    32
+  ],
+  "palette": "../../../../ArteConceitual/Paletas/blumenau.json",
+  "notes": "Pilar de madeira com faixa pintada amarela (estado ALERTA do rio) + escorrido de tinta. [Re-autoria ADR-004: EPX + textura via spec_redetail.py; retoques manuais aplicados sobre esta spec 2x.]",
+  "rows": [
+    "...........CBBBBBBAA1...........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBABBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........FFFFFFFFFF22..........",
+    "..........FFFFFFFFFF22..........",
+    "..........FFFFFFFFFF22..........",
+    "..........FFFFFFFFFF22..........",
+    "..........FFFFFFFFFF22..........",
+    "..........FFFFFFFFFF22..........",
+    "..........FFFFFFFFFF22..........",
+    "..........FFFFFFFFFF22..........",
+    "..........FFFFFFFFFF22..........",
+    "..........FFFFFFFFFF22..........",
+    "..........CCBFFFFBAA11..........",
+    "..........CCBBFFBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBABBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBBBBBAA11..........",
+    "..........CCBBABBBAA11..........",
+    "...........CBBBBBBAA1..........."
+  ]
+}

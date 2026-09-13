@@ -1,0 +1,16 @@
+{
+  "generator": "gen_tileset.py",
+  "familia": "agua",
+  "seed": 42,
+  "variations": 4,
+  "palette": "..\\ArteConceitual\\Paletas\\blumenau.json",
+  "tile_size": 32,
+  "draw_size": 16,
+  "scale": 2,
+  "rows": [
+    "superficie",
+    "lama",
+    "marca_nivel"
+  ],
+  "layout": "linhas = tipos, colunas = variações"
+}

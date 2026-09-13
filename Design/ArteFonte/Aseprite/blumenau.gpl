@@ -1,0 +1,21 @@
+GIMP Palette
+Name: Braziliation Blumenau
+Columns: 8
+# Paleta aprovada 2026-07-11 — fonte: Design/ArteConceitual/Paletas/blumenau.json
+# Blumenau clockpunk/hidrico — max 16 cores por sprite
+ 27  22  22	preto quente (outline/sombra profunda)
+ 35  44  51	azul petroleo (sombra)
+ 58  63  68	grafite (metal escuro)
+ 77  90 102	ferro azulado
+138 148 156	metal claro (highlight frio)
+110  84  36	latao escuro
+160 127  58	latao velho
+201 165  88	dourado sujo (highlight quente)
+138  74  43	cobre queimado
+ 74  50  38	madeira escura
+107  74  51	madeira umida
+140 107  66	ocre escuro
+203 180 138	bege gasto (luz)
+ 90 107  82	verde acinzentado (agua/lama)
+109  96  49	amarelo sujo (acento lama)
+122  46  42	vermelho escuro dessaturado (sangue/alerta)

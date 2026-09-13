@@ -18,7 +18,8 @@ namespace Braziliation.Editor.Menu
     /// </summary>
     public static class MainMenuUISetupEditor
     {
-        // ── Layout constants (reference canvas: 320 × 180 px) ─────────────────
+        // ── Layout constants (reference canvas: 320 × 180 px — UI canvas escala
+        // independente do PPU; migração p/ 640×360 é opcional e cosmética, ADR-004) ──
         private const float ButtonWidth    = 80f;
         private const float ButtonHeight   = 10f;
         private const float ButtonSpacing  = 2f;

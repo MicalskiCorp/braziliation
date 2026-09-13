@@ -1,0 +1,24 @@
+{
+  "name": "prop_blumenau_sirene_pneumatica",
+  "size": [16, 16],
+  "palette": "../../../../ArteConceitual/Paletas/blumenau.json",
+  "notes": "Corneta pneumática de ferro apontando para a direita, anel de latão na junção, poste de ferro. Boca escura (1) na extremidade.",
+  "rows": [
+    "................",
+    "................",
+    "................",
+    "................",
+    "...........455..",
+    "........344455..",
+    "....7634444551..",
+    "....7634444551..",
+    "....31..344455..",
+    "....31.....455..",
+    "....31..........",
+    "....31..........",
+    "....31..........",
+    "....31..........",
+    "....31..........",
+    "....31.........."
+  ]
+}

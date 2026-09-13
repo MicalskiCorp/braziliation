@@ -1,5 +1,7 @@
 # Context Pack — Prop Comporta de Blumenau
 
+> **✅ ADR-004 — re-autoria concluída (2026-07-12):** specs 2× (`*.2x.spec.json`, geradas via `spec_redetail.py` — EPX + textura) são a **fonte atual** dos PNGs entregues; as specs 1× ficam como histórico. Retoques futuros: editar as specs 2×.
+
 ## 1. Identificação
 
 - Asset: prop_blumenau_floodgate_lever
