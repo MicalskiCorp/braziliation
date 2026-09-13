@@ -1,0 +1,17 @@
+{
+  "asset": "chr-blumenau-edith-gaertner",
+  "seed": 70260726,
+  "prompt_id": "89a9e00a-e8ae-429d-8d5f-e0cd6bd206ca",
+  "positive": "[GLOBAL STYLE]\npixel art single character illustration for a 2D side-scrolling action platformer, modern metroidvania pixel art readability (Blasphemous-like), high pixel density, limited 32 color palette, one isolated character, clear silhouette, Brazilian post-apocalyptic dieselpunk\n\n[ASSET]\ntranslucent ghostly woman NPC, dignified middle-aged features not a young girl, gentle round face, wavy hair center-parted and pulled back softly framing the face, full body, single standing idle pose facing sideways, wearing a pale spectral blue-white glowing 1920s European day dress with dropped waist, gathered pleated skirt falling to mid-calf, short puffed cap sleeves, fully covered modest period dress, melancholic downcast expression, soft eyes not glowing not menacing, both arms raised holding a small translucent glowing pale-blue spectral cat up near her shoulder and chest the way one lifts a beloved pet close to their face, cat face and fur pattern clearly visible glowing blue, faint sparkle particles drifting along the dress fabric, dress hem and lower legs dissolving into thin swirling wisps of pale mist, soft cold blue-grey rim light outline, no weapon, no aggressive pose\n\n[TECHNICAL]\nsingle static pose only, no multiple views, no turnaround, no character sheet, no text, no labels, single character only, no scenery, no buildings, no forest, plain flat neutral grey background, full body centered in frame, designed for 32 PPU, strong readable silhouette",
+  "negative": "photorealistic, 3D render, vector art, smooth gradient, anti-aliased illustration, high resolution painting, excessive detail, blurry, generic fantasy, modern sci-fi, text, watermark, copyrighted character, modern clothing, colorful, cheerful, saturated colors, horror monster, aggressive pose, weapon, glowing red eyes, background, scenery, buildings, architecture, landscape, city, moon, trees, forest, multiple characters, other people, cropped body, close-up portrait, full scene illustration, multiple views, turnaround sheet, character reference sheet, UI panel, labels, grid lines, young child, anime schoolgirl, cat ears, nekomimi, nude, naked, bare skin, exposed breasts, nsfw",
+  "workflow": "workflow-thumbnails.json",
+  "model": "sd_xl_base_1.0.safetensors",
+  "images": [
+    "braziliation_chr-blumenau-edith-gaertner_00037_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00038_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00039_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00040_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00041_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00042_.png"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "asset": "chr-blumenau-edith-gaertner",
+  "seed": 20260724,
+  "prompt_id": "af897257-f49c-4ee8-b28d-fd6faf95cc82",
+  "positive": "[GLOBAL STYLE]\npixel art sprite for a 2D side-scrolling action platformer, modern metroidvania pixel art readability (Blasphemous-like), high pixel density, limited 32 color palette, clear silhouette, Brazilian post-apocalyptic dieselpunk\n\n[REGION]\nBlumenau ghost garden, cat cemetery, spectral pale blue-grey moonlight, mossy stone, colonial-german timber architecture hinted in background, damp air\n\n[ASSET]\ntranslucent ghostly woman NPC, standing idle pose, 1920s European mourning dress worn and faded, hair tied back in a bun, melancholic dignified expression, soft spectral blue-grey rim light outline, faint glow, feet fading into low mist, no weapon, no threatening pose\n\n[TECHNICAL]\northographic side view, no background, transparent background, readable at 640x360, designed for 32 PPU, no smooth gradients, no painterly rendering, strong readable silhouette",
+  "negative": "photorealistic, 3D render, vector art, smooth gradient, anti-aliased illustration, high resolution painting, excessive detail, blurry, generic fantasy, modern sci-fi, text, watermark, copyrighted character, modern clothing, colorful, cheerful, saturated colors, horror monster, aggressive pose, weapon",
+  "workflow": "workflow-thumbnails.json",
+  "model": "sd_xl_base_1.0.safetensors",
+  "images": [
+    "braziliation_chr-blumenau-edith-gaertner_00007_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00008_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00009_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00010_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00011_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00012_.png"
+  ]
+}

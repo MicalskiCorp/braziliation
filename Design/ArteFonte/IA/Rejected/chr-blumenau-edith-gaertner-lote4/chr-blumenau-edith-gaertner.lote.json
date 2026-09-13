@@ -1,0 +1,17 @@
+{
+  "asset": "chr-blumenau-edith-gaertner",
+  "seed": 40260726,
+  "prompt_id": "dc4e3738-c13c-4625-a5f1-4ba5bb231e67",
+  "positive": "[GLOBAL STYLE]\npixel art single character illustration for a 2D side-scrolling action platformer, modern metroidvania pixel art readability (Blasphemous-like), high pixel density, limited 32 color palette, one isolated character, clear silhouette, Brazilian post-apocalyptic dieselpunk\n\n[ASSET]\ntranslucent ghostly woman NPC, dignified middle-aged features not a young girl, full body, single standing idle pose, pale spectral blue-white glowing translucent skin and dress, 1920s European day dress with dropped waist and gathered pleated skirt and short cap sleeves, hair center-parted and pulled back low into a simple bun, melancholic downcast expression, soft eyes not glowing not menacing, one arm bent holding a small translucent glowing pale-blue spectral cat close against her chest, cat fur pattern faintly visible through the translucency, faint sparkle particles along the dress, lower hem dissolving into thin swirling wisps of pale mist instead of visible legs, soft cold blue-grey rim light outline, no weapon, no aggressive pose\n\n[TECHNICAL]\nsingle static pose only, no multiple views, no turnaround, no character sheet, no text, no labels, no UI panel, single character only, no scenery, no buildings, no forest, plain flat neutral background, full body centered in frame, designed for 32 PPU, no smooth gradients, no painterly rendering, strong readable silhouette",
+  "negative": "photorealistic, 3D render, vector art, smooth gradient, anti-aliased illustration, high resolution painting, excessive detail, blurry, generic fantasy, modern sci-fi, text, watermark, copyrighted character, modern clothing, colorful, cheerful, saturated colors, horror monster, aggressive pose, weapon, glowing red eyes, background, scenery, buildings, architecture, landscape, city, moon, trees, forest, multiple characters, other people, cropped body, close-up portrait, full scene illustration, multiple views, turnaround sheet, character reference sheet, UI panel, labels, grid lines, young child, anime schoolgirl, cat ears, nekomimi",
+  "workflow": "workflow-thumbnails.json",
+  "model": "sd_xl_base_1.0.safetensors",
+  "images": [
+    "braziliation_chr-blumenau-edith-gaertner_00025_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00026_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00027_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00028_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00029_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00030_.png"
+  ]
+}

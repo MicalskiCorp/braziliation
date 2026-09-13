@@ -1,0 +1,17 @@
+{
+  "asset": "chr-blumenau-edith-gaertner",
+  "seed": 80260726,
+  "prompt_id": "666d46c1-83bd-4e7d-8909-768da47ea378",
+  "positive": "[GLOBAL STYLE]\npixel art scene concept for a 2D side-scrolling action platformer, modern metroidvania pixel art readability (Blasphemous-like), high pixel density, limited color palette, moody atmospheric side-view scene, Brazilian post-apocalyptic dieselpunk world\n\n[SCENE]\nnight scene in an overgrown cat cemetery garden in Blumenau, small rectangular concrete gravestones with name plaques scattered on the ground, a white stone statue of a mother cat with kitten on a rough stone pedestal, gravel path, moss-covered thick tree trunks, dense dark subtropical vegetation, one enormous old tree whose thick exposed roots form a natural bench, low ground mist, cold pale blue-grey spectral moonlight filtering through the canopy, quiet melancholic mood\n\n[CHARACTER]\na translucent ghostly woman in a modest 1920s European day dress with pleated skirt and short cap sleeves, dignified middle-aged, hair in a low bun, sitting on the natural root bench of the enormous tree, holding a small glowing translucent spectral cat close to her chest, several other small glowing spectral cats sitting calmly around her on the ground and gravestones, soft blue-white glow on her and the cats contrasting with the dark garden\n\n[TECHNICAL]\nside-view game scene composition, character readable within the environment, designed for 32 PPU, strong readable silhouettes, no smooth gradients, no painterly rendering, no text, no labels",
+  "negative": "photorealistic, 3D render, vector art, smooth gradient, anti-aliased illustration, high resolution painting, blurry, generic fantasy, modern sci-fi, text, watermark, copyrighted character, modern clothing, colorful, cheerful, saturated colors, bright daylight, horror monster, aggressive pose, weapon, glowing red eyes, multiple views, turnaround sheet, character reference sheet, UI panel, labels, grid lines, young child, anime schoolgirl, cat ears on human, nekomimi, nude, naked, bare skin, exposed breasts, nsfw",
+  "workflow": "workflow-thumbnails.json",
+  "model": "sd_xl_base_1.0.safetensors",
+  "images": [
+    "braziliation_chr-blumenau-edith-gaertner_00043_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00044_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00045_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00046_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00047_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00048_.png"
+  ]
+}

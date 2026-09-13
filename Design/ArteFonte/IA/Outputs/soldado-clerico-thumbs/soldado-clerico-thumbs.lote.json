@@ -1,0 +1,17 @@
+{
+  "asset": "soldado-clerico-thumbs",
+  "seed": 20260712,
+  "prompt_id": "b1778ea5-28f6-4ffa-b610-63860b961851",
+  "positive": "pixel art character concept for a 2D side-scrolling action platformer, SNES-era readability, limited 16 color palette, clear silhouette, Brazilian post-apocalyptic dieselpunk. Blumenau clockpunk district, colonial-german influence, aged brass gears, dark iron, wet wood, militarized clergy. full-body concept of a clerical mercenary soldier, full clockpunk plate armor with brass gears, pneumatic rifle, rotating gear shield, stern zealot bearing, side view, muted earthy palette, strong readable silhouette",
+  "negative": "photorealistic, 3D render, vector art, smooth gradient, anti-aliased illustration, high resolution painting, excessive detail, blurry, generic fantasy, modern sci-fi, neon, text, watermark, copyrighted character",
+  "workflow": "workflow-thumbnails.json",
+  "model": "sd_xl_base_1.0.safetensors",
+  "images": [
+    "braziliation_soldado-clerico-thumbs_00001_.png",
+    "braziliation_soldado-clerico-thumbs_00002_.png",
+    "braziliation_soldado-clerico-thumbs_00003_.png",
+    "braziliation_soldado-clerico-thumbs_00004_.png",
+    "braziliation_soldado-clerico-thumbs_00005_.png",
+    "braziliation_soldado-clerico-thumbs_00006_.png"
+  ]
+}

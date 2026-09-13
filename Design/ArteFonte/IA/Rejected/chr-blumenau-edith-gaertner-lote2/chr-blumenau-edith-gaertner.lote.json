@@ -1,0 +1,17 @@
+{
+  "asset": "chr-blumenau-edith-gaertner",
+  "seed": 20260725,
+  "prompt_id": "f870c73e-e5e8-46e6-a19a-067c55cb263d",
+  "positive": "[GLOBAL STYLE]\npixel art character reference sheet for a 2D side-scrolling action platformer, modern metroidvania pixel art readability (Blasphemous-like), high pixel density, limited 32 color palette, single isolated character, clear silhouette, Brazilian post-apocalyptic dieselpunk\n\n[ASSET]\ntranslucent ghostly woman NPC, full body, standing idle pose facing sideways, pale spectral blue-white glowing translucent skin and dress, 1920s European day dress with dropped waist and gathered pleated skirt and short cap sleeves, hair center-parted and pulled back low into a simple bun, melancholic dignified expression, soft downcast eyes (not glowing, not menacing), one arm bent holding a small translucent glowing pale-blue spectral cat close against her chest, cat fur pattern still faintly visible through the translucency, faint sparkle particles drifting along the dress, lower hem of the dress dissolving into thin swirling wisps of pale mist instead of visible legs, soft cold blue-grey rim light outline, no weapon, no aggressive pose\n\n[TECHNICAL]\nsingle character only, no scenery, no buildings, no architecture, no landscape, no environment props, plain flat neutral grey backdrop, full body centered in frame, orthographic side view, designed for 32 PPU, no smooth gradients, no painterly rendering, strong readable silhouette, character concept sheet framing",
+  "negative": "photorealistic, 3D render, vector art, smooth gradient, anti-aliased illustration, high resolution painting, excessive detail, blurry, generic fantasy, modern sci-fi, text, watermark, copyrighted character, modern clothing, colorful, cheerful, saturated colors, horror monster, aggressive pose, weapon, glowing red eyes, background, scenery, buildings, architecture, landscape, city, moon, trees, forest, multiple characters, other people, cropped body, close-up portrait, full scene illustration",
+  "workflow": "workflow-thumbnails.json",
+  "model": "sd_xl_base_1.0.safetensors",
+  "images": [
+    "braziliation_chr-blumenau-edith-gaertner_00013_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00014_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00015_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00016_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00017_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00018_.png"
+  ]
+}

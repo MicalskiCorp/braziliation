@@ -1,0 +1,56 @@
+{
+  "_comment": "Workflow API do ComfyUI — lote de thumbnails via image-to-image (Opção C), usado quando o Passo 2 já tem um concept art aprovado (Design/ArteConceitual/{categoria}/{asset}/concept.png) ou uma silhueta própria para guiar a geração. Placeholders {POSITIVE}/{NEGATIVE}/{SEED}/{IMAGE}/{DENOISE} são substituídos por comfy_batch.py antes de submeter via POST /prompt. {IMAGE} precisa ser um arquivo já presente em ComfyUI/input/ (comfy_batch.py copia para lá). Gera 1 imagem por submissão (ao contrário do workflow-thumbnails.json, que faz lote de 6 em EmptyLatentImage) — repita com seeds diferentes para variações. NÃO usa ControlNet/IP-Adapter (nós custom não confirmados instalados); usa só nós stock do ComfyUI (LoadImage + VAEEncode + denoise parcial no KSampler). Usa LoRA 'Pixel Art XL' (nerijs, sd_xl_base_1.0, força 1.2, sem trigger word — https://huggingface.co/nerijs/pixel-art-xl) adicionado em 2026-07-26.",
+  "4": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": { "ckpt_name": "sd_xl_base_1.0.safetensors" }
+  },
+  "12": {
+    "class_type": "LoraLoader",
+    "inputs": {
+      "model": ["4", 0],
+      "clip": ["4", 1],
+      "lora_name": "pixel-art-xl.safetensors",
+      "strength_model": 1.2,
+      "strength_clip": 1.2
+    }
+  },
+  "10": {
+    "class_type": "LoadImage",
+    "inputs": { "image": "{IMAGE}" }
+  },
+  "11": {
+    "class_type": "VAEEncode",
+    "inputs": { "pixels": ["10", 0], "vae": ["4", 2] }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": { "clip": ["12", 1], "text": "{POSITIVE}" }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": { "clip": ["12", 1], "text": "{NEGATIVE}" }
+  },
+  "3": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["12", 0],
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "latent_image": ["11", 0],
+      "seed": "{SEED}",
+      "steps": 25,
+      "cfg": 6.5,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": "{DENOISE}"
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": { "samples": ["3", 0], "vae": ["4", 2] }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": { "images": ["8", 0], "filename_prefix": "braziliation_thumb" }
+  }
+}

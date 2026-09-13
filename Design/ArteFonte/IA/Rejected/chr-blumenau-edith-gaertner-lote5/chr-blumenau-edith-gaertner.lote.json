@@ -1,0 +1,14 @@
+{
+  "asset": "chr-blumenau-edith-gaertner",
+  "seed": 60260728,
+  "prompt_id": "ac603bbb-7426-4a44-aa0a-0b80fb309fd3",
+  "positive": "[GLOBAL STYLE]\npixel art single character illustration for a 2D side-scrolling action platformer, modern metroidvania pixel art readability (Blasphemous-like), high pixel density, limited 32 color palette, one isolated character, clear silhouette, Brazilian post-apocalyptic dieselpunk\n\n[ASSET]\ntranslucent ghostly woman NPC, dignified middle-aged features not a young girl, full body, single standing idle pose, pale spectral blue-white glowing translucent skin and dress, hair flowing translucent, melancholic downcast expression, soft eyes not glowing not menacing, holding a small translucent glowing pale-blue spectral cat close against her chest with both arms, cat face and fur pattern clearly visible glowing blue, faint sparkle particles along the dress, lower body dissolving into thin swirling wisps of pale mist, soft cold blue-grey rim light outline, no weapon, no aggressive pose\n\n[TECHNICAL]\nsingle static pose only, no multiple views, no turnaround, no character sheet, no text, no labels, single character only, no scenery, no buildings, no forest, plain flat neutral grey background, full body centered in frame, designed for 32 PPU, strong readable silhouette",
+  "negative": "photorealistic, 3D render, vector art, smooth gradient, anti-aliased illustration, high resolution painting, excessive detail, blurry, generic fantasy, modern sci-fi, text, watermark, copyrighted character, modern clothing, colorful, cheerful, saturated colors, horror monster, aggressive pose, weapon, glowing red eyes, background, scenery, buildings, architecture, pillars, landscape, city, moon, trees, forest, statue, pedestal, multiple characters, other people, cropped body, close-up portrait, full scene illustration, multiple views, turnaround sheet, character reference sheet, UI panel, labels, grid lines, young child, anime schoolgirl, cat ears, nekomimi, rectangular patch, floating box",
+  "workflow": "workflow-img2img.json",
+  "model": "sd_xl_base_1.0.safetensors",
+  "images": [
+    "braziliation_chr-blumenau-edith-gaertner_00036_.png"
+  ],
+  "reference_image": "C:\\Users\\Usuario\\.claude\\jobs\\aedd2e35\\tmp\\edith_composite_v1.png",
+  "denoise": 0.6
+}
