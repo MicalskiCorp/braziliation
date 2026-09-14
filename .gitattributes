@@ -7,3 +7,7 @@
 # Hooks e scripts shell rodam pelo sh do Git for Windows: CRLF quebra o shebang.
 .githooks/* text eol=lf
 *.sh text eol=lf
+
+# Scripts do cmd.exe: com LF o `goto :label` pode errar o alvo — sempre CRLF no disco.
+*.cmd text eol=crlf
+*.bat text eol=crlf
