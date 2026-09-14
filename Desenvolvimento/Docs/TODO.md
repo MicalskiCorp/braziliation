@@ -39,7 +39,7 @@
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
 | Ativar a licença Unity Personal na máquina (Hub → Preferences → Licenses → Add). Sem isso os testes EditMode não rodam por linha de comando (`unity-validar --testes` sai com 198); a compilação já funciona | Usuário | Alta | ❌ |
-| Play-teste da demo: `MainMenu` (movido para `Scenes/Menus/` em 2026-09-13) → `DemoGameplay`; animação trocando quadro, pulo só no chão, inimigo virando na ponta, ataque sem auto-dano | `@UnityDeveloper` | Alta | ❌ |
+| Play-teste da demo: `MainMenu` (movido para `Scenes/Menus/` em 2026-09-13) → `DemoGameplay`; animação trocando quadro, pulo só no chão, inimigo virando na ponta, ataque sem auto-dano; paridade de input (W/↑ pulam, F ataca) | `@UnityDeveloper` | Alta | ❌ |
 | Conectar o MCP `unity`: abrir o Editor com o pacote `com.unity.pipeline` (adicionado em 2026-09-13) e confirmar `unity status` | Usuário + `@UnityDeveloper` | Média | ❌ |
 | Conferir o slicing do `SheetAutoSlicer` e gerar Animators (alavanca, sino, Autômato) | `@UnityDeveloper` | Média | ❌ |
 | Prefab `Prop_FloodgateLever` em `Prefabs/Interactables/` | `@UnityDeveloper` | Média | ❌ |
@@ -68,6 +68,9 @@
 |------|-------------|-----------|--------|
 | Onda 3: veredito do lote 12 da Edith (teto de 3 lotes por ajuste) e curadoria dos thumbnails do Soldado Clérico | Usuário + `@SpriteArtist` | Média | 🔨 |
 | Onda 2 restante: tilesets pedra portuguesa, cemitério/terra, mármore, periferia pós-enchente | `@SpriteArtist` | Média | ❌ |
+| Fechar o A/B SDXL × Z-Image: testar Z-Image + LoRA PixelArtRedmond (versão Z Image), com "full body, head to toe" no prompt (o lote anterior saiu em busto) | `@SpriteArtist` | Média | ❌ — ver `Design/ArteFonte/IA/Models/bench-modelo-base-2026-09.md` |
+| Refazer a medição de tempo SDXL × Z-Image reiniciando o ComfyUI entre as rodadas — o gargalo é RAM do sistema (0,6 de 15,9 GB livres com os dois modelos residentes) | `@SpriteArtist` | Baixa | ❌ |
+| Passe de continuidade no frame de ataque do Autômato Abandonado (o opus redesenhou engrenagem do peito, cabeça e torso em relação ao idle) e registrar no context pack e em `indices/assets.md` | `@SpriteArtist` | Média | ❌ — ver `Design/ArteFonte/IA/Models/bench-modelo-claude-spec-2026-09.md` |
 | Clipes de ataque, dano e morte (o placeholder só tem idle/run/walk) | `@SpriteArtist` | Média | ⏸ com a arte própria |
 | Prefab final do painel de crafting | `@UnityDeveloper` | Média | ❌ |
 | Progressão visual da build (sprites por estágio de receptáculo) | `@SpriteArtist` + `@UnityDeveloper` | Média | ❌ |
@@ -84,6 +87,9 @@
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
 | Avaliar as 15 skills com o plugin `skill-creator` (modo Eval) | `@AgentArchitect` | Baixa | ❌ |
+| Decidir a política de declaração de uso de IA na Steam e registrar como ADR (número novo — o 008 é "Claude único harness") | Usuário + `@TechLead` | Média | ❌ |
+| Decidir o treino de LoRA de estilo próprio: RunPod por hora × Scenario (US$ 15/mês) × SDXL local em 8 GB | Usuário | Baixa | ❌ |
+| Decidir manter ou apagar os 11,7 GB de modelos Z-Image em `D:\Tools\ComfyUI` (depende do A/B fechado) | Usuário | Baixa | ⏸ depende do A/B SDXL × Z-Image |
 ---
 
 ## Sequência recomendada para a demo
