@@ -58,14 +58,19 @@ normalmente na reconexão — é a fila do próprio WhatsApp que segura, não es
 
 ## Manter sempre ligado (PC de casa)
 
-Sem isso o listener só captura enquanto o terminal estiver aberto. Duas opções simples
-no Windows:
+Sem isso o listener só captura enquanto o terminal estiver aberto. No PC de casa ele roda
+pelo **Agendador de Tarefas do Windows** (escolhido em 2026-09-14 — nada instalado global):
 
-- **pm2** (`npm i -g pm2`): `pm2 start listener.js --name entrevistas-braziliation`,
-  depois `pm2 save` e configurar o `pm2-startup` correspondente para sobreviver a reboot.
-- **Agendador de Tarefas do Windows**: ação "Iniciar um programa" apontando para `node`
-  com argumento `listener.js` nesta pasta, gatilho "ao fazer logon", opção "reiniciar em
-  caso de falha".
+- Tarefa **"Braziliation - Listener de entrevistas"**, gatilho "ao fazer logon", ação
+  `conhost.exe --headless iniciar-listener.cmd` (sem janela).
+- [`iniciar-listener.cmd`](iniciar-listener.cmd) reinicia o `node listener.js` 30 s depois de
+  qualquer queda e grava tudo em `listener.log` (fora do git). É lá que se confere se está
+  vivo: `Conectado. Escutando: …` e uma linha `Audio salvo em …` / `Mensagem salva em …` por
+  captura.
+- Parar/iniciar à mão: `Stop-ScheduledTask` / `Start-ScheduledTask -TaskName "Braziliation -
+  Listener de entrevistas"`. **Nunca rode `node listener.js` no terminal com a tarefa ativa** —
+  duas instâncias com o mesmo `auth/` derrubam uma à outra.
+- Alternativa não usada: **pm2** (`npm i -g pm2` + `pm2-windows-startup`).
 
 ## Perdeu a sessão / trocou de número
 

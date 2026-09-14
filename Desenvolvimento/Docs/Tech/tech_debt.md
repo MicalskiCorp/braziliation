@@ -41,20 +41,6 @@ Format:
 - **Fix:** Unity Hub → Preferences → Licenses → Add → licença Personal; depois
   `py .claude/skills/unity-validar/scripts/validar.py --testes`.
 
-- **Item:** Pipeline de entrevistas via WhatsApp (ADR-009) — captura e transcrição validadas;
-  falta o listener sempre ligado e a curadoria com uma entrevista real
-- **Where:** `Design/Pesquisa/Entrevistas/Ferramentas/whatsapp-listener/`, `Ferramentas/transcrever.py`
-- **Why:** escrito numa sessão em container efêmero na nuvem, sem WhatsApp real nem máquina
-  Windows; hoje o listener só roda enquanto há um terminal aberto.
-- **Validado em 2026-09-14 (PC de casa):** `npm install` (Node 24); pareamento por QR; grupo
-  privado dedicado configurado em `WHATSAPP_CHAT_JID` (`.env`, fora do git); um áudio e um texto
-  enviados pela própria conta capturados em `_inbox/` (correção `fromMe`, commit 5486fa7);
-  `transcrever.py` com o modelo medium em CPU transcreveu o áudio corretamente e moveu os dois
-  itens para `_pendente-curadoria/`. A primeira mensagem no grupo logo após parear falhou na
-  descriptografia (`PreKeyError`) — as seguintes passaram; se acontecer, é só reenviar.
-- **Fix (o que falta):** deixar o listener sempre ligado (pm2 ou Agendador de Tarefas — ver o
-  README do listener) e rodar a skill `processar-entrevistas` com a primeira entrevista real.
-
 ### Média
 
 - **Item:** Ruleset WFC de Blumenau é primeira versão — lâmina d'água serrilhada
