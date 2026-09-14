@@ -41,18 +41,19 @@ Format:
 - **Fix:** Unity Hub → Preferences → Licenses → Add → licença Personal; depois
   `py .claude/skills/unity-validar/scripts/validar.py --testes`.
 
-- **Item:** Pipeline de entrevistas via WhatsApp (ADR-009) ainda não validado de ponta a ponta (instalação e conexão já validadas)
+- **Item:** Pipeline de entrevistas via WhatsApp (ADR-009) — captura e transcrição validadas;
+  falta o listener sempre ligado e a curadoria com uma entrevista real
 - **Where:** `Design/Pesquisa/Entrevistas/Ferramentas/whatsapp-listener/`, `Ferramentas/transcrever.py`
-- **Why:** escrito numa sessão em container efêmero na nuvem, sem WhatsApp real para parear
-  (QR code) nem máquina Windows para instalar/rodar — o código segue a API pública do
-  Baileys e do faster-whisper, mas ninguém rodou `npm install`, o pareamento nem uma
-  transcrição real ainda.
-- **Validado em 2026-09-14 (PC de casa):** `npm install` (91 pacotes, Node 24) e as dependências
-  carregam; o listener conecta nos servidores do WhatsApp e gera o QR; `faster-whisper` 1.2.1
-  instalado (CUDA visível); `transcrever.py` roda com a fila vazia.
-- **Fix (o que falta):** parear via QR, confirmar captura de um áudio e de um texto de teste na
-  conversa dedicada, transcrever um áudio real e validar a skill `processar-entrevistas` ponta a
-  ponta com um item real.
+- **Why:** escrito numa sessão em container efêmero na nuvem, sem WhatsApp real nem máquina
+  Windows; hoje o listener só roda enquanto há um terminal aberto.
+- **Validado em 2026-09-14 (PC de casa):** `npm install` (Node 24); pareamento por QR; grupo
+  privado dedicado configurado em `WHATSAPP_CHAT_JID` (`.env`, fora do git); um áudio e um texto
+  enviados pela própria conta capturados em `_inbox/` (correção `fromMe`, commit 5486fa7);
+  `transcrever.py` com o modelo medium em CPU transcreveu o áudio corretamente e moveu os dois
+  itens para `_pendente-curadoria/`. A primeira mensagem no grupo logo após parear falhou na
+  descriptografia (`PreKeyError`) — as seguintes passaram; se acontecer, é só reenviar.
+- **Fix (o que falta):** deixar o listener sempre ligado (pm2 ou Agendador de Tarefas — ver o
+  README do listener) e rodar a skill `processar-entrevistas` com a primeira entrevista real.
 
 ### Média
 
