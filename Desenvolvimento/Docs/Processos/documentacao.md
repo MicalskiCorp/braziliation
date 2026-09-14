@@ -82,7 +82,7 @@ Traduz o que o Criativo aprovou em documentação técnica navegável — featur
 1. Próximo número = maior ADR + 1.
 2. Confirmar contexto, decisão, consequências e se substitui algum ADR.
 3. Escrever antes da linha final do arquivo; marcar o substituído como `Superseded por ADR-NNN`.
-4. Atualizar `CLAUDE.md`, `.claude/rules/` e `.github/instructions/` se repetem o tema.
+4. Atualizar `CLAUDE.md` e `.claude/rules/` se repetem o tema.
 5. Rodar `dotnet test`.
 
 - **Gate:** ADR substituído sem substituto quebra o teste

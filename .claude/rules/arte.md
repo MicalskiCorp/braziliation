@@ -8,7 +8,7 @@ paths:
 
 # Direção de arte — Braziliation
 
-Guia canônico: `Design/GuiasDeArte/style-bible.md`. Pipeline: `pipeline-sprites-programaticos.md`
+Guia canônico: `Design/GuiasDeArte/style-bible.md` · direção de arte e áudio: `direcao-de-arte.md`. Pipeline: `pipeline-sprites-programaticos.md`
 (programático) e `pipeline-ia-sprites.md` (difusão/concept).
 
 ## Restrições técnicas (ADR-004)

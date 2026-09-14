@@ -1,7 +1,6 @@
----
-description: "Direção de arte do Braziliation: pixel art dieselpunk, paleta restrita, resolução 640x360 32 PPU (Blasphemous-like, ADR-004), direção de áudio e referências visuais. Use quando propor ou revisar assets, sprites, tiles, animações ou descrições de arte."
----
-# Art Direction – Braziliation
+# Direção de Arte e Áudio — Braziliation
+
+> Pixel art dieselpunk, paleta restrita, resolução 640×360 @ 32 PPU (Blasphemous-like, ADR-004), direção de áudio e referências. Movido de `.github/instructions/art-direction.instructions.md` (ADR-008). Detalhe visual: [`style-bible.md`](style-bible.md); regras que o Claude Code carrega nas pastas de arte: `.claude/rules/arte.md`.
 
 ## Visual style
 
@@ -33,12 +32,12 @@ description: "Direção de arte do Braziliation: pixel art dieselpunk, paleta re
 - Ao propor assets ou descrições, mantenha dentro de **pixel art** e **dieselpunk**.
 - Novos personagens ou cenários devem se encaixar em `Design/Criativo/` (cidades, lendas, personagens) e no mundo estabelecido.
 - Para detalhes de implementação (import settings, atlases), alinhe com `Desenvolvimento/Docs/Architecture/` e as configurações do projeto Unity.
-- Para sprites e assets gerados com IA, siga `Design/GuiasDeArte/pipeline-ia-sprites.md`, `Design/GuiasDeArte/style-bible.md`, `Design/GuiasDeArte/palette-guide.md` e `Design/GuiasDeArte/sprite-scale-guide.md`.
-- Para sprites gerados por código/agente (props, tiles, ícones), siga `Design/GuiasDeArte/pipeline-sprites-programaticos.md` e use as ferramentas de `Design/ArteFonte/Ferramentas/`.
+- Para concept art e sprites por difusão, siga `pipeline-ia-sprites.md` (skill `concept-art`), `style-bible.md`, `palette-guide.md` e `sprite-scale-guide.md`.
+- Para sprites gerados por código/agente (props, tiles, ícones), siga `pipeline-sprites-programaticos.md` (skill `sprite-pipeline`) e use as ferramentas de `Design/ArteFonte/Ferramentas/`.
 
 ## Prompt template para geração de arte
 
-Ao gerar prompts para ferramentas de arte (Midjourney, Stable Diffusion etc.), inclua:
+Ao gerar prompts para ferramentas de arte (ComfyUI, Stable Diffusion etc.), inclua:
 - Paleta restrita da região (`Design/ArteConceitual/Paletas/{regiao}.json`; até ~32 cores por sprite — ADR-004)
 - Leitura em 640×360 @ 32 PPU (tile 32×32, player ~64 px de altura)
 - Pose e contexto

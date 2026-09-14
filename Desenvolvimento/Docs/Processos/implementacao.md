@@ -4,7 +4,7 @@
 
 Agentes **@GameplayEngineer · @UnityDeveloper · @SystemsDeveloper · @TestEngineer · @QAEngineer** · Código **Assets/Scripts/ · src/Braziliation.Game.Core/** · Testes **Tests/Braziliation.Game.Tests/**
 
-Lógica testável vive em C# puro (`src/`), sem Unity; o Unity só adapta. Scripts vão para a pasta do domínio (ADR-005: Core, Gameplay, Build, Crafting, Enemies, UI), todo input passa por `GameInput` (ADR-006) e UI nunca contém regra de jogo. A **definição de pronto** de qualquer código — teste primeiro no core, `unity-validar`, `.meta`, ficha de sistema, dívida e TODO registrados — é regra por caminho em `.claude/rules/csharp.md` (e no espelho do Copilot), aplicada a qualquer agente que toque `.cs`.
+Lógica testável vive em C# puro (`src/`), sem Unity; o Unity só adapta. Scripts vão para a pasta do domínio (ADR-005: Core, Gameplay, Build, Crafting, Enemies, UI), todo input passa por `GameInput` (ADR-006) e UI nunca contém regra de jogo. A **definição de pronto** de qualquer código — teste primeiro no core, `unity-validar`, `.meta`, ficha de sistema, dívida e TODO registrados — é regra por caminho em `.claude/rules/csharp.md`, aplicada a qualquer agente que toque `.cs`.
 
 ## I1 — Direção técnica e roteamento
 

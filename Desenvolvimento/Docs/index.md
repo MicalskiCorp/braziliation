@@ -34,4 +34,4 @@
 ---
 
 > Nova feature: `@GameArchitect Nova feature: {Nome}` · Novo sistema: `@GameArchitect Novo sistema: {Nome}`
-> Calibrar a sessão: no Claude Code o hook `SessionStart` já injeta a foto do projeto; no Copilot use o prompt `/project-context`.
+> Calibrar a sessão: o hook `SessionStart` do Claude Code já injeta a foto do projeto.

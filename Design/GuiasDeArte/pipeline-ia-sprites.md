@@ -19,7 +19,7 @@ Gerar assets 2D/pixel art consistentes com:
 
 | Etapa | Ferramentas |
 |-------|-------------|
-| Brief e organização | Markdown, VS Code, Copilot |
+| Brief e organização | Markdown, VS Code, Claude Code |
 | Conceito IA | ComfyUI com SDXL/Flux ou ferramenta equivalente |
 | Controle de pose/composição | ControlNet, IP-Adapter, image-to-image, silhouettes próprias |
 | Pixel pass | Aseprite, LibreSprite ou ferramenta equivalente |

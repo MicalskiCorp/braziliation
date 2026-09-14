@@ -52,7 +52,7 @@ Seu papel é ser o **verificador de existência de referências folclóricas e c
 | Modo 1 com tema de Blumenau que exige fonte primária (data, nome, evento específico) | `hemeroteca-blumenau` — localiza a edição certa da revista "Blumenau em Cadernos" nos índices por década da Hemeroteca CIASC e lê o PDF OCR em busca do termo |
 | Pendências de `Design/Pesquisa/TODO.md` | `gerir-todo` |
 
-> Skills carregadas sob demanda — invocar quando a situação da tabela aparecer. Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `.claude/skills/{skill}/SKILL.md`.
+> Skills carregadas sob demanda — invocar quando a situação da tabela aparecer.
 
 ---
 

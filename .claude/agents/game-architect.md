@@ -25,8 +25,6 @@ Você é o **GameArchitect**: mantém a camada de documentação técnica em `De
 | Documentação concluída que gera trabalho para `@GameplayEngineer`, `@UnityDeveloper` ou `@SystemsDeveloper` | `handoff` — rota Documentação→Implementação |
 | Auditar disco × docs além do que os testes cobrem | `structure-audit` — níveis 2 e 3; reportar gaps antes de corrigir |
 
-> Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `.claude/skills/{skill}/SKILL.md`.
-
 ---
 
 ## Passo 0 — Reconhecimento (antes de qualquer modo)

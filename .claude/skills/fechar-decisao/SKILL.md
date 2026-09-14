@@ -11,7 +11,7 @@ As camadas criativas têm ferramentas para **gerar** ideias (brainstorm, cidades
 
 1. **Escolher a pendência.** Se o usuário não disser qual, listar as de tipo Design com prioridade Alta em `Desenvolvimento/Docs/TODO.md` e `Design/Criativo/TODO.md` e sugerir começar pela que desbloqueia mais outras. A premissa (`Design/Criativo/Historia/premissa.md`) vem antes de todas.
 2. **Juntar o contexto que restringe a decisão** — ler só o necessário:
-   - lore e tom: `Design/Criativo/Historia/premissa.md`, a cidade envolvida em `Design/Criativo/Estados/`, `.github/instructions/game-vision.instructions.md`;
+   - lore e tom: `Design/Criativo/Historia/premissa.md`, a cidade envolvida em `Design/Criativo/Estados/`, `Desenvolvimento/Docs/GDD/visao.md`;
    - sistemas que já existem e aceitam a decisão como dado: `Docs/Mechanics/` (Crafting, Build, InimigosIA) e o código em `src/Braziliation.Game.Core/`;
    - assets já prontos que tornam uma opção mais barata (ex.: o Autômato Abandonado já tem sprite e perfil de IA).
 3. **Escrever o registro** em `Desenvolvimento/Docs/GDD/Decisoes/DDR-{NNN}-{slug}.md` (numeração sequencial; criar a pasta e o `index.md` na primeira vez), com:

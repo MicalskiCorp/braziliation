@@ -1,6 +1,6 @@
 ---
 name: structure-audit
-description: Audita a estrutura do Braziliation em todos os níveis — disco vs. docs (AssetsStructure, GuiasDeArte, índices, AGENTS.md vs. agentes reais nas 2 camadas/2 formatos) — e reporta gaps com plano de correção. Use quando o usuário pedir para auditar/validar estrutura, verificar padrão de pastas ou sincronizar documentação estrutural.
+description: Audita a estrutura do Braziliation em todos os níveis — disco vs. docs (AssetsStructure, GuiasDeArte, índices, AGENTS.md vs. agentes reais nas 2 camadas) — e reporta gaps com plano de correção. Use quando o usuário pedir para auditar/validar estrutura, verificar padrão de pastas ou sincronizar documentação estrutural.
 context: fork
 agent: agent-architect
 ---
@@ -23,10 +23,8 @@ Valida que o estado real do disco corresponde ao estado documentado. Não corrig
 - *Já são teste:* links relativos válidos, roteadores completos em `Docs/` e `Design/`, todo `.cs` numa ficha de sistema, feature no índice e no backlog. Aqui fica só o que exige julgamento: o conteúdo de uma ficha ainda descreve o código?
 
 ### 4. Ecossistema de agentes
-- Tabela do `AGENTS.md` vs. arquivos reais em `.github/agents/` E `.claude/agents/` (2ª camada, 2 formatos). A lista e a paridade de corpo já são checadas pelo `AgentParityTests`.
-- Wrappers da 1ª camada na raiz (`.github/agents/` e `.claude/agents/`) apontando para agentes de referência existentes.
-- Paridade Copilot↔Claude: mesmo agente presente nos dois formatos, corpo equivalente.
-  > **Cuidado com falso positivo:** os `.agent.md` Copilot mantêm BOM UTF-8 + CRLF de propósito (não tocar); os `.md` Claude não têm BOM e usam LF. Um `diff` bruto entre os dois mostra o arquivo inteiro como diferente por causa disso — sempre normalizar (remover BOM, `\r\n`→`\n`) antes de comparar corpo, senão gera um gap falso.
+- Cada agente de `.claude/agents/` na tabela do `AGENTS.md`, com `name` = arquivo e `model:` — já é teste (`AgentDefinitionTests`).
+- Wrappers da 1ª camada na raiz do workspace (`.claude/agents/`, fora do repositório) apontando para agentes existentes.
 
 ### 5. Skills
 - Toda skill em `.claude/skills/` referencia docs canônicos que existem e aparece no catálogo de `Desenvolvimento/Docs/Tech/processos.md` (checado pelo `DocsConsistencyTests`).

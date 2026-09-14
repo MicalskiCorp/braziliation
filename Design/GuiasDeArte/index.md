@@ -7,6 +7,7 @@ Hub dos padrões visuais usados para manter consistência entre arte humana, art
 | Guia | Uso |
 |------|-----|
 | [`style-bible.md`](style-bible.md) | Bíblia visual: pilares, formas, materiais, leitura e acabamento |
+| [`direcao-de-arte.md`](direcao-de-arte.md) | Direção de arte e de áudio: estilo, restrições técnicas (ADR-004), música, SFX e idioma |
 | [`sprite-scale-guide.md`](sprite-scale-guide.md) | Escala, tamanhos de sprite, tile grid e PPU |
 | [`palette-guide.md`](palette-guide.md) | Paletas, limites de cor e contraste por região |
 | [`animation-guide.md`](animation-guide.md) | Regras de animação, frames, timing e spritesheets |

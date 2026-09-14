@@ -36,12 +36,12 @@ Fases em [`Docs/Roadmap/roadmap.md`](Docs/Roadmap/roadmap.md); pendências vivas
 
 ## 🤖 Desenvolvimento assistido por IA
 
-O repositório funciona com **Claude Code** e **VS Code Copilot**. Os 11 agentes têm o mesmo corpo nos dois formatos: `.claude/agents/` (Claude Code) e `.github/agents/` (Copilot).
+O projeto usa **Claude Code** como único harness de agentes (ADR-008): agentes, skills, hooks e regras vivem em `.claude/`.
 
 - **Agentes e fluxo entre camadas:** [AGENTS.md](../AGENTS.md) — a lista de agentes vive só lá.
 - **Skills, travas automáticas e processos:** [Docs/Tech/processos.md](Docs/Tech/processos.md).
-- **Copilot:** instruções em `.github/instructions/` e prompts em `.github/prompts/` (`/project-context` calibra a sessão).
-- **Claude Code:** o hook `SessionStart` injeta a foto do projeto; regras por caminho em `.claude/rules/`.
+- **Manual de processos por camada:** [Docs/Processos/index.md](Docs/Processos/index.md).
+- O hook `SessionStart` injeta a foto do projeto; regras por caminho em `.claude/rules/`.
 - **Atualizar docs:** decisão de arquitetura → `Docs/Architecture/architecture_decisions.md`; dívida técnica → `Docs/Tech/tech_debt.md`.
 
 > 🎨 **Camada criativa:** `Design/Criativo/` na raiz do repo — gerida por `@GameCreative`.

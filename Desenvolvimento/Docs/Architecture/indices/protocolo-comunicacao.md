@@ -27,4 +27,4 @@ Nada disto depende de lembrar: o `DocsConsistencyTests` (roda no `dotnet test`, 
 
 ## Ponto de Contato
 
-O `@GameArchitect` mantém fichas e features sincronizadas. Definição do agente: `.github/agents/GameArchitect.agent.md` (Copilot) e `.claude/agents/game-architect.md` (Claude Code).
+O `@GameArchitect` mantém fichas e features sincronizadas. Definição do agente: `.claude/agents/game-architect.md`.

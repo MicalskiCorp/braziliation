@@ -123,4 +123,27 @@ Formato de cada entrada (os rótulos ficam em inglês — o `DocsConsistencyTest
 
 ---
 
+## ADR-008: Claude Code é o único harness de agentes
+
+- **Date:** 2026-09-13
+- **Status:** Accepted
+- **Context:** O projeto nasceu no VS Code Copilot e ganhou o Claude Code depois; os 11 agentes
+  existiam nos dois formatos. O Copilot deixou de ser usado, mas o espelho continuava custando
+  um teste de paridade, um script e um hook de sincronização, instruções duplicadas e ~20
+  documentos explicando "os dois formatos". Conteúdo que o Claude usava (visão do jogo,
+  direção de arte) morava na pasta de configuração do Copilot. Havia ainda regras do Cursor
+  esquecidas em `Desenvolvimento/.cursor/`.
+- **Decision:** Claude Code é o único harness. Saem `.github/agents/`, `.github/prompts/`,
+  `.github/instructions/` e `Desenvolvimento/.cursor/`. A visão do jogo vai para
+  `Desenvolvimento/Docs/GDD/visao.md`; a direção de arte e áudio, para
+  `Design/GuiasDeArte/direcao-de-arte.md`. A `.github/` fica só com o que a plataforma
+  GitHub usa: `workflows/`, `ISSUE_TEMPLATE/`, `PULL_REQUEST_TEMPLATE.md`.
+- **Consequences:** O Copilot deixa de funcionar com o projeto (os arquivos seguem no
+  histórico do git). `AgentParityTests`, `sync_bodies.py` e o hook `sync_agent_bodies.py`
+  saem; o `AgentDefinitionTests` cobra nome = arquivo, `model:`, registro no `AGENTS.md` e
+  que a `.github/` não volte a ter agentes. ADRs anteriores que citam `.github/instructions/`
+  ficam como registro histórico.
+
+---
+
 *(Novos ADRs entram acima desta linha. Entradas curtas, com link para `Docs/Architecture/` ou para o código quando ajudar.)*

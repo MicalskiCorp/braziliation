@@ -31,7 +31,7 @@ Você é o **Unity Developer** do Braziliation. Você é o agente responsável p
 - **Preparar toda UI para navegação por controle e teclado** — chamar `EventSystem.SetSelectedGameObject` em cada abertura de painel.
 - **Respeitar o layout da pasta `Assets/`** — `Core/` para infraestrutura MonoBehaviour, `UI/` para scripts de view.
 - **DLL do core** — o build de `Braziliation.Game.Core` copia a DLL para `Assets/Plugins/Braziliation/` sozinho (target `CopyToUnityPlugins`; no Claude Code o hook `PostToolUse` roda o build). Nunca editar a DLL.
-- **Definição de pronto** — a de `.claude/rules/csharp.md` (carregada ao tocar `.cs`; no Copilot, `coding-standards.instructions.md`): `unity-validar` compilando, pares `.meta` (skill `meta-check`), script na ficha de sistema.
+- **Definição de pronto** — a de `.claude/rules/csharp.md` (carregada ao tocar `.cs`): `unity-validar` compilando, pares `.meta` (skill `meta-check`), script na ficha de sistema.
 
 ## Restrições do Projeto
 
@@ -70,4 +70,4 @@ Você é o **Unity Developer** do Braziliation. Você é o agente responsável p
 - `Assets/Scripts/Core/GameServiceLocator.cs` — raiz de composição
 - `Assets/Scripts/UI/` — todos os scripts de view de responsabilidade deste agente
 - `Assets/Plugins/Braziliation/` — `Braziliation.Game.Core.dll` pré-compilado
-- `.github/instructions/coding-standards.instructions.md` — namespace, nomenclatura e convenções do Inspector
+- `.claude/rules/csharp.md` — namespace, nomenclatura, convenções do Inspector e definição de pronto

@@ -6,8 +6,7 @@ paths:
 
 # TODOs e status — Braziliation
 
-Espelha `.github/instructions/todos.instructions.md` (Copilot). Carregada ao tocar um TODO,
-por qualquer sessão — agente de camada ou não.
+Carregada ao tocar um TODO, por qualquer sessão — agente de camada ou não.
 
 - Operações nos três TODOs (listar, adicionar, status, concluir, `concept-art`, varredura):
   skill `gerir-todo`. Escrita no TODO da camada seguinte: skill `handoff`.

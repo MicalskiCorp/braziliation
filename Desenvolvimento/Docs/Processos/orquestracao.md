@@ -41,11 +41,11 @@ Não produz conteúdo de nenhuma camada: abre sessões, distribui trabalho, audi
 1. Nível 1 — `Assets/` × `AssetsStructure.md` e sprites sem registro em `assets.md`.
 2. Nível 2 — Design: pastas de `IA/`, guias listados no índice, paletas com status.
 3. Nível 3 — Documentação: arquivos listados nos índices, links válidos.
-4. Nível 4 — Agentes: tabela do `AGENTS.md` × arquivos reais, wrappers da 1ª camada, paridade.
+4. Nível 4 — Agentes: wrappers da 1ª camada (o registro no `AGENTS.md` já é teste).
 5. Nível 5 — Skills apontam para docs que existem e estão no catálogo.
 6. Relatório com gaps por nível; corrigir só após aprovação.
 
-- **Já automático:** Paridade, catálogo, links e índice de scripts são testes
+- **Já automático:** Registro de agentes, catálogo, links e índice de scripts são testes
 
 ## O4 — Criar ou atualizar agente
 
@@ -54,11 +54,11 @@ Não produz conteúdo de nenhuma camada: abre sessões, distribui trabalho, audi
 1. Inventário pela tabela do `AGENTS.md` e as `description:`; ≥50% de sobreposição → estender o existente.
 2. Definir limites: o que possui, o que delega.
 3. Propor antes de criar; confirmar em sobreposição alta.
-4. Escrever o corpo em `.claude/agents/{nome}.md`; propagar com `py .claude/skills/novo-agente/sync_bodies.py`.
-5. Frontmatter de cada formato à mão (`model:` obrigatório no Claude).
-6. Registrar no `AgentParityTests`, no `sync_bodies.py` e no `AGENTS.md`; wrappers da 1ª camada fora do repositório.
+4. Escrever `.claude/agents/{nome}.md`; em `skills:` só a skill de toda invocação.
+5. `name` igual ao arquivo e `model:` obrigatório.
+6. Registrar no `AGENTS.md` (o `AgentDefinitionTests` cobra); wrapper da 1ª camada fora do repositório.
 
-- **Gate:** Corpo idêntico nos dois formatos · prompt até 5 mil tokens
+- **Gate:** Nome = arquivo, `model:` e registro no `AGENTS.md` · prompt até 5 mil tokens
 
 ## O5 — Travas automáticas
 
@@ -66,8 +66,8 @@ Não produz conteúdo de nenhuma camada: abre sessões, distribui trabalho, audi
 
 1. Início de sessão: `session_snapshot.py` injeta git, pendências Alta dos 3 TODOs e o último `unity-validar`.
 2. Antes de escrever: `block_generated_dirs.py` bloqueia `Library/`, `Temp/`, `obj/`, `bin/`, o histórico congelado `TODO-arquivo.md` e a DLL do core.
-3. Depois de escrever: `build_game_core.py` recompila o core; `sync_agent_bodies.py` copia o corpo do agente editado para o formato Copilot.
-4. Antes do commit: `dotnet test` com as guardas (`DocsConsistency`, `TokenBudget`, `ConventionGuard`, `AgentParity`, `GitIgnoreGuard`, `UnityAssetConsistency`, `RepositoryLayout`), meta-check, paletas e o gate do Unity (script em stage exige validação OK posterior à edição).
+3. Depois de escrever: `build_game_core.py` recompila o core.
+4. Antes do commit: `dotnet test` com as guardas (`DocsConsistency`, `TokenBudget`, `ConventionGuard`, `AgentDefinition`, `GitIgnoreGuard`, `UnityAssetConsistency`, `RepositoryLayout`), meta-check, paletas e o gate do Unity (script em stage exige validação OK posterior à edição).
 5. No push: CI repete tudo.
 
 - **Princípio:** Regra que só está escrita envelhece; regra testada, não

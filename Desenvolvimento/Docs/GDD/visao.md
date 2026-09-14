@@ -1,7 +1,6 @@
----
-description: "Visão geral do Braziliation: pitch, pilares de design, experiência-alvo e escopo. Use quando precisar de contexto sobre o jogo, tom, objetivos de design ou o que está dentro e fora do escopo."
----
-# Game Vision – Braziliation
+# Visão do Jogo — Braziliation
+
+> Pitch, pilares, experiência-alvo e escopo. Movido de `.github/instructions/game-vision.instructions.md` (ADR-008). O pitch definitivo e o loop principal saem do DDR da premissa (skill `fechar-decisao`) e atualizam este arquivo.
 
 ## One-line pitch
 
@@ -32,4 +31,4 @@ description: "Visão geral do Braziliation: pitch, pilares de design, experiênc
 - `Desenvolvimento/Docs/GDD/` — features e objetivos detalhados.
 - `Design/Criativo/` — tom e cenário (camada criativa na raiz do repo).
 - `Desenvolvimento/Docs/Mechanics/` — regras e sistemas concretos.
-- `.github/instructions/art-direction.instructions.md` — direção visual e de áudio.
+- [`direcao-de-arte.md`](../../../Design/GuiasDeArte/direcao-de-arte.md) — direção visual e de áudio.

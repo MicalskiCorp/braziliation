@@ -96,9 +96,8 @@ Format:
 
 ### Baixa
 
-- *(nenhum item — o dos 11 agentes duplicados em 2 formatos foi pago em 2026-09-13: o corpo se
-  edita no formato Claude e `.claude/skills/novo-agente/sync_bodies.py` propaga ao Copilot; o
-  `AgentParityTests` falha na divergência.)*
+- *(nenhum item — o dos 11 agentes duplicados em 2 formatos deixou de existir em 2026-09-13:
+  o formato Copilot foi removido, ADR-008.)*
 
 ---
 

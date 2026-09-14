@@ -64,4 +64,4 @@ Após aprovar, manter em `{categoria}/{asset-slug}/` **apenas**: (1) o arquivo a
 ---
 
 > Estilo do projeto: Pixel Art de alta densidade · Dieselpunk pós-apocalíptico
-> Ver direção de arte completa em `.github/instructions/art-direction.instructions.md`
+> Ver direção de arte completa em [`../GuiasDeArte/direcao-de-arte.md`](../GuiasDeArte/direcao-de-arte.md)

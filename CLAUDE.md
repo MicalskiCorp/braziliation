@@ -2,9 +2,9 @@
 
 # Claude Code — Braziliation
 
-O arquivo importado acima (`AGENTS.md`) é o mapa de agentes, camadas e handoffs,
-compartilhado com o VS Code Copilot. Skills, travas e processos detalhados ficam em
-`Desenvolvimento/Docs/Tech/processos.md` — ler sob demanda. O que segue é específico do Claude Code.
+O arquivo importado acima (`AGENTS.md`) é o mapa de agentes, camadas e handoffs. Skills,
+travas e processos detalhados ficam em `Desenvolvimento/Docs/Tech/processos.md` — ler sob
+demanda. Claude Code é o único harness de agentes do projeto (ADR-008).
 
 > Por que este arquivo existe: o Claude Code lê `CLAUDE.md`, **não** `AGENTS.md`.
 > Sem este import, todo o mapa de processo do projeto ficava invisível nas sessões.

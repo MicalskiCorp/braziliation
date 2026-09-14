@@ -56,5 +56,4 @@ Testes são escritos **antes** da implementação — o contrato do teste define
 
 - `src/Braziliation.Game.Core/` — código de produção sob teste
 - `Tests/Braziliation.Game.Tests/` — projeto de testes (xUnit)
-- `.claude/rules/csharp.md` — definição de pronto do código (no Copilot, `coding-standards.instructions.md`)
-- `.github/instructions/coding-standards.instructions.md` — convenções de nomenclatura e namespace do projeto
+- `.claude/rules/csharp.md` — convenções de nomenclatura, namespace e definição de pronto do código

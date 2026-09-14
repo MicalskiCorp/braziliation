@@ -7,9 +7,6 @@ paths:
 
 # Padrões de código C# — Braziliation
 
-Espelha `.github/instructions/coding-standards.instructions.md` (Copilot). Ao mudar um,
-mude o outro.
-
 ## Contexto
 
 C# · Unity 6 (6000.2) URP 2D · New Input System · alvo PC (Steam) · 640×360 @ 32 PPU.

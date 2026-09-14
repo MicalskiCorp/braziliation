@@ -11,11 +11,11 @@ O Claude Code só descobre `.claude/agents/` e `.claude/skills/` relativos ao di
 | Raiz do workspace (pasta pai do repositório) | 1ª camada (personas: Jarvis, Computador, wrappers finos) | Só as personas — elas leem o agente de referência por caminho de arquivo |
 | `Braziliation/` | 2ª camada (agentes funcionais + skills) | Tudo — **use este cwd para trabalho real** |
 
-A 1ª camada vive **fora do repositório, por decisão do usuário (2026-09-13)**. Hoje há wrappers para 9 dos 11 agentes; `@Historiador` e `@AgentArchitect` só existem na 2ª camada. No Copilot (VS Code), `@Agente` funciona de qualquer cwd dentro do repositório.
+A 1ª camada vive **fora do repositório, por decisão do usuário (2026-09-13)**. Hoje há wrappers para 9 dos 11 agentes; `@Historiador` e `@AgentArchitect` só existem na 2ª camada.
 
 ## 2. Skills — catálogo por situação
 
-As skills em `.claude/skills/` só existem no Claude Code; no Copilot o agente lê o `SKILL.md` por caminho. Cada agente dono tem `Skill` em `tools:` e uma tabela "Situação → skill" no corpo. **Pré-carregamento (`skills:` no frontmatter) só para a skill que o agente usa em toda invocação** — `gerir-todo` no GameArchitect e no GameCreative, `sprite-pipeline` no SpriteArtist, `unity-validar` no UnityDeveloper e no GameplayEngineer, `validar-todos` e `structure-audit` no AgentArchitect (são forks dele). As demais carregam sob demanda: pré-carregar skill situacional põe o texto dela em toda execução do agente. O `DocsConsistencyTests` falha se uma skill não aparecer nesta tabela.
+As skills vivem em `.claude/skills/`. Cada agente dono tem `Skill` em `tools:` e uma tabela "Situação → skill" no corpo. **Pré-carregamento (`skills:` no frontmatter) só para a skill que o agente usa em toda invocação** — `gerir-todo` no GameArchitect e no GameCreative, `sprite-pipeline` no SpriteArtist, `unity-validar` no UnityDeveloper e no GameplayEngineer, `validar-todos` e `structure-audit` no AgentArchitect (são forks dele). As demais carregam sob demanda: pré-carregar skill situacional põe o texto dela em toda execução do agente. O `DocsConsistencyTests` falha se uma skill não aparecer nesta tabela.
 
 | Skill | Agente(s) | Quando invocar |
 |-------|-----------|-----------------|
@@ -25,7 +25,7 @@ As skills em `.claude/skills/` só existem no Claude Code; no Copilot o agente l
 | [`novo-asset`](../../../.claude/skills/novo-asset/SKILL.md) | `@SpriteArtist` | Asset novo sem brief/context pack |
 | [`nova-cidade`](../../../.claude/skills/nova-cidade/SKILL.md) | `@GameCreative` (Modo 6) · `@UnityDeveloper` (passo 5) | Estrutura de cidade ou estado novo; o passo das pastas em `Assets/Art/` vira pendência para `@UnityDeveloper` |
 | [`handoff`](../../../.claude/skills/handoff/SKILL.md) | `@Historiador`, `@GameCreative`, `@GameArchitect` | Escrever no TODO da camada seguinte — inclui o briefing da rota Pesquisa→Criativo (processar, brainstorm, revisão) |
-| [`novo-agente`](../../../.claude/skills/novo-agente/SKILL.md) | `@AgentArchitect` (Papel 2) | Criar, refatorar ou sincronizar agente (2 camadas × 2 formatos, `sync_bodies.py`) |
+| [`novo-agente`](../../../.claude/skills/novo-agente/SKILL.md) | `@AgentArchitect` (Papel 2) | Criar ou refatorar agente (arquivo em `.claude/agents/`, wrapper da 1ª camada, registro no `AGENTS.md`) |
 | [`validar-todos`](../../../.claude/skills/validar-todos/SKILL.md) | `@AgentArchitect` (Papel 3) | Auditar TODOs concluídos, cobertura de testes e gaps de milestone |
 | [`structure-audit`](../../../.claude/skills/structure-audit/SKILL.md) | `@AgentArchitect` (nível 4) · `@GameArchitect` (níveis 2-3) | Auditar disco × docs; só reporta, não corrige sem aprovação |
 | [`hemeroteca-blumenau`](../../../.claude/skills/hemeroteca-blumenau/SKILL.md) | `@Historiador` | Fato, data ou nome de Blumenau em fonte primária ("Blumenau em Cadernos") |
@@ -58,7 +58,7 @@ Ambas reportam antes de corrigir.
 
 ## 5. Criação e atualização de agente
 
-`@AgentArchitect` (Papel 2) via skill `novo-agente`: inventário pela tabela do `AGENTS.md`, corpo escrito no formato Claude e propagado ao Copilot por `py .claude/skills/novo-agente/sync_bodies.py` (no Claude Code, automático pelo hook), par registrado no `AgentParityTests` e linha no `AGENTS.md`. Mudou um modo ou uma skill? Atualizar o arquivo da camada em `Desenvolvimento/Docs/Processos/`.
+`@AgentArchitect` (Papel 2) via skill `novo-agente`: inventário pela tabela do `AGENTS.md`, agente escrito em `.claude/agents/{nome}.md` e linha no `AGENTS.md` (o `AgentDefinitionTests` cobra). Mudou um modo ou uma skill? Atualizar o arquivo da camada em `Desenvolvimento/Docs/Processos/`.
 
 ## 6. Asset/sprite (5 etapas)
 
@@ -73,14 +73,14 @@ Skill `nova-cidade`: scaffolding em `Design/Criativo/`, paleta em `Design/ArteCo
 | Onde | O que roda | Pega |
 |------|------------|------|
 | Início de sessão (hook `SessionStart`) | `.claude/hooks/session_snapshot.py` | Injeta git, pendências Alta dos 3 TODOs e o último `unity-validar` |
-| Ao editar (`PreToolUse`/`PostToolUse`) | `block_generated_dirs.py`, `build_game_core.py`, `sync_agent_bodies.py` | Escrita em pasta gerada ou em arquivo congelado (`TODO-arquivo.md`, DLL do core); core que parou de compilar; corpo de agente copiado para o formato Copilot no ato |
+| Ao editar (`PreToolUse`/`PostToolUse`) | `block_generated_dirs.py`, `build_game_core.py` | Escrita em pasta gerada ou em arquivo congelado (`TODO-arquivo.md`, DLL do core); core que parou de compilar |
 | Antes do commit (`.githooks/pre-commit`) | `dotnet test`, meta-check, `check_art_palettes.py`, `unity-validar/scripts/check_state.py` | Testes e guardas, `.meta` faltando, cor fora da paleta, script Unity em stage sem validação OK posterior à edição. Ativar por clone: `git config core.hooksPath .githooks` |
 | No CI (`.github/workflows/ci.yml`) | os mesmos | O que escapou do pre-commit |
 | No CI Unity (`unity-ci.yml`, GameCI) | compilação + EditMode | Ativo quando os secrets existirem ([`unity-ci.md`](unity-ci.md)) |
 
-Guardas dentro do `dotnet test`: `GitIgnoreGuardTests`, `DocsConsistencyTests` (links, pastas documentadas, todo `.cs` numa ficha de sistema, roteadores completos, feature no índice e no backlog, ADR substituído, catálogo de skills), `TokenBudgetTests` (tetos de tamanho de prompt e doc), `ConventionGuardTests` (serviço com teste dedicado, paleta com status), `UnityAssetConsistencyTests`, `AgentParityTests` e `RepositoryLayoutTests`.
+Guardas dentro do `dotnet test`: `GitIgnoreGuardTests`, `DocsConsistencyTests` (links, pastas documentadas, todo `.cs` numa ficha de sistema, roteadores completos, feature no índice e no backlog, ADR substituído, catálogo de skills), `TokenBudgetTests` (tetos de tamanho de prompt e doc), `ConventionGuardTests` (serviço com teste dedicado, paleta com status), `UnityAssetConsistencyTests`, `AgentDefinitionTests` (nome = arquivo, `model:`, registro no `AGENTS.md`, `.github/` só com CI e templates) e `RepositoryLayoutTests`.
 
-Scripts que as skills chamam para a parte mecânica: `gerir-todo/todo.py` (listar, varredura), `validar-todos/todos_inline.py` (`// TODO` classificados), `novo-agente/sync_bodies.py`, `meta-check/check_meta_pairs.py`, `unity-validar/scripts/validar.py`.
+Scripts que as skills chamam para a parte mecânica: `gerir-todo/todo.py` (listar, varredura), `validar-todos/todos_inline.py` (`// TODO` classificados), `unity-validar/scripts/check_state.py` (gate do commit), `meta-check/check_meta_pairs.py`, `unity-validar/scripts/validar.py`.
 
 ## 9. Servidores MCP
 
@@ -90,10 +90,10 @@ Scripts que as skills chamam para a parte mecânica: `gerir-todo/todo.py` (lista
 
 | Arquivo | Conteúdo | Como é usado |
 |---------|----------|--------------|
-| `.github/instructions/game-vision.instructions.md` | Visão e tom do jogo | On-demand pelo Copilot |
-| `.github/instructions/coding-standards.instructions.md` · `.claude/rules/csharp.md` | Convenções C# (espelhados) | Auto-injetados em `*.cs` |
-| `.github/instructions/art-direction.instructions.md` · `.claude/rules/arte.md` | Direção de arte | Copilot on-demand · Claude só nas pastas de arte (`ArteConceitual`, `ArteFonte`, `GuiasDeArte`, `Assets/Art`) |
-| `.github/instructions/todos.instructions.md` · `.claude/rules/todos.md` | Regras de TODO e status (espelhados) | Auto-injetados em `**/TODO.md` e no `Roadmap/` |
+| [`Desenvolvimento/Docs/GDD/visao.md`](../GDD/visao.md) | Pitch, pilares e experiência-alvo | Lido pelos agentes e pela skill `fechar-decisao` |
+| `.claude/rules/csharp.md` | Convenções C# e definição de pronto | Carregada ao tocar `*.cs` |
+| `.claude/rules/arte.md` · [`direcao-de-arte.md`](../../../Design/GuiasDeArte/direcao-de-arte.md) | Direção de arte e áudio | Regra carregada nas pastas de arte (`ArteConceitual`, `ArteFonte`, `GuiasDeArte`, `Assets/Art`); guia sob demanda |
+| `.claude/rules/todos.md` | Regras de TODO e status | Carregada em `**/TODO.md` e no `Roadmap/` |
 | `Desenvolvimento/Docs/Architecture/architecture_decisions.md` | ADRs | Referenciado pelos agentes |
 | `Desenvolvimento/Docs/Tech/tech_debt.md` | Dívida técnica | Referenciado pelos agentes |
 
@@ -106,12 +106,12 @@ Critério aplicado na consolidação de 2026-09-13 (Historiador 7→4 modos, Gam
 | **Modo do agente** | O procedimento é o núcleo daquele agente e depende das barreiras e ferramentas dele | Pesquisar tema (Historiador), Nova feature (GameArchitect) |
 | **Um modo com parâmetro** | Vários gatilhos disparam o mesmo procedimento com saída diferente | "Pesquisar" e "Fontes sobre"; "Listar" e "Compilar estado" |
 | **Skill** | O procedimento é usado por mais de um agente, carrega script ou gate próprio, ou é longo e raro (carga sob demanda) | `gerir-todo`, `handoff`, `concept-art`, `hemeroteca-blumenau` |
-| **Regra por caminho** (`.claude/rules/` + `.github/instructions/`) | Vale sempre que alguém toca um tipo de arquivo, qualquer que seja o agente | Definição de pronto em `csharp.md`; regras de TODO em `todos.md` |
-| **Script** (tool chamada pela skill) | Parte determinística: parsear, contar, cruzar, copiar — o modelo só recebe o resultado | `todo.py` (varredura), `todos_inline.py`, `sync_bodies.py`, `validar.py` |
+| **Regra por caminho** (`.claude/rules/`) | Vale sempre que alguém toca um tipo de arquivo, qualquer que seja o agente | Definição de pronto em `csharp.md`; regras de TODO em `todos.md` |
+| **Script** (tool chamada pela skill) | Parte determinística: parsear, contar, cruzar, copiar — o modelo só recebe o resultado | `todo.py` (varredura), `todos_inline.py`, `check_state.py`, `validar.py` |
 | **Teste** (`dotnet test`) | Invariante verificável do repositório — vira falha de build, não item de auditoria | Roteador completo, feature no backlog, serviço com teste, paleta com status |
-| **Hook** | Tem de acontecer sozinho num evento (sessão, edição, commit) | Sincronizar agentes ao editar, bloquear arquivo congelado, gate do Unity no commit |
+| **Hook** | Tem de acontecer sozinho num evento (sessão, edição, commit) | Foto do projeto na sessão, bloquear arquivo congelado, gate do Unity no commit |
 | **Skill em fork** (`context: fork`) | Procedimento que só devolve relatório e leria muito texto — isola o contexto | `validar-todos`, `structure-audit`, `hemeroteca-blumenau` |
 
 Não roda em fork a skill que conversa com o usuário no meio (aprovação de concept art, DDR, handoff): o fork devolve um resultado e perde o diálogo.
 
-Não vira skill: gatilho que só roteia para um agente — o agente já é o ponto de entrada (`@agent-{nome}` no Claude Code, `@{Nome}` no Copilot), e cada skill a mais põe sua descrição em toda sessão.
+Não vira skill: gatilho que só roteia para um agente — o agente já é o ponto de entrada (`@agent-{nome}`), e cada skill a mais põe sua descrição em toda sessão.

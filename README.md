@@ -28,15 +28,12 @@ Braziliation/                   ← raiz do repositório
 │   ├── GuiasDeArte/            ← bíblia visual, paletas, escala e pipelines de sprite
 │   └── Models/                 ← templates de documentação criativa
 ├── .claude/                    ← Claude Code: 11 agentes, 15 skills, hooks, rules, settings
-├── .github/                    ← agentes e instruções do Copilot + CI
-│   ├── agents/                 ← 11 agentes (formato Copilot)
-│   ├── instructions/           ← instruções auto-injetadas pelo Copilot
-│   ├── prompts/                ← templates de prompt (/create-feature, etc.)
+├── .github/                    ← plataforma GitHub: CI e templates de issue/PR
 │   ├── workflows/              ← GitHub Actions (ci.yml, unity-ci.yml)
 │   ├── ISSUE_TEMPLATE/         ← templates de issue
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── .githooks/                  ← pre-commit versionado (testes, meta-check, paletas)
-├── AGENTS.md                   ← guia canônico de agentes, skills e processos
+├── AGENTS.md                   ← mapa de agentes, camadas e TODOs (importado pelo CLAUDE.md)
 ├── CLAUDE.md                   ← entrada do Claude Code (importa AGENTS.md)
 ├── .mcp.json                   ← servidores MCP do projeto (aseprite, unity)
 ├── .gitignore
@@ -72,7 +69,7 @@ code .
 | Unity | 6000.2+ (URP 2D) |
 | .NET SDK | 8.0 (para testes CI) |
 | Git LFS | 3.x |
-| VS Code | 1.90+ (com extensão GitHub Copilot) |
+| Claude Code | CLI ou extensão do VS Code |
 
 ---
 
@@ -95,9 +92,9 @@ git config core.hooksPath .githooks
 
 ---
 
-## 🤖 Desenvolvimento assistido por IA (Claude Code e VS Code Copilot)
+## 🤖 Desenvolvimento assistido por IA (Claude Code)
 
-O repositório funciona com **Claude Code** (`.claude/`: agentes, skills, hooks, regras) e **VS Code Copilot** (`.github/`: agentes, instructions, prompts). Os 11 agentes têm o mesmo corpo nos dois formatos.
+O projeto usa **Claude Code** como único harness de agentes ([ADR-008](Desenvolvimento/Docs/Architecture/architecture_decisions.md)): agentes, skills, hooks e regras vivem em `.claude/`.
 
 ### Agentes disponíveis
 
@@ -115,25 +112,14 @@ O repositório funciona com **Claude Code** (`.claude/`: agentes, skills, hooks,
 | `@SpriteArtist` | Sprites programáticos, ciclo de crítica visual |
 | `@AgentArchitect` | Orquestração, criação e auditoria de agentes |
 
-**Guia completo dos 11 agentes, skills e fluxos:** [AGENTS.md](AGENTS.md)
-
-### Prompts rápidos
-
-| Prompt | Descrição |
-|--------|-----------|
-| `/project-context` | Carrega todo o contexto do projeto na sessão |
-| `/create-feature` | Documenta e implementa uma nova feature |
-| `/design-enemy` | Cria estrutura de inimigo (stats, componentes, prefab) |
-| `/refactor-system` | Plano de refactor com ADR e tech debt |
-| `/review-code` | Revisão de código contra padrões e GDD |
+**Mapa de agentes, camadas e TODOs:** [AGENTS.md](AGENTS.md) · **skills, travas e MCPs:** [processos.md](Desenvolvimento/Docs/Tech/processos.md)
 
 ### Como usar
 
-1. **Acionar agente** — Digite `@NomeDoAgente` no chat do Copilot.
-2. **Usar template** — Digite `/` no chat e selecione o prompt.
-3. **Calibrar sessão** — Use `/project-context` para carregar o contexto completo.
-
-**Guia detalhado:** [AGENTS.md](AGENTS.md)
+1. **Abrir o Claude Code na raiz do repositório** — a descoberta de `.claude/agents/` e `.claude/skills/` depende do diretório aberto.
+2. **Acionar um agente** — pelo pedido em linguagem natural ou com `@agent-{nome}` (ex.: `@agent-historiador`).
+3. **Acionar uma skill** — `/{nome}` (ex.: `/fechar-decisao`, `/unity-validar`).
+4. **Contexto da sessão** — o hook `SessionStart` injeta a foto do projeto (git, pendências Alta dos TODOs, última validação Unity).
 
 ---
 

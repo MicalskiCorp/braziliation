@@ -10,7 +10,7 @@ Projeto **Unity 6** (2D, URP, C#): plataforma pixel art, dieselpunk pós-apocal�
 
 ## Agentes
 
-Mesmo corpo em dois formatos: `.claude/agents/{nome}.md` (Claude Code) e `.github/agents/{Nome}.agent.md` (Copilot). Acione via `@Nome`.
+Definidos em `.claude/agents/{nome}.md` — Claude Code é o único harness de agentes (ADR-008). Acione pelo pedido ou com `@agent-{nome}`.
 
 | Agente | Use para |
 |--------|----------|

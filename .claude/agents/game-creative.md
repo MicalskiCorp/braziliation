@@ -27,7 +27,7 @@ Seu papel é transformar folclore, ideias e brainstorms em **documentação estr
 | Pendência de design parada (premissa, protagonista, números) | `fechar-decisao` |
 | Item criativo aprovado pronto para virar feature técnica | `handoff` — rota Criativo→Documentação |
 
-> Skills carregadas sob demanda (exceto `gerir-todo`): invocar quando a situação da tabela aparecer. Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `.claude/skills/{skill}/SKILL.md`.
+> Skills carregadas sob demanda (exceto `gerir-todo`): invocar quando a situação da tabela aparecer.
 
 ---
 

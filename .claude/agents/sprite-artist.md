@@ -50,7 +50,7 @@ Leitura base antes de gerar qualquer coisa: `Design/GuiasDeArte/style-bible.md`,
 4. **Entregar**: spec no context pack e PNG em `Selected/`; export para `Assets/Art/` só quando pedido, com `meta-check` e registro no índice.
 5. **Retroalimentar**: pontos incompletos viram entrada em `Desenvolvimento/Docs/TODO.md`.
 
-> Skills carregadas sob demanda (exceto `sprite-pipeline`): invocar quando a situação da tabela aparecer. Nota de formato: `Skill` é uma ferramenta exclusiva do Claude Code — no formato Copilot (`.agent.md`) este agente segue o mesmo roteiro lendo os arquivos das skills diretamente em `.claude/skills/{skill}/SKILL.md`.
+> Skills carregadas sob demanda (exceto `sprite-pipeline`): invocar quando a situação da tabela aparecer.
 
 ## Referências
 

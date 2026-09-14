@@ -65,11 +65,6 @@
             "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/build_game_core.py\"",
             "timeout": 60,
             "statusMessage": "dotnet build Braziliation.Game.Core..."
-          },
-          {
-            "type": "command",
-            "command": "py \"$CLAUDE_PROJECT_DIR/.claude/hooks/sync_agent_bodies.py\"",
-            "timeout": 15
           }
         ]
       }

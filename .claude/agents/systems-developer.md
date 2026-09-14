@@ -50,4 +50,4 @@ Você é o **Systems Developer** do Braziliation. Você projeta e implementa **s
 
 - `src/Braziliation.Game.Core/` — todo o código de produção de responsabilidade deste agente
 - `Tests/Braziliation.Game.Tests/` — testes .NET (xUnit) para os sistemas deste agente
-- `.github/instructions/coding-standards.instructions.md` — convenções de namespace e nomenclatura
+- `.claude/rules/csharp.md` — convenções de namespace, nomenclatura e definição de pronto
