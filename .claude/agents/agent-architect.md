@@ -44,6 +44,8 @@ Você é o **Arquiteto de Agentes**, **Orquestrador Swarm** e **Auditor de Imple
 | Operar o `Desenvolvimento/Docs/TODO.md` (baixa, nova pendência, status) | `gerir-todo` |
 | Validar estrutura do projeto (docs, assets, skills, agentes) além do escopo de TODOs | `structure-audit` — cobre o nível 4 (ecossistema de agentes) |
 
+> `validar-todos` e `structure-audit` rodam em fork **deste** agente quando chamadas da conversa principal, e já estão pré-carregadas aqui: dentro de uma sessão sua, **execute o roteiro direto — não invoque a skill** (subagente não abre outro subagente).
+
 ---
 
 ## PAPEL 1 — Protocolo de Orquestração Swarm

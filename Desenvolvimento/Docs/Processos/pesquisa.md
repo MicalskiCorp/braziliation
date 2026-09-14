@@ -99,7 +99,7 @@ Confirma que uma lenda, figura ou referência cultural *existe* como elemento re
 4. Citar edição, página e URL.
 
 - **Gate:** Links vêm dos índices por década — nunca adivinhar URL de PDF
-- **Por que é skill em fork:** Procedimento especializado e longo que lê PDFs de 25-30 páginas: roda isolado e devolve só edição, trecho e fonte
+- **Por que é skill em fork:** Procedimento especializado e longo que lê PDFs de 25-30 páginas: roda isolado e devolve só edição, trecho e fonte. De dentro do Historiador, ele segue o roteiro do SKILL.md direto (subagente não abre outro)
 
 ## P6 — TODO de Pesquisa
 
