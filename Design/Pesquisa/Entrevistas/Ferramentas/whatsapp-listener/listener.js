@@ -20,6 +20,7 @@ const AUTH_DIR = process.env.AUTH_DIR || path.join(__dirname, 'auth');
 const INBOX_DIR = process.env.INBOX_DIR || path.join(__dirname, '..', '..', '_inbox');
 const TARGET_JID = (process.env.WHATSAPP_CHAT_JID || '').trim();
 const DISCOVERY_MODE = TARGET_JID.length === 0;
+const STARTED_AT = Date.now();
 
 const logger = pino({ level: process.env.LOG_LEVEL || 'warn' });
 
@@ -53,15 +54,17 @@ function writeMeta(dir, tipo, msg, sender) {
 }
 
 async function handleMessage(sock, msg) {
-  if (!msg.message || msg.key.fromMe) return;
+  if (!msg.message) return;
 
-  const sender = msg.pushName || msg.key.participant || msg.key.remoteJid;
+  const sender = msg.key.fromMe ? 'eu' : (msg.pushName || msg.key.participant || msg.key.remoteJid);
 
   if (DISCOVERY_MODE) {
     console.log(`[descoberta] JID=${msg.key.remoteJid}  de=${sender}`);
     return;
   }
 
+  // Na conversa dedicada vale também o que a própria conta envia — é o caso de uso
+  // principal (o usuário grava a entrevista e manda o áudio). Fora dela, nada é lido.
   if (msg.key.remoteJid !== TARGET_JID) return;
 
   const messageType = Object.keys(msg.message)[0];
@@ -122,9 +125,13 @@ async function start() {
     }
   });
 
+  // 'append' traz o que foi enviado por outro aparelho da própria conta; o corte de horário
+  // evita reprocessar o histórico que chega na sincronização ao conectar.
   sock.ev.on('messages.upsert', async ({ messages, type }) => {
-    if (type !== 'notify') return;
+    if (type !== 'notify' && type !== 'append') return;
     for (const msg of messages) {
+      const ts = Number(msg.messageTimestamp?.low ?? msg.messageTimestamp ?? 0);
+      if (ts && ts * 1000 < STARTED_AT - 60000) continue;
       await handleMessage(sock, msg);
     }
   });
