@@ -1,12 +1,12 @@
 # Manual de Processos do Braziliation
 
-> Os 44 processos do projeto, camada por camada: quem executa, como se aciona, o passo a passo, o que lê e escreve, e onde a entrega é travada. Cada arquivo aponta a fonte canônica (agente ou skill) — o manual resume, a fonte manda.
+> Os 45 processos do projeto, camada por camada: quem executa, como se aciona, o passo a passo, o que lê e escreve, e onde a entrega é travada. Cada arquivo aponta a fonte canônica (agente ou skill) — o manual resume, a fonte manda.
 
 ## Camadas
 
 | Camada | Área | Processos | Arquivo |
 |---|---|:-:|---|
-| Pesquisa | Design | 6 | [`pesquisa.md`](pesquisa.md) |
+| Pesquisa | Design | 7 | [`pesquisa.md`](pesquisa.md) |
 | Criativo | Design | 10 | [`criativo.md`](criativo.md) |
 | Arte | Design (lateral) | 7 | [`arte.md`](arte.md) |
 | Documentação | Desenvolvimento | 7 | [`documentacao.md`](documentacao.md) |

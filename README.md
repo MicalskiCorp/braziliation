@@ -27,7 +27,7 @@ Braziliation/                   ← raiz do repositório
 │   ├── ArteFonte/              ← ferramentas de arte, context packs e saídas de IA
 │   ├── GuiasDeArte/            ← bíblia visual, paletas, escala e pipelines de sprite
 │   └── Models/                 ← templates de documentação criativa
-├── .claude/                    ← Claude Code: 11 agentes, 15 skills, hooks, rules, settings
+├── .claude/                    ← Claude Code: 11 agentes, 16 skills, hooks, rules, settings
 ├── .github/                    ← plataforma GitHub: CI e templates de issue/PR
 │   ├── workflows/              ← GitHub Actions (ci.yml, unity-ci.yml)
 │   ├── ISSUE_TEMPLATE/         ← templates de issue
@@ -129,7 +129,7 @@ Como o projeto funciona, camada por camada: quem executa cada processo, como se 
 
 | Camada | Área | Processos | Manual |
 |--------|------|:---------:|--------|
-| Pesquisa | Design | 6 | [pesquisa.md](Desenvolvimento/Docs/Processos/pesquisa.md) |
+| Pesquisa | Design | 7 | [pesquisa.md](Desenvolvimento/Docs/Processos/pesquisa.md) |
 | Criativo | Design | 10 | [criativo.md](Desenvolvimento/Docs/Processos/criativo.md) |
 | Arte | Design (lateral) | 7 | [arte.md](Desenvolvimento/Docs/Processos/arte.md) |
 | Documentação | Desenvolvimento | 7 | [documentacao.md](Desenvolvimento/Docs/Processos/documentacao.md) |

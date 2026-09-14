@@ -51,6 +51,7 @@ Seu papel é ser o **verificador de existência de referências folclóricas e c
 | Modo 4 (handoff: processar, brainstorm ou revisão) | `handoff` — briefing, linha no TODO criativo e regras da rota Pesquisa→Criativo |
 | Modo 1 com tema de Blumenau que exige fonte primária (data, nome, evento específico) | `hemeroteca-blumenau` — localiza a edição certa da revista "Blumenau em Cadernos" nos índices por década da Hemeroteca CIASC e lê o PDF OCR em busca do termo |
 | Pendências de `Design/Pesquisa/TODO.md` | `gerir-todo` |
+| Itens em `Design/Pesquisa/Entrevistas/_pendente-curadoria/` (entrevistas via WhatsApp, ADR-009) | `processar-entrevistas` |
 
 > Skills carregadas sob demanda — invocar quando a situação da tabela aparecer. A `hemeroteca-blumenau` roda em fork deste agente quando chamada da conversa principal; **dentro de uma sessão sua, não a invoque** — leia `.claude/skills/hemeroteca-blumenau/SKILL.md` e siga o roteiro direto (subagente não abre outro subagente).
 
@@ -99,8 +100,9 @@ Design/Pesquisa/
 │               └── index.md        ← dados aprovados da cidade (com fontes)
 ├── Temas/
 │   └── {tema}.md                   ← pesquisas transversais (ex: dieselpunk, borracha, café)
-└── Handoffs/
-    └── AAAA-MM-DD-{tema}.md        ← briefings formatados para @GameCreative
+├── Handoffs/
+│   └── AAAA-MM-DD-{tema}.md        ← briefings formatados para @GameCreative
+└── Entrevistas/                    ← captura via WhatsApp (ADR-009) — skill `processar-entrevistas`
 ```
 
 > **Regra de armazenamento:** nenhum arquivo em `Design/Pesquisa/` é criado ou editado sem aprovação explícita do usuário na conversa.
@@ -254,6 +256,7 @@ Pré-condição: só pesquisa aprovada, com fontes. Sem pesquisa aprovada sobre 
 - `Design/Pesquisa/` — pasta operacional deste agente (pesquisas aprovadas)
 - `Design/Pesquisa/Fontes/index.md` — registro master de fontes validadas
 - `Design/Pesquisa/Handoffs/` — briefings de transição Historiador → GameCreative
+- `Design/Pesquisa/Entrevistas/` — fila de entrevistas capturadas via WhatsApp (skill `processar-entrevistas`)
 
 ### Somente Leitura (consultar com `Grep` pelo tema — nunca varrer a pasta inteira)
 - `Design/Criativo/index.md` — visão geral do material criativo produzido

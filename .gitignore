@@ -61,4 +61,19 @@ Design/ArteFonte/Ferramentas/_gothicvania_out/
 *.ai
 *.tga
 
+# Captura de entrevistas via WhatsApp (ADR-009) — sessão pareada e conteúdo pessoal/de
+# terceiros nunca versionados; só o material já curado em Design/Pesquisa/Estados|Temas/
+# entra no git.
+Design/Pesquisa/Entrevistas/Ferramentas/whatsapp-listener/node_modules/
+Design/Pesquisa/Entrevistas/Ferramentas/whatsapp-listener/auth/
+Design/Pesquisa/Entrevistas/Ferramentas/whatsapp-listener/*.log
+Design/Pesquisa/Entrevistas/Ferramentas/whatsapp-listener/.env
+Design/Pesquisa/Entrevistas/Ferramentas/__pycache__/
+Design/Pesquisa/Entrevistas/_inbox/*
+Design/Pesquisa/Entrevistas/_pendente-curadoria/*
+Design/Pesquisa/Entrevistas/_processado/*
+!Design/Pesquisa/Entrevistas/_inbox/.gitkeep
+!Design/Pesquisa/Entrevistas/_pendente-curadoria/.gitkeep
+!Design/Pesquisa/Entrevistas/_processado/.gitkeep
+
 # Git LFS placeholders handled separately

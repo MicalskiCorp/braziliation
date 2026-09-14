@@ -36,6 +36,7 @@ Repositório de informações históricas, folclóricas e culturais **verificada
 - [Estados/](Estados/) — pesquisas organizadas por estado
 - [Temas/](Temas/) — pesquisas transversais
 - [Handoffs/](Handoffs/) — briefings preparados para o @GameCreative
+- [Entrevistas/](Entrevistas/index.md) — captura de entrevistas via WhatsApp, aguardando curadoria (skill `processar-entrevistas`)
 
 ## Estados com Material Aprovado
 

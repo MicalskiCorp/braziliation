@@ -1,0 +1,20 @@
+{
+  "name": "braziliation-whatsapp-listener",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Captura mensagens (audio e texto) de uma conversa dedicada do WhatsApp para a pesquisa do Braziliation.",
+  "type": "commonjs",
+  "main": "listener.js",
+  "scripts": {
+    "start": "node listener.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.9",
+    "dotenv": "^16.4.5",
+    "pino": "^9.4.0",
+    "qrcode-terminal": "^0.12.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

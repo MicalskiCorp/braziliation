@@ -86,7 +86,7 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
-| Avaliar as 15 skills com o plugin `skill-creator` (modo Eval) | `@AgentArchitect` | Baixa | ❌ |
+| Avaliar as 16 skills com o plugin `skill-creator` (modo Eval) | `@AgentArchitect` | Baixa | ❌ |
 | Decidir a política de declaração de uso de IA na Steam e registrar como ADR (número novo — o 008 é "Claude único harness") | Usuário + `@TechLead` | Média | ❌ |
 | Decidir o treino de LoRA de estilo próprio: RunPod por hora × Scenario (US$ 15/mês) × SDXL local em 8 GB | Usuário | Baixa | ❌ |
 | Decidir manter ou apagar os 11,7 GB de modelos Z-Image em `D:\Tools\ComfyUI` (depende do A/B fechado) | Usuário | Baixa | ⏸ depende do A/B SDXL × Z-Image |

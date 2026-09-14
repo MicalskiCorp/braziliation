@@ -29,6 +29,7 @@ As skills vivem em `.claude/skills/`. Cada agente dono tem `Skill` em `tools:` e
 | [`validar-todos`](../../../.claude/skills/validar-todos/SKILL.md) | `@AgentArchitect` (Papel 3) | Auditar TODOs concluídos, cobertura de testes e gaps de milestone |
 | [`structure-audit`](../../../.claude/skills/structure-audit/SKILL.md) | `@AgentArchitect` (nível 4) · `@GameArchitect` (níveis 2-3) | Auditar disco × docs; só reporta, não corrige sem aprovação |
 | [`hemeroteca-blumenau`](../../../.claude/skills/hemeroteca-blumenau/SKILL.md) | `@Historiador` | Fato, data ou nome de Blumenau em fonte primária ("Blumenau em Cadernos") |
+| [`processar-entrevistas`](../../../.claude/skills/processar-entrevistas/SKILL.md) | `@Historiador` | Curar entrevistas/conversas de pesquisa capturadas via WhatsApp (ADR-009), transcritas em `Design/Pesquisa/Entrevistas/_pendente-curadoria/` |
 | [`meta-check`](../../../.claude/skills/meta-check/SKILL.md) | `@UnityDeveloper` · `@SpriteArtist` | Pares asset/`.meta` em `Desenvolvimento/Assets/` |
 | [`unity-validar`](../../../.claude/skills/unity-validar/SKILL.md) | `@UnityDeveloper` · `@GameplayEngineer` · `@TestEngineer` | Compilar o Unity em batchmode antes de commitar mudança em `Assets/`; `--testes` roda os EditMode |
 | [`fechar-decisao`](../../../.claude/skills/fechar-decisao/SKILL.md) | `@GameCreative` (com `@TechLead` nos números) | Transformar pendência de design parada em DDR aprovado, com handoff |

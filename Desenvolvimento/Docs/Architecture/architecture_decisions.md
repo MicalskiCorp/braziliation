@@ -146,4 +146,38 @@ Formato de cada entrada (os rótulos ficam em inglês — o `DocsConsistencyTest
 
 ---
 
+## ADR-009: Captura de entrevistas de pesquisa via WhatsApp (Baileys + Whisper local)
+
+- **Date:** 2026-09-14
+- **Status:** Accepted
+- **Context:** A pesquisa do `@Historiador` dependia só de fontes web e do que o usuário
+  digitava na conversa. Parte do material relevante — relatos de historiadores locais,
+  memória oral de quem viveu ou ouviu as lendas — só existe em conversa falada, gravada de
+  forma esporádica conforme a oportunidade de entrevistar alguém aparece. Restrição do
+  usuário: usar só a licença já paga (Claude Code), nada de chamada à API da Anthropic fora
+  dela, e nenhuma API paga de terceiro além da integração direta com o WhatsApp — e nem a
+  API nem o Claude Code processam áudio como entrada.
+- **Decision:** Uma conversa dedicada do WhatsApp é o canal de captura. Um listener local
+  (Node.js + Baileys, protocolo multi-device não-oficial, rodando na máquina pessoal do
+  usuário — `Design/Pesquisa/Entrevistas/Ferramentas/whatsapp-listener/`) grava cada
+  mensagem nova (áudio ou texto) em `Design/Pesquisa/Entrevistas/_inbox/`. Um transcritor
+  local (Python + faster-whisper, sem API, `Ferramentas/transcrever.py`) converte os áudios
+  para texto e move o lote para `_pendente-curadoria/`. A curadoria roda dentro do Claude
+  Code (skill `processar-entrevistas`, agente `@Historiador`), aplicando o critério de
+  memória oral já registrado em `memories/repo/historian-guardrails.md`. O WhatsApp
+  Business Cloud API oficial foi descartado por exigir número dedicado, verificação de
+  negócio da Meta e webhook público — infraestrutura desproporcional a uma pessoa
+  entrevistando esporadicamente.
+- **Consequences:** Baileys é não-oficial — usar a conta pessoal para automação viola os
+  Termos de Serviço do WhatsApp; o risco é considerado baixo em uso pessoal, volume baixo e
+  número próprio, mas não é zero, sem garantia de recuperação se a conta for banida. A
+  sessão pareada (`auth/`) e todo o conteúdo bruto de `_inbox/`, `_pendente-curadoria/` e
+  `_processado/` ficam fora do git (dado pessoal/de terceiros) — só o material já curado e
+  aprovado entra em `Design/Pesquisa/`. Entrevistar terceiros exige confirmar consentimento
+  antes de aprovar qualquer relato. O listener precisa estar rodando (PC de casa) para
+  capturar em tempo real; mensagens enviadas enquanto ele está offline chegam na
+  reconexão, pela fila do próprio WhatsApp — sem precisar de acesso remoto à máquina.
+
+---
+
 *(Novos ADRs entram acima desta linha. Entradas curtas, com link para `Docs/Architecture/` ou para o código quando ajudar.)*

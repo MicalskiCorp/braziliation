@@ -27,6 +27,7 @@ Confirma que uma lenda, figura ou referência cultural *existe* como elemento re
 - `Aprovar e salvar:` → P2
 - `Listar pesquisas:` · `Compilar estado:` → P3
 - `Delegar ao criativo:` · `Brainstorm:` → P4
+- `Processar entrevistas` → P7 (skill)
 
 ## P1 — Pesquisar tema
 
@@ -110,6 +111,22 @@ Confirma que uma lenda, figura ou referência cultural *existe* como elemento re
 3. Item concluído vai para "Concluído" com a data.
 
 - **Estado hoje:** 6 estados e 3 temas não iniciados; só Blumenau pesquisada
+
+## P7 — Processar entrevistas (WhatsApp)
+
+**Quem:** @Historiador · skill `processar-entrevistas` · ADR-009
+**Aciona:** "processar entrevistas" · "curar entrevistas" — quando há itens em `Design/Pesquisa/Entrevistas/_pendente-curadoria/`
+
+1. Fora do Claude Code: o listener local (Node + Baileys, no PC de casa) grava cada áudio ou texto da conversa dedicada em `Entrevistas/_inbox/`.
+2. `py Design/Pesquisa/Entrevistas/Ferramentas/transcrever.py` transcreve com faster-whisper local, sem API, e move o lote para `_pendente-curadoria/`.
+3. A skill lista os itens e apresenta cada um: remetente, data e resumo.
+4. Classifica como memória oral (critério do guardrail do Historiador) e cruza com a pesquisa existente — e com busca web quando der.
+5. Decide com o usuário, item a item: aprovar e salvar (P2, citando o relato oral), pendência no TODO de Pesquisa, handoff direto (P4) ou descarte.
+6. Move a pasta para `_processado/` com o resultado no `meta.json` e resume o lote.
+
+- **Gate:** Decisão sempre do usuário · consentimento de terceiros antes de aprovar · áudio e transcrição brutos nunca entram no git
+- **Estado:** Nunca validado ponta a ponta (tech debt): falta `npm install`, pareamento por QR e uma transcrição real
+- **Risco:** Baileys é não-oficial — risco baixo, mas não nulo, de bloqueio da conta; preferir número secundário
 
 ---
 
