@@ -24,6 +24,10 @@ npm install
 cp .env.example .env
 ```
 
+> O npm 11 bloqueia por padrão os scripts de instalação da Baileys (checagem da versão do Node)
+> e do protobufjs e avisa com `allow-scripts`. Não são necessários: as dependências carregam sem
+> eles (validado em 2026-09-14, Node 24).
+
 ## Primeira execução — descobrir o JID da conversa
 
 Deixe `WHATSAPP_CHAT_JID` vazio no `.env` na primeira vez:

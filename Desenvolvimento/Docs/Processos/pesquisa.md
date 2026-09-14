@@ -125,7 +125,7 @@ Confirma que uma lenda, figura ou referência cultural *existe* como elemento re
 6. Move a pasta para `_processado/` com o resultado no `meta.json` e resume o lote.
 
 - **Gate:** Decisão sempre do usuário · consentimento de terceiros antes de aprovar · áudio e transcrição brutos nunca entram no git
-- **Estado:** Nunca validado ponta a ponta (tech debt): falta `npm install`, pareamento por QR e uma transcrição real
+- **Estado:** Instalação e conexão validadas em 2026-09-14; falta o pareamento por QR e uma captura e transcrição reais (tech debt)
 - **Risco:** Baileys é não-oficial — risco baixo, mas não nulo, de bloqueio da conta; preferir número secundário
 
 ---

@@ -41,16 +41,18 @@ Format:
 - **Fix:** Unity Hub → Preferences → Licenses → Add → licença Personal; depois
   `py .claude/skills/unity-validar/scripts/validar.py --testes`.
 
-- **Item:** Pipeline de entrevistas via WhatsApp (ADR-009) nunca foi validado de ponta a ponta
+- **Item:** Pipeline de entrevistas via WhatsApp (ADR-009) ainda não validado de ponta a ponta (instalação e conexão já validadas)
 - **Where:** `Design/Pesquisa/Entrevistas/Ferramentas/whatsapp-listener/`, `Ferramentas/transcrever.py`
 - **Why:** escrito numa sessão em container efêmero na nuvem, sem WhatsApp real para parear
   (QR code) nem máquina Windows para instalar/rodar — o código segue a API pública do
   Baileys e do faster-whisper, mas ninguém rodou `npm install`, o pareamento nem uma
   transcrição real ainda.
-- **Fix:** no PC de casa: `npm install` no listener, parear via QR, confirmar captura de um
-  áudio e um texto de teste na conversa dedicada; `pip install -r requirements.txt` e rodar
-  `transcrever.py` num áudio de teste; só então validar a skill `processar-entrevistas`
-  ponta a ponta com um item real.
+- **Validado em 2026-09-14 (PC de casa):** `npm install` (91 pacotes, Node 24) e as dependências
+  carregam; o listener conecta nos servidores do WhatsApp e gera o QR; `faster-whisper` 1.2.1
+  instalado (CUDA visível); `transcrever.py` roda com a fila vazia.
+- **Fix (o que falta):** parear via QR, confirmar captura de um áudio e de um texto de teste na
+  conversa dedicada, transcrever um áudio real e validar a skill `processar-entrevistas` ponta a
+  ponta com um item real.
 
 ### Média
 
