@@ -31,21 +31,6 @@ Format:
   parou aí. Steam Deck Verified exige suporte a controle e glifos corretos.
 - **Fix:** tela de rebind sobre `InputActionRebindingExtensions`; avaliar Steam Input API.
 
-- **Item:** Testes EditMode escritos mas nunca executados
-- **Where:** `Assets/Tests/EditMode/ProjectSetupTests.cs`, skill `unity-validar --testes`
-- **Why:** O assembly compila (batchmode 2026-09-13), mas rodar testes exige licença Unity
-  ativada na máquina: a licença Personal só via Hub dá 198 `No valid Unity Editor license
-  found` para o Editor aberto por linha de comando — com `-batchmode`, sem ele e pela CLI
-  oficial (`unity license status`: "nenhuma ativa"). Até lá, as mesmas verificações rodam
-  pelo lado de fora em `UnityAssetConsistencyTests` (xUnit, no CI).
-- **Fix:** Unity Hub → Preferences → Licenses → Add → licença Personal; depois
-  `py .claude/skills/unity-validar/scripts/validar.py --testes`. **Revisão de 2026-09-20:**
-  o CLI oficial expõe `unity license activate --personal --accept-eula`, o que pode
-  dispensar o Hub — não testado, porque exige `unity auth login` antes (hoje a máquina
-  não está logada). A conclusão antiga de que "Personal só ativa pelo Hub" veio de ver
-  `unity license status` vazio, não de tentar o `activate`. A mesma ativação gera o `.ulf`
-  que habilita o CI do Unity — ver [`unity-ci.md`](unity-ci.md).
-
 ### Média
 
 - **Item:** Ruleset WFC de Blumenau é primeira versão — lâmina d'água serrilhada
@@ -61,9 +46,10 @@ Format:
 - **Item:** `WfcMapImporter` compila, mas nunca foi executado
 - **Where:** `Assets/Editor/Art/WfcMapImporter.cs`
 - **Why:** Compilou no primeiro batchmode (2026-09-13, skill `unity-validar`). A premissa
-  anterior — "a licença Personal não permite `-batchmode`" — estava errada: a Personal só não
-  pode ser *ativada* pela linha de comando; ativada pelo Hub, batchmode funciona. Executar o
-  importador ainda exige o menu do Editor.
+  anterior — "a licença Personal não permite `-batchmode`" — estava errada, e a correção de
+  2026-09-13 ainda errava pela metade: Personal **também ativa pela linha de comando**
+  (`unity auth login` + `unity license activate --personal --accept-eula`, feito em
+  2026-09-20). Executar o importador é que ainda exige o menu do Editor.
 - **Fix:** Abrir o Editor, rodar `Assets > Braziliation > Importar Mapa WFC...` apontando para
   `Design/ArteFonte/IA/Outputs/wfc-teste/blumenau_s42.unity.json` e conferir o Tilemap.
 

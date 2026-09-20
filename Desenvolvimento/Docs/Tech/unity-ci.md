@@ -1,100 +1,57 @@
-# CI do Unity (GameCI)
+# CI do Unity (GameCI) — desligado por decisão
 
-O workflow [`unity-ci.yml`](../../../.github/workflows/unity-ci.yml) compila o projeto e roda os testes de `Assets/Tests/EditMode/` no GitHub Actions. Ele fica **desligado** — o job aparece como `skipped` — até a variável `UNITY_CI_ENABLED` existir.
+**ADR-010.** O workflow [`unity-ci.yml`](../../../.github/workflows/unity-ci.yml) existe, está correto e **não roda**: o job é gateado por `vars.UNITY_CI_ENABLED` e aparece como `skipped`. Não é pendência de configuração — é decisão, porque o caminho foi fechado pela Unity.
 
-Localmente, a mesma validação é a skill `unity-validar` (`py .claude/skills/unity-validar/scripts/validar.py`).
+A validação do lado Unity é **local e obrigatória**: skill `unity-validar` (compila em batchmode e roda os EditMode), exigida pelo `pre-commit` para qualquer script de `Assets/` em stage.
 
-> **Por que `skipped` e não `success`:** até 20 set 2026 o gate ficava nos passos, e o job fechava como **success em 6 segundos** com tudo pulado. Um check verde que não verificou nada é indistinguível de um que verificou — e quem o lê como "o Unity passou" está confiando num passo pulado. O gate subiu para o nível do job.
+## Por que não dá para ligar
 
-## Estado em 20 set 2026
+A Unity encerrou a ativação manual de licenças Personal. O fluxo `.alf → ulf` — única porta do tier gratuito no GameCI — responde hoje:
 
-Nada configurado: `gh secret list` volta vazio, não existe `.ulf` em lugar nenhum da máquina, e `unity auth status` diz "Você não está logado". O que existe é `AppData/Local/Unity/licenses/UnityEntitlementLicense.xml` — o *entitlement* do Hub, que **não** serve como `UNITY_LICENSE`.
+> *You are not eligible to activate your license offline. Offline activation is available only for Enterprise and Industry seats.*
 
-## Habilitar — 4 passos
+O Unity 6 licencia Personal por **entitlement de conta** (`UnityEntitlementLicense.xml` em `AppData/Local/Unity/licenses/`), formato que o `game-ci/unity-test-runner@v4` não consome. O `.ulf` que o secret `UNITY_LICENSE` espera não é mais obtenível num seat gratuito. O [issue #408 do GameCI](https://github.com/game-ci/documentation/issues/408) documenta o impasse e segue aberto.
 
-O passo 1 exige a sua conta Unity (navegador ou Hub); os outros três são linha de comando.
+Medido em 20 set 2026, nesta máquina: licença **ativa** (`Unity Personal (Assigned)`), nenhum `.ulf` em lugar nenhum do disco, `C:\ProgramData\Unity` inexistente, e `license activate --generate-request` gerando um `.alf` que o site recusa.
 
-### 1. Ativar a licença e gerar o `.ulf`
+### Alternativas avaliadas e recusadas
 
-Pelo Hub: `Preferences → Licenses → Add → Get a free personal license`.
-
-Pelo CLI oficial (mais rápido, se funcionar):
-
-```bash
-unity auth login                                   # abre o navegador
-unity license activate --personal --accept-eula
-unity license status                               # confirmar "ativa"
-```
-
-> O CLI **expõe** `license activate --personal --accept-eula` — o que contraria a nota antiga deste projeto de que Personal só ativa pelo Hub. Não foi testado nesta máquina, porque exige o login. Se falhar, o caminho do Hub continua valendo; o que importa é o arquivo no fim.
-
-Se a ativação reclamar de permissão, o destino é `C:\ProgramData` — abrir o terminal como Administrador e repetir.
-
-Confirmar que o arquivo saiu — o Hub pode mostrar a licença **sem** ter gerado o `.ulf`, e foi nisso que este projeto tropeçou:
-
-```powershell
-Test-Path "C:\ProgramData\Unity\Unity_lic.ulf"    # PowerShell → True
-```
-
-| Sistema | Caminho do `.ulf` |
+| Caminho | Por que não |
 |---|---|
-| Windows | `C:\ProgramData\Unity\Unity_lic.ulf` |
-| macOS | `/Library/Application Support/Unity/Unity_lic.ulf` |
-| Linux | `~/.local/share/unity3d/Unity/Unity_lic.ulf` |
+| Runner self-hosted | Exige a máquina pessoal ligada e expõe superfície de ataque via PR de fork |
+| `--include-personal` do CLI novo do GameCI ([PR #246](https://github.com/game-ci/cli/pull/246)) | É do CLI novo, não do `unity-test-runner@v4`; exige a senha da conta Unity como secret; e **consome o seat Personal até devolvê-lo** — pode derrubar a licença do Editor local no meio do trabalho |
 
-### 2. Criar os três secrets
+## Se um dia voltar a ser possível
 
-O primeiro lê do arquivo; os outros dois pedem o valor no terminal, para a senha não passar por histórico de shell nem por conversa.
-
-**PowerShell** — o `<` de redirecionamento **não existe** no PowerShell (`The '<' operator is reserved for future use`); usar o pipe:
+Ligar é criar os três secrets e a variável — o workflow já está pronto para isso.
 
 ```powershell
+# o .ulf só existirá se a Unity voltar a oferecer ativação de Personal, ou com Plus/Pro
 Get-Content "C:\ProgramData\Unity\Unity_lic.ulf" -Raw | gh secret set UNITY_LICENSE
 gh secret set UNITY_EMAIL
 gh secret set UNITY_PASSWORD
-```
-
-**Git Bash** — aí sim o redirecionamento vale:
-
-```bash
-gh secret set UNITY_LICENSE < "/c/ProgramData/Unity/Unity_lic.ulf"
-gh secret set UNITY_EMAIL
-gh secret set UNITY_PASSWORD
-```
-
-| Secret | Conteúdo |
-|--------|----------|
-| `UNITY_LICENSE` | conteúdo inteiro do `.ulf` |
-| `UNITY_EMAIL` | e-mail da conta Unity |
-| `UNITY_PASSWORD` | senha da conta Unity |
-
-`UNITY_SERIAL` só existe para Plus/Pro — não usar.
-
-### 3. Ligar o workflow
-
-```bash
 gh variable set UNITY_CI_ENABLED --body true
+gh workflow run "Unity (compilação + EditMode)"
 ```
 
 Com a variável ligada e os secrets faltando, o job **falha** no primeiro passo dizendo exatamente isso — configuração pela metade não vira verde.
 
-### 4. Testar na hora
+Com licença **Plus/Pro**, o caminho é outro e mais simples: `UNITY_SERIAL` no lugar do `UNITY_LICENSE`.
 
-Sem esperar um commit em `Assets/`, pelo `workflow_dispatch`:
+A imagem do editor não é obstáculo: o GameCI publica para a versão exata do projeto — conferido em 20 set 2026, `6000.2.8f1` tem 95 tags, entre elas `unityci/editor:6000.2.8f1-base-3.2.2`. O `unity-test-runner` detecta a versão pelo `ProjectSettings/ProjectVersion.txt`.
 
-```bash
-gh workflow run "Unity (compilação + EditMode)"
-gh run list --limit 3
+## Licença local — essa sim funciona
+
+Ativar na máquina destrava `unity-validar --testes`:
+
+```powershell
+unity auth login                                   # abre o navegador
+unity license activate --personal --accept-eula
+unity license status                               # "Licença: ativa — Unity Personal (Assigned)"
 ```
 
-## O que isso destrava junto
+Feito em 20 set 2026; os testes EditMode rodaram pela primeira vez, 9/9. **O CLI ativa Personal** — ao contrário do que este projeto registrava até então, com base em ter visto `license status` vazio sem nunca ter tentado o `activate`.
 
-O mesmo `.ulf` é o que falta para `unity-validar --testes` rodar os EditMode por linha de comando — hoje o Editor sai com código 198 (`No valid Unity Editor license found`). É um item Alta do `TODO.md` e uma dívida Alta em `tech_debt.md`: os dois caem na mesma ativação.
-
-## Imagem do editor
-
-O GameCI publica imagem para a versão exata do projeto — conferido em 20 set 2026: `6000.2.8f1` tem 95 tags, entre elas `unityci/editor:6000.2.8f1-base-3.2.2`. O `unity-test-runner` detecta a versão pelo `ProjectSettings/ProjectVersion.txt`, então não é preciso fixá-la no workflow.
-
-## Custo
+## Custo, se um dia rodar
 
 O primeiro run importa a `Library/` inteira (lento). Os seguintes usam o cache da `Library/`, chaveado pelo `packages-lock.json`.

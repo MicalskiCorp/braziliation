@@ -21,7 +21,7 @@ camada, sem os agentes funcionais nem as skills.
 |-------|---------|
 | Testes .NET (~1s) | `dotnet test Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj` |
 | Build do core puro | `dotnet build Desenvolvimento/src/Braziliation.Game.Core/Braziliation.Game.Core.csproj` |
-| Compilar Unity (Editor fechado) | `py .claude/skills/unity-validar/scripts/validar.py` · `--testes` roda também os EditMode (exige licença ativada na máquina) |
+| Compilar Unity (Editor fechado) | `py .claude/skills/unity-validar/scripts/validar.py` · `--testes` roda também os EditMode (licença ativa desde 2026-09-20; 9/9) |
 | Meta-check / paletas | `py .claude/skills/meta-check/check_meta_pairs.py` · `py Design/ArteFonte/Ferramentas/check_art_palettes.py` |
 | Ativar o pre-commit (uma vez por clone) | `git config core.hooksPath .githooks` |
 | Ferramentas de arte | `py Design/ArteFonte/Ferramentas/<script>.py` — **use `py`, não `python`** |
@@ -55,10 +55,12 @@ abrir o Unity, ou o projeto não compila.
 - **Pastas chamadas `Build/` são código** (`src/.../Build/`, `Assets/Scripts/Build/`). A
   regra de saída de player build no `.gitignore` é ancorada em `/Desenvolvimento/Build/`;
   nunca a desancore. `GitIgnoreGuardTests` falha se algum `.cs` cair numa regra de ignore.
-- **O projeto Unity compila em batchmode** com a licença Personal do Hub (validado em
-  2026-09-13). Mudou algo em `Assets/`? Rode a skill `unity-validar` antes de commitar — é a
-  única checagem local do lado Unity. Os testes EditMode (`--testes`) só rodam depois que a
-  licença for ativada na máquina (Hub → Preferences → Licenses); o CI Unity depende de secrets.
+- **O projeto Unity compila e roda os testes EditMode em batchmode** — licença ativada na
+  máquina em 2026-09-20 (`unity auth login` + `unity license activate --personal
+  --accept-eula`); `unity-validar --testes` passou 9/9. Mudou algo em `Assets/`? Rode a
+  skill `unity-validar` antes de commitar — **é a única checagem do lado Unity**, e o
+  pre-commit a exige. O CI do Unity está desligado por decisão (ADR-010): a Unity encerrou
+  a ativação de Personal em CI, e o job aparece como `skipped`, nunca como verde.
 - Commits vão direto no `main` até a v1 estar consolidada; o fluxo com PR vem depois.
 - Dívida técnica vive em `Desenvolvimento/Docs/Tech/tech_debt.md`. Se você encontrar
   dívida durante uma tarefa, registre lá — não só no TODO.

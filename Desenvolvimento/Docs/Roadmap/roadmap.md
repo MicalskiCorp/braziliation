@@ -36,7 +36,7 @@
 
 - ✅ Save versionado com migração explícita (ADR-007)
 - 🔨 Opções — `SettingsService` e tela de configurações prontos; rebind de controles e Steam Input pendentes
-- 🔨 Pipeline de build — CI .NET ativo; CI do Unity (GameCI) aguardando os secrets de licença
+- ✅ Pipeline de build — CI .NET ativo; CI do Unity desligado por decisão (ADR-010), com a validação Unity local e obrigatória no pre-commit
 - ✅ Versionamento — `VERSION` e `bundleVersion` sincronizados por `scripts/update_version.ps1`, com teste
 - ❌ Créditos e jurídico finais (hoje `CREDITS.md` só lista os placeholders CC0)
 - ❌ Fluxo com Pull Requests — entra depois da v1 consolidada; até lá, commits direto no `main`

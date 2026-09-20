@@ -180,4 +180,39 @@ Formato de cada entrada (os rótulos ficam em inglês — o `DocsConsistencyTest
 
 ---
 
+## ADR-010: CI do Unity desligado — a validação do lado Unity é local e obrigatória
+
+- **Date:** 2026-09-20
+- **Status:** Accepted
+- **Context:** O workflow `unity-ci.yml` existia desde o início "em espera pelos secrets de
+  licença", e a pendência ficou aberta por meses. Ao tentar fechá-la em 20 set 2026,
+  descobrimos que **não há caminho**: a Unity encerrou a ativação manual de licenças
+  Personal. O fluxo `.alf → .ulf` — única porta do tier gratuito no GameCI — responde
+  agora *"You are not eligible to activate your license offline. Offline activation is
+  available only for Enterprise and Industry seats"*. O Unity 6 passou a licenciar
+  Personal por **entitlement de conta** (`UnityEntitlementLicense.xml`), formato que o
+  `game-ci/unity-test-runner@v4` não consome. O issue #408 do GameCI documenta o impasse
+  e segue aberto. As alternativas foram avaliadas e recusadas: runner self-hosted exige
+  a máquina pessoal ligada e expõe superfície de ataque via PR de fork; a estratégia
+  experimental do CLI novo do GameCI (`--include-personal`) exige a senha da conta Unity
+  como secret e **consome o seat Personal até devolvê-lo** — o que pode derrubar a
+  licença do Editor local no meio do trabalho.
+- **Decision:** O CI do Unity fica **desligado por decisão**, não por pendência. O job é
+  gateado por `vars.UNITY_CI_ENABLED` e aparece como `skipped` — nunca como verde. A
+  validação do lado Unity é **local e obrigatória**: a skill `unity-validar` compila em
+  batchmode e roda os testes EditMode, e o `pre-commit` recusa qualquer script de
+  `Assets/` em stage sem uma validação OK posterior à última edição. O workflow e a
+  documentação de habilitação ficam no repositório: se a Unity voltar a oferecer ativação
+  de Personal em CI, ligar é criar os secrets e a variável.
+- **Consequences:** A cobertura do lado Unity depende de o pre-commit estar ativo no clone
+  (`git config core.hooksPath .githooks`) — quem commitar com `--no-verify` escapa, e o CI
+  não pega. Em troca, nenhuma senha da conta Unity vira secret e o seat Personal continua
+  inteiro para o Editor local. Os testes EditMode passaram a rodar de fato em 20 set 2026
+  (9/9), depois que a licença foi ativada na máquina por `unity auth login` +
+  `unity license activate --personal --accept-eula` — o CLI ativa Personal, ao contrário
+  do que este projeto registrava. Revisitar se o GameCI publicar suporte estável a
+  entitlement, ou se o projeto passar a ter licença Plus/Pro (aí `UNITY_SERIAL` resolve).
+
+---
+
 *(Novos ADRs entram acima desta linha. Entradas curtas, com link para `Docs/Architecture/` ou para o código quando ajudar.)*

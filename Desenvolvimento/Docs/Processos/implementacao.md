@@ -95,7 +95,7 @@ Lógica testável vive em C# puro (`src/`), sem Unity; o Unity só adapta. Scrip
 **Quem:** skills `unity-validar` · `meta-check`
 
 1. Com o Editor fechado: `py .claude/skills/unity-validar/scripts/validar.py` (~1–2 min).
-2. `--testes` roda também os EditMode — exige a licença ativada na máquina.
+2. `--testes` roda também os EditMode (9/9 em 20 set 2026) — exige a licença ativada na máquina (`unity auth login` + `unity license activate --personal --accept-eula`).
 3. Erro vem como `arquivo(linha,coluna): error CSxxxx`; corrigir e repetir.
 4. `py .claude/skills/meta-check/check_meta_pairs.py` e incluir os `.meta` novos no commit.
 5. Conferir o `git status`: import pode reescrever `.meta` e `ProjectSettings/`.
@@ -120,10 +120,10 @@ Lógica testável vive em C# puro (`src/`), sem Unity; o Unity só adapta. Scrip
 **Quem:** GitHub Actions
 
 1. `ci.yml` a cada push: restore, build e testes .NET; meta-check; gate de paletas.
-2. `unity-ci.yml` (GameCI): compilação e EditMode — em espera até os secrets de licença existirem.
+2. `unity-ci.yml` (GameCI): desligado por decisão (ADR-010) — aparece como `skipped`. A Unity encerrou a ativação de Personal em CI; a cobertura do lado Unity é o I7, local e exigido pelo pre-commit.
 3. Pega o que escapou do pre-commit (`--no-verify`, clone sem o hook).
 
-- **Pendente:** Secrets do GameCI (ver `Tech/unity-ci.md`)
+- **Atenção:** sem CI do Unity, quem commitar com `--no-verify` escapa da única checagem do lado Unity
 
 ---
 

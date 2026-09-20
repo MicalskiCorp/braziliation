@@ -38,14 +38,12 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
-| Ativar a licença Unity Personal na máquina (Hub → Preferences → Licenses → Add). Sem isso os testes EditMode não rodam por linha de comando (`unity-validar --testes` sai com 198); a compilação já funciona | Usuário | Alta | ❌ |
 | Play-teste da demo: `MainMenu` (movido para `Scenes/Menus/` em 2026-09-13) → `DemoGameplay`; animação trocando quadro, pulo só no chão, inimigo virando na ponta, ataque sem auto-dano; paridade de input (W/↑ pulam, F ataca) | `@UnityDeveloper` | Alta | ❌ |
 | Conectar o MCP `unity`: abrir o Editor com o pacote `com.unity.pipeline` (adicionado em 2026-09-13) e confirmar `unity status` | Usuário + `@UnityDeveloper` | Média | ❌ |
 | Conferir o slicing do `SheetAutoSlicer` e gerar Animators (alavanca, sino, Autômato) | `@UnityDeveloper` | Média | ❌ |
 | Prefab `Prop_FloodgateLever` em `Prefabs/Interactables/` | `@UnityDeveloper` | Média | ❌ |
 | Integrar a alavanca ao sistema hídrico de Blumenau | `@GameplayEngineer` | Média | ❌ |
 | Executar o `WfcMapImporter` com `Design/ArteFonte/IA/Outputs/wfc-teste/blumenau_s42.unity.json` | `@UnityDeveloper` | Média | ❌ |
-| Configurar os secrets do GameCI para o workflow `unity-ci.yml` | Usuário | Média | ❌ — ver [`Tech/unity-ci.md`](Tech/unity-ci.md) |
 | Conferir a matriz de colisão 2D das layers Ground/Player/Enemy | `@UnityDeveloper` | Baixa | ❌ |
 | Fatiar `env_placeholder_castelo_tileset.png` e montar blockout com Tilemap | `@UnityDeveloper` | Baixa | ❌ opcional |
 
