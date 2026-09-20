@@ -28,10 +28,12 @@ unity license status                               # confirmar "ativa"
 
 > O CLI **expõe** `license activate --personal --accept-eula` — o que contraria a nota antiga deste projeto de que Personal só ativa pelo Hub. Não foi testado nesta máquina, porque exige o login. Se falhar, o caminho do Hub continua valendo; o que importa é o arquivo no fim.
 
+Se a ativação reclamar de permissão, o destino é `C:\ProgramData` — abrir o terminal como Administrador e repetir.
+
 Confirmar que o arquivo saiu — o Hub pode mostrar a licença **sem** ter gerado o `.ulf`, e foi nisso que este projeto tropeçou:
 
-```bash
-ls "C:/ProgramData/Unity/Unity_lic.ulf"
+```powershell
+Test-Path "C:\ProgramData\Unity\Unity_lic.ulf"    # PowerShell → True
 ```
 
 | Sistema | Caminho do `.ulf` |
@@ -44,8 +46,18 @@ ls "C:/ProgramData/Unity/Unity_lic.ulf"
 
 O primeiro lê do arquivo; os outros dois pedem o valor no terminal, para a senha não passar por histórico de shell nem por conversa.
 
+**PowerShell** — o `<` de redirecionamento **não existe** no PowerShell (`The '<' operator is reserved for future use`); usar o pipe:
+
+```powershell
+Get-Content "C:\ProgramData\Unity\Unity_lic.ulf" -Raw | gh secret set UNITY_LICENSE
+gh secret set UNITY_EMAIL
+gh secret set UNITY_PASSWORD
+```
+
+**Git Bash** — aí sim o redirecionamento vale:
+
 ```bash
-gh secret set UNITY_LICENSE < "C:/ProgramData/Unity/Unity_lic.ulf"
+gh secret set UNITY_LICENSE < "/c/ProgramData/Unity/Unity_lic.ulf"
 gh secret set UNITY_EMAIL
 gh secret set UNITY_PASSWORD
 ```
