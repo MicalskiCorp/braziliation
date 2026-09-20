@@ -39,7 +39,12 @@ Format:
   oficial (`unity license status`: "nenhuma ativa"). Até lá, as mesmas verificações rodam
   pelo lado de fora em `UnityAssetConsistencyTests` (xUnit, no CI).
 - **Fix:** Unity Hub → Preferences → Licenses → Add → licença Personal; depois
-  `py .claude/skills/unity-validar/scripts/validar.py --testes`.
+  `py .claude/skills/unity-validar/scripts/validar.py --testes`. **Revisão de 2026-09-20:**
+  o CLI oficial expõe `unity license activate --personal --accept-eula`, o que pode
+  dispensar o Hub — não testado, porque exige `unity auth login` antes (hoje a máquina
+  não está logada). A conclusão antiga de que "Personal só ativa pelo Hub" veio de ver
+  `unity license status` vazio, não de tentar o `activate`. A mesma ativação gera o `.ulf`
+  que habilita o CI do Unity — ver [`unity-ci.md`](unity-ci.md).
 
 ### Média
 
