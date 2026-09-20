@@ -16,7 +16,18 @@ const ESTADO_TESTE = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'listener-t
 process.env.ESTADO_PATH = ESTADO_TESTE;
 
 const listener = require('./listener.js');
-const { extensionFor, unwrap, contentTypeOf, jaProcessada, lembrarId, avancarMarca, estado } = listener;
+const {
+  extensionFor,
+  unwrap,
+  contentTypeOf,
+  jaProcessada,
+  lembrarId,
+  avancarMarca,
+  estado,
+  tamanhoLegivel,
+  ehEcoDeConfirmacao,
+  confirmacoesEnviadas,
+} = listener;
 
 const agora = Math.floor(Date.now() / 1000);
 const msg = (id, ts) => ({ key: { id, remoteJid: 'x@g.us' }, messageTimestamp: ts });
@@ -44,6 +55,25 @@ teste('documento com legenda e desembrulhado', () =>
   ));
 teste('envelope de grupo nao vira o tipo da mensagem', () =>
   assert.strictEqual(contentTypeOf({ senderKeyDistributionMessage: {}, imageMessage: {} }), 'imageMessage'));
+
+// --- confirmacao na conversa ---
+teste('tamanho legivel em KB e MB', () => {
+  assert.strictEqual(tamanhoLegivel(26266), '26 KB');
+  assert.strictEqual(tamanhoLegivel(3 * 1024 * 1024), '3,0 MB');
+});
+
+teste('REGRESSAO: a confirmacao nao e capturada como anotacao', () => {
+  const corpo = '✅ Áudio recebido (1,8 MB) — na fila de transcrição';
+  confirmacoesEnviadas.add(corpo);
+  // O eco da propria conta tem que ser reconhecido, senao o listener confirma a
+  // confirmacao e entra em loop de mensagens.
+  assert.strictEqual(ehEcoDeConfirmacao({ key: { fromMe: true } }, corpo), true);
+  // Mesmo texto vindo de outra pessoa nao e eco — nao pode sumir da captura.
+  assert.strictEqual(ehEcoDeConfirmacao({ key: { fromMe: false } }, corpo), false);
+  // Anotacao de verdade da propria conta segue capturada.
+  assert.strictEqual(ehEcoDeConfirmacao({ key: { fromMe: true } }, 'o Rudolf falou da enchente'), false);
+  confirmacoesEnviadas.delete(corpo);
+});
 
 // --- corte de ja-processada (o bug do reinicio) ---
 teste('estado novo parte de agora, sem importar o historico', () => {

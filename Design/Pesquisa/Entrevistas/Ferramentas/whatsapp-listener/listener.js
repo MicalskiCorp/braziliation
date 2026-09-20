@@ -21,6 +21,8 @@ const INBOX_DIR = process.env.INBOX_DIR || path.join(__dirname, '..', '..', '_in
 const ESTADO_PATH = process.env.ESTADO_PATH || path.join(__dirname, 'estado.json');
 const TARGET_JID = (process.env.WHATSAPP_CHAT_JID || '').trim();
 const DISCOVERY_MODE = TARGET_JID.length === 0;
+// mensagem (padrao) | reacao | off — ver README, secao "Confirmacao de captura".
+const CONFIRMACAO = (process.env.CONFIRMAR_CAPTURA || 'mensagem').trim().toLowerCase();
 const STARTED_AT = Date.now();
 
 // Folga para mensagem que chega fora de ordem — o corte por horario sozinho descartaria.
@@ -163,6 +165,44 @@ function writeMeta(dir, tipo, msg, sender, extras = {}) {
   );
 }
 
+function tamanhoLegivel(bytes) {
+  if (!bytes) return null;
+  const mb = bytes / (1024 * 1024);
+  return mb >= 1 ? `${mb.toFixed(1).replace('.', ',')} MB` : `${Math.round(bytes / 1024)} KB`;
+}
+
+// Texto das confirmações mandadas há pouco. A confirmação volta no upsert como mensagem
+// de texto da própria conta: se o listener a capturasse, mandaria confirmação da
+// confirmação — loop de mensagens na conta do usuário. O id é registrado depois do envio,
+// tarde demais se o eco chegar antes; por isso o texto entra aqui ANTES de sair.
+const confirmacoesEnviadas = new Set();
+
+function ehEcoDeConfirmacao(msg, texto) {
+  return Boolean(msg.key.fromMe) && confirmacoesEnviadas.has(texto.trim());
+}
+
+// Aviso de volta na própria conversa, para dar para conferir no celular que a captura
+// pegou — sem isso o único sinal de vida é o listener.log, no PC.
+async function confirmar(sock, msg, texto) {
+  if (DISCOVERY_MODE || CONFIRMACAO === 'off') return;
+  try {
+    if (CONFIRMACAO === 'reacao') {
+      // Reação não vira mensagem nova na conversa: mais discreto quando há outra gente
+      // no grupo, e o listener não precisa se proteger do próprio aviso.
+      await sock.sendMessage(TARGET_JID, { react: { text: '✅', key: msg.key } });
+      return;
+    }
+    const corpo = `✅ ${texto}`;
+    confirmacoesEnviadas.add(corpo);
+    setTimeout(() => confirmacoesEnviadas.delete(corpo), 60000);
+    const enviada = await sock.sendMessage(TARGET_JID, { text: corpo }, { quoted: msg });
+    if (enviada?.key?.id) lembrarId(enviada);
+  } catch (err) {
+    // Falhar o aviso não pode invalidar a captura, que já está gravada em disco.
+    console.error('Falha ao confirmar na conversa:', err.message);
+  }
+}
+
 async function handleMessage(sock, msg) {
   if (!msg.message) return;
 
@@ -214,6 +254,8 @@ async function handleMessage(sock, msg) {
         nomeOriginal: media.fileName || null,
       });
       console.log('Audio salvo em', dir);
+      const tamanho = tamanhoLegivel(buffer.length);
+      await confirmar(sock, msg, `Áudio recebido${tamanho ? ` (${tamanho})` : ''} — na fila de transcrição`);
     } else if (messageType === 'imageMessage' || messageType === 'documentMessage') {
       const ehImagem = messageType === 'imageMessage';
       const arquivo = (ehImagem ? 'imagem' : 'documento') + extensionFor(media.mimetype, media.fileName);
@@ -232,13 +274,24 @@ async function handleMessage(sock, msg) {
         nomeOriginal: media.fileName || media.title || null,
       });
       console.log(ehImagem ? 'Imagem salva em' : 'Documento salvo em', dir);
+      const tamanho = tamanhoLegivel(buffer.length);
+      const nome = media.fileName || media.title;
+      await confirmar(
+        sock,
+        msg,
+        ehImagem
+          ? `Imagem recebida${tamanho ? ` (${tamanho})` : ''} — na fila de curadoria`
+          : `Documento recebido${nome ? `: ${nome}` : ''}${tamanho ? ` (${tamanho})` : ''} — na fila de curadoria`
+      );
     } else if (messageType === 'conversation' || messageType === 'extendedTextMessage') {
       const text = content.conversation || content.extendedTextMessage?.text || '';
       if (!text.trim()) return;
+      if (ehEcoDeConfirmacao(msg, text)) return;
       const dir = captureDir(msg, sender);
       fs.writeFileSync(path.join(dir, 'mensagem.txt'), text, 'utf8');
       writeMeta(dir, 'texto', msg, sender);
       console.log('Mensagem salva em', dir);
+      await confirmar(sock, msg, 'Anotação recebida — na fila de curadoria');
     }
     // Figurinha, vídeo, contato e localização seguem fora do escopo da captura.
   } catch (err) {
@@ -319,4 +372,15 @@ if (require.main === module) {
   });
 }
 
-module.exports = { extensionFor, unwrap, contentTypeOf, jaProcessada, lembrarId, avancarMarca, estado };
+module.exports = {
+  extensionFor,
+  unwrap,
+  contentTypeOf,
+  jaProcessada,
+  lembrarId,
+  avancarMarca,
+  estado,
+  tamanhoLegivel,
+  ehEcoDeConfirmacao,
+  confirmacoesEnviadas,
+};

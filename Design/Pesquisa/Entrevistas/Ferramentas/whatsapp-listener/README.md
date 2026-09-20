@@ -72,6 +72,30 @@ onde já foi lido, então **reiniciar o processo não perde a fila**: o listener
 mensagem processada em vez de recomeçar do "agora". Ele também não captura a mesma mensagem
 duas vezes — guarda os últimos 500 `messageId`.
 
+## Confirmação de captura
+
+Por padrão o listener responde na própria conversa quando grava algo — é o jeito de
+conferir pelo celular que pegou, sem abrir o `listener.log` no PC:
+
+> ✅ Documento recebido: ata-1889.pdf (1,2 MB) — na fila de curadoria
+
+A resposta cita a mensagem original, então num grupo movimentado dá para ver a qual delas
+se refere. Controlado por `CONFIRMAR_CAPTURA` no `.env`:
+
+| Valor | Efeito |
+|---|---|
+| `mensagem` (padrão) | Responde com o texto acima, citando a mensagem original |
+| `reacao` | Só reage com ✅ na mensagem — discreto, não polui um grupo com outras pessoas |
+| `off` | Não avisa nada |
+
+> A confirmação volta para o próprio listener como mensagem de texto da conta. Ela é
+> reconhecida e descartada — sem isso ele capturaria o próprio aviso e confirmaria a
+> confirmação, em loop. Há teste de regressão para esse caso.
+>
+> Vale lembrar que isto faz a conta **enviar** mensagem, não só receber. É mais automação
+> visível numa integração não-oficial (ver o aviso lá em cima): se o grupo tiver outras
+> pessoas ou você quiser pegar leve, `reacao` faz o mesmo trabalho com menos ruído.
+
 ## Testes
 
 ```bash
