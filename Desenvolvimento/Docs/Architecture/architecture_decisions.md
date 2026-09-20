@@ -177,6 +177,18 @@ Formato de cada entrada (os rótulos ficam em inglês — o `DocsConsistencyTest
   antes de aprovar qualquer relato. O listener precisa estar rodando (PC de casa) para
   capturar em tempo real; mensagens enviadas enquanto ele está offline chegam na
   reconexão, pela fila do próprio WhatsApp — sem precisar de acesso remoto à máquina.
+- **Atualização (2026-09-20) — imagem e documento:** a captura passou a cobrir também foto e
+  documento (PDF, DOCX, TXT/CSV) enviados na conversa, com a legenda quando houver. O
+  `transcrever.py` extrai o texto de documento com camada de texto (pdfplumber / python-docx,
+  local, sem API); imagem e PDF escaneado seguem inteiros para a curadoria, que lê o arquivo
+  direto no Claude Code — **não há OCR no pipeline**, e adicionar um exigiria dependência nova
+  (Tesseract). O arquivo bruto continua fora do git; imagem ou documento **aprovado** na
+  curadoria é copiado para `Design/Pesquisa/Fontes/Arquivos/`, que é versionado — com limite de
+  ~5 MB por arquivo, já que o repo não tem regra LFS para `.jpg`/`.pdf`. Na mesma passagem, o
+  listener passou a guardar em `estado.json` (fora do git) até onde já leu: a promessa de que
+  "mensagem enviada com o listener offline chega na reconexão" valia só para reconexão de
+  socket — reinício de processo descartava a fila em silêncio. A decisão original segue
+  valendo; só o escopo do que é capturado mudou.
 
 ---
 

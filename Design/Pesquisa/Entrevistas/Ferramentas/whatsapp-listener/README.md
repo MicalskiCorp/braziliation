@@ -52,9 +52,35 @@ node listener.js
 ```
 
 Cada mensagem nova na conversa configurada vira uma pasta em `../../_inbox/`:
-`{timestamp}__{remetente}__{messageId}/` com `audio.ogg` (voz) ou `mensagem.txt`
-(texto) + `meta.json`. Mensagens enviadas enquanto o listener está offline chegam
-normalmente na reconexão — é a fila do próprio WhatsApp que segura, não este script.
+`{timestamp}__{remetente}__{messageId}/`, sempre com `meta.json` mais o conteúdo:
+
+| Mandou no WhatsApp | Vira na pasta | `tipo` no `meta.json` |
+|---|---|---|
+| Áudio / mensagem de voz | `audio.ogg` | `audio` |
+| Áudio gravado noutro app e encaminhado | `audio.mp3` / `.m4a`… (formato de origem) | `audio` |
+| Texto | `mensagem.txt` | `texto` |
+| Foto (câmera ou galeria) | `imagem.jpg` (extensão conforme o mimetype) | `imagem` |
+| Documento (PDF, DOCX, TXT…) | `documento.pdf` (extensão conforme o arquivo) | `documento` |
+
+Imagem e documento com legenda gravam também `legenda.txt`, e o `meta.json` ganha
+`arquivo`, `mimetype` e `nomeOriginal` (o nome que o arquivo tinha no WhatsApp; foto
+tirada na hora não tem). Figurinha, vídeo, contato e localização continuam ignorados.
+
+Mensagens enviadas enquanto o listener está offline chegam normalmente na reconexão — é a
+fila do próprio WhatsApp que segura, não este script. O `estado.json` (fora do git) guarda até
+onde já foi lido, então **reiniciar o processo não perde a fila**: o listener retoma da última
+mensagem processada em vez de recomeçar do "agora". Ele também não captura a mesma mensagem
+duas vezes — guarda os últimos 500 `messageId`.
+
+## Testes
+
+```bash
+node teste-regras.js
+```
+
+Exercita as regras puras — extensão de arquivo por mimetype, desembrulho de documento com
+legenda, e o corte que decide o que já foi processado (inclusive o caso de regressão do
+reinício de processo). Não abre socket nem toca no `estado.json` real.
 
 ## Manter sempre ligado (PC de casa)
 
@@ -64,9 +90,10 @@ pelo **Agendador de Tarefas do Windows** (escolhido em 2026-09-14 — nada insta
 - Tarefa **"Braziliation - Listener de entrevistas"**, gatilho "ao fazer logon", ação
   `conhost.exe --headless iniciar-listener.cmd` (sem janela).
 - [`iniciar-listener.cmd`](iniciar-listener.cmd) reinicia o `node listener.js` 30 s depois de
-  qualquer queda e grava tudo em `listener.log` (fora do git). É lá que se confere se está
-  vivo: `Conectado. Escutando: …` e uma linha `Audio salvo em …` / `Mensagem salva em …` por
-  captura.
+  qualquer queda e grava tudo em `listener.log` (fora do git), rotacionando para
+  `listener.log.1` acima de 20 MB — a Baileys loga cada erro de rede e o arquivo cresce rápido. É lá que se confere se está
+  vivo: `Conectado. Escutando: …` e uma linha `Audio salvo em …` / `Mensagem salva em …` /
+  `Imagem salva em …` / `Documento salvo em …` por captura.
 - Parar/iniciar à mão: `Stop-ScheduledTask` / `Start-ScheduledTask -TaskName "Braziliation -
   Listener de entrevistas"`. **Nunca rode `node listener.js` no terminal com a tarefa ativa** —
   duas instâncias com o mesmo `auth/` derrubam uma à outra.

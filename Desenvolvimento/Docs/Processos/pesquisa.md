@@ -117,15 +117,15 @@ Confirma que uma lenda, figura ou referência cultural *existe* como elemento re
 **Quem:** @Historiador · skill `processar-entrevistas` · ADR-009
 **Aciona:** "processar entrevistas" · "curar entrevistas" — quando há itens em `Design/Pesquisa/Entrevistas/_pendente-curadoria/`
 
-1. Fora do Claude Code: o listener local (Node + Baileys, no PC de casa) grava cada áudio ou texto da conversa dedicada em `Entrevistas/_inbox/`.
-2. `py Design/Pesquisa/Entrevistas/Ferramentas/transcrever.py` transcreve com faster-whisper local, sem API, e move o lote para `_pendente-curadoria/`.
-3. A skill lista os itens e apresenta cada um: remetente, data e resumo.
+1. Fora do Claude Code: o listener local (Node + Baileys, no PC de casa) grava cada áudio, texto, foto ou documento da conversa dedicada em `Entrevistas/_inbox/`.
+2. `py Design/Pesquisa/Entrevistas/Ferramentas/transcrever.py` transcreve o áudio com faster-whisper local, extrai o texto de PDF/DOCX, e move o lote para `_pendente-curadoria/`. Sem API em nenhuma etapa.
+3. A skill lista os itens e apresenta cada um: remetente, data, tipo e resumo — imagem e PDF escaneado são lidos direto pelo Claude Code, que não tem OCR automático no pipeline.
 4. Classifica como memória oral (critério do guardrail do Historiador) e cruza com a pesquisa existente — e com busca web quando der.
-5. Decide com o usuário, item a item: aprovar e salvar (P2, citando o relato oral), pendência no TODO de Pesquisa, handoff direto (P4) ou descarte.
+5. Decide com o usuário, item a item: aprovar e salvar (P2, citando o relato oral), pendência no TODO de Pesquisa, handoff direto (P4) ou descarte. Imagem/documento aprovado é copiado para `Design/Pesquisa/Fontes/Arquivos/` e registrado no índice de lá — é a única cópia versionada.
 6. Move a pasta para `_processado/` com o resultado no `meta.json` e resume o lote.
 
-- **Gate:** Decisão sempre do usuário · consentimento de terceiros antes de aprovar · áudio e transcrição brutos nunca entram no git
-- **Estado:** Validado de ponta a ponta em 2026-09-14 — grupo privado dedicado; listener sempre ligado pelo Agendador do Windows (`iniciar-listener.cmd`, log em `listener.log`); transcrever e curar sob demanda
+- **Gate:** Decisão sempre do usuário · consentimento de terceiros antes de aprovar · áudio, imagem, documento e transcrição brutos nunca entram no git
+- **Estado:** Validado de ponta a ponta em 2026-09-14 (áudio e texto) e em 2026-09-20 (imagem e documento) — grupo privado dedicado; listener sempre ligado pelo Agendador do Windows (`iniciar-listener.cmd`, log em `listener.log`); transcrever e curar sob demanda
 - **Risco:** Baileys é não-oficial — risco baixo, mas não nulo, de bloqueio da conta; preferir número secundário
 
 ---

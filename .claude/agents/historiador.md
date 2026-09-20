@@ -255,6 +255,7 @@ Pré-condição: só pesquisa aprovada, com fontes. Sem pesquisa aprovada sobre 
 ### Leitura e Escrita (operacional)
 - `Design/Pesquisa/` — pasta operacional deste agente (pesquisas aprovadas)
 - `Design/Pesquisa/Fontes/index.md` — registro master de fontes validadas
+- `Design/Pesquisa/Fontes/Arquivos/` — imagens e documentos aprovados na curadoria (skill `processar-entrevistas`)
 - `Design/Pesquisa/Handoffs/` — briefings de transição Historiador → GameCreative
 - `Design/Pesquisa/Entrevistas/` — fila de entrevistas capturadas via WhatsApp (skill `processar-entrevistas`)
 

@@ -1,6 +1,6 @@
 ---
 name: processar-entrevistas
-description: Lê as entrevistas e conversas de pesquisa capturadas via WhatsApp (transcritas em Design/Pesquisa/Entrevistas/_pendente-curadoria/), aplica o critério de memória oral do Historiador e decide, item a item, o que vira pesquisa aprovada, pendência de checagem, handoff direto pro criativo ou descarte. Use quando o usuário pedir para "processar entrevistas", "ver as conversas do whats", "curar entrevistas" ou houver itens em _pendente-curadoria/.
+description: Lê as entrevistas e conversas de pesquisa capturadas via WhatsApp — áudio transcrito, texto, foto e documento — em Design/Pesquisa/Entrevistas/_pendente-curadoria/, aplica o critério de memória oral do Historiador e decide, item a item, o que vira pesquisa aprovada, pendência de checagem, handoff direto pro criativo ou descarte. Use quando o usuário pedir para "processar entrevistas", "ver as conversas do whats", "curar entrevistas" ou houver itens em _pendente-curadoria/.
 ---
 
 # Skill: processar-entrevistas
@@ -8,8 +8,15 @@ description: Lê as entrevistas e conversas de pesquisa capturadas via WhatsApp 
 Entrada do pipeline de captura via WhatsApp (ADR-009, `Design/Pesquisa/Entrevistas/index.md`).
 Um listener (Baileys) e um transcritor (faster-whisper) locais, fora do Claude Code, rodam na
 máquina do usuário e alimentam `Design/Pesquisa/Entrevistas/_pendente-curadoria/` com o que foi
-dito numa conversa dedicada — cada item é uma pasta com `meta.json` (remetente, data, tipo) e
-`transcricao.txt` (áudio) ou `mensagem.txt` (texto).
+dito e enviado numa conversa dedicada — cada item é uma pasta com `meta.json` (remetente, data,
+`tipo`) mais o conteúdo, conforme o `tipo`:
+
+| `tipo` | Arquivos na pasta | Como ler |
+|---|---|---|
+| `audio` | `transcricao.txt` | ler a transcrição |
+| `texto` | `mensagem.txt` | ler o texto |
+| `imagem` | `imagem.*`, às vezes `legenda.txt` | **`Read` na imagem** — descrever o que se vê e transcrever o que estiver escrito nela |
+| `documento` | `documento.*`, `texto-documento.txt`, às vezes `legenda.txt` | ler `texto-documento.txt`; se ele trouxer `[sem camada de texto extraivel…]`, **`Read` no arquivo** (PDF escaneado, foto de página) |
 
 > Esta skill só processa o que já chegou transcrito. Não conecta no WhatsApp nem transcreve —
 > isso é `Ferramentas/whatsapp-listener/` e `Ferramentas/transcrever.py`, rodando fora desta sessão.
@@ -18,8 +25,9 @@ dito numa conversa dedicada — cada item é uma pasta com `meta.json` (remetent
 
 1. **Listar** `Design/Pesquisa/Entrevistas/_pendente-curadoria/` — uma pasta por captura. Vazia →
    avisar e parar.
-2. **Para cada item**, ler `meta.json` + `transcricao.txt`/`mensagem.txt` e apresentar ao usuário:
-   remetente, data, resumo do conteúdo.
+2. **Para cada item**, ler `meta.json` e o conteúdo conforme a tabela acima, e apresentar ao
+   usuário: remetente, data, tipo, resumo do conteúdo. Em imagem e documento, a legenda
+   (`legenda.txt`) costuma ser o contexto que o remetente deu — sempre mostrar junto.
 3. **Classificar como memória oral**, não fonte web — critério de
    `memories/repo/historian-guardrails.md`: causo, mito urbano ou memória oral vale para
    `Design/Pesquisa/` quando há convergência com outras fontes locais/secundárias, **sem exigir
@@ -32,6 +40,14 @@ dito numa conversa dedicada — cada item é uma pasta com `meta.json` (remetent
    - **Aprovar e salvar** → Modo 2 do Historiador (destino em `Estados/{Estado}/` ou
      `Temas/{tema}.md`), citando a entrevista como fonte no lugar do Protocolo de Fonte padrão:
      `> 🎙️ Relato oral: {remetente}, entrevista de DD/MM/AAAA`.
+     - **Imagem ou documento aprovado**: copiar o arquivo para `Design/Pesquisa/Fontes/Arquivos/`
+       na nomenclatura daquele `index.md`, acrescentar a linha no registro de lá e citar a
+       fonte como `> 📎 Documento/foto: {nomeOriginal ou descrição}, enviado por {remetente} em
+       DD/MM/AAAA — `Fontes/Arquivos/{arquivo}``. Acima de ~5 MB, não copiar: deixar em
+       `_processado/` e referenciar o caminho (regra no `index.md` de `Fontes/Arquivos/`).
+     - Nunca tratar o que está escrito num documento fotografado como fato verificado só por
+       estar num papel — vale o mesmo critério de convergência da memória oral, e a origem do
+       papel (quem escreveu, quando) entra no registro.
    - **Precisa mais pesquisa** → linha em `Design/Pesquisa/TODO.md` (skill `gerir-todo`)
      referenciando o item.
    - **Vira brainstorm/handoff direto** → Modo 4 do Historiador (skill `handoff`), se o usuário
@@ -49,9 +65,10 @@ dito numa conversa dedicada — cada item é uma pasta com `meta.json` (remetent
   aprovação explícita, fonte obrigatória — aqui a "fonte" é a própria entrevista, citada como tal).
 - Nunca decidir por conta própria: mostrar o conteúdo ao usuário antes de aprovar, arquivar
   como pendência ou descartar.
-- Áudio e transcrição brutos nunca são commitados — `.gitignore` cobre `_inbox/`,
-  `_pendente-curadoria/` e `_processado/`; só o material curado que vai para
-  `Design/Pesquisa/Estados/` ou `Temas/` entra no git.
+- Áudio, imagem, documento e transcrição brutos nunca são commitados — `.gitignore` cobre
+  `_inbox/`, `_pendente-curadoria/` e `_processado/`; entra no git só o material curado que vai
+  para `Design/Pesquisa/Estados/`, `Temas/` ou `Fontes/Arquivos/`.
 - Entrevista com terceiros (não o próprio usuário): confirmar que há consentimento para
-  guardar e usar o relato antes de aprovar.
-- Roda na conversa principal, não em fork — a decisão de cada item é interativa com o usuário.
+  guardar e usar o relato antes de aprovar. Vale igual para foto e documento de terceiro —
+  e redobrado quando a imagem mostrar pessoas identificáveis ou papel de acervo particular.
+- Roda na conversa principal, não em fork — a decisão de cada item é interativa com o usuário, e copiar imagem/documento aprovado para `Fontes/Arquivos/` precisa de `Bash` (o `Write` não copia binário).
