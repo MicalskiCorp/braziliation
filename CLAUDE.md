@@ -27,7 +27,9 @@ camada, sem os agentes funcionais nem as skills.
 | Ferramentas de arte | `py Design/ArteFonte/Ferramentas/<script>.py` — **use `py`, não `python`** |
 
 O build do Core copia as DLLs para `Desenvolvimento/Assets/Plugins/Braziliation/`
-automaticamente (target `CopyToUnityPlugins`, desativado quando `CI=true`).
+automaticamente (target `CopyToUnityPlugins`, desativado quando `CI=true`). **Essa pasta
+é saída de build e não é versionada** — num clone novo, rode o build do core antes de
+abrir o Unity, ou o projeto não compila.
 
 ## Regras de ouro
 

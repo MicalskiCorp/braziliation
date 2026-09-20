@@ -41,6 +41,31 @@ public sealed class AgentDefinitionTests
         Assert.Contains(frontmatter, l => l.StartsWith("model:", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// O modelo do projeto é reativo: nenhum agente invoca outro — cada camada escreve no
+    /// TODO da seguinte e o usuário aciona (AGENTS.md, "Fluxo entre Camadas"; manual de
+    /// processos, O1). Declarar `Task` ou `Agent` em `tools:` dá ao agente exatamente a
+    /// capacidade que o modelo proíbe. O @AgentArchitect declarou as duas até 2026-09-19,
+    /// enquanto o próprio corpo dele dizia "não invoca os agentes — o usuário aciona".
+    /// </summary>
+    [Theory]
+    [MemberData(nameof(Agents))]
+    public void Agent_Does_Not_Declare_Subagent_Tools(string name)
+    {
+        var tools = Frontmatter(name).FirstOrDefault(l => l.StartsWith("tools:", StringComparison.Ordinal));
+        if (tools is null)
+            return;
+
+        var declared = tools["tools:".Length..]
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+        foreach (var proibida in new[] { "Task", "Agent" })
+            Assert.False(
+                declared.Contains(proibida, StringComparer.Ordinal),
+                $"@{name} declara `{proibida}` em tools:. O modelo é reativo — nenhum agente " +
+                "invoca outro; a camada escreve no TODO da seguinte e o usuário aciona.");
+    }
+
     /// <summary>O AGENTS.md é o inventário que os agentes leem; agente fora dele é invisível à orquestração.</summary>
     [Theory]
     [MemberData(nameof(Agents))]

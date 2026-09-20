@@ -73,8 +73,8 @@
 | Passe de continuidade no frame de ataque do Autômato Abandonado (o opus redesenhou engrenagem do peito, cabeça e torso em relação ao idle) e registrar no context pack e em `indices/assets.md` | `@SpriteArtist` | Média | ❌ — ver `Design/ArteFonte/IA/Models/bench-modelo-claude-spec-2026-09.md` |
 | Clipes de ataque, dano e morte (o placeholder só tem idle/run/walk) | `@SpriteArtist` | Média | ⏸ com a arte própria |
 | Prefab final do painel de crafting | `@UnityDeveloper` | Média | ❌ |
-| Progressão visual da build (sprites por estágio de receptáculo) | `@SpriteArtist` + `@UnityDeveloper` | Média | ❌ |
-| VFX e feedback de sinergias híbridas | `@SpriteArtist` + `@UnityDeveloper` | Média | ❌ |
+| Progressão visual da build (sprites por estágio de receptáculo) — consome `BuildProgressionView.cs` (marcador inline na linha 14) | `@SpriteArtist` + `@UnityDeveloper` | Média | ❌ |
+| VFX e feedback de sinergias híbridas — consome `HybridSynergyFeedbackView.cs` (marcador inline na linha 12) | `@SpriteArtist` + `@UnityDeveloper` | Média | ❌ |
 | Props narrativos, ícones de crafting, VFX | `@SpriteArtist` | Baixa | ❌ |
 | Pixel pass da comporta (dentes de engrenagem mais legíveis) — agora possível pelo MCP `aseprite` | `@SpriteArtist` | Baixa | ❌ opcional |
 | Substituir os placeholders Gothicvania e remover `Art/ThirdParty/` + `CREDITS.md` | `@SpriteArtist` | Baixa | ⏸ quando a Onda 3 entregar personagens |

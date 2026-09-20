@@ -67,10 +67,11 @@ Não produz conteúdo de nenhuma camada: abre sessões, distribui trabalho, audi
 1. Início de sessão: `session_snapshot.py` injeta git, pendências Alta dos 3 TODOs e o último `unity-validar`.
 2. Antes de escrever: `block_generated_dirs.py` bloqueia `Library/`, `Temp/`, `obj/`, `bin/`, o histórico congelado `TODO-arquivo.md` e a DLL do core.
 3. Depois de escrever: `build_game_core.py` recompila o core.
-4. Antes do commit: `dotnet test` com as guardas (`DocsConsistency`, `TokenBudget`, `ConventionGuard`, `AgentDefinition`, `GitIgnoreGuard`, `UnityAssetConsistency`, `RepositoryLayout`), meta-check, paletas e o gate do Unity (script em stage exige validação OK posterior à edição).
-5. No push: CI repete tudo.
+4. Antes do commit: `dotnet test` com as guardas (`DocsConsistency`, `TokenBudget`, `ConventionGuard`, `AgentDefinition`, `GitIgnoreGuard`, `UnityAssetConsistency`, `RepositoryLayout`), meta-check e paletas **contra o índice do git** (`check_clean_checkout.py`) e o gate do Unity (script em stage exige validação OK posterior à edição).
+5. No push: CI repete tudo. Os hooks do Git LFS — versionados em `.githooks/` desde 19 set 2026 — sobem os objetos; sem o `pre-push`, um push publica ponteiros sem os binários.
 
 - **Princípio:** Regra que só está escrita envelhece; regra testada, não
+- **Ponto cego fechado em 19 set 2026:** trava que olha a árvore de trabalho não vê o que o CI vê. Duas pastas de arte vazias com `.meta` versionado derrubaram o CI por seis dias enquanto o meta-check local aprovava todo commit. Os gates passaram a rodar contra o índice materializado — detalhe em [`processos.md` §8.1](../Tech/processos.md)
 
 ---
 

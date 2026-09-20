@@ -75,13 +75,22 @@ Skill `nova-cidade`: scaffolding em `Design/Criativo/`, paleta em `Design/ArteCo
 |------|------------|------|
 | Início de sessão (hook `SessionStart`) | `.claude/hooks/session_snapshot.py` | Injeta git, pendências Alta dos 3 TODOs e o último `unity-validar` |
 | Ao editar (`PreToolUse`/`PostToolUse`) | `block_generated_dirs.py`, `build_game_core.py` | Escrita em pasta gerada ou em arquivo congelado (`TODO-arquivo.md`, DLL do core); core que parou de compilar |
-| Antes do commit (`.githooks/pre-commit`) | `dotnet test`, meta-check, `check_art_palettes.py`, `unity-validar/scripts/check_state.py` | Testes e guardas, `.meta` faltando, cor fora da paleta, script Unity em stage sem validação OK posterior à edição. Ativar por clone: `git config core.hooksPath .githooks` |
+| Antes do commit (`.githooks/pre-commit`) | `dotnet test`, `meta-check/check_clean_checkout.py`, `unity-validar/scripts/check_state.py` | Testes e guardas, `.meta` faltando, cor fora da paleta, script Unity em stage sem validação OK posterior à edição. Os gates de `.meta` e paleta rodam contra o **índice** desde 2026-09-19, não contra o disco — ver §8.1. Ativar por clone: `git config core.hooksPath .githooks` |
+| No push e no checkout (`.githooks/post-checkout`, `post-commit`, `post-merge`, `pre-push`) | Hooks do Git LFS | Objetos LFS baixados e enviados. Versionados desde 2026-09-19: como o `core.hooksPath` aponta para uma pasta do repositório, o `git lfs install` os deposita ali, e sem o `pre-push` um push publica ponteiros sem os binários (218 arquivos em LFS). Por isso o **git-lfs virou requisito rígido**: sem ele instalado, os quatro saem com código 2 e o git aborta a operação |
 | No CI (`.github/workflows/ci.yml`) | os mesmos | O que escapou do pre-commit |
 | No CI Unity (`unity-ci.yml`, GameCI) | compilação + EditMode | Ativo quando os secrets existirem ([`unity-ci.md`](unity-ci.md)) |
 
 Guardas dentro do `dotnet test`: `GitIgnoreGuardTests`, `DocsConsistencyTests` (links, pastas documentadas, todo `.cs` numa ficha de sistema, roteadores completos, feature no índice e no backlog, ADR substituído, catálogo de skills), `TokenBudgetTests` (tetos de tamanho de prompt e doc), `ConventionGuardTests` (serviço com teste dedicado, paleta com status), `UnityAssetConsistencyTests`, `AgentDefinitionTests` (nome = arquivo, `model:`, registro no `AGENTS.md`, `.github/` só com CI e templates) e `RepositoryLayoutTests`.
 
-Scripts que as skills chamam para a parte mecânica: `gerir-todo/todo.py` (listar, varredura), `validar-todos/todos_inline.py` (`// TODO` classificados), `unity-validar/scripts/check_state.py` (gate do commit), `meta-check/check_meta_pairs.py`, `unity-validar/scripts/validar.py`.
+Scripts que as skills chamam para a parte mecânica: `gerir-todo/todo.py` (listar, varredura), `validar-todos/todos_inline.py` (`// TODO` classificados), `unity-validar/scripts/check_state.py` (gate do commit), `meta-check/check_meta_pairs.py`, `unity-validar/scripts/validar.py`, `meta-check/check_clean_checkout.py`.
+
+### 8.1 Disco × checkout limpo
+
+O ponto cego estrutural do projeto: o que existe na máquina de quem trabalha não é o que o CI recebe. Pasta vazia (o git não versiona), arquivo ignorado, artefato gerado — os três passam despercebidos por qualquer gate que olhe a árvore de trabalho.
+
+Foi assim que duas pastas de arte vazias, com os `.meta` ainda versionados, derrubaram o CI de 13 a 19 set 2026 enquanto o `meta-check` local aprovava todo commit. Seis dias, oito runs vermelhos, nenhuma trava local capaz de ver.
+
+`meta-check/check_clean_checkout.py` fecha a diferença: materializa o índice do git com `git checkout-index` numa pasta temporária e roda os gates **a partir dela**, então a versão commitada dos próprios scripts de gate é que decide. Custa ~5 s. O pre-commit o chama no lugar da checagem em disco; rodá-lo à mão antes de um push também vale, sobretudo depois de remover arquivos de uma pasta de `Assets/`.
 
 ## 9. Servidores MCP
 

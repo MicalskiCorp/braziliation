@@ -108,7 +108,7 @@ Lógica testável vive em C# puro (`src/`), sem Unity; o Unity só adapta. Scrip
 **Quem:** Todos · `Tech/DevelopmentRules.md`
 
 1. Até a v1: commit direto no `main`, sem PR.
-2. Pre-commit (`.githooks/pre-commit`): `dotnet test` sempre; meta-check quando `Assets/` muda; gate de paletas quando arte ou paleta muda; gate do Unity quando há script de `Assets/` em stage (exige `unity-validar` OK posterior à edição).
+2. Pre-commit (`.githooks/pre-commit`): `dotnet test` sempre; meta-check quando `Assets/` muda; gate de paletas quando arte ou paleta muda; gate do Unity quando há script de `Assets/` em stage (exige `unity-validar` OK posterior à edição). Meta e paleta rodam contra o **índice** (`check_clean_checkout.py`), não contra o disco — o que passa na sua árvore de trabalho pode reprovar num checkout limpo.
 3. Mensagem `tipo(escopo): descrição` — `feat`, `fix`, `docs`, `refactor`, `chore`, `test`.
 4. Versão: `scripts/update_version.ps1` atualiza `VERSION` e `bundleVersion` juntos; tags semver.
 5. Depois da v1: `develop`, `feature/*`, merge via PR com CI verde.

@@ -1,30 +1,57 @@
-# Braziliation.Game.Core – Plugin Setup
+# Braziliation.Game.Core — plugin do Unity
 
-This folder must contain the compiled DLL of the `Braziliation.Game.Core` project
-so that Unity's `Assembly-CSharp` can reference the service and domain types.
+Esta pasta recebe a DLL compilada do projeto `Braziliation.Game.Core` para que o
+`Assembly-CSharp` do Unity enxergue os serviços e tipos de domínio.
 
-## How to build and deploy
+> **O conteúdo desta pasta é saída de build e não é versionado** — só este README é.
+> Num clone novo a pasta chega vazia; o primeiro `dotnet build` do core a preenche.
 
-```powershell
-# From the repository root:
-dotnet build src/Braziliation.Game.Core/Braziliation.Game.Core.csproj -c Release
+## Primeiro uso num clone
 
-Copy-Item src/Braziliation.Game.Core/bin/Release/net8.0/Braziliation.Game.Core.dll `
-          Assets/Plugins/Braziliation/Braziliation.Game.Core.dll -Force
+```bash
+dotnet build Desenvolvimento/src/Braziliation.Game.Core/Braziliation.Game.Core.csproj
 ```
 
-After copying, Unity will reimport the DLL automatically.
+O target `CopyToUnityPlugins` (em `Braziliation.Game.Core.csproj`) roda depois de cada
+build e copia para cá a DLL do core mais as dependências NuGet que o runtime do Unity 6
+não fornece. Não é preciso copiar nada à mão. Abra o Unity só depois disso — sem a DLL,
+o projeto não compila.
 
-## Types provided to Unity scripts
+## Por que não é versionado
 
-| Namespace | Key types |
+O compilador emite bytes diferentes a cada troca de versão do SDK. Com a DLL no git,
+qualquer `dotnet build` ou `dotnet test` local — inclusive o do pre-commit — deixava o
+working tree sujo com uma modificação que ninguém pediu. Os `.meta` saíram junto: nada no
+projeto referencia esses assets por GUID, e um `.meta` sem asset é o que o `meta-check`
+reprova.
+
+## O que é copiado
+
+| Arquivo | Por quê |
 |---|---|
-| `Braziliation.SaveSystem` | `SaveGameService`, `SaveSlot`, `ISaveStorage` |
+| `Braziliation.Game.Core.dll` | O core em si (`netstandard2.1`, C# 10) |
+| `System.Text.Json.dll` | O Unity 6 traz a v6.0.0; o core precisa da v8.0.0 |
+| `System.Text.Encodings.Web.dll` | Dependência direta de `System.Text.Json` 8.x |
+| `System.Runtime.CompilerServices.Unsafe.dll` | Exigida por `Encodings.Web` 8.x |
+| `Microsoft.Bcl.AsyncInterfaces.dll` | Ausente no Mono; necessária para iteradores assíncronos |
+
+Ficam de fora as que o BCL do Unity 6 já fornece: `System.Memory`, `System.Buffers`,
+`System.Numerics.Vectors` e `System.Threading.Tasks.Extensions`.
+
+## Tipos oferecidos aos scripts do Unity
+
+| Namespace | Tipos principais |
+|---|---|
+| `Braziliation.SaveSystem` | `SaveGameService`, `SaveSlot`, `ISaveStorage`, `SaveLoadResult` |
 | `Braziliation.Settings` | `SettingsService`, `GameSettings`, `ISettingsStorage` |
 | `Braziliation.Storage` | `IStorageProvider`, `FileStorageProvider`, `StorageProviderSaveAdapter`, `StorageProviderSettingsAdapter` |
+| `Braziliation.Build` | `BuildState`, `HybridSynergyResolver` |
+| `Braziliation.Crafting` | `CraftingService`, `CraftingRecipe`, `ItemComponent`, `ReceptacleData` |
+| `Braziliation.Enemies` | `EnemyBrain`, `EnemyBehaviorProfile`, `EnemySenses` |
 
-## Notes
+## Notas
 
-- Rebuild the DLL whenever `src/Braziliation.Game.Core/` changes.
-- The DLL targets `net8.0`; Unity 6 is compatible.
-- Add a CI step to automate the copy on merge to `main`.
+- O hook `PostToolUse` recompila o core sozinho quando um `.cs` de
+  `src/Braziliation.Game.Core/` é editado numa sessão do Claude Code.
+- Em CI o target não roda (`Condition="'$(CI)' != 'true'"`): lá não existe Editor para
+  alimentar, e os testes referenciam o projeto direto, não esta pasta.

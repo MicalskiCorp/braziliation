@@ -89,6 +89,24 @@ Format:
 - **Why:** crescem por acréscimo; são lidos inteiros pelo `@GameCreative` e pelo `@SpriteArtist`. Estão como exceção explícita no `TokenBudgetTests`.
 - **Fix:** dividir a ficha de Blumenau por seção (características, monstros, lugares, missões) com o `index.md` virando roteador — muda o template `ModelCidade`, então é decisão do usuário; dividir o guia de IA por rota. Ao dividir, remover a exceção (o teste acusa exceção sobrando).
 
+- **Item:** `BuildProgressionView` lê `ExpansionLevel` pelo `ReceptacleController`, não pelo `BuildState`
+- **Where:** `Assets/Scripts/UI/BuildProgressionView.cs` (TODO inline nas linhas 11 e 71)
+- **Why:** `BuildState` não expõe o nível de expansão por receptáculo, então a view de UI
+  vai buscar o dado no controller de crafting. É UI atravessando uma camada: a view passa a
+  depender de `ReceptacleController` estar vinculado na cena, e já degrada com
+  `Debug.LogWarning` quando não está.
+- **Fix:** expor `BuildState.GetReceptacle(ReceptacleType)` no core (com teste, I2) e trocar
+  as três leituras; a view volta a depender só do estado que o `PlayerBuildController` emite.
+
+- **Item:** `BuildProgressionView` aplica os três arrays de estágio no mesmo `SpriteRenderer`
+- **Where:** `Assets/Scripts/UI/BuildProgressionView.cs` (TODO inline na linha 80)
+- **Why:** exoesqueleto, capa e espinha têm arrays de sprite separados, mas são aplicados em
+  sequência no único renderer do personagem — na prática o último `AplicarSprite` vence e os
+  dois primeiros não aparecem. Funciona como placeholder enquanto o personagem é um sprite só.
+- **Fix:** quando a arte entregar o personagem em partes, um `SerializeField` de renderer por
+  parte (`_rendererCapa`, `_rendererEspinha`) e um `AplicarSprite` por renderer. Depende da
+  pendência "Progressão visual da build" no `TODO.md`.
+
 - **Item:** `HealthComponent` dispara `OnHealthChanged` no `Awake`
 - **Where:** `Assets/Scripts/Gameplay/HealthComponent.cs`
 - **Why:** ouvinte registrado por código em outro `Awake` pode não estar inscrito ainda.

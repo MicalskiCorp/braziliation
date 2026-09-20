@@ -16,6 +16,17 @@ Desenvolvimento/.vs/
 /Build/
 /Builds/
 
+# Plugin do core no Unity: saída de build, não fonte. O target CopyToUnityPlugins
+# reescreve Braziliation.Game.Core.dll a cada build local, e o compilador emite bytes
+# diferentes a cada troca de SDK — com a DLL versionada, rodar `dotnet test` (uma ação
+# de leitura) deixava o working tree sujo. Quem clonar roda `dotnet build` do core uma
+# vez antes de abrir o Unity; o README da pasta explica. O .meta também sai: nada no
+# projeto referencia esses assets por GUID (conferido em 2026-09-19), e um .meta sem
+# asset é exatamente o que o meta-check reprova.
+Desenvolvimento/Assets/Plugins/Braziliation/*
+!Desenvolvimento/Assets/Plugins/Braziliation/README.md
+!Desenvolvimento/Assets/Plugins/Braziliation/README.md.meta
+
 # Unity
 Library/
 Temp/

@@ -25,8 +25,11 @@
       System.Runtime.CompilerServices.Unsafe � exigida por Encodings.Web 8.x
       Microsoft.Bcl.AsyncInterfaces � ausente no Mono; necessária para iteradores assíncronos
   -->
-  <!-- Condition: em CI o build não deve mexer em Assets/Plugins/ — isso sujaria
-       o working tree do runner com DLLs versionadas. Deploy só em máquina local. -->
+  <!-- Condition: em CI a cópia não serve para nada — lá não existe Editor para
+       alimentar, e os testes referenciam este projeto direto, não a pasta de Plugins.
+       (Até 2026-09-19 a condição existia para não sujar o working tree do runner com
+       DLLs versionadas; a pasta deixou de ser versionada, e a razão passou a ser esta.)
+       Deploy só em máquina local, onde o Unity precisa da DLL nova. -->
   <Target Name="CopyToUnityPlugins" AfterTargets="Build" Condition="'$(CI)' != 'true'">
     <ItemGroup>
       <_PluginDlls Include="$(OutputPath)Braziliation.Game.Core.dll" />

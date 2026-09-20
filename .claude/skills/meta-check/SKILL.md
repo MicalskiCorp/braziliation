@@ -24,6 +24,20 @@ py .claude/skills/meta-check/check_meta_pairs.py
 
 Roda a partir da raiz do repo (`Braziliation/`); assume `Desenvolvimento/Assets` por padrão (`--assets-dir` para outro caminho). Sai com código 0 se não houver gaps, 1 se houver — usável tanto por um agente quanto num hook.
 
+### Contra o índice do git, não contra o disco
+
+```
+py .claude/skills/meta-check/check_clean_checkout.py             # meta + paletas
+py .claude/skills/meta-check/check_clean_checkout.py --gates meta
+py .claude/skills/meta-check/check_clean_checkout.py --keep      # mantém a cópia
+```
+
+`check_meta_pairs.py` olha a **árvore de trabalho**. O CI olha um **checkout limpo** — e os dois divergem sempre que algo existe no disco mas não no git. Em 13 set 2026 duas pastas de arte ficaram vazias com os `.meta` ainda versionados; git não versiona pasta vazia, então em checkout limpo o `.meta` virava órfão. O CI reprovou por seis dias e o `meta-check` local passou o tempo todo, porque na máquina do desenvolvedor as pastas existem.
+
+`check_clean_checkout.py` materializa o índice (`git checkout-index`) numa pasta temporária e roda os gates **a partir dela** — então a versão commitada dos próprios scripts de gate é que decide. É o que o pre-commit executa desde 19 set 2026, no lugar da checagem em disco. Arquivos de LFS materializam como binário de verdade; se algum objeto estiver ausente, o script avisa e não reprova o commit (ambiente incompleto não é erro de conteúdo).
+
+Rode direto quando quiser conferir antes de um push, ou depois de remover arquivos de uma pasta de `Assets/`.
+
 ## Interpretando o resultado
 
 - **Asset sem `.meta`**: se for um arquivo real (`.png`, `.cs`, `.asset`) já usado em alguma cena/prefab, é crítico — abrir o Unity Editor uma vez com o projeto para deixá-lo gerar o `.meta`, depois conferir no Git que o novo `.meta` foi adicionado. Se for pasta vazia de scaffold (só contém `.gitkeep`), é baixa severidade — o Editor gera o `.meta` da pasta automaticamente e não há referência para quebrar.

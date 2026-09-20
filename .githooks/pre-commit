@@ -24,8 +24,10 @@ FALHOU=0
 # 1. Testes .NET — cobrem o core e as guardas do repositório (.gitignore, docs,
 #    paridade de agentes, CI, consistência de assets Unity). Rodam sempre: ~10 s.
 echo "[pre-commit] dotnet test..."
-# CI=true desliga o CopyToUnityPlugins: a trava não pode alterar arquivo versionado
-# (sem isso cada commit deixava Assets/Plugins/.../Braziliation.Game.Core.dll modificada).
+# CI=true desliga o CopyToUnityPlugins: a trava não precisa reimplantar a DLL no Unity
+# para rodar os testes, e não deve mexer em arquivo nenhum enquanto o commit é montado.
+# (A pasta Assets/Plugins/Braziliation/ deixou de ser versionada em 2026-09-19; antes
+# disso, sem este CI=true, cada commit deixava a DLL do core modificada.)
 if CI=true dotnet test Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj --nologo -v quiet >"$LOG" 2>&1; then
   grep -E "Aprovado!|Passed!" "$LOG" | tail -1
 else
@@ -34,10 +36,22 @@ else
   FALHOU=1
 fi
 
-# 2. Pares asset/.meta — só quando algo em Assets/ muda.
+# 2. Gates de repositório (pares asset/.meta, paletas) — rodados contra o ÍNDICE, não
+#    contra o disco. Por quê: até 2026-09-19 o meta-check olhava a árvore de trabalho e
+#    passava enquanto o CI reprovava o mesmo commit. Duas pastas de arte ficaram vazias
+#    com os .meta ainda versionados; git não versiona pasta vazia, então em checkout
+#    limpo o .meta virava órfão. Seis dias de CI vermelho, e esta trava não tinha como
+#    perceber — na máquina de quem commita as pastas existem.
+GATES=""
 if echo "$STAGED" | grep -q '^Desenvolvimento/Assets/'; then
-  echo "[pre-commit] meta-check..."
-  if ! $PY .claude/skills/meta-check/check_meta_pairs.py >"$LOG" 2>&1; then
+  GATES="meta"
+fi
+if echo "$STAGED" | grep -qE '^Desenvolvimento/Assets/Art/.*\.png$|^Design/ArteConceitual/Paletas/'; then
+  GATES="${GATES:+$GATES,}paletas"
+fi
+if [ -n "$GATES" ]; then
+  echo "[pre-commit] checkout limpo ($GATES)..."
+  if ! $PY .claude/skills/meta-check/check_clean_checkout.py --gates "$GATES" >"$LOG" 2>&1; then
     tail -30 "$LOG"; FALHOU=1
   fi
 fi
@@ -49,14 +63,6 @@ if [ -n "$UNITY_CS" ]; then
   echo "[pre-commit] unity-validar..."
   if ! echo "$UNITY_CS" | $PY .claude/skills/unity-validar/scripts/check_state.py >"$LOG" 2>&1; then
     cat "$LOG"; FALHOU=1
-  fi
-fi
-
-# 3. Paleta da arte própria — só quando PNG de Assets/Art ou uma paleta muda.
-if echo "$STAGED" | grep -qE '^Desenvolvimento/Assets/Art/.*\.png$|^Design/ArteConceitual/Paletas/'; then
-  echo "[pre-commit] paletas..."
-  if ! $PY Design/ArteFonte/Ferramentas/check_art_palettes.py >"$LOG" 2>&1; then
-    tail -30 "$LOG"; FALHOU=1
   fi
 fi
 

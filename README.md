@@ -50,14 +50,23 @@ git clone git@github.com:<org>/Braziliation.git
 cd Braziliation
 
 # 2. Instale Git LFS
+#    Os hooks do LFS (post-checkout, post-commit, post-merge, pre-push) são versionados
+#    em .githooks/ junto com o pre-commit do projeto — é o pre-push que sobe os objetos
+#    LFS, e sem ele um push publica ponteiros sem os binários. Rodar este comando é
+#    idempotente: ele reescreve os mesmos arquivos.
 git lfs install
 git lfs pull
 
-# 3. Abra o projeto Unity
+# 3. Compile o core — ANTES de abrir o Unity
+#    Assets/Plugins/Braziliation/ é saída de build e não é versionada: num clone novo
+#    ela chega vazia, e sem a DLL o projeto Unity não compila.
+dotnet build Desenvolvimento/src/Braziliation.Game.Core/Braziliation.Game.Core.csproj
+
+# 4. Abra o projeto Unity
 #    → Aponte o Unity Hub para a pasta  Desenvolvimento/
 #    → Unity 6 (6000.2+) com URP 2D
 
-# 4. Abra no VS Code
+# 5. Abra no VS Code
 code .
 ```
 
