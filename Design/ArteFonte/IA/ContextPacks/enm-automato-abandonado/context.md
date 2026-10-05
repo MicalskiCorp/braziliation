@@ -1,6 +1,18 @@
 # Context Pack — Autômato Abandonado (placeholder de inimigo)
 
-> **✅ ADR-004 — re-autoria concluída (2026-07-12):** specs 2× (`*.2x.spec.json` via `spec_redetail.py`) são a fonte atual; sheet re-autorado 192×64 (frames 64×64) entregue. Specs 1× = histórico.
+> **✅ ADR-011 — re-autoria davinciana concluída (2026-10-05):** o asset foi **redesenhado**,
+> não migrado. Saiu a versão frontal simétrica de 32×32/3 frames; entrou um autômato de
+> relojoaria em **96×96 @ 48 PPU**, vista lateral, montado por catálogo de peças
+> (`montagem.py`). Duas dimensões de variação: **armamento** (lança, escudo-engrenagem,
+> sucata) e **liga** (bronze, prata, ferro), esta última pensada como grau de dificuldade —
+> só a rampa do metal muda, a silhueta não. O idle de 6 frames é o **maquinismo girando**:
+> cada roda avança um período de simetria por ciclo, rodas que engrenam giram em sentidos
+> opostos, e a brasa da lente respira. Sem bob: é máquina rígida.
+> Caminho percorrido até aqui: 32×32 frontal → lateral em latão (recusada por "fofa") →
+> releitura gótica com manto (recusada por não ser davinciana) → esta. As duas recusadas
+> ficam registradas em `enm_automato.alt-latao.spec.json` e no histórico do git.
+>
+> _Histórico:_ **ADR-004 — re-autoria concluída (2026-07-12):** specs 2× (`*.2x.spec.json` via `spec_redetail.py`) são a fonte atual; sheet re-autorado 192×64 (frames 64×64) entregue. Specs 1× = histórico.
 
 ## 1. Identificação
 

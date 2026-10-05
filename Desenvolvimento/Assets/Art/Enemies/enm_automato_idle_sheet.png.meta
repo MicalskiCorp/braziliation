@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -141,8 +141,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 96
+        height: 96
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,7 +151,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d905a5c2db8f334ba9b3367a314e89e
+      spriteID: 77880368bd6ef2941bbbd4325b1dce88
       internalID: -22474830
       vertices: []
       indices: 
@@ -161,10 +161,10 @@ TextureImporter:
       name: enm_automato_idle_sheet_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
-        width: 64
-        height: 64
+        width: 96
+        height: 96
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,7 +173,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2967b7e91c6d24d4d86200d3aeb0aeb0
+      spriteID: 83cc4ed49f0c7d646bdeac89a7e81c9a
       internalID: 1226826704
       vertices: []
       indices: 
@@ -183,10 +183,10 @@ TextureImporter:
       name: enm_automato_idle_sheet_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 192
         y: 0
-        width: 64
-        height: 64
+        width: 96
+        height: 96
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,8 +195,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b4883f3e4e75ba45b69366750fecc45
+      spriteID: 37bbe7db4c6e4ad4f8741b6e0153843a
       internalID: 1382444842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enm_automato_idle_sheet_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 96
+        height: 96
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab983a099a201034c95ab9ba21411b6f
+      internalID: -277366859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enm_automato_idle_sheet_4
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 96
+        height: 96
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 660e68834fbd8c349915b6d25d9bf55a
+      internalID: -1000019878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enm_automato_idle_sheet_5
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 96
+        height: 96
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3276427999258f47904f76a7d53173d
+      internalID: -958545306
       vertices: []
       indices: 
       edges: []
@@ -218,6 +284,9 @@ TextureImporter:
       enm_automato_idle_sheet_0: -22474830
       enm_automato_idle_sheet_1: 1226826704
       enm_automato_idle_sheet_2: 1382444842
+      enm_automato_idle_sheet_3: -277366859
+      enm_automato_idle_sheet_4: -1000019878
+      enm_automato_idle_sheet_5: -958545306
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
