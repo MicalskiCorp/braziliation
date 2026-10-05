@@ -61,22 +61,25 @@ Legenda de status por célula: ❌ não iniciado · 🔨 em andamento · ⏸ agu
 
 ## Assets Registrados
 
-> **ADR-004 — re-autoria concluída (2026-07-12):** todos os assets pré-migração foram **re-autorados** para o grid 640×360/32 PPU via `spec_redetail.py` (EPX + textura de material) com crítica visual e gates re-aprovados — não são mais upscale cru. Tamanhos na tabela = originais 1×; no disco estão 2× re-detalhados. Fontes atuais: specs `*.2x.spec.json` nos context packs. Tilesets regenerados com detail pass (`gen_tileset --scale 2`). Frames do menu convertidos ×2 (640×360).
+> **ADR-011 — re-autoria concluída (2026-09-25):** todos os assets próprios foram re-autorados para o grid 960×540/48 PPU. Os que tinham spec 1× passaram por `spec_redetail.py --scale 3` (Scale3x + textura) — 16×3=48 é exato, então a migração não passou pelo fator 1,5. Tilesets regenerados com `gen_tileset --scale 3`, mesma seed 42. Os 8 frames do menu, que não têm spec, foram convertidos por `raster_3over2.py` (Scale3x + redução 2:1 por cor dominante, sem cor nova). **Tamanhos na tabela abaixo = o que está no disco hoje.** Fontes atuais: specs `*.3x.spec.json`. Fora da migração: o sheet do autômato (sendo substituído pela arte gótica 96×96) e os placeholders Gothicvania, que seguem a 32 PPU e mantêm seu tamanho em mundo.
+>
+> _Histórico:_ > **ADR-004 — re-autoria concluída (2026-07-12):** todos os assets pré-migração foram **re-autorados** para o grid 640×360/32 PPU via `spec_redetail.py` (EPX + textura de material) com crítica visual e gates re-aprovados — não são mais upscale cru. Tamanhos na tabela = originais 1×; no disco estão 2× re-detalhados. Fontes atuais: specs `*.2x.spec.json` nos context packs. Tilesets regenerados com detail pass (`gen_tileset --scale 2`). Frames do menu convertidos ×2 (640×360).
 
 | Asset | Caminho | Fonte | Paleta | Observação |
 |-------|---------|-------|--------|------------|
-| `prop_blumenau_floodgate_lever.png` | `Assets/Art/Environments/Blumenau/Props/` | Spec JSON em `Design/ArteFonte/IA/ContextPacks/exemplo-prop-comporta-blumenau/` | Blumenau (proposta-inicial) | Prop 32×32 do sistema hídrico; gerado via pipeline programático (2 iterações) |
-| `prop_blumenau_floodgate_lever_activate_sheet.png` | `Assets/Art/Environments/Blumenau/Props/` | Specs `_f2`/`_f3` no mesmo context pack | Blumenau (proposta-inicial) | Sheet 96×32, 3 frames de acionamento; requer Sprite Mode Multiple + slicing 32×32 (wiring pendente) |
-| `frame_001.png`–`frame_008.png` | `Assets/Art/Menu/Background/Frames/` | — | — | Sequência de 8 frames do fundo animado do menu principal; wiring em `Assets/Editor/Menu/MenuBackgroundSetupEditor.cs` |
-| `prop_blumenau_marcador_pilar_{verde,amarelo,vermelho,preto}.png` | `Assets/Art/Environments/Blumenau/Props/` | Specs em `ContextPacks/lote-sistema-hidrico-blumenau/` | Blumenau (aprovada) | 16×16 — 4 estados do rio (rotina/alerta/cheia/saturação) |
-| `prop_blumenau_sino_alerta.png` + `_ring_sheet.png` | idem | idem | Blumenau (aprovada) | 16×16 idle + sheet 48×16 (3 frames de badalada) |
-| `prop_blumenau_sirene_pneumatica.png` | idem | idem | Blumenau (aprovada) | 16×16 — sirene de alerta em poste |
-| `prop_blumenau_sinalizador_torre.png` + `_aceso.png` | idem | idem | Blumenau (aprovada) | 16×32 — farol de torre, estados apagado/aceso |
-| `prop_blumenau_lapide_gato.png` | idem | Specs em `ContextPacks/lote-jardim-edith/` | Blumenau (aprovada) | 16×16 — base das 9 lápides nomeadas (SQ-01) |
-| `prop_blumenau_estatua_gato.png` | idem | idem | Blumenau (aprovada) | 16×32 — estátua do Jardim de Edith |
-| `ui_item_pingente_gato.png` | `Assets/Art/UI/` | idem | Blumenau (aprovada) | 16×16 — item de coleta da SQ-01 (41×) |
-| `enm_automato_idle_sheet.png` | `Assets/Art/Enemies/` | Specs em `ContextPacks/enm-automato-abandonado/` | Blumenau (aprovada) | 96×32, 3 frames idle — placeholder do Autômato Abandonado (candidato a inimigo básico da demo) |
-| `env_blumenau_{enxaimel,metal,agua}_tileset.png` | `Assets/Art/Environments/Blumenau/Tilesets/` | `gen_tileset.py` seed 42 (manifests em `IA/Outputs/`) | Blumenau (aprovada) | Tiles 16×16 procedurais: enxaimel 4 tipos, metal 3, água/lama 3 × 4 variações |
+| `prop_blumenau_floodgate_lever.png` | `Assets/Art/Environments/Blumenau/Props/` | Spec JSON em `Design/ArteFonte/IA/ContextPacks/exemplo-prop-comporta-blumenau/` | Blumenau (proposta-inicial) | Prop 96×96 do sistema hídrico; gerado via pipeline programático (2 iterações) |
+| `prop_blumenau_floodgate_lever_activate_sheet.png` | `Assets/Art/Environments/Blumenau/Props/` | Specs `_f2`/`_f3` no mesmo context pack | Blumenau (proposta-inicial) | Sheet 288×96, 3 frames de acionamento; fatiado automaticamente pelo `SheetAutoSlicer` |
+| `frame_001.png`–`frame_008.png` | `Assets/Art/Menu/Background/Frames/` | — | — | 960×540 — sequência de 8 frames do fundo animado do menu principal; wiring em `Assets/Editor/Menu/MenuBackgroundSetupEditor.cs` |
+| `prop_blumenau_marcador_pilar_{verde,amarelo,vermelho,preto}.png` | `Assets/Art/Environments/Blumenau/Props/` | Specs em `ContextPacks/lote-sistema-hidrico-blumenau/` | Blumenau (aprovada) | 48×48 — 4 estados do rio (rotina/alerta/cheia/saturação) |
+| `prop_blumenau_sino_alerta.png` + `_ring_sheet.png` | idem | idem | Blumenau (aprovada) | 48×48 idle + sheet 144×48 (3 frames de badalada) |
+| `prop_blumenau_sirene_pneumatica.png` | idem | idem | Blumenau (aprovada) | 48×48 — sirene de alerta em poste |
+| `prop_blumenau_sinalizador_torre.png` + `_aceso.png` | idem | idem | Blumenau (aprovada) | 48×96 — farol de torre, estados apagado/aceso |
+| `prop_blumenau_lapide_gato.png` | idem | Specs em `ContextPacks/lote-jardim-edith/` | Blumenau (aprovada) | 48×48 — base das 9 lápides nomeadas (SQ-01) |
+| `prop_blumenau_estatua_gato.png` | idem | idem | Blumenau (aprovada) | 48×96 — estátua do Jardim de Edith |
+| `ui_item_pingente_gato.png` | `Assets/Art/UI/` | idem | Blumenau (aprovada) | 48×48 — item de coleta da SQ-01 (41×) |
+| `enm_automato_idle_sheet.png` | `Assets/Art/Enemies/` | `montagem.py` + spec em `ContextPacks/enm-automato-abandonado/` | Blumenau (aprovada) | 576×96 — 6 frames de idle do lanceiro bronze; a animação é o maquinismo girando, fatiada automaticamente pelo `SheetAutoSlicer` |
+| `enm_automato_{escudo,sucata,lanca_prata}.png` | idem | idem | Blumenau (aprovada) | 96×96 — variantes estáticas: escudo-engrenagem, sucata em liga de ferro, e lanceiro em liga de prata (grau de dificuldade pela liga) |
+| `env_blumenau_{enxaimel,metal,agua}_tileset.png` | `Assets/Art/Environments/Blumenau/Tilesets/` | `gen_tileset.py` seed 42 (manifests em `IA/Outputs/`) | Blumenau (aprovada) | Tiles 48×48 procedurais: enxaimel 4 tipos, metal 3, água/lama 3 × 4 variações |
 
 ## Assets de Terceiros (placeholder)
 

@@ -64,6 +64,10 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
+| **ADR-011 — re-autoria da arte para o grid de 48 PPU** | `@SpriteArtist` | Alta | ✅ Concluído 2026-09-25 — 16 specs via `spec_redetail --scale 3`, 3 tilesets via `gen_tileset --scale 3`, 8 frames do menu via `raster_3over2.py`. Restam só o autômato (em substituição) e os placeholders Gothicvania |
+| **ADR-011 — modo 48 nas ferramentas** | `@SpriteArtist` | Alta | ✅ Concluído 2026-09-25 — Scale3x em `spec_redetail --scale 3` e `gen_tileset --scale 3`; `raster_3over2.py` cobre PNG sem spec |
+| **`CameraScaler` é script órfão** — o GUID dele não aparece em nenhuma cena nem prefab, então nada aplica Pixel Perfect em runtime. As cenas usam câmera ortográfica pura (orthoSize 5,625 = 540/(2×48), correto para o ADR-011). Ou se liga o componente, ou se apaga o script | `@UnityDeveloper` | Alta | ❌ — descoberto em 2026-09-25 na migração do ADR-011 |
+| Autômato Abandonado: redesenho davinciano em 96×96 | `@SpriteArtist` | Alta | ✅ Concluído 2026-10-05 — 4 variantes (lança/escudo/sucata/prata) + idle de 6 frames com as engrenagens girando, exportados e aprovados nos gates. Falta o wiring: `.anim` + Animator e o prefab do inimigo (`@UnityDeveloper`) |
 | Onda 3: veredito do lote 12 da Edith (teto de 3 lotes por ajuste) e curadoria dos thumbnails do Soldado Clérico | Usuário + `@SpriteArtist` | Média | 🔨 |
 | Onda 2 restante: tilesets pedra portuguesa, cemitério/terra, mármore, periferia pós-enchente | `@SpriteArtist` | Média | ❌ |
 | Fechar o A/B SDXL × Z-Image: testar Z-Image + LoRA PixelArtRedmond (versão Z Image), com "full body, head to toe" no prompt (o lote anterior saiu em busto) | `@SpriteArtist` | Média | ❌ — ver `Design/ArteFonte/IA/Models/bench-modelo-base-2026-09.md` |

@@ -19,6 +19,11 @@ Format:
 
 ### Alta
 
+- **Item:** Só os placeholders CC0 seguem no grid antigo depois do ADR-011
+- **Where:** `Assets/Art/ThirdParty/Gothicvania/**` · lista viva em `Assets/Editor/Art/Escala/PixelScale.cs`
+- **Why:** Toda a arte própria está no grid de 48 desde 2026-10-05, quando o autômato foi redesenhado. Restam os 9 placeholders do Gothicvania, importados a 32 PPU — mantêm o tamanho em mundo e só parecem menos densos ao lado do resto.
+- **Fix:** Saem junto com `Art/ThirdParty/` e o `CREDITS.md` quando a arte própria os substituir, conforme o item já rastreado no TODO. Aí `PixelScale` vira uma constante só.
+
 - **Item:** UI de slots trata `Corrupt` e `FromNewerBuild` como "slot vazio"
 - **Where:** `Assets/Scripts/UI/SaveSlotsView.cs` (usa `SaveGameService.Load`)
 - **Why:** ADR-007 criou `LoadDetailed` com status distinguíveis, mas a UI ainda chama o
