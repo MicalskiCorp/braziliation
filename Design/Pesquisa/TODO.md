@@ -41,7 +41,7 @@
 | Acidente fatal de 1944 no Túnel de Siderópolis e origem da mão de obra (SP/MG/imigrantes pós-guerra) | Lenda confirmada como contada, mas sem registro documental; origem da mão de obra não confirmada em nenhuma fonte | Baixa | ❌ Não confirmado — ver [Sideropolis/index.md](Estados/SantaCatarina/cidades/Sideropolis/index.md) |
 | Datas de funcionamento do Leprosário de São Francisco do Sul (alegação "1923-1941") | Fontes divergem entre século XIX (lazareto) e século XVII (mosteiro beneditino); nenhuma sustenta o intervalo 1923-1941 | Baixa | ❌ Não confirmado — ver [SaoFranciscoDoSul/index.md](Estados/SantaCatarina/cidades/SaoFranciscoDoSul/index.md) |
 | Lenhador Fantasma da Ilha Redonda (São Francisco do Sul) | Motivo citado de forma consistente, mas só em fontes de baixa confiabilidade editorial (wiki de fãs) | Baixa | 🟡 Confirmação fraca — ver [SaoFranciscoDoSul/index.md](Estados/SantaCatarina/cidades/SaoFranciscoDoSul/index.md) |
-| Número exato da lei do Dia Estadual de São João Maria (19.722 vs. 19.777) | Data (3 de maio) e existência do dia oficial confirmadas; número da lei diverge entre Diário Oficial e reportagem secundária | Baixa | 🟡 Confirmar antes de citar o número em material publicado — ver [Temas/monge-joao-maria.md](../Temas/monge-joao-maria.md) |
+| Número exato da lei do Dia Estadual de São João Maria (19.722 vs. 19.777) | Data (3 de maio) e existência do dia oficial confirmadas; número da lei diverge entre Diário Oficial e reportagem secundária | Baixa | 🟡 Confirmar antes de citar o número em material publicado — ver [Temas/monge-joao-maria.md](Temas/monge-joao-maria.md) |
 
 ---
 
