@@ -48,6 +48,11 @@ abrir o Unity, ou o projeto não compila.
 - **Layout de `Assets/Scripts/` é por domínio (ADR-005, substitui o ADR-003):**
   `Core/`, `Gameplay/`, `Build/`, `Crafting/`, `Enemies/`, `UI/`. Script novo vai para
   a pasta do domínio.
+- **Escala: 960×540 @ 48 PPU, tile 48×48 (ADR-011, substitui o ADR-004).** Sprite novo
+  nasce no grid de 48 (player ~96 px, inimigo 48–96). A arte anterior continua importada a
+  32 PPU para não mudar de tamanho em mundo — a lista viva está em
+  `Assets/Editor/Art/PixelScale.cs`, e re-autorar um asset significa apagar a linha dele
+  de lá. Fila de re-autoria em `Docs/Tech/tech_debt.md`.
 - **Todo input passa por `Braziliation.Core.GameInput` (ADR-006)**, sobre o action map
   project-wide `Assets/InputSystem_Actions.inputactions`. Ação nova = binding no asset
   primeiro, propriedade em `GameInput` depois. Polling de `Keyboard.current`/`Gamepad.current`

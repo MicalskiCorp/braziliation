@@ -223,14 +223,14 @@ namespace Braziliation.Editor.Menu
             existing.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
             existing.transform.localScale = Vector3.one;
 
-            // Fix camera: orthoSize = referenceH / (2 x PPU) = 360 / (2 x 32) = 5.625 (ADR-004)
-            // so a 640×360 sprite at 32 PPU fills the viewport exactly with no black bars
+            // Fix camera: orthoSize = referenceH / (2 x PPU) = 540 / (2 x 48) = 5.625 (ADR-011)
+            // so um background de tela cheia preenche o viewport sem barras pretas
             var cam = Camera.main;
             if (cam != null && !Mathf.Approximately(cam.orthographicSize, 5.625f))
             {
                 cam.orthographicSize = 5.625f;
                 EditorUtility.SetDirty(cam);
-                Debug.Log("[MenuBackgroundSetup] Camera orthoSize set to 5.625 (640×360 @ 32 PPU, ADR-004).");
+                Debug.Log("[MenuBackgroundSetup] Camera orthoSize set to 5.625 (960×540 @ 48 PPU, ADR-011).");
             }
 
             // Mark scene dirty so Unity prompts to save

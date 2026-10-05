@@ -41,7 +41,8 @@ namespace Braziliation.Tests.EditMode
         }
 
         /// <summary>
-        /// SpriteImportPostprocessor força 32 PPU / Point / sem compressão em Assets/Art/.
+        /// SpriteImportPostprocessor força o PPU de PixelScale (48 no grid do ADR-011,
+        /// 32 no que ainda não foi re-autorado) / Point / sem compressão em Assets/Art/.
         /// Um .meta antigo que nunca foi reimportado escapa do postprocessor — este teste pega.
         /// </summary>
         [Test]
@@ -52,11 +53,13 @@ namespace Braziliation.Tests.EditMode
                 .Where(path => !path.StartsWith("Assets/Art/ThirdParty/"))
                 .Select(path => (path, importer: AssetImporter.GetAtPath(path) as TextureImporter))
                 .Where(x => x.importer != null)
-                .Where(x => !Mathf.Approximately(x.importer.spritePixelsPerUnit, 32f)
+                .Where(x => !Mathf.Approximately(x.importer.spritePixelsPerUnit,
+                                                 Braziliation.Editor.Art.PixelScale.Para(x.path))
                             || x.importer.filterMode != FilterMode.Point
                             || x.importer.textureCompression != TextureImporterCompression.Uncompressed
                             || x.importer.mipmapEnabled)
-                .Select(x => $"{x.path} (PPU {x.importer.spritePixelsPerUnit}, {x.importer.filterMode}, " +
+                .Select(x => $"{x.path} (PPU {x.importer.spritePixelsPerUnit}, esperado " +
+                             $"{Braziliation.Editor.Art.PixelScale.Para(x.path)}, {x.importer.filterMode}, " +
                              $"{x.importer.textureCompression}, mipmap {x.importer.mipmapEnabled})")
                 .ToList();
 

@@ -1,11 +1,11 @@
 # Direção de Arte e Áudio — Braziliation
 
-> Pixel art dieselpunk, paleta restrita, resolução 640×360 @ 32 PPU (Blasphemous-like, ADR-004), direção de áudio e referências. Movido de `.github/instructions/art-direction.instructions.md` (ADR-008). Detalhe visual: [`style-bible.md`](style-bible.md); regras que o Claude Code carrega nas pastas de arte: `.claude/rules/arte.md`.
+> Pixel art dieselpunk, paleta restrita, resolução 960×540 @ 48 PPU (Blasphemous-like, ADR-011), direção de áudio e referências. Movido de `.github/instructions/art-direction.instructions.md` (ADR-008). Detalhe visual: [`style-bible.md`](style-bible.md); regras que o Claude Code carrega nas pastas de arte: `.claude/rules/arte.md`.
 
 ## Visual style
 
 - **Pixel art** — Arte desenhada em pixel; sem texturas hi-res ou arte vetorial no jogo.
-- **Inspiração Blasphemous-era (ADR-004)** — Densidade de pixel de metroidvanias modernos (Blasphemous, SOTN). Leitura clara em 640×360 (32 PPU); personagem ~17% da altura da tela.
+- **Inspiração Blasphemous-era (ADR-011)** — Densidade de pixel de metroidvanias modernos (Blasphemous, SOTN). Leitura clara em 960×540 (48 PPU); personagem ~17% da altura da tela.
 - **Paleta restrita** — Paleta coesa por ambiente; evite "arco-íris" ou tons conflitantes. Defina paletas-chave por ambiente (ex: wasteland, selva, industrial).
 - **Dieselpunk brasileiro** — Industrial, mecânico, enferrujado, oleoso. Engrenagens, canos, vapor, tecnologia improvisada. Sabor brasileiro na arquitetura e props (ex: favela meets fábrica).
 
@@ -13,10 +13,10 @@
 
 | Atributo | Valor |
 |----------|-------|
-| Resolução de referência | 640×360 (CameraScaler; escala inteira ×3 → 1080p) — ADR-004 |
+| Resolução de referência | 960×540 (CameraScaler; escala inteira ×2 → 1080p) — ADR-011 |
 | PPU (pixels per unit) | 32 |
 | Pipeline | URP 2D — apenas sprites e tilemaps; sem modelos 3D no gameplay |
-| Tamanho base de sprite | 32×32 a 64×64 px (1 tile = 32×32 @ 32 PPU = 1 unidade Unity) |
+| Tamanho base de sprite | 48×48 a 96×96 px (1 tile = 48×48 @ 48 PPU = 1 unidade Unity) |
 | Animação | Sprite-based (2D Animation, Aseprite); run 8-12 frames, attack 6-10 |
 | Paleta máxima por sprite | ~32 cores (base regional de 16 + rampas estendidas conforme necessário) |
 | Assets legados (pré-ADR-004) | Upscale ×2 nearest — funcionais, aguardam re-autoria em densidade nova |
@@ -39,6 +39,6 @@
 
 Ao gerar prompts para ferramentas de arte (ComfyUI, Stable Diffusion etc.), inclua:
 - Paleta restrita da região (`Design/ArteConceitual/Paletas/{regiao}.json`; até ~32 cores por sprite — ADR-004)
-- Leitura em 640×360 @ 32 PPU (tile 32×32, player ~64 px de altura)
+- Leitura em 960×540 @ 48 PPU (tile 48×48, player ~96 px de altura)
 - Pose e contexto
 - Referência cultural brasileira / dieselpunk

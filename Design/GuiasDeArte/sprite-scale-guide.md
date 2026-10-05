@@ -6,9 +6,9 @@
 
 | Atributo | Valor |
 |----------|-------|
-| Resolução de referência | 640x360 (escala inteira ×3 → 1080p) |
+| Resolução de referência | 960x540 (escala inteira ×2 → 1080p) |
 | PPU | 32 |
-| Tile base | 32x32 px |
+| Tile base | 48x48 px |
 | Unidade Unity | 1 tile = 1 unidade |
 | Câmera | Pixel Perfect / URP 2D (`CameraScaler`) |
 
@@ -16,16 +16,16 @@
 
 | Asset | Tamanho Base | Observação |
 |-------|--------------|------------|
-| Tile comum | 32x32 | Chão, parede, borda, plataforma |
-| Prop pequeno | 32x32 | Garrafa, engrenagem pequena, vela, item simples |
+| Tile comum | 48x48 | Chão, parede, borda, plataforma |
+| Prop pequeno | 48x48 | Garrafa, engrenagem pequena, vela, item simples |
 | Prop médio | 32x64 ou 64x32 | Alavanca, porta baixa, caixa, cano |
 | Prop grande | 64x64 ou 96x64 | Máquina, altar, comporta pequena |
-| Player | 48x64 ou 64x64 | ~64px de altura (~17% da tela, proporção Blasphemous) |
+| Player | 72x96 ou 96x96 | ~96px de altura (~17% da tela, proporção Blasphemous) |
 | NPC humano | 48x64 ou 64x64 | Varia por roupa/chapéu/equipamento |
-| Inimigo pequeno | 32x32 a 64x48 | Deve ser lido como ameaça em movimento |
+| Inimigo pequeno | 48x48 a 96x72 | Deve ser lido como ameaça em movimento |
 | Inimigo médio | 64x64 a 96x64 | Pode ter partes animadas separadas |
 | Boss | Múltiplos de 32 | Preferir montagem por partes/prefab |
-| UI icon | 24x24 ou 32x32 | Deve ler em escala pequena |
+| UI icon | 36x36 ou 48x48 | Deve ler em escala pequena |
 
 ## Regras
 

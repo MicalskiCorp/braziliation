@@ -47,7 +47,7 @@ Formato de cada entrada (os rótulos ficam em inglês — o `DocsConsistencyTest
 ## ADR-004: Upgrade de resolução para 640×360 (Blasphemous-like)
 
 - **Date:** 2026-07-12
-- **Status:** Accepted
+- **Status:** **Superseded por ADR-011** (2026-09-25). Continua valendo tudo que não é número de escala: o alvo PC (SNES/EverDrive segue descartado), o limite de ~32 cores por sprite, as contagens de animação (run 8-12, attack 6-10) e a divisão de rotas (C para personagens/inimigos, A para props/ícones/tiles). Os números de resolução, PPU e tile foram substituídos.
 - **Context:** A direção de arte original (320×180, 16 PPU, tile 16, SNES-era) limitava a densidade de pixels. Decisão do usuário: elevar a fidelidade ao patamar de Blasphemous (640×360 nativo, ~2× densidade, mesma proporção de personagem em tela ~17%).
 - **Decision:** Resolução de referência **640×360** (escala inteira ×3 → 1080p), **32 PPU**, tile base **32×32**, player ~64px de altura, limite de cores por sprite elevado a **~32**. Assets legados convertidos por upscale ×2 nearest (preservam leitura e tamanho em tela; densidade nova entra por re-autoria asset a asset). Contagens de animação elevadas (run 8-12, attack 6-10).
 - **Consequences:** `CameraScaler` e `SpriteImportPostprocessor` reparametrizados (32 PPU / 640×360); ferramentas do pipeline com `--scale`; guias de arte atualizados; **o alvo "SNES (EverDrive)" citado em regras antigas fica formalmente descartado** — plataforma alvo é PC; rota C (difusão + pixel pass) passa a ser a principal para personagens/inimigos, rota A fica para props/ícones/tiles; assets legados marcados para re-autoria em densidade nova (rastreados no TODO.md).
@@ -224,6 +224,16 @@ Formato de cada entrada (os rótulos ficam em inglês — o `DocsConsistencyTest
   `unity license activate --personal --accept-eula` — o CLI ativa Personal, ao contrário
   do que este projeto registrava. Revisitar se o GameCI publicar suporte estável a
   entitlement, ou se o projeto passar a ter licença Plus/Pro (aí `UNITY_SERIAL` resolve).
+
+---
+
+## ADR-011: Resolução de referência 960×540 @ 48 PPU (substitui ADR-004)
+
+- **Date:** 2026-09-25
+- **Status:** Accepted
+- **Context:** O ADR-004 fixou 640×360 @ 32 PPU mirando densidade "Blasphemous-like", mas a densidade alvo da style-bible (3-4 bandas de valor por material, dithering na transição, ornamento legível) não cabe nos canvas que aquele PPU produz. Medido na re-autoria do Autômato Abandonado em 2026-09-25: a 64×64 cabem no máximo **duas** engrenagens legíveis num torso — cada uma precisa de ~13px mais folga escura em volta —, e o brief pedia um amontoado de engrenagens. Decisão do usuário: subir a densidade de **tudo** (cenário e personagens juntos), para manter a proporção entre os elementos. Aumentar só o inimigo o transformaria em mini-boss, o que não é a intenção.
+- **Decision:** Resolução de referência **960×540** (escala inteira **×2** → 1080p), **48 PPU**, tile base **48×48**, player ~96px de altura, sprite típico 48–96. Limite de ~32 cores por sprite continua valendo. A combinação é escolhida porque 960×540 é exatamente 1,5× de 640×360 **e** ainda escala em número inteiro para 1080p: com 48 PPU junto, o mundo visível permanece 20 × 11,25 unidades — o enquadramento da câmera não muda, só a densidade dentro dele. Dobrar (64 PPU / 1280×720) seria mais limpo para reescalar arte, mas 1280×720 só dá escala inteira em 1440p e exigiria ×1,5 em 1080p, quebrando o pixel perfect.
+- **Consequences:** O fator 1,5 **não é escala inteira de arte**: nada pode ser ampliado por nearest, tudo precisa ser re-autorado — 26 PNGs próprios em `Assets/Art/` (fora ThirdParty) e 40 specs nos context packs, rastreados em [`tech_debt.md`](../Tech/tech_debt.md). `gen_tileset.py` precisa de modo 48 (hoje desenha em 16 e entrega 32 via `--scale 2`); `spec_redetail.py` precisa de modo ×1,5 (hoje só 1×→2×). Lado Unity: Pixel Perfect Camera, `CameraScaler`, PPU de importação de todo sprite e `SheetAutoSlicer`. Os placeholders CC0 do Gothicvania precisam ser reescalados ou aposentados. Enquanto a migração não fecha, o projeto convive com assets em duas densidades — o `check_art_palettes` não pega isso, então a checagem é por inspeção. Precedente: o próprio ADR-004 já executou uma migração equivalente (16→32 PPU).
 
 ---
 

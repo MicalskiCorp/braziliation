@@ -23,7 +23,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from spec_redetail import add_noise, epx
+from spec_redetail import add_noise, epx, scale3x
 
 TILE = 16
 
@@ -181,7 +181,7 @@ def main() -> None:
     ap.add_argument("--palette", type=Path, required=True)
     ap.add_argument("--seed", type=int, required=True, help="Seed determinística (registrada no manifest)")
     ap.add_argument("--variations", type=int, default=4, help="Variações por tipo de tile (default 4)")
-    ap.add_argument("--scale", type=int, default=2, help="Upscale nearest do sheet final (default 2: desenho 16px -> tile 32px do ADR-004; usar 1 para saída nativa 16)")
+    ap.add_argument("--scale", type=int, default=2, help="Expansão do sheet final: 3 = tile 48px do ADR-011 (Scale3x + textura), 2 = tile 32px do ADR-004 (EPX + textura), 1 = nativo 16")
     ap.add_argument("-o", "--out", type=Path, required=True)
     args = ap.parse_args()
 
@@ -202,7 +202,14 @@ def main() -> None:
                 nearest = ["".join(ch * 2 for ch in r) for r in grid for _ in (0, 1)]
                 merged = ["".join(s if s != "." else n for s, n in zip(sr, nr)) for sr, nr in zip(smooth, nearest)]
                 grid = add_noise(merged, f"{args.familia}-{args.seed}-{row}-{col}")
-            elif args.scale > 2:
+            elif args.scale == 3:
+                # Detail pass ADR-011: Scale3x (curvas) + textura fina no grid 48.
+                # 16 x 3 = 48 é exato, então o tile do grid novo sai sem interpolação.
+                smooth = scale3x(grid)
+                nearest = ["".join(ch * 3 for ch in r) for r in grid for _ in range(3)]
+                merged = ["".join(s if s != "." else n for s, n in zip(sr, nr)) for sr, nr in zip(smooth, nearest)]
+                grid = add_noise(merged, f"{args.familia}-{args.seed}-{row}-{col}")
+            elif args.scale > 3:
                 grid = [ "".join(ch * args.scale for ch in r) for r in grid for _ in range(args.scale) ]
             for y in range(len(grid)):
                 for x in range(len(grid[0])):

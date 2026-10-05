@@ -9,7 +9,8 @@
 
 | Arquivo | Caminho | Função |
 |---------|---------|--------|
-| `SpriteImportPostprocessor.cs` | `Assets/Editor/Art/SpriteImportPostprocessor.cs` | Força 32 PPU, Point e sem compressão em toda textura de `Assets/Art/` (ADR-004) |
+| `SpriteImportPostprocessor.cs` | `Assets/Editor/Art/SpriteImportPostprocessor.cs` | Força Point, sem compressão e o PPU de `PixelScale` em toda textura de `Assets/Art/` |
+| `PixelScale.cs` | `Assets/Editor/Art/PixelScale.cs` | Fonte única do PPU por asset durante a migração do ADR-011: 48 no grid atual, 32 no que ainda não foi re-autorado |
 | `SheetAutoSlicer.cs` | `Assets/Editor/Art/SheetAutoSlicer.cs` | Fatia `*_sheet.png` em grade quadrada com pivot no centro-inferior, preservando IDs |
 | `SheetAnimationTool.cs` | `Assets/Editor/Art/SheetAnimationTool.cs` | Gera AnimationClip + AnimatorController de um sheet fatiado (`Assets > Braziliation > Criar Animação do Spritesheet`) |
 | `WfcMapImporter.cs` | `Assets/Editor/Art/WfcMapImporter.cs` | Pinta um Tilemap a partir do `.unity.json` do `gen_map_wfc.py` (`Assets > Braziliation > Importar Mapa WFC...`) |
@@ -33,7 +34,7 @@
 
 | Parâmetro | Tipo | Valor Padrão | Descrição |
 |-----------|------|-------------|-----------|
-| PPU de import | int | 32 | Definido no `SpriteImportPostprocessor` (ADR-004) |
+| PPU de import | float | 48 | `PixelScale.Atual` (ADR-011); assets na lista `PixelScale.Legado` continuam a 32 até serem re-autorados |
 
 ## Notas de Design
 

@@ -11,19 +11,23 @@ paths:
 Guia canônico: `Design/GuiasDeArte/style-bible.md` · direção de arte e áudio: `direcao-de-arte.md`. Pipeline: `pipeline-sprites-programaticos.md`
 (programático) e `pipeline-ia-sprites.md` (difusão/concept).
 
-## Restrições técnicas (ADR-004)
+## Restrições técnicas (ADR-011)
 
 | Atributo | Valor |
 |----------|-------|
-| Resolução de referência | 640×360 (escala inteira ×3 → 1080p) |
-| PPU | 32 |
-| Tile base | 32×32 |
-| Sprite típico | 32×32 a 64×64; player ~64 px de altura |
+| Resolução de referência | 960×540 (escala inteira ×2 → 1080p) |
+| PPU | 48 |
+| Tile base | 48×48 |
+| Sprite típico | 48×48 a 96×96; player ~96 px de altura |
 | Paleta máxima por sprite | ~32 cores |
 | Animação | run 8-12 frames, attack 6-10 |
 
 Estilo: pixel art dieselpunk brasileiro — industrial, enferrujado, oleoso, tecnologia
 improvisada. Silhueta legível em 1× antes de qualquer detalhe.
+
+> **Migração em curso (ADR-011):** a arte anterior ao grid de 48 continua importada a 32 PPU
+> para não mudar de tamanho em mundo. A lista viva está em `Assets/Editor/Art/PixelScale.cs`;
+> ao re-autorar um asset, apague a linha dele de lá.
 
 ## Regras inegociáveis
 

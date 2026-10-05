@@ -264,7 +264,7 @@ namespace Braziliation.Editor.Art
         {
             var root = new GameObject($"WFC_{rulesetName}");
             var grid = root.AddComponent<Grid>();
-            // 32 PPU com tile de 32 px = 1 unidade Unity por célula (ADR-004).
+            // 48 PPU com tile de 48 px = 1 unidade Unity por célula (ADR-011).
             grid.cellSize = Vector3.one;
 
             var layer = new GameObject("Tilemap");

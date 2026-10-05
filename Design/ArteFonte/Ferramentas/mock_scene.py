@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Compõe um sprite numa cena mock 640x360 para o teste de leitura em 1x.
+"""Compõe um sprite numa cena mock 960x540 para o teste de leitura em 1x.
 
 Implementa o passo "Validar em cena" do pipeline: o sprite precisa ler
-claramente na resolução de referência do jogo (640x360, 32 PPU — ADR-004),
+claramente na resolução de referência do jogo (960x540, 48 PPU — ADR-011),
 sobre faixas de valor que simulam céu/fundo/meio/chão da paleta da região.
 
-Gera dois arquivos: {nome}_mock.png (640x360 real) e {nome}_mock_3x.png
+Gera dois arquivos: {nome}_mock.png (960x540 real) e {nome}_mock_3x.png
 (ampliado para inspeção visual).
 
 Uso:
@@ -19,7 +19,7 @@ from pathlib import Path
 
 from PIL import Image
 
-REF_W, REF_H = 640, 360
+REF_W, REF_H = 960, 540
 
 
 def hex_to_rgba(h: str) -> tuple:
