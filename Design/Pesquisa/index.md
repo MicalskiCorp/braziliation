@@ -10,7 +10,7 @@ Repositório de informações históricas, folclóricas e culturais **verificada
 
 | Estado | História | Lendas | Cultura | Cidades |
 |--------|----------|--------|---------|---------|
-| Santa Catarina | Parcial | — | Parcial | 1 cidade |
+| Santa Catarina | Parcial | Parcial | Parcial | 7 cidades |
 
 ---
 
@@ -18,7 +18,7 @@ Repositório de informações históricas, folclóricas e culturais **verificada
 
 | Tema | Arquivo | Status |
 |------|---------|--------|
-| *(nenhum tema pesquisado ainda)* | — | — |
+| Monge João Maria (Planalto Catarinense / Guerra do Contestado) | [Temas/monge-joao-maria.md](Temas/monge-joao-maria.md) | Aprovado |
 
 ---
 
@@ -26,7 +26,9 @@ Repositório de informações históricas, folclóricas e culturais **verificada
 
 | Data | Tema | Arquivo | Status |
 |------|------|---------|--------|
-| *(nenhum handoff gerado ainda)* | — | — | — |
+| 20/09/2026 | Indaial — lendas do Médio Vale do Itajaí (processar) | [Handoffs/2026-09-20-indaial-lendas.md](Handoffs/2026-09-20-indaial-lendas.md) | ✅ Processado pelo @GameCreative (20/09/2026) |
+| 20/09/2026 | Dragão do Encano Alto — discrepância geográfica com Guabiruba (revisão) | [Estados/SantaCatarina/cidades/Indaial/index.md](Estados/SantaCatarina/cidades/Indaial/index.md#nota-de-cruzamento-com-o-criativo--discrepância-geográfica-a-verificar) | ✅ Processado pelo @GameCreative (20/09/2026) |
+| 20/09/2026 | 11 lendas de Santa Catarina — rodada 2 (processar) | [Handoffs/2026-09-20-lendas-sc-rodada-2.md](Handoffs/2026-09-20-lendas-sc-rodada-2.md) | ❌ Não iniciado |
 
 ---
 
@@ -40,4 +42,4 @@ Repositório de informações históricas, folclóricas e culturais **verificada
 
 ## Estados com Material Aprovado
 
-- [Estados/SantaCatarina/](Estados/SantaCatarina/index.md) — cobertura inicial de Blumenau
+- [Estados/SantaCatarina/](Estados/SantaCatarina/index.md) — Blumenau, Indaial, Siderópolis, São Francisco do Sul, Balneário Piçarras, Joinville, Navegantes + lendas regionais da Serra Catarinense

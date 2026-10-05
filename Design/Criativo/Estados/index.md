@@ -7,7 +7,7 @@
 
 | Estado | Status | Cidades | Arquivo |
 |--------|--------|---------|---------|
-| [`SantaCatarina/`](SantaCatarina/index.md) | 🔨 Em Construção | Florianópolis, Blumenau, Lages, Guabiruba | SC |
+| [`SantaCatarina/`](SantaCatarina/index.md) | 🔨 Em Construção | Florianópolis, Blumenau, Lages, Guabiruba, Indaial, Siderópolis, São Francisco do Sul, Balneário Piçarras, Joinville, Navegantes | SC |
 
 ## Estados Planejados
 

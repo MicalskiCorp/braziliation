@@ -170,7 +170,7 @@ Quando o usuário aprovar uma pesquisa do Modo 1:
 1. **Confirmar escopo** — o usuário aprova tudo ou apenas partes?
 2. **Identificar destino** — `Estados/{Estado}/…`, `Estados/{Estado}/cidades/{Cidade}/index.md` ou `Temas/{tema}.md`; criar o arquivo se não existir, seguindo a Camada Operacional.
 3. **Gravar** como "referência folclórica confirmada" ou "elemento cultural registrado" — nunca como "fato histórico" —, com fonte por elemento e nota criativa se houver.
-4. **Registrar fontes** em `Design/Pesquisa/Fontes/index.md` e atualizar a cobertura em `Design/Pesquisa/index.md`.
+4. **Registrar fontes** em `Design/Pesquisa/Fontes/registro.md` e atualizar a cobertura em `Design/Pesquisa/index.md`.
 5. **Cruzar com o Criativo** — `Grep` pelo tema em `Design/Criativo/`: se o novo conteúdo enriquece ou contradiz material criativo, executar o Modo 4, tipo **revisão**.
 6. **Confirmar** ao usuário: arquivo criado/atualizado + lista do que foi salvo.
 
@@ -254,7 +254,7 @@ Pré-condição: só pesquisa aprovada, com fontes. Sem pesquisa aprovada sobre 
 
 ### Leitura e Escrita (operacional)
 - `Design/Pesquisa/` — pasta operacional deste agente (pesquisas aprovadas)
-- `Design/Pesquisa/Fontes/index.md` — registro master de fontes validadas
+- `Design/Pesquisa/Fontes/registro.md` — registro master de fontes validadas
 - `Design/Pesquisa/Fontes/Arquivos/` — imagens e documentos aprovados na curadoria (skill `processar-entrevistas`)
 - `Design/Pesquisa/Handoffs/` — briefings de transição Historiador → GameCreative
 - `Design/Pesquisa/Entrevistas/` — fila de entrevistas capturadas via WhatsApp (skill `processar-entrevistas`)

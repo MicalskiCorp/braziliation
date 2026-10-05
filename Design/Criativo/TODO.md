@@ -30,7 +30,18 @@
 | Criar ficha individual: Enterrado Vivo (Catalepsia) | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | ❌ Não iniciado |
 | Criar ficha individual: Minhocão | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | ❌ Não iniciado |
 | Criar ficha individual: Pelznickel | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | ❌ Não iniciado |
-| Criar ficha individual: Dragão do Encano Alto | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | ❌ Não iniciado |
+| Criar ficha individual: Dragão de Guabiruba | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | ⏸ Bloqueado — aguardando pesquisa complementar sobre aparência/comportamento (ver `Estados/SantaCatarina/cidades/Guabiruba/index.md`) |
+| Mapear lenda: Igreja São Luís de França → lugar/cenário (Indaial) | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
+| Mapear lenda: Túnel Mal-Assombrado de Siderópolis → cenário | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
+| Mapear lenda: O Gritador → NPC ou boss (decidir qual, e em qual dos municípios de ocorrência — Urubici ou Otacílio Costa) | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
+| Mapear lenda: Leprosário de São Francisco do Sul → lugar/cenário | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
+| Mapear lenda: Gruta da Noiva → lugar/NPC | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
+| Mapear lenda: Moço Bonito do Baile → NPC/monstro | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
+| Mapear lenda: Chapeludo da Biblioteca → NPC/monstro | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
+| Mapear lenda: Mulher de Branco da Pedra da Miraguaia → NPC/lugar | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
+| Mapear lenda: Cemitério Histórico de Santa Bárbara → NPC ou boss (decidir qual, e em qual dos municípios de ocorrência — Urubici ou Bom Jardim da Serra) | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
+| Mapear lenda: Túneis Secretos de Blumenau → cenário/quest de desmistificação | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
+| Desenhar o NPC aliado Monge João Maria (falas, mecânica de cura/ajuda, stats, quando/onde aparece sendo itinerante) — direção de tratamento já fechada, ver `Estados/SantaCatarina/ideias.md` | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
 | Popular `por-categoria/lugares.md` | [`Lendas/por-categoria/lugares.md`](Lendas/por-categoria/lugares.md) | Baixa | 📋 Rascunho |
 | Popular `por-categoria/personagens.md` | [`Lendas/por-categoria/personagens.md`](Lendas/por-categoria/personagens.md) | Baixa | 📋 Rascunho |
 
@@ -42,13 +53,25 @@
 | Popular ficha completa de Lages | [`Estados/SantaCatarina/cidades/Lages/index.md`](Estados/SantaCatarina/cidades/Lages/index.md) | Alta | 📋 Rascunho |
 | Definir nome no game e Punk Genre de Guabiruba | [`Estados/SantaCatarina/cidades/Guabiruba/index.md`](Estados/SantaCatarina/cidades/Guabiruba/index.md) | Alta | 📋 Rascunho |
 | Popular ficha completa de Guabiruba | [`Estados/SantaCatarina/cidades/Guabiruba/index.md`](Estados/SantaCatarina/cidades/Guabiruba/index.md) | Alta | 📋 Rascunho |
+| Definir nome no game e Punk Genre de Indaial | [`Estados/SantaCatarina/cidades/Indaial/index.md`](Estados/SantaCatarina/cidades/Indaial/index.md) | Alta | 📋 Rascunho |
+| Popular ficha completa de Indaial (Tipo, Descrição distópica e Monstros) | [`Estados/SantaCatarina/cidades/Indaial/index.md`](Estados/SantaCatarina/cidades/Indaial/index.md) | Alta | 📋 Rascunho |
+| Decidir se e como virar quest a Igreja São Luís de França (duas versões conflitantes: crime vs. abandono) | [`Estados/SantaCatarina/cidades/Indaial/index.md`](Estados/SantaCatarina/cidades/Indaial/index.md) | Média | ❌ Não iniciado |
 | Elaborar descrição da cidade de Florianópolis no futuro distópico | [`Estados/SantaCatarina/cidades/Florianopolis/index.md`](Estados/SantaCatarina/cidades/Florianopolis/index.md) | Alta | 📋 Rascunho |
 | Detalhar monstros de Florianópolis (Bruxa, Mariposa, Boi Tatá, Animal Marinho) | [`Estados/SantaCatarina/cidades/Florianopolis/index.md`](Estados/SantaCatarina/cidades/Florianopolis/index.md) | Alta | 📋 Rascunho |
 | Definir nome e razão histórica do túnel de Lages | [`Estados/SantaCatarina/cidades/Lages/index.md`](Estados/SantaCatarina/cidades/Lages/index.md) | Média | ❌ Não iniciado |
 | Definir nome e razão histórica do túnel de Guabiruba | [`Estados/SantaCatarina/cidades/Guabiruba/index.md`](Estados/SantaCatarina/cidades/Guabiruba/index.md) | Média | ❌ Não iniciado |
-| Criar cidade: Joinville (IndustrialPunk) | [`Estados/SantaCatarina/cidades/`](Estados/SantaCatarina/cidades/) | Média | ❌ Não iniciado |
+| Definir nome no game e Punk Genre de Siderópolis | [`Estados/SantaCatarina/cidades/Sideropolis/index.md`](Estados/SantaCatarina/cidades/Sideropolis/index.md) | Alta | 📋 Rascunho |
+| Popular ficha completa de Siderópolis (Estrutura geral além do túnel, Tipo, Descrição, Monstros) | [`Estados/SantaCatarina/cidades/Sideropolis/index.md`](Estados/SantaCatarina/cidades/Sideropolis/index.md) | Alta | 📋 Rascunho |
+| Definir nome no game e Punk Genre de São Francisco do Sul | [`Estados/SantaCatarina/cidades/SaoFranciscoDoSul/index.md`](Estados/SantaCatarina/cidades/SaoFranciscoDoSul/index.md) | Alta | 📋 Rascunho |
+| Popular ficha completa de São Francisco do Sul | [`Estados/SantaCatarina/cidades/SaoFranciscoDoSul/index.md`](Estados/SantaCatarina/cidades/SaoFranciscoDoSul/index.md) | Alta | 📋 Rascunho |
+| Definir nome no game e Punk Genre de Balneário Piçarras | [`Estados/SantaCatarina/cidades/BalnearioPicarras/index.md`](Estados/SantaCatarina/cidades/BalnearioPicarras/index.md) | Alta | 📋 Rascunho |
+| Popular ficha completa de Balneário Piçarras | [`Estados/SantaCatarina/cidades/BalnearioPicarras/index.md`](Estados/SantaCatarina/cidades/BalnearioPicarras/index.md) | Alta | 📋 Rascunho |
+| Definir nome no game e Punk Genre de Joinville | [`Estados/SantaCatarina/cidades/Joinville/index.md`](Estados/SantaCatarina/cidades/Joinville/index.md) | Alta | 📋 Rascunho |
+| Popular ficha completa de Joinville | [`Estados/SantaCatarina/cidades/Joinville/index.md`](Estados/SantaCatarina/cidades/Joinville/index.md) | Alta | 📋 Rascunho |
+| Definir nome no game e Punk Genre de Navegantes | [`Estados/SantaCatarina/cidades/Navegantes/index.md`](Estados/SantaCatarina/cidades/Navegantes/index.md) | Alta | 📋 Rascunho |
+| Popular ficha completa de Navegantes | [`Estados/SantaCatarina/cidades/Navegantes/index.md`](Estados/SantaCatarina/cidades/Navegantes/index.md) | Alta | 📋 Rascunho |
+| Pesquisa complementar: aprofundar Noiva da Ponte e Rosa do Pé Inchado (Joinville) se o Criativo quiser desenvolvê-las | [`Estados/SantaCatarina/cidades/Joinville/index.md`](Estados/SantaCatarina/cidades/Joinville/index.md) | Baixa | ❌ Não iniciado |
 | Criar cidade: Criciúma (CoalPunk) | [`Estados/SantaCatarina/cidades/`](Estados/SantaCatarina/cidades/) | Média | ❌ Não iniciado |
-| Criar cidade: São Francisco do Sul (PiratePunk) | [`Estados/SantaCatarina/cidades/`](Estados/SantaCatarina/cidades/) | Baixa | ❌ Não iniciado |
 
 ### Estados Planejados
 
@@ -90,6 +113,7 @@
 
 | Item | Arquivo | Prioridade | Status |
 |------|---------|-----------|--------|
+| *(nenhum pendente — as 11 lendas de SC/rodada 2 foram processadas em 2026-09-20)* | | | |
 
 ---
 
@@ -118,6 +142,11 @@
 | Blumenau — Morro do Zendron detalhado como área de terror real e esperança dos necessitados | 2026-05-02 |
 | Blumenau — Contraste entre memória oficial do mausoléu e memória íntima de Edith amarrado | 2026-05-02 |
 | Blumenau — Handoff factual de teatro, sistema hídrico, Edith e mausoléu incorporado ao dossiê criativo | 2026-05-02 |
+| Dragão do Encano Alto renomeado para Dragão de Guabiruba e bairro corrigido para Lageado Alto (confusão geográfica com Indaial resolvida por decisão do usuário) | 2026-09-20 |
+| Handoff de pesquisa processado: Indaial — ficha da cidade criada com o material confirmado (Ponte Coberta do Warnow, Vale do Ribeirão Encano/Warnow, lenda da Igreja São Luís de França com versão concorrente, Trilha Memórias de Indaial e FIC); botija/luz da botija registrada como motivo brasileiro geral não local no pool de ideias | 2026-09-20 |
+| Handoff de pesquisa processado: 11 lendas de SC — rodada 2. Fichas criadas para Siderópolis, São Francisco do Sul, Balneário Piçarras, Joinville e Navegantes (só material confirmado); túneis secretos do Teatro Carlos Gomes registrados na ficha de Blumenau (separados do `Unterwasser-Gang`, sem citar partido político); O Gritador e Cemitério de Santa Bárbara registrados como lendas regionais em `Estados/SantaCatarina/ideias.md`; Monge João Maria registrado como contexto histórico-cultural sensível (não monstro) no mesmo arquivo; 9 novas entradas em `Lendas/catalogo.md`; arquétipo "Noiva Vingativa" registrado em `Ideias/pool.md` | 2026-09-20 |
+| Decidido: O Gritador e o Cemitério Histórico de Santa Bárbara ficam como lendas regionais de SC em `Estados/SantaCatarina/ideias.md` (não viram parte de Lages nem justificam cidade nova); cada um recebeu campo "Municípios de ocorrência" (Urubici/Otacílio Costa; Urubici/Bom Jardim da Serra), padronizado também na coluna de origem de `Lendas/catalogo.md`; intenção de uso registrada (NPC ou boss num desses municípios, papel/local não decidido) | 2026-09-20 |
+| Decidido: Monge João Maria entra em `Lendas/catalogo.md` como "NPC Aliado / Curandeiro Andarilho", não atrelado a região (itinerante); direção de tratamento fechada como regra em `Estados/SantaCatarina/ideias.md` (gentil, cura, ajuda o jogador, nunca monstro/boss/vilão, abordagem respeitosa da devoção viva); as duas entradas linkadas entre si | 2026-09-20 |
 
 ---
 

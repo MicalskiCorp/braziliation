@@ -11,14 +11,18 @@
 | Blumenau | *"Die Unterwelt"* | ClockPunk | 🔨 Em Construção | [`cidades/Blumenau/`](cidades/Blumenau/index.md) |
 | Lages | *"Os Campos Gelados"* | `{TODO}` | 📋 Rascunho | [`cidades/Lages/`](cidades/Lages/index.md) |
 | Guabiruba | *`{TODO}`* | `{TODO}` | 📋 Rascunho | [`cidades/Guabiruba/`](cidades/Guabiruba/index.md) |
+| Indaial | *`{TODO}`* | `{TODO}` | 📋 Rascunho | [`cidades/Indaial/`](cidades/Indaial/index.md) |
+| Siderópolis | *`{TODO}`* | `{TODO}` | 📋 Rascunho | [`cidades/Sideropolis/`](cidades/Sideropolis/index.md) |
+| São Francisco do Sul | *`{TODO}`* | `{TODO}` (sugestão anterior: PiratePunk — ainda não decidido) | 📋 Rascunho | [`cidades/SaoFranciscoDoSul/`](cidades/SaoFranciscoDoSul/index.md) |
+| Balneário Piçarras | *`{TODO}`* | `{TODO}` | 📋 Rascunho | [`cidades/BalnearioPicarras/`](cidades/BalnearioPicarras/index.md) |
+| Joinville | *`{TODO}`* | `{TODO}` (sugestão anterior: IndustrialPunk — ainda não decidido) | 📋 Rascunho | [`cidades/Joinville/`](cidades/Joinville/index.md) |
+| Navegantes | *`{TODO}`* | `{TODO}` | 📋 Rascunho | [`cidades/Navegantes/`](cidades/Navegantes/index.md) |
 
 ### Cidades Planejadas *(aguardam input)*
 
 | Cidade | Punk Genre Sugerido |
 |--------|--------------------|
-| Joinville | IndustrialPunk |
 | Criciúma | CoalPunk |
-| São Francisco do Sul | PiratePunk |
 
 ## Ideias Gerais do Estado
 

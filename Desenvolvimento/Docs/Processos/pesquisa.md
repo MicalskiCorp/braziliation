@@ -54,11 +54,11 @@ Confirma que uma lenda, figura ou referência cultural *existe* como elemento re
 1. Confirmar o escopo aprovado: tudo ou só partes.
 2. Identificar o destino (`Estados/{Estado}/…`, cidade ou `Temas/{tema}.md`) e criar o arquivo se não existir.
 3. Gravar como "referência folclórica confirmada", com fonte por elemento e nota criativa se houver.
-4. Registrar as fontes em `Fontes/index.md` e atualizar a cobertura em `Pesquisa/index.md`.
+4. Registrar as fontes em `Fontes/registro.md` e atualizar a cobertura em `Pesquisa/index.md`.
 5. Grep pelo tema no Criativo: se enriquece ou contradiz lore, P4 tipo **revisão**.
 6. Confirmar ao usuário o que foi salvo e onde.
 
-- **Escreve:** `Design/Pesquisa/…`, `Fontes/index.md`
+- **Escreve:** `Design/Pesquisa/…`, `Fontes/registro.md`
 - **Gate:** Aprovação explícita do usuário na conversa
 
 ## P3 — Consultar acervo

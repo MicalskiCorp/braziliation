@@ -196,12 +196,24 @@ Edith conta ao jogador:
 - Avistamentos de vulto de capuz preto vagando de madrugada pela Rua Angelo Dias.
 - Na história real: uma figura religiosa importante da cidade visitava secretamente uma viúva durante as madrugadas — o "fantasma" era o próprio padre tentando esconder os encontros.
 - No jogo: missão de investigação — seguir o vulto revela um segredo político dentro do alto clero, não sobrenatural. Terror real, não místico.
+- **Confirmado pela pesquisa (rodada 2, 20/09/2026):** este local é conhecido na tradição local como "Gespensterstrasse" (Travessa 4 de Fevereiro, hoje Rua Ângelo Dias) — mesma tradição já catalogada aqui como "Vulto de Capuz Preto". Por decisão do usuário, não abre item novo nem ficha separada; esta entrada segue sendo a versão válida.
 
 ### Cheias de 2008 — Terror Real da Cidade
 
 - As enchentes e deslizamentos entram como trauma coletivo moderno de Die Unterwelt: não só água alta, mas lama, desbarrancamento, bairros isolados, rádio improvisado e casas que continuam de pé por puro atraso da queda.
 - Referência forte para direção de arte e atmosfera: postes tortos, móveis pendurados em segundo andar, marcas de nível d'água nas paredes e pontes improvisadas sobre ruas onde antes havia comércio.
 - Melhor uso narrativo: mostrar que Blumenau teme monstros, mas respeita mesmo é o rio e o morro quando resolvem se mover.
+
+---
+
+## Lenda Real — Túneis Secretos sob o Teatro Carlos Gomes
+
+> Pesquisa aprovada em 20/09/2026 (rodada 2 de lendas de SC). **Não confundir com o `Unterwasser-Gang` logo abaixo** — aquele é invenção ficcional do Criativo para a rota Blumenau ↔ Florianópolis; esta é uma tradição oral real e independente, sobre um conjunto diferente de supostas passagens no centro da cidade. Por pedido explícito do usuário, este texto não nomeia partido político nem grupo político específico — inclusive em texto voltado ao jogador.
+
+- **A lenda (tradição oral confirmada):** existe, de fato, uma lenda urbana contada em Blumenau de que túneis ligariam o Teatro Carlos Gomes a instituições religiosas/escolares da cidade (colégios citados nominalmente nas fontes). Há mais de uma explicação popular para o propósito: (a) passagens discretas para encontros entre padres e freiras das instituições ligadas ao teatro; (b) uma teoria mais sensacionalista, ligada ao contexto da Segunda Guerra Mundial, sobre movimentação de um grupo político da época pela cidade. Bem documentada em reportagem regional dedicada ao tema.
+- **O que foi de fato encontrado (achado real, separado da lenda):** durante uma obra de esgoto em 2015, estruturas subterrâneas foram encontradas no centro de Blumenau — achado construtivo real, não lenda. Porém essas estruturas **não confirmam a lenda dos túneis**: tinham dimensões modestas (aproximadamente 1,5 m de altura por 50 cm de largura), incompatíveis com uso como passagem de pessoas. Segundo historiadora consultada pela reportagem de origem, eram galerias de drenagem de água construídas em estilo alemão, usadas no passado para escoar água pantanosa de um morro próximo até o rio — infraestrutura hídrica, não túnel de passagem. Não existe registro histórico documental dessas galerias (hipótese da reportagem: documentação perdida no incêndio do arquivo histórico de Blumenau em 1958).
+- **Ideias** *(sugestão trazida pelo handoff de pesquisa, não desenvolvida)*:
+  - Quest de desmistificação: o jogador explora esperando encontrar a "passagem secreta" prometida pela lenda e descobre que é uma galeria de água comum — subvertendo a expectativa.
 
 ---
 

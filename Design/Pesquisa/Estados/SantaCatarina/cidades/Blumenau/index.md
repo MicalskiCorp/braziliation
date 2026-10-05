@@ -83,9 +83,37 @@
 
 ---
 
+## Túneis Secretos de Blumenau (sob o Teatro Carlos Gomes) — ✅ Confirmada (lenda existente) / ✅ Confirmado (achado arqueológico real, mas sem ligação com a lenda)
+
+> Item pesquisado na rodada de 20/09/2026, a pedido explícito do usuário: **documentar sem citar partido político por nome**, focando no que interessa ao jogo — existência (ou não) de passagens subterrâneas reais no centro de Blumenau e a tradição oral sobre elas. Não confundir com o túnel ficcional *Unterwasser-Gang*, já existente em `Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md` — são coisas diferentes.
+
+### A lenda (tradição oral confirmada)
+- Existe, de fato, uma lenda urbana contada em Blumenau de que túneis ligariam o **Teatro Carlos Gomes** a instituições religiosas/escolares da cidade, citando nominalmente o **Colégio Sagrada Família** e o **Bom Jesus Santo Antônio** (e, em algumas versões, também o Colégio Pedro II).
+- Há mais de uma explicação popular para o propósito desses túneis: (a) passagens discretas para encontros entre padres e freiras das instituições religiosas ligadas ao teatro; (b) uma teoria mais sensacionalista, ligada ao contexto da Segunda Guerra Mundial, segundo a qual os túneis serviriam para movimentação de um grupo político da época pela cidade em caso de vitória da Alemanha no conflito, e de que a fachada do teatro teria sido desenhada remetendo a um elemento de uniforme militar da época para discursos em 1945.
+- Essa lenda está bem documentada em reportagem regional dedicada especificamente ao tema (NSC Total) e é citada também em cobertura de "lendas urbanas de Blumenau" do ND Mais.
+
+> 📌 **Fonte:** [NSC Total — Túneis e o mistério que envolvem o Teatro Carlos Gomes, em Blumenau](https://www.nsctotal.com.br/cotidiano/os-misterios-que-envolvem-o-teatro-carlos-gomes-em-blumenau) — acesso em 20/09/2026
+> 📌 **Fonte:** [ND Mais — Sexta-feira 13: veja lendas urbanas mais conhecidas de Blumenau e região](https://ndmais.com.br/cultura/sexta-feira-13-veja-as-lendas-urbanas-mais-conhecidas-de-blumenau-e-regiao/) — acesso em 20/09/2026
+> 📌 **Fonte:** [Angelina Wittmann — Túneis "descobertos" e "encobertos" novamente - Blumenau](https://angelinawittmann.blogspot.com/2015/01/tuneis-de-blumenau.html) — acesso em 20/09/2026
+
+### O que foi de fato encontrado (achado real, separado da lenda)
+- Durante uma obra de esgoto em **2015**, estruturas subterrâneas foram, de fato, encontradas no centro de Blumenau — isso é um achado construtivo real, não lenda.
+- Porém, essas estruturas **não confirmam a lenda dos túneis**: tinham dimensões modestas (aproximadamente 1,5 metro de altura por 50 centímetros de largura), incompatíveis com uso como passagem de pessoas para encontros ou fuga. Segundo historiadora consultada pela reportagem (Sueli Petry), eram **galerias de drenagem de água construídas em estilo alemão**, usadas no passado para escoar água pantanosa de um morro próximo (região do atual Parque São Francisco de Assis) até o rio — ou seja, infraestrutura hídrica, não túnel de passagem.
+- Não existe registro histórico documental dessas galerias antigas — a reportagem aponta a hipótese de que documentação relacionada possa ter se perdido no incêndio do arquivo histórico de Blumenau em 1958.
+
+> 📌 **Fonte:** [NSC Total — Túneis e o mistério que envolvem o Teatro Carlos Gomes, em Blumenau](https://www.nsctotal.com.br/cotidiano/os-misterios-que-envolvem-o-teatro-carlos-gomes-em-blumenau) — acesso em 20/09/2026
+
+**Nota criativa** *(sugestão, não fato)*: a separação entre "achado real, mundano" (galeria de drenagem) e "lenda ampliada" (túnel secreto de passagem) é, em si, um ótimo tema de quest de desmistificação para o jogo — o jogador explora e descobre que a "passagem secreta" é uma galeria de água comum, subvertendo a expectativa.
+
+### Nota sobre item relacionado, não desenvolvido (Gespensterstrasse)
+- Durante esta pesquisa, apareceu a "Gespensterstrasse" (Travessa 4 de Fevereiro, atual Rua Ângelo Dias) — confirmado que é a mesma tradição já catalogada no Criativo como o "Vulto de Capuz Preto" (padre visitando secretamente alguém querido de madrugada). Por decisão do usuário, este item não recebe ficha nova nem pendência — a versão já catalogada é a que segue valendo.
+
+---
+
 ## Status de Validacao para Criativo Manual
 
 - **Base factual solida para uso direto:** fundacao e estrutura urbana ligada ao rio Itajai-Acu; cheias e sistema de monitoramento; Teatro Carlos Gomes e seu palco giratorio; Edith Gaertner, Museu da Familia Colonial e Cemiterio dos Gatos; mausoleu de Dr. Blumenau como eixo de memoria oficial.
 - **Base valida com ressalva de enquadramento:** Hermann Baumgarten como pioneiro da imprensa blumenauense esta confirmado; o episodio de quase enterro em vida esta aceito aqui como causo local e memoria urbana secundaria convergente util ao projeto.
 - **Formula recomendada ao Criativo:** tratar o caso Baumgarten como lenda local inspiradora ou horror urbano baseado em memoria da cidade, evitando afirmar no texto criativo de apoio que se trata de fato historico primario comprovado.
 - **Resultado pratico:** o material de Blumenau esta apto para ser usado manualmente pela camada criativa, desde que a linha Baumgarten permaneça marcada como causo/memoria urbana e nao como certeza historica dura.
+- **Túneis secretos (rodada 20/09/2026):** lenda confirmada e pronta para uso; achado real de 2015 (galeria de drenagem) deve ser mantido separado da lenda de passagem secreta — não apresentar a galeria real como prova da lenda. Escrever sempre sem nomear partido político, por pedido explícito do usuário.

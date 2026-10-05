@@ -1,0 +1,1 @@
+- [Pesquisa de Indaial e pendência Encano Alto x Lageado Alto](project_indaial_pesquisa.md) — Indaial aprovada 20/09/2026; botija e sons fantasmas não confirmados; revisão pendente do Dragão de Guabiruba no catálogo criativo

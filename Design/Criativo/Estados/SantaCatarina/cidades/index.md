@@ -10,14 +10,18 @@
 | [`Blumenau/`](Blumenau/index.md) | *"Die Unterwelt"* | ClockPunk | 🔨 Em Construção |
 | [`Lages/`](Lages/index.md) | *"Os Campos Gelados"* | `{TODO}` | 📋 Rascunho |
 | [`Guabiruba/`](Guabiruba/index.md) | *`{TODO}`* | `{TODO}` | 📋 Rascunho |
+| [`Indaial/`](Indaial/index.md) | *`{TODO}`* | `{TODO}` | 📋 Rascunho |
+| [`Sideropolis/`](Sideropolis/index.md) | *`{TODO}`* | `{TODO}` | 📋 Rascunho |
+| [`SaoFranciscoDoSul/`](SaoFranciscoDoSul/index.md) | *`{TODO}`* | `{TODO}` | 📋 Rascunho |
+| [`BalnearioPicarras/`](BalnearioPicarras/index.md) | *`{TODO}`* | `{TODO}` | 📋 Rascunho |
+| [`Joinville/`](Joinville/index.md) | *`{TODO}`* | `{TODO}` | 📋 Rascunho |
+| [`Navegantes/`](Navegantes/index.md) | *`{TODO}`* | `{TODO}` | 📋 Rascunho |
 
 ### Planejadas *(aguardam input)*
 
 | Cidade | Punk Genre Sugerido |
 |--------|--------------------|
-| Joinville | IndustrialPunk |
 | Criciúma | CoalPunk |
-| São Francisco do Sul | PiratePunk |
 
 
 ---

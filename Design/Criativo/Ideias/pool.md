@@ -7,7 +7,8 @@
 
 | # | Ideia | Categoria | Prioridade | Status | Sessão de Origem |
 |---|-------|-----------|-----------|--------|-----------------|
-| *(nenhuma registrada)* | — | — | — | — | — |
+| 1 | Botija de ouro / luz da botija (fogo-fátuo) como sistema genérico de "tesouros enterrados" (luzes guiando o jogador a itens raros) — motivo folclórico brasileiro amplo e bem documentado, mas **sem fonte que o ligue a Indaial ou a qualquer cidade catalogada**. Usar só como worldbuilding livre; nunca apresentar como lenda catarinense/local confirmada. | `lenda` | Baixa | 💡 Nova | [Handoff Indaial](../../Pesquisa/Handoffs/2026-09-20-indaial-lendas.md) |
+| 2 | Arquétipo recorrente "Noiva Vingativa" — o padrão "noiva traída/morta que vira entidade vingativa contra homens" se repete em pelo menos três lendas já pesquisadas: Igreja São Luís de França (Indaial), Gruta da Noiva (Balneário Piçarras) e Noiva da Ponte (Joinville, não aprofundada). Cada cidade daria uma variação regional do mesmo motivo. Só registro do padrão — não desenhar mecânica/arco agora. | `narrativa` | Baixa | 💡 Nova | [Handoff 11 lendas de SC — rodada 2](../../Pesquisa/Handoffs/2026-09-20-lendas-sc-rodada-2.md) |
 
 ## Categorias
 
