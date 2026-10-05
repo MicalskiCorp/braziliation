@@ -1,0 +1,56 @@
+{
+  "name": "enm_automato",
+  "action": "idle",
+  "palette": "../../../../ArteConceitual/Paletas/blumenau.json",
+  "notes": "Idle do autômato abandonado em 6 frames (animation-guide: idle 4-6). Duas camadas independentes: o detalhe autorado das 3 chaves (brilho da lente + dente da engrenagem) cicla duas vezes, e a respiração de vapor sobe o corpo 2px e volta. Pernas (linhas 44-63) ficam ancoradas. PENDENTE (2026-09-24): as chaves abaixo sao da arte FRONTAL antiga, substituida pela re-autoria lateral em enm_automato.spec.json. Re-apontar as keys para a arte nova, rever as faixas de linhas das camadas e gerar com -o enm_automato.anim.spec.json, para nao sobrescrever a spec de arte.",
+  "frames": 6,
+  "keys": [
+    "enm_automato_idle_f1.2x.spec.json",
+    "enm_automato_idle_f2.2x.spec.json",
+    "enm_automato_idle_f3.2x.spec.json"
+  ],
+  "output_ids": [
+    "idle",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6"
+  ],
+  "layers": [
+    {
+      "op": "shift",
+      "rows": [
+        0,
+        17
+      ],
+      "dy": [
+        0,
+        -1,
+        -2,
+        -2,
+        -1,
+        0
+      ],
+      "fill": "repeat_edge",
+      "notes": "cabeca + pescoco: 2px de curso. repeat_edge estica o pescoco, que e a mola da respiracao."
+    },
+    {
+      "op": "shift",
+      "rows": [
+        18,
+        43
+      ],
+      "dy": [
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0
+      ],
+      "fill": "repeat_edge",
+      "notes": "torso: metade da amplitude e um frame atrasado em relacao a cabeca — acao secundaria, e o que separa respiracao de pulo."
+    }
+  ]
+}
