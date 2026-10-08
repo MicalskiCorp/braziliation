@@ -1,30 +1,34 @@
 {
   "titulo": "Soldado Clérico",
-  "resumo": "Humano dentro de armadura clockpunk, servo do alto clero de Blumenau. Carrega fuzil pneumático com tanque nas costas, ou escudo de engrenagem giratória. A liga do metal separa a tropa da guarda.",
+  "resumo": "Colono alemão do Vale do Itajaí armado pelo alto clero, em armadura improvisada de sucata doméstica no fim do século XIX. Pickelhaube, sobretudo militar e as peças que tinha em casa: porta de fogão a lenha no peito, tampa de panela como ombreira, cano de chaminé como braçadeira, panela de ágata como joelheira.",
   "status": "rascunho",
   "artefato": "https://claude.ai/artifact/N8qqSrEfVGBuZYM21A2XwY",
   "variantes": {
-    "idle": "Tropa · bronze",
-    "escudo": "Escudeiro · bronze",
-    "guarda": "Guarda · prata"
+    "idle": "Tropa · ferro",
+    "escudo": "Escudeiro · ferro",
+    "guarda": "Guarda · bronze"
   },
   "papeis": {
-    "idle": "Fuzil pneumático e tanque nas costas",
-    "escudo": "Escudo de engrenagem e maça curta",
-    "guarda": "Mesma montagem da tropa, liga trocada"
+    "idle": "Fuzil pneumático e barril de ar nas costas",
+    "escudo": "Tampa de tacho com engrenagem soldada, e martelo de ferreiro",
+    "guarda": "Quem conseguiu chapa de cervejaria"
   },
   "pecas": [
-    "tanque pneumático",
-    "couraça",
-    "tabardo do clero",
-    "gola",
-    "elmo de fresta",
-    "ombreiras",
-    "braço articulado",
+    "Pickelhaube",
+    "sobretudo militar",
+    "gola alta",
+    "porta de fogão (peitoral)",
+    "tampa de panela (ombreira)",
+    "cano de chaminé (braçadeira)",
+    "panela de ágata (joelheira)",
+    "caneca esmaltada",
+    "braçadeira do clero",
+    "cinto de couro",
+    "botas de cano alto",
+    "barril de ar",
     "fuzil pneumático",
-    "escudo de engrenagem",
-    "maça curta",
-    "pernas blindadas"
+    "tampa de tacho (escudo)",
+    "martelo de ferreiro"
   ],
   "animacoes": [],
   "historico": [
@@ -35,6 +39,10 @@
     {
       "data": "2026-10-07",
       "texto": "Correção de ordem de montagem: o tabardo estava sendo desenhado antes da couraça e a armadura o cobria. Passou a cair do cinturão, por cima das pernas. Elmo reduzido e pernas alongadas para a proporção ficar humana, não de boneco."
+    },
+    {
+      "data": "2026-10-07",
+      "texto": "Reformulado: a primeira versão lia como irmão de latão do Autômato. A direção passou a ser armadura improvisada de sucata doméstica alemã, no fim do século XIX — referência de leitura em Ghosts'n Goblins e Castlevania, referência de época e lugar na Prússia vitoriana e na cozinha de enxaimel. Sai o elmo medieval, entra a Pickelhaube; sai o tabardo, entra o sobretudo militar com saia; sai o latão dominante, entra o sobretudo escuro com a sucata clara por cima. O esmalte de ágata da louça alemã virou o acento claro, e é ele que faz a sucata ler contra o casaco."
     }
   ],
   "rodape": "Fonte da arte: <code>montagem.py</code> + <code>enm_soldado_clerico.spec.json</code> no context pack do asset. Página gerada por <code>pagina_personagem.py</code>. Os 6 thumbnails de difusão (rota C) seguem pendentes de curadoria — esta é a versão programática, placeholder jogável."

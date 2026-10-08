@@ -5,24 +5,35 @@ Brief (Blumenau/index.md, secção Monstros): "humano com armadura clockpunk
 completa, servo do alto clero. Usa armas pneumáticas e escudos de engrenagem
 giratória."
 
-É o segundo asset montado pela linha de montagem, e serve de teste dela: o
-autômato é uma máquina de gradil aberto, este é um HOMEM DENTRO DE ARMADURA.
-O que muda no desenho:
+Direção: NÃO é cavaleiro medieval. É um colono alemão do Vale do Itajaí em
+**armadura improvisada de sucata doméstica**, no fim do século XIX — o que um
+blumenauense teria à mão quando o alto clero o armou. Referência de leitura:
+os cavaleiros de Ghosts'n Goblins e Castlevania, onde a silhueta carrega o
+personagem; referência de época e lugar: a Prússia vitoriana e a cozinha de
+enxaimel.
 
-- a superfície é fechada, não vazada: peitoral sólido, e o olhar não atravessa;
-- a proporção é humana — cabeça pequena, ombreiras largas, perna comprida;
-- engrenagem é acessório de junta e de arma, não o corpo. Três ou quatro, não
-  uma dezena: ele usa a máquina, o autômato é a máquina;
-- entra tecido, que o autômato não tinha: o tabardo do clero, em carmim
-  desbotado, é o que separa este inimigo de qualquer soldado genérico.
+O que o separa do Autômato Abandonado, que é o irmão de linha de montagem:
 
-O que NÃO mudou e é o ponto do teste: nenhuma primitiva, nenhum passe de
-acabamento, nenhuma rampa de metal. Só o catálogo.
+| | Autômato | Soldado |
+|---|---|---|
+| dominante | latão, claro | **sobretudo escuro**, pano |
+| silhueta | gradil aberto, redondo | **Pickelhaube e saia de sobretudo** |
+| material | máquina fundida | **sucata de casa amarrada com couro** |
+| acento | brasa vermelha | **esmalte claro** e um pouco de cobre de cervejaria |
+
+A sucata é literal e doméstica, e é ela que ancora o personagem em Blumenau:
+
+- porta de fogão a lenha no peito, com dobradiça e trinco à vista;
+- tampa de panela como ombreira, com a asa ainda no lugar;
+- pedaço de cano de chaminé como braçadeira;
+- panela pequena como joelheira;
+- caneca de ágata esmaltada pendurada no cinto.
 
 Variação em dois eixos, como no autômato:
-- ARMAMENTO: fuzil pneumático (com tanque nas costas e mangueira) ou escudo de
-  engrenagem giratória com maça curta;
-- LIGA: bronze é a tropa, prata é a guarda do alto clero.
+- ARMAMENTO: fuzil pneumático, ou escudo de tampa de tacho com engrenagem
+  soldada — o "escudo de engrenagem giratória" do brief, feito de sucata;
+- LIGA: ferro é a tropa (sucata crua), bronze é quem conseguiu chapa de
+  cervejaria. Só a rampa do metal muda.
 
 Uso:
   py montagem.py enm_soldado_clerico.spec.json
@@ -34,179 +45,223 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[4] / "ArteFonte" / "Ferr
 from montagem_base import *  # noqa: F403,E402  (primitivas e estado da tela)
 from montagem_base import registrar_material  # noqa: E402
 
-# Carmim desbotado do clero: a única cor quente fora do metal. Vai do vermelho
-# de alerta ao ocre, então lê como tecido velho e não como sangue fresco.
+# Sobretudo: azul-petróleo escuro, o uniforme vitoriano. É o que domina a área
+# e o que mais separa este sprite do latão do autômato.
+registrar_material("sobretudo", ["1", "1", "2", "3"])
+# Esmalte de ágata: o branco-azulado da louça de cozinha alemã. Único claro.
+registrar_material("esmalte", ["2", "4", "5", "D"])
+registrar_material("couro", ["1", "A", "B", "D"])
+# Fuligem: ferro que viveu dentro de um fogão.
+registrar_material("fuligem", ["1", "1", "2", "3"])
 registrar_material("clero", ["1", "G", "9", "C"])
-registrar_material("couro", ["1", "A", "B", "C"])
 
 
 # ------------------------------------------------------------------- as peças
-def tanque():
-    """Tanque pneumático nas costas, com a mangueira que alimenta o fuzil."""
-    peca()
-    ellipse(37, 44, 7, 13, "metal_d")
-    rect(34, 32, 42, 36, "metal_d")              # cinta de topo
-    rebites(35, 41, 34, 3)
-    peca()
-    line(43, 38, 50, 34, 2, "metal_d")           # mangueira subindo ao ombro
-    line(50, 34, 58, 40, 2, "metal_d")
-    engrenagem(37, 31, 3, "metal", fase=.2)      # válvula
-
-
 def perna_tras():
     peca()
-    line(50, 62, 43, 76, 4, "metal_d")
-    line(43, 76, 46, 87, 4, "metal_d")
-    rect(40, 86, 54, 92, "metal_d")              # bota traseira
+    line(50, 68, 43, 80, 5, "sobretudo")
+    rect(39, 80, 48, 93, "couro")                 # bota de cano alto
+    rect(37, 90, 50, 94, "fuligem")
 
 
-def tabardo():
-    """Tabardo do clero: a peça que diz de quem ele é servo. Barra irregular,
-    gasta embaixo — o carmim escurece na bainha."""
+def sobretudo():
+    """Sobretudo militar: gola alta, peito duplo e saia que abre abaixo do
+    cinto. A saia é a silhueta — é ela que diz 'uniforme', não 'armadura'."""
     peca()
-    BARRA = [68, 74, 70, 78, 72, 80, 76, 81, 78, 80, 75, 79, 73, 77, 71, 74]
-    for i, fim in enumerate(BARRA):
-        x = 46 + i
-        rect(x, 57, x, fim, "clero")
+    rect(47, 28, 63, 60, "sobretudo")
     peca()
-    for i, fim in enumerate(BARRA):               # bainha encardida
-        x = 46 + i
-        for y in range(max(57, fim - 4), fim + 1):
-            if material(x, y) == "clero":
-                pintar(x, y, "1" if y > fim - 2 or (x + y) % 3 == 0 else "G")
+    BARRA = [78, 84, 80, 86, 82, 88, 85, 87, 84, 86, 82, 85, 80, 83, 78, 81, 76, 79]
+    for i, fim in enumerate(BARRA):               # saia com barra irregular
+        x = 40 + i
+        rect(x, 58, x, fim, "sobretudo")
+    peca()
+    rect(48, 24, 62, 29, "sobretudo")             # gola alta
+    rect(48, 24, 62, 25, "couro")
+    peca()
+    for y in range(32, 56, 5):                    # duas fileiras de botões
+        put(52, y, "cobre")
+        put(60, y, "cobre")
+    line(56, 30, 56, 58, 1, "fuligem")            # vinco do peito duplo
 
 
-def couraca():
-    """Peitoral fechado, com placas sobrepostas e fivelas."""
+def cinto():
     peca()
-    rect(46, 28, 64, 60, "metal")
-    ellipse(55, 42, 10, 16, "metal")
+    rect(42, 56, 66, 61, "couro")
+    rect(53, 56, 58, 61, "fuligem")               # fivela
     peca()
-    for y in (33, 41, 49):                        # placas que se sobrepõem
-        rect(46, y, 64, y + 1, "metal_d")
-        rebites(48, 62, y, 5)
-    peca()
-    rect(45, 56, 65, 60, "couro")                 # cinturão
-    rect(52, 56, 56, 60, "metal")                 # fivela
-    peca()
-    engrenagem(60, 37, 4, "cobre", fase=.5)       # manômetro de pressão no peito
+    ellipse(44, 66, 3, 4, "esmalte")              # caneca de ágata pendurada
+    rect(43, 62, 45, 64, "fuligem")
+    put(47, 65, "esmalte")                        # asa
 
 
-def gola():
+def peitoral_sucata():
+    """Porta de fogão a lenha amarrada no peito: dobradiça de um lado, trinco
+    do outro, e a fuligem que nunca sai."""
     peca()
-    rect(49, 24, 61, 29, "metal_d")
-    rebites(50, 60, 26, 4)
+    rect(48, 33, 64, 50, "fuligem")
+    peca()
+    rect(49, 34, 63, 49, "metal")
+    rect(51, 37, 61, 46, "fuligem")               # a boca da porta, encardida
+    rect(53, 39, 59, 44, "esmalte")               # chapa de esmalte rebitada por dentro
+    rebites(51, 61, 36, 3, "metal_d")
+    peca()
+    rect(47, 35, 49, 38, "metal_d")               # dobradiça
+    rect(47, 45, 49, 48, "metal_d")
+    rect(63, 40, 66, 43, "cobre")                 # trinco
+    peca()
+    line(46, 32, 66, 36, 2, "couro")              # correias em cruz
+    line(46, 51, 66, 47, 2, "couro")
 
 
-def elmo():
-    """Elmo fechado de fresta horizontal, com crista — o aceno ao clero."""
+def ombreira_tampa():
+    """Tampa de panela como ombreira — a asa continua no lugar dela."""
     peca()
-    ellipse(54, 18, 8, 7, "metal")
-    rect(54, 15, 64, 22, "metal")                 # viseira projetada
+    ellipse(66, 34, 8, 5, "esmalte")
+    ring(66, 34, 6, "metal_d", inner=.70)         # friso da tampa
+    put(63, 33, "clero")                          # lasca onde o esmalte saltou
     peca()
-    rect(45, 7, 56, 11, "metal_d")                # crista
-    line(47, 5, 54, 5, 2, "metal_d")
+    rect(64, 27, 68, 29, "metal_d")               # asa
+    put(63, 28, "metal_d")
+    put(69, 28, "metal_d")
     peca()
-    rect(56, 16, 65, 19, "metal_d")               # fresta
-    for x in range(57, 65, 3):
-        rect(x, 16, x, 19, "metal")               # barras da fresta
-    rebites(56, 64, 21, 3)
-
-
-def ombreira():
-    """Ombreiras grandes e ornamentais — o volume vitoriano do conjunto."""
-    peca()
-    ellipse(66, 32, 8, 6, "metal")
-    rebites(61, 71, 31, 4)
-    peca()
-    ellipse(44, 32, 6, 5, "metal_d")
-    engrenagem(68, 36, 3, "metal_d", fase=.3)     # junta do ombro
+    ellipse(43, 34, 6, 4, "fuligem")              # ombro de trás, chapa simples
 
 
 def braco():
     peca()
-    line(66, 37, 71, 48, 4, "metal")
-    engrenagem(72, 50, 3, "metal_d", fase=.6)     # cotovelo
+    line(66, 38, 71, 50, 5, "sobretudo")
     peca()
-    line(70, 52, 66, 60, 4, "metal")
-    rect(62, 59, 70, 63, "couro")                 # manopla
+    rect(68, 50, 75, 58, "metal_d")               # cano de chaminé como braçadeira
+    ring(71, 54, 4, "metal", inner=.72)
+    peca()
+    line(69, 58, 66, 66, 4, "sobretudo")
+    rect(62, 65, 70, 70, "couro")                 # luva
 
 
-def fuzil():
-    """Fuzil pneumático: cano longo, câmara de ar sob ele, coronha de madeira."""
+def cabeca():
+    """Pickelhaube: o capacete prussiano. É o que data o personagem no século
+    XIX e o que mais afasta a silhueta de um elmo medieval."""
     peca()
-    line(60, 56, 88, 46, 3, "metal_d")            # cano
+    ellipse(53, 17, 9, 7, "metal")
+    rect(45, 17, 62, 21, "metal")
     peca()
-    ellipse(70, 56, 6, 3, "metal")                # câmara de ar
-    rebites(66, 74, 56, 4)
+    rect(52, 6, 54, 12, "metal_d")                # a espigão
+    ellipse(53, 5, 2, 2, "metal_d")
+    rect(50, 11, 56, 13, "metal_d")               # base do espigão
     peca()
-    rect(55, 58, 64, 62, "madeira")               # coronha
-    line(63, 54, 67, 54, 1, "cobre")              # registro
-    line(86, 44, 90, 43, 2, "metal")              # boca
+    rect(58, 19, 67, 23, "metal_d")               # pala da frente
+    rect(42, 19, 48, 24, "metal_d")               # proteção de nuca
+    peca()
+    ellipse(54, 14, 5, 2, "cobre")                # placa frontal, latão de brasão
+    peca()
+    rect(56, 23, 64, 28, "fuligem")               # o rosto não se vê: só sombra
+    line(57, 26, 63, 26, 1, "couro")              # jugular
 
 
-def escudo():
-    """Escudo de engrenagem giratória, preso ao antebraço."""
-    engrenagem(74, 52, 14, "metal_d", dentes=18, fase=.1)
+def faixa_clero():
+    """Braçadeira do clero. Pequena de propósito: o tabardo grande competia com
+    a silhueta e sumia atrás da sucata."""
     peca()
-    ring(74, 52, 9, "metal", inner=.55)
-    peca()
-    ellipse(74, 52, 4, 4, "cobre")
-    peca()
-    ring(74, 52, 2, "metal_d", inner=.1)
+    rect(67, 40, 72, 46, "clero")
+    put(66, 41, "clero")
+    put(73, 45, "clero")
 
 
-def maca():
-    """Maça curta na mão livre, para a variante de escudo."""
+def joelheira():
     peca()
-    line(60, 62, 64, 78, 3, "madeira")
-    peca()
-    ellipse(65, 81, 4, 4, "metal_d")
-    rebites(62, 68, 81, 3)
+    ellipse(56, 76, 5, 4, "esmalte")              # panela pequena como joelheira
+    ring(56, 76, 3, "metal", inner=.60)
 
 
 def perna_frente():
     peca()
-    line(57, 60, 53, 76, 5, "metal")
-    engrenagem(55, 77, 3, "metal_d", fase=.8)     # joelheira
+    line(58, 66, 54, 78, 6, "sobretudo")
     peca()
-    line(55, 80, 59, 89, 5, "metal")
-    rect(52, 88, 72, 94, "metal_d")               # bota dianteira
-    rebites(55, 69, 90, 4)
+    rect(52, 80, 62, 93, "couro")                 # bota de cano alto
+    rect(50, 90, 68, 94, "fuligem")
+    rebites(53, 61, 84, 4, "metal_d")             # fivelas da bota
 
 
-def visor():
-    """A luz fria da fresta: o homem lá dentro não se vê, só o reflexo."""
-    for x in range(58, 65):
-        if material(x, 17) is not None:
-            pintar(x, 17, "1")
-        if material(x, 18) is not None:
-            pintar(x, 18, "1")
-    pintar(62, 17, "5")
-    pintar(63, 17, "D")
-    pintar(63, 18, "5")
+def fuzil():
+    """Fuzil pneumático: coronha de madeira, câmara de ar de cobre de
+    cervejaria, baioneta curta. A mangueira desce do tanque das costas."""
+    peca()
+    line(62, 60, 88, 50, 3, "metal_d")            # cano
+    peca()
+    ellipse(72, 59, 6, 3, "cobre")                # câmara de ar
+    rebites(68, 76, 59, 4, "metal_d")
+    peca()
+    rect(58, 62, 66, 66, "madeira")               # coronha
+    line(86, 48, 92, 45, 2, "metal")              # baioneta
+    put(93, 44, "metal")
+
+
+def tanque():
+    """Tanque de ar nas costas, de barril de cervejaria: aros e tudo."""
+    peca()
+    ellipse(39, 44, 7, 12, "metal_d")
+    for y in (36, 44, 52):
+        rect(32, y, 46, y + 1, "cobre")           # aros do barril
+    peca()
+    line(45, 38, 52, 34, 2, "fuligem")            # mangueira
+    line(52, 34, 60, 42, 2, "fuligem")
+    engrenagem(39, 31, 3, "metal", fase=.2)       # válvula
+
+
+def escudo():
+    """Tampa de tacho de cervejaria com uma engrenagem soldada no meio: o
+    'escudo de engrenagem giratória' do brief, construído de sucata."""
+    peca()
+    ellipse(74, 54, 14, 15, "metal_d")
+    peca()
+    ellipse(74, 54, 12, 13, "metal")
+    ring(74, 54, 9, "metal_d", inner=.80)         # friso do tacho
+    peca()
+    engrenagem(74, 54, 6, "cobre", dentes=12, fase=.3)
+    peca()
+    rect(72, 39, 76, 41, "metal_d")               # asa do tacho, ainda presa
+
+
+def maca():
+    """Martelo de ferreiro — a arma de quem não tinha arma."""
+    peca()
+    line(62, 66, 66, 82, 3, "madeira")
+    peca()
+    rect(62, 84, 71, 90, "fuligem")
+    rect(63, 85, 70, 89, "metal_d")
+
+
+def olhar():
+    """A fresta sob a pala: dois pixels frios no vazio do rosto."""
+    for x in range(57, 65):
+        for y in (24, 25):
+            if material(x, y) is not None:
+                pintar(x, y, "1")
+    pintar(62, 24, "5")
+    pintar(63, 24, "D")
+    pintar(62, 25, "4")
 
 
 ORDEM = [
-    ("tanque", tanque), ("perna_tras", perna_tras),
-    ("couraca", couraca), ("tabardo", tabardo), ("gola", gola),
-    ("elmo", elmo), ("ombreira", ombreira),
-    ("escudo", escudo), ("braco", braco), ("maca", maca), ("fuzil", fuzil),
-    ("perna_frente", perna_frente),
+    ("tanque", tanque), ("perna_tras", perna_tras), ("escudo", escudo),
+    ("sobretudo", sobretudo), ("peitoral_sucata", peitoral_sucata), ("cinto", cinto),
+    ("cabeca", cabeca), ("ombreira_tampa", ombreira_tampa), ("faixa_clero", faixa_clero),
+    ("braco", braco), ("maca", maca), ("fuzil", fuzil),
+    ("joelheira", joelheira), ("perna_frente", perna_frente),
 ]
 
-CORPO = {"perna_tras", "tabardo", "couraca", "gola", "elmo", "ombreira",
-         "braco", "perna_frente"}
+CORPO = {"perna_tras", "sobretudo", "peitoral_sucata", "cinto", "cabeca",
+         "ombreira_tampa", "faixa_clero", "braco", "joelheira", "perna_frente"}
 
 VARIANTES = {
-    "idle":        (CORPO | {"tanque", "fuzil"}, "bronze"),
-    "escudo":      (CORPO | {"escudo", "maca"}, "bronze"),
-    "guarda":      (CORPO | {"tanque", "fuzil"}, "prata"),
+    "idle":   (CORPO | {"tanque", "fuzil"}, "ferro"),
+    "escudo": (CORPO | {"escudo", "maca"}, "ferro"),
+    "guarda": (CORPO | {"tanque", "fuzil"}, "bronze"),
 }
 
 
 if __name__ == "__main__":
-    outputs = [{"id": nome, "rows": montar(ORDEM, partes, liga, acabamento=visor)}
+    outputs = [{"id": nome, "rows": montar(ORDEM, partes, liga, acabamento=olhar)}
                for nome, (partes, liga) in VARIANTES.items()]
     destino = sys.argv[1] if len(sys.argv) > 1 else "enm_soldado_clerico.spec.json"
     emitir_spec(destino, "enm_soldado_clerico", outputs)
