@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-"""Autômato Abandonado — máquina davinciana de Blumenau, 96x96 lateral.
+"""Autômato Abandonado — catálogo de peças da máquina davinciana de Blumenau.
 
-A criatura é um AUTÔMATO DE RELOJOARIA no espírito dos desenhos de Leonardo:
-armação aberta de madeira e metal, com o maquinismo à vista. O corpo não é uma
-carcaça fechada — é um gradil vazado por onde se enxerga o trem de engrenagens
-por dentro. Engrenagem pequena aparece em toda junta: pescoço, ombro, cotovelo,
-punho, quadril, joelho.
+A criatura é um autômato de relojoaria no espírito dos desenhos de Leonardo:
+armação aberta de madeira e metal, com o maquinismo à vista pelo vão do gradil
+e engrenagem em toda junta.
+
+Aqui mora só o DESENHO. O motor que desenha e acaba — primitivas, rampas,
+sombra de contato, luz de borda, outline — está em
+`Design/ArteFonte/Ferramentas/montagem_base.py`, compartilhado com os outros
+personagens montados por peça.
 
 Duas dimensões de variação, independentes:
 
@@ -16,170 +19,19 @@ Duas dimensões de variação, independentes:
   madeira, cobre e a brasa da lente ficam iguais, então a silhueta não muda com
   o grau e o jogador lê a dificuldade pela cor sem reaprender a forma.
 
-Fica no context pack, e não em Ferramentas/, porque é específico deste asset:
-Ferramentas/ guarda o que serve a qualquer sprite.
-
-Lições codificadas aqui (custaram iterações, não apague sem motivo):
-- engrenagem só lê como roda se for DISCO SÓLIDO FURADO — aro de 1px some;
-- dente tem que ser bloco 2x2; pixel isolado vira ponta de estrela;
-- o preto é exclusividade do outline e da sombra de contato: o corpo vive em
-  valores médios e é a LUZ DE BORDA de 1px que o recorta do fundo;
-- cada engrenagem precisa de folga escura em volta — a 64x64 cabiam duas, por
-  isso este arquivo nasceu em 96x96 (ADR-011);
-- o vazado entre as costelas é o que faz ler "máquina aberta" em vez de
-  "boneco de lata": sem buraco, detalhe interno vira textura.
+O idle de 6 frames é o maquinismo girando: cada roda avança um período de
+simetria por ciclo, rodas que engrenam giram em sentidos opostos, e a brasa da
+lente respira. Sem bob — é máquina rígida.
 
 Uso:
   py montagem.py enm_automato.spec.json
 """
-import json
-import math
 import sys
 from pathlib import Path
 
-W = H = 96
-EMPTY = "."
-
-# Animação: o idle é o maquinismo girando. NFRAMES e FRAME são lidos pela
-# engrenagem() para avançar a fase de cada roda.
-NFRAMES = 6
-FRAME = [0]
-
-# Ligas: rampa do metal principal. [sombra profunda, sombra, meio-tom, luz]
-LIGAS = {
-    "bronze": ["6", "7", "8", "8"],
-    "prata":  ["3", "4", "5", "5"],
-    "ferro":  ["2", "3", "4", "5"],
-}
-LIGA = ["bronze"]
-
-BASE_RAMPS = {
-    # "vazio" é o furo da engrenagem: não é transparência, é o interior escuro
-    # da máquina visto pela janela. Apagar o pixel abriria buraco na silhueta e
-    # levaria junto o que estivesse atrás.
-    "vazio":     ["1", "1", "2", "2"],
-    "madeira":   ["A", "B", "C", "D"],
-    "madeira_d": ["1", "A", "B", "C"],
-    "cobre":     ["1", "9", "C", "C"],
-}
-
-
-def ramp(m: str) -> list:
-    if m == "metal":
-        return LIGAS[LIGA[0]]
-    if m == "metal_d":
-        c = LIGAS[LIGA[0]]
-        return ["1", c[0], c[1], c[2]]
-    return BASE_RAMPS[m]
-
-
-grid, mat, z = None, None, None
-Z = [0]
-
-
-def limpar():
-    global grid, mat, z
-    grid = [[EMPTY] * W for _ in range(H)]
-    mat = [[None] * W for _ in range(H)]
-    z = [[-1] * W for _ in range(H)]
-    Z[0] = 0
-
-
-def peca():
-    Z[0] += 1
-
-
-def put(x, y, m):
-    if 0 <= x < W and 0 <= y < H:
-        grid[y][x] = "?"
-        mat[y][x] = m
-        z[y][x] = Z[0]
-
-
-def furar(x, y):
-    if 0 <= x < W and 0 <= y < H:
-        grid[y][x] = EMPTY
-        mat[y][x] = None
-        z[y][x] = -1
-
-
-def rect(x0, y0, x1, y1, m):
-    for y in range(y0, y1 + 1):
-        for x in range(x0, x1 + 1):
-            put(x, y, m)
-
-
-def vazar(x0, y0, x1, y1):
-    for y in range(y0, y1 + 1):
-        for x in range(x0, x1 + 1):
-            furar(x, y)
-
-
-def ellipse(cx, cy, rx, ry, m):
-    for y in range(cy - ry, cy + ry + 1):
-        for x in range(cx - rx, cx + rx + 1):
-            if ((x - cx + .5) / (rx + .5)) ** 2 + ((y - cy + .5) / (ry + .5)) ** 2 <= 1.1:
-                put(x, y, m)
-
-
-def ring(cx, cy, r, m, inner=.45):
-    for y in range(cy - r, cy + r + 1):
-        for x in range(cx - r, cx + r + 1):
-            d = ((x - cx + .5) / (r + .5)) ** 2 + ((y - cy + .5) / (r + .5)) ** 2
-            if inner <= d <= 1.05:
-                put(x, y, m)
-
-
-def line(x0, y0, x1, y1, t, m):
-    steps = max(abs(x1 - x0), abs(y1 - y0), 1)
-    for i in range(steps + 1):
-        x = round(x0 + (x1 - x0) * i / steps)
-        y = round(y0 + (y1 - y0) * i / steps)
-        rect(x, y, x + t - 1, y + t - 1, m)
-
-
-def engrenagem(cx, cy, r, m="metal", dentes=None, fase=0.0, eixo="cobre", giro=1):
-    """Disco sólido + dentes em bloco + janelas vazadas.
-
-    `giro` (+1/-1) é o sentido de rotação: rodas que engrenam uma na outra giram
-    em sentidos opostos, e é esse contraste que faz o maquinismo ler como
-    mecanismo em vez de enfeite girando junto. O passo por frame é um período
-    de simetria da peça dividido pelo ciclo, então o último frame emenda no
-    primeiro sem salto."""
-    if dentes is None:
-        dentes = max(6, min(18, r * 2))
-    janelas = (4 if r < 7 else 5) if r >= 4 else 0
-    periodo = 2 * math.pi / (janelas if janelas else dentes)
-    fase += giro * FRAME[0] * periodo / NFRAMES
-    peca()
-    ellipse(cx, cy, r, r, m)
-    for i in range(dentes):
-        a = fase + i * 2 * math.pi / dentes
-        tx, ty = cx + (r + 1.0) * math.cos(a), cy + (r + 1.0) * math.sin(a)
-        for ox in (0, 1):
-            for oy in (0, 1):
-                put(round(tx) + ox - 1, round(ty) + oy - 1, m)
-    if r >= 4:
-        raio_j = max(1, r // 3)
-        meu_z = Z[0]
-        for i in range(janelas):
-            a = fase + math.pi / janelas + i * 2 * math.pi / janelas
-            vx, vy = round(cx + (r * .55) * math.cos(a)), round(cy + (r * .55) * math.sin(a))
-            for dx in range(-raio_j, raio_j + 1):
-                for dy in range(-raio_j, raio_j + 1):
-                    # a janela vaza SÓ a própria roda: o que está atrás (a platina,
-                    # outra engrenagem) continua lá e é o que se enxerga pelo furo
-                    if abs(dx) + abs(dy) <= raio_j and 0 <= vx + dx < W and 0 <= vy + dy < H:
-                        if z[vy + dy][vx + dx] == meu_z:
-                            put(vx + dx, vy + dy, "vazio")
-    peca()
-    if r >= 5:
-        ellipse(cx, cy, r // 5, r // 5, eixo)
-
-
-def rebites(x0, x1, y, passo, m="cobre"):
-    for x in range(x0, x1 + 1, passo):
-        put(x, y, m)
+sys.path.insert(0, str(Path(__file__).resolve().parents[4] / "ArteFonte" / "Ferramentas"))
+from montagem_base import *  # noqa: F403,E402  (primitivas e estado da tela)
+from montagem_base import NFRAMES  # noqa: F401,E402
 
 
 # ------------------------------------------------------------------- as peças
@@ -335,17 +187,17 @@ def lente():
     """Único ponto quente do sprite, cercado de preto para queimar a 1x."""
     for y in range(13, 19):
         for x in range(60, 67):
-            if mat[y][x] is not None:
-                grid[y][x] = "1"
+            if material(x, y) is not None:
+                pintar(x, y, "1")
     # a brasa respira com o ciclo: dois frames mais acesa, os outros em brasa baixa
     aceso = FRAME[0] % NFRAMES in (1, 2)
     for x in range(62, 66):
-        grid[15][x] = "G"
-        grid[16][x] = "G"
-    grid[15][65] = "D" if aceso else "9"
-    grid[16][64] = "9" if aceso else "1"
+        pintar(x, 15, "G")
+        pintar(x, 16, "G")
+    pintar(65, 15, "D" if aceso else "9")
+    pintar(64, 16, "9" if aceso else "1")
     if aceso:
-        grid[14][64] = "9"
+        pintar(64, 14, "9")
 
 
 ORDEM = [
@@ -370,114 +222,13 @@ ESTATICOS = {
 ANIMA = (CORPO | {"lanca"}, "bronze")
 
 
-# ---------------------------------------------------------------- acabamento
-def runs_por_material():
-    out = {}
-    for y in range(H):
-        x = 0
-        while x < W:
-            m = mat[y][x]
-            if m is None:
-                x += 1
-                continue
-            x0 = x
-            while x < W and mat[y][x] == m:
-                x += 1
-            out.setdefault((y, m), []).append((x0, x - 1))
-    return out
-
-
-def shade():
-    for (y, m), runs in runs_por_material().items():
-        r = ramp(m)
-        for x0, x1 in runs:
-            n = x1 - x0 + 1
-            for x in range(x0, x1 + 1):
-                t = (x - x0) / max(n - 1, 1)
-                if n <= 3:
-                    band = 2 if t < .5 else 1
-                elif n <= 5:
-                    band = 2 if t < .34 else (1 if t < .7 else 0)
-                elif t < .18:
-                    band = 3
-                elif t < .38:
-                    band = 2
-                elif t < .74:
-                    band = 1
-                else:
-                    band = 0
-                if .34 <= t < .44 and (x + y) % 2 == 0:
-                    band = min(band + 1, 3)
-                if .70 <= t < .80 and (x + y) % 2 == 1:
-                    band = max(band - 1, 0)
-                grid[y][x] = r[band]
-
-
-def contato():
-    for y in range(H):
-        for x in range(W):
-            if mat[y][x] is None:
-                continue
-            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-                nx, ny = x + dx, y + dy
-                if 0 <= nx < W and 0 <= ny < H and z[ny][nx] > z[y][x]:
-                    grid[y][x] = ramp(mat[y][x])[0]
-                    break
-
-
-def luz_de_borda():
-    for y in range(H):
-        xs = [x for x in range(W) if mat[y][x] is not None]
-        if not xs:
-            continue
-        x = max(xs)
-        m = mat[y][x]
-        grid[y][x] = ramp(m)[3]
-        if y % 3 == 0 and x - 1 >= 0 and mat[y][x - 1] == m:
-            grid[y][x - 1] = ramp(m)[2]
-
-
-def outline():
-    base = [row[:] for row in grid]
-    for y in range(H):
-        for x in range(W):
-            if base[y][x] != EMPTY:
-                continue
-            if any(0 <= x + dx < W and 0 <= y + dy < H and base[y + dy][x + dx] != EMPTY
-                   for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
-                grid[y][x] = "1"
-
-
-def montar(partes: set, liga: str, frame: int = 0) -> list:
-    LIGA[0] = liga
-    FRAME[0] = frame
-    limpar()
-    for nome, fn in ORDEM:
-        if nome in partes:
-            fn()
-    shade()
-    contato()
-    luz_de_borda()
-    lente()
-    outline()
-    return ["".join(r) for r in grid]
 
 
 if __name__ == "__main__":
     ids_idle = ["idle"] + [f"f{i}" for i in range(2, NFRAMES + 1)]
-    outputs = [{"id": ids_idle[i], "rows": montar(ANIMA[0], ANIMA[1], i)} for i in range(NFRAMES)]
-    outputs += [{"id": nome, "rows": montar(partes, liga)} for nome, (partes, liga) in ESTATICOS.items()]
-    out = Path(sys.argv[1] if len(sys.argv) > 1 else "enm_automato.spec.json")
-    anterior = json.loads(out.read_text(encoding="utf-8")) if out.exists() else {}
-    spec = {
-        "name": "enm_automato",
-        "size": [W, H],
-        "palette": "../../../../ArteConceitual/Paletas/blumenau.json",
-        "notes": anterior.get("notes", ""),
-        "outputs": outputs,
-        "sheets": {"idle": ids_idle},
-    }
-    out.write_text(json.dumps(spec, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    usadas = sorted({c for o in outputs for r in o["rows"] for c in r if c != EMPTY})
-    print(f"OK: {out} — {NFRAMES} frames de idle + {len(ESTATICOS)} estáticos em {W}x{H}, "
-          f"{len(usadas)} cores: {' '.join(usadas)}")
+    outputs = [{"id": ids_idle[i], "rows": montar(ORDEM, ANIMA[0], ANIMA[1], i, acabamento=lente)}
+               for i in range(NFRAMES)]
+    outputs += [{"id": nome, "rows": montar(ORDEM, partes, liga, acabamento=lente)}
+                for nome, (partes, liga) in ESTATICOS.items()]
+    destino = sys.argv[1] if len(sys.argv) > 1 else "enm_automato.spec.json"
+    emitir_spec(destino, "enm_automato", outputs, sheets={"idle": ids_idle})
