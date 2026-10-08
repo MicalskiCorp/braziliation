@@ -1,0 +1,16 @@
+{
+  "descricao": "Registro das páginas de personagem publicadas como artefato. É a fonte única de qual personagem tem página e onde ela está — o hub da galeria é gerado daqui por Ferramentas/galeria_personagens.py. A URL de cada um também fica no {asset}.pagina.json do context pack; esta lista é o que amarra tudo num ponto só.",
+  "hub": "https://claude.ai/artifact/VT2WNugDunkevnvUycdYq5",
+  "personagens": [
+    {
+      "asset": "enm_automato",
+      "spec": "../ContextPacks/enm-automato-abandonado/enm_automato.spec.json",
+      "capa": "lanca"
+    },
+    {
+      "asset": "enm_soldado_clerico",
+      "spec": "../ContextPacks/enm-soldado-clerico/enm_soldado_clerico.spec.json",
+      "capa": "idle"
+    }
+  ]
+}

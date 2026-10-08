@@ -32,7 +32,11 @@ Processo canônico: **`Design/GuiasDeArte/pipeline-sprites-programaticos.md`** �
      `url`. Não existe? Publique e **grave a URL no JSON no mesmo passo** — sem isso a
      próxima sessão cria uma página órfã em vez de atualizar a do personagem;
    - toda mudança de arte ou animação nova ganha uma linha em `historico`, com a data e o
-     porquê. É esse histórico que transforma a página em documentação.
+     porquê. É esse histórico que transforma a página em documentação;
+   - personagem novo entra em `IA/Paginas/galeria.json`, e aí
+     `py Design/ArteFonte/Ferramentas/galeria_personagens.py` regenera tudo e remonta o
+     **hub** da galeria (fixado na barra lateral) — a galeria do claude.ai não tem pastas,
+     o hub é o agrupamento.
 8. Entregar: PNG aprovado em `ArteFonte/IA/Selected/`; se solicitado export, copiar para `Desenvolvimento/Assets/Art/{destino}` (nomes conforme `Docs/Architecture/Assets/AssetsStructure.md`) e registrar em `Docs/Architecture/indices/assets.md` (mover a linha do asset de "Backlog por Asset" para "Assets Registrados").
 9. Retroalimentar pendências em `Desenvolvimento/Docs/TODO.md`.
 

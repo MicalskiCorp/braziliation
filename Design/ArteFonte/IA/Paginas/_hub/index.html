@@ -1,0 +1,101 @@
+<title>Personagens do Braziliation</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #e8e3d9; --panel: #f6f3ec; --panel-2: #ded7c9; --line: #c6bda9;
+    --ink: #1b1616; --ink-soft: #5c554a; --brass: #8a6b22; --brass-lit: #c9a558;
+    --stage: #232c33; --floor: #3a3f44; --ok: #3f6b3a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #15191d; --panel: #1c2227; --panel-2: #232c33; --line: #333d45;
+      --ink: #e9e3d6; --ink-soft: #97a0a8; --brass: #c9a558; --brass-lit: #e2c485;
+      --stage: #1b1616; --floor: #2b3238; --ok: #7fb069;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #15191d; --panel: #1c2227; --panel-2: #232c33; --line: #333d45;
+    --ink: #e9e3d6; --ink-soft: #97a0a8; --brass: #c9a558; --brass-lit: #e2c485;
+    --stage: #1b1616; --floor: #2b3238; --ok: #7fb069;
+  }
+  body { background: var(--ground); color: var(--ink); font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 15px; line-height: 1.55; }
+  .wrap { max-width: 960px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 56px; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+  h1 { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: clamp(32px, 6vw, 46px); text-transform: uppercase; margin: 0; }
+  .tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--brass); border: 1px solid var(--line); padding: 2px 7px; border-radius: 2px; }
+  .sub { color: var(--ink-soft); max-width: 64ch; margin: 6px 0 24px; }
+  .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .ficha { display: block; text-decoration: none; color: inherit; background: var(--panel); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+  .ficha:hover { border-color: var(--brass); }
+  .ficha .palco { background: var(--stage); position: relative; display: grid; place-items: center; padding: 14px 0 0; }
+  .ficha .palco::after { content: ""; position: absolute; inset: auto 0 0 0; height: 20%; background: var(--floor); }
+  .ficha canvas { position: relative; z-index: 1; image-rendering: pixelated; display: block; }
+  .ficha .corpo { padding: 11px 13px 13px; }
+  .ficha .nome { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; text-transform: uppercase; font-size: 19px; letter-spacing: .02em; }
+  .ficha .resumo { color: var(--ink-soft); font-size: 13px; margin-top: 3px; }
+  .ficha .pe { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; align-items: center; }
+  .selo { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 2px; padding: 1px 6px; color: var(--ink-soft); }
+  .selo.ok { color: var(--ok); border-color: var(--ok); }
+  .selo.anim { color: var(--brass); border-color: var(--brass); }
+  h2 { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; text-transform: uppercase; letter-spacing: .04em; font-size: 20px; margin: 32px 0 3px; }
+  .dica { color: var(--ink-soft); font-size: 13px; margin: 0 0 12px; }
+  ol { padding-left: 20px; color: var(--ink-soft); font-size: 14px; }
+  ol li { margin-bottom: 6px; }
+  footer { margin-top: 30px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 13px; }
+  code { font-family: "IBM Plex Mono", monospace; font-size: .92em; background: var(--panel-2); padding: 1px 5px; border-radius: 2px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Personagens do Braziliation</h1>
+    <span class="tag">2 personagens</span>
+    <span class="tag">96×96 · 48 PPU</span>
+  </header>
+  <p class="sub">
+    A galeria do claude.ai não tem pastas — os artefatos ficam numa lista única por data.
+    Esta página é o agrupamento: a porta de entrada para a ficha de cada personagem, onde
+    moram os sprites, as variantes, a animação rodando e o histórico do que mudou.
+  </p>
+
+  <div class="galeria" id="galeria"></div>
+
+  <h2>Como isto se mantém</h2>
+  <p class="dica">Para a galeria não desandar conforme o projeto cresce.</p>
+  <ol>
+    <li>A lista de quem está aqui vive em <code>Design/ArteFonte/IA/Paginas/galeria.json</code>, no repositório.</li>
+    <li>Cada ficha é <strong>gerada da spec</strong> do asset — não tem como mostrar arte velha.</li>
+    <li>A URL de cada personagem fica no <code>{asset}.pagina.json</code> do context pack, e é nela que se republica. Personagem nunca ganha página nova: ganha versão nova da mesma página.</li>
+    <li>Mudou arte ou entrou animação? <code>py galeria_personagens.py</code> regenera tudo e diz o que republicar.</li>
+  </ol>
+
+  <footer>Gerado por <code>galeria_personagens.py</code> a partir de <code>IA/Paginas/galeria.json</code>. As páginas e as capas ficam em <code>Design/ArteFonte/IA/Paginas/</code>, versionadas junto com o projeto — o que foi publicado está sempre reproduzível a partir do repositório.</footer>
+</div>
+
+<script id="dados" type="application/json">[{"titulo": "Autômato Abandonado", "resumo": "Máquina de relojoaria no espírito dos desenhos de Leonardo: armação aberta de madeira e metal, com o maquinismo à vista pelo vão do gradil e engrenage…", "status": "aprovado", "url": "https://claude.ai/artifact/9TF8ejHqNuMmzcJe43EurS", "capa": "capas/enm_automato.png", "largura": 96, "altura": 96, "variantes": 4, "animacoes": 1}, {"titulo": "Soldado Clérico", "resumo": "Colono alemão do Vale do Itajaí armado pelo alto clero, em armadura improvisada de sucata doméstica no fim do século XIX. Veste o que um blumenauense …", "status": "rascunho", "url": "https://claude.ai/artifact/N8qqSrEfVGBuZYM21A2XwY", "capa": "capas/enm_soldado_clerico.png", "largura": 96, "altura": 96, "variantes": 3, "animacoes": 0}]</script>
+<script>
+  const D = JSON.parse(document.getElementById("dados").textContent);
+  const host = document.getElementById("galeria");
+  D.forEach(p => {
+    const a = document.createElement("a");
+    a.className = "ficha"; a.href = p.url; a.target = "_blank"; a.rel = "noopener";
+    const palco = document.createElement("div"); palco.className = "palco";
+    const c = document.createElement("canvas");
+    const escala = 2;
+    c.width = p.largura * escala; c.height = p.altura * escala;
+    palco.appendChild(c);
+    const corpo = document.createElement("div"); corpo.className = "corpo";
+    const selos = [`<span class="selo ${p.status === "aprovado" ? "ok" : ""}">${p.status}</span>`,
+                   `<span class="selo">${p.variantes} variantes</span>`];
+    if (p.animacoes) selos.push(`<span class="selo anim">${p.animacoes} animação(ões)</span>`);
+    corpo.innerHTML = `<div class="nome">${p.titulo}</div><div class="resumo">${p.resumo}</div>` +
+                      `<div class="pe">${selos.join("")}</div>`;
+    a.append(palco, corpo); host.appendChild(a);
+    const img = new Image();
+    img.onload = () => {
+      const ctx = c.getContext("2d");
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(img, 0, 0, c.width, c.height);
+    };
+    img.src = p.capa;
+  });
+</script>

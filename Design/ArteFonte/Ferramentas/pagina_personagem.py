@@ -327,7 +327,10 @@ MODELO = """<title>{titulo}</title>
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("spec", type=Path, help="Spec consolidada do asset")
-    ap.add_argument("--saida", type=Path, required=True, help="Pasta da página (index.html + sprites/)")
+    ap.add_argument("--saida", type=Path, default=None,
+                    help="Pasta da página. Padrão: Design/ArteFonte/IA/Paginas/{nome do asset}/ — "
+                         "dentro do projeto, e não num diretório temporário, para o que foi "
+                         "publicado continuar reproduzível a partir do repositório")
     args = ap.parse_args()
 
     spec = json.loads(args.spec.read_text(encoding="utf-8"))
@@ -336,7 +339,7 @@ def main() -> None:
     meta_path = args.spec.with_name(args.spec.name.replace(".spec.json", ".pagina.json"))
     meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
 
-    saida = args.saida
+    saida = args.saida or (Path(__file__).resolve().parents[1] / "IA" / "Paginas" / nome)
     (saida / "sprites").mkdir(parents=True, exist_ok=True)
     for antigo in (saida / "sprites").glob("*.png"):
         antigo.unlink()

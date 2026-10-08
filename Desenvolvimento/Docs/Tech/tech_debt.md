@@ -19,6 +19,13 @@ Format:
 
 ### Alta
 
+- **Item:** Dois artefatos antigos do autômato continuam publicados e duplicam a página do personagem
+- **Where:** claude.ai/artifact/SG8dXeBixrnPTm6GrGWiLP ("Autômato Abandonado", página de revisão de 26 set) e claude.ai/artifact/N9vDgyhyb5QNJBLjHqMxXu ("Idle do Autômato")
+- **Why:** Nasceram antes do passo de página por personagem. Hoje o conteúdo deles vive na página canônica (9TF8ejHqNuMmzcJe43EurS), e a lista da galeria mostra dois itens com o mesmo nome "Autômato Abandonado" — exatamente a desorganização que o hub veio resolver.
+- **Fix:** Apagar os dois, com confirmação do usuário (apagar artefato é irreversível e quebra o link para quem o tiver). Só o usuário decide.
+
+
+
 - **Item:** `Ferramentas/index.md` vive raspando o teto de 1500 tokens do roteador
 - **Where:** `Design/ArteFonte/Ferramentas/index.md`
 - **Why:** São 19 ferramentas numa tabela só, com descrição de uma ou duas linhas cada. Em 2026-10-07 estourou ao ganhar duas linhas e foi preciso enxugar seis descrições para caber. A próxima ferramenta estoura de novo.

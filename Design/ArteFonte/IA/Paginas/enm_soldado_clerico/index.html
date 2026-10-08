@@ -1,0 +1,280 @@
+<title>Soldado Clérico</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #e8e3d9; --panel: #f6f3ec; --panel-2: #ded7c9; --line: #c6bda9;
+    --ink: #1b1616; --ink-soft: #5c554a; --brass: #8a6b22; --brass-lit: #c9a558;
+    --stage: #232c33; --floor: #3a3f44; --ok: #3f6b3a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #15191d; --panel: #1c2227; --panel-2: #232c33; --line: #333d45;
+      --ink: #e9e3d6; --ink-soft: #97a0a8; --brass: #c9a558; --brass-lit: #e2c485;
+      --stage: #1b1616; --floor: #2b3238; --ok: #7fb069;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #15191d; --panel: #1c2227; --panel-2: #232c33; --line: #333d45;
+    --ink: #e9e3d6; --ink-soft: #97a0a8; --brass: #c9a558; --brass-lit: #e2c485;
+    --stage: #1b1616; --floor: #2b3238; --ok: #7fb069;
+  }
+  body { background: var(--ground); color: var(--ink); font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 15px; line-height: 1.55; }
+  .wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 56px; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+  h1 { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: clamp(30px, 6vw, 44px); text-transform: uppercase; margin: 0; text-wrap: balance; }
+  .tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--brass); border: 1px solid var(--line); padding: 2px 7px; border-radius: 2px; white-space: nowrap; }
+  .tag.ok { color: var(--ok); border-color: var(--ok); }
+  .sub { color: var(--ink-soft); max-width: 64ch; margin: 6px 0 20px; }
+  .palco { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; display: grid; place-items: center; min-height: 320px; }
+  .palco::after { content: ""; position: absolute; inset: auto 0 0 0; height: 22%; background: var(--floor); }
+  #palco { position: relative; z-index: 1; image-rendering: pixelated; display: block; }
+  .selo { position: absolute; z-index: 2; top: 8px; left: 10px; font-family: "IBM Plex Mono", monospace; font-size: 11px; color: #8a949c; }
+  .controles { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); margin-bottom: 20px; }
+  .grupo { display: flex; align-items: center; gap: 6px; }
+  .rotulo { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  button { font: 500 13px/1 "IBM Plex Mono", monospace; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 2px; padding: 7px 10px; cursor: pointer; }
+  button:hover { border-color: var(--brass); }
+  button[aria-pressed="true"] { background: var(--brass); color: var(--panel); border-color: var(--brass); }
+  button:focus-visible { outline: 2px solid var(--brass-lit); outline-offset: 2px; }
+  .amostra { width: 26px; height: 26px; padding: 0; }
+  h2 { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; text-transform: uppercase; letter-spacing: .04em; font-size: 20px; margin: 28px 0 3px; }
+  .dica { color: var(--ink-soft); font-size: 13px; margin: 0 0 14px; }
+  .grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid transparent; border-radius: 2px; padding: 10px; text-align: center; cursor: pointer; font: inherit; color: inherit; }
+  .card[aria-pressed="true"] { border-left-color: var(--brass); background: var(--panel-2); }
+  .card canvas { image-rendering: pixelated; background: var(--stage); border-radius: 2px; }
+  .card .nome { font-size: 13px; font-weight: 600; margin-top: 6px; }
+  .card .papel { font-size: 12px; color: var(--ink-soft); }
+  .tira { display: flex; flex-wrap: wrap; gap: 8px; }
+  .quadro { text-align: center; }
+  .quadro canvas { image-rendering: pixelated; background: var(--stage); border: 1px solid var(--line); border-radius: 2px; display: block; }
+  .quadro span { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--ink-soft); display: block; margin-top: 3px; }
+  .rampa { display: flex; flex-wrap: wrap; gap: 4px; }
+  .cor { width: 44px; height: 44px; border-radius: 2px; border: 1px solid var(--line); display: grid; place-items: end center; padding-bottom: 2px; font-family: "IBM Plex Mono", monospace; font-size: 10px; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.9); }
+  .pecas { display: flex; flex-wrap: wrap; gap: 4px; }
+  .peca { font-family: "IBM Plex Mono", monospace; font-size: 11px; border: 1px solid var(--line); border-radius: 2px; padding: 2px 7px; color: var(--ink-soft); }
+  .hist { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .hist li { display: grid; grid-template-columns: 94px 1fr; gap: 12px; border-bottom: 1px dashed var(--line); padding-bottom: 10px; }
+  .hist time { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--brass); }
+  footer { margin-top: 30px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 13px; }
+  code { font-family: "IBM Plex Mono", monospace; font-size: .92em; background: var(--panel-2); padding: 1px 5px; border-radius: 2px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Soldado Clérico</h1>
+    <span class="tag">96×96 · 48 PPU</span>
+    <span class="tag">14 de 32 cores</span>
+    <span class="tag ">rascunho</span>
+  </header>
+  <p class="sub">Colono alemão do Vale do Itajaí armado pelo alto clero, em armadura improvisada de sucata doméstica no fim do século XIX. Veste o que um blumenauense teria: traje típico e Pickelhaube, com as peças da cozinha amarradas por cima — porta de fogão a lenha no peito, tampa de panela como ombreira, cano de chaminé como braçadeira.</p>
+
+  <div class="palco">
+    <span class="selo" id="selo"></span>
+    <canvas id="palco"></canvas>
+  </div>
+
+  <div class="controles">
+    <div class="grupo" id="grupoZoom">
+      <span class="rotulo">zoom</span>
+      <button data-zoom="1">1×</button><button data-zoom="2">2×</button>
+      <button data-zoom="3" aria-pressed="true">3×</button><button data-zoom="5">5×</button>
+    </div>
+    <div class="grupo" id="grupoFundo">
+      <span class="rotulo">fundo</span>
+      <button class="amostra" data-fundo="#232c33" style="background:#232c33" aria-pressed="true" title="Céu noturno"></button>
+      <button class="amostra" data-fundo="#3a3f44" style="background:#3a3f44" title="Concreto"></button>
+      <button class="amostra" data-fundo="#5a6b52" style="background:#5a6b52" title="Lama"></button>
+      <button class="amostra" data-fundo="#cbb48a" style="background:#cbb48a" title="Reboco"></button>
+    </div>
+    <div class="grupo">
+      <button id="btnGrade" aria-pressed="false">Grade</button>
+      <button id="btnEspelho" aria-pressed="false">Espelhar</button>
+      <button id="btnTocar" aria-pressed="true" hidden>⏸ Pausar</button>
+    </div>
+  </div>
+
+  <h2>Variantes</h2>
+  <p class="dica">Cada uma é um subconjunto do catálogo de peças. Clique para levar ao palco.</p>
+  <div class="grade" id="variantes"></div>
+
+  <div id="secaoAnim" hidden>
+    <h2>Animações</h2>
+    <p class="dica" id="dicaAnim"></p>
+    <div class="grade" id="animacoes"></div>
+    <h2>Quadros</h2>
+    <p class="dica">Os frames da animação selecionada, parados.</p>
+    <div class="tira" id="tira"></div>
+  </div>
+
+  <h2>Peças</h2>
+  <p class="dica">O catálogo que monta todas as variantes.</p>
+  <div class="pecas" id="pecas"></div>
+
+  <h2>Cores em uso</h2>
+  <p class="dica">Da paleta da região. O gate <code>palette_check.py</code> reprova qualquer cor fora dela.</p>
+  <div class="rampa" id="rampa"></div>
+
+  <h2>Histórico</h2>
+  <p class="dica">O que mudou neste personagem, e por quê.</p>
+  <ul class="hist" id="historico"></ul>
+
+  <footer>Fonte da arte: <code>montagem.py</code> + <code>enm_soldado_clerico.spec.json</code> no context pack do asset. Página gerada por <code>pagina_personagem.py</code>. Os 6 thumbnails de difusão (rota C) seguem pendentes de curadoria — esta é a versão programática, placeholder jogável.</footer>
+</div>
+
+<script id="dados" type="application/json">{"largura": 96, "altura": 96, "arquivos": {"var:idle": "sprites/idle.png", "var:escudo": "sprites/escudo.png", "var:guarda": "sprites/guarda.png"}, "variantes": [{"id": "idle", "nome": "Tropa · ferro", "papel": "Fuzil pneumático e barril de ar nas costas"}, {"id": "escudo", "nome": "Escudeiro · ferro", "papel": "Tampa de tacho com engrenagem soldada, e martelo de ferreiro"}, {"id": "guarda", "nome": "Guarda · bronze", "papel": "Quem conseguiu chapa de cervejaria"}], "animacoes": [], "pecas": ["Pickelhaube com tufo de pena", "gola de loden", "suspensórios com edelvais", "calção de couro", "meias de cano alto", "sobretudo militar", "porta de fogão (peitoral)", "tampa de panela (ombreira)", "cano de chaminé (braçadeira)", "panela de ágata (joelheira)", "caneca esmaltada", "braçadeira do clero", "botas", "barril de ar", "fuzil pneumático", "tampa de tacho (escudo)", "martelo de ferreiro"], "cores": [{"key": "1", "hex": "#1b1616"}, {"key": "2", "hex": "#232c33"}, {"key": "3", "hex": "#3a3f44"}, {"key": "4", "hex": "#4d5a66"}, {"key": "5", "hex": "#8a949c"}, {"key": "6", "hex": "#6e5424"}, {"key": "7", "hex": "#a07f3a"}, {"key": "8", "hex": "#c9a558"}, {"key": "9", "hex": "#8a4a2b"}, {"key": "A", "hex": "#4a3226"}, {"key": "B", "hex": "#6b4a33"}, {"key": "C", "hex": "#8c6b42"}, {"key": "D", "hex": "#cbb48a"}, {"key": "E", "hex": "#5a6b52"}], "historico": [{"data": "2026-10-07", "texto": "Primeira montagem programática, a partir do brief em Blumenau/index.md: \"humano com armadura clockpunk completa, servo do alto clero. Usa armas pneumáticas e escudos de engrenagem giratória.\" Serviu de teste da linha de montagem extraída do autômato — nenhuma primitiva ou passe de acabamento precisou mudar, só o catálogo de peças. O carmim do tabardo entrou pela API registrar_material."}, {"data": "2026-10-07", "texto": "Correção de ordem de montagem: o tabardo estava sendo desenhado antes da couraça e a armadura o cobria. Passou a cair do cinturão, por cima das pernas. Elmo reduzido e pernas alongadas para a proporção ficar humana, não de boneco."}, {"data": "2026-10-07", "texto": "Reformulado: a primeira versão lia como irmão de latão do Autômato. A direção passou a ser armadura improvisada de sucata doméstica alemã, no fim do século XIX — referência de leitura em Ghosts'n Goblins e Castlevania, referência de época e lugar na Prússia vitoriana e na cozinha de enxaimel. Sai o elmo medieval, entra a Pickelhaube; sai o tabardo, entra o sobretudo militar com saia; sai o latão dominante, entra o sobretudo escuro com a sucata clara por cima. O esmalte de ágata da louça alemã virou o acento claro, e é ele que faz a sucata ler contra o casaco."}, {"data": "2026-10-07", "texto": "Entraram os elementos de Tracht, pela lógica de que um colono de Blumenau teria acesso a traje de festa, não a equipamento militar: tufo de pena preso ao espigão do Pickelhaube, gola de loden verde, suspensórios de couro com travessa no peito e edelvais bordado, calção de couro e meias de cano alto. As meias resolveram de quebra um problema de leitura — as pernas eram uma coluna escura única, e agora separam calção, meia e bota."}]}</script>
+<script>
+  const D = JSON.parse(document.getElementById("dados").textContent);
+  const W = D.largura, H = D.altura;
+  const estado = { sel: D.variantes[0].id, zoom: 3, fundo: "#232c33", grade: false,
+                   espelho: false, tocando: true, frame: 0, anim: null };
+  const imgs = {};
+  const ctx = document.getElementById("palco").getContext("2d");
+  const minis = [];
+
+  function desenhar(c, img, quadro, escala, fundo, grade, espelho) {
+    const w = W * escala, h = H * escala;
+    c.canvas.width = w; c.canvas.height = h;
+    c.imageSmoothingEnabled = false;
+    if (fundo) { c.fillStyle = fundo; c.fillRect(0, 0, w, h); } else { c.clearRect(0, 0, w, h); }
+    if (img && img.complete && img.naturalWidth) {
+      c.save();
+      if (espelho) { c.translate(w, 0); c.scale(-1, 1); }
+      c.drawImage(img, quadro * W, 0, W, H, 0, 0, w, h);
+      c.restore();
+    }
+    if (grade && escala >= 3) {
+      c.strokeStyle = "rgba(255,0,255,.26)"; c.lineWidth = 1;
+      for (let x = 0; x <= w; x += escala) { c.beginPath(); c.moveTo(x + .5, 0); c.lineTo(x + .5, h); c.stroke(); }
+      for (let y = 0; y <= h; y += escala) { c.beginPath(); c.moveTo(0, y + .5); c.lineTo(w, y + .5); c.stroke(); }
+    }
+  }
+
+  function alvo() {
+    if (estado.anim) {
+      const a = D.animacoes.find(x => x.id === estado.anim);
+      return { img: imgs["anim:" + a.id], frames: a.frames, rotulo: a.nome + " · " + a.fps + " fps" };
+    }
+    const v = D.variantes.find(x => x.id === estado.sel);
+    return { img: imgs["var:" + v.id], frames: 1, rotulo: v.nome };
+  }
+
+  function render() {
+    const a = alvo();
+    desenhar(ctx, a.img, estado.frame % a.frames, estado.zoom, estado.fundo, estado.grade, estado.espelho);
+    document.getElementById("selo").textContent =
+      `${a.rotulo} · ${estado.zoom}×${a.frames > 1 ? ` · quadro ${(estado.frame % a.frames) + 1}/${a.frames}` : ""}${estado.espelho ? " · espelhado" : ""}`;
+    minis.forEach(m => desenhar(m.ctx, m.img(), 0, 1, estado.fundo, false, estado.espelho));
+    document.getElementById("btnTocar").hidden = a.frames <= 1;
+  }
+
+  function cartao(host, chave, nome, papel, pegarImg, aoClicar) {
+    const b = document.createElement("button");
+    b.className = "card"; b.id = chave;
+    b.setAttribute("aria-pressed", "false");
+    const c = document.createElement("canvas");
+    const meta = document.createElement("div");
+    meta.innerHTML = `<div class="nome">${nome}</div>` + (papel ? `<div class="papel">${papel}</div>` : "");
+    b.append(c, meta);
+    b.addEventListener("click", () => {
+      document.querySelectorAll(".card").forEach(x => x.setAttribute("aria-pressed", "false"));
+      b.setAttribute("aria-pressed", "true");
+      aoClicar(); estado.frame = 0; montarTira(); render();
+    });
+    host.appendChild(b);
+    minis.push({ ctx: c.getContext("2d"), img: pegarImg });
+  }
+
+  function montarTira() {
+    const host = document.getElementById("tira");
+    host.textContent = "";
+    if (!estado.anim) return;
+    const a = D.animacoes.find(x => x.id === estado.anim);
+    for (let i = 0; i < a.frames; i++) {
+      const cel = document.createElement("div");
+      cel.className = "quadro";
+      const c = document.createElement("canvas");
+      desenhar(c.getContext("2d"), imgs["anim:" + a.id], i, 2, estado.fundo, false, estado.espelho);
+      const s = document.createElement("span");
+      s.textContent = a.ids[i];
+      cel.append(c, s);
+      host.appendChild(cel);
+    }
+  }
+
+  function grupo(id, attr, aplicar) {
+    document.getElementById(id).addEventListener("click", e => {
+      const b = e.target.closest(`button[data-${attr}]`);
+      if (!b) return;
+      document.querySelectorAll(`#${id} button`).forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      aplicar(b.dataset[attr]); montarTira(); render();
+    });
+  }
+  grupo("grupoZoom", "zoom", v => estado.zoom = Number(v));
+  grupo("grupoFundo", "fundo", v => estado.fundo = v);
+
+  for (const [id, prop, ligado] of [["btnGrade", "grade"], ["btnEspelho", "espelho"]]) {
+    const b = document.getElementById(id);
+    b.addEventListener("click", () => {
+      estado[prop] = !estado[prop];
+      b.setAttribute("aria-pressed", String(estado[prop]));
+      montarTira(); render();
+    });
+  }
+  const btnTocar = document.getElementById("btnTocar");
+  btnTocar.addEventListener("click", () => {
+    estado.tocando = !estado.tocando;
+    btnTocar.setAttribute("aria-pressed", String(estado.tocando));
+    btnTocar.textContent = estado.tocando ? "⏸ Pausar" : "▶ Tocar";
+  });
+
+  const hostV = document.getElementById("variantes");
+  D.variantes.forEach(v => cartao(hostV, "v-" + v.id, v.nome, v.papel,
+    () => imgs["var:" + v.id], () => { estado.anim = null; estado.sel = v.id; }));
+  if (D.animacoes.length) {
+    document.getElementById("secaoAnim").hidden = false;
+    document.getElementById("dicaAnim").textContent =
+      "Tocando na velocidade do jogo, em loop — a mesma que o SpriteSheetAnimator usa.";
+    const hostA = document.getElementById("animacoes");
+    D.animacoes.forEach(a => cartao(hostA, "a-" + a.id, a.nome, a.frames + " quadros · " + a.fps + " fps",
+      () => imgs["anim:" + a.id], () => { estado.anim = a.id; }));
+  }
+
+  const hostP = document.getElementById("pecas");
+  D.pecas.forEach(p => {
+    const s = document.createElement("span"); s.className = "peca"; s.textContent = p; hostP.appendChild(s);
+  });
+  const hostC = document.getElementById("rampa");
+  D.cores.forEach(c => {
+    const d = document.createElement("div");
+    d.className = "cor"; d.style.background = c.hex; d.title = c.key + " · " + c.hex;
+    d.textContent = c.key; hostC.appendChild(d);
+  });
+  const hostH = document.getElementById("historico");
+  D.historico.forEach(h => {
+    const li = document.createElement("li");
+    li.innerHTML = `<time>${h.data}</time><span>${h.texto}</span>`;
+    hostH.appendChild(li);
+  });
+
+  let ultimo = 0, fps = 8;
+  function laco(t) {
+    const a = alvo();
+    if (a.frames > 1) {
+      const an = D.animacoes.find(x => x.id === estado.anim);
+      fps = an ? an.fps : 8;
+      if (estado.tocando && t - ultimo >= 1000 / fps) { ultimo = t; estado.frame++; render(); }
+    }
+    requestAnimationFrame(laco);
+  }
+
+  let faltam = Object.keys(D.arquivos).length;
+  Object.entries(D.arquivos).forEach(([chave, src]) => {
+    const img = new Image();
+    img.onload = img.onerror = () => { if (--faltam === 0) { montarTira(); render(); } };
+    img.src = src; imgs[chave] = img;
+  });
+  document.getElementById("v-" + estado.sel)?.setAttribute("aria-pressed", "true");
+  render();
+  requestAnimationFrame(laco);
+</script>

@@ -118,9 +118,21 @@ histórico do que mudou.
 
 | Artefato | Onde |
 |----------|------|
-| Gerador | [`pagina_personagem.py`](../ArteFonte/Ferramentas/pagina_personagem.py) |
+| Gerador de uma página | [`pagina_personagem.py`](../ArteFonte/Ferramentas/pagina_personagem.py) |
 | Metadados e **URL do artefato** | `{asset}.pagina.json`, ao lado da spec no context pack |
-| Índice das páginas | [`Docs/Architecture/indices/assets.md`](../../Desenvolvimento/Docs/Architecture/indices/assets.md) |
+| Páginas e capas geradas | `Design/ArteFonte/IA/Paginas/{asset}/` — versionadas |
+| Registro de quem está na galeria | `Design/ArteFonte/IA/Paginas/galeria.json` |
+| Hub + regeneração em lote | [`galeria_personagens.py`](../ArteFonte/Ferramentas/galeria_personagens.py) |
+
+### O hub da galeria
+
+A galeria do claude.ai **não tem pastas**: os artefatos ficam numa lista única por data de
+atualização, misturados com tudo que já foi publicado. O agrupamento possível é por
+conteúdo. Por isso existe um **hub** — uma página só que lista todos os personagens, com
+capa, status e link, fixada na barra lateral. É por ele que se navega, não pela lista.
+
+`py galeria_personagens.py` regenera todas as páginas, remonta o hub e imprime o que
+republicar. Personagem novo = uma entrada em `galeria.json`.
 
 Duas regras que fazem isso funcionar:
 

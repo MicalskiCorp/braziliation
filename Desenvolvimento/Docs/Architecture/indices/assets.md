@@ -88,6 +88,8 @@ vira a documentação visual. A URL canônica fica no campo `artefato` do
 `{asset}.pagina.json` no context pack — esta tabela é só o atalho. Gerador e regras:
 [`pipeline-sprites-programaticos.md`](../../../../Design/GuiasDeArte/pipeline-sprites-programaticos.md#a-página-do-personagem).
 
+**Hub da galeria (fixado na barra lateral):** https://claude.ai/artifact/VT2WNugDunkevnvUycdYq5
+
 | Personagem | Status | Página |
 |------------|--------|--------|
 | Autômato Abandonado | aprovado | https://claude.ai/artifact/9TF8ejHqNuMmzcJe43EurS |
