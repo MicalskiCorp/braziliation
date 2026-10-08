@@ -1,6 +1,6 @@
 {
   "titulo": "Soldado Clérico",
-  "resumo": "Colono alemão do Vale do Itajaí armado pelo alto clero, em armadura improvisada de sucata doméstica no fim do século XIX. Pickelhaube, sobretudo militar e as peças que tinha em casa: porta de fogão a lenha no peito, tampa de panela como ombreira, cano de chaminé como braçadeira, panela de ágata como joelheira.",
+  "resumo": "Colono alemão do Vale do Itajaí armado pelo alto clero, em armadura improvisada de sucata doméstica no fim do século XIX. Veste o que um blumenauense teria: traje típico e Pickelhaube, com as peças da cozinha amarradas por cima — porta de fogão a lenha no peito, tampa de panela como ombreira, cano de chaminé como braçadeira.",
   "status": "rascunho",
   "artefato": "https://claude.ai/artifact/N8qqSrEfVGBuZYM21A2XwY",
   "variantes": {
@@ -14,17 +14,19 @@
     "guarda": "Quem conseguiu chapa de cervejaria"
   },
   "pecas": [
-    "Pickelhaube",
+    "Pickelhaube com tufo de pena",
+    "gola de loden",
+    "suspensórios com edelvais",
+    "calção de couro",
+    "meias de cano alto",
     "sobretudo militar",
-    "gola alta",
     "porta de fogão (peitoral)",
     "tampa de panela (ombreira)",
     "cano de chaminé (braçadeira)",
     "panela de ágata (joelheira)",
     "caneca esmaltada",
     "braçadeira do clero",
-    "cinto de couro",
-    "botas de cano alto",
+    "botas",
     "barril de ar",
     "fuzil pneumático",
     "tampa de tacho (escudo)",
@@ -43,6 +45,10 @@
     {
       "data": "2026-10-07",
       "texto": "Reformulado: a primeira versão lia como irmão de latão do Autômato. A direção passou a ser armadura improvisada de sucata doméstica alemã, no fim do século XIX — referência de leitura em Ghosts'n Goblins e Castlevania, referência de época e lugar na Prússia vitoriana e na cozinha de enxaimel. Sai o elmo medieval, entra a Pickelhaube; sai o tabardo, entra o sobretudo militar com saia; sai o latão dominante, entra o sobretudo escuro com a sucata clara por cima. O esmalte de ágata da louça alemã virou o acento claro, e é ele que faz a sucata ler contra o casaco."
+    },
+    {
+      "data": "2026-10-07",
+      "texto": "Entraram os elementos de Tracht, pela lógica de que um colono de Blumenau teria acesso a traje de festa, não a equipamento militar: tufo de pena preso ao espigão do Pickelhaube, gola de loden verde, suspensórios de couro com travessa no peito e edelvais bordado, calção de couro e meias de cano alto. As meias resolveram de quebra um problema de leitura — as pernas eram uma coluna escura única, e agora separam calção, meia e bota."
     }
   ],
   "rodape": "Fonte da arte: <code>montagem.py</code> + <code>enm_soldado_clerico.spec.json</code> no context pack do asset. Página gerada por <code>pagina_personagem.py</code>. Os 6 thumbnails de difusão (rota C) seguem pendentes de curadoria — esta é a versão programática, placeholder jogável."

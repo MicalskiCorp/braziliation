@@ -54,13 +54,20 @@ registrar_material("couro", ["1", "A", "B", "D"])
 # Fuligem: ferro que viveu dentro de um fogão.
 registrar_material("fuligem", ["1", "1", "2", "3"])
 registrar_material("clero", ["1", "G", "9", "C"])
+# Loden: o verde-acinzentado do paletó de Tracht. Aparece em gola e lapela.
+registrar_material("loden", ["1", "2", "E", "E"])
+# Meia de cano alto do traje típico — o claro que separa calção de bota.
+registrar_material("meia", ["2", "C", "D", "D"])
 
 
 # ------------------------------------------------------------------- as peças
 def perna_tras():
     peca()
-    line(50, 68, 43, 80, 5, "sobretudo")
-    rect(39, 80, 48, 93, "couro")                 # bota de cano alto
+    line(50, 68, 44, 77, 6, "couro")              # calção de couro
+    peca()
+    rect(41, 77, 47, 85, "meia")                  # meia de cano alto
+    peca()
+    rect(39, 85, 48, 93, "couro")                 # bota
     rect(37, 90, 50, 94, "fuligem")
 
 
@@ -75,8 +82,10 @@ def sobretudo():
         x = 40 + i
         rect(x, 58, x, fim, "sobretudo")
     peca()
-    rect(48, 24, 62, 29, "sobretudo")             # gola alta
+    rect(48, 24, 62, 29, "loden")                 # gola alta de paletó de Tracht
     rect(48, 24, 62, 25, "couro")
+    peca()
+    line(57, 30, 61, 44, 2, "loden")              # lapela
     peca()
     for y in range(32, 56, 5):                    # duas fileiras de botões
         put(52, y, "cobre")
@@ -111,6 +120,14 @@ def peitoral_sucata():
     peca()
     line(46, 32, 66, 36, 2, "couro")              # correias em cruz
     line(46, 51, 66, 47, 2, "couro")
+    peca()
+    line(52, 28, 50, 56, 3, "couro")              # suspensórios por cima de tudo
+    line(62, 28, 64, 56, 3, "couro")
+    rect(50, 40, 64, 43, "couro")                 # travessa do peito
+    put(56, 41, "esmalte")                        # edelvais bordado na travessa
+    put(57, 41, "esmalte")
+    put(56, 42, "esmalte")
+    put(57, 40, "esmalte")
 
 
 def ombreira_tampa():
@@ -154,6 +171,11 @@ def cabeca():
     peca()
     ellipse(54, 14, 5, 2, "cobre")                # placa frontal, latão de brasão
     peca()
+    line(53, 5, 49, 1, 1, "loden")                # tufo de pena preso ao espigão
+    line(54, 5, 51, 0, 1, "loden")
+    line(54, 6, 53, 1, 1, "loden")
+    put(48, 1, "loden")
+    peca()
     rect(56, 23, 64, 28, "fuligem")               # o rosto não se vê: só sombra
     line(57, 26, 63, 26, 1, "couro")              # jugular
 
@@ -169,17 +191,21 @@ def faixa_clero():
 
 def joelheira():
     peca()
-    ellipse(56, 76, 5, 4, "esmalte")              # panela pequena como joelheira
+    ellipse(57, 74, 5, 4, "esmalte")              # panela pequena como joelheira
     ring(56, 76, 3, "metal", inner=.60)
 
 
 def perna_frente():
     peca()
-    line(58, 66, 54, 78, 6, "sobretudo")
+    line(58, 66, 55, 75, 7, "couro")              # calção de couro
+    line(54, 70, 61, 70, 1, "cobre")              # bordado da barra
     peca()
-    rect(52, 80, 62, 93, "couro")                 # bota de cano alto
+    rect(53, 78, 61, 86, "meia")                  # meia de cano alto
+    line(54, 81, 60, 81, 1, "couro")              # canelado da meia
+    peca()
+    rect(52, 86, 62, 93, "couro")                 # bota
     rect(50, 90, 68, 94, "fuligem")
-    rebites(53, 61, 84, 4, "metal_d")             # fivelas da bota
+    rebites(53, 61, 88, 4, "metal_d")             # fivelas da bota
 
 
 def fuzil():
