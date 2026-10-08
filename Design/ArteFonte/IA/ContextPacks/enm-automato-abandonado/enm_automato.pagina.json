@@ -1,0 +1,62 @@
+{
+  "titulo": "Autômato Abandonado",
+  "resumo": "Máquina de relojoaria no espírito dos desenhos de Leonardo: armação aberta de madeira e metal, com o maquinismo à vista pelo vão do gradil e engrenagem em toda junta. Reage por reflexo a movimento, sem programação ativa.",
+  "status": "aprovado",
+  "artefato": "https://claude.ai/artifact/9TF8ejHqNuMmzcJe43EurS",
+  "variantes": {
+    "lanca": "Lanceiro · bronze",
+    "escudo": "Escudeiro · bronze",
+    "sucata": "Sucata · ferro",
+    "lanca_prata": "Lanceiro · prata"
+  },
+  "papeis": {
+    "lanca": "Pique longo preso ao punho",
+    "escudo": "Engrenagem gigante no antebraço",
+    "sucata": "Sem arma nem regulador; tábua de remendo",
+    "lanca_prata": "Mesma montagem, liga trocada"
+  },
+  "pecas": [
+    "gradil de madeira",
+    "platina",
+    "roda mestra",
+    "regulador de esferas",
+    "crânio-gaiola",
+    "pescoço-pistão",
+    "catracas nas juntas",
+    "braço articulado",
+    "lança",
+    "escudo-engrenagem",
+    "tábua de remendo",
+    "pernas de madeira"
+  ],
+  "animacoes": [
+    {
+      "sheet": "idle",
+      "fps": 8,
+      "nome": "Idle — maquinismo girando"
+    }
+  ],
+  "historico": [
+    {
+      "data": "2026-07-12",
+      "texto": "Primeira versão: 32×32 frontal e simétrica, 3 frames, placeholder do inimigo básico."
+    },
+    {
+      "data": "2026-09-24",
+      "texto": "Re-autoria em vista lateral e latão, 64×64. O brief já pedia side-view — a versão frontal não conseguia indicar direção num plataforma. Recusada por ler \"fofa\": formas redondas, cabeça grande, latão dominante."
+    },
+    {
+      "data": "2026-09-25",
+      "texto": "Releitura gótica (SotN / Blasphemous): vertical e magro, manto rasgado, coroa quebrada, rosácea no peito. Recusada por não ser davinciana. Fica registrada em enm_automato.alt-latao.spec.json e no histórico do git."
+    },
+    {
+      "data": "2026-10-05",
+      "texto": "Direção aprovada: autômato de relojoaria em 96×96 no grid de 48 PPU (ADR-011), montado por catálogo de peças. Duas dimensões de variação — armamento e liga, esta última pensada como grau de dificuldade, porque troca só a rampa do metal e a silhueta não muda. Idle de 6 frames onde as rodas realmente giram: cada uma avança um período de simetria por ciclo e as que engrenam giram em sentidos opostos."
+    },
+    {
+      "data": "2026-10-07",
+      "texto": "Já é o inimigo da cena de demonstração. O motor de montagem saiu para Ferramentas/montagem_base.py e o catálogo ficou com o asset; os 11 PNGs saíram byte a byte idênticos depois do refactor."
+    }
+  ],
+  "rodape": "Fonte da arte: <code>montagem.py</code> + <code>enm_automato.spec.json</code> no context pack. Página gerada por <code>pagina_personagem.py</code>. O sheet está em <code>Assets/Art/Enemies/Resources/</code> e é o inimigo da cena <code>DemoGameplay</code>."
+}

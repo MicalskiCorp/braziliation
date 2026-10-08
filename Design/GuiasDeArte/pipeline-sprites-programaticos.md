@@ -107,6 +107,29 @@ Quando o brief pede animação (ver contagens em [`animation-guide.md`](animatio
    - **Clip + Animator**: selecionar o sheet fatiado no Project e rodar `Assets > Braziliation > Criar Animação do Spritesheet` — gera `.anim` (8 fps, sem loop) + `.controller` em `Assets/Animations/World/`;
    - Ligar o Animator ao GameObject/prefab do prop continua sendo wiring de cena do `@UnityDeveloper`.
 
+## A página do personagem
+
+Cada personagem tem **um** artefato publicado que acompanha o desenvolvimento dele. Não é
+entrega de fim de linha: nasce com o primeiro sprite ainda em rascunho e é **republicado na
+mesma URL** a cada variante nova, animação nova ou mudança de direção. Quando a arte é
+aprovada, aquela mesma página passa a ser a documentação visual do personagem — sprites,
+variantes, animação rodando na velocidade do jogo, paleta em uso, catálogo de peças e o
+histórico do que mudou.
+
+| Artefato | Onde |
+|----------|------|
+| Gerador | [`pagina_personagem.py`](../ArteFonte/Ferramentas/pagina_personagem.py) |
+| Metadados e **URL do artefato** | `{asset}.pagina.json`, ao lado da spec no context pack |
+| Índice das páginas | [`Docs/Architecture/indices/assets.md`](../../Desenvolvimento/Docs/Architecture/indices/assets.md) |
+
+Duas regras que fazem isso funcionar:
+
+- **A página é gerada da spec, nunca escrita à mão.** Enquanto a fonte da arte for a spec,
+  a página não tem como mostrar uma versão velha. Mexeu na arte → rode o gerador →
+  republique.
+- **A URL mora no repositório**, no campo `artefato` do `{asset}.pagina.json`. É o que
+  permite uma sessão futura atualizar a página do personagem em vez de criar uma órfã.
+
 ## Re-autoria de specs 1× (legado pré-ADR-004)
 
 Specs criadas no grid antigo (320x180/16 PPU) são re-autoradas com [`spec_redetail.py`](../ArteFonte/Ferramentas/spec_redetail.py): expansão EPX (suaviza degraus de curvas/diagonais) + textura de material com seed determinística, emitindo **spec 2× versionada** (`{nome}.2x.spec.json`) + PNG. O resultado é ponto de partida — passa pelo ciclo de crítica visual normal e recebe retoques manuais na spec 2×, que vira a fonte atual do asset. Specs novas nascem direto no grid do ADR-004.

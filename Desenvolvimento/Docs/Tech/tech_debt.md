@@ -19,6 +19,13 @@ Format:
 
 ### Alta
 
+- **Item:** `Ferramentas/index.md` vive raspando o teto de 1500 tokens do roteador
+- **Where:** `Design/ArteFonte/Ferramentas/index.md`
+- **Why:** São 19 ferramentas numa tabela só, com descrição de uma ou duas linhas cada. Em 2026-10-07 estourou ao ganhar duas linhas e foi preciso enxugar seis descrições para caber. A próxima ferramenta estoura de novo.
+- **Fix:** Separar como já se fez em `Design/Pesquisa/Fontes/`: o `index.md` vira roteador com nome e meia linha por ferramenta, e um `catalogo.md` ao lado guarda uso, parâmetros e o porquê de cada uma.
+
+
+
 - **Item:** Só os placeholders CC0 seguem no grid antigo depois do ADR-011
 - **Where:** `Assets/Art/ThirdParty/Gothicvania/**` · lista viva em `Assets/Editor/Art/Escala/PixelScale.cs`
 - **Why:** Toda a arte própria está no grid de 48 desde 2026-10-05, quando o autômato foi redesenhado. Restam os 9 placeholders do Gothicvania, importados a 32 PPU — mantêm o tamanho em mundo e só parecem menos densos ao lado do resto.

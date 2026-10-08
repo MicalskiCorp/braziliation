@@ -1,0 +1,41 @@
+{
+  "titulo": "Soldado Clérico",
+  "resumo": "Humano dentro de armadura clockpunk, servo do alto clero de Blumenau. Carrega fuzil pneumático com tanque nas costas, ou escudo de engrenagem giratória. A liga do metal separa a tropa da guarda.",
+  "status": "rascunho",
+  "artefato": "https://claude.ai/artifact/N8qqSrEfVGBuZYM21A2XwY",
+  "variantes": {
+    "idle": "Tropa · bronze",
+    "escudo": "Escudeiro · bronze",
+    "guarda": "Guarda · prata"
+  },
+  "papeis": {
+    "idle": "Fuzil pneumático e tanque nas costas",
+    "escudo": "Escudo de engrenagem e maça curta",
+    "guarda": "Mesma montagem da tropa, liga trocada"
+  },
+  "pecas": [
+    "tanque pneumático",
+    "couraça",
+    "tabardo do clero",
+    "gola",
+    "elmo de fresta",
+    "ombreiras",
+    "braço articulado",
+    "fuzil pneumático",
+    "escudo de engrenagem",
+    "maça curta",
+    "pernas blindadas"
+  ],
+  "animacoes": [],
+  "historico": [
+    {
+      "data": "2026-10-07",
+      "texto": "Primeira montagem programática, a partir do brief em Blumenau/index.md: \"humano com armadura clockpunk completa, servo do alto clero. Usa armas pneumáticas e escudos de engrenagem giratória.\" Serviu de teste da linha de montagem extraída do autômato — nenhuma primitiva ou passe de acabamento precisou mudar, só o catálogo de peças. O carmim do tabardo entrou pela API registrar_material."
+    },
+    {
+      "data": "2026-10-07",
+      "texto": "Correção de ordem de montagem: o tabardo estava sendo desenhado antes da couraça e a armadura o cobria. Passou a cair do cinturão, por cima das pernas. Elmo reduzido e pernas alongadas para a proporção ficar humana, não de boneco."
+    }
+  ],
+  "rodape": "Fonte da arte: <code>montagem.py</code> + <code>enm_soldado_clerico.spec.json</code> no context pack do asset. Página gerada por <code>pagina_personagem.py</code>. Os 6 thumbnails de difusão (rota C) seguem pendentes de curadoria — esta é a versão programática, placeholder jogável."
+}

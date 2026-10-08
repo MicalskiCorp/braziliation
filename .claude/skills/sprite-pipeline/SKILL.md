@@ -21,8 +21,20 @@ Processo canônico: **`Design/GuiasDeArte/pipeline-sprites-programaticos.md`** �
    - Critérios: checklist de crítica visual do guia canônico. Reprovou → ajustar a spec (o output/frame específico) e repetir.
    - **Retoque fino (opcional):** para ajustes que ficam melhores à mão do que na spec (anti-alias pontual, sombreamento com rampa, dithering), usar o MCP `aseprite` (pixel-mcp, Aseprite local). O resultado volta como PNG e passa pelo mesmo gate abaixo; registrar na spec/`lotes.md` o que foi retocado fora dela.
 6. Gate final: `py Design/ArteFonte/Ferramentas/palette_check.py {png} {paleta}` deve APROVAR para cada output/sheet relevante.
-7. Entregar: PNG aprovado em `ArteFonte/IA/Selected/`; se solicitado export, copiar para `Desenvolvimento/Assets/Art/{destino}` (nomes conforme `Docs/Architecture/Assets/AssetsStructure.md`) e registrar em `Docs/Architecture/indices/assets.md` (mover a linha do asset de "Backlog por Asset" para "Assets Registrados").
-8. Retroalimentar pendências em `Desenvolvimento/Docs/TODO.md`.
+7. **Página do personagem (artefato).** Todo personagem tem **uma** página que vive com
+   ele: nasce no primeiro sprite, é republicada na mesma URL a cada mudança, e quando a
+   arte é aprovada vira a documentação visual dele.
+   - gerar: `py Design/ArteFonte/Ferramentas/pagina_personagem.py {spec} --saida {pasta}`
+     — a página sai da spec, então não tem como mostrar arte velha;
+   - metadados (título, status, peças, rótulos das variantes, fps das animações e o
+     **histórico**) ficam em `{asset}.pagina.json`, ao lado da spec;
+   - **a URL fica no campo `artefato` desse JSON.** Já existe? Republique nela, passando
+     `url`. Não existe? Publique e **grave a URL no JSON no mesmo passo** — sem isso a
+     próxima sessão cria uma página órfã em vez de atualizar a do personagem;
+   - toda mudança de arte ou animação nova ganha uma linha em `historico`, com a data e o
+     porquê. É esse histórico que transforma a página em documentação.
+8. Entregar: PNG aprovado em `ArteFonte/IA/Selected/`; se solicitado export, copiar para `Desenvolvimento/Assets/Art/{destino}` (nomes conforme `Docs/Architecture/Assets/AssetsStructure.md`) e registrar em `Docs/Architecture/indices/assets.md` (mover a linha do asset de "Backlog por Asset" para "Assets Registrados").
+9. Retroalimentar pendências em `Desenvolvimento/Docs/TODO.md`.
 
 Para gerar o **concept art (Passo 2)** de personagens/criaturas via ComfyUI (rota C), ou quando não houver ainda spec/context pack, ver `Design/GuiasDeArte/pipeline-ia-sprites.md` — inclui o modo `comfy_batch.py --reference-image` para usar concept art/silhueta como base image-to-image.
 

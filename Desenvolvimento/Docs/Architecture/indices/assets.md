@@ -81,6 +81,18 @@ Legenda de status por célula: ❌ não iniciado · 🔨 em andamento · ⏸ agu
 | `enm_automato_{escudo,sucata,lanca_prata}.png` | idem | idem | Blumenau (aprovada) | 96×96 — variantes estáticas: escudo-engrenagem, sucata em liga de ferro, e lanceiro em liga de prata (grau de dificuldade pela liga) |
 | `env_blumenau_{enxaimel,metal,agua}_tileset.png` | `Assets/Art/Environments/Blumenau/Tilesets/` | `gen_tileset.py` seed 42 (manifests em `IA/Outputs/`) | Blumenau (aprovada) | Tiles 48×48 procedurais: enxaimel 4 tipos, metal 3, água/lama 3 × 4 variações |
 
+## Páginas de Personagem (artefatos)
+
+Cada personagem tem uma página publicada que acompanha o desenvolvimento dele e, aprovado,
+vira a documentação visual. A URL canônica fica no campo `artefato` do
+`{asset}.pagina.json` no context pack — esta tabela é só o atalho. Gerador e regras:
+[`pipeline-sprites-programaticos.md`](../../../../Design/GuiasDeArte/pipeline-sprites-programaticos.md#a-página-do-personagem).
+
+| Personagem | Status | Página |
+|------------|--------|--------|
+| Autômato Abandonado | aprovado | https://claude.ai/artifact/9TF8ejHqNuMmzcJe43EurS |
+| Soldado Clérico | rascunho | https://claude.ai/artifact/N8qqSrEfVGBuZYM21A2XwY |
+
 ## Assets de Terceiros (placeholder)
 
 > Arte **não própria**, usada para destravar o desenvolvimento de mecânicas enquanto o pipeline
