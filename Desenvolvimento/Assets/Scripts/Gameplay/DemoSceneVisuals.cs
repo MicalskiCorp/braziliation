@@ -23,17 +23,24 @@ namespace Braziliation.Gameplay
     /// </summary>
     public static class DemoSceneVisuals
     {
-        // Sprites estáticos (caminhos relativos à pasta Resources do pacote de terceiros)
+        // Sprites estáticos. Caminhos relativos a uma pasta Resources: o autômato vive em
+        // Assets/Art/Enemies/Resources/, os placeholders na Resources do pacote de terceiros.
         public const string PlayerSpritePath = "Demo/chr_placeholder_heroi_idle";
-        public const string EnemySpritePath = "Demo/enm_placeholder_cao_idle";
+        public const string EnemySpritePath = "enm_automato_lanca";
         public const string GroundSpritePath = "Demo/env_placeholder_chao_tile";
         public const string BackgroundSpritePath = "Demo/env_placeholder_fundo_castelo";
 
         // Spritesheets de animação (fatiados pelo SheetAutoSlicer na importação)
         public const string PlayerIdleSheetPath = "Demo/Sheets/chr_placeholder_heroi_idle_sheet";
         public const string PlayerRunSheetPath = "Demo/Sheets/chr_placeholder_heroi_run_sheet";
-        public const string EnemyIdleSheetPath = "Demo/Sheets/enm_placeholder_cao_idle_sheet";
-        public const string EnemyWalkSheetPath = "Demo/Sheets/enm_placeholder_cao_walk_sheet";
+        public const string EnemyIdleSheetPath = "enm_automato_idle_sheet";
+
+        /// <summary>
+        /// O autômato ainda não tem arte de caminhada: o clipe de walk reaproveita o
+        /// idle, então ele anda com as engrenagens girando e sem passo. Trocar quando
+        /// a animação de walk entrar (animation-guide pede 8-12 frames).
+        /// </summary>
+        public const string EnemyWalkSheetPath = EnemyIdleSheetPath;
 
         // Cores usadas quando o sprite não é encontrado (aparência anterior à arte)
         public static readonly Color PlayerFallbackColor = new Color(0.15f, 0.75f, 0.95f, 1f);
@@ -43,8 +50,10 @@ namespace Braziliation.Gameplay
         // Geometria de colisão. Pé do personagem em y=0 local; o collider sobe pelo offset.
         public static readonly Vector2 PlayerColliderSize = new Vector2(0.9f, 2.4f);
         public static readonly Vector2 PlayerColliderOffset = new Vector2(0f, 1.2f);
-        public static readonly Vector2 EnemyColliderSize = new Vector2(2.5f, 1.4f);
-        public static readonly Vector2 EnemyColliderOffset = new Vector2(0f, 0.7f);
+        // Autômato: 96 px a 48 PPU = 2 unidades de altura; o corpo ocupa ~1 unidade de
+        // largura (a lança fica de fora do collider de propósito).
+        public static readonly Vector2 EnemyColliderSize = new Vector2(1.0f, 1.9f);
+        public static readonly Vector2 EnemyColliderOffset = new Vector2(0f, 0.95f);
 
         /// <summary>Y da superfície de caminhada. O collider desce a partir daí.</summary>
         public const float GroundSurfaceY = -1f;
@@ -70,8 +79,8 @@ namespace Braziliation.Gameplay
         public const int GroundSortingOrder = -10;
         public const int CharacterSortingOrder = 0;
 
-        /// <summary>A arte do cão do pacote Gothicvania é desenhada olhando para a esquerda.</summary>
-        public const bool EnemySpriteFacesRight = false;
+        /// <summary>O autômato é desenhado olhando para a direita; o controller espelha.</summary>
+        public const bool EnemySpriteFacesRight = true;
 
         public static bool TryLoadSprite(string resourcePath, out Sprite sprite)
         {
@@ -132,8 +141,8 @@ namespace Braziliation.Gameplay
             if (animator == null)
                 animator = enemy.AddComponent<SpriteSheetAnimator>();
 
-            animator.AddClip("idle", EnemyIdleSheetPath, 6f);
-            animator.AddClip("walk", EnemyWalkSheetPath, 10f);
+            animator.AddClip("idle", EnemyIdleSheetPath, 8f);
+            animator.AddClip("walk", EnemyWalkSheetPath, 8f);
 
             if (enemy.GetComponent<EnemySpriteAnimation>() == null)
                 enemy.AddComponent<EnemySpriteAnimation>();
