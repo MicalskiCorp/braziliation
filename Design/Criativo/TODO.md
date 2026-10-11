@@ -113,7 +113,7 @@
 
 | Item | Arquivo | Prioridade | Status |
 |------|---------|-----------|--------|
-| *(nenhum pendente — as 11 lendas de SC/rodada 2 foram processadas em 2026-09-20)* | | | |
+| Processar handoff: Teatro Carlos Gomes por dentro — visita guiada (11/10/2026) | [Pesquisa/Handoffs/2026-10-11-teatro-carlos-gomes-visita.md](../Pesquisa/Handoffs/2026-10-11-teatro-carlos-gomes-visita.md) | Alta | ❌ Não iniciado |
 
 ---
 

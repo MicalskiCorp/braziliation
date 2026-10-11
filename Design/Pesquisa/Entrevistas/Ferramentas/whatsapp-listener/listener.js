@@ -181,25 +181,74 @@ function ehEcoDeConfirmacao(msg, texto) {
   return Boolean(msg.key.fromMe) && confirmacoesEnviadas.has(texto.trim());
 }
 
+// Categorias do resumo de lote, na ordem em que aparecem nele.
+const CATEGORIAS_LOTE = [
+  ['audio', 'áudio', 'áudios', 'na fila de transcrição'],
+  ['imagem', 'imagem', 'imagens', 'na fila de curadoria'],
+  ['documento', 'documento', 'documentos', 'na fila de curadoria'],
+  ['anotacao', 'anotação', 'anotações', 'na fila de curadoria'],
+];
+
+// Texto do aviso de um lote de capturas. Um item só mantém o aviso individual de sempre;
+// vários viram uma mensagem única por categoria — em 2026-10-11 um envio de 105 arquivos
+// gerou 105 respostas, e o WhatsApp barrou a maioria com rate-overlimit.
+function resumoDoLote(itens) {
+  if (itens.length === 1) return itens[0].texto;
+  const linhas = [`Lote de ${itens.length} itens recebido e validado:`];
+  for (const [categoria, singular, plural, fila] of CATEGORIAS_LOTE) {
+    const doTipo = itens.filter((item) => item.categoria === categoria);
+    if (!doTipo.length) continue;
+    const tamanho = tamanhoLegivel(doTipo.reduce((soma, item) => soma + (item.bytes || 0), 0));
+    const nome = doTipo.length === 1 ? singular : plural;
+    linhas.push(`• ${doTipo.length} ${nome}${tamanho ? ` (${tamanho})` : ''} — ${fila}`);
+  }
+  return linhas.join('\n');
+}
+
+// O aviso sai quando a conversa fica JANELA_LOTE_MS sem captura nova — o bastante para um
+// envio de várias fotos ou áudios de uma vez cair num aviso só. O teto evita que uma
+// sequência longa fique sem retorno nenhum.
+const JANELA_LOTE_MS = 20000;
+const ESPERA_MAXIMA_LOTE_MS = 120000;
+let lote = [];
+let inicioDoLote = 0;
+let timerDoLote = null;
+
 // Aviso de volta na própria conversa, para dar para conferir no celular que a captura
-// pegou — sem isso o único sinal de vida é o listener.log, no PC.
-async function confirmar(sock, msg, texto) {
+// pegou — sem isso o único sinal de vida é o listener.log, no PC. Só enfileira: quem
+// manda é enviarLote, quando o lote fecha.
+function confirmar(sock, msg, item) {
   if (DISCOVERY_MODE || CONFIRMACAO === 'off') return;
+  if (!lote.length) inicioDoLote = Date.now();
+  lote.push({ ...item, msg, sock });
+  clearTimeout(timerDoLote);
+  const restante = inicioDoLote + ESPERA_MAXIMA_LOTE_MS - Date.now();
+  timerDoLote = setTimeout(enviarLote, Math.max(0, Math.min(JANELA_LOTE_MS, restante)));
+}
+
+async function enviarLote() {
+  const itens = lote;
+  lote = [];
+  timerDoLote = null;
+  if (!itens.length) return;
+  // O socket mais recente: se houve reconexão no meio do lote, o primeiro já fechou.
+  const { sock } = itens[itens.length - 1];
   try {
     if (CONFIRMACAO === 'reacao') {
       // Reação não vira mensagem nova na conversa: mais discreto quando há outra gente
-      // no grupo, e o listener não precisa se proteger do próprio aviso.
-      await sock.sendMessage(TARGET_JID, { react: { text: '✅', key: msg.key } });
+      // no grupo, e o listener não precisa se proteger do próprio aviso. Num lote, reage
+      // só na última mensagem — uma reação por item esbarra no mesmo rate-overlimit.
+      await sock.sendMessage(TARGET_JID, { react: { text: '✅', key: itens[itens.length - 1].msg.key } });
       return;
     }
-    const corpo = `✅ ${texto}`;
+    const corpo = `✅ ${resumoDoLote(itens)}`;
     confirmacoesEnviadas.add(corpo);
     setTimeout(() => confirmacoesEnviadas.delete(corpo), 60000);
-    const enviada = await sock.sendMessage(TARGET_JID, { text: corpo }, { quoted: msg });
+    const enviada = await sock.sendMessage(TARGET_JID, { text: corpo }, { quoted: itens[0].msg });
     if (enviada?.key?.id) lembrarId(enviada);
   } catch (err) {
     // Falhar o aviso não pode invalidar a captura, que já está gravada em disco.
-    console.error('Falha ao confirmar na conversa:', err.message);
+    console.error(`Falha ao confirmar lote de ${itens.length} na conversa:`, err.message);
   }
 }
 
@@ -255,7 +304,11 @@ async function handleMessage(sock, msg) {
       });
       console.log('Audio salvo em', dir);
       const tamanho = tamanhoLegivel(buffer.length);
-      await confirmar(sock, msg, `Áudio recebido${tamanho ? ` (${tamanho})` : ''} — na fila de transcrição`);
+      confirmar(sock, msg, {
+        categoria: 'audio',
+        bytes: buffer.length,
+        texto: `Áudio recebido${tamanho ? ` (${tamanho})` : ''} — na fila de transcrição`,
+      });
     } else if (messageType === 'imageMessage' || messageType === 'documentMessage') {
       const ehImagem = messageType === 'imageMessage';
       const arquivo = (ehImagem ? 'imagem' : 'documento') + extensionFor(media.mimetype, media.fileName);
@@ -276,13 +329,13 @@ async function handleMessage(sock, msg) {
       console.log(ehImagem ? 'Imagem salva em' : 'Documento salvo em', dir);
       const tamanho = tamanhoLegivel(buffer.length);
       const nome = media.fileName || media.title;
-      await confirmar(
-        sock,
-        msg,
-        ehImagem
+      confirmar(sock, msg, {
+        categoria: ehImagem ? 'imagem' : 'documento',
+        bytes: buffer.length,
+        texto: ehImagem
           ? `Imagem recebida${tamanho ? ` (${tamanho})` : ''} — na fila de curadoria`
-          : `Documento recebido${nome ? `: ${nome}` : ''}${tamanho ? ` (${tamanho})` : ''} — na fila de curadoria`
-      );
+          : `Documento recebido${nome ? `: ${nome}` : ''}${tamanho ? ` (${tamanho})` : ''} — na fila de curadoria`,
+      });
     } else if (messageType === 'conversation' || messageType === 'extendedTextMessage') {
       const text = content.conversation || content.extendedTextMessage?.text || '';
       if (!text.trim()) return;
@@ -291,7 +344,7 @@ async function handleMessage(sock, msg) {
       fs.writeFileSync(path.join(dir, 'mensagem.txt'), text, 'utf8');
       writeMeta(dir, 'texto', msg, sender);
       console.log('Mensagem salva em', dir);
-      await confirmar(sock, msg, 'Anotação recebida — na fila de curadoria');
+      confirmar(sock, msg, { categoria: 'anotacao', texto: 'Anotação recebida — na fila de curadoria' });
     }
     // Figurinha, vídeo, contato e localização seguem fora do escopo da captura.
   } catch (err) {
@@ -381,6 +434,7 @@ module.exports = {
   avancarMarca,
   estado,
   tamanhoLegivel,
+  resumoDoLote,
   ehEcoDeConfirmacao,
   confirmacoesEnviadas,
 };

@@ -80,12 +80,26 @@ conferir pelo celular que pegou, sem abrir o `listener.log` no PC:
 > ✅ Documento recebido: ata-1889.pdf (1,2 MB) — na fila de curadoria
 
 A resposta cita a mensagem original, então num grupo movimentado dá para ver a qual delas
-se refere. Controlado por `CONFIRMAR_CAPTURA` no `.env`:
+se refere.
+
+**Lote:** o aviso só sai quando a conversa fica 20 s sem captura nova (teto de 2 min). Um
+item sozinho recebe o aviso acima; vários mandados de uma vez viram **uma mensagem só**,
+citando o primeiro:
+
+> ✅ Lote de 27 itens recebido e validado:
+> • 10 áudios (60,0 MB) — na fila de transcrição
+> • 16 imagens (16,0 MB) — na fila de curadoria
+> • 1 anotação — na fila de curadoria
+
+Sem isso, um envio de 105 arquivos (2026-10-11) gerava 105 respostas e o WhatsApp barrava a
+maioria com `rate-overlimit` — a captura não é afetada, só o aviso.
+
+Controlado por `CONFIRMAR_CAPTURA` no `.env`:
 
 | Valor | Efeito |
 |---|---|
 | `mensagem` (padrão) | Responde com o texto acima, citando a mensagem original |
-| `reacao` | Só reage com ✅ na mensagem — discreto, não polui um grupo com outras pessoas |
+| `reacao` | Só reage com ✅ na mensagem (num lote, só na última) — discreto, não polui um grupo com outras pessoas |
 | `off` | Não avisa nada |
 
 > A confirmação volta para o próprio listener como mensagem de texto da conta. Ela é
@@ -118,9 +132,18 @@ pelo **Agendador de Tarefas do Windows** (escolhido em 2026-09-14 — nada insta
   `listener.log.1` acima de 20 MB — a Baileys loga cada erro de rede e o arquivo cresce rápido. É lá que se confere se está
   vivo: `Conectado. Escutando: …` e uma linha `Audio salvo em …` / `Mensagem salva em …` /
   `Imagem salva em …` / `Documento salvo em …` por captura.
-- Parar/iniciar à mão: `Stop-ScheduledTask` / `Start-ScheduledTask -TaskName "Braziliation -
-  Listener de entrevistas"`. **Nunca rode `node listener.js` no terminal com a tarefa ativa** —
-  duas instâncias com o mesmo `auth/` derrubam uma à outra.
+- Parar/reiniciar à mão (PowerShell). **`Stop-ScheduledTask` sozinho não basta:** ele derruba só
+  o `conhost` e deixa o `cmd` e o `node` órfãos — o `node` antigo segue conectado, e um novo
+  `Start-ScheduledTask` sobe a segunda instância. Derrube a árvore inteira:
+
+  ```powershell
+  Get-CimInstance Win32_Process | ? { $_.Name -eq 'conhost.exe' -and $_.CommandLine -like '*iniciar-listener*' } |
+    % { taskkill /pid $_.ProcessId /t /f }
+  Start-ScheduledTask -TaskName "Braziliation - Listener de entrevistas"   # para reiniciar
+  ```
+
+  **Nunca rode `node listener.js` no terminal com a tarefa ativa** — duas instâncias com o
+  mesmo `auth/` derrubam uma à outra.
 - Alternativa não usada: **pm2** (`npm i -g pm2` + `pm2-windows-startup`).
 
 ## Perdeu a sessão / trocou de número

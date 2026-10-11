@@ -81,6 +81,16 @@ Todas as fontes utilizadas nas pesquisas aprovadas do projeto Braziliation.
 | 66 | ND Mais — Devotos revelam milagres alcançados com água benta de monge em SC | https://ndmais.com.br/cultura/devotos-revelam-milagres-alcancados-com-agua-benta-de-monge-em-sc/ | JN | devoção popular viva e águas benzidas | 20/09/2026 |
 | 67 | Diário Oficial do Estado de SC — Lei nº 19.722, de 22 de janeiro de 2026 | https://portal.doe.sea.sc.gov.br/repositorio/2026/20260122/Jornal/22681-A.pdf | OT | fonte primária do Dia Estadual de São João Maria (3 de maio) | 20/09/2026 |
 | 68 | Portal RDX — Santa Catarina agora tem um dia oficial para o monge São João Maria | https://portalrdx.com.br/04/04/2026/santa-catarina-agora-tem-um-dia-oficial-para-o-monge-sao-joao-maria/ | JN | cobertura jornalística da lei do dia estadual | 20/09/2026 |
+| 69 | Wikipedia — Teatro Carlos Gomes (Blumenau) | https://pt.wikipedia.org/wiki/Teatro_Carlos_Gomes_(Blumenau) | WK | Auditório Willy Sievert (Cine Carlitos, anos 80), Equipe Vira Lata (1969), capacidades — convergência com a visita guiada de 11/10/2026 | 11/10/2026 |
+| 70 | ND Mais — Como funciona palco giratório de Blumenau, um dos únicos do país | https://ndmais.com.br/cultura/como-funciona-palco-giratorio-de-blumenau-um-dos-unicos-do-pais/ | JN | palco giratório de 1942 ("primeiro do sul do Brasil") | 11/10/2026 |
+| 71 | Prefeitura de Blumenau — Auditório Carlos Jardim | https://www.blumenau.sc.gov.br/secretarias/fundacao-cultural/fcblu/auditaorio-carlos-jardim-recebe-a-peaca-de-teatro-auaquelas-que-moram-nelaa6 | PO | Carlos Jardim / Equipe Vira Lata | 11/10/2026 |
+| 72 | Fundação Hermann Hering — Sociedade Teatral Frohsinn / Sociedade Dramático Musical Carlos Gomes | https://fundacaohermannhering.org.br/conteudos/sociedade-teatral-frohsinn-sociedade-dramatico-musical-carlos-gomes/ | MU | doação do terreno pela Cia. Hering, Curt Hering | 11/10/2026 |
+| 73 | Curta Blumenau — Memória Digital: Rose Gaertner | https://www.curtablumenau.com/2020/05/memoria-digital-rose-gaertner-alema.html | JN | Rose Sametzki Gaertner, casamento com o cônsul Victor Gaertner, Theaterverein Frohsinn | 11/10/2026 |
+| 74 | NSC Total — Teatro Carlos Gomes faz 160 anos | https://www.nsctotal.com.br/noticias/teatro-carlos-gomes-principal-palco-da-arte-em-blumenau-completa-160-anos | JN | Elisete Beck, direção do teatro | 11/10/2026 |
+| 75 | Teatro Carlos Gomes — Nova praça | https://teatrocarlosgomes.com.br/nova-praca-teatro-carlos-gomes-apresenta-espaco-central-revitalizado/ | MU | praça: Ana Holzer, Wander Weege, esculturas de Pedro Dantas Rodrigues | 11/10/2026 |
+| 76 | OUT Escola de Dança — equipe | https://www.outescoladedanca.com.br/equipe | OT | Pró-Dança (1987) → OUT (2022), Maria Beatriz Niemeyer | 11/10/2026 |
+| 77 | NSC Total — Alda Niemeyer celebra 105 anos | https://www.nsctotal.com.br/colunistas/pedro-machado/vovo-de-sc-que-sobreviveu-a-2a-guerra-mundial-celebra-105-anos-barbaridade-quem-diria | JN | Alda Schlemm Niemeyer | 11/10/2026 |
+| 78 | Escavador — Édio Raniere da Silva | https://www.escavador.com/sobre/6759204/edio-raniere-da-silva | OT | Cartografia Vira Lata (2007), pesquisa sobre a Equipe Vira Lata e Carlos Jardim | 11/10/2026 |
 
 ---
 

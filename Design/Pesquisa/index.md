@@ -29,6 +29,7 @@ Repositório de informações históricas, folclóricas e culturais **verificada
 | 20/09/2026 | Indaial — lendas do Médio Vale do Itajaí (processar) | [Handoffs/2026-09-20-indaial-lendas.md](Handoffs/2026-09-20-indaial-lendas.md) | ✅ Processado pelo @GameCreative (20/09/2026) |
 | 20/09/2026 | Dragão do Encano Alto — discrepância geográfica com Guabiruba (revisão) | [Estados/SantaCatarina/cidades/Indaial/index.md](Estados/SantaCatarina/cidades/Indaial/index.md#nota-de-cruzamento-com-o-criativo--discrepância-geográfica-a-verificar) | ✅ Processado pelo @GameCreative (20/09/2026) |
 | 20/09/2026 | 11 lendas de Santa Catarina — rodada 2 (processar) | [Handoffs/2026-09-20-lendas-sc-rodada-2.md](Handoffs/2026-09-20-lendas-sc-rodada-2.md) | ❌ Não iniciado |
+| 11/10/2026 | Teatro Carlos Gomes por dentro — visita guiada (processar) | [Handoffs/2026-10-11-teatro-carlos-gomes-visita.md](Handoffs/2026-10-11-teatro-carlos-gomes-visita.md) | ❌ Não iniciado |
 
 ---
 

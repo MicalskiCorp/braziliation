@@ -25,6 +25,7 @@ const {
   avancarMarca,
   estado,
   tamanhoLegivel,
+  resumoDoLote,
   ehEcoDeConfirmacao,
   confirmacoesEnviadas,
 } = listener;
@@ -118,6 +119,35 @@ teste('estado corrompido nao trava o listener', () => {
   delete require.cache[require.resolve('./listener.js')];
   const recuperado = require('./listener.js');
   assert.ok(recuperado.estado.ultimoTimestamp > 0, 'deveria cair no padrao em vez de explodir');
+});
+
+// --- resumo do lote de confirmacoes ---
+const MB = 1024 * 1024;
+teste('lote de um item mantem o aviso individual', () => {
+  const texto = 'Documento recebido: ata-1889.pdf (1,2 MB) — na fila de curadoria';
+  assert.strictEqual(resumoDoLote([{ categoria: 'documento', bytes: 1.2 * MB, texto }]), texto);
+});
+
+teste('lote grande vira uma mensagem so, por categoria e com o total', () => {
+  const itens = [
+    ...Array.from({ length: 10 }, () => ({ categoria: 'audio', bytes: 6 * MB, texto: 'a' })),
+    ...Array.from({ length: 16 }, () => ({ categoria: 'imagem', bytes: MB, texto: 'i' })),
+    { categoria: 'anotacao', texto: 'n' },
+  ];
+  assert.strictEqual(
+    resumoDoLote(itens),
+    'Lote de 27 itens recebido e validado:\n' +
+      '• 10 áudios (60,0 MB) — na fila de transcrição\n' +
+      '• 16 imagens (16,0 MB) — na fila de curadoria\n' +
+      '• 1 anotação — na fila de curadoria'
+  );
+});
+
+teste('resumo de lote enviado e reconhecido como eco', () => {
+  const corpo = '✅ ' + resumoDoLote([{ categoria: 'imagem', bytes: MB }, { categoria: 'imagem', bytes: MB }]);
+  confirmacoesEnviadas.add(corpo);
+  assert.strictEqual(ehEcoDeConfirmacao({ key: { fromMe: true } }, corpo), true);
+  confirmacoesEnviadas.delete(corpo);
 });
 
 let falhas = 0;
