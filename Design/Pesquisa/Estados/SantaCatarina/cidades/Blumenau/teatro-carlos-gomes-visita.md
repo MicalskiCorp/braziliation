@@ -54,6 +54,7 @@
 
 **Em cima do palco giratório** — 📎 `sc-teatro-carlos-gomes-palco-giratorio-2026-10-11.jpg`, `…-plateia-vista-do-palco-…`
 - ✅ Palco giratório de 1942. O guia diz "primeiro do Brasil"; as fontes dizem **primeiro do sul do Brasil** e "um dos únicos do país" — divergência registrada.
+- 🎙️ A caixa cênica tem pé-direito muito alto para que cenários e telões sejam içados e sumam da vista da plateia; as varas pretas numeradas, com tomadas, são as que carregam os refletores.
 - 🎙️ O palco era girado à mão ("uns alemães grossos lá embaixo"), depois foi motorizado de forma barulhenta e com defeito, e hoje gira por um painel com controle de direção, tempo e velocidade. As varas de cenário e luz, antes puxadas no braço com ~50 refletores, hoje usam contrapeso, e há projeto para mecanizá-las. O fosso da orquestra é formado por placas do piso que são rebaixadas; com ele, a música é ao vivo sem os músicos aparecerem em cena.
 - 🎙️ Causo: ainda criança, Vera Fischer dançou neste palco num espetáculo regido por Heinz Geyer.
 - 🎙️ O palco também recebe formaturas e as mostras de fim de ano dos alunos das três escolas.

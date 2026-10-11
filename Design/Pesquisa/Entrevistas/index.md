@@ -44,14 +44,15 @@ fora do git). Imagem ou documento aprovado na curadoria é copiado para
 | `_inbox/` | Captura crua do listener — `audio.ogg`, `mensagem.txt`, `imagem.*` ou `documento.*` + `meta.json` |
 | `_pendente-curadoria/` | Já transcrito/extraído, aguardando o `@Historiador` (skill `processar-entrevistas`) |
 | `_processado/` | Arquivado após curadoria, com `resultado` no `meta.json` |
-| `Ferramentas/` | Código do listener e do transcritor — ver `Ferramentas/whatsapp-listener/README.md` |
+| `Inventarios/` | Inventário de assuntos de cada entrevista curada — todo bloco da transcrição com destino (✅ pesquisa, 🔎 pendência, ⛔ fora); conferido pelo teste `InterviewInventoryTests` — ver [`Inventarios/index.md`](Inventarios/index.md) |
+| `Ferramentas/` | Código do listener do transcritor e do `blocos.py` (divide transcrições em blocos para o inventário) — ver `Ferramentas/whatsapp-listener/README.md` |
 
 ## Como usar
 
 1. Rodar `Ferramentas/whatsapp-listener/` no PC de casa (sempre ligado, pareado uma vez via QR code).
 2. Mandar a entrevista para a conversa dedicada — áudio gravado direto no WhatsApp, texto, foto de documento ou PDF. Funciona de qualquer lugar: o listener recebe quando o PC volta a ficar online, sem precisar de acesso remoto.
 3. Rodar `py Ferramentas/transcrever.py` quando quiser processar o que chegou.
-4. Invocar a skill `processar-entrevistas` (ou pedir ao `@Historiador` "processar entrevistas") para curar o lote.
+4. Invocar a skill `processar-entrevistas`, que roda `Ferramentas/blocos.py` e monta o inventário antes de gravar pesquisa (ou pedir ao `@Historiador` "processar entrevistas") para curar o lote.
 
 ## Riscos conhecidos
 
