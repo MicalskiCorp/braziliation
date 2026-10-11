@@ -1,5 +1,7 @@
 # Inventário de assuntos — Visita guiada ao Teatro Carlos Gomes (11/10/2026)
 
+> Assunto: [teatro-carlos-gomes](../Assuntos/teatro-carlos-gomes.md) · Sessão: 11/10/2026
+
 > Todo bloco das transcrições tem destino aqui: ✅ está na pesquisa, 🔎 virou pendência no TODO,
 > ⛔ ficou fora com o motivo. O teste `InterviewInventoryTests` confere que nenhum bloco ficou sem
 > linha e que as chaves de cada ✅/🔎 aparecem de fato no arquivo de destino.

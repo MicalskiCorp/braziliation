@@ -72,6 +72,15 @@ onde já foi lido, então **reiniciar o processo não perde a fila**: o listener
 mensagem processada em vez de recomeçar do "agora". Ele também não captura a mesma mensagem
 duas vezes — guarda os últimos 500 `messageId`.
 
+## Assunto da coleta (`#assunto` / `#fim`)
+
+Uma mensagem de texto `#assunto benzedeira` abre um assunto: tudo o que chegar depois leva
+`"assunto": "benzedeira"` no `meta.json`, até outro `#assunto` ou `#fim`. O assunto vale pelo
+horário de **envio** da mensagem (a fila entregue depois de uma queda cai no assunto certo),
+sobrevive a reinício (fica no `estado.json`) e expira sozinho depois de 12 h sem nada chegar.
+O aviso de recebimento mostra o assunto, ou `📂 Sem assunto` quando faltou a marca. Protocolo
+completo para quem envia: [`../../como-enviar.md`](../../como-enviar.md).
+
 ## Confirmação de captura
 
 Por padrão o listener responde na própria conversa quando grava algo — é o jeito de

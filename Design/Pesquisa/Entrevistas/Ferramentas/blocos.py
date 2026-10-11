@@ -6,8 +6,8 @@ de decisão era o áudio inteiro, e um resumo seleciona. Com blocos de ~150 pala
 da fala ganha um id (A1.01, A1.02…) que o inventário precisa cobrir, e o teste
 `InterviewInventoryTests` barra o commit se algum bloco ficar sem destino.
 
-    py blocos.py                                  # lote em _pendente-curadoria/
-    py blocos.py --pasta ../_processado --prefixo A
+    py blocos.py --lote 2026-10-11-teatro-carlos-gomes
+    py blocos.py --lote 2026-10-11-teatro-carlos-gomes --pasta ../_processado
 
 Grava `blocos.txt` dentro de cada pasta de áudio (fora do git, como a transcrição) e imprime a
 tabela "Trechos" pronta para colar no inventário. Os trechos são ordenados pelo horário de
@@ -70,6 +70,9 @@ def dividir(texto: str, alvo: int = PALAVRAS_POR_BLOCO) -> list:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--lote", required=True,
+                        help="só as capturas deste lote (meta.json 'lote', gravado por curadoria.py linha) — "
+                             "dois assuntos pendentes nunca entram na mesma numeração")
     parser.add_argument("--pasta", default=str(ROOT / "_pendente-curadoria"))
     parser.add_argument("--prefixo", default="A", help="letra dos ids dos trechos (padrão: A)")
     parser.add_argument("--incluir-descartados", action="store_true",
@@ -82,6 +85,8 @@ def main() -> None:
         if not transcricao.exists():
             continue
         meta = json.loads((pasta / "meta.json").read_text(encoding="utf-8"))
+        if meta.get("lote") != args.lote:
+            continue
         if meta.get("resultado") == "descartado" and not args.incluir_descartados:
             continue
         audios = sorted(p for p in pasta.iterdir() if p.stem == "audio")

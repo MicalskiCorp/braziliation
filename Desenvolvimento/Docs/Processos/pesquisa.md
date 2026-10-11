@@ -120,7 +120,8 @@ Confirma que uma lenda, figura ou referência cultural *existe* como elemento re
 1. Fora do Claude Code: o listener local (Node + Baileys, no PC de casa) grava cada áudio, texto, foto ou documento da conversa dedicada em `Entrevistas/_inbox/`.
 2. `py Design/Pesquisa/Entrevistas/Ferramentas/transcrever.py` transcreve o áudio com faster-whisper local, extrai o texto de PDF/DOCX, e move o lote para `_pendente-curadoria/`. Sem API em nenhuma etapa.
 3. A skill leva o lote por um fluxo fixo (detalhe na própria skill), com o material de trabalho em `Entrevistas/_lotes/{lote}/`, fora do git:
-   - **Linha do tempo** (`Ferramentas/curadoria.py linha`): áudios ordenados pelo horário gravado, palavras por minuto, mídias numeradas e ligadas ao trecho pelo horário, duplicatas, folhas de miniaturas.
+   - **Separar por assunto** (`curadoria.py triagem` → `atribuir`) e montar uma sessão por vez.
+   - **Linha do tempo** (`Ferramentas/curadoria.py linha --assunto`): áudios ordenados pelo horário gravado, palavras por minuto, mídias numeradas e ligadas ao trecho pelo horário, duplicatas, folhas de miniaturas.
    - **Revisão da transcrição**: prováveis erros por trecho, resolvidos por busca web ou com o usuário.
    - **Inventário de assuntos** (`Ferramentas/blocos.py`): todo bloco de ~150 palavras com destino — pesquisa, pendência ou fora com motivo — em `Entrevistas/Inventarios/`, conferido pelo teste `InterviewInventoryTests`.
    - **De-para áudio ↔ lugar ↔ fotos** (`curadoria.py gerar`): nenhuma mídia sem lugar; material sem narração (exterior) em seção própria.
@@ -128,7 +129,8 @@ Confirma que uma lenda, figura ou referência cultural *existe* como elemento re
 5. Decide com o usuário: consentimento, imagens para o git (1–2 por lugar, reduzidas, sem rosto), pendências, handoff e descartes. Decisão criativa sobre o material vai para o handoff, nunca para a pesquisa.
 6. Grava a pesquisa por lugar, arquiva em `_processado/` com o resultado no `meta.json` e fecha com `dotnet test` (o pre-commit roda o mesmo).
 
-- **Entrada padronizada:** [`como-enviar.md`](../../../Design/Pesquisa/Entrevistas/como-enviar.md) — fotos e vídeos como documento, um áudio por lugar, texto abrindo e fechando o lote
+- **Entrada padronizada:** [`como-enviar.md`](../../../Design/Pesquisa/Entrevistas/como-enviar.md) — `#assunto {nome}` / `#fim` marcam o assunto de tudo o que chega (o listener grava no `meta.json`), fotos e vídeos como documento, um áudio por lugar
+- **Assunto × sessão:** assunto é permanente e acumula ([`Entrevistas/Assuntos/`](../../../Design/Pesquisa/Entrevistas/Assuntos/index.md)); sessão é uma coleta de um assunto numa data. Cada lote de curadoria é uma sessão de um assunto só — o que chega sem marca passa pela triagem (`curadoria.py triagem`/`atribuir`), e ferramenta e teste recusam mistura
 - **Gate:** Decisão sempre do usuário · consentimento de terceiros antes de aprovar · áudio, imagem, documento e transcrição brutos nunca entram no git
 - **Estado:** Validado de ponta a ponta em 2026-09-14 (áudio e texto), em 2026-09-20 (imagem e documento) e em 2026-10-11 (lote de visita guiada: 9 áudios, 87 fotos, 3 vídeos — origem do fluxo por fases) — grupo privado dedicado; listener sempre ligado pelo Agendador do Windows (`iniciar-listener.cmd`, log em `listener.log`); transcrever e curar sob demanda
 - **Risco:** Baileys é não-oficial — risco baixo, mas não nulo, de bloqueio da conta; preferir número secundário

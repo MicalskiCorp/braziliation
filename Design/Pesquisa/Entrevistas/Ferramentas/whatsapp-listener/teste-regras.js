@@ -26,6 +26,8 @@ const {
   estado,
   tamanhoLegivel,
   resumoDoLote,
+  lerComandoAssunto,
+  assuntoVigente,
   ehEcoDeConfirmacao,
   confirmacoesEnviadas,
 } = listener;
@@ -125,14 +127,17 @@ teste('estado corrompido nao trava o listener', () => {
 const MB = 1024 * 1024;
 teste('lote de um item mantem o aviso individual', () => {
   const texto = 'Documento recebido: ata-1889.pdf (1,2 MB) — na fila de curadoria';
-  assert.strictEqual(resumoDoLote([{ categoria: 'documento', bytes: 1.2 * MB, texto }]), texto);
+  assert.strictEqual(
+    resumoDoLote([{ categoria: 'documento', bytes: 1.2 * MB, texto, assunto: 'teatro-carlos-gomes' }]),
+    texto + '\n📂 Assunto: teatro-carlos-gomes'
+  );
 });
 
 teste('lote grande vira uma mensagem so, por categoria e com o total', () => {
   const itens = [
-    ...Array.from({ length: 10 }, () => ({ categoria: 'audio', bytes: 6 * MB, texto: 'a' })),
-    ...Array.from({ length: 16 }, () => ({ categoria: 'imagem', bytes: MB, texto: 'i' })),
-    { categoria: 'anotacao', texto: 'n' },
+    ...Array.from({ length: 10 }, () => ({ categoria: 'audio', bytes: 6 * MB, texto: 'a', assunto: 'teatro' })),
+    ...Array.from({ length: 16 }, () => ({ categoria: 'imagem', bytes: MB, texto: 'i', assunto: 'teatro' })),
+    { categoria: 'anotacao', texto: 'n', assunto: 'teatro' },
   ];
   assert.strictEqual(
     resumoDoLote(itens),
@@ -140,6 +145,7 @@ teste('lote grande vira uma mensagem so, por categoria e com o total', () => {
       '• 10 áudios (60,0 MB) — na fila de transcrição\n' +
       '• 16 imagens (16,0 MB) — na fila de curadoria\n' +
       '• 1 anotação — na fila de curadoria\n' +
+      '📂 Assunto: teatro\n' +
       '💡 Fotos enviadas como *Documento* mantêm o horário da câmera (📎 → Documento).'
   );
 });
@@ -154,6 +160,38 @@ teste('resumo de lote enviado e reconhecido como eco', () => {
   confirmacoesEnviadas.add(corpo);
   assert.strictEqual(ehEcoDeConfirmacao({ key: { fromMe: true } }, corpo), true);
   confirmacoesEnviadas.delete(corpo);
+});
+
+// --- assunto da coleta (#assunto / #fim) ---
+teste('#assunto abre com slug sem acento, #fim fecha, texto comum nao e comando', () => {
+  assert.deepStrictEqual(lerComandoAssunto('#assunto Benzedeira Dona Zélia'), { acao: 'abrir', assunto: 'benzedeira-dona-zelia' });
+  assert.deepStrictEqual(lerComandoAssunto('#Assunto: Edith Gaertner\nlevar o caderno'), { acao: 'abrir', assunto: 'edith-gaertner' });
+  assert.deepStrictEqual(lerComandoAssunto('#fim'), { acao: 'fechar' });
+  assert.strictEqual(lerComandoAssunto('#assunto'), null, 'sem nome nao abre assunto');
+  assert.strictEqual(lerComandoAssunto('falamos do #assunto ontem'), null, 'so vale no comeco da mensagem');
+  assert.strictEqual(lerComandoAssunto('✅ 📂 Assunto *x* aberto — até #fim'), null, 'o proprio aviso nao vira comando');
+});
+
+teste('assunto expira depois de 12 h sem nada chegar', () => {
+  const aberto = { slug: 'benzedeira', desde: 1000, ultimo: 1000 };
+  assert.strictEqual(assuntoVigente(aberto, 1000 + 3600), 'benzedeira');
+  assert.strictEqual(assuntoVigente(aberto, 1000 + 13 * 3600), null, '#fim esquecido nao pode contaminar o proximo assunto');
+  assert.strictEqual(assuntoVigente(null, 1000), null);
+});
+
+teste('aviso diz o assunto do material e cobra a marca quando falta', () => {
+  assert.ok(resumoDoLote([{ categoria: 'audio', texto: 'a', assunto: 'benzedeira' }]).includes('📂 Assunto: benzedeira'));
+  assert.ok(resumoDoLote([{ categoria: 'audio', texto: 'a', assunto: null }]).includes('Sem assunto'));
+  const misto = resumoDoLote([
+    { categoria: 'audio', texto: 'a', assunto: 'teatro' },
+    { categoria: 'audio', texto: 'b', assunto: 'benzedeira' },
+  ]);
+  assert.ok(misto.includes('📂 Assunto: teatro') && misto.includes('📂 Assunto: benzedeira'), 'lote misto mostra os dois');
+  assert.strictEqual(
+    resumoDoLote([{ categoria: 'anotacao', texto: '📂 Assunto *x* aberto', assunto: 'x', comando: true }]),
+    '📂 Assunto *x* aberto',
+    'o aviso de abertura nao repete o assunto'
+  );
 });
 
 let falhas = 0;

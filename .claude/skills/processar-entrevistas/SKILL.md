@@ -28,16 +28,29 @@ resumiu ~62 min de áudio direto em pesquisa — 12 assuntos se perderam sem nin
 abaixo fecha um desses furos. **O lote inteiro passa pelas fases na ordem**; o usuário valida no
 fim das fases 3, 4, 5 e 6.
 
+**Assunto × sessão.** Assunto é permanente e acumula (a benzedeira, o Teatro Carlos Gomes, Edith
+Gaertner) e tem página em `Design/Pesquisa/Entrevistas/Assuntos/`; sessão é uma coleta de um
+assunto numa data. **Um lote de curadoria é sempre uma sessão de um assunto só**:
+`{lote}` = `{AAAA-MM-DD}-{slug}`. O material chega picado e intercalado — a separação começa no
+`#assunto` do WhatsApp (gravado no `meta.json` pelo listener) e é cobrada pela ferramenta e pelo
+teste. Nunca juntar capturas de assuntos diferentes, nem do mesmo assunto em datas diferentes,
+no mesmo lote.
+
 Ferramentas em `Design/Pesquisa/Entrevistas/Ferramentas/` (rodar de dentro dela, com `py`).
-Material de trabalho do lote fica em `Entrevistas/_lotes/{lote}/` (fora do git); `{lote}` =
-`AAAA-MM-DD-assunto`.
+Material de trabalho do lote fica em `Entrevistas/_lotes/{lote}/` (fora do git).
 
 ## Fases
 
-1. **Preparar.** Listar `_pendente-curadoria/` (vazia → avisar e parar). Ler as mensagens de texto:
-   elas dizem o que é o lote, onde e quem fala. Combinar com o usuário o nome do lote. Confirmar o
-   **consentimento** de terceiros antes de seguir (sem consentimento: relato anônimo ou fora).
-2. **Linha do tempo** — `py curadoria.py linha --lote {lote}`. Ordena os áudios pelo horário
+1. **Separar por assunto.** Listar `_pendente-curadoria/` (vazia → avisar e parar).
+   `py curadoria.py triagem` agrupa por horário o que chegou **sem** `#assunto` e mostra as
+   mensagens de texto de cada grupo; propor o assunto de cada grupo ao usuário e, confirmado,
+   `py curadoria.py atribuir --grupo N --assunto {slug}`. Assunto que já existe em `Assuntos/`
+   reusa o mesmo slug (é o que junta as sessões); assunto novo ganha página no modelo de
+   `Assuntos/teatro-carlos-gomes.md`. Se houver vários assuntos ou datas pendentes, curar **uma
+   sessão por vez**, cada uma pelas fases 2–9. Ler as mensagens de texto da sessão (o que é, onde,
+   quem fala) e confirmar o **consentimento** de terceiros (sem ele: relato anônimo ou fora).
+2. **Linha do tempo** — `py curadoria.py linha --assunto {slug} [--data AAAA-MM-DD]` (recusa
+   assunto com mais de uma data pendente sem `--data`). Ordena os áudios pelo horário
    gravado no arquivo, calcula palavras por minuto (abaixo de 110 = possível trecho perdido),
    numera as mídias (`#` foto com horário, `F` sem horário, `V` vídeo), marca duplicatas, sugere o
    trecho de cada mídia pelo horário (entre dois áudios → o lugar seguinte) e grava em
@@ -46,9 +59,10 @@ Material de trabalho do lote fica em `Entrevistas/_lotes/{lote}/` (fora do git);
    deturpados, palavras truncadas). Resolver o que der por busca web antes de perguntar (fonte
    confirmada → ✅ com link); apresentar o resto ao usuário trecho a trecho, em lotes de até 4
    perguntas, sempre com uma proposta. Registrar cada decisão na tabela "Resultado da revisão".
-4. **Inventário de assuntos** — `py blocos.py --pasta ../_pendente-curadoria` divide cada
+4. **Inventário de assuntos** — `py blocos.py --lote {lote}` divide cada
    transcrição em blocos de ~150 palavras. Ler **todos** os blocos e montar
-   `Design/Pesquisa/Entrevistas/Inventarios/{lote}.md` (modelo: `2026-10-11-teatro-carlos-gomes.md`):
+   `Design/Pesquisa/Entrevistas/Inventarios/{lote}.md` (modelo: `2026-10-11-teatro-carlos-gomes.md`,
+   com a linha `> Assunto: [slug](../Assuntos/slug.md) · Sessão: DD/MM/AAAA`):
    um assunto por linha; status `✅` pesquisa, `🔎` pendência no TODO, `⛔` fora com motivo
    obrigatório; em `✅`/`🔎`, chaves literais que vão aparecer no destino. O usuário valida o
    inventário — não um resumo.
@@ -67,7 +81,9 @@ Material de trabalho do lote fica em `Entrevistas/_lotes/{lote}/` (fora do git);
    - **Handoff** para o Criativo e **descartes** (duplicatas, testes).
    - Decisão criativa do usuário sobre o material (ex.: "esta abertura vai ser o túnel") vai para
      o **handoff**, nunca para a pesquisa — na pesquisa entra só o que se vê.
-7. **Gravar.** Pesquisa organizada **por lugar**, em arquivo próprio quando o da cidade passar de
+7. **Gravar.** Assunto que volta é **acrescentado** ao arquivo de pesquisa que já existe (com a
+   data da sessão), nunca num arquivo paralelo; a página do assunto ganha a linha da sessão.
+   Pesquisa organizada **por lugar**, em arquivo próprio quando o da cidade passar de
    ~5 mil tokens (`TokenBudgetTests`), com `> 🎙️ Relato oral: {quem}, entrevista de DD/MM/AAAA`,
    `✅` no que converge com fonte e `🎙️` no que é só relato; fontes novas em
    `Fontes/registro.md`; pendências em `Design/Pesquisa/TODO.md` (skill `gerir-todo`); handoff
@@ -77,8 +93,9 @@ Material de trabalho do lote fica em `Entrevistas/_lotes/{lote}/` (fora do git);
    novo para o `de-para.md` apontar para `_processado/` (ele grava `trecho`, `lugar` e
    `observacao` em cada captura).
 9. **Fechar.** `dotnet test Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj`
-   — o `InterviewInventoryTests` falha se um bloco ficou sem linha ou uma chave não está no
-   destino (depois de dividir ou mover um arquivo de pesquisa, atualizar a tabela Destinos do
+   — o `InterviewInventoryTests` falha se um bloco ficou sem linha, se uma chave não está no
+   destino, se o inventário não aponta para um assunto que o lista de volta, ou se uma captura
+   aparece em dois inventários (depois de dividir ou mover um arquivo de pesquisa, atualizar a tabela Destinos do
    inventário). Resumir ao usuário: itens, blocos e assuntos cobertos, aprovados, pendências,
    handoffs e descartes, e onde estão `revisao.md` e `de-para.md`.
 

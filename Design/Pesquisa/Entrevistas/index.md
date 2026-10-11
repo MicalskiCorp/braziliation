@@ -47,12 +47,13 @@ fora do git). Imagem ou documento aprovado na curadoria é copiado para
 | `_pendente-curadoria/` | Já transcrito/extraído, aguardando o `@Historiador` (skill `processar-entrevistas`) |
 | `_processado/` | Arquivado após curadoria, com `resultado`, `trecho` e `lugar` no `meta.json` |
 | `_lotes/` | Material de trabalho de cada lote (fora do git): `mapa.json`, folhas de miniaturas, `revisao.md` da transcrição e `de-para.md` áudio ↔ lugar ↔ fotos — gerados por `Ferramentas/curadoria.py` |
+| `Assuntos/` | Uma página por assunto (a benzedeira, o Teatro Carlos Gomes…) com todas as sessões, inventários e onde o material vive — ver [`Assuntos/index.md`](Assuntos/index.md) |
 | `Inventarios/` | Inventário de assuntos de cada entrevista curada — todo bloco da transcrição com destino (✅ pesquisa, 🔎 pendência, ⛔ fora); conferido pelo teste `InterviewInventoryTests` — ver [`Inventarios/index.md`](Inventarios/index.md) |
 | `Ferramentas/` | Código do listener do transcritor, do `curadoria.py` (linha do tempo e de-para do lote) e do `blocos.py` (blocos para o inventário) — ver `Ferramentas/whatsapp-listener/README.md` |
 
 ## Como usar
 
-0. Gravar e mandar seguindo o [protocolo de envio](como-enviar.md) — fotos e vídeos como *documento* (preserva o horário), um áudio por lugar, texto abrindo e fechando o lote.
+0. Gravar e mandar seguindo o [protocolo de envio](como-enviar.md) — `#assunto {nome}` antes do material e `#fim` depois, fotos e vídeos como *documento* (preserva o horário), um áudio por lugar.
 1. Rodar `Ferramentas/whatsapp-listener/` no PC de casa (sempre ligado, pareado uma vez via QR code).
 2. Mandar a entrevista para a conversa dedicada — áudio gravado direto no WhatsApp, texto, foto de documento ou PDF. Funciona de qualquer lugar: o listener recebe quando o PC volta a ficar online, sem precisar de acesso remoto.
 3. Rodar `py Ferramentas/transcrever.py` quando quiser processar o que chegou.

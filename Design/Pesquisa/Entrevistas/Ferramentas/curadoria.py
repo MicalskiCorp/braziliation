@@ -5,10 +5,20 @@ as folhas de miniaturas, a detecção de duplicatas e o de-para foram montados c
 improvisados, um passo de cada vez. Este script faz o mesmo de forma repetível. Fluxo completo
 na skill `processar-entrevistas`.
 
-    py curadoria.py linha  --lote 2026-10-11-teatro-carlos-gomes
-    py curadoria.py gerar  --lote 2026-10-11-teatro-carlos-gomes
+    py curadoria.py triagem                                  # o que chegou sem #assunto
+    py curadoria.py atribuir --grupo 2 --assunto benzedeira
+    py curadoria.py linha    --assunto teatro-carlos-gomes [--data 2026-10-11]
+    py curadoria.py gerar    --lote 2026-10-11-teatro-carlos-gomes
 
-`linha` lê as capturas de `_pendente-curadoria/` (e de `_processado/`), e grava em
+**Assunto e sessão.** Assunto é permanente e acumula (a benzedeira, o Teatro Carlos Gomes, Edith
+Gaertner); sessão é uma coleta de um assunto numa data. O lote de trabalho é sempre uma sessão de
+um assunto só: `{AAAA-MM-DD}-{assunto}`. O assunto vem do `#assunto` mandado no WhatsApp (o
+listener grava no `meta.json`); o que chegar sem ele passa pela `triagem`, que agrupa por horário,
+e pelo `atribuir`, com o assunto que o usuário confirmar. `linha` recusa captura sem assunto e
+`gerar` recusa mapa com captura de outro assunto — material de assuntos diferentes no mesmo dia
+nunca entra no mesmo lote.
+
+`linha` lê as capturas do assunto em `_pendente-curadoria/` (e `_processado/`) e grava em
 `_lotes/{lote}/` (fora do git):
   - `mapa.json`    — trechos de áudio na ordem da gravação e cada mídia com o trecho sugerido
                      pelo horário. A curadoria edita: nome e explicação de cada lugar, seções
@@ -69,18 +79,89 @@ def hora_foto(arquivo: Path, nome_original: str):
     return None
 
 
-def capturas(lote: str, todas: bool):
-    """Pastas de captura do lote. Sem marca de lote ainda, entram as não descartadas."""
-    for base in PASTAS:
+def todas_capturas(bases=PASTAS):
+    for base in bases:
         if not base.exists():
             continue
         for pasta in sorted(p for p in base.iterdir() if (p / "meta.json").exists()):
-            meta = json.loads((pasta / "meta.json").read_text(encoding="utf-8"))
-            if meta.get("lote") not in (None, lote):
-                continue
-            if meta.get("resultado") == "descartado" and not todas:
-                continue
-            yield pasta, meta
+            yield pasta, json.loads((pasta / "meta.json").read_text(encoding="utf-8"))
+
+
+def gravar_meta(pasta: Path, meta: dict) -> None:
+    (pasta / "meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def slug(texto: str) -> str:
+    """Mesmo slug do listener (`slugAssunto`): sem acento, minúsculo, hífen."""
+    import unicodedata
+    sem_acento = unicodedata.normalize("NFD", texto).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]+", "-", sem_acento.lower()).strip("-")[:60]
+
+
+def hora_local(pasta: Path, fuso: int) -> datetime.datetime:
+    """Horário de envio da mensagem: o prefixo UTC do nome da pasta, no fuso local."""
+    utc = datetime.datetime.strptime(pasta.name[:19], "%Y-%m-%dT%H-%M-%S")
+    return utc + datetime.timedelta(hours=fuso)
+
+
+def capturas(lote: str, assunto: str, data: str, fuso: int, todas: bool):
+    """Capturas da sessão: do assunto, da data e ainda sem lote (ou já deste lote)."""
+    for pasta, meta in todas_capturas():
+        if meta.get("assunto") != assunto or meta.get("lote") not in (None, lote):
+            continue
+        if hora_local(pasta, fuso).strftime("%Y-%m-%d") != data and meta.get("lote") != lote:
+            continue
+        if meta.get("resultado") == "descartado" and not todas:
+            continue
+        yield pasta, meta
+
+
+def triagem(args) -> None:
+    """Agrupa por horário o que está pendente sem assunto e grava os grupos em _lotes/_triagem.json."""
+    sem = [(p, m) for p, m in todas_capturas([PASTAS[0]]) if not m.get("assunto")]
+    if not sem:
+        print("Nada pendente sem assunto.")
+        return
+    grupos, anterior = [], None
+    for pasta, meta in sorted(sem, key=lambda pm: pm[0].name):
+        hora = hora_local(pasta, args.fuso)
+        # Mais de N minutos sem mensagem separa duas coletas — no mesmo dia pode haver uma visita
+        # de manhã e uma conversa à tarde, de assuntos diferentes.
+        if anterior is None or (hora - anterior).total_seconds() > args.intervalo * 60:
+            grupos.append([])
+        grupos[-1].append((pasta, meta, hora))
+        anterior = hora
+    LOTES.mkdir(exist_ok=True)
+    (LOTES / "_triagem.json").write_text(json.dumps(
+        {str(i): [p.name for p, _, _ in g] for i, g in enumerate(grupos, 1)}, ensure_ascii=False, indent=2), encoding="utf-8")
+    for i, g in enumerate(grupos, 1):
+        tipos = {}
+        for _, m, _ in g:
+            tipos[m.get("tipo")] = tipos.get(m.get("tipo"), 0) + 1
+        print(f"\nGrupo {i}: {g[0][2]:%d/%m %H:%M} – {g[-1][2]:%H:%M} · " + ", ".join(f"{n} {t}" for t, n in tipos.items()))
+        for pasta, m, hora in g:
+            if m.get("tipo") == "texto":
+                texto = (pasta / "mensagem.txt").read_text(encoding="utf-8").strip().replace("\n", " ")
+                print(f"   {hora:%H:%M} texto: {texto[:120]}")
+    print("\nConfirmar o assunto de cada grupo com o usuário e rodar `atribuir --grupo N --assunto X`.")
+
+
+def atribuir(args) -> None:
+    alvo = slug(args.assunto)
+    if args.grupo:
+        grupos = json.loads((LOTES / "_triagem.json").read_text(encoding="utf-8"))
+        nomes = grupos[str(args.grupo)]
+    else:
+        nomes = [n.strip() for n in args.pastas.split(",") if n.strip()]
+    for nome in nomes:
+        pasta = achar(nome)
+        meta = json.loads((pasta / "meta.json").read_text(encoding="utf-8"))
+        if meta.get("assunto") not in (None, alvo) and not args.forcar:
+            print(f"  {nome} já é do assunto '{meta['assunto']}' — não troquei (use --forcar se for engano)")
+            continue
+        meta["assunto"] = alvo
+        gravar_meta(pasta, meta)
+    print(f"{len(nomes)} captura(s) → assunto '{alvo}'.")
 
 
 def achar(nome: str) -> Path:
@@ -93,14 +174,32 @@ def achar(nome: str) -> Path:
 def linha(args) -> None:
     from PIL import Image, ImageDraw, ImageOps
 
-    destino = LOTES / args.lote
+    assunto = slug(args.assunto)
+    pendentes = [(p, m) for p, m in todas_capturas([PASTAS[0]]) if m.get("assunto") == assunto and not m.get("lote")]
+    datas = sorted({hora_local(p, args.fuso).strftime("%Y-%m-%d") for p, _ in pendentes})
+    data = args.data or (datas[0] if datas else None)
+    if not data:  # sem pendente e sem --data: nada a montar (com --data, refaz um lote já arquivado)
+        print(f"Nada pendente do assunto '{assunto}'.")
+        sys.exit(1)
+    if len(datas) > 1 and not args.data:
+        print(f"O assunto '{assunto}' tem material de {len(datas)} datas ({', '.join(datas)}): cada data é uma "
+              "sessão. Rode uma vez por data com --data.")
+        sys.exit(1)
+    sem_assunto = sum(1 for _, m in todas_capturas([PASTAS[0]]) if not m.get("assunto"))
+    if sem_assunto:
+        print(f"  aviso: {sem_assunto} captura(s) pendente(s) sem assunto — rode `triagem` para não deixar "
+              "material desta sessão de fora.")
+    lote = f"{data}-{assunto}"
+    args.lote = lote
+
+    destino = LOTES / lote
     (destino / "folhas").mkdir(parents=True, exist_ok=True)
     fuso = datetime.timedelta(hours=args.fuso)
     audios, midias, hashes = [], [], {}
 
-    for pasta, meta in capturas(args.lote, args.incluir_descartados):
-        meta["lote"] = args.lote
-        (pasta / "meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+    for pasta, meta in capturas(lote, assunto, data, args.fuso, args.incluir_descartados):
+        meta["lote"] = lote
+        gravar_meta(pasta, meta)
         for arq in sorted(pasta.iterdir()):
             if arq.stem == "audio":
                 info = mvhd(arq) if arq.suffix.lower() in {".m4a", ".mp4"} else None
@@ -192,7 +291,7 @@ def linha(args) -> None:
     if quadros:
         folha(quadros, "videos")
 
-    mapa = {"lote": args.lote, "fuso": args.fuso, "trechos": trechos,
+    mapa = {"lote": args.lote, "assunto": assunto, "data": data, "fuso": args.fuso, "trechos": trechos,
             "secoes_extras": [], "midias": midias}
     # O mapa.json é editado à mão na curadoria: rodar `linha` de novo não pode apagar esse trabalho.
     arquivo_mapa = destino / ("mapa-rascunho.json" if (destino / "mapa.json").exists() else "mapa.json")
@@ -256,10 +355,15 @@ def gerar(args) -> None:
     ids = {s["id"] for s in secoes}
 
     problemas = [f"seção {s['id']} sem nome de lugar" for s in secoes if not s.get("lugar")]
+    # Um lote é um assunto só: captura marcada com outro assunto aqui é mistura, não curadoria.
+    for nome in [t["pasta"] for t in mapa["trechos"]] + [m["pasta"] for m in mapa["midias"]]:
+        outro = json.loads((achar(nome) / "meta.json").read_text(encoding="utf-8")).get("assunto")
+        if outro != mapa.get("assunto"):
+            problemas.append(f"{nome} é do assunto '{outro}', não '{mapa.get('assunto')}'")
     problemas += [f"{m['num']} ({m['pasta']}) sem trecho válido: '{m['trecho']}'"
                   for m in mapa["midias"] if not m["duplicata_de"] and m["trecho"] not in ids]
     if problemas:
-        print("Mapa incompleto — nenhuma mídia pode ficar sem lugar:\n  " + "\n  ".join(problemas))
+        print("Mapa recusado — toda mídia precisa de lugar, e o lote inteiro de um assunto só:\n  " + "\n  ".join(problemas))
         sys.exit(1)
 
     def link(m, arquivo=None):
@@ -323,14 +427,24 @@ def gerar(args) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="comando", required=True)
-    p_linha = sub.add_parser("linha", help="linha do tempo, folhas, rascunho do mapa e da revisão")
-    p_linha.add_argument("--lote", required=True, help="AAAA-MM-DD-assunto")
+    p_tri = sub.add_parser("triagem", help="agrupa por horário o que chegou sem #assunto")
+    p_tri.add_argument("--fuso", type=int, default=-3)
+    p_tri.add_argument("--intervalo", type=int, default=90, help="minutos sem mensagem que separam coletas (padrão: 90)")
+    p_atr = sub.add_parser("atribuir", help="grava o assunto confirmado pelo usuário num grupo da triagem")
+    alvo = p_atr.add_mutually_exclusive_group(required=True)
+    alvo.add_argument("--grupo", type=int)
+    alvo.add_argument("--pastas", help="nomes de pasta separados por vírgula")
+    p_atr.add_argument("--assunto", required=True)
+    p_atr.add_argument("--forcar", action="store_true", help="troca assunto já gravado (correção de engano)")
+    p_linha = sub.add_parser("linha", help="linha do tempo, folhas, rascunho do mapa e da revisão de uma sessão")
+    p_linha.add_argument("--assunto", required=True)
+    p_linha.add_argument("--data", help="AAAA-MM-DD da sessão (obrigatória se o assunto tiver mais de uma data pendente)")
     p_linha.add_argument("--fuso", type=int, default=-3, help="horas em relação a UTC (padrão: -3)")
     p_linha.add_argument("--incluir-descartados", action="store_true")
     p_gerar = sub.add_parser("gerar", help="de-para.md e trecho/lugar no meta.json, a partir do mapa editado")
     p_gerar.add_argument("--lote", required=True)
     args = parser.parse_args()
-    {"linha": linha, "gerar": gerar}[args.comando](args)
+    {"triagem": triagem, "atribuir": atribuir, "linha": linha, "gerar": gerar}[args.comando](args)
 
 
 if __name__ == "__main__":

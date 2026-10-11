@@ -1,6 +1,6 @@
 # Inventários de Assuntos das Entrevistas
 
-Um arquivo por entrevista curada: cada bloco da transcrição com o destino de cada assunto
+Um arquivo por **sessão** curada (`{AAAA-MM-DD}-{assunto}.md`), ligado à página do assunto em [`../Assuntos/`](../Assuntos/index.md): cada bloco da transcrição com o destino de cada assunto
 (✅ pesquisa, 🔎 pendência, ⛔ fora com motivo). É a garantia de que a curadoria não perde
 assunto: o teste `InterviewInventoryTests` barra o commit se algum bloco ficar sem linha ou se
 uma chave não aparecer no arquivo de destino. Gerado no passo de inventário da skill

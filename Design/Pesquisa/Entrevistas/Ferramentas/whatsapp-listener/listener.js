@@ -72,11 +72,14 @@ function lerEstado() {
     return {
       ultimoTimestamp: Number(estado.ultimoTimestamp) || 0,
       ids: Array.isArray(estado.ids) ? estado.ids : [],
+      // Assunto aberto com #assunto sobrevive a reinicio: a visita não pode perder a marca
+      // porque o PC reiniciou no meio dela.
+      assunto: estado.assunto && estado.assunto.slug ? estado.assunto : null,
     };
   } catch {
     // Primeira execucao (ou estado corrompido): parte de agora, para nao importar o
     // historico inteiro da conversa no pareamento.
-    return { ultimoTimestamp: Math.floor(STARTED_AT / 1000), ids: [] };
+    return { ultimoTimestamp: Math.floor(STARTED_AT / 1000), ids: [], assunto: null };
   }
 }
 
@@ -196,9 +199,49 @@ const CATEGORIAS_LOTE = [
 // foto ao áudio na curadoria (como-enviar.md). Avisar na hora corrige o envio ainda na visita.
 const DICA_FOTO = '💡 Fotos enviadas como *Documento* mantêm o horário da câmera (📎 → Documento).';
 
+// Assunto da coleta (como-enviar.md): "#assunto benzedeira" abre, "#fim" fecha, e tudo o que chega
+// entre os dois leva o assunto no meta.json. É o que impede a conversa com a benzedeira de se
+// misturar com a visita a um museu mandada no mesmo dia. Sem nada chegar por 12 h, o assunto
+// expira — um "#fim" esquecido não contamina o assunto seguinte.
+const EXPIRA_ASSUNTO_S = 12 * 3600;
+
+function slugAssunto(texto) {
+  return String(texto)
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 60);
+}
+
+function lerComandoAssunto(texto) {
+  const primeira = String(texto || '').trim().split('\n')[0].trim();
+  if (/^#fim\b/i.test(primeira)) return { acao: 'fechar' };
+  const m = primeira.match(/^#assunto\b[:\s]*(.*)$/i);
+  if (!m) return null;
+  const assunto = slugAssunto(m[1]);
+  return assunto ? { acao: 'abrir', assunto } : null;
+}
+
+function assuntoVigente(atual, tsSegundos) {
+  if (!atual || !atual.slug) return null;
+  return tsSegundos - (atual.ultimo || 0) <= EXPIRA_ASSUNTO_S ? atual.slug : null;
+}
+
+function linhaDeAssunto(itens) {
+  const material = itens.filter((item) => !item.comando);
+  if (!material.length) return '';
+  return [...new Set(material.map((item) => item.assunto || null))]
+    .map((a) => (a ? `📂 Assunto: ${a}` : '📂 Sem assunto — vai para a triagem (mande #assunto <nome> antes do material)'))
+    .join('\n');
+}
+
 function resumoDoLote(itens) {
   const dica = itens.some((item) => item.categoria === 'imagem') ? `\n${DICA_FOTO}` : '';
-  if (itens.length === 1) return itens[0].texto + dica;
+  const assunto = linhaDeAssunto(itens);
+  const rodape = (assunto ? `\n${assunto}` : '') + dica;
+  if (itens.length === 1) return itens[0].texto + rodape;
   const linhas = [`Lote de ${itens.length} itens recebido e validado:`];
   for (const [categoria, singular, plural, fila] of CATEGORIAS_LOTE) {
     const doTipo = itens.filter((item) => item.categoria === categoria);
@@ -207,7 +250,7 @@ function resumoDoLote(itens) {
     const nome = doTipo.length === 1 ? singular : plural;
     linhas.push(`• ${doTipo.length} ${nome}${tamanho ? ` (${tamanho})` : ''} — ${fila}`);
   }
-  return linhas.join('\n') + dica;
+  return linhas.join('\n') + rodape;
 }
 
 // O aviso sai quando a conversa fica JANELA_LOTE_MS sem captura nova — o bastante para um
@@ -275,6 +318,20 @@ async function handleMessage(sock, msg) {
   const messageType = contentTypeOf(content);
   if (!messageType) return;
 
+  // Assunto vigente quando a mensagem foi *enviada*, não quando foi lida: a fila que o WhatsApp
+  // entrega depois de uma queda do listener ainda cai no assunto certo.
+  const ts = timestampSegundos(msg) || Math.floor(Date.now() / 1000);
+  let assunto = assuntoVigente(estado.assunto, ts);
+  if (!assunto && estado.assunto) {
+    estado.assunto = null;
+    salvarEstado();
+  }
+  const renovarAssunto = () => {
+    if (!assunto || !estado.assunto) return;
+    estado.assunto.ultimo = Math.max(estado.assunto.ultimo || 0, ts);
+    salvarEstado();
+  };
+
   // O download precisa da mensagem já desembrulhada para achar as chaves de mídia.
   const baixar = () =>
     downloadMediaMessage(
@@ -303,13 +360,16 @@ async function handleMessage(sock, msg) {
       const dir = captureDir(msg, sender);
       fs.writeFileSync(path.join(dir, arquivo), buffer);
       writeMeta(dir, 'audio', msg, sender, {
+        assunto,
         arquivo,
         mimetype: media.mimetype || null,
         nomeOriginal: media.fileName || null,
       });
       console.log('Audio salvo em', dir);
       const tamanho = tamanhoLegivel(buffer.length);
+      renovarAssunto();
       confirmar(sock, msg, {
+        assunto,
         categoria: 'audio',
         bytes: buffer.length,
         texto: `Áudio recebido${tamanho ? ` (${tamanho})` : ''} — na fila de transcrição`,
@@ -327,6 +387,7 @@ async function handleMessage(sock, msg) {
       // meta.json por último: é ele que marca a pasta como capturada por inteiro, e o
       // transcrever.py pula pasta sem meta para não pegar download pela metade.
       writeMeta(dir, ehImagem ? 'imagem' : 'documento', msg, sender, {
+        assunto,
         arquivo,
         mimetype: media.mimetype || null,
         nomeOriginal: media.fileName || media.title || null,
@@ -334,7 +395,9 @@ async function handleMessage(sock, msg) {
       console.log(ehImagem ? 'Imagem salva em' : 'Documento salvo em', dir);
       const tamanho = tamanhoLegivel(buffer.length);
       const nome = media.fileName || media.title;
+      renovarAssunto();
       confirmar(sock, msg, {
+        assunto,
         categoria: ehImagem ? 'imagem' : 'documento',
         bytes: buffer.length,
         texto: ehImagem
@@ -345,11 +408,25 @@ async function handleMessage(sock, msg) {
       const text = content.conversation || content.extendedTextMessage?.text || '';
       if (!text.trim()) return;
       if (ehEcoDeConfirmacao(msg, text)) return;
+      const comando = lerComandoAssunto(text);
+      let aviso = 'Anotação recebida — na fila de curadoria';
+      if (comando && comando.acao === 'abrir') {
+        estado.assunto = { slug: comando.assunto, desde: ts, ultimo: ts };
+        salvarEstado();
+        assunto = comando.assunto;
+        aviso = `📂 Assunto *${assunto}* aberto — o que chegar agora vai para ele até #fim ou outro #assunto`;
+      } else if (comando) {
+        aviso = assunto ? `📂 Assunto *${assunto}* fechado` : '📂 Nenhum assunto estava aberto';
+        estado.assunto = null;
+        salvarEstado();
+      } else {
+        renovarAssunto();
+      }
       const dir = captureDir(msg, sender);
       fs.writeFileSync(path.join(dir, 'mensagem.txt'), text, 'utf8');
-      writeMeta(dir, 'texto', msg, sender);
+      writeMeta(dir, 'texto', msg, sender, comando ? { assunto, comando: comando.acao } : { assunto });
       console.log('Mensagem salva em', dir);
-      confirmar(sock, msg, { categoria: 'anotacao', texto: 'Anotação recebida — na fila de curadoria' });
+      confirmar(sock, msg, { categoria: 'anotacao', texto: aviso, assunto, comando: Boolean(comando) });
     }
     // Figurinha, vídeo, contato e localização seguem fora do escopo da captura.
   } catch (err) {
@@ -440,6 +517,8 @@ module.exports = {
   estado,
   tamanhoLegivel,
   resumoDoLote,
+  lerComandoAssunto,
+  assuntoVigente,
   ehEcoDeConfirmacao,
   confirmacoesEnviadas,
 };

@@ -33,6 +33,54 @@ public sealed class InterviewInventoryTests
         Assert.True(problems.Count == 0, "Inventário de entrevista com furos:\n" + string.Join("\n", problems));
     }
 
+    /// <summary>
+    /// Material chega picado e intercalado (a benzedeira, uma visita, a benzedeira de novo). Cada
+    /// sessão pertence a um assunto registrado em <c>Entrevistas/Assuntos/</c>, que lista a sessão de
+    /// volta — e uma mesma captura nunca é curada em dois inventários, que é como os assuntos se
+    /// misturariam sem ninguém notar.
+    /// </summary>
+    [Fact]
+    public void Every_Inventory_Belongs_To_One_Registered_Subject_And_No_Capture_Is_Shared()
+    {
+        var root = Path.Combine(GitRoot, "Design", "Pesquisa", "Entrevistas");
+        var dir = Path.Combine(root, "Inventarios");
+        if (!Directory.Exists(dir))
+            return;
+
+        var problems = new List<string>();
+        var owner = new Dictionary<string, string>();
+        foreach (var file in Directory.EnumerateFiles(dir, "*.md").Where(f => Path.GetFileName(f) != "index.md"))
+        {
+            var name = Path.GetFileName(file);
+            var text = File.ReadAllText(file);
+
+            var subject = Regex.Match(text, @"Assunto:\s*\[([^\]]+)\]\(\.\./Assuntos/([^)]+\.md)\)");
+            if (!subject.Success)
+                problems.Add($"{name}: falta a linha '> Assunto: [slug](../Assuntos/slug.md)'");
+            else
+            {
+                var page = Path.Combine(root, "Assuntos", subject.Groups[2].Value);
+                if (!File.Exists(page))
+                    problems.Add($"{name}: página de assunto {subject.Groups[2].Value} não existe");
+                else if (!File.ReadAllText(page).Contains(name, StringComparison.Ordinal))
+                    problems.Add($"{name}: a página {subject.Groups[2].Value} não lista esta sessão");
+                if (!name.EndsWith($"-{subject.Groups[1].Value}.md", StringComparison.Ordinal))
+                    problems.Add($"{name}: o nome do arquivo deve terminar com o slug do assunto ({subject.Groups[1].Value})");
+            }
+
+            foreach (var cells in TableRows(text, "Trechos").Where(c => c.Length >= 2))
+            {
+                var folder = cells[1].Trim('`');
+                if (owner.TryGetValue(folder, out var other))
+                    problems.Add($"captura {folder} aparece em {other} e em {name} — uma captura é de um assunto só");
+                else
+                    owner[folder] = name;
+            }
+        }
+
+        Assert.True(problems.Count == 0, "Assuntos das entrevistas misturados ou sem registro:\n" + string.Join("\n", problems));
+    }
+
     [Fact]
     public void A_Block_Without_A_Row_Is_Reported()
     {
