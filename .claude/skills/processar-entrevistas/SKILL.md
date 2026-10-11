@@ -41,7 +41,7 @@ dito e enviado numa conversa dedicada — cada item é uma pasta com `meta.json`
      `Temas/{tema}.md`), citando a entrevista como fonte no lugar do Protocolo de Fonte padrão:
      `> 🎙️ Relato oral: {remetente}, entrevista de DD/MM/AAAA`.
      - **Imagem ou documento aprovado**: copiar o arquivo para `Design/Pesquisa/Fontes/Arquivos/`
-       na nomenclatura daquele `index.md`, acrescentar a linha no registro de lá e citar a
+       na nomenclatura daquele `index.md`, acrescentar a linha em `Fontes/Arquivos/registro.md` e citar a
        fonte como `> 📎 Documento/foto: {nomeOriginal ou descrição}, enviado por {remetente} em
        DD/MM/AAAA — `Fontes/Arquivos/{arquivo}``. Acima de ~5 MB, não copiar: deixar em
        `_processado/` e referenciar o caminho (regra no `index.md` de `Fontes/Arquivos/`).

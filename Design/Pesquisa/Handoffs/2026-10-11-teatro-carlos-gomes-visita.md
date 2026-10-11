@@ -1,5 +1,5 @@
 # Handoff — Teatro Carlos Gomes por dentro: visita guiada (processar)
-> Data: 11/10/2026 · pesquisa de origem: `Design/Pesquisa/Estados/SantaCatarina/cidades/Blumenau/index.md` → seção "Visita guiada ao Teatro Carlos Gomes — relato oral por lugar"
+> Data: 11/10/2026 · pesquisa de origem: `Design/Pesquisa/Estados/SantaCatarina/cidades/Blumenau/teatro-carlos-gomes-visita.md`
 
 ## Contexto factual
 

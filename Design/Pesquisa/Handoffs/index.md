@@ -8,6 +8,7 @@ handoff: o que foi pesquisado, com fonte, e o que virou pendência em
 |---------|---------|
 | [`2026-09-20-indaial-lendas.md`](2026-09-20-indaial-lendas.md) | Handoff — Indaial: lendas do Médio Vale do Itajaí (processar) |
 | [`2026-09-20-lendas-sc-rodada-2.md`](2026-09-20-lendas-sc-rodada-2.md) | Handoff — 11 lendas de Santa Catarina, rodada 2 (processar) |
+| [`2026-10-11-teatro-carlos-gomes-visita.md`](2026-10-11-teatro-carlos-gomes-visita.md) | Handoff — Teatro Carlos Gomes por dentro: visita guiada (processar) |
 
 Handoff novo entra como arquivo datado (`AAAA-MM-DD-assunto.md`) e ganha linha aqui.
 O protocolo está na skill `handoff`.
