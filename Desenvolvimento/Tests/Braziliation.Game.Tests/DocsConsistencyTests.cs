@@ -19,7 +19,7 @@ public sealed class DocsConsistencyTests
         ".git", "Library", "Temp", "Logs", "obj", "bin", "UserSettings", ".vs", "node_modules",
         "TextMesh Pro", "Outputs", "Rejected",
         // Captura bruta de entrevistas (ADR-009): fora do git, nunca é documentação do projeto.
-        "_inbox", "_pendente-curadoria", "_processado",
+        "_inbox", "_pendente-curadoria", "_processado", "_lotes",
     };
 
     internal static IEnumerable<string> MarkdownFiles()

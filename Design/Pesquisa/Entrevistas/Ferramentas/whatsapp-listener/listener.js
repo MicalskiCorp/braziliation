@@ -192,8 +192,13 @@ const CATEGORIAS_LOTE = [
 // Texto do aviso de um lote de capturas. Um item só mantém o aviso individual de sempre;
 // vários viram uma mensagem única por categoria — em 2026-10-11 um envio de 105 arquivos
 // gerou 105 respostas, e o WhatsApp barrou a maioria com rate-overlimit.
+// Foto mandada como "Foto" chega comprimida e sem o horário da câmera — e é o horário que liga a
+// foto ao áudio na curadoria (como-enviar.md). Avisar na hora corrige o envio ainda na visita.
+const DICA_FOTO = '💡 Fotos enviadas como *Documento* mantêm o horário da câmera (📎 → Documento).';
+
 function resumoDoLote(itens) {
-  if (itens.length === 1) return itens[0].texto;
+  const dica = itens.some((item) => item.categoria === 'imagem') ? `\n${DICA_FOTO}` : '';
+  if (itens.length === 1) return itens[0].texto + dica;
   const linhas = [`Lote de ${itens.length} itens recebido e validado:`];
   for (const [categoria, singular, plural, fila] of CATEGORIAS_LOTE) {
     const doTipo = itens.filter((item) => item.categoria === categoria);
@@ -202,7 +207,7 @@ function resumoDoLote(itens) {
     const nome = doTipo.length === 1 ? singular : plural;
     linhas.push(`• ${doTipo.length} ${nome}${tamanho ? ` (${tamanho})` : ''} — ${fila}`);
   }
-  return linhas.join('\n');
+  return linhas.join('\n') + dica;
 }
 
 // O aviso sai quando a conversa fica JANELA_LOTE_MS sem captura nova — o bastante para um

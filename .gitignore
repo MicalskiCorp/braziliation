@@ -85,6 +85,7 @@ Design/Pesquisa/Entrevistas/Ferramentas/__pycache__/
 Design/Pesquisa/Entrevistas/_inbox/*
 Design/Pesquisa/Entrevistas/_pendente-curadoria/*
 Design/Pesquisa/Entrevistas/_processado/*
+Design/Pesquisa/Entrevistas/_lotes/
 !Design/Pesquisa/Entrevistas/_inbox/.gitkeep
 !Design/Pesquisa/Entrevistas/_pendente-curadoria/.gitkeep
 !Design/Pesquisa/Entrevistas/_processado/.gitkeep

@@ -139,8 +139,14 @@ teste('lote grande vira uma mensagem so, por categoria e com o total', () => {
     'Lote de 27 itens recebido e validado:\n' +
       '• 10 áudios (60,0 MB) — na fila de transcrição\n' +
       '• 16 imagens (16,0 MB) — na fila de curadoria\n' +
-      '• 1 anotação — na fila de curadoria'
+      '• 1 anotação — na fila de curadoria\n' +
+      '💡 Fotos enviadas como *Documento* mantêm o horário da câmera (📎 → Documento).'
   );
+});
+
+teste('lote sem foto comum nao traz a dica de envio', () => {
+  const resumo = resumoDoLote([{ categoria: 'documento', bytes: MB }, { categoria: 'audio', bytes: MB }]);
+  assert.ok(!resumo.includes('💡'), 'documento ja preserva o horario — dica so atrapalha');
 });
 
 teste('resumo de lote enviado e reconhecido como eco', () => {

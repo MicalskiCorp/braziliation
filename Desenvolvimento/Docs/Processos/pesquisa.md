@@ -119,13 +119,18 @@ Confirma que uma lenda, figura ou referência cultural *existe* como elemento re
 
 1. Fora do Claude Code: o listener local (Node + Baileys, no PC de casa) grava cada áudio, texto, foto ou documento da conversa dedicada em `Entrevistas/_inbox/`.
 2. `py Design/Pesquisa/Entrevistas/Ferramentas/transcrever.py` transcreve o áudio com faster-whisper local, extrai o texto de PDF/DOCX, e move o lote para `_pendente-curadoria/`. Sem API em nenhuma etapa.
-3. A skill lista os itens e apresenta cada um: remetente, data, tipo e resumo — imagem e PDF escaneado são lidos direto pelo Claude Code, que não tem OCR automático no pipeline.
-4. Classifica como memória oral (critério do guardrail do Historiador) e cruza com a pesquisa existente — e com busca web quando der.
-5. Decide com o usuário, item a item: aprovar e salvar (P2, citando o relato oral), pendência no TODO de Pesquisa, handoff direto (P4) ou descarte. Imagem/documento aprovado é copiado para `Design/Pesquisa/Fontes/Arquivos/` e registrado no índice de lá — é a única cópia versionada.
-6. Move a pasta para `_processado/` com o resultado no `meta.json` e resume o lote.
+3. A skill leva o lote por um fluxo fixo (detalhe na própria skill), com o material de trabalho em `Entrevistas/_lotes/{lote}/`, fora do git:
+   - **Linha do tempo** (`Ferramentas/curadoria.py linha`): áudios ordenados pelo horário gravado, palavras por minuto, mídias numeradas e ligadas ao trecho pelo horário, duplicatas, folhas de miniaturas.
+   - **Revisão da transcrição**: prováveis erros por trecho, resolvidos por busca web ou com o usuário.
+   - **Inventário de assuntos** (`Ferramentas/blocos.py`): todo bloco de ~150 palavras com destino — pesquisa, pendência ou fora com motivo — em `Entrevistas/Inventarios/`, conferido pelo teste `InterviewInventoryTests`.
+   - **De-para áudio ↔ lugar ↔ fotos** (`curadoria.py gerar`): nenhuma mídia sem lugar; material sem narração (exterior) em seção própria.
+4. Classifica como memória oral (critério do guardrail do Historiador) e cruza com a pesquisa existente e com busca web.
+5. Decide com o usuário: consentimento, imagens para o git (1–2 por lugar, reduzidas, sem rosto), pendências, handoff e descartes. Decisão criativa sobre o material vai para o handoff, nunca para a pesquisa.
+6. Grava a pesquisa por lugar, arquiva em `_processado/` com o resultado no `meta.json` e fecha com `dotnet test` (o pre-commit roda o mesmo).
 
+- **Entrada padronizada:** [`como-enviar.md`](../../../Design/Pesquisa/Entrevistas/como-enviar.md) — fotos e vídeos como documento, um áudio por lugar, texto abrindo e fechando o lote
 - **Gate:** Decisão sempre do usuário · consentimento de terceiros antes de aprovar · áudio, imagem, documento e transcrição brutos nunca entram no git
-- **Estado:** Validado de ponta a ponta em 2026-09-14 (áudio e texto) e em 2026-09-20 (imagem e documento) — grupo privado dedicado; listener sempre ligado pelo Agendador do Windows (`iniciar-listener.cmd`, log em `listener.log`); transcrever e curar sob demanda
+- **Estado:** Validado de ponta a ponta em 2026-09-14 (áudio e texto), em 2026-09-20 (imagem e documento) e em 2026-10-11 (lote de visita guiada: 9 áudios, 87 fotos, 3 vídeos — origem do fluxo por fases) — grupo privado dedicado; listener sempre ligado pelo Agendador do Windows (`iniciar-listener.cmd`, log em `listener.log`); transcrever e curar sob demanda
 - **Risco:** Baileys é não-oficial — risco baixo, mas não nulo, de bloqueio da conta; preferir número secundário
 
 ---

@@ -16,7 +16,9 @@ WhatsApp (conversa dedicada)
    → _inbox/                          (áudio, texto, imagem ou documento — um item por pasta)
    → Ferramentas/transcrever.py       (faster-whisper + extração de texto, local, sem API)
    → _pendente-curadoria/             (preparado, aguardando curadoria)
-   → skill `processar-entrevistas`    (@Historiador, dentro do Claude Code)
+   → skill `processar-entrevistas`    (@Historiador, dentro do Claude Code):
+        linha do tempo → revisão da transcrição → inventário de assuntos
+        → de-para áudio ↔ lugar ↔ fotos → decisões → pesquisa       (_lotes/{lote}/)
    → _processado/                     (arquivado com o resultado da curadoria)
 ```
 
@@ -43,12 +45,14 @@ fora do git). Imagem ou documento aprovado na curadoria é copiado para
 |-------|----------|
 | `_inbox/` | Captura crua do listener — `audio.ogg`, `mensagem.txt`, `imagem.*` ou `documento.*` + `meta.json` |
 | `_pendente-curadoria/` | Já transcrito/extraído, aguardando o `@Historiador` (skill `processar-entrevistas`) |
-| `_processado/` | Arquivado após curadoria, com `resultado` no `meta.json` |
+| `_processado/` | Arquivado após curadoria, com `resultado`, `trecho` e `lugar` no `meta.json` |
+| `_lotes/` | Material de trabalho de cada lote (fora do git): `mapa.json`, folhas de miniaturas, `revisao.md` da transcrição e `de-para.md` áudio ↔ lugar ↔ fotos — gerados por `Ferramentas/curadoria.py` |
 | `Inventarios/` | Inventário de assuntos de cada entrevista curada — todo bloco da transcrição com destino (✅ pesquisa, 🔎 pendência, ⛔ fora); conferido pelo teste `InterviewInventoryTests` — ver [`Inventarios/index.md`](Inventarios/index.md) |
-| `Ferramentas/` | Código do listener do transcritor e do `blocos.py` (divide transcrições em blocos para o inventário) — ver `Ferramentas/whatsapp-listener/README.md` |
+| `Ferramentas/` | Código do listener do transcritor, do `curadoria.py` (linha do tempo e de-para do lote) e do `blocos.py` (blocos para o inventário) — ver `Ferramentas/whatsapp-listener/README.md` |
 
 ## Como usar
 
+0. Gravar e mandar seguindo o [protocolo de envio](como-enviar.md) — fotos e vídeos como *documento* (preserva o horário), um áudio por lugar, texto abrindo e fechando o lote.
 1. Rodar `Ferramentas/whatsapp-listener/` no PC de casa (sempre ligado, pareado uma vez via QR code).
 2. Mandar a entrevista para a conversa dedicada — áudio gravado direto no WhatsApp, texto, foto de documento ou PDF. Funciona de qualquer lugar: o listener recebe quando o PC volta a ficar online, sem precisar de acesso remoto.
 3. Rodar `py Ferramentas/transcrever.py` quando quiser processar o que chegou.
