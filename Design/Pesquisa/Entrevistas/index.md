@@ -53,7 +53,7 @@ fora do git). Imagem ou documento aprovado na curadoria é copiado para
 
 ## Como usar
 
-0. Gravar e mandar seguindo o [protocolo de envio](como-enviar.md) — `#assunto {nome}` antes do material e `#fim` depois, fotos e vídeos como *documento* (preserva o horário), um áudio por lugar.
+0. Gravar e mandar seguindo o [protocolo de envio](como-enviar.md) — fotos e vídeos como *documento* (preserva o horário), um áudio por lugar, dizendo o assunto no começo. O assunto é detectado na curadoria; `#assunto {nome}` é atalho opcional.
 1. Rodar `Ferramentas/whatsapp-listener/` no PC de casa (sempre ligado, pareado uma vez via QR code).
 2. Mandar a entrevista para a conversa dedicada — áudio gravado direto no WhatsApp, texto, foto de documento ou PDF. Funciona de qualquer lugar: o listener recebe quando o PC volta a ficar online, sem precisar de acesso remoto.
 3. Rodar `py Ferramentas/transcrever.py` quando quiser processar o que chegou.

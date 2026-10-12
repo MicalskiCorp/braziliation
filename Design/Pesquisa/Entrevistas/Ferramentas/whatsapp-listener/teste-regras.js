@@ -179,9 +179,13 @@ teste('assunto expira depois de 12 h sem nada chegar', () => {
   assert.strictEqual(assuntoVigente(null, 1000), null);
 });
 
-teste('aviso diz o assunto do material e cobra a marca quando falta', () => {
+teste('aviso mostra o assunto marcado e nao cobra marca de quem nao usou', () => {
   assert.ok(resumoDoLote([{ categoria: 'audio', texto: 'a', assunto: 'benzedeira' }]).includes('📂 Assunto: benzedeira'));
-  assert.ok(resumoDoLote([{ categoria: 'audio', texto: 'a', assunto: null }]).includes('Sem assunto'));
+  assert.strictEqual(
+    resumoDoLote([{ categoria: 'audio', texto: 'Áudio recebido', assunto: null }]),
+    'Áudio recebido',
+    'sem #assunto o assunto e detectado na curadoria — o aviso nao cobra nada'
+  );
   const misto = resumoDoLote([
     { categoria: 'audio', texto: 'a', assunto: 'teatro' },
     { categoria: 'audio', texto: 'b', assunto: 'benzedeira' },

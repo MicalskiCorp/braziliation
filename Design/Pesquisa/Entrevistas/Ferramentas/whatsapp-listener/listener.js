@@ -229,11 +229,12 @@ function assuntoVigente(atual, tsSegundos) {
   return tsSegundos - (atual.ultimo || 0) <= EXPIRA_ASSUNTO_S ? atual.slug : null;
 }
 
+// Só mostra o assunto marcado com o atalho #assunto. Material sem marca é o caso normal: o assunto
+// é detectado pelo conteúdo na curadoria (curadoria.py triagem) — cobrar a marca aqui seria pôr
+// trabalho de processo em quem está no meio da coleta.
 function linhaDeAssunto(itens) {
-  const material = itens.filter((item) => !item.comando);
-  if (!material.length) return '';
-  return [...new Set(material.map((item) => item.assunto || null))]
-    .map((a) => (a ? `📂 Assunto: ${a}` : '📂 Sem assunto — vai para a triagem (mande #assunto <nome> antes do material)'))
+  return [...new Set(itens.filter((item) => !item.comando && item.assunto).map((item) => item.assunto))]
+    .map((a) => `📂 Assunto: ${a}`)
     .join('\n');
 }
 

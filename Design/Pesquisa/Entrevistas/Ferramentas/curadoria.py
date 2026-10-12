@@ -116,12 +116,74 @@ def capturas(lote: str, assunto: str, data: str, fuso: int, todas: bool):
         yield pasta, meta
 
 
+ASSUNTOS = ROOT / "Assuntos"
+SEM_TEXTO = "[sem camada de texto extraivel"
+
+
+def normalizar(texto: str) -> str:
+    import unicodedata
+    return unicodedata.normalize("NFD", texto).encode("ascii", "ignore").decode().lower()
+
+
+def palavras_chave() -> dict:
+    """{slug: [chaves]} da linha '> Palavras-chave: a; b; c' de cada página em Assuntos/."""
+    chaves = {}
+    for pagina in sorted(ASSUNTOS.glob("*.md")) if ASSUNTOS.exists() else []:
+        if pagina.name == "index.md":
+            continue
+        texto = pagina.read_text(encoding="utf-8")
+        linha_chaves = re.search(r"Palavras-chave:\s*(.+)", texto)
+        if linha_chaves:
+            chaves[pagina.stem] = [normalizar(k.strip()) for k in linha_chaves.group(1).split(";") if k.strip()]
+    return chaves
+
+
+def texto_da_captura(pasta: Path, meta: dict) -> str:
+    """Tudo o que a captura diz em texto: mensagem, transcrição, legenda, texto do documento."""
+    partes = [meta.get("nomeOriginal") or ""]
+    for nome in ("mensagem.txt", "transcricao.txt", "legenda.txt", "texto-documento.txt"):
+        arq = pasta / nome
+        if arq.exists():
+            conteudo = arq.read_text(encoding="utf-8")
+            if not conteudo.startswith(SEM_TEXTO):
+                partes.append(conteudo)
+    return " ".join(partes)
+
+
+def pontuar(texto: str, chaves: dict) -> dict:
+    """{slug: {chave: ocorrências}} — só chaves que aparecem."""
+    alvo = normalizar(texto)
+    pontos = {}
+    for assunto, lista in chaves.items():
+        achadas = {k: len(re.findall(r"\b" + re.escape(k) + r"\b", alvo)) for k in lista}
+        achadas = {k: n for k, n in achadas.items() if n}
+        if achadas:
+            pontos[assunto] = achadas
+    return pontos
+
+
+def mais_provavel(pontos: dict):
+    if not pontos:
+        return None
+    return max(pontos, key=lambda a: sum(pontos[a].values()))
+
+
 def triagem(args) -> None:
-    """Agrupa por horário o que está pendente sem assunto e grava os grupos em _lotes/_triagem.json."""
-    sem = [(p, m) for p, m in todas_capturas([PASTAS[0]]) if not m.get("assunto")]
+    """Agrupa por horário o que está pendente sem assunto e sugere o assunto de cada grupo pelo
+    conteúdo — transcrição, textos e legendas comparados às palavras-chave de cada página em
+    Assuntos/. A sugestão é para o usuário confirmar, nunca é gravada sozinha."""
+    pendentes = list(todas_capturas([PASTAS[0]]))
+    marcados = {}
+    for _, m in pendentes:
+        if m.get("assunto"):
+            marcados[m["assunto"]] = marcados.get(m["assunto"], 0) + 1
+    for assunto, n in sorted(marcados.items()):
+        print(f"Já marcado com #assunto: {assunto} ({n} captura(s)) — não passa pela triagem")
+    sem = [(p, m) for p, m in pendentes if not m.get("assunto")]
     if not sem:
         print("Nada pendente sem assunto.")
         return
+    chaves = palavras_chave()
     grupos, anterior = [], None
     for pasta, meta in sorted(sem, key=lambda pm: pm[0].name):
         hora = hora_local(pasta, args.fuso)
@@ -131,28 +193,68 @@ def triagem(args) -> None:
             grupos.append([])
         grupos[-1].append((pasta, meta, hora))
         anterior = hora
-    LOTES.mkdir(exist_ok=True)
-    (LOTES / "_triagem.json").write_text(json.dumps(
-        {str(i): [p.name for p, _, _ in g] for i, g in enumerate(grupos, 1)}, ensure_ascii=False, indent=2), encoding="utf-8")
+    registro = {}
     for i, g in enumerate(grupos, 1):
-        tipos = {}
-        for _, m, _ in g:
+        tipos, total, por_item = {}, {}, {}
+        for pasta, m, _ in g:
             tipos[m.get("tipo")] = tipos.get(m.get("tipo"), 0) + 1
+            pontos = pontuar(texto_da_captura(pasta, m), chaves)
+            for assunto, achadas in pontos.items():
+                for k, n in achadas.items():
+                    total.setdefault(assunto, {})
+                    total[assunto][k] = total[assunto].get(k, 0) + n
+            if pontos:
+                por_item[pasta.name] = mais_provavel(pontos)
+        sugestao = mais_provavel(total)
+        # Dois itens do mesmo horário apontando para assuntos diferentes: o horário juntou o que o
+        # conteúdo separa. Não sugerir um assunto só — separar por --pastas.
+        mistura = len(set(por_item.values())) > 1
+        registro[str(i)] = {"pastas": [p.name for p, _, _ in g], "sugestao": None if mistura else sugestao,
+                            "por_item": por_item, "mistura": mistura}
+
         print(f"\nGrupo {i}: {g[0][2]:%d/%m %H:%M} – {g[-1][2]:%H:%M} · " + ", ".join(f"{n} {t}" for t, n in tipos.items()))
+        if mistura:
+            print("   ⚠️ conteúdo aponta para mais de um assunto — separar com `atribuir --pastas`:")
+            for nome, assunto in por_item.items():
+                print(f"      {nome} → {assunto}")
+        elif sugestao:
+            sinais = ", ".join(f"{k}×{n}" for k, n in sorted(total[sugestao].items(), key=lambda kv: -kv[1])[:6])
+            print(f"   sugestão: {sugestao}  ({sinais})")
+        else:
+            print("   sem correspondência com assunto conhecido — ler o conteúdo e propor (assunto novo?)")
         for pasta, m, hora in g:
-            if m.get("tipo") == "texto":
-                texto = (pasta / "mensagem.txt").read_text(encoding="utf-8").strip().replace("\n", " ")
-                print(f"   {hora:%H:%M} texto: {texto[:120]}")
-    print("\nConfirmar o assunto de cada grupo com o usuário e rodar `atribuir --grupo N --assunto X`.")
+            if m.get("tipo") in ("texto", "audio"):
+                arq = pasta / ("mensagem.txt" if m.get("tipo") == "texto" else "transcricao.txt")
+                if arq.exists():
+                    trecho = arq.read_text(encoding="utf-8").strip().replace("\n", " ")
+                    print(f"   {hora:%H:%M} {m.get('tipo')}: {trecho[:140]}")
+        sem_sinal = sum(1 for p, m, _ in g if m.get("tipo") in ("imagem", "documento") and p.name not in por_item)
+        if sem_sinal:
+            print(f"   {sem_sinal} foto(s)/documento(s) sem texto — seguem o grupo pelo horário; conferir nas folhas")
+    LOTES.mkdir(exist_ok=True)
+    (LOTES / "_triagem.json").write_text(json.dumps(registro, ensure_ascii=False, indent=2), encoding="utf-8")
+    print("\nApresentar as sugestões ao usuário numa pergunta só. Confirmadas: `atribuir --grupo N` "
+          "(usa a sugestão) ou `atribuir --grupo N --assunto X` (corrige); grupo misto: `atribuir --pastas`.")
 
 
 def atribuir(args) -> None:
-    alvo = slug(args.assunto)
     if args.grupo:
-        grupos = json.loads((LOTES / "_triagem.json").read_text(encoding="utf-8"))
-        nomes = grupos[str(args.grupo)]
+        grupo = json.loads((LOTES / "_triagem.json").read_text(encoding="utf-8"))[str(args.grupo)]
+        if grupo["mistura"]:
+            print(f"Grupo {args.grupo} mistura assuntos pelo conteúdo — atribuir por partes com --pastas.")
+            sys.exit(1)
+        nomes = grupo["pastas"]
+        escolhido = args.assunto or grupo["sugestao"]
+        if not escolhido:
+            print(f"Grupo {args.grupo} não tem sugestão — informar --assunto.")
+            sys.exit(1)
     else:
         nomes = [n.strip() for n in args.pastas.split(",") if n.strip()]
+        escolhido = args.assunto
+        if not escolhido:
+            print("Com --pastas, informar --assunto.")
+            sys.exit(1)
+    alvo = slug(escolhido)
     for nome in nomes:
         pasta = achar(nome)
         meta = json.loads((pasta / "meta.json").read_text(encoding="utf-8"))
@@ -427,14 +529,14 @@ def gerar(args) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="comando", required=True)
-    p_tri = sub.add_parser("triagem", help="agrupa por horário o que chegou sem #assunto")
+    p_tri = sub.add_parser("triagem", help="agrupa por horário o que chegou sem #assunto e sugere o assunto pelo conteúdo")
     p_tri.add_argument("--fuso", type=int, default=-3)
     p_tri.add_argument("--intervalo", type=int, default=90, help="minutos sem mensagem que separam coletas (padrão: 90)")
     p_atr = sub.add_parser("atribuir", help="grava o assunto confirmado pelo usuário num grupo da triagem")
     alvo = p_atr.add_mutually_exclusive_group(required=True)
     alvo.add_argument("--grupo", type=int)
     alvo.add_argument("--pastas", help="nomes de pasta separados por vírgula")
-    p_atr.add_argument("--assunto", required=True)
+    p_atr.add_argument("--assunto", help="assunto confirmado; sem ele, --grupo usa a sugestão da triagem")
     p_atr.add_argument("--forcar", action="store_true", help="troca assunto já gravado (correção de engano)")
     p_linha = sub.add_parser("linha", help="linha do tempo, folhas, rascunho do mapa e da revisão de uma sessão")
     p_linha.add_argument("--assunto", required=True)

@@ -2,6 +2,7 @@
 
 > Slug: `teatro-carlos-gomes` (o `#assunto` no WhatsApp) · Estado: Santa Catarina · Cidade: Blumenau
 > Pessoas: guia da visita guiada mensal do teatro — terceiro, **anônimo** por decisão do responsável
+> Palavras-chave: teatro carlos gomes; carlos gomes; palco giratório; heinz geyer; willy sievert; frohsinn; theaterverein; salão centenário; caixa cênica; fosso da orquestra; coxia; camarim; plateia; balcão
 
 O Teatro Carlos Gomes por dentro: história, salas, palco giratório, porão e exterior, contados na
 visita guiada pública.

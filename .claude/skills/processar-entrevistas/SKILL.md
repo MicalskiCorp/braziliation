@@ -31,9 +31,10 @@ fim das fases 3, 4, 5 e 6.
 **Assunto × sessão.** Assunto é permanente e acumula (a benzedeira, o Teatro Carlos Gomes, Edith
 Gaertner) e tem página em `Design/Pesquisa/Entrevistas/Assuntos/`; sessão é uma coleta de um
 assunto numa data. **Um lote de curadoria é sempre uma sessão de um assunto só**:
-`{lote}` = `{AAAA-MM-DD}-{slug}`. O material chega picado e intercalado — a separação começa no
-`#assunto` do WhatsApp (gravado no `meta.json` pelo listener) e é cobrada pela ferramenta e pelo
-teste. Nunca juntar capturas de assuntos diferentes, nem do mesmo assunto em datas diferentes,
+`{lote}` = `{AAAA-MM-DD}-{slug}`. O material chega picado e intercalado, e o usuário **não** precisa marcar
+o assunto ao mandar: ele é detectado na fase 1 e confirmado pelo usuário (o `#assunto` do WhatsApp
+é só atalho opcional, gravado no `meta.json` pelo listener). A separação é cobrada pela ferramenta
+e pelo teste. Nunca juntar capturas de assuntos diferentes, nem do mesmo assunto em datas diferentes,
 no mesmo lote.
 
 Ferramentas em `Design/Pesquisa/Entrevistas/Ferramentas/` (rodar de dentro dela, com `py`).
@@ -42,11 +43,17 @@ Material de trabalho do lote fica em `Entrevistas/_lotes/{lote}/` (fora do git).
 ## Fases
 
 1. **Separar por assunto.** Listar `_pendente-curadoria/` (vazia → avisar e parar).
-   `py curadoria.py triagem` agrupa por horário o que chegou **sem** `#assunto` e mostra as
-   mensagens de texto de cada grupo; propor o assunto de cada grupo ao usuário e, confirmado,
-   `py curadoria.py atribuir --grupo N --assunto {slug}`. Assunto que já existe em `Assuntos/`
+   `py curadoria.py triagem` agrupa por horário o que chegou sem `#assunto` e **sugere o assunto
+   de cada grupo** pelo conteúdo (transcrição, textos, legendas × `Palavras-chave:` das páginas
+   em `Assuntos/`), com os sinais que achou. Conferir cada sugestão lendo o início das
+   transcrições e as folhas; onde não houver sugestão (assunto novo), propor pelo conteúdo. Grupo
+   marcado ⚠️ misto: separar as capturas por assunto. Apresentar **todas as sugestões numa
+   pergunta só**; confirmadas, `py curadoria.py atribuir --grupo N` (aceita a sugestão),
+   `--grupo N --assunto {slug}` (corrige) ou `--pastas a,b --assunto {slug}` (grupo misto).
+   Foto sem texto segue o grupo pelo horário — conferir nas folhas se é mesmo daquele assunto. Assunto que já existe em `Assuntos/`
    reusa o mesmo slug (é o que junta as sessões); assunto novo ganha página no modelo de
-   `Assuntos/teatro-carlos-gomes.md`. Se houver vários assuntos ou datas pendentes, curar **uma
+   `Assuntos/teatro-carlos-gomes.md`, **com palavras-chave** (o teste cobra). A cada sessão,
+   acrescentar à página os termos novos que apareceram — é o que melhora a próxima detecção. Se houver vários assuntos ou datas pendentes, curar **uma
    sessão por vez**, cada uma pelas fases 2–9. Ler as mensagens de texto da sessão (o que é, onde,
    quem fala) e confirmar o **consentimento** de terceiros (sem ele: relato anônimo ou fora).
 2. **Linha do tempo** — `py curadoria.py linha --assunto {slug} [--data AAAA-MM-DD]` (recusa

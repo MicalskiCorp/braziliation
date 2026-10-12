@@ -81,6 +81,28 @@ public sealed class InterviewInventoryTests
         Assert.True(problems.Count == 0, "Assuntos das entrevistas misturados ou sem registro:\n" + string.Join("\n", problems));
     }
 
+    /// <summary>
+    /// O assunto de uma captura é detectado pelo conteúdo, comparado às palavras-chave de cada página
+    /// (`curadoria.py triagem`). Página sem palavras-chave nunca é sugerida — o material do assunto
+    /// cairia como "assunto novo" e ganharia uma segunda página.
+    /// </summary>
+    [Fact]
+    public void Every_Subject_Page_Has_Keywords_For_Detection()
+    {
+        var dir = Path.Combine(GitRoot, "Design", "Pesquisa", "Entrevistas", "Assuntos");
+        if (!Directory.Exists(dir))
+            return;
+
+        var missing = Directory.EnumerateFiles(dir, "*.md")
+            .Where(f => Path.GetFileName(f) != "index.md")
+            .Where(f => !Regex.IsMatch(File.ReadAllText(f), @"Palavras-chave:[^;\n]*\S[^;\n]*;[^;\n]*\S"))
+            .Select(Path.GetFileName)
+            .ToList();
+
+        Assert.True(missing.Count == 0,
+            "Página de assunto sem '> Palavras-chave: a; b; …' (pelo menos duas):\n" + string.Join("\n", missing));
+    }
+
     [Fact]
     public void A_Block_Without_A_Row_Is_Reported()
     {

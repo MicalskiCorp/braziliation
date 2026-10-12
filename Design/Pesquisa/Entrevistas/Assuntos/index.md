@@ -13,10 +13,21 @@ que este liste o inventário de volta.
 
 ## Assunto novo
 
-1. Escolher o slug (minúsculo, sem acento, hífen): é o que vai no WhatsApp — `#assunto benzedeira`.
+1. Escolher o slug (minúsculo, sem acento, hífen). É também o que vai no atalho opcional do
+   WhatsApp (`#assunto benzedeira`), para quem quiser marcar na hora.
 2. Criar `{slug}.md` no modelo de [`teatro-carlos-gomes.md`](teatro-carlos-gomes.md): slug,
-   estado/cidade, pessoas (com o consentimento), tabela de sessões, onde o material vive.
+   estado/cidade, pessoas (com o consentimento), **palavras-chave**, tabela de sessões, onde o
+   material vive.
 3. Linha nesta tabela.
 
 Assunto que volta (a benzedeira de novo, um mês depois) **não** ganha página nova: ganha uma
 linha na tabela de sessões da página que já existe.
+
+## Detecção automática
+
+Ninguém precisa marcar o assunto ao mandar o material. Na curadoria, `curadoria.py triagem` junta
+as mensagens por horário e compara o conteúdo de cada grupo (transcrição, textos, legendas) com a
+linha `> Palavras-chave:` de cada página — e sugere o assunto, ou avisa quando o mesmo horário traz
+conteúdo de assuntos diferentes. O usuário confirma antes de gravar. Por isso toda página precisa
+de palavras-chave: termos que só aparecem quando se fala **deste** assunto (nomes, lugares, objetos,
+práticas), não palavras genéricas. A cada sessão nova, acrescentar os termos que apareceram nela.
