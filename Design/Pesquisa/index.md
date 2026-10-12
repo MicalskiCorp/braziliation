@@ -19,6 +19,7 @@ Repositório de informações históricas, folclóricas e culturais **verificada
 | Tema | Arquivo | Status |
 |------|---------|--------|
 | Monge João Maria (Planalto Catarinense / Guerra do Contestado) | [Temas/monge-joao-maria.md](Temas/monge-joao-maria.md) | Aprovado |
+| Benzedeira (relato oral — benzimento de fechamento de corpo) | [Temas/benzedeira.md](Temas/benzedeira.md) | Aprovado |
 
 ---
 
@@ -30,6 +31,7 @@ Repositório de informações históricas, folclóricas e culturais **verificada
 | 20/09/2026 | Dragão do Encano Alto — discrepância geográfica com Guabiruba (revisão) | [Estados/SantaCatarina/cidades/Indaial/index.md](Estados/SantaCatarina/cidades/Indaial/index.md#nota-de-cruzamento-com-o-criativo--discrepância-geográfica-a-verificar) | ✅ Processado pelo @GameCreative (20/09/2026) |
 | 20/09/2026 | 11 lendas de Santa Catarina — rodada 2 (processar) | [Handoffs/2026-09-20-lendas-sc-rodada-2.md](Handoffs/2026-09-20-lendas-sc-rodada-2.md) | ❌ Não iniciado |
 | 11/10/2026 | Teatro Carlos Gomes por dentro — visita guiada (processar) | [Handoffs/2026-10-11-teatro-carlos-gomes-visita.md](Handoffs/2026-10-11-teatro-carlos-gomes-visita.md) | ❌ Não iniciado |
+| 12/10/2026 | Benzedeira — benzimento de fechamento de corpo e a fala dela (processar) | [Handoffs/2026-10-11-benzedeira.md](Handoffs/2026-10-11-benzedeira.md) | ❌ Não iniciado |
 
 ---
 

@@ -43,6 +43,7 @@
 | Lenhador Fantasma da Ilha Redonda (São Francisco do Sul) | Motivo citado de forma consistente, mas só em fontes de baixa confiabilidade editorial (wiki de fãs) | Baixa | 🟡 Confirmação fraca — ver [SaoFranciscoDoSul/index.md](Estados/SantaCatarina/cidades/SaoFranciscoDoSul/index.md) |
 | Teatro Carlos Gomes: "primeiro palco giratório do Brasil" (guia, 11/10/2026) | Fontes dizem "primeiro do sul do Brasil" / "um dos únicos do país" — manter a forma das fontes até achar algo melhor | Baixa | 🟡 Divergência — ver [Blumenau/teatro-carlos-gomes-visita.md](Estados/SantaCatarina/cidades/Blumenau/teatro-carlos-gomes-visita.md) |
 | Teatro Carlos Gomes: afirmações do guia sem fonte (visita de 11/10/2026) | Luz elétrica em teatro em 1909, a primeira de SC · Equipe Vira Lata, primeiro grupo do Brasil com atores registrados em carteira · obras da cidade paradas por falta de tijolo durante a construção (recorte de jornal entregue ao arquivo histórico do teatro) · lustre em espiral no vão do elevador, removido em 2006 · banquete de Getúlio Vargas e coreografia do sino/coral · nome da Rua John Kennedy após visita do cônsul dos EUA | Média | 🎙️ Relato oral, não confirmado — ver [Blumenau/teatro-carlos-gomes-visita.md](Estados/SantaCatarina/cidades/Blumenau/teatro-carlos-gomes-visita.md) |
+| Benzedeira: cidade dela e da igreja de Santa Isabel (sessão de 11/10/2026) | Ela aprendeu a jaculatória ouvindo um padre batizar na igreja de Santa Isabel; a cidade não foi informada | Baixa | ❌ A confirmar com o responsável — ver [Temas/benzedeira.md](Temas/benzedeira.md) |
 | Número exato da lei do Dia Estadual de São João Maria (19.722 vs. 19.777) | Data (3 de maio) e existência do dia oficial confirmadas; número da lei diverge entre Diário Oficial e reportagem secundária | Baixa | 🟡 Confirmar antes de citar o número em material publicado — ver [Temas/monge-joao-maria.md](Temas/monge-joao-maria.md) |
 
 ---
@@ -57,6 +58,7 @@
 | Dragão do Encano Alto — discrepância geográfica com Guabiruba (revisão) | [Estados/SantaCatarina/cidades/Indaial/index.md](Estados/SantaCatarina/cidades/Indaial/index.md) | 20/09/2026 | ✅ Processado pelo @GameCreative (20/09/2026) |
 | 11 lendas de Santa Catarina — rodada 2 (processar) | [Handoffs/2026-09-20-lendas-sc-rodada-2.md](Handoffs/2026-09-20-lendas-sc-rodada-2.md) | 20/09/2026 | ❌ Não iniciado |
 | Teatro Carlos Gomes por dentro — visita guiada (processar) | [Handoffs/2026-10-11-teatro-carlos-gomes-visita.md](Handoffs/2026-10-11-teatro-carlos-gomes-visita.md) | 11/10/2026 | ❌ Não iniciado |
+| Benzedeira — benzimento de fechamento de corpo e a fala dela (processar) | [Handoffs/2026-10-11-benzedeira.md](Handoffs/2026-10-11-benzedeira.md) | 12/10/2026 | ❌ Não iniciado |
 
 ---
 

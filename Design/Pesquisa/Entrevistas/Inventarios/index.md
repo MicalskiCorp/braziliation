@@ -8,6 +8,7 @@ uma chave não aparecer no arquivo de destino. Gerado no passo de inventário da
 
 | Arquivo | Entrevista |
 |---------|------------|
+| [`2026-10-11-benzedeira.md`](2026-10-11-benzedeira.md) | Benzedeira — benzimento de fechamento de corpo (1 áudio cortado, 5 blocos) |
 | [`2026-10-11-teatro-carlos-gomes.md`](2026-10-11-teatro-carlos-gomes.md) | Visita guiada ao Teatro Carlos Gomes (9 áudios, 66 blocos) |
 
 Inventário novo entra como arquivo datado (`AAAA-MM-DD-assunto.md`) e ganha linha aqui.

@@ -113,6 +113,7 @@
 
 | Item | Arquivo | Prioridade | Status |
 |------|---------|-----------|--------|
+| Processar handoff: Benzedeira — benzimento de fechamento de corpo e a fala dela (11/10/2026) — **usar a fala com os trejeitos, sem normalizar** | [Pesquisa/Handoffs/2026-10-11-benzedeira.md](../Pesquisa/Handoffs/2026-10-11-benzedeira.md) | Alta | ❌ Não iniciado |
 | Processar handoff: Teatro Carlos Gomes por dentro — visita guiada (11/10/2026) | [Pesquisa/Handoffs/2026-10-11-teatro-carlos-gomes-visita.md](../Pesquisa/Handoffs/2026-10-11-teatro-carlos-gomes-visita.md) | Alta | ❌ Não iniciado |
 
 ---

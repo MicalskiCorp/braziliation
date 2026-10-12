@@ -9,6 +9,7 @@ que este liste o inventário de volta.
 
 | Assunto | Slug | Sessões | Página |
 |---|---|---|---|
+| Benzedeira | `benzedeira` | 1 (11/10/2026) | [`benzedeira.md`](benzedeira.md) |
 | Teatro Carlos Gomes | `teatro-carlos-gomes` | 1 (11/10/2026) | [`teatro-carlos-gomes.md`](teatro-carlos-gomes.md) |
 
 ## Assunto novo

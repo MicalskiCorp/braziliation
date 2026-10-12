@@ -26,6 +26,8 @@ Regras de nomenclatura e de tamanho: [index.md](index.md).
 | 16 | `sc-teatro-carlos-gomes-porao-roldanas-madeira-2026-10-11.jpg` | eu | Teatro Carlos Gomes — roldanas de madeira das antigas varas de luz | [Blumenau/teatro-carlos-gomes-visita.md](../../Estados/SantaCatarina/cidades/Blumenau/teatro-carlos-gomes-visita.md) | 11/10/2026 |
 | 17 | `sc-teatro-carlos-gomes-porao-tijolos-2026-10-11.jpg` | eu | Teatro Carlos Gomes — tijolo à vista no porão | [Blumenau/teatro-carlos-gomes-visita.md](../../Estados/SantaCatarina/cidades/Blumenau/teatro-carlos-gomes-visita.md) | 11/10/2026 |
 | 18 | `sc-teatro-carlos-gomes-porao-abertura-emparedada-2026-10-11.jpg` | eu | Teatro Carlos Gomes — abertura emparedada na parede de tijolo do porão sob o palco | [Blumenau/teatro-carlos-gomes-visita.md](../../Estados/SantaCatarina/cidades/Blumenau/teatro-carlos-gomes-visita.md) | 11/10/2026 |
+| 19 | `benzedeira-altar-parede-2026-10-11.jpg` | eu | Benzedeira — parede do altar no cômodo onde ela benze (quadros, crucifixo, imagens) | [Temas/benzedeira.md](../../Temas/benzedeira.md) | 12/10/2026 |
+| 20 | `benzedeira-balcao-carreteis-2026-10-11.jpg` | eu | Benzedeira — balcão com carretéis de linha e imagens | [Temas/benzedeira.md](../../Temas/benzedeira.md) | 12/10/2026 |
 
 `Origem` = remetente do `meta.json` da captura. `Usado em` = arquivo de pesquisa que cita
 este material (`Estados/…` ou `Temas/…`), ou `—` enquanto só arquivado.
