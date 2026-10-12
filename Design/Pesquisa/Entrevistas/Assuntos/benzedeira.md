@@ -6,6 +6,24 @@
 
 Benzimento e reza de uma benzedeira: as orações, como e onde ela benze, de onde aprendeu.
 
+**Para que serve:** material para o NPC benzedeira do jogo — uma senhorinha de acalanto, ponto
+seguro da região, que prepara garrafadas com itens do mapa e dá benzimentos que viram encantamentos
+do jogador (direção do responsável, 12/10/2026 — `Pesquisa/Handoffs/2026-10-11-benzedeira.md`).
+Haverá uma benzedeira por região, cada uma com benzimento e garrafada próprios.
+
+**O que buscar nas próximas entrevistas** (com esta ou com outras benzedeiras):
+
+- **Benzimentos:** o nome de cada um, para que serve (quebranto, mau-olhado, cobreiro, espinhela
+  caída, corpo fechado…), como ela faz (ramo, linha, água, vela, sinal da cruz) e a reza **inteira**,
+  do jeito dela.
+- **Garrafadas e remédios:** quais ervas e raízes, como prepara, para que serve cada uma, quanto
+  tempo toma.
+- **Região:** de onde ela é, com quem aprendeu, o que é próprio do lugar.
+- **O jeito dela:** a conversa de acolhida, as expressões, os conselhos — é a voz da personagem.
+
+Outra benzedeira, de outro lugar, entra como assunto próprio (ex.: `benzedeira-{lugar}`), para que
+o material de cada região não se misture.
+
 ## Sessões
 
 | Data | Lote | Inventário | Material | Resumo |

@@ -36,17 +36,54 @@ Fotos: `Design/Pesquisa/Fontes/Arquivos/benzedeira-altar-parede-2026-10-11.jpg` 
 - O gesto de dizer "o sangue de Cristo tem poder" nas costas de quem fala mal, sem responder.
 - O espaço: devoção doméstica, improvisada e cheia de objetos.
 
-## Sugestões de conexão *(sugestão criativa, não fato)*
+## Direção criativa do responsável (12/10/2026) *(decisão criativa, não fato)*
 
-- Uma benzedeira NPC que "fecha o corpo" do jogador: mecânica de proteção ou buff antes de uma área
-  perigosa, com a fala dela tocada/escrita literalmente.
-- Os carretéis de linha e as imagens do altar como objetos de cenário da casa dela.
-- A jaculatória "três vezes" como gesto ritual repetível.
+A benzedeira é um **tipo de NPC**, não uma personagem só — e é para ela que as entrevistas com
+benzedeiras estão sendo feitas.
+
+- **Quem ela é:** uma senhorinha muito tranquila, calma e querida — o espírito das benzedeiras dos
+  nossos avós e bisavós. Uma **personagem de acalanto**. A fala vem das entrevistas, com os trejeitos.
+- **Ponto seguro:** a casa dela é um lugar onde o jogador **recupera a vida toda** e se prepara para a
+  jornada.
+- **Garrafadas:** o jogador leva à benzedeira os **itens de medicina que encontra no mapa** (ervas,
+  raízes, ingredientes de poções) e ela prepara **garrafadas**, cada uma para um benefício.
+- **Benzimentos = encantamentos do jogador:** o jogador pede um benzimento e recebe um efeito — ex.:
+  **"corpo fechado" → bônus de defesa**.
+- **Progressão:** conforme o jogo avança, **desbloqueiam-se** benzimentos e garrafadas novos.
+- **Várias benzedeiras pelo mapa:** cada região tem a sua, com **um benzimento e uma garrafada
+  próprios** daquela região.
+
+### Pontos de projeto para fechar *(perguntas, não decisões)*
+
+- **Monge João Maria** já é "NPC Aliado / Curandeiro Andarilho" (cura e ajuda; itinerante — ver
+  `Design/Criativo/Lendas/catalogo.md` e `Estados/SantaCatarina/ideias.md`). Como os dois convivem
+  sem se repetir? Ponto de partida: o monge é itinerante e raro; a benzedeira é fixa, regional e o
+  ponto seguro recorrente.
+- **Ponto seguro × checkpoint:** checkpoints ainda não existem (`Desenvolvimento/Docs/Roadmap/roadmap.md`).
+  A casa da benzedeira é o checkpoint/descanso da região?
+- **Garrafada × crafting:** a mesa de crafting das cidades combina componentes para os
+  **receptáculos** da build (`Desenvolvimento/Docs/Mechanics/Crafting.md`). A garrafada é consumível
+  feito por NPC — os itens de medicina são um tipo novo de componente ou um inventário à parte?
+- **Benzimento × Capa Mística:** a Capa das Lendas do Mar já dá "encantamentos de resistência e
+  proteção" e "bênçãos" permanentes pela build (`Mechanics/Build.md`). O benzimento é o efeito
+  temporário, pedido a uma NPC — deixar a diferença explícita.
+
+### Detalhes da entrevista que servem à direção
+
+- O "corpo fechado" dela já é o benzimento-exemplo: proteção contra inimigo, arma de fogo e
+  malefício → bônus de defesa.
+- O quebranto → candidato a benzimento de outro efeito (cura de estado negativo).
+- A jaculatória "três vezes" e "nas costas de quem fala mal" → gesto ritual repetível.
+- O cômodo (altar, carretéis de linha, imagens) → referência de cenário da casa da benzedeira.
 
 ## Instrução para o @GameCreative
 
-Criar a personagem benzedeira (ficha e falas) a partir de `Temas/benzedeira.md`. **Fala de
-personagem baseada nesta entrevista usa os trejeitos dela, sem normalizar para o português padrão
-nem para a oração canônica** — decisão do responsável do projeto em 12/10/2026. Pode encurtar e
-selecionar trechos; não pode "corrigir". Tratar como devoção viva: nada de caricatura. Não usar
-nomes de pessoas reais (a benzedeira e quem foi benzido são anônimos).
+Desenhar a **benzedeira como tipo de NPC** conforme a direção acima: ficha do arquétipo
+(personalidade de acalanto, papel de ponto seguro, garrafadas, benzimentos, progressão, uma por
+região) e a primeira benzedeira a partir de `Temas/benzedeira.md`, com o "corpo fechado" como
+benzimento inicial. Levar os "pontos de projeto para fechar" como pendências — os que tocam
+mecânica (checkpoint, crafting, build) seguem para o `@GameArchitect` pelo handoff normal.
+**Fala de personagem baseada nesta entrevista usa os trejeitos dela, sem normalizar para o
+português padrão nem para a oração canônica** — decisão do responsável do projeto em 12/10/2026.
+Pode encurtar e selecionar trechos; não pode "corrigir". Tratar como devoção viva: nada de
+caricatura. Não usar nomes de pessoas reais (a benzedeira e quem foi benzido são anônimos).

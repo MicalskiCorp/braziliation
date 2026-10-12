@@ -24,6 +24,7 @@
 |------|-----------|-----------|--------|
 | Dieselpunk brasileiro | Referências históricas para a estética (era Vargas, industralização 1930-50) | Alta | ❌ Não iniciado |
 | Imigração alemã/italiana | Colonização do Sul, cultura, arquitetura | Alta | ❌ Não iniciado |
+| Benzimentos e garrafadas por região | Quais benzimentos e garrafadas são próprios de cada região (ervas, males, rezas) — base para a benzedeira regional do jogo, cruzando com as entrevistas do assunto `benzedeira` | Alta | ❌ Não iniciado |
 | Ciclo da Borracha | Amazônia 1850-1920, contexto econômico e social | Média | ❌ Não iniciado |
 
 ---
