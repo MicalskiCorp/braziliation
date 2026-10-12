@@ -105,15 +105,43 @@ def hora_local(pasta: Path, fuso: int) -> datetime.datetime:
 
 
 def capturas(lote: str, assunto: str, data: str, fuso: int, todas: bool):
-    """Capturas da sessão: do assunto, da data e ainda sem lote (ou já deste lote)."""
+    """Capturas da sessão: do assunto e da data de sessão gravada pela triagem (ou já deste lote)."""
     for pasta, meta in todas_capturas():
-        if meta.get("assunto") != assunto or meta.get("lote") not in (None, lote):
-            continue
-        if hora_local(pasta, fuso).strftime("%Y-%m-%d") != data and meta.get("lote") != lote:
+        if meta.get("lote") != lote and (meta.get("lote") or meta.get("assunto") != assunto
+                                         or meta.get("sessao") != data):
             continue
         if meta.get("resultado") == "descartado" and not todas:
             continue
         yield pasta, meta
+
+
+def hora_captura(pasta: Path, meta: dict, fuso: int):
+    """Quando o material foi gravado ou fotografado — não quando foi enviado. None sem como saber
+    (foto mandada como "Foto", que o WhatsApp entrega sem horário; texto)."""
+    for arq in sorted(pasta.iterdir()):
+        if arq.stem not in ("audio", "imagem", "documento"):
+            continue
+        sufixo = arq.suffix.lower()
+        if sufixo in (".m4a", ".mp4"):
+            info = mvhd(arq)
+            if info and info[0].year > 1904:
+                return info[0] + datetime.timedelta(hours=fuso)
+        elif sufixo in (".jpg", ".jpeg", ".png", ".webp"):
+            hora = hora_foto(arq, meta.get("nomeOriginal"))
+            if hora:
+                return hora
+    return None
+
+
+def data_da_sessao(itens, fuso: int):
+    """(data, base, datas distintas) de um grupo: pela gravação/foto quando houver, senão pelo envio.
+    O áudio mandado hoje e gravado ontem é da sessão de ontem."""
+    gravadas = [h for h in (hora_captura(p, m, fuso) for p, m in itens) if h]
+    if gravadas:
+        datas = sorted({h.strftime("%Y-%m-%d") for h in gravadas})
+        return datas[0], "gravação", datas
+    envio = min(hora_local(p, fuso) for p, _ in itens).strftime("%Y-%m-%d")
+    return envio, "envio", [envio]
 
 
 ASSUNTOS = ROOT / "Assuntos"
@@ -172,16 +200,11 @@ def triagem(args) -> None:
     """Agrupa por horário o que está pendente sem assunto e sugere o assunto de cada grupo pelo
     conteúdo — transcrição, textos e legendas comparados às palavras-chave de cada página em
     Assuntos/. A sugestão é para o usuário confirmar, nunca é gravada sozinha."""
-    pendentes = list(todas_capturas([PASTAS[0]]))
-    marcados = {}
-    for _, m in pendentes:
-        if m.get("assunto"):
-            marcados[m["assunto"]] = marcados.get(m["assunto"], 0) + 1
-    for assunto, n in sorted(marcados.items()):
-        print(f"Já marcado com #assunto: {assunto} ({n} captura(s)) — não passa pela triagem")
-    sem = [(p, m) for p, m in pendentes if not m.get("assunto")]
+    # Passa pela triagem tudo o que ainda não tem sessão — inclusive o marcado com #assunto, que
+    # entra com o assunto certo, mas precisa da data da sessão como qualquer outro.
+    sem = [(p, m) for p, m in todas_capturas([PASTAS[0]]) if not m.get("sessao")]
     if not sem:
-        print("Nada pendente sem assunto.")
+        print("Nada pendente sem sessão.")
         return
     chaves = palavras_chave()
     grupos, anterior = [], None
@@ -198,6 +221,11 @@ def triagem(args) -> None:
         tipos, total, por_item = {}, {}, {}
         for pasta, m, _ in g:
             tipos[m.get("tipo")] = tipos.get(m.get("tipo"), 0) + 1
+            if m.get("assunto"):  # marcado com #assunto: vale mais que qualquer palavra-chave
+                por_item[pasta.name] = m["assunto"]
+                total.setdefault(m["assunto"], {})
+                total[m["assunto"]]["#assunto"] = total[m["assunto"]].get("#assunto", 0) + 100
+                continue
             pontos = pontuar(texto_da_captura(pasta, m), chaves)
             for assunto, achadas in pontos.items():
                 for k, n in achadas.items():
@@ -209,10 +237,16 @@ def triagem(args) -> None:
         # Dois itens do mesmo horário apontando para assuntos diferentes: o horário juntou o que o
         # conteúdo separa. Não sugerir um assunto só — separar por --pastas.
         mistura = len(set(por_item.values())) > 1
+        data, base, datas = data_da_sessao([(p, m) for p, m, _ in g], args.fuso)
         registro[str(i)] = {"pastas": [p.name for p, _, _ in g], "sugestao": None if mistura else sugestao,
-                            "por_item": por_item, "mistura": mistura}
+                            "por_item": por_item, "mistura": mistura, "sessao": data}
 
-        print(f"\nGrupo {i}: {g[0][2]:%d/%m %H:%M} – {g[-1][2]:%H:%M} · " + ", ".join(f"{n} {t}" for t, n in tipos.items()))
+        print(f"\nGrupo {i}: enviado {g[0][2]:%d/%m %H:%M} – {g[-1][2]:%H:%M} · "
+              + ", ".join(f"{n} {t}" for t, n in tipos.items()))
+        print(f"   sessão: {data[8:10]}/{data[5:7]} (pela {base})")
+        if len(datas) > 1:
+            print(f"   ⚠️ material gravado em datas diferentes ({', '.join(datas)}) — se forem sessões distintas, "
+                  "atribuir por partes com --pastas --data")
         if mistura:
             print("   ⚠️ conteúdo aponta para mais de um assunto — separar com `atribuir --pastas`:")
             for nome, assunto in por_item.items():
@@ -244,12 +278,15 @@ def atribuir(args) -> None:
             print(f"Grupo {args.grupo} mistura assuntos pelo conteúdo — atribuir por partes com --pastas.")
             sys.exit(1)
         nomes = grupo["pastas"]
+        sessao = args.data or grupo["sessao"]
         escolhido = args.assunto or grupo["sugestao"]
         if not escolhido:
             print(f"Grupo {args.grupo} não tem sugestão — informar --assunto.")
             sys.exit(1)
     else:
         nomes = [n.strip() for n in args.pastas.split(",") if n.strip()]
+        itens = [(achar(n), json.loads((achar(n) / "meta.json").read_text(encoding="utf-8"))) for n in nomes]
+        sessao = args.data or data_da_sessao(itens, args.fuso)[0]
         escolhido = args.assunto
         if not escolhido:
             print("Com --pastas, informar --assunto.")
@@ -262,8 +299,9 @@ def atribuir(args) -> None:
             print(f"  {nome} já é do assunto '{meta['assunto']}' — não troquei (use --forcar se for engano)")
             continue
         meta["assunto"] = alvo
+        meta["sessao"] = sessao
         gravar_meta(pasta, meta)
-    print(f"{len(nomes)} captura(s) → assunto '{alvo}'.")
+    print(f"{len(nomes)} captura(s) → assunto '{alvo}', sessão {sessao}.")
 
 
 def achar(nome: str) -> Path:
@@ -278,7 +316,11 @@ def linha(args) -> None:
 
     assunto = slug(args.assunto)
     pendentes = [(p, m) for p, m in todas_capturas([PASTAS[0]]) if m.get("assunto") == assunto and not m.get("lote")]
-    datas = sorted({hora_local(p, args.fuso).strftime("%Y-%m-%d") for p, _ in pendentes})
+    sem_sessao = [p.name for p, m in pendentes if not m.get("sessao")]
+    if sem_sessao:
+        print(f"{len(sem_sessao)} captura(s) de '{assunto}' sem data de sessão — rode `triagem` e `atribuir` antes.")
+        sys.exit(1)
+    datas = sorted({m["sessao"] for _, m in pendentes})
     data = args.data or (datas[0] if datas else None)
     if not data:  # sem pendente e sem --data: nada a montar (com --data, refaz um lote já arquivado)
         print(f"Nada pendente do assunto '{assunto}'.")
@@ -287,9 +329,9 @@ def linha(args) -> None:
         print(f"O assunto '{assunto}' tem material de {len(datas)} datas ({', '.join(datas)}): cada data é uma "
               "sessão. Rode uma vez por data com --data.")
         sys.exit(1)
-    sem_assunto = sum(1 for _, m in todas_capturas([PASTAS[0]]) if not m.get("assunto"))
-    if sem_assunto:
-        print(f"  aviso: {sem_assunto} captura(s) pendente(s) sem assunto — rode `triagem` para não deixar "
+    sem_triagem = sum(1 for _, m in todas_capturas([PASTAS[0]]) if not m.get("sessao"))
+    if sem_triagem:
+        print(f"  aviso: {sem_triagem} captura(s) pendente(s) ainda sem triagem — rode `triagem` para não deixar "
               "material desta sessão de fora.")
     lote = f"{data}-{assunto}"
     args.lote = lote
@@ -435,7 +477,9 @@ def escrever_revisao(destino: Path, trechos) -> None:
     linhas = [f"# Revisão das transcrições — {destino.name}", "",
               "> Fora do git. Ordem = ordem da gravação. Preencher os prováveis erros de cada trecho",
               "> (✅ confirmado em fonte · ⚠️ palpite, conferir com o responsável) e, ao final, a tabela",
-              "> \"Resultado da revisão\" com a decisão de cada ⚠️.", "",
+              "> \"Resultado da revisão\" com a decisão de cada ⚠️.",
+              "> Fiel à fala: corrigir só erro do Whisper; concordância, pronúncia e desvios da pessoa",
+              "> ficam como ela falou (texto canônico só como referência, em seção à parte).", "",
               "| Trecho | Horário | Duração | Palavras/min |", "|---|---|---|---|"]
     linhas += [f"| {t['id']} | {t['inicio']}–{t['fim']} | {t['duracao_min']} min | {t['ppm']} {('⚠️ ' + t['alerta']) if t['alerta'] else ''} |" for t in trechos]
     linhas += ["", "## Resultado da revisão", "", "| Trecho | Na transcrição | Decisão | Base |", "|---|---|---|---|"]
@@ -537,6 +581,8 @@ def main() -> None:
     alvo.add_argument("--grupo", type=int)
     alvo.add_argument("--pastas", help="nomes de pasta separados por vírgula")
     p_atr.add_argument("--assunto", help="assunto confirmado; sem ele, --grupo usa a sugestão da triagem")
+    p_atr.add_argument("--data", help="AAAA-MM-DD da sessão; sem ela, a da triagem (pela gravação)")
+    p_atr.add_argument("--fuso", type=int, default=-3)
     p_atr.add_argument("--forcar", action="store_true", help="troca assunto já gravado (correção de engano)")
     p_linha = sub.add_parser("linha", help="linha do tempo, folhas, rascunho do mapa e da revisão de uma sessão")
     p_linha.add_argument("--assunto", required=True)

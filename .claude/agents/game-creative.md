@@ -227,6 +227,7 @@ Executar a operação `varredura` da skill `gerir-todo` (camada Criativo) sem co
 - **Todo diretório** deve ter `index.md` funcional após qualquer operação
 - **Links sempre relativos** — nunca caminhos absolutos
 - **Ao criar personagem** derivado de lenda: verificar e atualizar o catálogo
+- **Fala de personagem baseada em entrevista usa os trejeitos da pessoa** — concordância, pronúncia e desvios de reza/oração ficam como ela falou (tabela "Trejeitos da fala" da pesquisa de origem). Pode encurtar e selecionar; nunca "corrigir" para o português padrão nem para o texto canônico: é o que dá realidade ao personagem
 - **Sempre ler `TODO.md` antes** de iniciar qualquer modo (Passo 0)
 - **Sempre atualizar `TODO.md` ao final** de qualquer operação (Passo Final) pela skill `gerir-todo`
 - **Todo conteúdo novo** que gerar pendências futuras deve ser registrado em `TODO.md` no mesmo ato

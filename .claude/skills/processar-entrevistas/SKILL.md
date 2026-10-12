@@ -65,7 +65,18 @@ Material de trabalho do lote fica em `Entrevistas/_lotes/{lote}/` (fora do git).
 3. **Revisar a transcrição** — em `revisao.md`, listar por trecho os prováveis erros (nomes
    deturpados, palavras truncadas). Resolver o que der por busca web antes de perguntar (fonte
    confirmada → ✅ com link); apresentar o resto ao usuário trecho a trecho, em lotes de até 4
-   perguntas, sempre com uma proposta. Registrar cada decisão na tabela "Resultado da revisão".
+   perguntas, sempre com uma proposta e um **clipe curto de cada ponto** para ouvir (`.ogg`, que o
+   VS Code toca). Registrar cada decisão na tabela "Resultado da revisão".
+   - **Transcrição fiel à fala.** Corrigir **só o que o Whisper ouviu errado**. Concordância,
+     pronúncia ("arcança" por "alcança"), regionalismo e os desvios da pessoa em relação a uma oração
+     ou texto conhecido **ficam como ela falou**: são a voz dela e o material de fala dos personagens
+     do jogo. Texto canônico (oração, ditado, música) serve para *identificar* a palavra, nunca para
+     corrigir — vai numa seção "Referência" à parte, com o que a pessoa muda. Quando não dá para
+     saber se a forma estranha é da pessoa ou do Whisper, perguntar ao usuário, que ouviu o áudio.
+     (Em 2026-10-11 a revisão da benzedeira normalizou a reza para o português padrão e apagou
+     justamente o jeito dela de rezar.)
+   - **Conversa fora do assunto** que o usuário mandar descartar sai sem registro: cortar áudio e
+     transcrições e não descrever o conteúdo descartado em nenhum arquivo.
 4. **Inventário de assuntos** — `py blocos.py --lote {lote}` divide cada
    transcrição em blocos de ~150 palavras. Ler **todos** os blocos e montar
    `Design/Pesquisa/Entrevistas/Inventarios/{lote}.md` (modelo: `2026-10-11-teatro-carlos-gomes.md`,
@@ -95,6 +106,14 @@ Material de trabalho do lote fica em `Entrevistas/_lotes/{lote}/` (fora do git).
    `✅` no que converge com fonte e `🎙️` no que é só relato; fontes novas em
    `Fontes/registro.md`; pendências em `Design/Pesquisa/TODO.md` (skill `gerir-todo`); handoff
    pela skill `handoff`. Nunca gravar relato como "fato histórico".
+   - **Fala transcrita (reza, causo, depoimento):** copiar o texto validado do `revisao.md` para a
+     pesquisa **por script, sem redigitar**, com cada parágrafo numa linha (chave que atravessa
+     quebra de linha não é achada). Logo abaixo, a tabela `## Trejeitos da fala (não corrigir)` —
+     colunas *Ela diz · Forma comum · Trejeito · Não pode aparecer na fala*, a última com o fragmento
+     mínimo que denuncia uma normalização (ex.: `alcan`, `creio em cristo`). O teste
+     `Speech_Mannerisms_Are_Not_Normalized` falha se um trejeito sumir ou um fragmento aparecer.
+     Modelo: `Design/Pesquisa/Temas/benzedeira.md`. No handoff, instruir o Criativo a usar a fala
+     com os trejeitos.
 8. **Arquivar.** Mover as pastas para `_processado/` com `resultado` (`aprovado` |
    `pendente-pesquisa` | `handoff` | `descartado`) e `destino` no `meta.json`; rodar `gerar` de
    novo para o `de-para.md` apontar para `_processado/` (ele grava `trecho`, `lugar` e

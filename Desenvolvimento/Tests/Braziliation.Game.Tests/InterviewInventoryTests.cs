@@ -103,6 +103,50 @@ public sealed class InterviewInventoryTests
             "Página de assunto sem '> Palavras-chave: a; b; …' (pelo menos duas):\n" + string.Join("\n", missing));
     }
 
+    /// <summary>
+    /// A fala de quem foi entrevistado vale pelos trejeitos ("não te arcança", "nas onda do mar",
+    /// "creio em cruz") — é a voz dos personagens. Em 2026-10-12 a primeira revisão da benzedeira
+    /// normalizou a reza para o português padrão. Toda pesquisa com tabela "Trejeitos da fala" tem o
+    /// texto acima dela conferido: a forma dela precisa estar lá, e a forma comum não pode aparecer —
+    /// uma "correção" de uma única ocorrência já falha.
+    /// </summary>
+    [Fact]
+    public void Speech_Mannerisms_Are_Not_Normalized()
+    {
+        var problems = new List<string>();
+        foreach (var file in Directory.EnumerateFiles(Path.Combine(GitRoot, "Design", "Pesquisa"), "*.md", SearchOption.AllDirectories))
+        {
+            var text = File.ReadAllText(file);
+            var table = text.IndexOf("## Trejeitos da fala", StringComparison.Ordinal);
+            if (table < 0)
+                continue;
+            var speech = Regex.Replace(text[..table], @"\s+", " ");
+            var name = Path.GetFileName(file);
+            var rows = TableRows(text[table..], "Trejeitos da fala (não corrigir)").ToList();
+            if (rows.Count == 0)
+                problems.Add($"{name}: tabela 'Trejeitos da fala (não corrigir)' vazia ou ilegível");
+            foreach (var cells in rows)
+            {
+                if (cells.Length < 4)
+                {
+                    problems.Add($"{name}: linha de trejeito sem a coluna 'Não pode aparecer na fala': {cells[0]}");
+                    continue;
+                }
+                var theirs = cells[0];
+                if (!speech.Contains(theirs, StringComparison.OrdinalIgnoreCase))
+                    problems.Add($"{name}: o trejeito '{theirs}' sumiu da fala");
+                // A última coluna traz o fragmento mínimo que denuncia a normalização ("alcan" pega
+                // "alcança", "alcancem" e "alcançarão"); a frase canônica inteira deixaria escapar
+                // uma correção parcial.
+                foreach (var fragment in cells[3].Split(';').Select(f => f.Trim()).Where(f => f.Length > 0 && f != "—"))
+                    if (speech.Contains(fragment, StringComparison.OrdinalIgnoreCase))
+                        problems.Add($"{name}: a fala foi normalizada — aparece '{fragment}' (ela diz '{theirs}')");
+            }
+        }
+
+        Assert.True(problems.Count == 0, "Trejeitos da fala corrigidos:\n" + string.Join("\n", problems.Distinct()));
+    }
+
     [Fact]
     public void A_Block_Without_A_Row_Is_Reported()
     {
