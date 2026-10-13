@@ -29,6 +29,7 @@
 | Regras de compatibilidade e composição final dos itens híbridos | [`Sistemas/Crafting.md`](Architecture/Sistemas/Crafting.md) | Alta | ❌ |
 | Política de seed do sorteio híbrido (determinístico × aleatório) | [`Sistemas/Crafting.md`](Architecture/Sistemas/Crafting.md) | Média | ❌ |
 | Localização e quantidade de totens | [`Mechanics/Build.md`](Mechanics/Build.md) | Média | ❌ |
+| Localização das benzedeiras (uma por região; a casa é o checkpoint?) e do ponto único do Monge João Maria — quando houver mapa | [DDR-001](GDD/Decisoes/DDR-001-benzedeira-npc.md) · [DDR-002](GDD/Decisoes/DDR-002-monge-joao-maria-papel.md) | Média | ❌ |
 
 ---
 

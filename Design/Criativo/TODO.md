@@ -41,7 +41,7 @@
 | Mapear lenda: Mulher de Branco da Pedra da Miraguaia → NPC/lugar | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
 | Mapear lenda: Cemitério Histórico de Santa Bárbara → NPC ou boss (decidir qual, e em qual dos municípios de ocorrência — Urubici ou Bom Jardim da Serra) | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
 | Mapear lenda: Túneis Secretos de Blumenau → cenário/quest de desmistificação | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
-| Desenhar o NPC aliado Monge João Maria (falas, mecânica de cura/ajuda, stats, quando/onde aparece sendo itinerante) — direção de tratamento já fechada, ver `Estados/SantaCatarina/ideias.md` | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
+| Desenhar o NPC aliado Monge João Maria — itinerante pontual que aparece num local só para entregar um item especial ([DDR-002](../../Desenvolvimento/Docs/GDD/Decisoes/DDR-002-monge-joao-maria-papel.md)): falas e qual é o item; o local fica para quando houver mapa — direção de tratamento já fechada, ver `Estados/SantaCatarina/ideias.md` | [`Lendas/catalogo.md`](Lendas/catalogo.md) | Média | ❌ Não iniciado |
 | Popular `por-categoria/lugares.md` | [`Lendas/por-categoria/lugares.md`](Lendas/por-categoria/lugares.md) | Baixa | 📋 Rascunho |
 | Popular `por-categoria/personagens.md` | [`Lendas/por-categoria/personagens.md`](Lendas/por-categoria/personagens.md) | Baixa | 📋 Rascunho |
 
@@ -113,7 +113,7 @@
 
 | Item | Arquivo | Prioridade | Status |
 |------|---------|-----------|--------|
-| Processar handoff: Benzedeira — **NPC de acalanto e ponto seguro**: garrafadas com itens do mapa, benzimentos como encantamentos (ex.: corpo fechado → defesa), desbloqueio por progressão, uma por região (11/10/2026) — **usar a fala com os trejeitos, sem normalizar** | [Pesquisa/Handoffs/2026-10-11-benzedeira.md](../Pesquisa/Handoffs/2026-10-11-benzedeira.md) | Alta | ❌ Não iniciado |
+| Processar handoff: Benzedeira — **NPC de acalanto e ponto seguro**: garrafadas com itens do mapa, benzimentos como encantamentos (ex.: corpo fechado → defesa), desbloqueio por progressão, uma por região (11/10/2026) — **usar a fala com os trejeitos, sem normalizar**; os pontos de projeto do handoff já foram decididos em [DDR-001](../../Desenvolvimento/Docs/GDD/Decisoes/DDR-001-benzedeira-npc.md) | [Pesquisa/Handoffs/2026-10-11-benzedeira.md](../Pesquisa/Handoffs/2026-10-11-benzedeira.md) | Alta | ❌ Não iniciado |
 | Processar handoff: Teatro Carlos Gomes por dentro — visita guiada (11/10/2026) | [Pesquisa/Handoffs/2026-10-11-teatro-carlos-gomes-visita.md](../Pesquisa/Handoffs/2026-10-11-teatro-carlos-gomes-visita.md) | Alta | ❌ Não iniciado |
 
 ---

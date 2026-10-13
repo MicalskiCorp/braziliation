@@ -77,7 +77,10 @@
 
 ### Direção de tratamento (regra fechada, não sugestão)
 
-- **É um NPC gentil e amistoso**, andarilho, que cura e ajuda o jogador ao longo da jornada.
+- **É um NPC gentil e amistoso**, andarilho, que ajuda o jogador.
+- **Papel no jogo — decisão do usuário (12/10/2026):** **itinerante pontual** — aparece **num local só**, uma vez,
+  para **entregar um item especial**; não é comerciante nem ponto de cura recorrente (isso é das benzedeiras).
+  Registro: [`DDR-002`](../../../../Desenvolvimento/Docs/GDD/Decisoes/DDR-002-monge-joao-maria-papel.md).
 - **Não é** monstro, boss, vilão, nem alvo de combate, em nenhuma hipótese.
 - **Não é atrelado a uma região específica** — ao contrário de outras lendas desta ficha (que ficam presas a município(s) de ocorrência), ele é itinerante no mundo do jogo. A origem histórica real (Planalto Catarinense/Vale do Contestado) fica registrada como pano de fundo, não como restrição de onde o NPC pode aparecer.
 - **Abordagem respeitosa é obrigatória**, com o cuidado explícito de não prejudicar nenhuma crença — é devoção viva, com Dia Estadual em lei estadual (3 de maio).

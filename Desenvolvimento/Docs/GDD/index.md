@@ -9,7 +9,7 @@
 |-------|-----------|
 | [`visao.md`](visao.md) | Pitch, pilares de design, experiência-alvo e o que está fora do escopo |
 | [`Features/`](Features/index.md) | 7 features de Blumenau (igrejas, teatro, sistema hídrico, Jardim de Edith, mausoléu, Morro do Zendron), documentadas e ainda não implementadas |
-| `Decisoes/` | Registros de Decisão de Design (DDR) da skill `fechar-decisao` — a pasta nasce com o primeiro DDR |
+| [`Decisoes/`](Decisoes/index.md) | Registros de Decisão de Design (DDR) da skill `fechar-decisao` — 2 aprovados (benzedeira, Monge João Maria) |
 
 ## Onde vive a visão enquanto a premissa não fecha
 

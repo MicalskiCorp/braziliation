@@ -140,3 +140,4 @@ O item resultante carrega **os tipos dos componentes usados**. Essa tipagem defi
 | Exploração de mundo | Depende — componentes são encontrados via exploração |
 | Sistema de NPCs | Depende — expansão de slots requer interação com NPCs |
 | Narrativa | Potencializa — itens carregam fragmentos de lore do mundo |
+| Garrafadas da benzedeira | Independente — **não passam pela mesa**: garrafa vazia achada no mapa + ingredientes, levados à benzedeira ([DDR-001](../GDD/Decisoes/DDR-001-benzedeira-npc.md)) |

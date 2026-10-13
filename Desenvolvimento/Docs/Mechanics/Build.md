@@ -88,7 +88,8 @@ novas placas metálicas surgem → engrenagens ficam aparentes → tubos e pist�
 **Habilidades e atributos desbloqueados por slots:**
 - magias e feitiços ofensivos;
 - encantamentos de resistência e proteção;
-- bênçãos para aumentar atributos;
+- bênçãos para aumentar atributos — **fixas** (atributos e aprimoramentos permanentes da build); o nome pode mudar
+  para não se confundir com os **benzimentos** das benzedeiras, que são temporários e pedidos a NPC ([DDR-001](../GDD/Decisoes/DDR-001-benzedeira-npc.md));
 - magias em área;
 - utilidades gameplay (Exemplo: Rastreamento de itens e caminhos ocultos).
 
@@ -174,3 +175,4 @@ Combinações de componentes de pilares diferentes geram efeitos únicos que nã
 | Combate | Potencializa — habilidades e resistências impactam combate diretamente |
 | Sistema de NPCs | Potencializa — builds podem alterar diálogos e relações |
 | Narrativa | Potencializa — aparência e habilidades refletem escolhas narrativas |
+| Benzimentos da benzedeira | Complementa — efeito **temporário** pedido a NPC, somado à build fixa ([DDR-001](../GDD/Decisoes/DDR-001-benzedeira-npc.md)) |
