@@ -38,6 +38,8 @@ As skills vivem em `.claude/skills/`. Cada agente dono tem `Skill` em `tools:` e
 
 **Plugins habilitados** (`.claude/settings.json` → `enabledPlugins`): `unity` (skills oficiais da Unity, entre elas `2d-pixel-perfect`, `sprite-editor`, `tilemap-*`, `unity-cli`) e `skill-creator` (criar e avaliar skills).
 
+As 16 foram avaliadas com o `skill-creator` em 2026-11-03 — resultado, limites medidos e bugs do plugin em [`avaliacao-skills.md`](avaliacao-skills.md). Reexecutar ao entrar skill nova.
+
 ## 3. Gestão de TODOs
 
 | TODO | Dono | Item concluído |

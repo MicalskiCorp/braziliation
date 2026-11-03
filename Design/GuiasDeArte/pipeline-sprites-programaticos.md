@@ -51,7 +51,7 @@ Qualquer modelo multimodal num harness agêntico (Claude, Copilot, Cursor) execu
 5. **Renderizar**: `py render_spec.py {asset}.spec.json` — sem `-o`, renderiza **todos os outputs** (um PNG por id) e monta automaticamente qualquer sheet declarada, tudo em `../../Outputs/`. Para iterar só um frame durante a crítica: `py render_spec.py {asset}.spec.json --only f2 -o ../../Outputs/{asset}_f2.png`.
 6. **Visualizar e criticar** (o coração do ciclo — repetir até aprovar):
    - `py upscale_preview.py {asset}.png -s 8 --grid` → inspecionar ampliado (repetir por output relevante);
-   - `py mock_scene.py {asset}.png {paleta}.json` → inspecionar leitura em 640×360 real;
+   - `py mock_scene.py {asset}.png {paleta}.json` → inspecionar leitura em 960×540 real (resolução de referência, ADR-011);
    - criticar contra a checklist abaixo; ajustar a spec e voltar ao passo 5.
 7. **Validar paleta**: `py palette_check.py {asset}.png {paleta}.json` deve APROVAR (repetir para cada output e para o sheet, se houver).
 8. **Curadoria**: mover PNG aprovado para `Design/ArteFonte/IA/Selected/`; a spec permanece no context pack como fonte.
@@ -60,7 +60,7 @@ Qualquer modelo multimodal num harness agêntico (Claude, Copilot, Cursor) execu
 
 ### Checklist de crítica visual (passo 6)
 
-- [ ] Silhueta reconhecível só pela forma, em 1x, no mock 640×360?
+- [ ] Silhueta reconhecível só pela forma, em 1x, no mock 960×540?
 - [ ] Leitura dieselpunk brasileiro (desgaste, remendo, materiais do projeto) ou ficou genérico?
 - [ ] Contraste de valor separa o asset do fundo (não saturação)?
 - [ ] Highlight apenas nos pontos que guiam o olhar?

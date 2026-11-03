@@ -1,6 +1,6 @@
 ---
 name: sprite-pipeline
-description: Gera um sprite pixel art programático seguindo o pipeline do Braziliation — spec JSON, ciclo gerar→visualizar→criticar→refinar, validação de paleta e mock 640x360. Use quando o usuário pedir para gerar/criar sprite, placeholder, prop pixel art ou validar um sprite existente.
+description: Gera um sprite pixel art programático seguindo o pipeline do Braziliation — spec JSON, ciclo gerar→visualizar→criticar→refinar, validação de paleta e mock 960x540. Use quando o usuário pedir para gerar/criar sprite, placeholder, prop pixel art ou validar um sprite existente.
 allowed-tools: Bash(py Design/ArteFonte/Ferramentas/*)
 ---
 

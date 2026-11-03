@@ -11,3 +11,4 @@
 | [`tech_debt.md`](tech_debt.md) | Dívida técnica conhecida e sugestões de fix |
 | [`unity-ci.md`](unity-ci.md) | CI do Unity: desligado por decisão (ADR-010) e por quê |
 | [`processos.md`](processos.md) | Catálogo de skills, TODOs, travas automáticas, MCPs e processos dos agentes |
+| [`avaliacao-skills.md`](avaliacao-skills.md) | Avaliação das 16 skills com o plugin `skill-creator` (2026-11-03) |
