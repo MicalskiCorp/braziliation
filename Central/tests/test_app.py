@@ -133,6 +133,42 @@ class ExecutarPeloPainelTest(unittest.TestCase):
         self.assertIn("/validacao", r["ir"])
         self.assertIn("Ficha: Dragão | [`c.md`](c.md) | Média", (self.raiz / TODO).read_text(encoding="utf-8"))
 
+    def test_estado_ao_vivo_por_consulta_curta(self):
+        SessaoFalsa.roteiro = [lambda s: (s.texto("Qual nome?"), s.fim())]
+        f = filas.por_id(filas.carregar(self.raiz), "cri-lendas")
+        antes = self.c.get("/vivo").json()
+        r = self.c.post("/fila/cri-lendas/executar", data={"itens": [f.abertos[0]["id"]]}, headers=self.h).json()
+        ex_id = r["ir"].rsplit("/", 1)[1]
+        self.assertTrue(esperar(lambda: self.ger.obter(ex_id).estado == "aguardando-voce"))
+        depois = self.c.get("/vivo").json()
+        self.assertNotEqual(antes["v"], depois["v"])
+        self.assertEqual(depois["atencao"], 1)
+        d = self.c.get(f"/execucao/{ex_id}/novidades?desde=0").json()
+        self.assertEqual(d["estado"]["estado"], "aguardando-voce")
+        self.assertTrue(any("Qual nome?" in e["html"] for e in d["entradas"]))
+        fim = d["entradas"][-1]["i"] + 1
+        self.assertEqual(self.c.get(f"/execucao/{ex_id}/novidades?desde={fim}").json()["entradas"], [])
+        self.assertEqual(self.c.get("/execucao/nao-existe/novidades").status_code, 404)
+
+    def test_validacao_durante_o_commit_nao_oferece_commit_nem_descarte(self):
+        SessaoFalsa.roteiro = [lambda s: (s.texto("Feito." + BLOCO), s.fim())]
+        f = filas.por_id(filas.carregar(self.raiz), "cri-lendas")
+        r = self.c.post("/fila/cri-lendas/executar", data={"itens": [f.abertos[0]["id"]]}, headers=self.h).json()
+        ex_id = r["ir"].rsplit("/", 1)[1]
+        self.assertTrue(esperar(lambda: self.ger.obter(ex_id).estado == "aguardando-validacao"))
+        ex = self.ger.obter(ex_id)
+        ex.estado, ex.mensagem = "commitando", "Commit em andamento (o pre-commit roda os testes)…"
+        html = self.c.get(f"/execucao/{ex_id}/validacao").text
+        self.assertIn("atualiza sozinha", html)
+        self.assertNotIn('id="form-commit"', html)
+        self.assertNotIn("Descartar a execução", html)
+        self.assertNotIn("Rodar as checagens de novo", html)
+        r = self.c.post(f"/execucao/{ex_id}/commit", data={"mensagem": "docs: x", "revisei": "1", "arquivos": [TODO]},
+                        headers=self.h).json()
+        self.assertFalse(r["ok"])
+        self.assertIn("já está em andamento", r["erro"])
+        ex.estado = "aguardando-validacao"
+
 
 if __name__ == "__main__":
     unittest.main()

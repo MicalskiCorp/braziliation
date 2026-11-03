@@ -13,7 +13,7 @@
   <a class="marca" href="/">Central · Braziliation</a>
   <nav>
     <a href="/">Filas</a>
-    <a href="/execucoes">Execuções {% if n_atencao %}<span class="badge">{{ n_atencao }}</span>{% elif n_ativas %}<span class="badge cinza">{{ n_ativas }}</span>{% endif %}</a>
+    <a href="/execucoes">Execuções <span id="nav-badge" class="badge{{ '' if n_atencao else ' cinza' }}{{ '' if n_atencao or n_ativas else ' oculto' }}">{{ n_atencao or n_ativas }}</span></a>
     <a href="/conversa">Conversa livre</a>
     <a href="/saude">Saúde</a>
     <a href="/doc?c=Central/README.md">Como usar</a>

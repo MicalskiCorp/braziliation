@@ -1,6 +1,7 @@
 """Ciclo das execuções num repositório git temporário, com o agente falso (ADR-012)."""
 import sys
 import tempfile
+import threading
 import unittest
 from pathlib import Path
 
@@ -239,6 +240,96 @@ class RegrasTest(Base):
         self.ate(ex, "rodando")
         novo = Gerenciador(raiz=self.raiz, estado=self.estado, fabrica=SessaoFalsa, zelador=False)
         self.assertEqual(novo.obter(ex.id).estado, "interrompida")
+
+
+
+class AcaoRepetidaTest(Base):
+    """Segundo clique (ou outra aba) durante uma ação longa é recusado pelo servidor (2026-11-03)."""
+
+    def pronta_para_commit(self):
+        SessaoFalsa.roteiro = [troca_no_todo("| Alta | ❌ Não iniciado |", "| Alta | 🔨 Em andamento |")]
+        ex = self.criar(fila(), itens(self.raiz)[:1])
+        self.ate(ex, "aguardando-validacao")
+        esperar(lambda: self.ger.obter(ex.id).checagens.get("eco", {}).get("estado") == "ok")
+        return ex
+
+    def test_commit_duplo_e_recusado_enquanto_o_pre_commit_roda(self):
+        ex = self.pronta_para_commit()
+        base = git(self.raiz, "rev-parse", "HEAD").stdout.strip()
+        liberar, original = threading.Event(), gitops.commitar
+
+        def commit_lento(*args, **kw):
+            liberar.wait(20)
+            return original(*args, **kw)
+
+        gitops.commitar = commit_lento
+        try:
+            primeiro = threading.Thread(target=self.ger.commitar, args=(ex.id, "docs: lenda", [TODO]))
+            primeiro.start()
+            self.ate(ex, "commitando")
+            with self.assertRaisesRegex(Bloqueio, "já está em andamento"):
+                self.ger.commitar(ex.id, "docs: lenda", [TODO])
+            with self.assertRaisesRegex(Bloqueio, "commitando"):
+                self.ger.descartar(ex.id)
+            with self.assertRaisesRegex(Bloqueio, "commitando"):
+                self.ger.preparar_checagens(ex.id)
+            liberar.set()
+            primeiro.join(30)
+        finally:
+            gitops.commitar = original
+            liberar.set()
+        self.ate(ex, "commitada")
+        novos = git(self.raiz, "rev-list", f"{base}..HEAD").stdout.split()
+        self.assertEqual(len(novos), 1)
+
+    def test_commit_recusado_pelo_pre_commit_volta_para_a_validacao(self):
+        ex = self.pronta_para_commit()
+        original = gitops.commitar
+        gitops.commitar = lambda *a, **k: gitops.Saida(1, "testes falharam")
+        try:
+            r = self.ger.commitar(ex.id, "docs: lenda", [TODO])
+        finally:
+            gitops.commitar = original
+        self.assertFalse(r.ok)
+        self.assertEqual(self.ger.obter(ex.id).estado, "aguardando-validacao")
+        self.assertIn("recusou", self.ger.obter(ex.id).mensagem)
+
+    def test_checagem_que_ja_roda_nao_roda_de_novo(self):
+        ex = self.pronta_para_commit()
+        self.ger.obter(ex.id).checagens["eco"] = {"estado": "rodando", "saida": "", "quando": ""}
+        with self.assertRaisesRegex(Bloqueio, "já estão rodando"):
+            self.ger.preparar_checagens(ex.id)
+
+    def test_descarte_duplo_e_recusado(self):
+        ex = self.pronta_para_commit()
+        liberar, original = threading.Event(), gitops.remover_worktree
+
+        def remover_lento(*args, **kw):
+            liberar.wait(20)
+            return original(*args, **kw)
+
+        gitops.remover_worktree = remover_lento
+        try:
+            primeiro = threading.Thread(target=self.ger.descartar, args=(ex.id,))
+            primeiro.start()
+            self.ate(ex, "descartando")
+            with self.assertRaisesRegex(Bloqueio, "descartando"):
+                self.ger.descartar(ex.id)
+            liberar.set()
+            primeiro.join(30)
+        finally:
+            gitops.remover_worktree = original
+            liberar.set()
+        self.ate(ex, "descartada")
+
+    def test_reinicio_no_meio_do_commit_volta_para_a_validacao(self):
+        ex = self.pronta_para_commit()
+        with self.ger.trava:
+            self.ger.obter(ex.id).estado = "commitando"
+            self.ger._salvar(self.ger.obter(ex.id))
+        novo = Gerenciador(raiz=self.raiz, estado=self.estado, fabrica=SessaoFalsa, zelador=False)
+        self.assertEqual(novo.obter(ex.id).estado, "aguardando-validacao")
+        self.assertIn("git log", novo.obter(ex.id).mensagem)
 
 
 if __name__ == "__main__":

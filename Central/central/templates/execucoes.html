@@ -3,6 +3,7 @@
 {% block pagina %}execucoes{% endblock %}
 {% block conteudo %}
 <h1>Execuções</h1>
+<div data-vivo="execucoes">
 <p class="sub">{{ vivas }} de {{ maximo }} agente(s) rodando agora. Filas de worktree correm em paralelo; as da árvore principal, uma por vez.</p>
 {% if not lista %}<div class="caixa">Nenhuma execução ainda. Escolha uma <a href="/">fila</a>.</div>{% else %}
 <table>
@@ -14,11 +15,12 @@
     <td>{{ '@' ~ e.agente if e.agente else 'manual' }}</td>
     <td><span class="selo {{ 'aviso' if e.modo == 'principal' else '' }}">{{ 'principal' if e.modo == 'principal' else 'worktree' }}</span></td>
     <td>{{ e.itens|length }}</td>
-    <td><span class="selo {% if e.estado == 'commitada' %}ok{% elif e.estado in ('erro', 'conflito', 'interrompida') %}erro{% elif e.estado == 'aguardando-validacao' %}info{% elif e.estado == 'aguardando-voce' %}aviso{% endif %}">{{ e.rotulo }}</span>
+    <td><span class="selo {% if e.estado == 'commitada' %}ok{% elif e.estado in ('erro', 'conflito', 'interrompida') %}erro{% elif e.estado == 'aguardando-validacao' %}info{% elif e.estado == 'aguardando-voce' or e.ocupada %}aviso{% endif %}">{{ e.rotulo }}</span>
       {% if e.pendentes %}<span class="selo aviso">permissão</span>{% endif %}{% if e.commit %} <code>{{ e.commit[:8] }}</code>{% endif %}</td>
     <td><a href="/execucao/{{ e.id }}">chat</a> · <a href="/execucao/{{ e.id }}/validacao">validação</a></td>
   </tr>
   {% endfor %}
 </table>
 {% endif %}
+</div>
 {% endblock %}

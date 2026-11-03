@@ -1,8 +1,8 @@
 """Rotas da Central (ADR-012). Toda ação é POST via fetch com o token da página (seguranca.py)."""
 from __future__ import annotations
 
-import asyncio
 import datetime as dt
+import hashlib
 import json
 import re
 import subprocess
@@ -11,7 +11,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 from fastapi import FastAPI, Form, Request
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, PlainTextResponse, StreamingResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from markupsafe import Markup
@@ -302,31 +302,30 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
         return json.dumps([ex.estado, [p["request_id"] for p in ex.pendentes], ex.mensagem,
                            {k: v["estado"] for k, v in ex.checagens.items()}, ex.commit], ensure_ascii=False)
 
-    @app.get("/execucao/{ex_id}/eventos")
-    async def eventos_execucao(request: Request, ex_id: str, desde: int = 0):
-        if obter_ou_none(ex_id) is None:
-            return PlainTextResponse("não existe", status_code=404)
+    # Atualização ao vivo por consulta curta (o navegador pergunta a cada 1,5 s), não por conexão aberta:
+    # o navegador aceita só 6 conexões por endereço, e cada aba com EventSource segurava uma — com várias
+    # abas da Central nada mais carregava. Voltar pelo histórico também matava o EventSource (2026-11-03).
 
-        async def fluxo():
-            i, ultimo, ping = desde, None, 0
-            while not await request.is_disconnected():
-                ex = ger.obter(ex_id)
-                for e in ger.eventos(ex_id, i):
-                    yield f"data: {json.dumps({'i': e['i'], 'html': html_entrada(e, ex)}, ensure_ascii=False)}\n\n"
-                    i = e["i"] + 1
-                sig = assinatura(ex)
-                if sig != ultimo:
-                    ultimo = sig
-                    dado = {"estado": ex.estado, "rotulo": ex.rotulo, "mensagem": ex.mensagem,
-                            "pendentes": [p["request_id"] for p in ex.pendentes], "commit": ex.commit,
-                            "checagens": {k: v["estado"] for k, v in ex.checagens.items()}}
-                    yield f"event: estado\ndata: {json.dumps(dado, ensure_ascii=False)}\n\n"
-                ping += 1
-                if ping % 20 == 0:
-                    yield ": ping\n\n"
-                await asyncio.sleep(0.7)
+    def resumo_vivo() -> dict:
+        estados = [(e.id, e.estado, len(e.pendentes), e.commit, e.mensagem) for e in ger.listar()]
+        bruto = json.dumps([estados, app.state.versao_arquivos], ensure_ascii=False).encode("utf-8")
+        return {"v": hashlib.sha1(bruto).hexdigest()[:16], "atencao": len(ger.pedem_atencao()),
+                "ativas": len(ger.ativas())}
 
-        return StreamingResponse(fluxo(), media_type="text/event-stream")
+    @app.get("/vivo")
+    async def vivo():
+        return resumo_vivo()
+
+    @app.get("/execucao/{ex_id}/novidades")
+    async def novidades(ex_id: str, desde: int = 0):
+        ex = obter_ou_none(ex_id)
+        if ex is None:
+            return JSONResponse({"erro": "não existe"}, status_code=404)
+        entradas = [{"i": e["i"], "html": html_entrada(e, ex)} for e in ger.eventos(ex_id, desde)]
+        estado = {"estado": ex.estado, "rotulo": ex.rotulo, "mensagem": ex.mensagem, "ocupada": ex.ocupada,
+                  "pendentes": [p["request_id"] for p in ex.pendentes], "commit": ex.commit,
+                  "checagens": {k: v["estado"] for k, v in ex.checagens.items()}}
+        return {"entradas": entradas, "estado": estado, "assinatura": assinatura(ex), **resumo_vivo()}
 
     async def acao_execucao(fn, *args, ir: str | None = None):
         try:
@@ -386,9 +385,11 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
                     return falha("Feche o Editor do Unity antes — o batchmode não roda com o projeto aberto.")
                 if ger.obter(ex_id).modo != "principal":
                     return falha("unity-validar roda só em execução na árvore principal.")
+            lista = await run_in_threadpool(ger.preparar_checagens, ex_id, so or None)
         except Bloqueio as erro:
             return falha(str(erro))
-        threading.Thread(target=ger.rodar_checagens, args=(ex_id, so or None), daemon=True).start()
+        if lista:
+            threading.Thread(target=ger._executar_checagens, args=(ger.obter(ex_id), lista), daemon=True).start()
         return ok()
 
     @app.post("/execucao/{ex_id}/ajuste")
@@ -470,6 +471,7 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
         cmd = (["dotnet", "test", "Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj", "--nologo", "-v", "quiet"]
                if GATES[nome] is None else [*config.python_do_projeto(), *GATES[nome]])
         app.state.gates[nome] = {"estado": "rodando", "saida": "", "quando": dt.datetime.now().isoformat(timespec="seconds")}
+        app.state.versao_arquivos += 1     # as outras abas da Saúde mostram «rodando» na hora
 
         def rodar():
             try:
@@ -513,23 +515,6 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
         if not alvo.is_file() or alvo.suffix.lower() not in fontes.IMAGENS:
             return PlainTextResponse("só imagens", status_code=404)
         return FileResponse(alvo)
-
-    # ── atualização ao vivo do painel ───────────────────────────────────────
-
-    @app.get("/eventos")
-    async def eventos(request: Request):
-        async def fluxo():
-            ultimo, ping = None, 0
-            while not await request.is_disconnected():
-                atual = f"{ger.versao}-{app.state.versao_arquivos}"
-                if atual != ultimo:
-                    ultimo = atual
-                    yield f"data: {atual}\n\n"
-                ping += 1
-                if ping % 15 == 0:
-                    yield ": ping\n\n"
-                await asyncio.sleep(1)
-        return StreamingResponse(fluxo(), media_type="text/event-stream")
 
     if observar:
         threading.Thread(target=_observar, args=(app, raiz), daemon=True, name="observador").start()

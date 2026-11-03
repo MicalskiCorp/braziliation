@@ -29,14 +29,14 @@
   </form>
   <div class="barra">
     <form action="/execucao/{{ ex.id }}/interromper" method="post" data-acao data-mostrar-em="rodando" class="{{ '' if ex.estado == 'rodando' else 'oculto' }}"><button>Interromper o turno</button></form>
-    {% if ex.estado == 'erro' and '-manual-' not in ex.id %}<form action="/execucao/{{ ex.id }}/tentar-de-novo" method="post" data-acao><button class="primario">Tentar de novo</button></form>{% endif %}
+    {% if '-manual-' not in ex.id %}<form action="/execucao/{{ ex.id }}/tentar-de-novo" method="post" data-acao data-mostrar-em="erro" class="{{ '' if ex.estado == 'erro' else 'oculto' }}"><button class="primario">Tentar de novo</button></form>{% endif %}
     <form action="/execucao/{{ ex.id }}/retomar" method="post" data-acao data-mostrar-em="interrompida" class="{{ '' if ex.estado == 'interrompida' else 'oculto' }}"><button class="primario">Retomar</button></form>
     <form action="/execucao/{{ ex.id }}/finalizar" method="post" data-acao data-mostrar-em="rodando aguardando-voce interrompida"
           class="{{ '' if ex.estado in ('rodando', 'aguardando-voce', 'interrompida') else 'oculto' }}"
           data-confirmar="Encerrar o agente e levar o que foi feito para a validação?"><button>Ir para a validação</button></form>
     <a class="botao {{ '' if ex.estado in ('aguardando-validacao', 'conflito', 'commitada') else 'oculto' }}" data-mostrar-em="aguardando-validacao conflito commitada" href="/execucao/{{ ex.id }}/validacao">Abrir a validação →</a>
     <form action="/execucao/{{ ex.id }}/descartar" method="post" data-acao data-mostrar-em="na-fila preparando rodando aguardando-voce aguardando-validacao interrompida conflito erro"
-          class="{{ '' if ex.ativa or ex.estado == 'erro' else 'oculto' }}"
+          class="{{ '' if (ex.ativa or ex.estado == 'erro') and not ex.ocupada else 'oculto' }}"
           data-confirmar="Descartar a execução? Tudo o que o agente mudou nos arquivos versionados volta ao estado anterior."><button class="perigo">Descartar</button></form>
   </div>
 </div>

@@ -18,18 +18,20 @@
 {% if f.instrucao %}<p class="sub">Orientação que vai para o agente: {{ f.instrucao }}</p>{% endif %}
 {% for d in dessinc %}<div class="caixa erro">{{ d }}</div>{% endfor %}
 
+<div data-vivo="fila-execucoes">
 {% if execucoes %}
 <div class="caixa info">
   <h3>Execuções desta fila</h3>
   <ul>{% for e in execucoes %}
-    <li><a href="/execucao/{{ e.id }}{% if e.estado in ('aguardando-validacao', 'conflito') %}/validacao{% endif %}">{{ e.id }}</a>
+    <li><a href="/execucao/{{ e.id }}{% if e.estado in ('aguardando-validacao', 'conflito') or e.ocupada %}/validacao{% endif %}">{{ e.id }}</a>
       <span class="selo">{{ e.rotulo }}</span> {{ 'edições manuais' if not e.agente else '@' ~ e.agente }} · {{ e.itens|length }} item(ns)</li>
   {% endfor %}</ul>
 </div>
 {% endif %}
+</div>
 
 {% if listener %}
-<div class="caixa">
+<div class="caixa" data-vivo="listener">
   <h3>Listener do WhatsApp</h3>
   <p>Tarefa agendada: <span class="selo {{ 'ok' if listener.tarefa in ('Em execução', 'Running') else 'aviso' }}">{{ listener.tarefa }}</span></p>
   {% if listener.log %}<details><summary>Fim do log</summary><pre>{{ listener.log|join('\n') }}</pre></details>{% endif %}
@@ -65,20 +67,20 @@
     {% if responsaveis %}<th>Responsável</th>{% endif %}<th>Referência</th><th></th>
   </tr>
   {% for i in itens %}{% set ocupado = em_exec.get(i.id) %}
-  <tr data-item data-status="{{ i.status }}" data-prioridade="{{ i.prioridade }}" data-responsavel="{{ i.responsavel }}"
+  <tr data-item data-id="{{ i.id }}" data-status="{{ i.status }}" data-prioridade="{{ i.prioridade }}" data-responsavel="{{ i.responsavel }}"
       class="{{ 'em-execucao' if ocupado }}">
     <td>{% if not f.acompanhamento %}<input type="checkbox" name="itens" value="{{ i.id }}" form="form-executar"
         {% if ocupado or not i.aberto %}disabled{% endif %}>{% endif %}</td>
-    <td>{{ celula(i.titulo_md or i.titulo, f.arquivo) }}
+    <td data-vivo="t-{{ i.id }}">{{ celula(i.titulo_md or i.titulo, f.arquivo) }}
       {% if i.descricao %}<div class="sub">{{ celula(i.descricao, f.arquivo) }}</div>{% endif %}
       {% if i.correcao %}<div class="sub">Correção: {{ i.correcao }}</div>{% endif %}
       {% if ocupado %}<div><a class="selo info" href="/execucao/{{ ocupado.id }}">em execução · {{ ocupado.rotulo }}</a></div>{% endif %}</td>
     {% if secoes|length > 1 %}<td class="sub">{{ i.secao }}</td>{% endif %}
-    <td class="status">{{ celula(i.texto_status, f.arquivo) }}</td>
-    <td>{{ i.prioridade }}</td>
-    {% if responsaveis %}<td>{{ celula(i.responsavel, f.arquivo) }}</td>{% endif %}
-    <td>{{ celula(i.referencia, f.arquivo) }}</td>
-    <td>{% if f.fonte.todo and i.aberto and not ocupado %}
+    <td class="status" data-vivo="s-{{ i.id }}">{{ celula(i.texto_status, f.arquivo) }}</td>
+    <td data-vivo="p-{{ i.id }}">{{ i.prioridade }}</td>
+    {% if responsaveis %}<td data-vivo="r-{{ i.id }}">{{ celula(i.responsavel, f.arquivo) }}</td>{% endif %}
+    <td data-vivo="f-{{ i.id }}">{{ celula(i.referencia, f.arquivo) }}</td>
+    <td data-vivo="e-{{ i.id }}">{% if f.fonte.todo and i.aberto and not ocupado %}
       <details><summary class="sub">editar</summary>
         <form action="/fila/{{ f.id }}/item/{{ i.id }}/status" method="post" data-acao>
           <select name="valor">{% for s, nome in status.items() if s != '✅' %}<option value="{{ s }} {{ nome|capitalize }}"{% if s == i.status %} selected{% endif %}>{{ s }} {{ nome }}</option>{% endfor %}</select>

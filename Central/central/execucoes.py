@@ -25,12 +25,16 @@ from pathlib import Path
 from . import config, conversa, fontes, gitops
 from .agente import SessaoAgente
 
-ATIVOS = {"na-fila", "preparando", "rodando", "aguardando-voce", "aguardando-validacao", "interrompida", "conflito"}
+# Ação longa em andamento (o pre-commit leva minutos): o estado muda antes de soltar a trava, então um
+# segundo clique — ou outra aba — é recusado em vez de rodar a mesma ação de novo (visto em 2026-11-03).
+OCUPADOS = {"commitando", "integrando", "descartando"}
+ATIVOS = {"na-fila", "preparando", "rodando", "aguardando-voce", "aguardando-validacao", "interrompida", "conflito"} | OCUPADOS
 SEGURAM_A_ARVORE = ATIVOS - {"na-fila"}
 ROTULOS = {
     "na-fila": "na fila", "preparando": "preparando", "rodando": "rodando", "aguardando-voce": "aguardando você",
     "aguardando-validacao": "aguardando validação", "interrompida": "interrompida",
     "conflito": "conflito na integração", "commitada": "commitada", "descartada": "descartada", "erro": "erro",
+    "commitando": "commitando", "integrando": "integrando", "descartando": "descartando",
 }
 PEDEM_ATENCAO = {"aguardando-voce", "aguardando-validacao", "interrompida", "conflito", "erro"}
 
@@ -77,6 +81,10 @@ class Execucao:
     @property
     def rotulo(self) -> str:
         return ROTULOS.get(self.estado, self.estado)
+
+    @property
+    def ocupada(self) -> bool:
+        return self.estado in OCUPADOS
 
     @property
     def ativa(self) -> bool:
@@ -139,6 +147,15 @@ class Gerenciador:
             if ex.estado in ("rodando", "preparando") or (ex.estado == "aguardando-voce" and ex.pendentes):
                 ex.estado, ex.pendentes = "interrompida", []
                 ex.mensagem = "A Central reiniciou com esta execução em andamento. Use «Retomar»."
+            elif ex.estado == "commitando":
+                ex.estado = "aguardando-validacao"
+                ex.mensagem = "A Central reiniciou durante o commit. Confira o git log antes de commitar de novo."
+            elif ex.estado == "integrando":
+                ex.estado = "conflito"
+                ex.mensagem = "A Central reiniciou durante a integração. Use «Integrar de novo»."
+            elif ex.estado == "descartando":
+                ex.estado = "erro"
+                ex.mensagem = "A Central reiniciou durante o descarte. Descarte de novo."
             self.execucoes[ex.id] = ex
 
     def _registrar(self, ex: Execucao, entrada: dict) -> None:
@@ -566,9 +583,19 @@ class Gerenciador:
         return lista
 
     def rodar_checagens(self, ex_id: str, so: str | None = None) -> None:
+        """Para as threads do fim de turno: se as checagens já estão rodando, não há o que fazer."""
+        try:
+            lista = self.preparar_checagens(ex_id, so)
+        except Bloqueio:
+            return
+        if lista:
+            self._executar_checagens(self.obter(ex_id), lista)
+
+    def preparar_checagens(self, ex_id: str, so: str | None = None) -> dict[str, list[str]]:
+        """Marca as checagens como «rodando» — ou recusa, se já estão. A rota chama isto antes de abrir a thread."""
         ex = self.obter(ex_id)
         if not ex.cwd or not Path(ex.cwd).exists():
-            return
+            return {}
         lista = self._checagens_para(ex)
         if so == "unity":
             if ex.modo != "principal":
@@ -579,9 +606,16 @@ class Gerenciador:
         elif so:
             lista = {k: v for k, v in lista.items() if k == so}
         with self.trava:
+            if ex.ocupada:
+                raise Bloqueio(f"a execução está {ex.rotulo} — aguarde")
+            if any(ex.checagens.get(nome, {}).get("estado") == "rodando" for nome in lista):
+                raise Bloqueio("as checagens já estão rodando")
             for nome in lista:
                 ex.checagens[nome] = {"estado": "rodando", "saida": "", "quando": agora()}
             self._salvar(ex)
+        return lista
+
+    def _executar_checagens(self, ex: Execucao, lista: dict[str, list[str]]) -> None:
         for nome, cmd in lista.items():
             try:
                 r = subprocess.run(cmd, cwd=ex.cwd, capture_output=True, timeout=1800,
@@ -603,16 +637,28 @@ class Gerenciador:
     def descartar(self, ex_id: str) -> None:
         with self.trava:
             ex = self.obter(ex_id)
+            if ex.ocupada:
+                raise Bloqueio(f"a execução está {ex.rotulo} — aguarde terminar")
             if not ex.ativa and ex.estado != "erro":
                 raise Bloqueio(f"a execução já está {ex.rotulo}")
+            anterior = ex.estado
+            ex.estado, ex.mensagem = "descartando", "Descartando: os arquivos voltam ao estado anterior…"
+            self._salvar(ex)
             sessao = self.sessoes.pop(ex.id, None)
-        if sessao:
-            sessao.encerrar(espera=5)
-        if ex.modo == "worktree" and ex.cwd and Path(ex.cwd).exists():
-            gitops.remover_worktree(self.raiz, Path(ex.cwd), ex.branch)
-        elif ex.modo == "principal" and ex.estado in SEGURAM_A_ARVORE:
-            gitops.restaurar(self.raiz)
+        try:
+            if sessao:
+                sessao.encerrar(espera=5)
+            if ex.modo == "worktree" and ex.cwd and Path(ex.cwd).exists():
+                gitops.remover_worktree(self.raiz, Path(ex.cwd), ex.branch)
+            elif ex.modo == "principal" and anterior in SEGURAM_A_ARVORE:
+                gitops.restaurar(self.raiz)
+        except Exception as erro:
+            with self.trava:
+                ex.estado, ex.mensagem = "erro", f"O descarte falhou: {erro}. Descarte de novo."
+                self._salvar(ex)
+            raise
         with self.trava:
+            ex.mensagem = ""
             ex.estado, ex.pendentes = "descartada", []
             self._registrar(ex, {"tipo": "nota", "texto": "Execução descartada: os arquivos voltaram ao estado anterior."})
             self._salvar(ex)
@@ -621,16 +667,27 @@ class Gerenciador:
     def commitar(self, ex_id: str, mensagem: str, caminhos: list[str]) -> gitops.Saida:
         with self.trava:
             ex = self.obter(ex_id)
+            if ex.estado == "commitando":
+                raise Bloqueio("o commit já está em andamento — aguarde o pre-commit terminar")
             if ex.estado != "aguardando-validacao":
                 raise Bloqueio(f"só se commita depois da validação — a execução está {ex.rotulo}")
             if not mensagem.strip():
                 raise Bloqueio("mensagem de commit vazia")
-            ex.mensagem = "Commit em andamento (o pre-commit roda os testes)…"
+            if not caminhos:
+                raise Bloqueio("nenhum arquivo selecionado")
+            ex.estado, ex.mensagem = "commitando", "Commit em andamento (o pre-commit roda os testes)…"
             self._salvar(ex)
         cwd = Path(ex.cwd)
-        r = gitops.commitar(cwd, caminhos, mensagem)
+        try:
+            r = gitops.commitar(cwd, caminhos, mensagem)
+        except Exception:
+            with self.trava:
+                ex.estado, ex.mensagem = "aguardando-validacao", ""
+                self._salvar(ex)
+            raise
         with self.trava:
             if not r.ok:
+                ex.estado = "aguardando-validacao"
                 ex.mensagem = "O pre-commit recusou o commit. Veja a saída, peça ajuste ao agente ou corrija."
                 self._registrar(ex, {"tipo": "nota", "texto": "Pre-commit recusou o commit:\n" + r.texto[-3000:]})
                 self._salvar(ex)
@@ -649,13 +706,25 @@ class Gerenciador:
         return r
 
     def integrar(self, ex_id: str, ja_commitado: bool = False) -> gitops.Saida:
-        ex = self.obter(ex_id)
-        if ex.modo != "worktree" or not ex.commit:
-            raise Bloqueio("não há commit de worktree para integrar")
+        with self.trava:
+            ex = self.obter(ex_id)
+            if ex.modo != "worktree" or not ex.commit:
+                raise Bloqueio("não há commit de worktree para integrar")
+            if not ja_commitado:    # vindo do commit, a execução já está «commitando»
+                if ex.estado != "conflito":
+                    raise Bloqueio(f"a execução está {ex.rotulo} — não há o que integrar agora")
+                ex.estado, ex.mensagem = "integrando", "Integrando ao branch principal…"
+                self._salvar(ex)
         cwd = Path(ex.cwd)
-        if cwd.exists():
-            gitops.restaurar(cwd)   # o que não foi selecionado sai junto com o worktree
-        r = gitops.integrar(self.raiz, cwd, ex.branch)
+        try:
+            if cwd.exists():
+                gitops.restaurar(cwd)   # o que não foi selecionado sai junto com o worktree
+            r = gitops.integrar(self.raiz, cwd, ex.branch)
+        except Exception as erro:
+            with self.trava:
+                ex.estado, ex.mensagem = "conflito", f"A integração falhou: {erro}"
+                self._salvar(ex)
+            raise
         with self.trava:
             if r.ok:
                 ex.commit = gitops.head(self.raiz)

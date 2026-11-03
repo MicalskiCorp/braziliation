@@ -4,6 +4,7 @@
 {% block conteudo %}
 <h1>Filas de trabalho</h1>
 <p class="sub">Cada fila é uma seção dos TODOs de camada (ou a dívida técnica e as entrevistas). Escolha a fila, selecione os itens e execute com o agente dono.</p>
+<div data-vivo="painel">
 
 {% if atencao %}
 <div class="caixa aviso">
@@ -56,4 +57,5 @@
   {% endfor %}
 </table>
 {% endif %}
+</div>
 {% endblock %}

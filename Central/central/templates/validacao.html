@@ -4,9 +4,9 @@
 {% block conteudo %}
 <div id="validacao" data-execucao="{{ ex.id }}" data-proximo="{{ proximo }}"></div>
 <p class="sub"><a href="/">Filas</a> › <a href="/execucao/{{ ex.id }}">{{ ex.fila_nome }}</a> › validação</p>
-<h1>Validação <span class="selo">{{ ex.rotulo }}</span></h1>
+<h1>Validação <span class="selo" id="estado" data-estado="{{ ex.estado }}">{{ ex.rotulo }}</span></h1>
 <p class="sub">{{ '@' ~ ex.agente if ex.agente else 'Edições manuais' }} · {{ 'árvore principal' if ex.modo == 'principal' else 'worktree ' ~ ex.branch }}{% if ex.cwd %} · <span class="mono">{{ ex.cwd }}</span>{% endif %}</p>
-{% if ex.mensagem %}<div class="caixa {{ 'erro' if ex.estado in ('conflito', 'erro') else 'info' }}">{{ ex.mensagem }}</div>{% endif %}
+<div data-vivo="mensagem">{% if ex.mensagem or ex.ocupada %}<div class="caixa {{ 'erro' if ex.estado in ('conflito', 'erro') else 'info' }}">{{ ex.mensagem or ex.rotulo }}{% if ex.ocupada %} A tela atualiza sozinha quando terminar.{% endif %}</div>{% endif %}</div>
 
 {% if ex.estado == 'commitada' %}
   <div class="caixa info">Commit <code>{{ ex.commit[:10] }}</code>{% if ex.integrada %} no branch principal{% endif %}. O push continua manual, pelo VS Code.</div>
@@ -32,6 +32,7 @@
 {% endif %}
 
 <h2>Checagens</h2>
+<div data-vivo="checagens">
 {% if ex.checagens %}
 <table>
   {% for nome, c in ex.checagens.items() %}
@@ -41,7 +42,8 @@
   {% endfor %}
 </table>
 {% else %}<p class="sub">Ainda não rodaram.</p>{% endif %}
-{% if ex.ativa %}
+</div>
+{% if ex.ativa and not ex.ocupada %}
 <div class="barra">
   <form action="/execucao/{{ ex.id }}/checagens" method="post" data-acao><button>Rodar as checagens de novo</button></form>
   {% if ex.modo == 'principal' %}
@@ -86,7 +88,7 @@
   <div class="barra"><button>Pedir ajuste ao agente</button></div>
 </form>
 {% endif %}
-{% if ex.ativa or ex.estado == 'erro' %}
+{% if (ex.ativa or ex.estado == 'erro') and not ex.ocupada %}
 <form action="/execucao/{{ ex.id }}/descartar" method="post" data-acao class="barra"
       data-confirmar="Descartar? Tudo o que mudou nos arquivos versionados volta ao estado anterior.">
   <button class="perigo">Descartar a execução</button></form>

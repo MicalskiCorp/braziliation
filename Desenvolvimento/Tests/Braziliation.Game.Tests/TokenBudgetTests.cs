@@ -35,7 +35,11 @@ public sealed class TokenBudgetTests
 
     private static string GitRoot => RepoRootFinder.FindGitRoot();
     private static string Relative(string path) => Path.GetRelativePath(GitRoot, path).Replace('\\', '/');
-    private static long Tokens(string path) => new FileInfo(path).Length / 4;
+    // Conta com quebra de linha LF. Com core.autocrlf, o mesmo commit tem CRLF num checkout e LF noutro, e
+    // o tamanho em disco mudava o veredito: o architecture_decisions.md passava no main (~4970) e reprovava
+    // no worktree da Central (~5036) — 2026-11-03.
+    private static long Tokens(string path) =>
+        System.Text.Encoding.UTF8.GetByteCount(File.ReadAllText(path).Replace("\r\n", "\n")) / 4;
 
     private static string Report(IEnumerable<string> items) => string.Join("\n", items);
 
