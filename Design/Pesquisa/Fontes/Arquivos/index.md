@@ -8,6 +8,10 @@ continua em `../../Entrevistas/_processado/`, fora do git.
 > do responsável pelo projeto — e, se o material for de terceiro, sem consentimento
 > confirmado para guardar e usar.
 
+> **Foto de visita de referência** (lugar, mobília, arquitetura, vegetação — material de direção de arte) não vem
+> para cá: vai para `Design/ArteConceitual/ReferenciasVisuais/{tema}/`, com `fontes.md`, e a pesquisa cita de lá.
+> Aqui ficam foto e documento usados como **evidência de pesquisa** (ata, recorte, placa histórica, documento).
+
 ## Nomenclatura
 
 `{estado-ou-tema}-{assunto-curto}-{AAAA-MM-DD}.{ext}` — a data é a da captura, não a do

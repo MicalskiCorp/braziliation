@@ -508,6 +508,16 @@ def gerar(args) -> None:
             problemas.append(f"{nome} é do assunto '{outro}', não '{mapa.get('assunto')}'")
     problemas += [f"{m['num']} ({m['pasta']}) sem trecho válido: '{m['trecho']}'"
                   for m in mapa["midias"] if not m["duplicata_de"] and m["trecho"] not in ids]
+    # Lote sem horário de captura (fotos como "Foto", notas de voz) se organiza por lugar: a seção
+    # lista as anotações em áudio e as placas/textos daquele lugar. Áudio ou texto do lote que não
+    # caiu em nenhuma seção ficaria de fora do de-para sem ninguém notar.
+    ligados = {t["pasta"] for t in mapa["trechos"]}
+    for s in secoes:
+        ligados.update(s.get("audios", []) + s.get("textos", []))
+    for pasta, meta in todas_capturas():
+        if meta.get("lote") == mapa["lote"] and meta.get("tipo") in ("audio", "texto") \
+                and meta.get("resultado") != "descartado" and pasta.name not in ligados:
+            problemas.append(f"{meta['tipo']} {pasta.name} não está em nenhuma seção (campo audios/textos)")
     if problemas:
         print("Mapa recusado — toda mídia precisa de lugar, e o lote inteiro de um assunto só:\n  " + "\n  ".join(problemas))
         sys.exit(1)
@@ -527,7 +537,12 @@ def gerar(args) -> None:
     for s in secoes:
         qtd = sum(1 for m in mapa["midias"] if m["trecho"] == s["id"] and not m["duplicata_de"])
         horario = f"{s['inicio']}–{s['fim']}" if s.get("inicio") else s.get("horario", "")
-        audio = f"{s['duracao_min']} min" if s.get("duracao_min") else "sem áudio"
+        if s.get("duracao_min"):
+            audio = f"{s['duracao_min']} min"
+        elif s.get("audios") or s.get("textos"):
+            audio = f"{len(s.get('audios', []))} anotação(ões), {len(s.get('textos', []))} placa(s)"
+        else:
+            audio = "sem áudio"
         saida.append(f"| [{s['id']}](#{s['id'].lower()}) | {s['lugar']} | {horario} | {audio} | {qtd} |")
 
     for s in secoes:
@@ -535,11 +550,18 @@ def gerar(args) -> None:
         if s.get("pasta"):
             audio = next(p.name for p in achar(s["pasta"]).iterdir() if p.stem == "audio")
             saida.append(f"🎙️ **Áudio:** [{s['inicio']}–{s['fim']}, {s['duracao_min']} min]({link({'pasta': s['pasta'], 'arquivo': audio})})")
-        else:
+        elif not s.get("audios"):
             saida.append("🎙️ **Áudio:** nenhum (sem narração)")
         saida += ["", f"**O lugar:** {s.get('explicacao', '')}", ""]
         if s.get("nota"):
             saida += [f"> {s['nota']}", ""]
+        for pasta in s.get("textos", []):
+            texto = (achar(pasta) / "mensagem.txt").read_text(encoding="utf-8").strip().replace("\n", " ")
+            saida += [f"🪧 **Placa / texto:** {texto}", ""]
+        for pasta in s.get("audios", []):
+            audio = next(p.name for p in achar(pasta).iterdir() if p.stem == "audio")
+            texto = (achar(pasta) / "transcricao.txt").read_text(encoding="utf-8").strip()
+            saida += [f"🎙️ **Anotação em áudio** ([ouvir]({link({'pasta': pasta, 'arquivo': audio})})): {texto}", ""]
         figuras = []
         for m in (m for m in mapa["midias"] if m["trecho"] == s["id"] and not m["duplicata_de"]):
             legenda = f"{m['num']} · {m['hora'] or 'sem horário'}" + (f" · {m['destaque']}" if m["destaque"] else "")
@@ -558,6 +580,8 @@ def gerar(args) -> None:
         lugar = {m["pasta"]: m.get("destaque", "") for m in mapa["midias"] if m["trecho"] == s["id"]}
         if s.get("pasta"):
             lugar[s["pasta"]] = ""
+        for pasta in s.get("audios", []) + s.get("textos", []):
+            lugar[pasta] = ""
         for pasta, destaque in lugar.items():
             arq = achar(pasta) / "meta.json"
             meta = json.loads(arq.read_text(encoding="utf-8"))

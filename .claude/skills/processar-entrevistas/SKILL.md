@@ -93,9 +93,12 @@ Material de trabalho do lote fica em `Entrevistas/_lotes/{lote}/` (fora do git).
    alguma mídia ficou sem lugar — e mostrar o `de-para.md` ao usuário.
 6. **Decidir com o usuário** (perguntas agrupadas, com recomendação):
    - **Consentimento e identificação** de quem fala (anônimo é o padrão).
-   - **Imagens para o git:** 1–2 por lugar, reduzidas a 1600 px, sem rosto identificável,
-     copiadas para `Design/Pesquisa/Fontes/Arquivos/` (`{estado}-{assunto}-{lugar}-{AAAA-MM-DD}.jpg`)
-     com linha em `Fontes/Arquivos/registro.md`; o resto fica em `_processado/`.
+   - **Imagens para o git:** foto que é **evidência de pesquisa** (documento, placa, recorte) vai
+     para `Design/Pesquisa/Fontes/Arquivos/` (`{estado}-{assunto}-{lugar}-{AAAA-MM-DD}.jpg`, linha em
+     `Fontes/Arquivos/registro.md`). Foto de **visita de referência** (lugar, mobília, arquitetura,
+     vegetação) vai para `Design/ArteConceitual/ReferenciasVisuais/{tema}/` com `fontes.md`, curada
+     sem as tremidas e as quase repetidas (modelo: lote `2026-10-24-museu-da-familia-colonial`, 163
+     de 231). Sem rosto identificável; reduzidas (1280–1600 px). O resto fica em `_processado/`.
    - **Handoff** para o Criativo e **descartes** (duplicatas, testes).
    - Decisão criativa do usuário sobre o material (ex.: "esta abertura vai ser o túnel") vai para
      o **handoff**, nunca para a pesquisa — na pesquisa entra só o que se vê.
