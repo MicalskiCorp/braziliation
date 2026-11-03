@@ -40,6 +40,8 @@ Relato oral do guia, organizado por lugar — do exterior do prédio ao porão s
 
 ## Edith Gaertner, Museu da Família Colonial e Cemitério dos Gatos
 
+> Visita de 24/10/2026, com as placas do museu e fotos por lugar (casas de 1864 e 1858, Cemitério dos Gatos, Mausoléu): **[museu-da-familia-colonial-visita.md](museu-da-familia-colonial-visita.md)**.
+
 - Edith Gaertner aparece ligada à preservação da memória da família do fundador de Blumenau e ao processo de formação do Museu da Família Colonial.
 - A trajetória registrada nas fontes disponíveis a descreve como ex-atriz que retornou a Blumenau em 1924, passou a viver na propriedade da família e reuniu ali os bens e imóveis que desejava preservar.
 - Durante esse período, Edith passou a sepultar seus gatos no horto da residência, originando o conhecido Cemitério dos Gatos, hoje integrado ao complexo museológico.

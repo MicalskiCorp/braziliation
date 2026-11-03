@@ -31,6 +31,7 @@ Repositório de informações históricas, folclóricas e culturais **verificada
 | 20/09/2026 | Dragão do Encano Alto — discrepância geográfica com Guabiruba (revisão) | [Estados/SantaCatarina/cidades/Indaial/index.md](Estados/SantaCatarina/cidades/Indaial/index.md#nota-de-cruzamento-com-o-criativo--discrepância-geográfica-a-verificar) | ✅ Processado pelo @GameCreative (20/09/2026) |
 | 20/09/2026 | 11 lendas de Santa Catarina — rodada 2 (processar) | [Handoffs/2026-09-20-lendas-sc-rodada-2.md](Handoffs/2026-09-20-lendas-sc-rodada-2.md) | ❌ Não iniciado |
 | 11/10/2026 | Teatro Carlos Gomes por dentro — visita guiada (processar) | [Handoffs/2026-10-11-teatro-carlos-gomes-visita.md](Handoffs/2026-10-11-teatro-carlos-gomes-visita.md) | ❌ Não iniciado |
+| 03/11/2026 | Museu da Família Colonial — referências de arte e ideias para Blumenau (brainstorm) | [Handoffs/2026-10-24-museu-da-familia-colonial.md](Handoffs/2026-10-24-museu-da-familia-colonial.md) | ❌ Não iniciado |
 | 12/10/2026 | Benzedeira — benzimento de fechamento de corpo e a fala dela (processar) | [Handoffs/2026-10-11-benzedeira.md](Handoffs/2026-10-11-benzedeira.md) | ❌ Não iniciado |
 
 ---

@@ -49,4 +49,9 @@ No Passo 1 (brief) ou no Passo 2 do fluxo geral (`pipeline-sprites-programaticos
 
 | Pasta | Tema | Status |
 |-------|------|--------|
-| [`edith-gaertner/`](edith-gaertner/fontes.md) | NPC Edith Gaertner (pessoa real, 1882–1967, Blumenau) | 7 referências depositadas (figura histórica, tratamento espectral, local real — Cemitério dos Gatos) |
+| [`edith-gaertner/`](edith-gaertner/fontes.md) | NPC Edith Gaertner (pessoa real, 1882–1967, Blumenau) | 7 referências depositadas (figura histórica, tratamento espectral, local real — Cemitério dos Gatos) + 13 fotos (visita 24/10/2026) |
+| [`blumenau-arquitetura-colonial/`](blumenau-arquitetura-colonial/fontes.md) | Arquitetura colonial de Blumenau | 28 fotos (visita 24/10/2026) |
+| [`blumenau-mobiliario-colonial/`](blumenau-mobiliario-colonial/fontes.md) | Mobiliário e objetos dos imigrantes | 67 fotos (visita 24/10/2026) |
+| [`mata-atlantica-vegetacao/`](mata-atlantica-vegetacao/fontes.md) | Vegetação nativa do Vale do Itajaí | 22 fotos (visita 24/10/2026) |
+| [`familia-blumenau/`](familia-blumenau/fontes.md) | Família Blumenau e acervo | 28 fotos (visita 24/10/2026) |
+| [`mausoleu-familia-blumenau/`](mausoleu-familia-blumenau/fontes.md) | Mausoléu da Família Blumenau | 5 fotos (visita 24/10/2026) |

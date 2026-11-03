@@ -113,6 +113,7 @@
 
 | Item | Arquivo | Prioridade | Status |
 |------|---------|-----------|--------|
+| Brainstorm: Museu da Família Colonial — referências de arte (163 fotos por tema em `ArteConceitual/ReferenciasVisuais/`) e ideias para Blumenau (casas do centro × periferia, madeiras, goteira na chuva, vegetação nativa, a fenda da Edith no Cemitério dos Gatos) (24/10/2026) | [Pesquisa/Handoffs/2026-10-24-museu-da-familia-colonial.md](../Pesquisa/Handoffs/2026-10-24-museu-da-familia-colonial.md) | Alta | ❌ Não iniciado |
 | Processar handoff: Benzedeira — **NPC de acalanto e ponto seguro**: garrafadas com itens do mapa, benzimentos como encantamentos (ex.: corpo fechado → defesa), desbloqueio por progressão, uma por região (11/10/2026) — **usar a fala com os trejeitos, sem normalizar**; os pontos de projeto do handoff já foram decididos em [DDR-001](../../Desenvolvimento/Docs/GDD/Decisoes/DDR-001-benzedeira-npc.md) | [Pesquisa/Handoffs/2026-10-11-benzedeira.md](../Pesquisa/Handoffs/2026-10-11-benzedeira.md) | Alta | ❌ Não iniciado |
 | Processar handoff: Teatro Carlos Gomes por dentro — visita guiada (11/10/2026) | [Pesquisa/Handoffs/2026-10-11-teatro-carlos-gomes-visita.md](../Pesquisa/Handoffs/2026-10-11-teatro-carlos-gomes-visita.md) | Alta | ❌ Não iniciado |
 

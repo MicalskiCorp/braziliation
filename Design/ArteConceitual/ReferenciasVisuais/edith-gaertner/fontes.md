@@ -45,3 +45,29 @@
 - O que é: foto real do local, outro ângulo — mais lápides de concreto visíveis (algumas com foto/plaqueta), estátua branca de gato sobre pedestal de pedra ao centro, troncos de árvores grossos cobertos de musgo, banco de pedra
 - Data/período: foto contemporânea do local real
 - Uso pretendido: referência do **lugar real**, ângulo complementar — reforça quantidade/disposição das lápides e escala das árvores em relação ao espaço.
+
+---
+
+## Visita de 24/10/2026 — parque da Edith e Cemitério dos Gatos (13 fotos próprias)
+
+- **Fonte:** foto própria — Nai (esposa do responsável do projeto), Museu da Família Colonial, Blumenau/SC, 24/10/2026; enviada pelo WhatsApp como Foto (comprimida, sem horário de captura).
+- **O que é:** foto real do lugar/objeto indicado na tabela (`F` = número no de-para do lote `2026-10-24-museu-da-familia-colonial`, na ordem do percurso).
+- **Data/período:** fotografia de 24/10/2026; lugares e objetos dos séculos XIX–XX.
+- **Uso pretendido:** embasamento visual de direção de arte e de prompt — não é material de treino/dataset.
+- **Direção do responsável:** `Design/Pesquisa/Handoffs/2026-10-24-museu-da-familia-colonial.md`.
+
+| Arquivo | F | Lugar |
+|---|---|---|
+| `museu-familia-colonial-F191.jpg` | F191 | Parque da Edith |
+| `museu-familia-colonial-F192.jpg` | F192 | Parque da Edith |
+| `museu-familia-colonial-F203.jpg` | F203 | Parque da Edith |
+| `painel-edith-parque.jpg` | F205 | Parque da Edith |
+| `museu-familia-colonial-F206.jpg` | F206 | Parque da Edith |
+| `museu-familia-colonial-F207.jpg` | F207 | Parque da Edith |
+| `museu-familia-colonial-F208.jpg` | F208 | Parque da Edith |
+| `cemiterio-gatos-totem.jpg` | F211 | Cemitério dos Gatos |
+| `cemiterio-gatos-estatua.jpg` | F212 | Cemitério dos Gatos |
+| `museu-familia-colonial-F213.jpg` | F213 | Cemitério dos Gatos |
+| `museu-familia-colonial-F214.jpg` | F214 | Cemitério dos Gatos |
+| `cemiterio-gatos-tumulos.jpg` | F216 | Cemitério dos Gatos |
+| `museu-familia-colonial-F217.jpg` | F217 | Cemitério dos Gatos |

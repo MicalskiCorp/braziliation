@@ -25,6 +25,7 @@
 | Dieselpunk brasileiro | Referências históricas para a estética (era Vargas, industralização 1930-50) | Alta | ❌ Não iniciado |
 | Imigração alemã/italiana | Colonização do Sul, cultura, arquitetura | Alta | ❌ Não iniciado |
 | Benzimentos e garrafadas por região | Quais benzimentos e garrafadas são próprios de cada região (ervas, males, rezas) — base para a benzedeira regional do jogo, cruzando com as entrevistas do assunto `benzedeira` | Alta | ❌ Não iniciado |
+| Casa colonial dos imigrantes em Blumenau | Contexto histórico para consultar junto das referências visuais da visita de 24/10/2026: mobiliário e objetos do século XIX, madeiras nativas usadas (peroba, canela, cambará), enxaimel e telhados (escama de peixe), as famílias Gaertner e Wendenburg, o Mausoléu da Família Blumenau | Alta | ❌ Não iniciado — base: [museu-da-familia-colonial-visita.md](Estados/SantaCatarina/cidades/Blumenau/museu-da-familia-colonial-visita.md) |
 | Ciclo da Borracha | Amazônia 1850-1920, contexto econômico e social | Média | ❌ Não iniciado |
 
 ---
@@ -44,6 +45,7 @@
 | Lenhador Fantasma da Ilha Redonda (São Francisco do Sul) | Motivo citado de forma consistente, mas só em fontes de baixa confiabilidade editorial (wiki de fãs) | Baixa | 🟡 Confirmação fraca — ver [SaoFranciscoDoSul/index.md](Estados/SantaCatarina/cidades/SaoFranciscoDoSul/index.md) |
 | Teatro Carlos Gomes: "primeiro palco giratório do Brasil" (guia, 11/10/2026) | Fontes dizem "primeiro do sul do Brasil" / "um dos únicos do país" — manter a forma das fontes até achar algo melhor | Baixa | 🟡 Divergência — ver [Blumenau/teatro-carlos-gomes-visita.md](Estados/SantaCatarina/cidades/Blumenau/teatro-carlos-gomes-visita.md) |
 | Teatro Carlos Gomes: afirmações do guia sem fonte (visita de 11/10/2026) | Luz elétrica em teatro em 1909, a primeira de SC · Equipe Vira Lata, primeiro grupo do Brasil com atores registrados em carteira · obras da cidade paradas por falta de tijolo durante a construção (recorte de jornal entregue ao arquivo histórico do teatro) · lustre em espiral no vão do elevador, removido em 2006 · banquete de Getúlio Vargas e coreografia do sino/coral · nome da Rua John Kennedy após visita do cônsul dos EUA | Média | 🎙️ Relato oral, não confirmado — ver [Blumenau/teatro-carlos-gomes-visita.md](Estados/SantaCatarina/cidades/Blumenau/teatro-carlos-gomes-visita.md) |
+| Livros do Dr. Hermann Blumenau fotografados no Museu da Família Colonial (vitrines da Casa 3) | Achar os PDFs e o conteúdo dos livros ("Colônia Blumenau", "História de Blumenau" e outros) para enriquecer a história — pedido do responsável na visita de 24/10/2026 | Média | ❌ Não iniciado — ver [museu-da-familia-colonial-visita.md](Estados/SantaCatarina/cidades/Blumenau/museu-da-familia-colonial-visita.md) |
 | Benzedeira: cidade dela e da igreja de Santa Isabel (sessão de 11/10/2026) | Ela aprendeu a jaculatória ouvindo um padre batizar na igreja de Santa Isabel; a cidade não foi informada | Baixa | ❌ A confirmar com o responsável — ver [Temas/benzedeira.md](Temas/benzedeira.md) |
 | Número exato da lei do Dia Estadual de São João Maria (19.722 vs. 19.777) | Data (3 de maio) e existência do dia oficial confirmadas; número da lei diverge entre Diário Oficial e reportagem secundária | Baixa | 🟡 Confirmar antes de citar o número em material publicado — ver [Temas/monge-joao-maria.md](Temas/monge-joao-maria.md) |
 
@@ -59,6 +61,7 @@
 | Dragão do Encano Alto — discrepância geográfica com Guabiruba (revisão) | [Estados/SantaCatarina/cidades/Indaial/index.md](Estados/SantaCatarina/cidades/Indaial/index.md) | 20/09/2026 | ✅ Processado pelo @GameCreative (20/09/2026) |
 | 11 lendas de Santa Catarina — rodada 2 (processar) | [Handoffs/2026-09-20-lendas-sc-rodada-2.md](Handoffs/2026-09-20-lendas-sc-rodada-2.md) | 20/09/2026 | ❌ Não iniciado |
 | Teatro Carlos Gomes por dentro — visita guiada (processar) | [Handoffs/2026-10-11-teatro-carlos-gomes-visita.md](Handoffs/2026-10-11-teatro-carlos-gomes-visita.md) | 11/10/2026 | ❌ Não iniciado |
+| Museu da Família Colonial — referências de arte e ideias para Blumenau (brainstorm) | [Handoffs/2026-10-24-museu-da-familia-colonial.md](Handoffs/2026-10-24-museu-da-familia-colonial.md) | 03/11/2026 | ❌ Não iniciado |
 | Benzedeira — benzimento de fechamento de corpo e a fala dela (processar) | [Handoffs/2026-10-11-benzedeira.md](Handoffs/2026-10-11-benzedeira.md) | 12/10/2026 | ❌ Não iniciado |
 
 ---

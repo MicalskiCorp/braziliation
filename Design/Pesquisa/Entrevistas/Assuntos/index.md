@@ -10,6 +10,7 @@ que este liste o inventário de volta.
 | Assunto | Slug | Sessões | Página |
 |---|---|---|---|
 | Benzedeira | `benzedeira` | 1 (11/10/2026) | [`benzedeira.md`](benzedeira.md) |
+| Museu da Família Colonial (casas, parque da Edith, Cemitério dos Gatos, Mausoléu) | `museu-da-familia-colonial` | 1 (24/10/2026) | [`museu-da-familia-colonial.md`](museu-da-familia-colonial.md) |
 | Teatro Carlos Gomes | `teatro-carlos-gomes` | 1 (11/10/2026) | [`teatro-carlos-gomes.md`](teatro-carlos-gomes.md) |
 
 ## Assunto novo
