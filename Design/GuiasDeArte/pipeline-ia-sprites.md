@@ -305,6 +305,22 @@ Treine apenas depois de ter pelo menos 30 a 80 imagens aprovadas do próprio Bra
 
 Antes disso, prefira prompt fixo, paleta fixa, image-to-image e pixel pass manual.
 
+### Gate do projeto (ADR-014, 2026-11-03)
+
+Decisão vigente: **não treinar LoRA de estilo próprio ainda.** O assunto só reabre quando os três
+critérios valerem ao mesmo tempo — a contagem oficial é a tabela "Assets Registrados" de
+[`indices/assets.md`](../../Desenvolvimento/Docs/Architecture/indices/assets.md):
+
+1. **≥ 30 imagens próprias aprovadas no grid 48 PPU**, das quais **≥ 10 de personagem/inimigo** com pixel pass fechado;
+2. **modelo base decidido** — o A/B SDXL × Z-Image resolvido, porque LoRA é treinado *para* uma base (um LoRA de SDXL não serve no Z-Image);
+3. **≥ 2 personagens com sheet de animação aprovado**, para o treino ter noção de pose e não só de material.
+
+Quando reabrir, a rota é **treino em GPU alugada por hora** (`kohya_ss`), com os pesos
+`.safetensors` guardados junto dos outros LoRAs e **inferência sempre local no ComfyUI**. SaaS de
+treino gerenciado (tipo Scenario) está descartado — mensalidade sem relação com uso e pesos não
+exportáveis. Comparativo completo em
+[`decisao-lora-estilo-proprio.md`](../ArteFonte/IA/Models/decisao-lora-estilo-proprio.md).
+
 ## Trilha de Estudo
 
 ### Fase 1 — Fundamentos de Pixel Art

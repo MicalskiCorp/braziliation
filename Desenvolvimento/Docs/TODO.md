@@ -86,7 +86,6 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
-| Decidir o treino de LoRA de estilo próprio: RunPod por hora × Scenario (US$ 15/mês) × SDXL local em 8 GB | Usuário | Baixa | ❌ |
 | Decidir manter ou apagar os 11,7 GB de modelos Z-Image em `D:\Tools\ComfyUI` (depende do A/B fechado) | Usuário | Baixa | ⏸ depende do A/B SDXL × Z-Image |
 ---
 

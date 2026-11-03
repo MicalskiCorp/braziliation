@@ -11,6 +11,7 @@
 | [`bench-modelo-base-2026-09.md`](bench-modelo-base-2026-09.md) | SDXL × Z-Image Turbo — Z-Image para concept, SDXL + `pixel-art-xl` para referência pixelada |
 | [`bench-modelo-claude-spec-2026-09.md`](bench-modelo-claude-spec-2026-09.md) | Qual modelo Claude o `@SpriteArtist` usa para escrever spec JSON |
 | [`pesquisa-ferramentas-2026-07.md`](pesquisa-ferramentas-2026-07.md) | Ferramentas de sprite e animação por IA, com preços — decisão vigente: só free/local |
+| [`decisao-lora-estilo-proprio.md`](decisao-lora-estilo-proprio.md) | LoRA de estilo próprio (RunPod × Scenario × local em 8 GB) — decidido pelo ADR-014: não antes do gate de dataset; depois, GPU por hora com pesos locais |
 
 ## Workflows do ComfyUI (usados pelo `comfy_batch.py`)
 

@@ -86,7 +86,7 @@ Traduz o que o Criativo aprovou em documentação técnica navegável — featur
 5. Rodar `dotnet test`.
 
 - **Gate:** ADR substituído sem substituto quebra o teste
-- **Vigentes:** 002, 005, 006, 007, 008, 009, 010, 011, 012, 013 · substituídos: 001 (→004), 003 (→005) e 004 (→011). Lista conferida em 3 nov 2026; a fonte é [`architecture_decisions.md`](../Architecture/architecture_decisions.md) e a skill `novo-adr` manda atualizar esta linha ao registrar um ADR novo.
+- **Vigentes:** 002, 005, 006, 007, 008, 009, 010, 011, 012, 013, 014 · substituídos: 001 (→004), 003 (→005) e 004 (→011). Lista conferida em 3 nov 2026; a fonte é [`architecture_decisions.md`](../Architecture/architecture_decisions.md) e a skill `novo-adr` manda atualizar esta linha ao registrar um ADR novo.
 
 ## D6 — Handoff para a Implementação
 

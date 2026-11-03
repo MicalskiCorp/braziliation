@@ -36,6 +36,9 @@ improvisada. Silhueta legível em 1× antes de qualquer detalhe.
   linha no `lotes.md` do context pack. Seed, modelo e o que mudou entram na linha.
 - **`palette_check.py` precisa APROVAR** antes do export para `Assets/Art/`.
 - Sem nome de artista vivo no prompt. Sem dataset de jogo comercial.
+- **Sem treino de LoRA de estilo próprio até o gate do ADR-014** (≥30 imagens próprias em 48 PPU,
+  ≥10 de personagem/inimigo, base decidida, 2 personagens animados). Até lá: prompt fixo, paleta
+  travada, img2img e pixel pass. Treino gerenciado em SaaS está descartado.
 - Prompt negativo de qualquer humanoide inclui `nude, naked, bare skin, exposed breasts,
   nsfw`, e a roupa é descrita com substantivo de peça concreta — nunca adjetivo solto.
   Isto veio de um incidente real (2026-07-25) com personagem baseada em pessoa histórica.
