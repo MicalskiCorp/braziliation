@@ -22,6 +22,7 @@ public sealed class TokenBudgetTests
     private static readonly Dictionary<string, string> DocumentExceptions = new()
     {
         ["Desenvolvimento/Docs/TODO-arquivo.md"] = "histórico congelado, fora do caminho de leitura dos agentes",
+        ["Desenvolvimento/Docs/Architecture/architecture_decisions.md"] = "dívida registrada: dividir em um arquivo por ADR",
         ["Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md"] = "dívida registrada: dividir a ficha da cidade por seção",
         ["Design/GuiasDeArte/pipeline-ia-sprites.md"] = "dívida registrada: dividir o guia por rota",
     };

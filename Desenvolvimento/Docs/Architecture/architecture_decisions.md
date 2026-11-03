@@ -262,4 +262,34 @@ Formato de cada entrada (os rótulos ficam em inglês — o `DocsConsistencyTest
 
 ---
 
+## ADR-013: Declaração ampla de uso de IA na ficha da Steam
+
+- **Date:** 2026-11-03
+- **Status:** Accepted
+- **Context:** A Steamworks exige declarar uso de IA na ficha da loja em duas categorias:
+  *Pre-Generated AI content* (conteúdo criado com IA durante o desenvolvimento e embarcado no
+  jogo) e *Live-Generated AI content* (gerado em tempo real durante o jogo — não se aplica ao
+  Braziliation, que não gera conteúdo em runtime). O projeto usa IA de duas formas distintas:
+  Claude Code para programação e documentação (ferramenta de desenvolvimento, não gera conteúdo
+  embarcado no produto final), e difusão via ComfyUI para concept art e ponto de partida de
+  sprites (skills `concept-art` e `sprite-pipeline`), que depois passam por reautoria/pixel art
+  manual em grau variável conforme o asset. Essa segunda frente é o caso ambíguo: parte da arte
+  final nasce de um gerador de difusão, mesmo quando o resultado embarcado é majoritariamente
+  retrabalho manual, e decidir o nível de disclosure caso a caso criaria risco de inconsistência
+  e de non-compliance por subdeclaração.
+- **Decision:** Declarar amplamente. A ficha da Steam marca *Pre-Generated AI content* e
+  descreve o uso: concept art e referência de sprites gerados por difusão (ComfyUI), refinados
+  por artista, mesmo quando o pixel art final embarcado é majoritariamente manual. Claude Code
+  fica fora do escopo da declaração — é ferramenta de desenvolvimento (programação/documentação),
+  não gera arte, texto, áudio ou vídeo que embarca no produto final, que é o que a Steam cobre
+  em "AI Generated Content".
+- **Consequences:** Nenhuma pendência de código decorre desta decisão — é texto na ficha da loja
+  Steam, preenchido na etapa de publicação (fora do escopo do repositório). Zero risco de
+  non-compliance por subdeclaração; em troca, a declaração ampla pode gerar reação de parte do
+  público "anti-IA" mesmo em casos onde o asset final é majoritariamente autoral. Revisitar se a
+  Steam mudar as categorias de disclosure, ou se o projeto deixar de usar difusão em qualquer
+  etapa da produção de arte (aí a declaração poderia ficar em branco).
+
+---
+
 *(Novos ADRs entram acima desta linha. Entradas curtas, com link para `Docs/Architecture/` ou para o código quando ajudar.)*

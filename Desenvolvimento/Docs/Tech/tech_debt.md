@@ -52,10 +52,10 @@ Format:
 
 ### Média
 
-- **Item:** `architecture_decisions.md` está no teto de tokens — o próximo ADR não cabe
-- **Where:** `Desenvolvimento/Docs/Architecture/architecture_decisions.md` (~4970 de 5000 tokens do `TokenBudgetTests`)
-- **Why:** O ADR-012 (Central, 2026-11-03) já precisou ser enxugado para caber. Um arquivo único com todos os ADRs só cresce.
-- **Fix:** Um arquivo por ADR em `Architecture/ADR/` com um `index.md` roteador (e a skill `novo-adr` apontando para lá), ou mover os ADRs substituídos (001, 003, 004) para um arquivo de histórico.
+- **Item:** `architecture_decisions.md` passou do teto de tokens — registrado como exceção em `TokenBudgetTests.DocumentExceptions`
+- **Where:** `Desenvolvimento/Docs/Architecture/architecture_decisions.md` (~5595 de 5000 tokens do `TokenBudgetTests`)
+- **Why:** O ADR-012 (Central, 2026-11-03) já precisou ser enxugado para caber; o ADR-013 (declaração de IA na Steam, 2026-11-03) estourou de fato. Um arquivo único com todos os ADRs só cresce.
+- **Fix:** Um arquivo por ADR em `Architecture/ADR/` com um `index.md` roteador (e a skill `novo-adr` apontando para lá), ou mover os ADRs substituídos (001, 003, 004) para um arquivo de histórico. Até lá, a exceção no teste segue valendo.
 
 - **Item:** Ruleset WFC de Blumenau é primeira versão — lâmina d'água serrilhada
 - **Where:** `Design/ArteFonte/Ferramentas/rulesets/blumenau-fachada.json`
