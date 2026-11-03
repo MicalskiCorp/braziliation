@@ -21,10 +21,10 @@
 
 ### Lendas
 
-| Item | Arquivo | Prioridade | Status |
-|------|---------|-----------|--------|
 > Status revisado em 2026-09-13: as seis estavam "🔨 Em andamento" desde abril, mas `por-categoria/criaturas.md` não tem nenhuma ficha — as lendas existem só no catálogo e nas fichas de cidade.
 
+| Item | Arquivo | Prioridade | Status |
+|------|---------|-----------|--------|
 | Criar ficha individual: Bruxas Açorianas | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Alta | ❌ Não iniciado |
 | Criar ficha individual: Lobisomem de Ratones | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Alta | ❌ Não iniciado |
 | Criar ficha individual: Enterrado Vivo (Catalepsia) | [`Lendas/por-categoria/criaturas.md`](Lendas/por-categoria/criaturas.md) | Média | ❌ Não iniciado |

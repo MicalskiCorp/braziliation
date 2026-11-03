@@ -1,0 +1,35 @@
+{% set t = e.tipo %}
+{% if t == 'pedido' %}
+<details class="nota"><summary>Pedido enviado ao agente</summary><div class="md">{{ md(e.texto, '', ex.id) }}</div></details>
+{% elif t == 'agente' %}
+<div class="msg agente md">{{ md(e.texto, '', ex.id) }}
+  {% if imagens %}<div class="imagens">{% for img in imagens %}<a href="/arquivo?c={{ quote(img) }}&e={{ ex.id }}" target="_blank" rel="noopener"><img src="/arquivo?c={{ quote(img) }}&e={{ ex.id }}" alt="{{ img }}" title="{{ img }}"></a>{% endfor %}</div>{% endif %}
+</div>
+{% elif t == 'voce' %}
+<div class="msg voce">{{ e.texto }}</div>
+{% elif t == 'ferramenta' %}
+<div class="ferr"><b>{{ e.nome }}</b> {{ e.resumo }}</div>
+{% elif t == 'erro_ferramenta' %}
+<div class="ferr erro">✗ {{ e.texto }}</div>
+{% elif t == 'permissao' %}
+<div class="permissao" data-request="{{ e.request_id }}">
+  <div><b>O agente pede permissão:</b> {{ e.ferramenta }}</div>
+  <pre>{{ e.resumo }}</pre>
+  {% if e.descricao and e.descricao != e.resumo %}<div class="sub">{{ e.descricao }}</div>{% endif %}
+  {% if pendente %}
+  <form class="acoes" action="/execucao/{{ ex.id }}/permissao" method="post" data-acao>
+    <input type="hidden" name="request_id" value="{{ e.request_id }}">
+    <button class="primario" name="decisao" value="permitir">Permitir</button>
+    <button name="decisao" value="sempre" title="Mesma ferramenta (e, no Bash, o mesmo começo de comando) passa sem perguntar até o fim desta execução">Permitir sempre nesta execução</button>
+    <button class="perigo" name="decisao" value="negar">Negar</button>
+    <input type="text" name="motivo" placeholder="motivo (opcional, vai para o agente)">
+  </form>
+  {% endif %}
+</div>
+{% elif t == 'decisao' %}
+<div class="nota decisao">{{ e.texto }}</div>
+{% elif t == 'fim_turno' %}
+<div class="fim-turno">{{ 'turno terminou com erro' if e.erro else '— fim do turno —' }}</div>
+{% else %}
+<div class="nota">{{ e.texto }}</div>
+{% endif %}

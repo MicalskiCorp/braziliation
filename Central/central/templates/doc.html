@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block titulo %}{{ caminho }}{% endblock %}
+{% block pagina %}doc{% endblock %}
+{% block conteudo %}
+<p class="sub mono">{{ caminho }}{% if execucao %} · na execução {{ execucao }}{% endif %}</p>
+{% if filhos is not none %}
+<ul>{% for f in filhos %}<li><a href="/doc?c={{ quote(f) }}{% if execucao %}&e={{ execucao }}{% endif %}">{{ f }}</a></li>{% endfor %}</ul>
+{% elif html %}<div class="md caixa">{{ html }}</div>
+{% else %}<pre class="caixa">{{ texto }}</pre>{% endif %}
+{% endblock %}

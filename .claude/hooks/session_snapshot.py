@@ -14,13 +14,13 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-TODOS = [
-    "Design/Pesquisa/TODO.md",
-    "Design/Criativo/TODO.md",
-    "Desenvolvimento/Docs/TODO.md",
-]
+# Conta pelo parser único dos TODOs (ADR-012): antes este hook tinha um leitor próprio que
+# discordava do `todo.py` — 31 contra 29 pendências Alta no Criativo em 2026-11-03.
+sys.path.insert(0, str(ROOT / ".claude" / "skills" / "gerir-todo"))
+import todo_md  # noqa: E402
+
+TODOS = list(todo_md.CAMADAS.values())
 UNITY_STATE = ROOT / ".claude" / "state" / "unity-validar.json"
-ABERTO = ("❌", "🔨", "📋", "⏸")
 
 
 def git(*args: str) -> str:
@@ -35,14 +35,11 @@ def git(*args: str) -> str:
 
 
 def pendencias_alta(relativo: str) -> int:
-    arquivo = ROOT / relativo
-    if not arquivo.exists():
+    try:
+        doc = todo_md.ler(ROOT / relativo)
+    except (OSError, UnicodeDecodeError):
         return 0
-    total = 0
-    for linha in arquivo.read_text(encoding="utf-8-sig", errors="replace").splitlines():
-        if linha.startswith("|") and "Alta" in linha and any(s in linha for s in ABERTO):
-            total += 1
-    return total
+    return sum(1 for i in doc.itens(so_abertos=True) if i.prioridade == "Alta")
 
 
 def main() -> None:

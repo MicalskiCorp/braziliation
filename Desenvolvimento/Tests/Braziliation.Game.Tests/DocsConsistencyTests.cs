@@ -20,6 +20,8 @@ public sealed class DocsConsistencyTests
         "TextMesh Pro", "Outputs", "Rejected",
         // Captura bruta de entrevistas (ADR-009): fora do git, nunca é documentação do projeto.
         "_inbox", "_pendente-curadoria", "_processado", "_lotes",
+        // Central (ADR-012): ambiente Python (traz .md de pacotes) e estado local das execuções.
+        ".venv", ".estado",
     };
 
     internal static IEnumerable<string> MarkdownFiles()

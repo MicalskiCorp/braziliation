@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="central-token" content="{{ token }}">
+<title>{% block titulo %}Central{% endblock %} · Braziliation</title>
+<link rel="stylesheet" href="/static/app.css">
+<script src="/static/app.js" defer></script>
+</head>
+<body data-pagina="{% block pagina %}{% endblock %}">
+<header class="topo">
+  <a class="marca" href="/">Central · Braziliation</a>
+  <nav>
+    <a href="/">Filas</a>
+    <a href="/execucoes">Execuções {% if n_atencao %}<span class="badge">{{ n_atencao }}</span>{% elif n_ativas %}<span class="badge cinza">{{ n_ativas }}</span>{% endif %}</a>
+    <a href="/conversa">Conversa livre</a>
+    <a href="/saude">Saúde</a>
+    <a href="/doc?c=Central/README.md">Como usar</a>
+  </nav>
+</header>
+<main>
+{% block conteudo %}{% endblock %}
+</main>
+</body>
+</html>

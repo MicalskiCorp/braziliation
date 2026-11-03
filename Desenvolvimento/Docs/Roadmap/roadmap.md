@@ -1,12 +1,12 @@
 # Roadmap – Braziliation
 
 > Visão por fases. O detalhe de cada pendência vive no [`TODO.md`](../TODO.md). A fase atual está bloqueada por decisões de design (premissa, inimigo base, arma inicial, números de Crafting e Build) — fechar com a skill `fechar-decisao`.
-> **Atualizado em 2026-09-13.** Legenda: ✅ feito · 🔨 parcial · ❌ não iniciado.
+> **Atualizado em 2026-11-03.** Legenda: ✅ feito · 🔨 parcial · ❌ não iniciado.
 
 ## Fase: Fundação — ✅ concluída
 
-- ✅ Unity 6 + URP 2D + Pixel Perfect (640×360, 32 PPU — ADR-004)
-- ✅ GameInitializer, CameraScaler
+- ✅ Unity 6 + URP 2D, referência 960×540 @ 48 PPU (ADR-011, substitui o 640×360 @ 32 PPU do ADR-004)
+- ✅ GameInitializer · 🔨 CameraScaler existe mas não está em nenhuma cena — ver o [`TODO.md`](../TODO.md)
 - ✅ Input via `GameInput` sobre o action map project-wide (ADR-006)
 - ✅ Layout de `Assets/Scripts/` por domínio (ADR-005)
 - ✅ Movimento básico (andar, pular) e colisão com layers dedicadas (Ground, Player, Enemy)

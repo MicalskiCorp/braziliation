@@ -53,7 +53,7 @@ Rotas de handoff válidas: Pesquisa→Criativo, Criativo→Documentação, Docum
 | `Design/Criativo/TODO.md` | `@GameCreative` |
 | `Desenvolvimento/Docs/TODO.md` | `@GameArchitect` — handoffs chegam em `## Handoffs do @GameCreative` |
 
-Operações nos três: skill `gerir-todo`; escrita no TODO da camada seguinte: skill `handoff`. Status de pendência vive **só** no TODO da camada; roadmap e backlog apenas linkam.
+Cada seção de TODO é também uma fila da **Central** (`Central/`, ADR-012), o painel local que executa itens com o agente dono e leva o resultado à validação. Operações nos três: skill `gerir-todo`; escrita no TODO da camada seguinte: skill `handoff`. Status de pendência vive **só** no TODO da camada; roadmap e backlog apenas linkam.
 
 ## Docs úteis
 - `Desenvolvimento/Docs/Processos/index.md` — manual de processos por camada (para humanos; o canônico é o agente/skill)

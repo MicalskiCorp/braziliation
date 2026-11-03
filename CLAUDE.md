@@ -25,6 +25,7 @@ camada, sem os agentes funcionais nem as skills.
 | Meta-check / paletas | `py .claude/skills/meta-check/check_meta_pairs.py` · `py Design/ArteFonte/Ferramentas/check_art_palettes.py` |
 | Ativar o pre-commit (uma vez por clone) | `git config core.hooksPath .githooks` |
 | Ferramentas de arte | `py Design/ArteFonte/Ferramentas/<script>.py` — **use `py`, não `python`** |
+| Central (painel das filas) | `Central\iniciar-central.cmd` → http://127.0.0.1:8765 · `py .claude/skills/gerir-todo/todo.py validar` |
 
 O build do Core copia as DLLs para `Desenvolvimento/Assets/Plugins/Braziliation/`
 automaticamente (target `CopyToUnityPlugins`, desativado quando `CI=true`). **Essa pasta
@@ -67,5 +68,8 @@ abrir o Unity, ou o projeto não compila.
   pre-commit a exige. O CI do Unity está desligado por decisão (ADR-010): a Unity encerrou
   a ativação de Personal em CI, e o job aparece como `skipped`, nunca como verde.
 - Commits vão direto no `main` até a v1 estar consolidada; o fluxo com PR vem depois.
+- **Central (ADR-012):** cada seção de TODO é uma fila em `Central/`. Sessão aberta pela
+  Central não commita nem dá push — o commit sai da validação do responsável, e o push é
+  sempre manual. TODO se lê e escreve pelo parser único `gerir-todo/todo_md.py`.
 - Dívida técnica vive em `Desenvolvimento/Docs/Tech/tech_debt.md`. Se você encontrar
   dívida durante uma tarefa, registre lá — não só no TODO.

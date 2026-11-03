@@ -13,6 +13,8 @@
 | Implementação | Desenvolvimento | 9 | [`implementacao.md`](implementacao.md) |
 | Orquestração | Transversal | 5 | [`orquestracao.md`](orquestracao.md) |
 
+**Central** (ADR-012): os processos que têm pendência viram filas no painel local `Central/` — selecionar itens, executar com o agente dono, conversar quando ele pedir decisão, validar e commitar. O manual continua valendo: a Central só aciona o agente e a skill de cada processo. Mapa processo → fila: [`Central/PLANO.md`](../../../Central/PLANO.md) §7.
+
 Critério de onde cada procedimento mora (modo, skill, script, teste, hook, regra ou fork): [`modo-skill-ou-regra.md`](modo-skill-ou-regra.md).
 
 ## Como as camadas se encadeiam

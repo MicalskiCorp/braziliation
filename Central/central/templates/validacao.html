@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block titulo %}Validação · {{ ex.fila_nome }}{% endblock %}
+{% block pagina %}validacao{% endblock %}
+{% block conteudo %}
+<div id="validacao" data-execucao="{{ ex.id }}" data-proximo="{{ proximo }}"></div>
+<p class="sub"><a href="/">Filas</a> › <a href="/execucao/{{ ex.id }}">{{ ex.fila_nome }}</a> › validação</p>
+<h1>Validação <span class="selo">{{ ex.rotulo }}</span></h1>
+<p class="sub">{{ '@' ~ ex.agente if ex.agente else 'Edições manuais' }} · {{ 'árvore principal' if ex.modo == 'principal' else 'worktree ' ~ ex.branch }}{% if ex.cwd %} · <span class="mono">{{ ex.cwd }}</span>{% endif %}</p>
+{% if ex.mensagem %}<div class="caixa {{ 'erro' if ex.estado in ('conflito', 'erro') else 'info' }}">{{ ex.mensagem }}</div>{% endif %}
+
+{% if ex.estado == 'commitada' %}
+  <div class="caixa info">Commit <code>{{ ex.commit[:10] }}</code>{% if ex.integrada %} no branch principal{% endif %}. O push continua manual, pelo VS Code.</div>
+{% endif %}
+{% if ex.estado == 'conflito' %}
+  <form action="/execucao/{{ ex.id }}/integrar" method="post" data-acao class="barra"><button class="primario">Integrar de novo</button>
+  <span class="sub">Depois de resolver no worktree, ou de commitar/descartar o que trava a árvore principal.</span></form>
+{% endif %}
+
+{% if ex.resultado %}
+<h2>O que o agente diz que fez</h2>
+{% if ex.resultado.erro %}<div class="caixa erro">{{ ex.resultado.erro }}</div>{% endif %}
+<table>
+  <tr><th>Item</th><th>Situação</th><th>Resumo</th></tr>
+  {% for i in ex.resultado['itens'] %}
+  <tr><td>{{ i.titulo }}</td>
+    <td><span class="selo {{ 'ok' if i.situacao == 'feito' else 'aviso' }}">{{ i.situacao }}</span></td>
+    <td>{{ md(i.resumo or '', '', ex.id) }}</td></tr>
+  {% endfor %}
+</table>
+{% elif ex.estado == 'aguardando-validacao' %}
+<div class="caixa aviso">A execução veio para a validação sem o bloco de resultado do agente — confira o diff com atenção.</div>
+{% endif %}
+
+<h2>Checagens</h2>
+{% if ex.checagens %}
+<table>
+  {% for nome, c in ex.checagens.items() %}
+  <tr><td>{{ nome }}</td>
+    <td><span class="selo {{ 'ok' if c.estado == 'ok' else ('aviso' if c.estado == 'rodando' else 'erro') }}">{{ c.estado }}</span> <span class="sub">{{ c.quando }}</span></td>
+    <td>{% if c.saida %}<details><summary class="sub">saída</summary><pre>{{ c.saida }}</pre></details>{% endif %}</td></tr>
+  {% endfor %}
+</table>
+{% else %}<p class="sub">Ainda não rodaram.</p>{% endif %}
+{% if ex.ativa %}
+<div class="barra">
+  <form action="/execucao/{{ ex.id }}/checagens" method="post" data-acao><button>Rodar as checagens de novo</button></form>
+  {% if ex.modo == 'principal' %}
+  <form action="/execucao/{{ ex.id }}/checagens" method="post" data-acao><input type="hidden" name="so" value="unity">
+    <button {% if unity_aberto %}disabled title="Feche o Editor do Unity"{% endif %}>unity-validar (~90 s)</button></form>
+  {% if unity_aberto %}<span class="sub">O Editor do Unity está aberto — feche-o para rodar o unity-validar.</span>{% endif %}
+  {% endif %}
+</div>
+{% endif %}
+
+{% if fora %}
+<h2>Fora do git</h2>
+<div class="caixa aviso">Estes arquivos mudaram durante a execução e não são versionados — o descarte não os desfaz.
+  <details><summary>{{ fora|length }} arquivo(s)</summary><pre>{{ fora|join('\n') }}</pre></details></div>
+{% endif %}
+
+{% if ex.estado == 'aguardando-validacao' %}
+<h2>Diff</h2>
+{% if not arquivos %}<div class="caixa">Nenhum arquivo versionado mudou.</div>{% endif %}
+<form id="form-commit" action="/execucao/{{ ex.id }}/commit" method="post" data-acao data-esperando="Commitando — o pre-commit roda os testes…">
+  {% for a in arquivos %}
+  <details class="diff" {% if loop.index <= 6 %}open{% endif %}>
+    <summary><input type="checkbox" name="arquivos" value="{{ a.caminho }}" checked> {{ a.caminho }} <span class="selo">{{ a.estado }}</span></summary>
+    {% if a.binario %}
+      {% if a.caminho.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp')) %}<div class="imagens"><img src="/arquivo?c={{ quote(a.caminho) }}&e={{ ex.id }}" alt=""></div>{% else %}<pre>(binário)</pre>{% endif %}
+    {% else %}<pre>{% for l in a.patch.splitlines() %}<span class="{{ 'hunk' if l.startswith('@@') else ('add' if l.startswith('+') and not l.startswith('+++') else ('del' if l.startswith('-') and not l.startswith('---') else '')) }}">{{ l }}</span>
+{% endfor %}</pre>{% endif %}
+  </details>
+  {% endfor %}
+  {% if arquivos %}
+  <h2>Commit</h2>
+  <p class="sub">Local, pelo pre-commit do projeto. {{ 'Os arquivos desmarcados somem junto com o worktree.' if ex.modo == 'worktree' else 'Os desmarcados ficam sem commit na árvore principal.' }} O push é sempre manual, pelo VS Code.</p>
+  <textarea name="mensagem" rows="9">{{ mensagem_commit }}</textarea>
+  <p><label><input type="checkbox" name="revisei" value="1"> Revisei o diff e as checagens</label></p>
+  <button class="primario">Commitar</button>
+  {% endif %}
+</form>
+
+<h2>Não está bom?</h2>
+<form action="/execucao/{{ ex.id }}/ajuste" method="post" data-acao>
+  <textarea name="texto" placeholder="O que o agente precisa ajustar — ele continua na mesma sessão." required></textarea>
+  <div class="barra"><button>Pedir ajuste ao agente</button></div>
+</form>
+{% endif %}
+{% if ex.ativa or ex.estado == 'erro' %}
+<form action="/execucao/{{ ex.id }}/descartar" method="post" data-acao class="barra"
+      data-confirmar="Descartar? Tudo o que mudou nos arquivos versionados volta ao estado anterior.">
+  <button class="perigo">Descartar a execução</button></form>
+{% endif %}
+{% endblock %}

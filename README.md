@@ -27,6 +27,7 @@ Braziliation/                   ← raiz do repositório
 │   ├── ArteFonte/              ← ferramentas de arte, context packs e saídas de IA
 │   ├── GuiasDeArte/            ← bíblia visual, paletas, escala e pipelines de sprite
 │   └── Models/                 ← templates de documentação criativa
+├── Central/                    ← central web local de gestão do projeto (plano em PLANO.md)
 ├── .claude/                    ← Claude Code: 11 agentes, 16 skills, hooks, rules, settings
 ├── .github/                    ← plataforma GitHub: CI e templates de issue/PR
 │   ├── workflows/              ← GitHub Actions (ci.yml, unity-ci.yml)

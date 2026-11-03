@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block titulo %}Conversa livre{% endblock %}
+{% block pagina %}conversa{% endblock %}
+{% block conteudo %}
+<h1>Conversa livre e ações globais</h1>
+<p class="sub">Para o que não é item de fila: direção técnica, ADR, auditorias, uma sessão de orquestração. Segue o mesmo ciclo — chat, validação, commit.</p>
+<h2>Ações prontas</h2>
+<div class="grade">
+  {% for chave, p in presets.items() %}
+  <form class="cartao" action="/conversa" method="post" data-acao>
+    <input type="hidden" name="preset" value="{{ chave }}">
+    <div class="nome">{{ {'validar-todos': 'Auditar TODOs e cobertura', 'structure-audit': 'Auditar estrutura', 'tokens': 'Análise de tokens', 'revisao-qa': 'Revisão de QA', 'sessao': 'Sessão de orquestração'}[chave] }}</div>
+    <div class="sub">@{{ p[0] }} · worktree</div>
+    <div class="rodape"><button>Abrir</button></div>
+  </form>
+  {% endfor %}
+</div>
+<h2>Conversa com um agente</h2>
+<form action="/conversa" method="post" data-acao class="caixa">
+  <p><label>Agente <select name="agente"><option value="">(sessão padrão, sem agente)</option>{% for a in agentes %}<option>{{ a }}</option>{% endfor %}</select></label>
+     <label>Onde <select name="modo"><option value="worktree">worktree próprio (paralelo, seguro)</option><option value="principal">árvore principal (Unity, arquivos fora do git)</option></select></label></p>
+  <textarea name="mensagem" required placeholder="O que você quer discutir ou fazer"></textarea>
+  <div class="barra"><button class="primario">Abrir conversa</button></div>
+</form>
+{% endblock %}

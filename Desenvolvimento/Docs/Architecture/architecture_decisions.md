@@ -237,4 +237,29 @@ Formato de cada entrada (os rótulos ficam em inglês — o `DocsConsistencyTest
 
 ---
 
+## ADR-012: Central — painel local das filas de trabalho, com parser único dos TODOs
+
+- **Date:** 2026-11-03
+- **Status:** Accepted
+- **Context:** Os fluxos (TODOs de camada, handoffs, concept art, entrevistas, dívida) só eram
+  operáveis pelo chat do VS Code. E a leitura dos TODOs não era confiável: hook de sessão e
+  `todo.py` discordavam (31 × 29 Alta no Criativo), uma citação partia a tabela de Lendas, um
+  handoff estava ❌ numa camada e processado na outra.
+- **Decision:** (1) Parser único `gerir-todo/todo_md.py`, vocabulário e esquema em
+  `.claude/rules/todos.md`, `todo.py validar` no pre-commit e no CI. (2) Central em `Central/`
+  ([plano](../../../Central/PLANO.md)): camada externa — importa o projeto, nada importa ela —,
+  web em Python só em `127.0.0.1`, sempre ligada pelo Agendador. Uma fila por seção de TODO (mais
+  dívida e entrevistas); itens selecionados rodam com o agente dono pelo `claude -p` (mesma
+  licença, `CLAUDE.md`, hooks e skills), com chat para decisão e permissão, validação do diff e
+  commit local pelo pre-commit, só com confirmação. Agente não commita nem dá push; **push só
+  manual, pelo VS Code**. Filas de Markdown rodam em worktree próprio, em paralelo; as que
+  dependem de arquivo fora do git, do Unity ou da GPU usam a árvore principal, uma por vez.
+- **Consequences:** Status continua só nos TODOs; a Central guarda apenas execuções e conversas
+  em `Central/.estado/`. Toda ação exige token e `Host`/`Origin` da própria Central (DNS
+  rebinding). O protocolo `stream-json` pode mudar numa atualização do Claude Code — há teste de
+  contrato com uma conversa gravada. Sem `AskUserQuestion` no modo sem interface: o agente
+  pergunta em texto. Acesso de fora da máquina (Tailscale) exige revisar este ADR.
+
+---
+
 *(Novos ADRs entram acima desta linha. Entradas curtas, com link para `Docs/Architecture/` ou para o código quando ajudar.)*

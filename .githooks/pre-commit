@@ -18,7 +18,8 @@ if command -v py >/dev/null 2>&1; then PY=py
 elif command -v python3 >/dev/null 2>&1; then PY=python3
 else PY=python; fi
 
-LOG="$ROOT/.git/pre-commit.log"
+# git-dir e não "$ROOT/.git": num worktree (as execuções da Central, ADR-012) `.git` é arquivo.
+LOG="$(git rev-parse --absolute-git-dir)/pre-commit.log"
 FALHOU=0
 
 # 1. Testes .NET — cobrem o core e as guardas do repositório (.gitignore, docs,
@@ -66,8 +67,42 @@ if [ -n "$UNITY_CS" ]; then
   fi
 fi
 
+# 3. TODOs de camada — parser único (ADR-012). Lê a versão em stage; leva menos de 1 s.
+#    Por quê: em 2026-11-03 uma citação no meio da tabela de Lendas escondia dois itens Alta
+#    de um dos leitores, e três ✅ seguiam no TODO de Desenvolvimento. Ninguém via.
+echo "[pre-commit] todo.py validar..."
+if ! $PY .claude/skills/gerir-todo/todo.py validar --indice >"$LOG" 2>&1; then
+  cat "$LOG"; FALHOU=1
+fi
+if echo "$STAGED" | grep -qE '^\.claude/skills/gerir-todo/|^\.claude/hooks/session_snapshot\.py$'; then
+  echo "[pre-commit] testes do parser de TODO..."
+  if ! $PY -m unittest discover -s .claude/skills/gerir-todo/tests >"$LOG" 2>&1; then
+    tail -30 "$LOG"; FALHOU=1
+  fi
+fi
+
+# 4. Central (ADR-012) — testes no venv dela. Num worktree de execução da Central o venv não
+#    existe; o do checkout principal serve, porque o código testado é o desta árvore.
+if echo "$STAGED" | grep -q '^Central/'; then
+  VENV_PY=""
+  PRINCIPAL=$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")
+  for base in "$ROOT" "$PRINCIPAL"; do
+    for py in "$base/Central/.venv/Scripts/python.exe" "$base/Central/.venv/bin/python"; do
+      [ -z "$VENV_PY" ] && [ -x "$py" ] && VENV_PY="$py"
+    done
+  done
+  if [ -z "$VENV_PY" ]; then
+    echo "[pre-commit] AVISO: Central/.venv não existe — testes da Central não rodaram (ver Central/README.md)"
+  else
+    echo "[pre-commit] testes da Central..."
+    if ! (cd Central && "$VENV_PY" -m unittest discover -s tests -t . >"$LOG" 2>&1); then
+      tail -30 "$LOG"; FALHOU=1
+    fi
+  fi
+fi
+
 if [ "$FALHOU" -ne 0 ]; then
-  echo "[pre-commit] Commit bloqueado. Log completo: .git/pre-commit.log"
+  echo "[pre-commit] Commit bloqueado. Log completo: $LOG"
   exit 1
 fi
 exit 0

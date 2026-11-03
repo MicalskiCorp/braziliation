@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block titulo %}Saúde{% endblock %}
+{% block pagina %}saude{% endblock %}
+{% block conteudo %}
+<h1>Saúde do projeto</h1>
+<table>
+  <tr><td>Branch</td><td><code>{{ s.branch }}</code> · {{ s.ultimo_commit }}</td></tr>
+  <tr><td>Remoto</td><td>{{ s.frente }} commit(s) à frente, {{ s.atras }} atrás <span class="sub">— o push é manual, pelo VS Code</span></td></tr>
+  <tr><td>Árvore principal</td><td>{% if s.alterados %}<details><summary>{{ s.alterados|length }} alteração(ões) sem commit</summary><pre>{{ s.alterados|join('\n') }}</pre></details>{% else %}limpa{% endif %}</td></tr>
+  <tr><td>Pre-commit</td><td>{% if s.hooks == '.githooks' %}<span class="selo ok">ativo</span>{% else %}<span class="selo erro">desativado</span> — rode <code>git config core.hooksPath .githooks</code>{% endif %}</td></tr>
+  <tr><td>Último unity-validar</td><td>{% if s.unity %}{{ s.unity.quando }} · <span class="selo {{ 'ok' if s.unity.ok else 'erro' }}">{{ 'OK' if s.unity.ok else 'falhou' }}</span>{% if s.unity.testes %} EditMode {{ s.unity.testes.passaram }}/{{ s.unity.testes.total }}{% endif %}{% else %}nunca rodou{% endif %}
+    {% if s.unity_aberto %} · <span class="selo aviso">Editor aberto</span>{% endif %}</td></tr>
+  <tr><td>Ferramentas</td><td>{% for nome, caminho in ferramentas.items() %}<div><code>{{ nome }}</code> {% if caminho %}<span class="sub mono">{{ caminho }}</span>{% else %}<span class="selo erro">não encontrado</span>{% endif %}</div>{% endfor %}</td></tr>
+  <tr><td>Listener do WhatsApp</td><td>{{ listener.tarefa }}</td></tr>
+  {% if uso %}<tr><td>Uso do plano</td><td>{% for nome, janela in (uso.unifiedWindows or {}).items() %}{{ nome }}: {{ (janela.utilization * 100)|round|int }}% {% endfor %}<span class="sub">(da última execução)</span></td></tr>{% endif %}
+</table>
+<h2>Checagens sob demanda</h2>
+<p class="sub">Rodam na árvore principal.</p>
+<table>
+  {% for nome in nomes_gates %}{% set g = gates.get(nome) %}
+  <tr><td>{{ nome }}</td>
+    <td>{% if g %}<span class="selo {{ 'ok' if g.estado == 'ok' else ('aviso' if g.estado == 'rodando' else 'erro') }}">{{ g.estado }}</span> <span class="sub">{{ g.quando }}</span>{% endif %}</td>
+    <td>{% if g and g.saida %}<details><summary class="sub">saída</summary><pre>{{ g.saida }}</pre></details>{% endif %}</td>
+    <td><form action="/saude/gate" method="post" data-acao data-recarregar><input type="hidden" name="nome" value="{{ nome }}"><button>Rodar</button></form></td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

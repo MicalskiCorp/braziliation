@@ -7,23 +7,27 @@ de KB — para produzir uma lista de poucas linhas. Aqui o código faz a leitura
 recebe só a lista; o que exige julgamento (se entra no TODO, com que prioridade) continua
 com ele.
 
+A leitura dos TODOs de camada é a do parser único `todo_md.py` (ADR-012) — o mesmo do
+hook de sessão, do pre-commit e da Central.
+
 Uso:
   py .claude/skills/gerir-todo/todo.py listar {pesquisa|criativo|dev}
   py .claude/skills/gerir-todo/todo.py varredura {criativo|pesquisa}
+  py .claude/skills/gerir-todo/todo.py validar [pesquisa|criativo|dev]   # sem camada = os três
+  py .claude/skills/gerir-todo/todo.py validar --indice                  # a versão em stage (pre-commit)
 """
 import re
 import sys
 import unicodedata
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
-TODOS = {
-    "pesquisa": ROOT / "Design/Pesquisa/TODO.md",
-    "criativo": ROOT / "Design/Criativo/TODO.md",
-    "dev": ROOT / "Desenvolvimento/Docs/TODO.md",
-}
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import todo_md  # noqa: E402
+
+ROOT = todo_md.ROOT
+TODOS = {nome: ROOT / rel for nome, rel in todo_md.CAMADAS.items()}
 CRIATIVO = ROOT / "Design/Criativo"
-ABERTO = ("❌", "📋", "🔨", "⏸")
+ABERTO = todo_md.ABERTOS
 MARCADORES = [r"\{TODO\}", r"\*\(a definir\)\*", r"\*\(Escrever aqui\)\*", r"\*\(nenhum"]
 
 
@@ -66,14 +70,10 @@ def status(celulas) -> str:
 
 
 def listar(camada: str) -> None:
-    texto = ler(TODOS[camada])
+    doc = todo_md.ler(TODOS[camada])
     por_secao = {}
-    for secao, cel in linhas_de_tabela(texto):
-        s = status(cel)
-        if "Concluído" in secao or s not in ABERTO:
-            continue
-        alta = "Alta" in cel
-        por_secao.setdefault(secao, []).append((s, alta, limpo(cel[0])))
+    for item in doc.itens(so_abertos=True):
+        por_secao.setdefault(item.secao, []).append((item.status, item.prioridade == "Alta", item.titulo))
     total = sum(len(v) for v in por_secao.values())
     print(f"{TODOS[camada].relative_to(ROOT).as_posix()} — {total} pendência(s) aberta(s)")
     for secao, itens in por_secao.items():
@@ -149,13 +149,38 @@ def varredura_pesquisa() -> None:
         print(f"   {'no TODO ' if chave(e) in todo else 'NOVO    '} {e}")
 
 
+def do_indice(camada: str):
+    """Versão em stage do TODO — o que o commit vai gravar, não o que está no disco."""
+    import subprocess
+    rel = todo_md.CAMADAS[camada]
+    r = subprocess.run(["git", "show", f":{rel}"], cwd=ROOT, capture_output=True)
+    texto = r.stdout.decode("utf-8").replace("\r\n", "\n") if r.returncode == 0 else ""
+    return todo_md.analisar(texto, ROOT / rel)
+
+
+def validar(camadas, indice: bool = False) -> int:
+    falhas = 0
+    for camada in camadas:
+        doc = do_indice(camada) if indice else todo_md.ler(TODOS[camada])
+        problemas = todo_md.validar(doc)
+        falhas += len(problemas)
+        print(f"{doc.relativo}: {'OK' if not problemas else f'{len(problemas)} problema(s)'}")
+        for p in problemas:
+            print(f"   {p}")
+    return 1 if falhas else 0
+
+
 def main() -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
+    if sys.argv[1:] == ["validar"] or sys.argv[1:] == ["validar", "--indice"]:
+        return validar(list(TODOS), indice="--indice" in sys.argv)
     if len(sys.argv) != 3:
         print(__doc__)
         return 2
     op, camada = sys.argv[1], sys.argv[2]
+    if op == "validar" and camada in TODOS:
+        return validar([camada])
     if op == "listar" and camada in TODOS:
         listar(camada)
     elif op == "varredura" and camada == "criativo":

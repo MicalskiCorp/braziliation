@@ -91,3 +91,8 @@ Design/Pesquisa/Entrevistas/_lotes/
 !Design/Pesquisa/Entrevistas/_processado/.gitkeep
 
 # Git LFS placeholders handled separately
+
+# Central (ADR-012): ambiente Python e estado próprio (execuções, conversas, log) — nunca versionados.
+Central/.venv/
+Central/.estado/
+__pycache__/

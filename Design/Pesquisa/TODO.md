@@ -57,9 +57,6 @@
 
 | Tema | Arquivo Handoff | Data | Status |
 |------|----------------|------|--------|
-| Indaial — lendas do Médio Vale do Itajaí (processar) | [Handoffs/2026-09-20-indaial-lendas.md](Handoffs/2026-09-20-indaial-lendas.md) | 20/09/2026 | ✅ Processado pelo @GameCreative (20/09/2026) |
-| Dragão do Encano Alto — discrepância geográfica com Guabiruba (revisão) | [Estados/SantaCatarina/cidades/Indaial/index.md](Estados/SantaCatarina/cidades/Indaial/index.md) | 20/09/2026 | ✅ Processado pelo @GameCreative (20/09/2026) |
-| 11 lendas de Santa Catarina — rodada 2 (processar) | [Handoffs/2026-09-20-lendas-sc-rodada-2.md](Handoffs/2026-09-20-lendas-sc-rodada-2.md) | 20/09/2026 | ❌ Não iniciado |
 | Teatro Carlos Gomes por dentro — visita guiada (processar) | [Handoffs/2026-10-11-teatro-carlos-gomes-visita.md](Handoffs/2026-10-11-teatro-carlos-gomes-visita.md) | 11/10/2026 | ❌ Não iniciado |
 | Museu da Família Colonial — referências de arte e ideias para Blumenau (brainstorm) | [Handoffs/2026-10-24-museu-da-familia-colonial.md](Handoffs/2026-10-24-museu-da-familia-colonial.md) | 03/11/2026 | ❌ Não iniciado |
 | Benzedeira — benzimento de fechamento de corpo e a fala dela (processar) | [Handoffs/2026-10-11-benzedeira.md](Handoffs/2026-10-11-benzedeira.md) | 12/10/2026 | ❌ Não iniciado |
@@ -77,3 +74,6 @@
 | Blumenau — handoff factual de teatro, sistema hídrico, Edith Gaertner, Museu da Família Colonial e Mausoléu processado pela camada criativa | 2026-05-02 |
 | Indaial — pesquisa factual aprovada e salva (Warnow, Ponte Coberta, Vale do Ribeirão Encano, lenda da Igreja São Luís de França, Trilha Memórias de Indaial, FIC); botija/luz da botija e sons fantasmas checados e registrados como não confirmados localmente | 2026-09-20 |
 | 11 lendas de Santa Catarina (rodada 2) pesquisadas e aprovadas: Túnel de Siderópolis, O Gritador, Monge João Maria, Leprosário de São Francisco do Sul, Gruta da Noiva (Piçarras), Moço Bonito do Baile e Chapeludo da Biblioteca (Joinville), 4 lendas de Navegantes, Túneis secretos de Blumenau, Cemitério Histórico de Santa Bárbara; fichas novas de Siderópolis, São Francisco do Sul, Balneário Piçarras, Joinville e Navegantes criadas | 2026-09-20 |
+| Handoff processado pelo @GameCreative: Indaial — lendas do Médio Vale do Itajaí ([Handoffs/2026-09-20-indaial-lendas.md](Handoffs/2026-09-20-indaial-lendas.md)) | 2026-09-20 |
+| Handoff processado pelo @GameCreative: Dragão do Encano Alto — discrepância geográfica com Guabiruba (revisão) | 2026-09-20 |
+| Handoff processado pelo @GameCreative: 11 lendas de Santa Catarina — rodada 2 ([Handoffs/2026-09-20-lendas-sc-rodada-2.md](Handoffs/2026-09-20-lendas-sc-rodada-2.md)) — a baixa estava faltando aqui; o Criativo registrou o processamento em 2026-09-20 | 2026-09-20 |

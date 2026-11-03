@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block titulo %}Filas{% endblock %}
+{% block pagina %}painel{% endblock %}
+{% block conteudo %}
+<h1>Filas de trabalho</h1>
+<p class="sub">Cada fila é uma seção dos TODOs de camada (ou a dívida técnica e as entrevistas). Escolha a fila, selecione os itens e execute com o agente dono.</p>
+
+{% if atencao %}
+<div class="caixa aviso">
+  <h3>Aguardando você</h3>
+  <ul>
+  {% for e in atencao %}
+    <li><a href="/execucao/{{ e.id }}{% if e.estado in ('aguardando-validacao', 'conflito') %}/validacao{% endif %}">{{ e.fila_nome }}</a>
+      — <span class="selo {% if e.estado == 'aguardando-validacao' %}info{% elif e.estado in ('erro', 'conflito', 'interrompida') %}erro{% else %}aviso{% endif %}">{{ e.rotulo }}</span>
+      {% if e.pendentes %}<span class="selo aviso">{{ e.pendentes|length }} permissão(ões)</span>{% endif %}
+      <span class="sub">{{ e.itens|length }} item(ns){% if e.agente %} · @{{ e.agente }}{% endif %}</span></li>
+  {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% for aviso in sem_fila %}<div class="caixa erro">Seção sem fila no registro (<code>Central/filas.json</code>): {{ aviso }}</div>{% endfor %}
+{% if dessinc %}
+<div class="caixa erro"><h3>Handoffs dessincronizados entre Pesquisa e Criativo</h3><ul>{% for d in dessinc %}<li>{{ d }}</li>{% endfor %}</ul></div>
+{% endif %}
+
+{% for camada, filas in grupos %}
+<h2>{{ camada }}</h2>
+<div class="grade">
+  {% for f in filas %}{% set c = f.contagem() %}
+  <a class="cartao{% if not c.abertos %} vazia{% endif %}" href="/fila/{{ f.id }}">
+    <div class="nome">{{ f.nome }}</div>
+    <div class="numeros">
+      <span><b>{{ c.abertos }}</b> abertos</span>
+      {% if c.alta %}<span><b>{{ c.alta }}</b> Alta</span>{% endif %}
+      {% if c.bloqueados %}<span><b>{{ c.bloqueados }}</b> ⏸</span>{% endif %}
+    </div>
+    <div class="rodape">
+      {% if f.acompanhamento %}<span class="selo">acompanhamento</span>
+      {% else %}<span class="selo">{{ '@' ~ f.agente if f.agente != '@responsavel' else 'por responsável' }}</span>{% endif %}
+      {% if f.isolamento == 'principal' and not f.acompanhamento %}<span class="selo aviso">árvore principal</span>{% endif %}
+      {% if c.usuario %}<span class="selo aviso">{{ c.usuario }} com você</span>{% endif %}
+      {% if por_fila.get(f.id) %}<span class="selo info">{{ por_fila[f.id]|length }} em execução</span>{% endif %}
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% endfor %}
+
+{% if usuario %}
+<h2>Itens com você como responsável</h2>
+<table>
+  <tr><th>Fila</th><th>Item</th><th>Status</th></tr>
+  {% for f, i in usuario %}
+  <tr><td><a href="/fila/{{ f.id }}">{{ f.nome }}</a></td><td>{{ celula(i.titulo, f.arquivo) }}</td><td>{{ celula(i.texto_status, f.arquivo) }}</td></tr>
+  {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

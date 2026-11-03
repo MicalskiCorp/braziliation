@@ -75,7 +75,7 @@ Skill `nova-cidade`: scaffolding em `Design/Criativo/`, paleta em `Design/ArteCo
 |------|------------|------|
 | Início de sessão (hook `SessionStart`) | `.claude/hooks/session_snapshot.py` | Injeta git, pendências Alta dos 3 TODOs e o último `unity-validar` |
 | Ao editar (`PreToolUse`/`PostToolUse`) | `block_generated_dirs.py`, `build_game_core.py` | Escrita em pasta gerada ou em arquivo congelado (`TODO-arquivo.md`, DLL do core); core que parou de compilar |
-| Antes do commit (`.githooks/pre-commit`) | `dotnet test`, `meta-check/check_clean_checkout.py`, `unity-validar/scripts/check_state.py` | Testes e guardas, `.meta` faltando, cor fora da paleta, script Unity em stage sem validação OK posterior à edição. Os gates de `.meta` e paleta rodam contra o **índice** desde 2026-09-19, não contra o disco — ver §8.1. Ativar por clone: `git config core.hooksPath .githooks` |
+| Antes do commit (`.githooks/pre-commit`) | `dotnet test`, `gerir-todo/todo.py validar`, `meta-check/check_clean_checkout.py`, `unity-validar/scripts/check_state.py`; testes do parser e da Central quando eles estão em stage | Testes e guardas, TODO malformado (tabela partida, item sem status, ✅ fora de `## Concluído`), `.meta` faltando, cor fora da paleta, script Unity em stage sem validação OK posterior à edição. Os gates de `.meta` e paleta rodam contra o **índice** desde 2026-09-19, não contra o disco — ver §8.1. Ativar por clone: `git config core.hooksPath .githooks` |
 | No push e no checkout (`.githooks/post-checkout`, `post-commit`, `post-merge`, `pre-push`) | Hooks do Git LFS | Objetos LFS baixados e enviados. Versionados desde 2026-09-19: como o `core.hooksPath` aponta para uma pasta do repositório, o `git lfs install` os deposita ali, e sem o `pre-push` um push publica ponteiros sem os binários (218 arquivos em LFS). Por isso o **git-lfs virou requisito rígido**: sem ele instalado, os quatro saem com código 2 e o git aborta a operação |
 | No CI (`.github/workflows/ci.yml`) | os mesmos | O que escapou do pre-commit |
 | No CI Unity (`unity-ci.yml`, GameCI) | nada — job `skipped` | **Desligado por decisão (ADR-010):** a Unity encerrou a ativação de Personal em CI. A cobertura do lado Unity é a skill `unity-validar`, exigida pelo pre-commit ([`unity-ci.md`](unity-ci.md)) |
@@ -91,6 +91,10 @@ O ponto cego estrutural do projeto: o que existe na máquina de quem trabalha n�
 Foi assim que duas pastas de arte vazias, com os `.meta` ainda versionados, derrubaram o CI de 13 a 19 set 2026 enquanto o `meta-check` local aprovava todo commit. Seis dias, oito runs vermelhos, nenhuma trava local capaz de ver.
 
 `meta-check/check_clean_checkout.py` fecha a diferença: materializa o índice do git com `git checkout-index` numa pasta temporária e roda os gates **a partir dela**, então a versão commitada dos próprios scripts de gate é que decide. Custa ~5 s. O pre-commit o chama no lugar da checagem em disco; rodá-lo à mão antes de um push também vale, sobretudo depois de remover arquivos de uma pasta de `Assets/`.
+
+### 8.2 Central
+
+Painel local em `Central/` (ADR-012, [README](../../../Central/README.md)): uma fila por seção de TODO, mais entrevistas e dívida técnica. A execução abre o agente dono pelo `claude -p` — o mesmo `CLAUDE.md`, hooks e skills —, com `git commit` e `git push` bloqueados; o commit sai da tela de validação e passa por este pre-commit. Filas de Markdown rodam em worktree próprio e podem correr em paralelo; as demais usam a árvore principal, uma por vez.
 
 ## 9. Servidores MCP
 

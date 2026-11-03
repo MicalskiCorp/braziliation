@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block titulo %}{{ f.nome }}{% endblock %}
+{% block pagina %}fila{% endblock %}
+{% block conteudo %}
+<p class="sub"><a href="/">Filas</a> › {{ f.camada }}</p>
+<h1>{{ f.nome }}</h1>
+<div class="barra">
+  {% if f.acompanhamento %}<span class="selo">só acompanhamento</span>
+  {% else %}<span class="selo">executa com {{ '@' ~ f.agente if f.agente != '@responsavel' else 'o @ da coluna Responsável' }}</span>{% endif %}
+  {% if not f.acompanhamento %}
+    {% if f.isolamento == 'principal' %}<span class="selo aviso">árvore principal · uma execução por vez</span>
+    {% else %}<span class="selo ok">worktree próprio · roda em paralelo</span>{% endif %}
+  {% endif %}
+  {% if f.arquivo %}<a class="selo" href="/doc?c={{ quote(f.arquivo) }}">{{ f.arquivo }}{% if f.fonte.secao %} § {{ f.fonte.secao }}{% endif %}</a>{% endif %}
+  <a class="selo" href="/fila/{{ f.id }}?todos={{ 0 if todos else 1 }}">{{ 'só abertos' if todos else 'mostrar concluídos também' }}</a>
+</div>
+{% if f.nota %}<div class="caixa info">{{ f.nota }}</div>{% endif %}
+{% if f.instrucao %}<p class="sub">Orientação que vai para o agente: {{ f.instrucao }}</p>{% endif %}
+{% for d in dessinc %}<div class="caixa erro">{{ d }}</div>{% endfor %}
+
+{% if execucoes %}
+<div class="caixa info">
+  <h3>Execuções desta fila</h3>
+  <ul>{% for e in execucoes %}
+    <li><a href="/execucao/{{ e.id }}{% if e.estado in ('aguardando-validacao', 'conflito') %}/validacao{% endif %}">{{ e.id }}</a>
+      <span class="selo">{{ e.rotulo }}</span> {{ 'edições manuais' if not e.agente else '@' ~ e.agente }} · {{ e.itens|length }} item(ns)</li>
+  {% endfor %}</ul>
+</div>
+{% endif %}
+
+{% if listener %}
+<div class="caixa">
+  <h3>Listener do WhatsApp</h3>
+  <p>Tarefa agendada: <span class="selo {{ 'ok' if listener.tarefa in ('Em execução', 'Running') else 'aviso' }}">{{ listener.tarefa }}</span></p>
+  {% if listener.log %}<details><summary>Fim do log</summary><pre>{{ listener.log|join('\n') }}</pre></details>{% endif %}
+  {% if lotes %}<p class="sub">Lotes em <code>_lotes/</code>: {% for l in lotes %}{{ l.nome }} ({{ l.etapa }}){{ ', ' if not loop.last }}{% endfor %}</p>{% endif %}
+</div>
+{% endif %}
+
+{% if not itens %}
+  <div class="caixa">Nada {{ '' if todos else 'aberto ' }}nesta fila.</div>
+{% else %}
+<form id="form-executar" action="/fila/{{ f.id }}/executar" method="post" data-acao data-esperando="Preparando a execução…">
+  <div class="barra">
+    <label>Status <select data-filtro="status"><option value="">todos</option>{% for s, nome in status.items() %}<option value="{{ s }}">{{ s }} {{ nome }}</option>{% endfor %}</select></label>
+    <label>Prioridade <select data-filtro="prioridade"><option value="">todas</option>{% for p in prioridades %}<option>{{ p }}</option>{% endfor %}</select></label>
+    {% if responsaveis %}<label>Responsável <select data-filtro="responsavel"><option value="">todos</option>{% for r in responsaveis %}<option>{{ r }}</option>{% endfor %}</select></label>{% endif %}
+  </div>
+  {% if not f.acompanhamento %}
+  <details class="caixa">
+    <summary>Orientação extra para o agente (opcional)</summary>
+    <textarea name="orientacao" placeholder="Ex.: comece pelo item 2; use as fotos de ReferenciasVisuais; não crie personagem novo ainda."></textarea>
+  </details>
+  <div class="barra">
+    <button class="primario" type="submit">Executar selecionados (<span id="n-selecionados">0</span>)</button>
+    <span class="sub">Abre o chat com o agente. Nada é commitado sem a sua validação.</span>
+  </div>
+  {% endif %}
+</form>
+
+<table>
+  <tr>
+    <th>{% if not f.acompanhamento %}<input type="checkbox" data-selecionar-visiveis title="Selecionar os visíveis">{% endif %}</th>
+    <th>Item</th>{% if secoes|length > 1 %}<th>Seção</th>{% endif %}<th>Status</th><th>Prioridade</th>
+    {% if responsaveis %}<th>Responsável</th>{% endif %}<th>Referência</th><th></th>
+  </tr>
+  {% for i in itens %}{% set ocupado = em_exec.get(i.id) %}
+  <tr data-item data-status="{{ i.status }}" data-prioridade="{{ i.prioridade }}" data-responsavel="{{ i.responsavel }}"
+      class="{{ 'em-execucao' if ocupado }}">
+    <td>{% if not f.acompanhamento %}<input type="checkbox" name="itens" value="{{ i.id }}" form="form-executar"
+        {% if ocupado or not i.aberto %}disabled{% endif %}>{% endif %}</td>
+    <td>{{ celula(i.titulo_md or i.titulo, f.arquivo) }}
+      {% if i.descricao %}<div class="sub">{{ celula(i.descricao, f.arquivo) }}</div>{% endif %}
+      {% if i.correcao %}<div class="sub">Correção: {{ i.correcao }}</div>{% endif %}
+      {% if ocupado %}<div><a class="selo info" href="/execucao/{{ ocupado.id }}">em execução · {{ ocupado.rotulo }}</a></div>{% endif %}</td>
+    {% if secoes|length > 1 %}<td class="sub">{{ i.secao }}</td>{% endif %}
+    <td class="status">{{ celula(i.texto_status, f.arquivo) }}</td>
+    <td>{{ i.prioridade }}</td>
+    {% if responsaveis %}<td>{{ celula(i.responsavel, f.arquivo) }}</td>{% endif %}
+    <td>{{ celula(i.referencia, f.arquivo) }}</td>
+    <td>{% if f.fonte.todo and i.aberto and not ocupado %}
+      <details><summary class="sub">editar</summary>
+        <form action="/fila/{{ f.id }}/item/{{ i.id }}/status" method="post" data-acao>
+          <select name="valor">{% for s, nome in status.items() if s != '✅' %}<option value="{{ s }} {{ nome|capitalize }}"{% if s == i.status %} selected{% endif %}>{{ s }} {{ nome }}</option>{% endfor %}</select>
+          <button>Status</button></form>
+        <form action="/fila/{{ f.id }}/item/{{ i.id }}/prioridade" method="post" data-acao>
+          <select name="valor">{% for p in prioridades %}<option{% if p == i.prioridade %} selected{% endif %}>{{ p }}</option>{% endfor %}</select>
+          <button>Prioridade</button></form>
+        <form action="/fila/{{ f.id }}/item/{{ i.id }}/concluir" method="post" data-acao data-confirmar="Dar baixa neste item? A edição vai para a validação antes do commit.">
+          <button>Dar baixa</button></form>
+      </details>{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+{% if f.fonte.todo %}
+<details class="caixa">
+  <summary>Adicionar item</summary>
+  <form action="/fila/{{ f.id }}/adicionar" method="post" data-acao>
+    <p><label>Título<br><input type="text" name="titulo" required size="80"></label></p>
+    {% if secoes|length > 1 %}<p><label>Seção <select name="secao">{% for s in secoes %}<option>{{ s }}</option>{% endfor %}</select></label></p>{% endif %}
+    <p><label>Referência (link Markdown relativo ao TODO)<br><input type="text" name="referencia" size="80"></label></p>
+    <p><label>Prioridade <select name="prioridade">{% for p in prioridades %}<option{% if p == 'Média' %} selected{% endif %}>{{ p }}</option>{% endfor %}</select></label>
+       {% if responsaveis %}<label>Responsável <input type="text" name="responsavel" placeholder="`@UnityDeveloper`"></label>{% endif %}</p>
+    <button>Adicionar</button> <span class="sub">Entra num worktree e vai para a validação antes do commit.</span>
+  </form>
+</details>
+{% endif %}
+{% if f.fonte.todo in ('criativo', 'pesquisa') %}
+<form action="/fila/{{ f.id }}/varredura" method="post" data-acao data-esperando="Varrendo a camada…" class="barra">
+  <button>Varredura da camada</button><span class="sub">Lacunas que ainda não viraram item (só leitura).</span>
+</form>
+<div id="saida-acao" class="caixa oculto"><pre></pre></div>
+{% endif %}
+{% endblock %}

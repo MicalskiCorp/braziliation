@@ -11,13 +11,16 @@ Uma lógica para os três índices de pendência. Antes, cada agente descrevia a
 
 | TODO | Dono | Seções | Item concluído |
 |------|------|--------|----------------|
-| `Design/Pesquisa/TODO.md` | `@Historiador` | Estados a Pesquisar · Temas Transversais · Handoffs Pendentes para @GameCreative · Concluído | Sai da tabela e entra em `## Concluído` com a data |
+| `Design/Pesquisa/TODO.md` | `@Historiador` | Estados a Pesquisar · Temas Transversais · Pendências de Checagem · Handoffs Pendentes para @GameCreative · Concluído | Sai da tabela e entra em `## Concluído` com a data |
 | `Design/Criativo/TODO.md` | `@GameCreative` | História · Lendas · Cidades — {Estado} · Estados Planejados · Crafting & Build · Ideias · Concept Art Pendente · Handoffs de Pesquisa · Concluído | Sai da tabela e entra em `## Concluído` com a data (e o link, se houver DDR ou concept aprovado) |
 | `Desenvolvimento/Docs/TODO.md` | `@GameArchitect` | Handoffs do @GameCreative · Decisões de design · Unity · Gameplay · UI e arte · Ecossistema e processo | **A linha sai.** O registro é o commit. `TODO-arquivo.md` é histórico congelado — nunca editar |
 
-Status: ❌ não iniciado · 📋 rascunho · 🔨 em andamento · ⏸ bloqueado (sempre dizer do quê).
+Status: ❌ não iniciado · 📋 rascunho · 🔨 em andamento · ⏸ bloqueado (sempre dizer do quê) · 🟡 e 🎙️ só na Checagem da Pesquisa. Vocabulário e esquema de tabela completos: `.claude/rules/todos.md`. Todo leitor de TODO usa o parser único `todo_md.py` (ADR-012) — inclusive a Central.
 
 ## Operações
+
+### validar
+`py .claude/skills/gerir-todo/todo.py validar` confere os três TODOs contra o esquema (tabela partida, item sem status, ✅ fora de `## Concluído`, prioridade fora de Alta/Média/Baixa). Roda no pre-commit; rodar também depois de editar um TODO à mão.
 
 ### listar
 `py .claude/skills/gerir-todo/todo.py listar {pesquisa|criativo|dev}` devolve as pendências abertas por seção, com contagem por status e os itens Alta. Sem `Bash`: ler o TODO e resumir do mesmo jeito, destacando os ⏸ com o bloqueio.
