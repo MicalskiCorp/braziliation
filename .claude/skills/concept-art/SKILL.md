@@ -16,6 +16,7 @@ Roteiro executável da **etapa 2** do fluxo de 5 etapas, para personagens, criat
 5. **Gerar o lote** no ComfyUI local (setup em `Design/ArteFonte/IA/Models/comfyui-setup.md`; um modelo residente por vez):
    - texto: `py Design/ArteFonte/Ferramentas/comfy_batch.py --asset {slug} --seed {N} --positive "…" --negative "…"` — 6 a 12 thumbnails;
    - a partir de concept ou silhueta: `--reference-image {png} --denoise 0.4-0.6` — 1 imagem por submissão, variar a seed.
+   - ⚠️ o `comfy_batch.py` só dirige **SDXL**, embora o bench de modelo base tenha decidido **Z-Image** para esta etapa. Logue o modelo que de fato rodou — o script escreve SDXL fixo no log. Para rodar Z-Image hoje, patchear o campo `prompt` do workflow à mão (dívida aberta em `Docs/Tech/tech_debt.md`).
 6. **Log.** Linha em `Design/ArteFonte/IA/ContextPacks/{asset}/lotes.md`: seed, modelo e o que mudou em relação ao lote anterior.
 7. **Gate de decisão** — toda imagem termina em exatamente um lugar: aprovar → `IA/Selected/`; descartar → `IA/Rejected/`; iterar → novo lote com a mudança anotada. **Teto: 3 lotes por pedido de ajuste** — no terceiro sem resolver, levar o melhor candidato ao pixel pass (MCP `aseprite`).
 8. **Propor ao usuário.** Candidato em `Design/ArteConceitual/{categoria}/{asset-slug}/concept.png` + `concept.md` no formato de `Design/ArteConceitual/index.md` ("Convenção do concept art de asset"), com `Status: proposto` e todo o contexto usado: lore, prompts, seed, referência e denoise, variações. **Nunca marcar aprovado sozinho.**

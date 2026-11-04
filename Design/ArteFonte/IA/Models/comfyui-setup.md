@@ -60,6 +60,12 @@ Z-Image não vem como checkpoint único; são **três** arquivos separados:
 | `qwen_3_4b_fp8_mixed.safetensors` | `models/text_encoders/` | [Comfy-Org/z_image_turbo](https://huggingface.co/Comfy-Org/z_image_turbo) |
 | `z_image_ae.safetensors` | `models/vae/` | idem (`split_files/vae/ae.safetensors`) |
 
+> **Retenção decidida em 2026-11-03: os 11,7 GB ficam.** Os três arquivos têm papel
+> declarado (Etapa 2, pelo bench) e são a precondição do A/B pendente — apagar custaria
+> re-baixar 11,7 GB e fecharia o A/B por desistência. `D:` tem 983 GB livres, então não há
+> pressão de disco. O custo de manter **dois modelos é de RAM, não de disco**: rode um
+> residente por vez, como já manda o aviso acima.
+
 Três diferenças que quebram se você copiar o workflow do SDXL:
 
 - Text encoder é **Qwen** — `CLIPLoader` com `type: "qwen_image"`, e o encode é

@@ -57,6 +57,24 @@ Format:
 - **Why:** O ADR-012 (Central, 2026-11-03) já precisou ser enxugado para caber; o ADR-013 (declaração de IA na Steam, 2026-11-03) estourou de fato. Um arquivo único com todos os ADRs só cresce.
 - **Fix:** Um arquivo por ADR em `Architecture/ADR/` com um `index.md` roteador (e a skill `novo-adr` apontando para lá), ou mover os ADRs substituídos (001, 003, 004) para um arquivo de histórico. Até lá, a exceção no teste segue valendo.
 
+- **Item:** O veredito do bench de modelo base nunca entrou na rota operacional — `comfy_batch.py` só dirige SDXL
+- **Where:** `Design/ArteFonte/Ferramentas/comfy_batch.py` (linhas 65-71 e 106) · `Design/ArteFonte/IA/Models/workflow-zimage-thumbnails.json`
+- **Why:** O bench de 2026-09-03 decidiu **Z-Image Turbo para a Etapa 2 (concept)** e SDXL +
+  `pixel-art-xl` só para a rota de referência pixelada. A decisão está escrita em
+  `bench-modelo-base-2026-09.md` e em `comfyui-setup.md`, mas o executor não a implementa: o
+  `comfy_batch.py` escolhe entre dois workflows SDXL fixos, escreve em `wf["6"]["inputs"]["text"]`
+  e registra `"model": "sd_xl_base_1.0.safetensors"` **fixo** no log. Como o
+  `TextEncodeZImageOmni` lê o campo `prompt`, passar `--workflow workflow-zimage-thumbnails.json`
+  **não quebra**: ele grava um `text` que ninguém lê, gera com o prompt embutido no JSON e
+  mente no `lotes.md`. Falha silenciosa — a pior categoria. Resultado prático: a skill
+  `concept-art` roda SDXL em toda Etapa 2, e os 11,7 GB do Z-Image não têm rota de uso.
+- **Fix:** no `comfy_batch.py`, detectar o `class_type` do nó de encode (`TextEncodeZImageOmni`
+  → campo `prompt`; `CLIPTextEncode` → `text`), ajustar steps/cfg do destilado (8 / 1.0) e ler o
+  nome do modelo do próprio workflow em vez da constante. Enquanto não for pago, o aviso no
+  passo 5 da skill `concept-art` segura o engano, e o A/B pendente roda com o campo `prompt`
+  patcheado à mão. **Some quando o A/B fechar por abandono do Z-Image** — aí o certo é o
+  script recusar o workflow em vez de aprender a dirigi-lo.
+
 - **Item:** Ruleset WFC de Blumenau é primeira versão — lâmina d'água serrilhada
 - **Where:** `Design/ArteFonte/Ferramentas/rulesets/blumenau-fachada.json`
 - **Why:** A adjacência escrita à mão deixa `agua`/`lama` variarem de altura livremente, então

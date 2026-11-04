@@ -54,6 +54,19 @@ de pixel art de Z-Image instalado) e em **3,5× menos tempo**.
 2. **Enquadramento** — o prompt precisa de "full body, head to toe" para o Z-Image parar de
    entregar busto.
 3. **O tempo não é comparação limpa.** Ver abaixo.
+4. **O veredito não chegou ao executor** (achado de 2026-11-03). O `comfy_batch.py` só dirige os
+   dois workflows SDXL: escreve em `wf["6"]["inputs"]["text"]` e registra
+   `"model": "sd_xl_base_1.0.safetensors"` fixo no log. Como o `TextEncodeZImageOmni` lê o campo
+   `prompt`, apontar o script para o workflow do Z-Image **não dá erro** — gera com o prompt
+   embutido no JSON e mente no `lotes.md`. Na prática a Etapa 2 continua em SDXL, contra o que
+   está decidido aqui. Dívida aberta em `Desenvolvimento/Docs/Tech/tech_debt.md` (Média).
+   **É a precondição real da pendência 1**, não o contrário: até ela ser paga, patchear
+   `prompt` à mão.
+
+> **Retenção dos modelos — decidida em 2026-11-03: manter.** Os 11,7 GB do Z-Image ficam em
+> `D:\Tools\ComfyUI`. Nenhum desfecho das pendências acima produz "apagar" (se o Z-Image + LoRA
+> vencer, ele é a base; se perder, o veredito vigente já o usa na Etapa 2), e a pendência 1
+> **exige** os arquivos. Registro em [`comfyui-setup.md`](comfyui-setup.md#z-image-turbo--arquivos-e-diferenças).
 
 ## Achado estrutural, mais importante que o A/B
 
