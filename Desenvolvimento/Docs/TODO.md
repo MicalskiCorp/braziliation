@@ -39,7 +39,7 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
-| Fatiar `env_placeholder_castelo_tileset.png` e montar blockout com Tilemap | `@UnityDeveloper` | Baixa | ❌ opcional |
+| *(nenhum pendente — o blockout do castelo foi concluído em 2026-11-04)* | | | |
 
 ---
 

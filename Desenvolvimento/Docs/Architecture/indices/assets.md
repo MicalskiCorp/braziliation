@@ -43,7 +43,7 @@
 | Bootstrap | `Assets/Scenes/Bootstrap/` | Inicialização global e serviços |
 | Levels | `Assets/Scenes/Levels/` | Fases jogáveis |
 | Menus | `Assets/Scenes/Menus/MainMenu.unity` | Menu principal — primeira cena do build (movida de `Animations/Menu/` em 2026-09-13) |
-| Sandbox | `Assets/Scenes/Sandbox/` | Protótipos e testes |
+| Sandbox | `Assets/Scenes/Sandbox/` | Protótipos e testes — ex.: `CastleBlockout.unity` (blockout de nível com Tilemap, tileset placeholder Gothicvania) |
 | DemoGameplay | `Assets/Scenes/DemoGameplay.unity` | Cena jogável atual de demonstração — segunda do build |
 | SampleScene | `Assets/Scenes/SampleScene.unity` | Template do Unity, desativada no build |
 
@@ -114,7 +114,7 @@ vira a documentação visual. A URL canônica fica no campo `artefato` do
 | `env_placeholder_fundo_castelo.png` | idem | idem | CC0 | Fundo estático do `Background_Demo` — 960×608 (30 × 19 un) |
 | `chr_placeholder_heroi_{idle,run}_sheet.png` | `Assets/Art/ThirdParty/Gothicvania/Resources/Demo/Sheets/` | idem | CC0 | Sheets 4 e 12 frames, células quadradas, pivot centro-inferior — tocados pelo `SpriteSheetAnimator` |
 | `enm_placeholder_cao_{idle,walk}_sheet.png` | idem | idem | CC0 | Sheets 6 e 12 frames, idem |
-| `env_placeholder_castelo_tileset.png` | `Assets/Art/ThirdParty/Gothicvania/Environments/` | idem | CC0 | Tileset completo 1664×480 (grid 32×32 após ×2) — para blockout de nível via Tilemap |
+| `env_placeholder_castelo_tileset.png` | `Assets/Art/ThirdParty/Gothicvania/Environments/` | idem | CC0 | Tileset completo 1664×480 (grid 32×32 após ×2), Sprite Mode Multiple fatiado por `TilesetAutoSlicer` — 3 Tiles usados em `Environments/Tiles/` (parede, topo e fuste do piso) montam o blockout de `Assets/Scenes/Sandbox/CastleBlockout.unity` |
 
 ## Arte Conceitual e Fontes
 

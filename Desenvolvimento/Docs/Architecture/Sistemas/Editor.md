@@ -20,6 +20,8 @@
 | `FloodgateLeverPrefabBuilder.cs` | `Assets/Editor/Interactables/FloodgateLeverPrefabBuilder.cs` | Cria/atualiza `Prop_FloodgateLever.prefab` a partir do Animator da onda atual (`Tools > Braziliation > Setup > Build Floodgate Lever Prefab`) |
 | `FloodgateGatePrefabBuilder.cs` | `Assets/Editor/Interactables/FloodgateGatePrefabBuilder.cs` | Cria/atualiza `Prop_FloodgateGate.prefab`: comporta + alavanca aninhada já ligada ao `FloodgateController.Toggle` (`Tools > Braziliation > Setup > Build Floodgate Gate Prefab`) |
 | `AutomatoPrefabBuilder.cs` | `Assets/Editor/Enemies/AutomatoPrefabBuilder.cs` | Cria/atualiza `Enemy_Automato.prefab` com o Animator de idle em loop (`Tools > Braziliation > Setup > Build Automato Enemy Prefab`) |
+| `TilesetAutoSlicer.cs` | `Assets/Editor/Art/TilesetAutoSlicer.cs` | Fatia `*_tileset.png` sob `Assets/Art/ThirdParty/` em grid completo (`{PixelScale.Para}²`), nomes `{nome}_{col}_{row}` — escopo restrito a ThirdParty de propósito (ver Notas de Design) |
+| `CastleBlockoutEditor.cs` | `Assets/Editor/Gameplay/CastleBlockoutEditor.cs` | Cria/atualiza o blockout `Assets/Scenes/Sandbox/CastleBlockout.unity` (Tilemap + TilemapCollider2D) a partir de 3 Tiles do tileset placeholder do castelo (`Braziliation > Demo > Create or Update Castle Blockout Scene`) |
 
 ## Features que Usam Este Sistema
 
@@ -43,3 +45,5 @@
 
 - `SheetAutoSlicer`, `SheetAnimationTool` e `WfcMapImporter` foram exercitados em batchmode (`-executeMethod`) em 2026-11-03: geraram os três Animators da onda atual, os prefabs `Prop_FloodgateLever`/`Enemy_Automato` e o Tilemap de teste em `Assets/Scenes/WfcImportTest.unity`. O achado: a guarda de "já fatiado" do `SheetAutoSlicer` só olhava a contagem de quadros, não o tamanho — dois sheets redesenhados em PPU maior (lever e sino) ficaram fatiados com o rect antigo até o fix.
 - `MainMenuUISetupEditor` ainda calcula o tamanho da câmera para 320×180 @ 16 PPU (pré-ADR-004) — registrado em `Tech/tech_debt.md`.
+- `TilesetAutoSlicer` ficou restrito a `Assets/Art/ThirdParty/` (não todo `Assets/Art/`) porque os tilesets próprios em `Assets/Art/Environments/Blumenau/Tilesets/` também terminam em `_tileset.png`, mas já têm fatiamento autorado à mão (outra convenção de nomes). Rodar o postprocessor neles reatribui GUID novo a cada sprite e quebra qualquer Tile/Tilemap que já referencie os antigos — aconteceu na prática em 2026-11-04 (revertido antes do commit; ver `Tech/tech_debt.md`).
+- `CastleBlockoutEditor`: os três Tiles (parede, topo e fuste do piso) são carregados/criados **depois** do `EditorSceneManager.NewScene(..., Single)`, nunca antes — carregá-los antes faz a referência em memória virar "fake null" assim que a cena anterior é descarregada (sem erro nenhum; o Tilemap simplesmente fica vazio). Custou um ciclo de depuração via `unity run_script` nesta sessão.

@@ -143,8 +143,15 @@ Format:
 
 ### Baixa
 
-- *(nenhum item — o dos 11 agentes duplicados em 2 formatos deixou de existir em 2026-09-13:
-  o formato Copilot foi removido, ADR-008.)*
+- **Item:** `TilesetAutoSlicer` fatia o tileset placeholder do castelo em todas as 780 células (grid 52×15), não só as não-vazias
+- **Where:** `Assets/Editor/Art/TilesetAutoSlicer.cs` · `Assets/Art/ThirdParty/Gothicvania/Environments/env_placeholder_castelo_tileset.png`
+- **Why:** Ler a transparência por célula durante o import (`OnPreprocessTexture`) exigiria decodificar o PNG à mão nesse ponto do pipeline (a textura ainda não existe como objeto legível) — optei pela fatia completa, igual ao "Grid By Cell Size" padrão do Unity, para não arriscar um import quebrado sem retorno visual síncrono. A maioria das ~500 células vazias nunca vira sprite usado; só 3 viraram Tile asset para o blockout.
+- **Fix:** Se algum dia vier um segundo tileset de terceiros maior, considerar filtrar por alfa no pós-import (`OnPostprocessTexture`, textura já legível) para não gerar sprites inúteis.
+
+- **Item:** `env_placeholder_castelo_tileset.png` reslicado por engano durante o desenvolvimento do `TilesetAutoSlicer` chegou a colidir com os tilesets próprios de Blumenau (mesmo sufixo `_tileset.png`) — revertido antes do commit, mas o Editor aberto na sessão manteve os três por um instante com GUIDs trocados
+- **Where:** `Assets/Art/Environments/Blumenau/Tilesets/env_blumenau_{agua,enxaimel,metal}_tileset.png`
+- **Why:** O postprocessor nasceu com escopo `Assets/Art/` inteiro; corrigido para `Assets/Art/ThirdParty/` apenas (ver `Sistemas/Editor.md` → Notas de Design). Os três `.meta` foram revertidos via `git checkout --` e resincronizados com `AssetDatabase.Refresh(ForceUpdate)` antes do commit; nenhuma mudança chegou a ser commitada.
+- **Fix:** Nenhuma ação pendente — registrado para o caso de algum Tile/Tilemap de Blumenau aparecer com sprite faltando; sinal de que o Editor ficou com estado em memória dessincronizado do disco por algum motivo não coberto aqui. Reimportar os três manualmente (clique direito → Reimport) resolveria.
 
 ---
 
