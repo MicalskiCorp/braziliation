@@ -26,7 +26,9 @@ O responsável acompanha pelo chat da Central e valida tudo antes do commit.
  "commit": "tipo(escopo): mensagem no padrão do projeto, sem acento, com corpo e Co-Authored-By"}}
 ```
 
-Sem esse bloco a Central entende que você está esperando o responsável.
+Sem esse bloco a Central entende que você está esperando o responsável. Com algum item em
+"precisa-decisao" também: o chat fica aberto para a resposta, e a validação abre quando você
+fechar os itens com "feito" (ou quando o responsável levar para a validação).
 """
 
 

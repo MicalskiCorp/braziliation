@@ -39,6 +39,27 @@ ROTULOS = {
 PEDEM_ATENCAO = {"aguardando-voce", "aguardando-validacao", "interrompida", "conflito", "erro"}
 
 
+PEDIDO_DE_RESOLUCAO = """\
+A Central tentou levar o seu commit para o branch «{alvo}» e deu conflito: outro trabalho, já
+integrado, mexeu nas mesmas linhas de:
+{lista}
+
+O rebase está parado no seu worktree, e esses arquivos têm os marcadores de conflito do git —
+entre `<<<<<<<` e `=======` está a versão que já entrou no {alvo}; entre `=======` e `>>>>>>>`, a sua.
+
+Resolva editando os arquivos:
+- junte as duas versões, mantendo o que cada uma fez quando forem compatíveis (num TODO: as linhas
+  das duas execuções, sem duplicar item e sem quebrar a tabela);
+- se forem incompatíveis — as duas decidiram coisas diferentes sobre o mesmo ponto —, explique a
+  diferença, pergunte ao responsável e encerre o turno;
+- não rode comandos git: a Central faz o add e conclui o rebase.
+{orientacao}
+Ao terminar, encerre com o bloco de resultado, como antes. O responsável valida a versão combinada
+antes da integração."""
+
+MAX_TENTATIVAS = 2
+
+
 class Bloqueio(Exception):
     """A execução não pode acontecer (ou a ação não cabe no estado atual)."""
 
@@ -77,6 +98,10 @@ class Execucao:
     ultimo_evento_ts: float = 0.0
     ultimo_texto: str = ""
     uso: dict = field(default_factory=dict)
+    conflito: list = field(default_factory=list)     # arquivos em conflito na integração
+    resolvendo: bool = False                         # o agente está juntando as duas versões
+    tentativas: int = 0                              # turnos de resolução que ainda deixaram marcador
+    integrar_pendente: bool = False                  # commit pronto (conflito resolvido), falta aprovar
 
     @property
     def rotulo(self) -> str:
@@ -117,6 +142,7 @@ class Gerenciador:
         self.execucoes: dict[str, Execucao] = {}
         self.sessoes: dict[str, SessaoAgente] = {}
         self.versao = 0
+        self.resolver_conflitos = True    # conflito na integração vai para o agente da execução
         self._n: dict[str, int] = {}
         self._carregar()
         if zelador:
@@ -440,11 +466,19 @@ class Gerenciador:
     def _fim_do_turno(self, ex: Execucao) -> None:
         resultado = conversa.extrair_resultado(ex.ultimo_texto)
         ex.ultimo_texto = ""
-        if resultado is not None and self._so_pede_decisao(ex, resultado):
-            # Sem arquivo alterado não há o que validar: a resposta vem pelo chat e a sessão segue
-            # viva (2026-11-03: o ADR da política de IA ia para a validação com o diff vazio).
-            resultado = None
-            self._registrar(ex, {"tipo": "nota", "texto": "O agente pediu decisão sem alterar arquivo — responda pelo chat."})
+        if ex.resolvendo and resultado is not None and not self._pede_decisao(resultado):
+            ex.resultado = resultado
+            ex.estado, ex.mensagem = "integrando", "Conferindo a resolução do conflito e concluindo o rebase…"
+            threading.Thread(target=self._concluir_resolucao, args=(ex.id,), daemon=True).start()
+            return
+        if resultado is not None and self._pede_decisao(resultado):
+            # Pergunta ao responsável: a conversa segue no chat, com a sessão viva. O que já foi feito vai
+            # para a validação quando ele quiser («Ir para a validação») ou quando o agente terminar
+            # (2026-11-03: o ADR da IA e o dossiê do LoRA iam direto para a validação, sem caixa de resposta).
+            ex.resultado, ex.estado = resultado, "aguardando-voce"
+            self._registrar(ex, {"tipo": "nota", "texto": "O agente pediu decisão — responda aqui no chat. "
+                                                         "Para validar o que já está feito, use «Ir para a validação»."})
+            return
         if resultado is not None:
             ex.resultado = resultado
             ex.estado = "aguardando-validacao"
@@ -456,12 +490,8 @@ class Gerenciador:
             ex.estado = "aguardando-voce"
 
     @staticmethod
-    def _so_pede_decisao(ex: Execucao, resultado: dict) -> bool:
-        situacoes = {i.get("situacao", "") for i in resultado.get("itens", []) if isinstance(i, dict)}
-        if not situacoes or not situacoes <= {"precisa-decisao"}:
-            return False
-        cwd = Path(ex.cwd) if ex.cwd else None
-        return cwd is not None and cwd.exists() and not gitops.alteracoes(cwd)
+    def _pede_decisao(resultado: dict) -> bool:
+        return any(isinstance(i, dict) and i.get("situacao") == "precisa-decisao" for i in resultado.get("itens", []))
 
     def _fim_do_processo(self, ex: Execucao, ev: dict) -> None:
         self.sessoes.pop(ex.id, None)
@@ -483,14 +513,15 @@ class Gerenciador:
             ex = self.obter(ex_id)
             if ex.estado not in ("aguardando-voce", "rodando", "interrompida", "aguardando-validacao"):
                 raise Bloqueio(f"a execução está {ex.rotulo}: não recebe mensagem")
+            sessao = self.sessoes.get(ex.id)
+            viva = bool(sessao and sessao.vivo)
+            if not viva and self.vivas() >= self.max:     # antes de registrar: recusa não deixa rastro
+                raise Bloqueio(f"já há {self.vivas()} agentes rodando (limite {self.max}) — tente quando um terminar")
             self._registrar(ex, {"tipo": "voce", "texto": texto})
             ex.estado, ex.resultado, ex.mensagem = "rodando", None, ""
-            sessao = self.sessoes.get(ex.id)
-            if sessao and sessao.vivo:
+            if viva:
                 sessao.enviar(texto)
             else:
-                if self.vivas() >= self.max:
-                    raise Bloqueio(f"já há {self.vivas()} agentes rodando (limite {self.max}) — tente quando um terminar")
                 self._abrir_sessao(ex, texto, retomar=True)
             self._salvar(ex)
 
@@ -543,6 +574,8 @@ class Gerenciador:
         ex = self.obter(ex_id)
         if not ex.cwd or not Path(ex.cwd).exists():
             return []
+        if ex.integrar_pendente:
+            return gitops.diff_contra(Path(ex.cwd), gitops.branch(self.raiz))
         return gitops.diff(Path(ex.cwd))
 
     def fora_do_git(self, ex_id: str) -> list[str]:
@@ -567,7 +600,10 @@ class Gerenciador:
 
     def _checagens_para(self, ex: Execucao) -> dict[str, list[str]]:
         py = config.python_do_projeto()
-        caminhos = [p for _, p in gitops.alteracoes(Path(ex.cwd))] if ex.cwd and Path(ex.cwd).exists() else []
+        if ex.cwd and Path(ex.cwd).exists() and ex.integrar_pendente:
+            caminhos = [a["caminho"] for a in gitops.diff_contra(Path(ex.cwd), gitops.branch(self.raiz))]
+        else:
+            caminhos = [p for _, p in gitops.alteracoes(Path(ex.cwd))] if ex.cwd and Path(ex.cwd).exists() else []
         lista = {
             "todo.py validar": [*py, ".claude/skills/gerir-todo/todo.py", "validar"],
             "dotnet test": ["dotnet", "test", "Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj",
@@ -671,6 +707,8 @@ class Gerenciador:
                 raise Bloqueio("o commit já está em andamento — aguarde o pre-commit terminar")
             if ex.estado != "aguardando-validacao":
                 raise Bloqueio(f"só se commita depois da validação — a execução está {ex.rotulo}")
+            if ex.integrar_pendente:
+                raise Bloqueio("o commit já existe (conflito resolvido) — use «Aprovar e integrar»")
             if not mensagem.strip():
                 raise Bloqueio("mensagem de commit vazia")
             if not caminhos:
@@ -711,29 +749,49 @@ class Gerenciador:
             if ex.modo != "worktree" or not ex.commit:
                 raise Bloqueio("não há commit de worktree para integrar")
             if not ja_commitado:    # vindo do commit, a execução já está «commitando»
-                if ex.estado != "conflito":
+                aprovacao = ex.estado == "aguardando-validacao" and ex.integrar_pendente
+                if ex.estado != "conflito" and not aprovacao:
                     raise Bloqueio(f"a execução está {ex.rotulo} — não há o que integrar agora")
+                if ex.cwd and Path(ex.cwd).exists() and gitops.em_rebase(Path(ex.cwd)):
+                    raise Bloqueio("o conflito ainda está aberto no worktree — use «Resolver com o Claude» "
+                                   "ou resolva à mão e conclua o rebase")
                 ex.estado, ex.mensagem = "integrando", "Integrando ao branch principal…"
                 self._salvar(ex)
         cwd = Path(ex.cwd)
         try:
-            if cwd.exists():
+            if cwd.exists() and ex.integrar_pendente and gitops.alteracoes(cwd):
+                # Ajuste pedido depois da resolução: entra no mesmo commit, pelo pre-commit.
+                gitops.exigir(gitops.git(cwd, "add", "-A"), "git add")
+                emenda = gitops.git(cwd, "commit", "--amend", "--no-edit", timeout=1800)
+                if not emenda.ok:
+                    gitops.git(cwd, "reset", "-q")
+                    with self.trava:
+                        ex.estado, ex.mensagem = "aguardando-validacao", "O pre-commit recusou o ajuste."
+                        self._registrar(ex, {"tipo": "nota", "texto": "Pre-commit recusou o ajuste:\n" + emenda.texto[-3000:]})
+                        self._salvar(ex)
+                    return emenda
+            elif cwd.exists() and not ex.integrar_pendente:
                 gitops.restaurar(cwd)   # o que não foi selecionado sai junto com o worktree
-            r = gitops.integrar(self.raiz, cwd, ex.branch)
+            r = gitops.integrar(self.raiz, cwd, ex.branch, manter_conflito=True)
         except Exception as erro:
             with self.trava:
                 ex.estado, ex.mensagem = "conflito", f"A integração falhou: {erro}"
                 self._salvar(ex)
             raise
+        resolver = False
         with self.trava:
             if r.ok:
                 ex.commit = gitops.head(self.raiz)
-                ex.estado, ex.integrada, ex.mensagem = "commitada", True, ""
+                ex.estado, ex.integrada, ex.integrar_pendente, ex.mensagem = "commitada", True, False, ""
                 self._registrar(ex, {"tipo": "nota", "texto": f"Integrado ao {gitops.branch(self.raiz)} ({ex.commit[:9]})."})
             elif r.texto.startswith("conflito"):
-                ex.estado, ex.mensagem = "conflito", r.texto
-                self._registrar(ex, {"tipo": "nota", "texto": "Conflito na integração: " + r.texto +
-                                     f" Resolva no worktree ({ex.cwd}) com `git rebase {gitops.branch(self.raiz)}` e clique em «Integrar», ou descarte."})
+                ex.conflito = gitops.conflitados(cwd) if cwd.exists() else []
+                ex.estado, ex.integrar_pendente = "conflito", False
+                ex.mensagem = "Conflito na integração: " + (", ".join(ex.conflito) or r.texto)
+                resolver = self.resolver_conflitos and bool(ex.conflito)
+                self._registrar(ex, {"tipo": "nota", "texto": ex.mensagem + (
+                    " — o agente vai juntar as duas versões; você valida o resultado antes da integração."
+                    if resolver else " — use «Resolver com o Claude», resolva no worktree ou descarte.")})
             else:
                 ex.estado, ex.mensagem = "conflito", ("O commit existe no branch " + ex.branch + ", mas não entrou no "
                                                      "branch principal: " + r.texto[-600:])
@@ -741,7 +799,106 @@ class Gerenciador:
             self._salvar(ex)
         if r.ok and cwd.exists():
             gitops.remover_worktree(self.raiz, cwd, ex.branch)
+        if resolver:
+            threading.Thread(target=self._resolver_sozinho, args=(ex_id,), daemon=True).start()
         return r
+
+    # ── conflito resolvido pelo agente ──────────────────────────────────────
+
+    def _resolver_sozinho(self, ex_id: str) -> None:
+        try:
+            self.resolver_conflito(ex_id)
+        except Bloqueio as erro:
+            with self.trava:
+                ex = self.obter(ex_id)
+                self._registrar(ex, {"tipo": "nota", "texto": f"Não deu para chamar o agente agora ({erro}). "
+                                                             "Use «Resolver com o Claude» na validação."})
+
+    def resolver_conflito(self, ex_id: str, orientacao: str = "") -> None:
+        """Deixa o rebase parado com os marcadores e pede ao agente da execução — na mesma sessão, com o
+        contexto do que ele fez — que junte as duas versões. Quem aprova a versão combinada é o responsável."""
+        with self.trava:
+            ex = self.obter(ex_id)
+            if ex.estado != "conflito" or ex.modo != "worktree" or not ex.cwd or not Path(ex.cwd).exists():
+                raise Bloqueio(f"a execução está {ex.rotulo} — não há conflito de worktree para resolver")
+            sessao = self.sessoes.get(ex.id)
+            if not (sessao and sessao.vivo) and self.vivas() >= self.max:
+                raise Bloqueio(f"já há {self.vivas()} agentes rodando (limite {self.max})")
+            ex.estado, ex.mensagem = "integrando", "Reaplicando o commit sobre o branch principal…"
+            self._salvar(ex)
+        cwd, alvo = Path(ex.cwd), gitops.branch(self.raiz)
+        if not gitops.em_rebase(cwd):
+            r = gitops.rebase_sobre(cwd, alvo, manter_conflito=True)
+            if r.ok:    # o branch principal mudou de novo e agora o commit se aplica limpo
+                with self.trava:
+                    ex.estado, ex.integrar_pendente, ex.conflito, ex.mensagem = "aguardando-validacao", True, [], ""
+                    self._registrar(ex, {"tipo": "nota", "texto": "O commit agora se aplica sem conflito — confira e aprove a integração."})
+                    self._salvar(ex)
+                return
+        with self.trava:
+            ex.conflito = gitops.conflitados(cwd)
+            lista = "\n".join(f"- {p}" for p in ex.conflito) or (
+                "- (nenhum arquivo marcado: o rebase parou por outro motivo — " + ex.mensagem + ")")
+            extra = f"\nOrientação do responsável: {orientacao.strip()}\n" if orientacao.strip() else ""
+            ex.resolvendo, ex.resultado, ex.mensagem, ex.tentativas = True, None, "", 0
+            ex.estado = "rodando"
+            self._registrar(ex, {"tipo": "nota", "texto": "Pedido ao agente: resolver o conflito em "
+                                                         + (", ".join(ex.conflito) or "?") + "."})
+            texto = PEDIDO_DE_RESOLUCAO.format(alvo=alvo, lista=lista, orientacao=extra)
+            sessao = self.sessoes.get(ex.id)
+            if sessao and sessao.vivo:
+                sessao.enviar(texto)
+            else:
+                self._abrir_sessao(ex, texto, retomar=True)
+            self._salvar(ex)
+
+    def _concluir_resolucao(self, ex_id: str) -> None:
+        ex = self.obter(ex_id)
+        cwd = Path(ex.cwd)
+        restantes = gitops.com_marcadores(cwd, ex.conflito)
+        if restantes:
+            with self.trava:
+                ex.tentativas += 1
+                sessao = self.sessoes.get(ex.id)
+                if ex.tentativas < MAX_TENTATIVAS and sessao and sessao.vivo:
+                    ex.estado, ex.mensagem = "rodando", ""
+                    texto = ("Ainda há marcadores de conflito (<<<<<<< / >>>>>>>) em: " + ", ".join(restantes) +
+                             ". Termine de juntar as versões e encerre com o bloco de resultado.")
+                    self._registrar(ex, {"tipo": "nota", "texto": texto})
+                    sessao.enviar(texto)
+                else:
+                    ex.estado, ex.resolvendo = "conflito", False
+                    ex.mensagem = "O agente terminou, mas ainda há marcadores de conflito em " + ", ".join(restantes) + "."
+                    self._registrar(ex, {"tipo": "nota", "texto": ex.mensagem + " Resolva com o Claude de novo "
+                                         "(com uma orientação), à mão no worktree, ou descarte."})
+                self._salvar(ex)
+            return
+        r = gitops.continuar_rebase(cwd, ex.conflito)
+        sessao = None
+        with self.trava:
+            if r.ok and not gitops.em_rebase(cwd):
+                ex.commit = gitops.head(cwd)
+                ex.conflito, ex.resolvendo, ex.tentativas = [], False, 0
+                ex.estado, ex.integrar_pendente = "aguardando-validacao", True
+                ex.mensagem = "Conflito resolvido pelo agente — confira a versão combinada e aprove a integração."
+                self._registrar(ex, {"tipo": "nota", "texto": ex.mensagem})
+                sessao = self.sessoes.get(ex.id)
+            elif gitops.em_rebase(cwd) and gitops.conflitados(cwd):
+                ex.estado, ex.resolvendo = "conflito", False
+                ex.mensagem = "O rebase parou num novo conflito: " + ", ".join(gitops.conflitados(cwd))
+                self._registrar(ex, {"tipo": "nota", "texto": ex.mensagem})
+            else:
+                ex.estado, ex.resolvendo = "conflito", False
+                ex.mensagem = "O rebase não concluiu: " + r.texto[-1500:]
+                self._registrar(ex, {"tipo": "nota", "texto": ex.mensagem + " — use «Resolver com o Claude» "
+                                                                             "para o agente corrigir."})
+            self._salvar(ex)
+        if sessao:
+            sessao.encerrar(espera=5)
+        if ex.estado == "aguardando-validacao":
+            self.rodar_checagens(ex_id)
+        elif ex.estado == "conflito" and self.resolver_conflitos and gitops.conflitados(cwd):
+            self._resolver_sozinho(ex_id)
 
     # ── manutenção ──────────────────────────────────────────────────────────
 

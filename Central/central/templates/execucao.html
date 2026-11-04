@@ -20,11 +20,11 @@
 
 <div class="compositor">
   <form action="/execucao/{{ ex.id }}/mensagem" method="post" data-acao data-limpar
-        data-mostrar-em="aguardando-voce rodando interrompida" class="{{ '' if ex.estado in ('aguardando-voce', 'rodando', 'interrompida') else 'oculto' }}">
+        data-mostrar-em="aguardando-voce rodando interrompida aguardando-validacao" class="{{ '' if ex.estado in ('aguardando-voce', 'rodando', 'interrompida', 'aguardando-validacao') else 'oculto' }}">
     <textarea name="texto" placeholder="Responder ao agente…" required></textarea>
     <div class="barra">
       <button class="primario">Enviar</button>
-      <span class="sub">O agente lê no próximo turno. Ele termina pedindo a validação quando acabar.</span>
+      <span class="sub">O agente lê no próximo turno e continua na mesma sessão; a validação abre de novo quando ele terminar.</span>
     </div>
   </form>
   <div class="barra">

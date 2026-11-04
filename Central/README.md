@@ -36,7 +36,8 @@ Editar status, prioridade, dar baixa ou adicionar item pelo painel também passa
 | Entrevistas, Concept art, Unity, Gameplay, UI e arte, Dívida | árvore principal | Uma por vez — as outras esperam na fila |
 
 - **O mesmo item em duas execuções é bloqueado.**
-- Duas execuções no mesmo TODO geram **aviso**: seções diferentes se juntam sozinhas no commit (rebase); se mexerem nas mesmas linhas, a segunda fica em *conflito na integração* e você decide (resolver no worktree e "Integrar de novo", ou descartar).
+- Duas execuções no mesmo TODO geram **aviso**: seções diferentes se juntam sozinhas no commit (rebase); se mexerem nas mesmas linhas, a segunda fica em *conflito na integração*.
+- **Conflito é resolvido pelo Claude.** A Central deixa o rebase parado no worktree e pede ao agente da própria execução — na mesma sessão, com o contexto do que ele fez — que junte as duas versões (num TODO: as linhas das duas execuções, sem duplicar item). Se as mudanças forem incompatíveis, ele pergunta no chat. A Central confere que não sobrou marcador (`<<<<<<<`/`>>>>>>>`; se sobrar, devolve ao agente uma vez), conclui o rebase e traz a **versão combinada** para a validação: nada entra no branch principal antes do seu **Aprovar e integrar**. Na tela de conflito há também «Resolver com o Claude» com uma orientação sua, «Integrar de novo» para quem resolveu à mão no worktree, e Descartar.
 - Execução na árvore principal **só começa com a árvore limpa** — é o que torna o descarte seguro. Commite (ou descarte) o que estiver pendente antes.
 - No máximo 3 agentes vivos ao mesmo tempo (`CENTRAL_MAX_PARALELO`); o excedente espera. Execução esperando resposta há mais de 20 min tem o processo fechado e retomado quando você responde.
 

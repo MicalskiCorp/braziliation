@@ -12,8 +12,22 @@
   <div class="caixa info">Commit <code>{{ ex.commit[:10] }}</code>{% if ex.integrada %} no branch principal{% endif %}. O push continua manual, pelo VS Code.</div>
 {% endif %}
 {% if ex.estado == 'conflito' %}
-  <form action="/execucao/{{ ex.id }}/integrar" method="post" data-acao class="barra"><button class="primario">Integrar de novo</button>
-  <span class="sub">Depois de resolver no worktree, ou de commitar/descartar o que trava a árvore principal.</span></form>
+<div class="caixa erro">
+  <h3>Conflito na integração</h3>
+  <p>Outro trabalho, já integrado, mexeu nas mesmas linhas{% if ex.conflito %} de: {% for c in ex.conflito %}<code>{{ c }}</code>{{ ', ' if not loop.last }}{% endfor %}{% endif %}.
+     O Claude pode juntar as duas versões — o agente desta execução, com o contexto do que fez. Você valida a versão combinada antes da integração.</p>
+  <form action="/execucao/{{ ex.id }}/resolver" method="post" data-acao data-esperando="Chamando o agente…">
+    <textarea name="orientacao" placeholder="Orientação opcional — ex.: mantenha as duas linhas; a decisão do outro commit vale."></textarea>
+    <div class="barra"><button class="primario">Resolver com o Claude</button></div>
+  </form>
+  {% if not em_rebase %}
+  <form action="/execucao/{{ ex.id }}/integrar" method="post" data-acao class="barra"><button>Integrar de novo</button>
+    <span class="sub">Se você resolveu à mão no worktree, ou commitou/descartou o que travava a árvore principal.</span></form>
+  {% else %}<p class="sub">O rebase está parado no worktree com os marcadores — dá para resolver à mão ali também.</p>{% endif %}
+</div>
+{% endif %}
+{% if ex.estado == 'aguardando-validacao' and ex.integrar_pendente %}
+<div class="caixa info">O conflito foi resolvido e o commit já está pronto no worktree. O diff abaixo é a <b>versão combinada</b> contra o branch principal — confira e aprove a integração (ou peça ajuste).</div>
 {% endif %}
 
 {% if ex.resultado %}
@@ -60,7 +74,34 @@
   <details><summary>{{ fora|length }} arquivo(s)</summary><pre>{{ fora|join('\n') }}</pre></details></div>
 {% endif %}
 
-{% if ex.estado == 'aguardando-validacao' %}
+{% if ex.estado == 'conflito' and arquivos %}
+<h2>Arquivos em conflito</h2>
+{% for a in arquivos %}
+<details class="diff" open><summary>{{ a.caminho }} <span class="selo erro">{{ a.estado }}</span></summary>
+  <pre>{% for l in a.patch.splitlines() %}<span class="{{ 'del' if l.lstrip('+- ').startswith(('<<<<<<<', '>>>>>>>', '=======')) else ('hunk' if l.startswith('@@') else '') }}">{{ l }}</span>
+{% endfor %}</pre></details>
+{% endfor %}
+{% endif %}
+
+{% if ex.estado == 'aguardando-validacao' and ex.integrar_pendente %}
+<h2>Versão combinada</h2>
+{% for a in arquivos %}
+<details class="diff" {% if loop.index <= 6 %}open{% endif %}>
+  <summary>{{ a.caminho }} <span class="selo">{{ a.estado }}</span></summary>
+  {% if a.binario %}<pre>(binário)</pre>{% else %}<pre>{% for l in a.patch.splitlines() %}<span class="{{ 'hunk' if l.startswith('@@') else ('add' if l.startswith('+') and not l.startswith('+++') else ('del' if l.startswith('-') and not l.startswith('---') else '')) }}">{{ l }}</span>
+{% endfor %}</pre>{% endif %}
+</details>
+{% endfor %}
+<form action="/execucao/{{ ex.id }}/integrar" method="post" data-acao data-esperando="Integrando…" class="caixa">
+  <p class="sub">Leva o commit (<code>{{ ex.commit[:9] }}</code>) para o branch principal. O push continua manual, pelo VS Code.</p>
+  <button class="primario">Aprovar e integrar</button>
+</form>
+<h2>Não está bom?</h2>
+<form action="/execucao/{{ ex.id }}/ajuste" method="post" data-acao>
+  <textarea name="texto" placeholder="O que o agente precisa ajustar na versão combinada." required></textarea>
+  <div class="barra"><button>Pedir ajuste ao agente</button></div>
+</form>
+{% elif ex.estado == 'aguardando-validacao' %}
 <h2>Diff</h2>
 {% if not arquivos %}<div class="caixa">Nenhum arquivo versionado mudou.</div>{% endif %}
 <form id="form-commit" action="/execucao/{{ ex.id }}/commit" method="post" data-acao data-esperando="Commitando — o pre-commit roda os testes…">

@@ -32,6 +32,27 @@ def troca_no_todo(antes, depois):
     return passo
 
 
+def junta_as_versoes(linha_final):
+    """O agente falso troca o bloco de conflito inteiro pela linha combinada."""
+    def passo(s):
+        arq = s.cwd / TODO
+        saida, dentro = [], False
+        for l in arq.read_text(encoding="utf-8").splitlines():
+            if l.startswith("<<<<<<<"):
+                dentro = True
+                continue
+            if dentro and l.startswith(">>>>>>>"):
+                dentro = False
+                saida.append(linha_final)
+                continue
+            if not dentro:
+                saida.append(l)
+        arq.write_text("\n".join(saida) + "\n", encoding="utf-8", newline="\n")
+        s.texto("Juntei as duas versões." + BLOCO)
+        s.fim()
+    return passo
+
+
 class Base(unittest.TestCase):
     def setUp(self):
         self.raiz = repo_temporario()
@@ -97,7 +118,7 @@ class WorktreeTest(Base):
         self.assertIn("| Baixa | 📋", texto)
         self.assertEqual(self.ger.obter(b.id).estado, "commitada")
 
-    def test_mesma_linha_em_duas_execucoes_vira_conflito(self):
+    def _duas_execucoes_na_mesma_linha(self):
         SessaoFalsa.roteiro = [troca_no_todo("| Ficha: Dragão | [`c.md`](c.md) | Média |", "| Ficha: Dragão | [`c.md`](c.md) | Alta |")]
         a = self.criar(fila(), itens(self.raiz)[1:2])
         self.ate(a, "aguardando-validacao")
@@ -105,11 +126,48 @@ class WorktreeTest(Base):
         b = self.criar(fila("outra", "Lendas"), [{"id": "outro-id", "titulo": "outro"}])
         self.ate(b, "aguardando-validacao")
         self.assertTrue(self.ger.commitar(a.id, "docs: a", [TODO]).ok)
+        return a, b
+
+    def test_mesma_linha_em_duas_execucoes_vira_conflito(self):
+        self.ger.resolver_conflitos = False
+        a, b = self._duas_execucoes_na_mesma_linha()
         self.ger.commitar(b.id, "docs: b", [TODO])
         b = self.ger.obter(b.id)
         self.assertEqual(b.estado, "conflito")
         self.assertIn(TODO, b.mensagem)
+        self.assertEqual(b.conflito, [TODO])
         self.assertIn("| Alta |", (self.raiz / TODO).read_text(encoding="utf-8"))
+
+    def test_conflito_resolvido_pelo_agente_e_aprovado(self):
+        a, b = self._duas_execucoes_na_mesma_linha()
+        SessaoFalsa.roteiro = [junta_as_versoes("| Ficha: Dragão | [`c.md`](c.md) | Alta | ❌ Não iniciado — prioridade revista |")]
+        self.ger.commitar(b.id, "docs: b", [TODO])
+        self.ate(b, "aguardando-validacao")
+        b = self.ger.obter(b.id)
+        self.assertTrue(b.integrar_pendente)
+        self.assertIn("deu conflito", SessaoFalsa.criadas[-1].recebidas[0])
+        self.assertIn("prioridade revista", "".join(a["patch"] for a in self.ger.diff(b.id)))
+        self.assertIn("| Alta |", (self.raiz / TODO).read_text(encoding="utf-8"), "nada entra no main antes da aprovação")
+        self.assertNotIn("prioridade revista", (self.raiz / TODO).read_text(encoding="utf-8"))
+        with self.assertRaises(Bloqueio):
+            self.ger.commitar(b.id, "docs: de novo", [TODO])
+        r = self.ger.integrar(b.id)
+        self.assertTrue(r.ok, r.texto)
+        texto = (self.raiz / TODO).read_text(encoding="utf-8")
+        self.assertIn("prioridade revista", texto)
+        self.assertNotIn("<<<<<<<", texto)
+        self.assertEqual(self.ger.obter(b.id).estado, "commitada")
+        self.assertTrue(gitops.arvore_limpa(self.raiz))
+
+    def test_marcador_esquecido_volta_para_o_agente(self):
+        a, b = self._duas_execucoes_na_mesma_linha()
+        SessaoFalsa.roteiro = [lambda s: (s.texto("Pronto." + BLOCO), s.fim()),
+                               junta_as_versoes("| Ficha: Dragão | [`c.md`](c.md) | Alta | ❌ Não iniciado |")]
+        self.ger.commitar(b.id, "docs: b", [TODO])
+        self.ate(b, "aguardando-validacao")
+        recebidas = SessaoFalsa.criadas[-1].recebidas
+        self.assertTrue(any("Ainda há marcadores" in m for m in recebidas), recebidas)
+        self.assertNotIn("<<<<<<<", (Path(self.ger.obter(b.id).cwd) / TODO).read_text(encoding="utf-8"))
 
     def test_sobra_de_worktree_e_apagada(self):
         sobra = self.raiz / ".git" / "central" / "wt" / "sobra-antiga" / "obj"
@@ -183,9 +241,63 @@ class RegrasTest(Base):
         ex = self.criar(fila(), itens(self.raiz)[:1])
         self.ate(ex, "aguardando-voce")
         self.assertTrue(SessaoFalsa.criadas[-1].vivo)
-        self.assertIsNone(self.ger.obter(ex.id).resultado)
+        self.assertEqual(self.ger.obter(ex.id).resultado["itens"][0]["situacao"], "precisa-decisao")
         self.ger.enviar(ex.id, "B")
         self.ate(ex, "aguardando-validacao")
+
+    def test_pedido_de_decisao_com_trabalho_feito_fica_no_chat(self):
+        # Caso do print de 2026-11-03: o agente escreveu o dossiê do LoRA e pediu a escolha (1 a 4); a
+        # execução ia para a validação e o chat perdia a caixa de resposta.
+        pede = ('Escolha 1, 2, 3 ou 4.\n```resultado\n{"itens": [{"titulo": "x", "situacao": "precisa-decisao", '
+                '"resumo": "dossiê escrito"}], "commit": "docs: dossie"}\n```')
+
+        def dossie(s):
+            arq = s.cwd / TODO
+            arq.write_text(arq.read_text(encoding="utf-8").replace("❌ Não iniciado", "⏸ aguardando a escolha", 1),
+                           encoding="utf-8", newline="\n")
+            s.texto(pede)
+            s.fim()
+
+        SessaoFalsa.roteiro = [dossie, troca_no_todo("⏸ aguardando a escolha", "🔨 opção 1")]
+        ex = self.criar(fila(), itens(self.raiz)[:1])
+        self.ate(ex, "aguardando-voce")
+        self.assertTrue(SessaoFalsa.criadas[-1].vivo)
+        self.assertEqual(self.ger.obter(ex.id).checagens, {})
+        self.ger.enviar(ex.id, "1")
+        self.ate(ex, "aguardando-validacao")
+        self.assertIn("🔨 opção 1", self.ger.diff(ex.id)[0]["patch"])
+
+    def test_quem_pediu_decisao_pode_ir_para_a_validacao_com_o_que_ja_fez(self):
+        pede = ('A ou B?\n```resultado\n{"itens": [{"titulo": "x", "situacao": "precisa-decisao", '
+                '"resumo": "parcial"}], "commit": "docs: parcial"}\n```')
+        SessaoFalsa.roteiro = [lambda s: (s.texto(pede), s.fim())]
+        ex = self.criar(fila(), itens(self.raiz)[:1])
+        self.ate(ex, "aguardando-voce")
+        self.ger.finalizar(ex.id)
+        self.ate(ex, "aguardando-validacao")
+        self.assertEqual(self.ger.obter(ex.id).resultado["commit"], "docs: parcial")
+
+    def test_resposta_na_validacao_retoma_o_agente(self):
+        SessaoFalsa.roteiro = [troca_no_todo("❌ Não iniciado", "🔨 primeira versão")]
+        ex = self.criar(fila(), itens(self.raiz)[:1])
+        self.ate(ex, "aguardando-validacao")
+        # A validação fechou a sessão; a resposta abre outra, retomando a mesma conversa.
+        SessaoFalsa.roteiro = [troca_no_todo("🔨 primeira versão", "🔨 segunda versão")]
+        self.ger.enviar(ex.id, "troque para a segunda versão")
+        self.ate(ex, "aguardando-validacao")
+        self.assertIn("🔨 segunda versão", self.ger.diff(ex.id)[0]["patch"])
+        self.assertEqual(SessaoFalsa.criadas[-1].retomar, "sessao-falsa")
+
+    def test_limite_de_agentes_recusa_sem_registrar_a_mensagem(self):
+        SessaoFalsa.roteiro = [troca_no_todo("❌ Não iniciado", "🔨 feito")]
+        ex = self.criar(fila(), itens(self.raiz)[:1])
+        self.ate(ex, "aguardando-validacao")
+        antes = len(self.ger.eventos(ex.id))
+        self.ger.max = 0
+        with self.assertRaisesRegex(Bloqueio, "limite"):
+            self.ger.enviar(ex.id, "mais uma coisa")
+        self.assertEqual(self.ger.obter(ex.id).estado, "aguardando-validacao")
+        self.assertEqual(len(self.ger.eventos(ex.id)), antes)
 
     def test_permissao_e_permitir_sempre(self):
         def passo(s):

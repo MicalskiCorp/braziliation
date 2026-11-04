@@ -172,13 +172,78 @@ def commitar(cwd: Path, caminhos: list[str], mensagem: str) -> Saida:
     return r
 
 
-def integrar(raiz: Path, worktree: Path, nome_branch: str) -> Saida:
+def em_rebase(cwd: Path) -> bool:
+    pasta = Path(git(cwd, "rev-parse", "--absolute-git-dir").texto)
+    return (pasta / "rebase-merge").exists() or (pasta / "rebase-apply").exists()
+
+
+def conflitados(cwd: Path) -> list[str]:
+    return [l for l in git(cwd, "diff", "--name-only", "--diff-filter=U").texto.splitlines() if l.strip()]
+
+
+def com_marcadores(cwd: Path, caminhos: list[str]) -> list[str]:
+    """Arquivos que ainda têm marcador de conflito. Só `<<<<<<<` e `>>>>>>>`: `=======` é também
+    sublinhado de título em Markdown."""
+    sobra = []
+    for p in caminhos:
+        arquivo = cwd / p
+        if arquivo.is_file():
+            linhas = arquivo.read_text(encoding="utf-8", errors="replace").splitlines()
+            if any(l.startswith(("<<<<<<< ", ">>>>>>> ")) or l in ("<<<<<<<", ">>>>>>>") for l in linhas):
+                sobra.append(p)
+    return sobra
+
+
+def continuar_rebase(cwd: Path, caminhos: list[str]) -> Saida:
+    """Marca os arquivos como resolvidos e conclui o rebase, sem abrir editor."""
+    if caminhos:
+        exigir(git(cwd, "add", "--", *caminhos), "git add")
+    return git(cwd, "-c", "core.editor=true", "rebase", "--continue", timeout=1800)
+
+
+def diff_contra(cwd: Path, base: str) -> list[dict]:
+    """O que o worktree traz em relação a `base` (commit + o que ainda não foi commitado) — a
+    validação de um conflito resolvido mostra o resultado combinado, não só o último passo."""
+    arquivos = []
+    nomes = git(cwd, "diff", "--name-status", base).texto.splitlines()
+    novos = [l for l in git(cwd, "ls-files", "--others", "--exclude-standard").texto.splitlines() if l.strip()]
+    for linha in nomes + [f"A\t{n}" for n in novos]:
+        partes = linha.split("\t")
+        if len(partes) < 2:
+            continue
+        codigo, caminho = partes[0], partes[-1]
+        estado = {"A": "novo", "D": "removido"}.get(codigo[0], "alterado")
+        absoluto = cwd / caminho
+        item = {"caminho": caminho, "estado": estado, "patch": "", "binario": False}
+        if absoluto.is_file() and _binario(absoluto):
+            item["binario"] = True
+        elif caminho in novos:
+            item["patch"] = "".join(f"+{l}\n" for l in absoluto.read_text(encoding="utf-8", errors="replace").splitlines())[:LIMITE_PATCH]
+        else:
+            item["patch"] = git(cwd, "diff", base, "--", caminho).texto[:LIMITE_PATCH]
+        arquivos.append(item)
+    return arquivos
+
+
+def rebase_sobre(worktree: Path, alvo: str, manter_conflito: bool) -> Saida:
+    """Reaplica o commit do worktree sobre `alvo`. Com conflito: aborta, ou deixa o rebase parado
+    com os marcadores nos arquivos para alguém (o agente) resolver."""
+    if em_rebase(worktree):
+        return Saida(1, "conflito: rebase em andamento em " + ", ".join(conflitados(worktree)))
+    r = git(worktree, "rebase", alvo)
+    if r.ok:
+        return r
+    arquivos = conflitados(worktree)
+    if not manter_conflito or not arquivos:
+        git(worktree, "rebase", "--abort")
+    return Saida(1, f"conflito ao reaplicar sobre {alvo}: {', '.join(arquivos) or r.texto[-800:]}")
+
+
+def integrar(raiz: Path, worktree: Path, nome_branch: str, manter_conflito: bool = False) -> Saida:
     """Leva o commit do worktree para o branch da árvore principal: rebase e fast-forward."""
     alvo = branch(raiz)
     if head(raiz) != git(worktree, "merge-base", "HEAD", alvo).texto:
-        r = git(worktree, "rebase", alvo)
+        r = rebase_sobre(worktree, alvo, manter_conflito)
         if not r.ok:
-            conflitos = git(worktree, "diff", "--name-only", "--diff-filter=U").texto
-            git(worktree, "rebase", "--abort")
-            return Saida(1, f"conflito ao reaplicar sobre {alvo}: {conflitos or r.texto[-800:]}")
+            return r
     return git(raiz, "merge", "--ff-only", nome_branch)

@@ -372,8 +372,10 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
         mensagem_commit = (ex.resultado or {}).get("commit") or (
             f"chore({ex.camada.lower() or 'central'}): {todo_md.sem_acento(ex.fila_nome).lower()}\n\n"
             + "\n".join(f"- {todo_md.sem_acento(i['titulo'])}" for i in ex.itens))
+        em_rebase = bool(ex.modo == "worktree" and ex.cwd and Path(ex.cwd).exists() and ex.ativa
+                         and await run_in_threadpool(gitops.em_rebase, Path(ex.cwd)))
         return pagina(request, "validacao.html", ex=ex, arquivos=arquivos, mensagem_commit=mensagem_commit,
-                      proximo=len(ger.eventos(ex_id)),
+                      proximo=len(ger.eventos(ex_id)), em_rebase=em_rebase,
                       fora=ger.fora_do_git(ex_id), unity_aberto=fontes.unity_aberto() if ex.modo == "principal" else False)
 
     @app.post("/execucao/{ex_id}/checagens")
@@ -413,6 +415,10 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
         if not r.ok:
             return falha("O pre-commit recusou o commit.", saida=r.texto[-4000:])
         return ok(ir=f"/execucao/{ex_id}/validacao")
+
+    @app.post("/execucao/{ex_id}/resolver")
+    async def resolver(ex_id: str, orientacao: str = Form("")):
+        return await acao_execucao(ger.resolver_conflito, ex_id, orientacao, ir=f"/execucao/{ex_id}")
 
     @app.post("/execucao/{ex_id}/integrar")
     async def integrar(ex_id: str):
