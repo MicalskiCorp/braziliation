@@ -6,7 +6,7 @@
 ## Fase: Fundação — ✅ concluída
 
 - ✅ Unity 6 + URP 2D, referência 960×540 @ 48 PPU (ADR-011, substitui o 640×360 @ 32 PPU do ADR-004)
-- ✅ GameInitializer · 🔨 CameraScaler existe mas não está em nenhuma cena — ver o [`TODO.md`](../TODO.md)
+- ✅ GameInitializer · ✅ CameraScaler ligado (Pixel Perfect Camera) no Main Camera de `MainMenu` e `DemoGameplay`
 - ✅ Input via `GameInput` sobre o action map project-wide (ADR-006)
 - ✅ Layout de `Assets/Scripts/` por domínio (ADR-005)
 - ✅ Movimento básico (andar, pular) e colisão com layers dedicadas (Ground, Player, Enemy)

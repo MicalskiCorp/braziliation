@@ -13,7 +13,10 @@ namespace Braziliation.UI
     /// Responde a eventos do ReceptacleController para manter a view sincronizada.
     ///
     /// Contém zero lógica de negócio — toda operação é delegada ao ReceptacleController.
-    /// TODO: criar Prefab do painel e vincular no Inspector
+    ///
+    /// Prefab final em <c>Assets/Prefabs/UI/CraftingPanel.prefab</c> — painel, slots e
+    /// <c>_primeiroSelecionado</c> já vinculados; <c>_receptacleController</c> fica vazio no
+    /// prefab (referência de cena) e é ligado na cena que instanciar o painel.
     /// </summary>
     public sealed class CraftingPanelController : MonoBehaviour
     {

@@ -141,6 +141,48 @@ Format:
 - **Why:** ouvinte registrado por código em outro `Awake` pode não estar inscrito ainda.
 - **Fix:** mover a emissão inicial para `Start`, ou expor `EmitCurrent()` para a HUD puxar.
 
+- **Item:** Editar um `.unity` em disco (fora do Editor) enquanto o Editor tem essa cena
+  aberta trava o servidor de comandos (`unity command ...`) sem erro visível
+- **Where:** processo geral de qualquer agente que edite `Assets/Scenes/*.unity` direto pelo
+  `Edit`/`Write` com o Editor aberto (não só este item)
+- **Why:** Ao editar `MainMenu.unity`/`DemoGameplay.unity` em disco e, bem depois, rodar
+  `AssetDatabase.Refresh()` via `unity command run_script` (para gerar
+  `CraftingPanel.prefab`), o Editor abriu o diálogo nativo "The open scene(s) have been
+  modified externally" — um modal Win32 que não aparece no JSON de nenhum comando: todo
+  `unity command <algo>` subsequente só devolve "Main thread operation timed out after
+  30000ms" (confirmado no `Editor.log`), indefinidamente, porque o diálogo roda seu próprio
+  loop de mensagens e nunca libera a thread principal para o despachante de comandos. `unity
+  status` continua dizendo "ready" (não sonda o processo de verdade) — só
+  `Get-Process -Id <pid> | Select Responding,MainWindowTitle` mostra `Responding: True` com
+  o título sem alteração, e enumerar as janelas do processo (Win32 `EnumWindows`) revela o
+  diálogo e os botões `&Reload`/`&Ignore`.
+- **Fix:** Nenhuma ação de código pendente — é comportamento normal do Editor. Registrado
+  para a próxima vez: se `unity command` travar em 30 s repetidamente com o Editor "ready",
+  suspeitar de um diálogo nativo antes de supor crash; recuperar clicando `Reload` (ou pedir
+  ao usuário) em vez de esperar ou derrubar o processo. Evitar o gatilho: preferir editar
+  cenas pelos comandos do Editor (`set_component_properties`, `attach_script` etc.) a
+  editar o `.unity` em disco quando o Editor já tem aquela cena aberta.
+
+- **Item:** `DemoGameplay.unity` não tem `EventSystem` — nenhum painel UGUI instanciado nela
+  ganha navegação por teclado/controle
+- **Where:** `Assets/Scenes/DemoGameplay.unity`
+- **Why:** Encontrado ao criar `Assets/Prefabs/UI/CraftingPanel.prefab` (2026-11-04): a cena
+  só tem o Canvas da HUD (`HUD_Demo`, sem `GraphicRaycaster` interativo de fato) — sem
+  `EventSystem`, `EventSystem.current` é `null` e qualquer `ShowPanel()` que chame
+  `SetSelectedGameObject` (convenção de Steam Input deste agente) lança `NullReferenceException`
+  assim que um painel interativo for instanciado e aberto nessa cena.
+- **Fix:** Adicionar `EventSystem` + `InputSystemUIInputModule` à cena (mesmo par que já existe
+  em `MainMenu.unity`) quando o crafting (ou qualquer outro painel UGUI) for de fato wireado em
+  `DemoGameplay`.
+
+- **Item:** `HUD_Demo` (`CanvasHealthHud`) usa `CanvasScaler` com referência 800×600, de antes do ADR-011
+- **Where:** `Assets/Scenes/DemoGameplay.unity` → GameObject `HUD_Demo` → `CanvasScaler`
+- **Why:** Encontrado na mesma inspeção acima. `Assets/Prefabs/UI/CraftingPanel.prefab` já nasce
+  com `CanvasScaler` em Scale With Screen Size, referência 960×540 (ADR-011); o HUD ficou para
+  trás.
+- **Fix:** Alinhar o `CanvasScaler` do HUD para 960×540 / Match Width Or Height 0.5 e conferir a
+  HUD em jogo depois.
+
 ### Baixa
 
 - **Item:** `TilesetAutoSlicer` fatia o tileset placeholder do castelo em todas as 780 células (grid 52×15), não só as não-vazias

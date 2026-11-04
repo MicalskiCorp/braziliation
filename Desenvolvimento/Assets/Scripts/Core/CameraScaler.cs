@@ -1,26 +1,22 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-[RequireComponent(typeof(PixelPerfectCamera))]
-public class CameraScaler : MonoBehaviour
+namespace Braziliation.Core
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private PixelPerfectCamera cam;
-
-    void Start()
+    [RequireComponent(typeof(PixelPerfectCamera))]
+    public class CameraScaler : MonoBehaviour
     {
-        cam = GetComponent<PixelPerfectCamera>();
-        // ADR-011: 960x540 / 48 PPU. 1 tile de 48px = 1 unidade.
-        // O mundo visível segue 20 x 11,25 unidades, igual ao ADR-004 — só a
-        // densidade dentro do enquadramento mudou. 960x540 escala x2 para 1080p.
-        cam.assetsPPU = 48;
-        cam.refResolutionX = 960;
-        cam.refResolutionY = 540;
-    }
+        private PixelPerfectCamera _cam;
 
-    // Update is called once per frame
-    void Update()
-    {
-
+        private void Awake()
+        {
+            _cam = GetComponent<PixelPerfectCamera>();
+            // ADR-011: 960x540 / 48 PPU. 1 tile de 48px = 1 unidade.
+            // O mundo visível segue 20 x 11,25 unidades, igual ao ADR-004 — só a
+            // densidade dentro do enquadramento mudou. 960x540 escala x2 para 1080p.
+            _cam.assetsPPU = 48;
+            _cam.refResolutionX = 960;
+            _cam.refResolutionY = 540;
+        }
     }
 }

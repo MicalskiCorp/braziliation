@@ -58,14 +58,12 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
-| **`CameraScaler` é script órfão** — o GUID dele não aparece em nenhuma cena nem prefab, então nada aplica Pixel Perfect em runtime. As cenas usam câmera ortográfica pura (orthoSize 5,625 = 540/(2×48), correto para o ADR-011). Ou se liga o componente, ou se apaga o script | `@UnityDeveloper` | Alta | ❌ — descoberto em 2026-09-25 na migração do ADR-011 |
 | Onda 3: veredito do lote 12 da Edith (teto de 3 lotes por ajuste) e curadoria dos thumbnails do Soldado Clérico | Usuário + `@SpriteArtist` | Média | 🔨 |
 | Onda 2 restante: tilesets pedra portuguesa, cemitério/terra, mármore, periferia pós-enchente | `@SpriteArtist` | Média | ❌ |
 | Fechar o A/B SDXL × Z-Image: testar Z-Image + LoRA PixelArtRedmond (versão Z Image), com "full body, head to toe" no prompt (o lote anterior saiu em busto). Enquanto o `comfy_batch.py` não aprender Z-Image, patchear o campo `prompt` do workflow à mão — pelo script o prompt é ignorado em silêncio | `@SpriteArtist` | Média | ❌ — ver `Design/ArteFonte/IA/Models/bench-modelo-base-2026-09.md` |
 | Refazer a medição de tempo SDXL × Z-Image reiniciando o ComfyUI entre as rodadas — o gargalo é RAM do sistema (0,6 de 15,9 GB livres com os dois modelos residentes) | `@SpriteArtist` | Baixa | ❌ |
 | Passe de continuidade no frame de ataque do Autômato Abandonado (o opus redesenhou engrenagem do peito, cabeça e torso em relação ao idle) e registrar no context pack e em `indices/assets.md` | `@SpriteArtist` | Média | ❌ — ver `Design/ArteFonte/IA/Models/bench-modelo-claude-spec-2026-09.md` |
 | Clipes de ataque, dano e morte (o placeholder só tem idle/run/walk) | `@SpriteArtist` | Média | ⏸ com a arte própria |
-| Prefab final do painel de crafting | `@UnityDeveloper` | Média | ❌ |
 | Progressão visual da build (sprites por estágio de receptáculo) — consome `BuildProgressionView.cs` (marcador inline na linha 14) | `@SpriteArtist` + `@UnityDeveloper` | Média | ❌ |
 | VFX e feedback de sinergias híbridas — consome `HybridSynergyFeedbackView.cs` (marcador inline na linha 12) | `@SpriteArtist` + `@UnityDeveloper` | Média | ❌ |
 | Props narrativos, ícones de crafting, VFX | `@SpriteArtist` | Baixa | ❌ |
