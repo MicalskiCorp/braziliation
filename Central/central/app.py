@@ -17,7 +17,7 @@ from fastapi.templating import Jinja2Templates
 from markupsafe import Markup
 from starlette.concurrency import run_in_threadpool
 
-from . import config, filas as mod_filas, fontes, gitops
+from . import config, filas as mod_filas, fontes, gitops, tokens
 from .execucoes import ATIVOS, ROTULOS, Bloqueio, Gerenciador
 from .fontes import todo_md
 from .seguranca import Protecao
@@ -72,6 +72,7 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
 
     templates.env.globals.update(md=md, celula=celula, ROTULOS=ROTULOS, quote=quote)
     templates.env.filters["limpo"] = todo_md.limpo
+    templates.env.filters["tk"] = tokens.fmt
 
     def pagina(request: Request, nome: str, **ctx) -> HTMLResponse:
         ctx.setdefault("n_atencao", len(ger.pedem_atencao()))
@@ -280,9 +281,29 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
 
     # ── execuções ───────────────────────────────────────────────────────────
 
+    def uso_de(ex) -> dict | None:
+        # Edição manual não abre sessão e não tem bruto.jsonl; conversa livre sem agente tem, e conta.
+        return tokens.resumo(ger._pasta(ex.id))
+
     @app.get("/execucoes", response_class=HTMLResponse)
     async def execucoes(request: Request):
-        return pagina(request, "execucoes.html", lista=ger.listar(), vivas=ger.vivas(), maximo=ger.max)
+        lista = ger.listar()
+        usos = await run_in_threadpool(lambda: {e.id: uso_de(e) for e in lista})
+        return pagina(request, "execucoes.html", lista=lista, vivas=ger.vivas(), maximo=ger.max, usos=usos)
+
+    @app.get("/tokens", response_class=HTMLResponse)
+    async def pagina_tokens(request: Request):
+        def montar():
+            linhas = [(e, r) for e in ger.listar() if (r := uso_de(e))]
+            return linhas, tokens.agrupar(linhas), mod_filas.carregar(raiz)
+        linhas, grupos, fs = await run_in_threadpool(montar)
+        total = {"lidos": sum(r["lidos"] for _, r in linhas), "custo_usd": round(sum(r["custo_usd"] for _, r in linhas), 2),
+                 "requisicoes": sum(r["requisicoes"] for _, r in linhas)}
+        versao = config.versao_claude()
+        return pagina(request, "tokens.html", linhas=linhas, grupos=grupos, total=total,
+                      janelas=[f for f in fs if f.janela_compactacao], economia=config.ECONOMIA,
+                      versao=".".join(map(str, versao)) if versao else "", mod=config.mod_economia_ativo(),
+                      minimo=".".join(map(str, config.VERSAO_MIN_MODS)))
 
     def obter_ou_none(ex_id: str):
         try:
@@ -296,8 +317,9 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
         if ex is None:
             return pagina(request, "erro.html", erro="Execução não encontrada.")
         evs = ger.eventos(ex_id)
+        uso = await run_in_threadpool(uso_de, ex)
         return pagina(request, "execucao.html", ex=ex, entradas=[Markup(html_entrada(e, ex)) for e in evs],
-                      proximo=len(evs), viva=bool(ger.sessoes.get(ex_id) and ger.sessoes[ex_id].vivo))
+                      proximo=len(evs), viva=bool(ger.sessoes.get(ex_id) and ger.sessoes[ex_id].vivo), uso=uso)
 
     def assinatura(ex) -> str:
         return json.dumps([ex.estado, [p["request_id"] for p in ex.pendentes], ex.mensagem,
@@ -465,9 +487,13 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
     async def saude(request: Request):
         info = await run_in_threadpool(fontes.saude, raiz)
         ultimo_uso = next((e.uso for e in ger.listar() if e.uso), {})
+        versao = await run_in_threadpool(config.versao_claude)
         return pagina(request, "saude.html", s=info, gates=app.state.gates, nomes_gates=list(GATES),
                       ferramentas=config.ferramentas(),
-                      listener=fontes.listener(), uso=ultimo_uso)
+                      listener=fontes.listener(), uso=ultimo_uso,
+                      versao_claude=".".join(map(str, versao)) if versao else "",
+                      mod_ativo=config.mod_economia_ativo(), economia=config.ECONOMIA,
+                      minimo_mods=".".join(map(str, config.VERSAO_MIN_MODS)))
 
     @app.post("/saude/gate")
     async def gate(nome: str = Form(...)):

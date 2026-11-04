@@ -45,7 +45,7 @@ class ProtecaoTest(unittest.TestCase):
         self.assertNotIn("unsafe-inline", csp.split("script-src", 1)[1].split(";")[0])
 
     def test_todas_as_paginas_abrem(self):
-        urls = ["/", "/execucoes", "/conversa", "/saude", "/doc?c=Design/Criativo/TODO.md", "/doc?c=Design"]
+        urls = ["/", "/execucoes", "/conversa", "/tokens", "/saude", "/doc?c=Design/Criativo/TODO.md", "/doc?c=Design"]
         urls += [f"/fila/{f['id']}" for f in filas.registro()]
         for url in urls:
             self.assertEqual(self.c.get(url).status_code, 200, url)

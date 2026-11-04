@@ -70,6 +70,8 @@ abrir o Unity, ou o projeto não compila.
 - Commits vão direto no `main` até a v1 estar consolidada; o fluxo com PR vem depois.
 - **Central (ADR-012):** cada seção de TODO é uma fila em `Central/`. Sessão aberta pela
   Central não commita nem dá push — o commit sai da validação do responsável, e o push é
-  sempre manual. TODO se lê e escreve pelo parser único `gerir-todo/todo_md.py`.
+  sempre manual. TODO se lê e escreve pelo parser único `gerir-todo/todo_md.py`. Tokens de
+  cada execução na página Tokens; janela de compactação por fila e mod `Central/mod-economia/`
+  (ADR-015).
 - Dívida técnica vive em `Desenvolvimento/Docs/Tech/tech_debt.md`. Se você encontrar
   dívida durante uma tarefa, registre lá — não só no TODO.

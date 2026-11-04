@@ -11,6 +11,16 @@
   <a class="botao" href="/execucao/{{ ex.id }}/validacao">Validação</a>
 </div>
 {% if ex.itens %}<details class="caixa"><summary>{{ ex.itens|length }} item(ns) desta execução</summary><ul>{% for i in ex.itens %}<li>{{ i.titulo }}</li>{% endfor %}</ul></details>{% endif %}
+{% if uso %}<details class="caixa"><summary>Tokens: {{ uso.lidos|tk }} lidos em {{ uso.requisicoes }} requisições · contexto {{ uso.contexto_inicial|tk }} → máx {{ uso.contexto_max|tk }}{% if uso.compactacoes %} · {{ uso.compactacoes|length }}× compactada{% endif %}</summary>
+  <p class="sub">Cada requisição relê o contexto inteiro, então o que pesa é requisições × tamanho do contexto.
+    Saída {{ uso.saida|tk }} (pensamento {{ uso.pensamento|tk }}) · custo equivalente US$ {{ '%.2f'|format(uso.custo_usd) }}
+    · {{ uso.modelo or '?' }} · Claude Code {{ uso.versao or '?' }}
+    · janela de compactação {{ (ex.economia.janela|tk) if ex.economia and ex.economia.janela else 'auto' }}
+    · mod de economia {{ 'carregado' if uso.mod_carregado else 'não carregado' }}</p>
+  {% if uso.compactacoes %}<p class="sub">Compactações: {% for c in uso.compactacoes %}{{ c.antes|tk }} na requisição {{ c.requisicao }}{{ ' (' ~ c.gatilho ~ ')' if c.gatilho }}{{ ', ' if not loop.last }}{% endfor %}</p>{% endif %}
+  {% if uso.maiores %}<table><tr><th>Resultados de ferramenta que mais pesaram</th><th>Tamanho</th><th title="tamanho × requisições seguintes, que o releram">Relido</th></tr>
+    {% for m in uso.maiores %}<tr><td><code>{{ m.ferramenta }}</code> <span class="sub mono">{{ m.resumo[:110] }}</span></td><td>~{{ m.tokens|tk }}</td><td>~{{ m.relido|tk }}</td></tr>{% endfor %}</table>{% endif %}
+</details>{% endif %}
 {% for a in ex.avisos %}<div class="caixa aviso">{{ a }}</div>{% endfor %}
 <p id="mensagem-estado" class="sub">{{ ex.mensagem }}</p>
 

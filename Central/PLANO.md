@@ -76,7 +76,7 @@ Estados de uma execução: na fila → rodando → aguardando você → aguardan
 | Servidor | FastAPI + Uvicorn | Leve, com streaming nativo para o chat |
 | Interface | Jinja2 + JavaScript próprio em `static/` (sem biblioteca) | Sem npm, sem build, sem CDN; a CSP proíbe script inline |
 | Ao vivo | `watchfiles` + Server-Sent Events, só nas pastas de trabalho (nunca `Library/`) | TODO editado no VS Code atualiza o painel sozinho |
-| Agente | `claude.exe` sem interface: `-p --agent {nome} --input-format stream-json --output-format stream-json --permission-prompt-tool stdio --permission-mode auto --append-system-prompt-file {contrato} --disallowedTools …` | Mesmo `CLAUDE.md`, hooks, agentes e skills do VS Code, mesma licença, sem chamada de API à parte (ADR-009) |
+| Agente | `claude.exe` sem interface: `-p --agent {nome} --input-format stream-json --output-format stream-json --permission-prompt-tool stdio --permission-mode auto --append-system-prompt-file {contrato} --disallowedTools …`; na 2.1.287+ também `--plugin-dir mod-economia`, e `CLAUDE_CODE_AUTO_COMPACT_WINDOW` nas filas com janela (ADR-015) | Mesmo `CLAUDE.md`, hooks, agentes e skills do VS Code, mesma licença, sem chamada de API à parte (ADR-009) |
 | Ambiente | venv em `Central/.venv` (fora do git), `requirements.txt` fixado | Não mexe no Python global das skills |
 | Testes | `unittest` (biblioteca padrão) em `Central/tests/` e ao lado do parser | Entram no pre-commit e no CI; o agente é trocado por um falso |
 | Sempre ligada | Tarefa "Braziliation - Central" no Agendador (`registrar-tarefa.ps1`): `conhost --headless` sem janela, reinício automático, log rotativo em `.estado/` | Mesmo papel do listener (ADR-009), sem janela aberta |

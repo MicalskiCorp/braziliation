@@ -38,6 +38,9 @@ class Fila:
     instrucao: str = ""
     nota: str = ""
     acompanhamento: bool = False
+    # Tokens a partir dos quais o agente compacta a conversa (CLAUDE_CODE_AUTO_COMPACT_WINDOW, ADR-015).
+    # 0 = o padrão do Claude Code ("auto").
+    janela_compactacao: int = 0
     itens: list[dict] = field(default_factory=list)
     hash: str = ""
 
@@ -88,7 +91,8 @@ def carregar(raiz: Path | None = None) -> list[Fila]:
     for r in registro(raiz):
         f = Fila(id=r["id"], camada=r["camada"], nome=r["nome"], fonte=r["fonte"], agente=r.get("agente", ""),
                  isolamento=r.get("isolamento", "worktree"), instrucao=r.get("instrucao", ""),
-                 nota=r.get("nota", ""), acompanhamento=r.get("acompanhamento", False))
+                 nota=r.get("nota", ""), acompanhamento=r.get("acompanhamento", False),
+                 janela_compactacao=int(r.get("janela_compactacao", 0) or 0))
         if "todo" in f.fonte:
             doc = docs[f.fonte["todo"]]
             f.hash = doc.hash

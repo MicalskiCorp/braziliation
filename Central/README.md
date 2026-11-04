@@ -45,6 +45,16 @@ Editar status, prioridade, dar baixa ou adicionar item pelo painel também passa
 
 Quando o limite do plano (janela de 5 h ou semanal) estoura no meio de uma execução, ela passa a **aguardando o limite virar**: a Central lê o horário da virada que o Claude Code informa, fecha o processo do agente (a sessão fica guardada) e, passado o horário (com ~1 min de folga), **retoma sozinha na mesma sessão** — não precisa mandar "continue". Sem horário informado, tenta de novo em 5, 10, 20… até 60 min. Enquanto o limite estiver esgotado, execução nova espera na fila e começa sozinha depois; o que você escrever no chat vira recado e vai junto na retomada. A espera sobrevive a um reinício da Central. Há «Retomar agora» para forçar, e um aviso no topo de todas as páginas.
 
+## Economia de tokens
+
+([ADR-015](../Desenvolvimento/Docs/Architecture/architecture_decisions.md#adr-015-economia-de-tokens-nas-execuções-da-central--medir-compactar-cedo-por-fila-e-um-mod-para-o-resumo))
+Cada requisição ao modelo relê a conversa inteira: o que pesa é **requisições × tamanho do contexto**.
+
+- **Medir.** A página **Tokens** mostra, por fila, a média das execuções com e sem janela de compactação, e cada execução com requisições, contexto inicial e máximo, compactações e custo. No chat de uma execução, o quadro «Tokens» lista também os resultados de ferramenta que mais pesaram. Tudo vem do `bruto.jsonl`; o custo é o equivalente em US$ que o Claude Code informa.
+- **Compactar cedo.** `janela_compactacao` numa fila de [`filas.json`](filas.json) (de 100000 a 1000000 tokens) vira `CLAUDE_CODE_AUTO_COMPACT_WINDOW` no processo do agente: a conversa é resumida quando o contexto chega perto da janela, no meio do turno. Começou em 150000 nas filas Unity, Gameplay e UI e arte, as de sessão longa. Uma compactação aparece no chat como nota. Se a média da fila na página Tokens não cair, tire a janela.
+- **O mod** [`mod-economia/`](mod-economia/) faz o resumo guardar os itens, os arquivos mexidos, as decisões pendentes e as checagens que faltam. A Central o carrega com `--plugin-dir` só se o `claude.exe` dela for **2.1.287+** (mods); a página Saúde diz se está carregado. Mais velho, rode `claude update` com nenhuma execução rodando.
+- `CENTRAL_ECONOMIA=0` no ambiente da Central desliga a janela e o mod.
+
 ## Regras que a Central não quebra
 
 - Lê e escreve TODO só pelo parser único (`.claude/skills/gerir-todo/todo_md.py`); status continua só nos TODOs.
@@ -63,5 +73,6 @@ Quando o limite do plano (janela de 5 h ou semanal) estoura no meio de uma execu
 
 - **Fila nova** = seção nova num TODO → registrar em [`filas.json`](filas.json). O `test_filas` falha se uma seção com tabela ficar sem fila, e o painel avisa.
 - **Testes:** `cd Central && .venv\Scripts\python.exe -m unittest discover -s tests -t .` — rodam no pre-commit quando algo em `Central/` está em stage, e no CI. O agente é substituído por um falso; o contrato com o `stream-json` real está gravado em `tests/fixtures/sessao.jsonl`.
+- **Mod de economia:** `claude plugin validate Central/mod-economia` e `claude plugin test Central/mod-economia`, com um Claude Code 2.1.287+. Rodam no pre-commit quando o mod está em stage, com o primeiro `claude` que servir (o do PATH ou o da extensão do VS Code). Sem nenhum, o pre-commit avisa e não bloqueia. A API de mods é acesso antecipado: depois de atualizar o Claude Code, rode os dois.
 - **Dependências:** versões fixas em `requirements.txt`.
 - **Worktree preso** (raro, servidor de build do dotnet segurando arquivo): `dotnet build-server shutdown`, depois `git worktree prune`.

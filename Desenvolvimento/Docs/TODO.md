@@ -77,7 +77,7 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
-| *(nenhum pendente — a retenção dos modelos Z-Image foi decidida em 2026-11-03: manter; o conserto do `comfy_batch.py` que ela destravou é dívida, e vive em [`Tech/tech_debt.md`](Tech/tech_debt.md))* | | | |
+| Avaliar a janela de compactação do ADR-015 na página Tokens da Central depois de ~5 execuções com janela nas filas Unity, Gameplay e UI e arte: manter, ajustar ou voltar ao `auto`; e decidir se vale o passo seguinte por mod (esforço por requisição, saídas grandes encurtadas) | @TechLead | Média | ❌ Não iniciado |
 
 ---
 

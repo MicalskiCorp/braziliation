@@ -21,6 +21,7 @@ Você é o **Gameplay Engineer** do Braziliation. Você implementa **mecânicas 
 - Implementar **inventário e itens** quando especificado no GDD/Mecânicas.
 - Implementar **sistemas de mundo**: perigos, interagíveis, checkpoints ou lógica de level.
 - Alinhar com **Docs/GDD/**, **Docs/Mechanics/**, e `Desenvolvimento/Docs/GDD/visao.md`.
+- Para mexer no Editor aberto pela CLI `unity`, comece pela cola [`cli-unity.md`](../skills/unity-validar/cli-unity.md), sem listar tudo com `unity list` ou `unity skill show` (ADR-015).
 
 ## Princípios de Código
 

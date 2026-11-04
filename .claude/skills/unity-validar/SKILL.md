@@ -25,6 +25,8 @@ Fecha o ciclo que o CI não cobre: o CI roda só o core C# puro (`Tests/Brazilia
 4. Arquivos novos em `Assets/` ganham `.meta` nessa execução. Rodar a skill `meta-check` e incluir os `.meta` no commit.
 5. O resultado fica em `.claude/state/unity-validar.json` (lido pelo hook de início de sessão e pelo pre-commit; o campo `via` diz se foi `batchmode` ou `editor-aberto`) e, no batchmode, o log completo em `.claude/state/unity-validar.log`.
 
+**Outros comandos da CLI `unity`** (cena, objetos, menu, C# no Editor, Play Mode, captura): [`cli-unity.md`](cli-unity.md). Leia antes de usar a CLI e não rode `unity list`, `unity skill show` ou `unity command` sem filtro, que devolvem de 16 a 22 mil caracteres cada (ADR-015).
+
 ## Regras
 
 - Nunca apagar `Temp/UnityLockfile` para "destravar" — ele existe porque há um Editor aberto no projeto.

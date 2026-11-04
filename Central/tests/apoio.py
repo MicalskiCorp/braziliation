@@ -81,9 +81,11 @@ class SessaoFalsa:
     roteiro: list = []
     criadas: list = []
 
-    def __init__(self, cwd, agente, contrato, nome, ao_evento, retomar=None, exe=None):
+    def __init__(self, cwd, agente, contrato, nome, ao_evento, retomar=None, exe=None, economia=None):
         self.cwd, self.agente, self.contrato, self.nome = Path(cwd), agente, contrato, nome
         self.ao_evento, self.retomar = ao_evento, retomar
+        self.economia = dict(economia or {})
+        self.mod_ativo = False
         self._vivo = False
         self.recebidas: list[str] = []
         self.respostas: list[tuple] = []

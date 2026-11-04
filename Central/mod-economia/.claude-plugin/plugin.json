@@ -1,0 +1,5 @@
+{
+  "name": "braziliation-economia",
+  "version": "0.1.0",
+  "description": "Central do Braziliation (ADR-015): quando uma execução compacta a conversa, o resumo preserva os itens, as decisões pendentes, os arquivos mexidos e as checagens que faltam."
+}

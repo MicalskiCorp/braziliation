@@ -1,5 +1,6 @@
 """Caminhos e limites da Central. Tudo pode ser trocado por variável de ambiente (os testes usam)."""
 import os
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -84,6 +85,42 @@ def claude_exe() -> str:
     if candidato:
         return candidato
     return str(Path.home() / ".local" / "bin" / ("claude.exe" if os.name == "nt" else "claude"))
+
+
+# ── economia de tokens (ADR-015) ────────────────────────────────────────────
+# O mod que reescreve as instruções da compactação. Mods carregam a partir da 2.1.287; o claude.exe
+# da Central (~/.local/bin) estava na 2.1.277 em 2026-11-04 — com ele a execução roda sem o mod, e a
+# página Saúde diz o que falta. CENTRAL_ECONOMIA=0 desliga mod e janela de uma vez.
+MOD_ECONOMIA = CENTRAL / "mod-economia"
+VERSAO_MIN_MODS = (2, 1, 287)
+ECONOMIA = os.environ.get("CENTRAL_ECONOMIA", "1") != "0"
+_versoes: dict[tuple[str, int], tuple[int, ...] | None] = {}
+
+
+def versao_claude(exe: str | None = None) -> tuple[int, ...] | None:
+    """Versão do Claude Code, lida de `claude --version`. Guardada por executável e data do arquivo:
+    um `claude update` muda a data e a próxima execução já lê a versão nova, sem reiniciar a Central."""
+    exe = exe or claude_exe()
+    try:
+        chave = (exe, os.stat(exe).st_mtime_ns)
+    except OSError:
+        chave = (exe, 0)
+    if chave not in _versoes:
+        try:
+            r = subprocess.run([exe, "--version"], capture_output=True, text=True, timeout=20,
+                               env=ambiente(), creationflags=SEM_JANELA)
+            m = re.search(r"(\d+)\.(\d+)\.(\d+)", r.stdout or "")
+            _versoes[chave] = tuple(int(x) for x in m.groups()) if m else None
+        except (OSError, subprocess.SubprocessError):
+            _versoes[chave] = None
+    return _versoes[chave]
+
+
+def mod_economia_ativo(exe: str | None = None) -> bool:
+    if not (ECONOMIA and MOD_ECONOMIA.is_dir()):
+        return False
+    versao = versao_claude(exe)
+    return versao is not None and versao >= VERSAO_MIN_MODS
 
 
 def python_do_projeto() -> list[str]:

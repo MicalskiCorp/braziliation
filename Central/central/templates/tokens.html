@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block titulo %}Tokens{% endblock %}
+{% block pagina %}tokens{% endblock %}
+{% block conteudo %}
+<h1>Tokens</h1>
+<p class="sub">Cada requisição ao modelo relê a conversa inteira, então o que pesa é <b>requisições × tamanho do contexto</b>,
+  não o tamanho da resposta. O custo é o equivalente em US$ que o Claude Code informa: no plano, o que conta é o limite de uso,
+  que gasta na mesma proporção. Decisão e desenho: ADR-015.</p>
+
+<div class="caixa">
+  <b>{{ total.lidos|tk }}</b> tokens lidos em {{ total.requisicoes }} requisições, {{ linhas|length }} execução(ões) ·
+  custo equivalente US$ {{ '%.2f'|format(total.custo_usd) }}
+  <div class="sub">
+    {% if not economia %}Economia desligada (<code>CENTRAL_ECONOMIA=0</code>).{% else %}
+    Janela de compactação: {% for f in janelas %}{{ f.nome }} {{ f.janela_compactacao|tk }}{{ ', ' if not loop.last }}{% else %}nenhuma fila (todas no padrão do Claude Code){% endfor %}
+    — as outras filas ficam no padrão. Mod de economia: {% if mod %}carregado (Claude Code {{ versao }}){% else %}desligado — Claude Code
+    {{ versao or '?' }}; mods exigem {{ minimo }}+ (<code>claude update</code> com nenhuma execução rodando){% endif %}.{% endif %}
+  </div>
+</div>
+
+<h2>Por fila — antes e depois da janela</h2>
+<p class="sub">Compare as linhas da mesma fila: «auto» é o padrão do Claude Code; com janela, o agente compacta a conversa
+  quando o contexto chega perto dela. Se a média de tokens lidos não cair, ou se o agente passar a reler arquivos depois da
+  compactação, a janela não compensa — volte a fila para o padrão em <code>Central/filas.json</code>.</p>
+<table>
+  <tr><th>Fila</th><th>Janela</th><th>Execuções</th><th>Lidos (média)</th><th>Requisições (média)</th><th>Contexto máx (média)</th><th>Compactações</th><th>Custo (média)</th></tr>
+  {% for g in grupos %}
+  <tr><td>{% if g.fila_id != 'conversa' %}<a href="/fila/{{ g.fila_id }}">{{ g.fila }}</a>{% else %}{{ g.fila }}{% endif %}</td>
+    <td>{{ g.janela|tk if g.janela else 'auto' }}</td><td>{{ g.n }}</td><td>{{ g.lidos_medio|tk }}</td>
+    <td>{{ g.requisicoes_medio }}</td><td>{{ g.contexto_max_medio|tk }}</td><td>{{ g.compactacoes }}</td>
+    <td>US$ {{ '%.2f'|format(g.custo_medio) }}</td></tr>
+  {% else %}<tr><td colspan="8" class="sub">Nenhuma execução com agente ainda.</td></tr>{% endfor %}
+</table>
+
+<h2>Execuções</h2>
+<table>
+  <tr><th>Quando</th><th>Fila</th><th>Agente</th><th>Lidos</th><th>Requisições</th><th>Contexto</th><th>Janela</th><th>Mod</th><th>Custo</th></tr>
+  {% for e, r in linhas|sort(attribute='1.lidos', reverse=True) %}
+  <tr><td class="sub"><a href="/execucao/{{ e.id }}">{{ e.criada.replace('T', ' ') }}</a></td><td>{{ e.fila_nome }}</td><td>{{ '@' ~ e.agente if e.agente else 'sem agente' }}</td>
+    <td>{{ r.lidos|tk }}</td><td>{{ r.requisicoes }}</td><td>{{ r.contexto_inicial|tk }} → {{ r.contexto_max|tk }}{% if r.compactacoes %} · {{ r.compactacoes|length }}×{% endif %}</td>
+    <td>{{ (e.economia.janela|tk) if e.economia and e.economia.janela else 'auto' }}</td><td>{{ 'sim' if r.mod_carregado else '—' }}</td>
+    <td>US$ {{ '%.2f'|format(r.custo_usd) }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

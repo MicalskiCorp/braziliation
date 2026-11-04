@@ -1,5 +1,5 @@
 {
-  "descricao": "Registro das filas da Central (ADR-012). Uma fila por seção dos TODOs de camada, mais entrevistas e dívida técnica. O status continua nos TODOs: aqui só se diz de onde a fila lê, quem a executa e onde a execução roda. 'agente' é o nome do arquivo em .claude/agents/; '@responsavel' usa a coluna Responsável de cada item. 'isolamento': 'worktree' roda num worktree próprio e pode correr em paralelo; 'principal' roda na árvore do projeto, uma execução por vez — para o que depende de arquivo fora do git, do Unity ou da GPU. 'secao_prefixo' junta várias seções (ex.: uma de cidades por estado). O teste test_filas falha se uma seção com tabela ficar sem fila.",
+  "descricao": "Registro das filas da Central (ADR-012). Uma fila por seção dos TODOs de camada, mais entrevistas e dívida técnica. O status continua nos TODOs: aqui só se diz de onde a fila lê, quem a executa e onde a execução roda. 'agente' é o nome do arquivo em .claude/agents/; '@responsavel' usa a coluna Responsável de cada item. 'isolamento': 'worktree' roda num worktree próprio e pode correr em paralelo; 'principal' roda na árvore do projeto, uma execução por vez — para o que depende de arquivo fora do git, do Unity ou da GPU. 'secao_prefixo' junta várias seções (ex.: uma de cidades por estado). 'janela_compactacao' (tokens, 100000 a 1000000) faz o agente compactar a conversa quando o contexto chega perto dela — CLAUDE_CODE_AUTO_COMPACT_WINDOW, ADR-015; sem ela, o padrão do Claude Code. Só nas filas de sessão longa, e a página Tokens mostra se compensou. O teste test_filas falha se uma seção com tabela ficar sem fila.",
   "filas": [
     {"id": "pes-estados", "camada": "Pesquisa", "nome": "Estados a pesquisar",
      "fonte": {"todo": "pesquisa", "secao": "Estados a Pesquisar"}, "agente": "historiador", "isolamento": "worktree"},
@@ -43,12 +43,12 @@
      "fonte": {"todo": "dev", "secao": "Decisões de design — bloqueiam a demo"}, "agente": "game-creative", "isolamento": "worktree",
      "instrucao": "Use a skill fechar-decisao: opções amarradas à lore e aos sistemas, recomendação e números iniciais. Nada é decidido sem o responsável aprovar no chat."},
     {"id": "dev-unity", "camada": "Desenvolvimento", "nome": "Unity",
-     "fonte": {"todo": "dev", "secao": "Unity — validação no Editor e wiring"}, "agente": "@responsavel", "isolamento": "principal",
+     "fonte": {"todo": "dev", "secao": "Unity — validação no Editor e wiring"}, "agente": "@responsavel", "isolamento": "principal", "janela_compactacao": 150000,
      "instrucao": "Mexeu em Assets/? Rode a skill unity-validar depois da última edição de .cs, antes de terminar — funciona com o Editor aberto ou fechado. Validar à mão pela CLI `unity` não grava o resultado e o pre-commit recusa o commit. Se não der para validar, diga que ficou faltando."},
     {"id": "dev-gameplay", "camada": "Desenvolvimento", "nome": "Gameplay",
-     "fonte": {"todo": "dev", "secao": "Gameplay"}, "agente": "@responsavel", "isolamento": "principal"},
+     "fonte": {"todo": "dev", "secao": "Gameplay"}, "agente": "@responsavel", "isolamento": "principal", "janela_compactacao": 150000},
     {"id": "dev-ui-arte", "camada": "Desenvolvimento", "nome": "UI e arte",
-     "fonte": {"todo": "dev", "secao": "UI e arte"}, "agente": "@responsavel", "isolamento": "principal"},
+     "fonte": {"todo": "dev", "secao": "UI e arte"}, "agente": "@responsavel", "isolamento": "principal", "janela_compactacao": 150000},
     {"id": "dev-ecossistema", "camada": "Desenvolvimento", "nome": "Ecossistema e processo",
      "fonte": {"todo": "dev", "secao": "Ecossistema e processo"}, "agente": "@responsavel", "isolamento": "worktree"},
     {"id": "dev-divida", "camada": "Desenvolvimento", "nome": "Dívida técnica",

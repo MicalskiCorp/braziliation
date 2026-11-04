@@ -81,6 +81,12 @@ def normalizar(ev: dict) -> list[dict]:
                  "duracao_s": round((ev.get("duration_ms") or 0) / 1000)}]
     if tipo == "system" and ev.get("subtype") == "init":
         return [{"tipo": "nota", "texto": f"Sessão do agente aberta em {ev.get('cwd', '?')}."}]
+    if tipo == "system" and ev.get("subtype") == "compact_boundary":
+        meta = ev.get("compact_metadata") or {}
+        antes = meta.get("pre_tokens") or 0
+        gatilho = {"auto": "automática", "manual": "pedida", "plugin": "pelo mod"}.get(meta.get("trigger", ""), "")
+        return [{"tipo": "nota", "texto": f"Contexto compactado{' (' + gatilho + ')' if gatilho else ''}: "
+                                          f"{round(antes / 1000)} mil tokens viraram um resumo."}]
     return []
 
 

@@ -117,6 +117,7 @@ class Execucao:
     limite_tipo: str = ""                            # five_hour, seven_day…
     tentativas_limite: int = 0                       # retomadas que bateram no limite de novo
     recados: list = field(default_factory=list)      # mensagens escritas durante a espera do limite
+    economia: dict = field(default_factory=dict)     # política de tokens aplicada (ADR-015): janela, mod, versão
 
     @property
     def rotulo(self) -> str:
@@ -306,7 +307,8 @@ class Gerenciador:
             camada=fila.camada if fila is not None else "", arquivo_fonte=fila.arquivo if fila is not None else "",
             itens=[{"id": i["id"], "titulo": i["titulo"]} for i in itens], agente=agente,
             modo=modo or (fila.isolamento if fila is not None else "worktree"), prompt=prompt,
-            criada=agora(), avisos=avisos)
+            criada=agora(), avisos=avisos,
+            economia={"janela": getattr(fila, "janela_compactacao", 0) or 0} if config.ECONOMIA else {})
         with self.trava:
             self.execucoes[ex.id] = ex
             pasta = self._pasta(ex.id)
@@ -438,7 +440,10 @@ class Gerenciador:
         sessao = self.fabrica(cwd=Path(ex.cwd), agente=ex.agente, contrato=self._pasta(ex.id) / "contrato.md",
                               nome=f"Central · {ex.fila_nome} · {ex.id[-4:]}",
                               ao_evento=lambda ev, i=ex.id: self._evento(i, ev),
-                              retomar=ex.session_id if retomar and ex.session_id else None)
+                              retomar=ex.session_id if retomar and ex.session_id else None,
+                              economia={**ex.economia, "execucao": ex.id, "fila": ex.fila_nome})
+        # O que valeu nesta sessão: é o que separa o antes do depois na página Tokens.
+        ex.economia = {**ex.economia, "mod": bool(getattr(sessao, "mod_ativo", False))}
         self.sessoes[ex.id] = sessao
         sessao.iniciar()
         sessao.enviar(mensagem)

@@ -38,7 +38,8 @@ class SessaoAgente:
     """Processo `claude -p` de uma execução. Eventos chegam por `ao_evento`, numa thread."""
 
     def __init__(self, cwd: Path, agente: str, contrato: Path, nome: str,
-                 ao_evento: Callable[[dict], None], retomar: str | None = None, exe: str | None = None):
+                 ao_evento: Callable[[dict], None], retomar: str | None = None, exe: str | None = None,
+                 economia: dict | None = None):
         self.cwd = Path(cwd)
         self.agente = agente
         self.contrato = contrato
@@ -46,6 +47,9 @@ class SessaoAgente:
         self.ao_evento = ao_evento
         self.retomar = retomar
         self.exe = exe or config.claude_exe()
+        # Economia de tokens (ADR-015): {"janela": tokens, "execucao": id, "fila": nome}.
+        self.economia = dict(economia or {})
+        self.mod_ativo = config.mod_economia_ativo(self.exe)
         self.proc: subprocess.Popen | None = None
         self._escrita = threading.Lock()
         self._stderr: list[str] = []
@@ -59,13 +63,30 @@ class SessaoAgente:
             args += ["--agent", self.agente]
         if self.retomar:
             args += ["--resume", self.retomar]
+        if self.mod_ativo:
+            args += ["--plugin-dir", str(config.MOD_ECONOMIA)]
         # Variádico: fica por último para não engolir outras opções.
         return args + ["--disallowedTools", *PROIBIDAS]
+
+    def variaveis(self) -> dict:
+        """O que esta sessão recebe a mais no ambiente.
+
+        A janela é a variável do próprio Claude Code (vale no meio do turno, onde o mod não pode
+        compactar: `$.session.compact` recusa enquanto um turno roda). O mod lê a execução e a
+        fila para as instruções do resumo."""
+        extra = {}
+        janela = self.economia.get("janela") or 0
+        if config.ECONOMIA and janela:
+            extra["CLAUDE_CODE_AUTO_COMPACT_WINDOW"] = str(int(janela))
+        if self.mod_ativo:
+            extra["CENTRAL_EXECUCAO"] = str(self.economia.get("execucao", ""))
+            extra["CENTRAL_FILA"] = str(self.economia.get("fila", ""))
+        return extra
 
     def iniciar(self) -> None:
         self.proc = subprocess.Popen(
             self.argumentos(), cwd=self.cwd, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE, env=config.ambiente(), creationflags=config.SEM_JANELA)
+            stderr=subprocess.PIPE, env=config.ambiente(self.variaveis()), creationflags=config.SEM_JANELA)
         threading.Thread(target=self._ler, daemon=True, name=f"agente-{self.nome}").start()
         threading.Thread(target=self._ler_erro, daemon=True).start()
         self._enviar({"type": "control_request", "request_id": f"init-{uuid.uuid4().hex[:8]}",

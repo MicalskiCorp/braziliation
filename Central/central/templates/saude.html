@@ -11,6 +11,10 @@
   <tr><td>Último unity-validar</td><td>{% if s.unity %}{{ s.unity.quando }} · <span class="selo {{ 'ok' if s.unity.ok else 'erro' }}">{{ 'OK' if s.unity.ok else 'falhou' }}</span>{% if s.unity.testes %} EditMode {{ s.unity.testes.passaram }}/{{ s.unity.testes.total }}{% endif %}{% else %}nunca rodou{% endif %}
     {% if s.unity_aberto %} · <span class="selo aviso">Editor aberto</span>{% endif %}</td></tr>
   <tr><td>Ferramentas</td><td>{% for nome, caminho in ferramentas.items() %}<div><code>{{ nome }}</code> {% if caminho %}<span class="sub mono">{{ caminho }}</span>{% else %}<span class="selo erro">não encontrado</span>{% endif %}</div>{% endfor %}</td></tr>
+  <tr><td>Economia de tokens</td><td>{% if not economia %}<span class="selo aviso">desligada</span> (<code>CENTRAL_ECONOMIA=0</code>){% else %}
+    Claude Code da Central: <code>{{ versao_claude or '?' }}</code> ·
+    {% if mod_ativo %}<span class="selo ok">mod carregado nas execuções</span>{% else %}<span class="selo aviso">mod desligado</span> — mods exigem {{ minimo_mods }} ou mais nova: rode <code>claude update</code> com nenhuma execução rodando{% endif %}
+    · <a href="/tokens">uso por fila</a>{% endif %}</td></tr>
   <tr><td>Listener do WhatsApp</td><td>{{ listener.tarefa }}</td></tr>
   {% if uso %}<tr><td>Uso do plano</td><td>{% for nome, janela in (uso.unifiedWindows or {}).items() %}{{ nome }}: {{ (janela.utilization * 100)|round|int }}% {% endfor %}<span class="sub">(da última execução)</span></td></tr>{% endif %}
 </table>
