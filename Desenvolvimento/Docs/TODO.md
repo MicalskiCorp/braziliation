@@ -39,8 +39,6 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
-| Play-teste da demo: `MainMenu` (movido para `Scenes/Menus/` em 2026-09-13) → `DemoGameplay`; animação trocando quadro, pulo só no chão, inimigo virando na ponta, ataque sem auto-dano; paridade de input (W/↑ pulam, F ataca) — auditoria de código em 2026-11-03 confirma os 5 pontos (GameInput, PlayerController, PlayerCombat, EnemyController, SpriteSheetAnimator); falta o play-teste interativo | `@UnityDeveloper` | Alta | ⏸ aguardando Editor aberto para o play-teste manual |
-| Conectar o MCP `unity`: abrir o Editor com o pacote `com.unity.pipeline` (adicionado em 2026-09-13) e confirmar `unity status` — pacote confirmado em `Packages/manifest.json` (0.7.0-exp.1) em 2026-11-03 | Usuário + `@UnityDeveloper` | Média | ⏸ aguardando o usuário abrir o Editor |
 | Fatiar `env_placeholder_castelo_tileset.png` e montar blockout com Tilemap | `@UnityDeveloper` | Baixa | ❌ opcional |
 
 ---
