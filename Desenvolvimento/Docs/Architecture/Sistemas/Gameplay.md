@@ -19,6 +19,7 @@
 | `DemoSceneBootstrap.cs` | `Assets/Scripts/Gameplay/DemoSceneBootstrap.cs` | Monta em runtime a cena mínima: locator, build, chão, player, inimigo e HUD |
 | `DemoAutoBootstrapper.cs` | `Assets/Scripts/Gameplay/DemoAutoBootstrapper.cs` | Garante o bootstrap de demo em cenas que não são de menu |
 | `DemoSceneVisuals.cs` | `Assets/Scripts/Gameplay/DemoSceneVisuals.cs` | Fonte única de aparência e geometria da demo (runtime e cena fixa) |
+| `FloodgateLeverInteractable.cs` | `Assets/Scripts/Gameplay/FloodgateLeverInteractable.cs` | Casca visual da alavanca da comporta: toca a animação e dispara `UnityEvent`; implementa `IInteractable`; zero regra hídrica |
 
 Os adaptadores de inimigo (`EnemyController.cs`, `EnemySpriteAnimation.cs`) moram nesta pasta, mas são documentados em [Enemies](Enemies.md).
 
@@ -32,7 +33,7 @@ Os adaptadores de inimigo (`EnemyController.cs`, `EnemySpriteAnimation.cs`) mora
 
 | Sistema | Arquivo | Motivo |
 |---------|---------|--------|
-| [Core](Core.md) | `GameInput.cs`, `GameLayers.cs`, `IDamageable.cs`, `IStatReceiver.cs` | Input pelo action map, layers nomeadas e contratos de dano/atributo |
+| [Core](Core.md) | `GameInput.cs`, `GameLayers.cs`, `IDamageable.cs`, `IStatReceiver.cs`, `IInteractable.cs` | Input pelo action map, layers nomeadas e contratos de dano/atributo/interação |
 | [Build](Build.md) | `PlayerBuildController.cs` | Envia ao `PlayerController` os atributos calculados pela build |
 | [Enemies](Enemies.md) | `EnemyController.cs` | Inimigo da demo |
 | [UI](UI.md) | `SimpleHealthHud.cs`, `CanvasHealthHud.cs` | HUD de vida lê o `HealthComponent` |

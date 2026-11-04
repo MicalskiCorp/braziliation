@@ -85,26 +85,10 @@ Format:
   e variadas, e passar a usar o ruleset derivado como padrão. É edição de uma grade de texto de
   12 linhas, não reescrita de regras — decisão de direção de arte, não de código.
 
-- **Item:** `WfcMapImporter` compila, mas nunca foi executado
-- **Where:** `Assets/Editor/Art/WfcMapImporter.cs`
-- **Why:** Compilou no primeiro batchmode (2026-09-13, skill `unity-validar`). A premissa
-  anterior — "a licença Personal não permite `-batchmode`" — estava errada, e a correção de
-  2026-09-13 ainda errava pela metade: Personal **também ativa pela linha de comando**
-  (`unity auth login` + `unity license activate --personal --accept-eula`, feito em
-  2026-09-20). Executar o importador é que ainda exige o menu do Editor.
-- **Fix:** Abrir o Editor, rodar `Assets > Braziliation > Importar Mapa WFC...` apontando para
-  `Design/ArteFonte/IA/Outputs/wfc-teste/blumenau_s42.unity.json` e conferir o Tilemap.
-
 - **Item:** `PlayerInventory` é uma lista sem capacidade, categorias nem persistência
 - **Where:** `Assets/Scripts/Core/PlayerInventory.cs` (TODO inline)
 - **Why:** stub para destravar crafting.
 - **Fix:** definir regras no GDD antes de implementar; inventário não entra no save hoje.
-
-- **Item:** Ferramentas de editor de sprite compilam, mas nunca foram exercitadas
-- **Where:** `Assets/Editor/Art/SheetAutoSlicer.cs`, `SheetAnimationTool.cs`
-- **Why:** compilaram no batchmode de 2026-09-13; o slicing e a geração de `.anim` ainda não
-  foram conferidos num sheet real.
-- **Fix:** abrir o Unity, reimportar um `*_sheet.png` e confirmar slicing + `.anim`.
 
 - **Item:** Efeito híbrido nomeado `"PrótesisViva"` (espanhol) entre nomes PT-BR
 - **Where:** `src/Braziliation.Game.Core/Build/HybridSynergyResolver.cs`

@@ -141,8 +141,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 96
+        height: 96
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,7 +151,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 244d49bcb0d61274ea6d0303cec4b5f6
+      spriteID: 1858cfa7b5577e04ba5a1720ec220d6b
       internalID: 458230267
       vertices: []
       indices: 
@@ -161,10 +161,10 @@ TextureImporter:
       name: prop_blumenau_floodgate_lever_activate_sheet_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
-        width: 64
-        height: 64
+        width: 96
+        height: 96
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,7 +173,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 451fd7294915edb47acd20969de3de7b
+      spriteID: 7624dab8d6919b14293a9bed7ce27f71
       internalID: -1276790894
       vertices: []
       indices: 
@@ -183,10 +183,10 @@ TextureImporter:
       name: prop_blumenau_floodgate_lever_activate_sheet_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 192
         y: 0
-        width: 64
-        height: 64
+        width: 96
+        height: 96
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,7 +195,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b98e969b98b0af43aca7a5d72ec7787
+      spriteID: 48ffeb3f6034ba843a9c050ca9885126
       internalID: 1350710739
       vertices: []
       indices: 

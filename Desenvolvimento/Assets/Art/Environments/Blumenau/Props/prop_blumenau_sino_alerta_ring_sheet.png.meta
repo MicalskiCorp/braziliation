@@ -141,8 +141,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 48
+        height: 48
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,7 +151,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5714ec064ee75034f8beadb166e44a89
+      spriteID: 894e9496c3836b44b9f46e0550739327
       internalID: 848307040
       vertices: []
       indices: 
@@ -161,10 +161,10 @@ TextureImporter:
       name: prop_blumenau_sino_alerta_ring_sheet_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 0
-        width: 32
-        height: 32
+        width: 48
+        height: 48
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,7 +173,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f107d7cc64c58634eb02d9483a11d972
+      spriteID: c74b6c11649721d4c94cced79c99d956
       internalID: -1042702720
       vertices: []
       indices: 
@@ -183,10 +183,10 @@ TextureImporter:
       name: prop_blumenau_sino_alerta_ring_sheet_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
-        width: 32
-        height: 32
+        width: 48
+        height: 48
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,7 +195,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37f7276880e1bc24c9b8a9d8c59f6bdc
+      spriteID: f520bb4f7f0123f4686b8abf1adbcf9a
       internalID: -2056061089
       vertices: []
       indices: 

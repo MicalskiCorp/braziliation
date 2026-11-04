@@ -42,6 +42,11 @@ namespace Braziliation.Editor.Art
             public int[] cellVariation;// width*height, coluna do tileset; -1 quando vazio
         }
 
+        /// <summary>Mapa de teste da fila Unity de 2026-11-03 — ver Docs/TODO.md § Unity.</summary>
+        private const string KnownTestMapPath =
+            "../../Design/ArteFonte/IA/Outputs/wfc-teste/blumenau_s42.unity.json";
+        private const string KnownTestScenePath = "Assets/Scenes/WfcImportTest.unity";
+
         [MenuItem("Assets/Braziliation/Importar Mapa WFC...")]
         public static void ImportMap()
         {
@@ -52,6 +57,41 @@ namespace Braziliation.Editor.Art
                 return;
             }
 
+            ImportMapFromJsonFile(path);
+        }
+
+        /// <summary>
+        /// Roda o importer sobre o mapa de teste conhecido, numa cena nova dedicada
+        /// (não na DemoGameplay), para ficar disponível para revisão visual no Editor.
+        /// Pensado para rodar em batch (-executeMethod) sem diálogo de arquivo.
+        /// </summary>
+        [MenuItem("Tools/Braziliation/Setup/Importar Mapa WFC de Teste (blumenau_s42)")]
+        public static void ImportKnownTestMap()
+        {
+            var fullPath = Path.GetFullPath(Path.Combine(Application.dataPath, KnownTestMapPath));
+            if (!File.Exists(fullPath))
+            {
+                Debug.LogError($"[WfcMapImporter] Mapa de teste não encontrado: {fullPath}");
+                return;
+            }
+
+            var scene = UnityEditor.SceneManagement.EditorSceneManager.NewScene(
+                UnityEditor.SceneManagement.NewSceneSetup.EmptyScene,
+                UnityEditor.SceneManagement.NewSceneMode.Single);
+
+            if (!ImportMapFromJsonFile(fullPath))
+            {
+                return;
+            }
+
+            UnityEditor.SceneManagement.EditorSceneManager.SaveScene(scene, KnownTestScenePath);
+            AssetDatabase.Refresh();
+            Debug.Log($"[WfcMapImporter] Mapa de teste importado em '{KnownTestScenePath}'.");
+        }
+
+        /// <summary>Valida a extensão e delega para <see cref="ImportMapFromJson"/>.</summary>
+        private static bool ImportMapFromJsonFile(string path)
+        {
             if (!path.EndsWith(".unity.json"))
             {
                 EditorUtility.DisplayDialog(
@@ -59,14 +99,20 @@ namespace Braziliation.Editor.Art
                     "Selecione o arquivo *.unity.json — é o formato de máquina.\n\n" +
                     "O *.map.json ao lado dele é a versão legível e não é lida por este importer.",
                     "Ok");
-                return;
+                return false;
             }
 
+            return ImportMapFromJson(path);
+        }
+
+        /// <summary>Núcleo do importer, sem diálogo — usado pelo menu e pelo batch.</summary>
+        private static bool ImportMapFromJson(string path)
+        {
             var map = JsonUtility.FromJson<WfcMapData>(File.ReadAllText(path));
             if (map == null || map.cells == null || map.cells.Length == 0)
             {
                 EditorUtility.DisplayDialog("Mapa inválido", $"Não foi possível ler:\n{path}", "Ok");
-                return;
+                return false;
             }
 
             var expected = map.width * map.height;
@@ -77,7 +123,7 @@ namespace Braziliation.Editor.Art
                     $"O mapa declara {map.width}x{map.height} = {expected} células, " +
                     $"mas traz {map.cells.Length}. Regere com gen_map_wfc.py.",
                     "Ok");
-                return;
+                return false;
             }
 
             var sprites = new Dictionary<int, Sprite[]>();
@@ -89,7 +135,7 @@ namespace Braziliation.Editor.Art
                     Debug.LogError(
                         $"[WfcMapImporter] Tileset '{map.tilesetNames[i]}' não está dentro de Assets/. " +
                         "O ruleset precisa apontar o 'sheet' para um PNG do projeto Unity.");
-                    return;
+                    return false;
                 }
 
                 EnsureSlicedAsGrid(assetPath, map.tilesetRows[i], map.tilesetVariations[i], map.tileSize);
@@ -97,7 +143,7 @@ namespace Braziliation.Editor.Art
                 if (sprites[i].Length == 0)
                 {
                     Debug.LogError($"[WfcMapImporter] Nenhum sprite fatiado em {assetPath}.");
-                    return;
+                    return false;
                 }
             }
 
@@ -138,6 +184,7 @@ namespace Braziliation.Editor.Art
             Selection.activeGameObject = tilemap.gameObject;
             Debug.Log($"[WfcMapImporter] '{map.ruleset}' importado: {map.width}x{map.height}, " +
                       $"{painted} células pintadas, {tileCache.Count} tiles distintos.");
+            return true;
         }
 
         /// <summary>

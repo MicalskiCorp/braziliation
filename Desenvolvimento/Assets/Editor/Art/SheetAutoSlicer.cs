@@ -46,7 +46,17 @@ namespace Braziliation.Editor.Art
             provider.InitSpriteEditorDataProvider();
 
             int frames = width / height;
-            if (provider.GetSpriteRects().Length == frames)
+            var existingRects = provider.GetSpriteRects();
+            // Não basta conferir a contagem: se a textura foi redesenhada em outro
+            // tamanho (ex.: 32px → 48px) mas o número de quadros não mudou, a contagem
+            // ainda bate e o slicing antigo (com rects do tamanho errado) nunca era
+            // substituído. Foi o que aconteceu com os sheets da comporta e do sino após
+            // o re-export em 96/48 px — a guarda só olhava `Length`.
+            bool alreadySlicedAtCurrentSize = existingRects.Length == frames
+                && existingRects.Length > 0
+                && Mathf.RoundToInt(existingRects[0].rect.width) == height
+                && Mathf.RoundToInt(existingRects[0].rect.height) == height;
+            if (alreadySlicedAtCurrentSize)
             {
                 return;
             }
