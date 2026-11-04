@@ -124,6 +124,18 @@ Format:
   parte (`_rendererCapa`, `_rendererEspinha`) e um `AplicarSprite` por renderer. Depende da
   pendência "Progressão visual da build" no `TODO.md`.
 
+- **Item:** Comporta hídrica de Blumenau só conhece aberta/fechada local, sem o sistema global de 4 estados nem arte de porta
+- **Where:** `Assets/Scripts/Gameplay/FloodgateController.cs` · `Docs/GDD/Features/Blumenau-SistemaHidrico.md`
+- **Why:** A fila Unity de 2026-11-03 pedia só "integrar a alavanca ao sistema hídrico"; o
+  `HydricStateManager` (4 estados Rotina/Alerta/Cheia/Saturação, `@SystemsDeveloper`, Core
+  puro) ainda não existe, então a comporta ganhou toggle local (`Open`/`Close`/`Toggle`) com
+  um hook `SetLocked` para esse sistema travar em Cheia/Saturação quando existir. Também não
+  há sprite de comporta/porta em `Assets/Art/Environments/Blumenau/Props/` — só a alavanca —
+  então `FloodgateController` funciona hoje só com o colisor (sem troca de sprite visível).
+- **Fix:** Modelar `HydricState.cs`/`HydricStateManager.cs` (TODOs já descritos em
+  `Blumenau-SistemaHidrico.md`) e chamar `FloodgateController.SetLocked` nas transições de
+  estado; pedir o asset de comporta pela skill `novo-asset` e plugar em `_gateRenderer`.
+
 - **Item:** `HealthComponent` dispara `OnHealthChanged` no `Awake`
 - **Where:** `Assets/Scripts/Gameplay/HealthComponent.cs`
 - **Why:** ouvinte registrado por código em outro `Awake` pode não estar inscrito ainda.

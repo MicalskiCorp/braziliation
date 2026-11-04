@@ -18,6 +18,7 @@
 | `MainMenuUISetupEditor.cs` | `Assets/Editor/Menu/MainMenuUISetupEditor.cs` | Monta a hierarquia de UI do menu principal (`Tools > Braziliation > Setup Main Menu UI`) |
 | `MenuBackgroundSetupEditor.cs` | `Assets/Editor/Menu/MenuBackgroundSetupEditor.cs` | Configura o fundo animado do menu (`Tools > Braziliation > Setup Menu Background`) |
 | `FloodgateLeverPrefabBuilder.cs` | `Assets/Editor/Interactables/FloodgateLeverPrefabBuilder.cs` | Cria/atualiza `Prop_FloodgateLever.prefab` a partir do Animator da onda atual (`Tools > Braziliation > Setup > Build Floodgate Lever Prefab`) |
+| `FloodgateGatePrefabBuilder.cs` | `Assets/Editor/Interactables/FloodgateGatePrefabBuilder.cs` | Cria/atualiza `Prop_FloodgateGate.prefab`: comporta + alavanca aninhada já ligada ao `FloodgateController.Toggle` (`Tools > Braziliation > Setup > Build Floodgate Gate Prefab`) |
 | `AutomatoPrefabBuilder.cs` | `Assets/Editor/Enemies/AutomatoPrefabBuilder.cs` | Cria/atualiza `Enemy_Automato.prefab` com o Animator de idle em loop (`Tools > Braziliation > Setup > Build Automato Enemy Prefab`) |
 
 ## Features que Usam Este Sistema

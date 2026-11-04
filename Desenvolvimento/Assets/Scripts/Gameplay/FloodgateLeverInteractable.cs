@@ -6,9 +6,10 @@ namespace Braziliation.Gameplay
 {
     /// <summary>
     /// Casca visual da alavanca da comporta (Prop_FloodgateLever): toca a animação de
-    /// ativação e avisa quem estiver ouvindo. Nenhuma regra do sistema hídrico de
-    /// Blumenau vive aqui — isso é integração do <c>@GameplayEngineer</c>
-    /// (Docs/TODO.md § Unity, "Integrar a alavanca ao sistema hídrico de Blumenau").
+    /// ativação e avisa quem estiver ouvindo via <see cref="OnActivated"/>. Nenhuma regra
+    /// do sistema hídrico de Blumenau vive aqui — quem decide o que a interação significa
+    /// no mundo é a <see cref="FloodgateController"/> ligada no Inspector (ou já pronta no
+    /// prefab <c>Prop_FloodgateGate</c>).
     ///
     /// Convenção: o Animator fica desligado em repouso para não tocar a animação de
     /// ativação sozinho ao carregar a cena — o <see cref="SpriteRenderer"/> mostra o
@@ -34,6 +35,12 @@ namespace Braziliation.Gameplay
 
         /// <summary>Estado atual da alavanca — ligada ou desligada.</summary>
         public bool IsOn => _isOn;
+
+        /// <summary>
+        /// Evento disparado a cada interação — exposto para wiring programático (ex.:
+        /// <c>FloodgateGatePrefabBuilder</c>) além do Inspector.
+        /// </summary>
+        public UnityEvent OnActivated => _onActivated;
 
         private void Awake()
         {
