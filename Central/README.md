@@ -56,7 +56,7 @@ Quando o limite do plano (janela de 5 h ou semanal) estoura no meio de uma execu
 
 - No modo sem interface não existe `AskUserQuestion`: o agente pergunta em texto e encerra o turno.
 - Play-teste no Editor e pixel pass manual no Aseprite seguem com você — os itens aparecem nas filas, a execução é com as mãos.
-- `unity-validar` exige o Editor fechado e roda só em execução da árvore principal (o worktree não tem a `Library/`).
+- `unity-validar` roda só em execução da árvore principal (o worktree não tem a `Library/`). Com o Editor aberto, valida nele pela CLI `unity`; com ele fechado, em batchmode.
 - Arquivos fora do git que uma execução da árvore principal muda (`_lotes/`, `_processado/`) não voltam no descarte; a validação os lista.
 
 ## Manutenção

@@ -20,6 +20,12 @@ else PY=python; fi
 
 # git-dir e não "$ROOT/.git": num worktree (as execuções da Central, ADR-012) `.git` é arquivo.
 LOG="$(git rev-parse --absolute-git-dir)/pre-commit.log"
+# Cada passo grava a saída em $PASSO (lida logo depois para o resumo na tela) e
+# anexa() a acumula em $LOG. Por quê: até 2026-11-04 cada passo sobrescrevia $LOG,
+# e o "Log completo" do fim só tinha o último passo — nunca o que bloqueou.
+PASSO="$LOG.passo"
+: >"$LOG"
+anexa() { { echo "===== $1"; cat "$PASSO"; echo; } >>"$LOG"; }
 FALHOU=0
 
 # 1. Testes .NET — cobrem o core e as guardas do repositório (.gitignore, docs,
@@ -29,13 +35,14 @@ echo "[pre-commit] dotnet test..."
 # para rodar os testes, e não deve mexer em arquivo nenhum enquanto o commit é montado.
 # (A pasta Assets/Plugins/Braziliation/ deixou de ser versionada em 2026-09-19; antes
 # disso, sem este CI=true, cada commit deixava a DLL do core modificada.)
-if CI=true dotnet test Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj --nologo -v quiet >"$LOG" 2>&1; then
-  grep -E "Aprovado!|Passed!" "$LOG" | tail -1
+if CI=true dotnet test Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj --nologo -v quiet >"$PASSO" 2>&1; then
+  grep -E "Aprovado!|Passed!" "$PASSO" | tail -1
 else
   echo "[pre-commit] FALHOU: dotnet test"
-  grep -E "error |Com falha|Failed |\[FAIL\]|Assert" "$LOG" | head -25
+  grep -E "error |Com falha|Failed |\[FAIL\]|Assert" "$PASSO" | head -25
   FALHOU=1
 fi
+anexa "dotnet test"
 
 # 2. Gates de repositório (pares asset/.meta, paletas) — rodados contra o ÍNDICE, não
 #    contra o disco. Por quê: até 2026-09-19 o meta-check olhava a árvore de trabalho e
@@ -52,9 +59,10 @@ if echo "$STAGED" | grep -qE '^Desenvolvimento/Assets/Art/.*\.png$|^Design/ArteC
 fi
 if [ -n "$GATES" ]; then
   echo "[pre-commit] checkout limpo ($GATES)..."
-  if ! $PY .claude/skills/meta-check/check_clean_checkout.py --gates "$GATES" >"$LOG" 2>&1; then
-    tail -30 "$LOG"; FALHOU=1
+  if ! $PY .claude/skills/meta-check/check_clean_checkout.py --gates "$GATES" >"$PASSO" 2>&1; then
+    tail -30 "$PASSO"; FALHOU=1
   fi
+  anexa "checkout limpo ($GATES)"
 fi
 
 # 2b. Script Unity no commit — exige unity-validar OK e posterior à última edição.
@@ -62,23 +70,26 @@ fi
 UNITY_CS=$(git diff --cached --name-only --diff-filter=ACMR | grep '^Desenvolvimento/Assets/.*\.cs$')
 if [ -n "$UNITY_CS" ]; then
   echo "[pre-commit] unity-validar..."
-  if ! echo "$UNITY_CS" | $PY .claude/skills/unity-validar/scripts/check_state.py >"$LOG" 2>&1; then
-    cat "$LOG"; FALHOU=1
+  if ! echo "$UNITY_CS" | $PY .claude/skills/unity-validar/scripts/check_state.py >"$PASSO" 2>&1; then
+    cat "$PASSO"; FALHOU=1
   fi
+  anexa "unity-validar"
 fi
 
 # 3. TODOs de camada — parser único (ADR-012). Lê a versão em stage; leva menos de 1 s.
 #    Por quê: em 2026-11-03 uma citação no meio da tabela de Lendas escondia dois itens Alta
 #    de um dos leitores, e três ✅ seguiam no TODO de Desenvolvimento. Ninguém via.
 echo "[pre-commit] todo.py validar..."
-if ! $PY .claude/skills/gerir-todo/todo.py validar --indice >"$LOG" 2>&1; then
-  cat "$LOG"; FALHOU=1
+if ! $PY .claude/skills/gerir-todo/todo.py validar --indice >"$PASSO" 2>&1; then
+  cat "$PASSO"; FALHOU=1
 fi
+anexa "todo.py validar"
 if echo "$STAGED" | grep -qE '^\.claude/skills/gerir-todo/|^\.claude/hooks/session_snapshot\.py$'; then
   echo "[pre-commit] testes do parser de TODO..."
-  if ! $PY -m unittest discover -s .claude/skills/gerir-todo/tests >"$LOG" 2>&1; then
-    tail -30 "$LOG"; FALHOU=1
+  if ! $PY -m unittest discover -s .claude/skills/gerir-todo/tests >"$PASSO" 2>&1; then
+    tail -30 "$PASSO"; FALHOU=1
   fi
+  anexa "testes do parser de TODO"
 fi
 
 # 4. Central (ADR-012) — testes no venv dela. Num worktree de execução da Central o venv não
@@ -95,12 +106,14 @@ if echo "$STAGED" | grep -q '^Central/'; then
     echo "[pre-commit] AVISO: Central/.venv não existe — testes da Central não rodaram (ver Central/README.md)"
   else
     echo "[pre-commit] testes da Central..."
-    if ! (cd Central && "$VENV_PY" -m unittest discover -s tests -t . >"$LOG" 2>&1); then
-      tail -30 "$LOG"; FALHOU=1
+    if ! (cd Central && "$VENV_PY" -m unittest discover -s tests -t . >"$PASSO" 2>&1); then
+      tail -30 "$PASSO"; FALHOU=1
     fi
+    anexa "testes da Central"
   fi
 fi
 
+rm -f "$PASSO"
 if [ "$FALHOU" -ne 0 ]; then
   echo "[pre-commit] Commit bloqueado. Log completo: $LOG"
   exit 1

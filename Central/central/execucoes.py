@@ -677,8 +677,7 @@ class Gerenciador:
         if so == "unity":
             if ex.modo != "principal":
                 raise Bloqueio("unity-validar roda só em execução na árvore principal (o worktree não tem a Library do Unity)")
-            if fontes.unity_aberto():
-                raise Bloqueio("feche o Editor do Unity antes — o batchmode não roda com o projeto aberto")
+            # Editor aberto não bloqueia mais: o validar.py valida nele pela CLI `unity` (2026-11-04).
             lista = {"unity-validar": [*config.python_do_projeto(), ".claude/skills/unity-validar/scripts/validar.py", "--testes"]}
         elif so:
             lista = {k: v for k, v in lista.items() if k == so}

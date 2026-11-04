@@ -388,8 +388,6 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
         try:
             ger.obter(ex_id)
             if so == "unity":
-                if fontes.unity_aberto():
-                    return falha("Feche o Editor do Unity antes — o batchmode não roda com o projeto aberto.")
                 if ger.obter(ex_id).modo != "principal":
                     return falha("unity-validar roda só em execução na árvore principal.")
             lista = await run_in_threadpool(ger.preparar_checagens, ex_id, so or None)
@@ -475,8 +473,6 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
     async def gate(nome: str = Form(...)):
         if nome not in GATES:
             return falha("checagem desconhecida")
-        if nome == "unity-validar" and fontes.unity_aberto():
-            return falha("Feche o Editor do Unity antes.")
         if app.state.gates.get(nome, {}).get("estado") == "rodando":
             return falha("já está rodando")
         cmd = (["dotnet", "test", "Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj", "--nologo", "-v", "quiet"]

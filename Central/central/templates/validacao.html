@@ -62,8 +62,8 @@
   <form action="/execucao/{{ ex.id }}/checagens" method="post" data-acao><button>Rodar as checagens de novo</button></form>
   {% if ex.modo == 'principal' %}
   <form action="/execucao/{{ ex.id }}/checagens" method="post" data-acao><input type="hidden" name="so" value="unity">
-    <button {% if unity_aberto %}disabled title="Feche o Editor do Unity"{% endif %}>unity-validar (~90 s)</button></form>
-  {% if unity_aberto %}<span class="sub">O Editor do Unity está aberto — feche-o para rodar o unity-validar.</span>{% endif %}
+    <button>unity-validar ({{ '~30 s' if unity_aberto else '~90 s' }})</button></form>
+  {% if unity_aberto %}<span class="sub">Editor do Unity aberto — a validação roda nele, pela CLI <code>unity</code>.</span>{% endif %}
   {% endif %}
 </div>
 {% endif %}

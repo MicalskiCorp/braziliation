@@ -21,7 +21,7 @@ camada, sem os agentes funcionais nem as skills.
 |-------|---------|
 | Testes .NET (~1s) | `dotnet test Desenvolvimento/Tests/Braziliation.Game.Tests/Braziliation.Game.Tests.csproj` |
 | Build do core puro | `dotnet build Desenvolvimento/src/Braziliation.Game.Core/Braziliation.Game.Core.csproj` |
-| Compilar Unity (Editor fechado) | `py .claude/skills/unity-validar/scripts/validar.py` · `--testes` roda também os EditMode (licença ativa desde 2026-09-20; 9/9) |
+| Compilar Unity (Editor aberto ou fechado) | `py .claude/skills/unity-validar/scripts/validar.py` · `--testes` roda também os EditMode (licença ativa desde 2026-09-20; 9/9) |
 | Meta-check / paletas | `py .claude/skills/meta-check/check_meta_pairs.py` · `py Design/ArteFonte/Ferramentas/check_art_palettes.py` |
 | Ativar o pre-commit (uma vez por clone) | `git config core.hooksPath .githooks` |
 | Ferramentas de arte | `py Design/ArteFonte/Ferramentas/<script>.py` — **use `py`, não `python`** |

@@ -75,7 +75,7 @@ Lógica testável vive em C# puro (`src/`), sem Unity; o Unity só adapta. Scrip
 5. `[SerializeField]` sempre, com `[Header]`/`[Tooltip]`; layers via `GameLayers`.
 6. Validar com `unity-validar` e `meta-check`; decisão relevante vai para ADR, atalho para `tech_debt.md`.
 
-- **Editor aberto:** Usar o MCP `unity` em vez do batchmode
+- **Editor aberto:** `unity-validar` valida no próprio Editor pela CLI `unity` (mesmo comando); validar à mão pela CLI não grava resultado e o pre-commit recusa
 
 ## I6 — Revisão de qualidade
 
@@ -94,7 +94,7 @@ Lógica testável vive em C# puro (`src/`), sem Unity; o Unity só adapta. Scrip
 
 **Quem:** skills `unity-validar` · `meta-check`
 
-1. Com o Editor fechado: `py .claude/skills/unity-validar/scripts/validar.py` (~1–2 min).
+1. `py .claude/skills/unity-validar/scripts/validar.py` — batchmode com o Editor fechado (~1–2 min), ou no Editor aberto pela CLI `unity` (~10–30 s).
 2. `--testes` roda também os EditMode (9/9 em 20 set 2026) — exige a licença ativada na máquina (`unity auth login` + `unity license activate --personal --accept-eula`).
 3. Erro vem como `arquivo(linha,coluna): error CSxxxx`; corrigir e repetir.
 4. `py .claude/skills/meta-check/check_meta_pairs.py` e incluir os `.meta` novos no commit.

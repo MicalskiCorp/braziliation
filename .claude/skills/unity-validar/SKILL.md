@@ -1,6 +1,6 @@
 ---
 name: unity-validar
-description: Compila o projeto Unity do Braziliation em batchmode, sem abrir o Editor, e resume os erros de compilação com arquivo e linha; com --testes também roda os testes EditMode. Use depois de editar qualquer script em Assets/, antes de commitar mudança Unity, quando o usuário pedir para "validar no Unity", "ver se compila" ou "rodar testes do Unity".
+description: Compila o projeto Unity do Braziliation (em batchmode com o Editor fechado, ou no próprio Editor aberto pela CLI `unity`) e resume os erros de compilação com arquivo e linha; com --testes também roda os testes EditMode. Use depois de editar qualquer script em Assets/, antes de commitar mudança Unity, quando o usuário pedir para "validar no Unity", "ver se compila" ou "rodar testes do Unity".
 allowed-tools: Bash(py .claude/skills/unity-validar/scripts/validar.py*)
 ---
 
@@ -18,12 +18,12 @@ Fecha o ciclo que o CI não cobre: o CI roda só o core C# puro (`Tests/Brazilia
    py .claude/skills/unity-validar/scripts/validar.py --testes  # compila + testes EditMode (exige licença ativada)
    ```
    Se `--testes` responder que a licença foi recusada, a compilação reportada continua valendo; peça ao usuário para ativar a licença uma vez.
-2. Se o script disser que **o Editor está aberto** para este projeto: não force. Peça ao usuário para fechar o Editor, ou use a CLI oficial (`unity status` / skill `unity-cli` do plugin da Unity) para agir no Editor aberto.
+2. **Editor aberto com o projeto:** o mesmo comando detecta e valida no próprio Editor pela CLI oficial `unity` (`recompile` → `recompile_status`; `run_tests` com `--testes`), e grava o resultado do mesmo jeito. **Não valide à mão** com `unity command recompile`: nada é gravado e o pre-commit recusa o commit (aconteceu duas vezes na Central em 2026-11-04). Se o script disser que o Editor não respondeu, confira `unity status` ou peça ao usuário para fechar o Editor.
 3. Ler o resumo:
    - **Erros de compilação** vêm como `arquivo(linha,coluna): error CSxxxx: mensagem` — corrigir na fonte e rodar de novo.
    - **Testes EditMode** falhando vêm com nome e mensagem — os testes vivem em `Desenvolvimento/Assets/Tests/EditMode/`.
 4. Arquivos novos em `Assets/` ganham `.meta` nessa execução. Rodar a skill `meta-check` e incluir os `.meta` no commit.
-5. O resultado fica em `.claude/state/unity-validar.json` (lido pelo hook de início de sessão) e o log completo em `.claude/state/unity-validar.log`.
+5. O resultado fica em `.claude/state/unity-validar.json` (lido pelo hook de início de sessão e pelo pre-commit; o campo `via` diz se foi `batchmode` ou `editor-aberto`) e, no batchmode, o log completo em `.claude/state/unity-validar.log`.
 
 ## Regras
 
