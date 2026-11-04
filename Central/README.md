@@ -41,6 +41,10 @@ Editar status, prioridade, dar baixa ou adicionar item pelo painel também passa
 - Execução na árvore principal **só começa com a árvore limpa** — é o que torna o descarte seguro. Commite (ou descarte) o que estiver pendente antes.
 - No máximo 3 agentes vivos ao mesmo tempo (`CENTRAL_MAX_PARALELO`); o excedente espera. Execução esperando resposta há mais de 20 min tem o processo fechado e retomado quando você responde.
 
+## Limite de uso do plano
+
+Quando o limite do plano (janela de 5 h ou semanal) estoura no meio de uma execução, ela passa a **aguardando o limite virar**: a Central lê o horário da virada que o Claude Code informa, fecha o processo do agente (a sessão fica guardada) e, passado o horário (com ~1 min de folga), **retoma sozinha na mesma sessão** — não precisa mandar "continue". Sem horário informado, tenta de novo em 5, 10, 20… até 60 min. Enquanto o limite estiver esgotado, execução nova espera na fila e começa sozinha depois; o que você escrever no chat vira recado e vai junto na retomada. A espera sobrevive a um reinício da Central. Há «Retomar agora» para forçar, e um aviso no topo de todas as páginas.
+
 ## Regras que a Central não quebra
 
 - Lê e escreve TODO só pelo parser único (`.claude/skills/gerir-todo/todo_md.py`); status continua só nos TODOs.

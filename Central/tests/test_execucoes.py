@@ -1,11 +1,13 @@
 """Ciclo das execuções num repositório git temporário, com o agente falso (ADR-012)."""
+import datetime
 import sys
 import tempfile
+import time
 import threading
 import unittest
 from pathlib import Path
 
-from central import filas, gitops
+from central import config, filas, gitops
 from central.execucoes import Bloqueio, Gerenciador
 from central.fontes import todo_md
 from tests.apoio import BLOCO, PY, SessaoFalsa, apagar, esperar, git, pedir_permissao, repo_temporario
@@ -50,6 +52,21 @@ def junta_as_versoes(linha_final):
         arq.write_text("\n".join(saida) + "\n", encoding="utf-8", newline="\n")
         s.texto("Juntei as duas versões." + BLOCO)
         s.fim()
+    return passo
+
+
+AVISO_LIMITE = "You've hit your session limit · resets 2:50pm (America/Sao_Paulo)"
+
+
+def limite_batido(resets_em_s=None, texto=AVISO_LIMITE):
+    """O que o claude manda quando o limite do plano estoura no meio do turno (gravado em 2026-11-03)."""
+    def passo(s):
+        if resets_em_s is not None:
+            s.ao_evento({"type": "rate_limit_event", "rate_limit_info": {
+                "status": "rejected", "resetsAt": int(time.time()) + resets_em_s, "rateLimitType": "five_hour"}})
+        s.texto(texto)
+        s.ao_evento({"type": "result", "subtype": "success", "is_error": True, "result": texto,
+                     "api_error_status": 429})
     return passo
 
 
@@ -345,6 +362,72 @@ class RegrasTest(Base):
         self.ate(ex, "aguardando-validacao")
         with self.assertRaises(Bloqueio):
             self.ger.tentar_de_novo(ex.id)
+
+    def _sessao_fechou(self, ex):
+        cwd = Path(self.ger.obter(ex.id).cwd)
+        return esperar(lambda: not any(s.vivo for s in SessaoFalsa.criadas if s.cwd == cwd))
+
+    def test_limite_de_uso_espera_a_virada_e_retoma_sozinho(self):
+        SessaoFalsa.roteiro = [limite_batido(resets_em_s=3600)]
+        ex = self.criar(fila(), itens(self.raiz)[:1])
+        self.ate(ex, "aguardando-limite")
+        e = self.ger.obter(ex.id)
+        self.assertGreater(e.retomar_em, time.time() + 3500)
+        self.assertTrue(self.ger.limite_ativo())
+        self.assertIn("retoma sozinha", e.mensagem)
+        self.assertFalse(any(ev["tipo"] == "agente" for ev in self.ger.eventos(ex.id)),
+                         "o aviso do Claude Code não é fala do agente")
+        self.assertTrue(self._sessao_fechou(ex), "o processo fecha durante a espera")
+        # execução nova durante o limite espera na fila, com aviso
+        _, avisos = self.ger.avaliar(fila("cri-ideias", "Ideias"), itens(self.raiz, "Ideias"))
+        self.assertTrue(any("limite de uso" in a for a in avisos), avisos)
+        outra = self.criar(fila("cri-ideias", "Ideias"), itens(self.raiz, "Ideias"))
+        self.assertEqual(self.ger.obter(outra.id).estado, "na-fila")
+        # recado escrito durante a espera vai junto na retomada
+        self.ger.enviar(ex.id, "use a versão B")
+        self.assertEqual(self.ger.obter(ex.id).estado, "aguardando-limite")
+        self.assertEqual(self.ger.retomar_limites(), [], "antes da virada nada retoma")
+        # a janela vira
+        self.ger.limite["ate"] = time.time() - 1
+        self.ger.obter(ex.id).retomar_em = time.time() - 1
+        SessaoFalsa.roteiro = [troca_no_todo("❌ Não iniciado", "🔨")]
+        self.assertEqual(self.ger.retomar_limites(), [ex.id])
+        self.ate(ex, "aguardando-validacao")
+        recebidas = [m for s in SessaoFalsa.criadas for m in s.recebidas if "O limite de uso virou" in m]
+        self.assertEqual(len(recebidas), 1)
+        self.assertIn("use a versão B", recebidas[0])
+        self.ate(outra, "aguardando-validacao")
+        self.assertEqual(self.ger.obter(ex.id).tentativas_limite, 0)
+
+    def test_limite_sem_horario_espera_cada_vez_mais(self):
+        SessaoFalsa.roteiro = [limite_batido(texto="API Error: 429 usage limit reached")]
+        ex = self.criar(fila(), itens(self.raiz)[:1])
+        self.ate(ex, "aguardando-limite")
+        primeira = self.ger.obter(ex.id).retomar_em - time.time()
+        self.assertAlmostEqual(primeira, 5 * 60 + config.LIMITE_MARGEM_S, delta=10)
+        self._sessao_fechou(ex)
+        self.ger.limite["ate"] = 0
+        SessaoFalsa.roteiro = [limite_batido(texto="API Error: 429 usage limit reached")]
+        self.ger.retomar_agora(ex.id)
+        self.ate(ex, "aguardando-limite")
+        segunda = self.ger.obter(ex.id).retomar_em - time.time()
+        self.assertAlmostEqual(segunda, 10 * 60 + config.LIMITE_MARGEM_S, delta=10)
+
+    def test_horario_da_virada_lido_do_aviso(self):
+        quando = Gerenciador._ate_do_texto(AVISO_LIMITE)
+        alvo = datetime.datetime.fromtimestamp(quando)
+        self.assertEqual((alvo.hour, alvo.minute), (14, 50))
+        self.assertGreater(quando, time.time())
+        self.assertEqual(Gerenciador._ate_do_texto("sem horário"), 0.0)
+
+    def test_espera_do_limite_sobrevive_ao_reinicio(self):
+        SessaoFalsa.roteiro = [limite_batido(resets_em_s=3600)]
+        ex = self.criar(fila(), itens(self.raiz)[:1])
+        self.ate(ex, "aguardando-limite")
+        self._sessao_fechou(ex)
+        novo = Gerenciador(raiz=self.raiz, estado=self.estado, fabrica=SessaoFalsa, zelador=False)
+        self.assertEqual(novo.obter(ex.id).estado, "aguardando-limite")
+        self.assertTrue(novo.limite_ativo())
 
     def test_reinicio_da_central_interrompe_o_que_rodava(self):
         SessaoFalsa.roteiro = [lambda s: None]

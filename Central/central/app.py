@@ -76,6 +76,7 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
     def pagina(request: Request, nome: str, **ctx) -> HTMLResponse:
         ctx.setdefault("n_atencao", len(ger.pedem_atencao()))
         ctx.setdefault("n_ativas", len(ger.ativas()))
+        ctx.setdefault("limite", ger.limite_info())
         return templates.TemplateResponse(request, nome, {"token": protecao_token["valor"], **ctx})
 
     def carregar():
@@ -358,6 +359,10 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
     @app.post("/execucao/{ex_id}/tentar-de-novo")
     async def tentar_de_novo(ex_id: str):
         return await acao_execucao(ger.tentar_de_novo, ex_id, ir=f"/execucao/{ex_id}")
+
+    @app.post("/execucao/{ex_id}/retomar-agora")
+    async def retomar_agora(ex_id: str):
+        return await acao_execucao(ger.retomar_agora, ex_id)
 
     @app.post("/execucao/{ex_id}/retomar")
     async def retomar(ex_id: str):

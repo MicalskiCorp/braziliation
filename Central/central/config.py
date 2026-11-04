@@ -15,6 +15,9 @@ PORTA = int(os.environ.get("CENTRAL_PORTA", "8765"))
 MAX_PARALELO = int(os.environ.get("CENTRAL_MAX_PARALELO", "3"))
 # Execução esperando resposta há mais que isso tem o processo fechado; a resposta o retoma.
 INATIVIDADE_MIN = int(os.environ.get("CENTRAL_INATIVIDADE_MIN", "20"))
+# Folga depois do horário de virada do limite de uso antes de retomar (o relógio do servidor e o
+# daqui não batem ao segundo).
+LIMITE_MARGEM_S = int(os.environ.get("CENTRAL_LIMITE_MARGEM_S", "90"))
 
 # Os servidores de build do dotnet prendem arquivos do worktree e impedem a remoção
 # (medido em 2026-11-03). Toda checagem e todo commit da Central rodam sem eles.

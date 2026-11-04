@@ -20,6 +20,8 @@
   </nav>
 </header>
 <main>
+{% if limite %}<div class="caixa aviso">Limite de uso do plano esgotado{% if limite.tipo and limite.tipo != 'desconhecido' %} ({{ limite.tipo }}){% endif %} até <b>{{ limite.quando }}</b>.
+  {{ limite.esperando }} execução(ões) esperando — a Central retoma sozinha quando virar.</div>{% endif %}
 {% block conteudo %}{% endblock %}
 </main>
 </body>

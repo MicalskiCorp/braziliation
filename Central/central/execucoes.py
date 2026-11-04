@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import re
 import secrets
 import shlex
 import shutil
@@ -28,14 +29,24 @@ from .agente import SessaoAgente
 # Ação longa em andamento (o pre-commit leva minutos): o estado muda antes de soltar a trava, então um
 # segundo clique — ou outra aba — é recusado em vez de rodar a mesma ação de novo (visto em 2026-11-03).
 OCUPADOS = {"commitando", "integrando", "descartando"}
-ATIVOS = {"na-fila", "preparando", "rodando", "aguardando-voce", "aguardando-validacao", "interrompida", "conflito"} | OCUPADOS
+ATIVOS = {"na-fila", "preparando", "rodando", "aguardando-voce", "aguardando-validacao", "interrompida", "conflito",
+          "aguardando-limite"} | OCUPADOS
 SEGURAM_A_ARVORE = ATIVOS - {"na-fila"}
 ROTULOS = {
     "na-fila": "na fila", "preparando": "preparando", "rodando": "rodando", "aguardando-voce": "aguardando você",
     "aguardando-validacao": "aguardando validação", "interrompida": "interrompida",
     "conflito": "conflito na integração", "commitada": "commitada", "descartada": "descartada", "erro": "erro",
     "commitando": "commitando", "integrando": "integrando", "descartando": "descartando",
+    "aguardando-limite": "aguardando o limite virar",
 }
+
+# Limite de uso do plano (janela de 5 h ou semanal). Visto em 2026-11-03: chega um rate_limit_event com
+# status "rejected" e o horário da virada (resetsAt, em segundos), e o turno termina em erro 429 com
+# "You've hit your session limit · resets 2:50pm (America/Sao_Paulo)". O processo segue vivo esperando
+# entrada — antes disto a execução caía em "aguardando você" e alguém tinha de mandar "continue".
+LIMITE_TEXTO = re.compile(r"hit your .{0,20}limit|usage limit|limit reached|limite de uso", re.IGNORECASE)
+RETOMADA = ("O limite de uso virou e a Central retomou esta execução. Continue exatamente de onde parou — o "
+            "trabalho feito até aqui continua nos arquivos. Se já tinha terminado, encerre com o bloco de resultado.")
 PEDEM_ATENCAO = {"aguardando-voce", "aguardando-validacao", "interrompida", "conflito", "erro"}
 
 
@@ -102,6 +113,10 @@ class Execucao:
     resolvendo: bool = False                         # o agente está juntando as duas versões
     tentativas: int = 0                              # turnos de resolução que ainda deixaram marcador
     integrar_pendente: bool = False                  # commit pronto (conflito resolvido), falta aprovar
+    retomar_em: float = 0.0                          # limite de uso: quando a Central retoma sozinha
+    limite_tipo: str = ""                            # five_hour, seven_day…
+    tentativas_limite: int = 0                       # retomadas que bateram no limite de novo
+    recados: list = field(default_factory=list)      # mensagens escritas durante a espera do limite
 
     @property
     def rotulo(self) -> str:
@@ -143,6 +158,7 @@ class Gerenciador:
         self.sessoes: dict[str, SessaoAgente] = {}
         self.versao = 0
         self.resolver_conflitos = True    # conflito na integração vai para o agente da execução
+        self.limite = {"ate": 0.0, "tipo": ""}   # limite de uso esgotado até (epoch), para a conta toda
         self._n: dict[str, int] = {}
         self._carregar()
         if zelador:
@@ -182,6 +198,9 @@ class Gerenciador:
             elif ex.estado == "descartando":
                 ex.estado = "erro"
                 ex.mensagem = "A Central reiniciou durante o descarte. Descarte de novo."
+            elif ex.estado == "aguardando-limite" and ex.retomar_em > time.time():
+                self.limite = {"ate": max(self.limite["ate"], ex.retomar_em - config.LIMITE_MARGEM_S),
+                               "tipo": ex.limite_tipo}
             self.execucoes[ex.id] = ex
 
     def _registrar(self, ex: Execucao, entrada: dict) -> None:
@@ -266,6 +285,9 @@ class Gerenciador:
                             f"({', '.join(p for _, p in sujos[:4])}{'…' if len(sujos) > 4 else ''}). Execução desta fila "
                             "roda na árvore principal e precisa começar limpa, para o descarte ser seguro — commite ou "
                             "descarte antes.")
+            if self.limite_ativo():
+                avisos.append(f"O limite de uso do plano está esgotado até {self.limite_info()['quando']}: a execução "
+                              "entra na fila e começa sozinha quando ele virar.")
             if self.vivas() >= self.max:
                 avisos.append(f"Já há {self.vivas()} agente(s) rodando (limite {self.max}): esta entra na fila.")
         return bloqueios, avisos
@@ -342,6 +364,12 @@ class Gerenciador:
     # ── escalonamento ───────────────────────────────────────────────────────
 
     def _pode_iniciar(self, ex: Execucao) -> bool:
+        if self.limite_ativo():
+            aviso = f"Esperando o limite de uso virar ({self.limite_info()['quando']}) — começa sozinha."
+            if ex.mensagem != aviso:
+                ex.mensagem = aviso
+                self._salvar(ex)
+            return False
         if self.vivas() >= self.max:
             return False
         if ex.modo == "principal":
@@ -433,11 +461,17 @@ class Gerenciador:
                 ex.session_id = ev.get("session_id", ex.session_id)
             if tipo == "rate_limit_event":
                 ex.uso = ev.get("rate_limit_info", {})
+                self._anotar_limite(ex.uso)
+            limite = self._eh_limite(ev)
             if tipo == "control_request" and ev.get("request", {}).get("subtype") == "can_use_tool":
                 if self._permitida(ex, ev):
                     return
             for entrada in conversa.normalizar(ev):
-                if entrada["tipo"] == "agente":
+                if entrada["tipo"] == "agente" and len(entrada["texto"]) < 300 and LIMITE_TEXTO.search(entrada["texto"]):
+                    entrada = {"tipo": "nota", "texto": "Claude Code: " + entrada["texto"]}   # não é fala do agente
+                elif entrada["tipo"] == "fim_turno" and limite:
+                    entrada = {"tipo": "nota", "texto": self._limite_atingido(ex, ev)}
+                elif entrada["tipo"] == "agente":
                     ex.ultimo_texto += entrada["texto"] + "\n"
                     entrada["texto"] = conversa.sem_bloco(entrada["texto"])
                     if not entrada["texto"]:
@@ -466,6 +500,7 @@ class Gerenciador:
     def _fim_do_turno(self, ex: Execucao) -> None:
         resultado = conversa.extrair_resultado(ex.ultimo_texto)
         ex.ultimo_texto = ""
+        ex.tentativas_limite = 0
         if ex.resolvendo and resultado is not None and not self._pede_decisao(resultado):
             ex.resultado = resultado
             ex.estado, ex.mensagem = "integrando", "Conferindo a resolução do conflito e concluindo o rebase…"
@@ -511,6 +546,12 @@ class Gerenciador:
             raise Bloqueio("mensagem vazia")
         with self.trava:
             ex = self.obter(ex_id)
+            if ex.estado == "aguardando-limite":
+                ex.recados.append(texto)
+                self._registrar(ex, {"tipo": "voce", "texto": texto})
+                self._registrar(ex, {"tipo": "nota", "texto": "Recado guardado: vai para o agente quando o limite virar."})
+                self._salvar(ex)
+                return
             if ex.estado not in ("aguardando-voce", "rodando", "interrompida", "aguardando-validacao"):
                 raise Bloqueio(f"a execução está {ex.rotulo}: não recebe mensagem")
             sessao = self.sessoes.get(ex.id)
@@ -560,7 +601,7 @@ class Gerenciador:
         """O responsável leva a execução para a validação sem esperar o bloco de resultado."""
         with self.trava:
             ex = self.obter(ex_id)
-            if ex.estado not in ("rodando", "aguardando-voce", "interrompida"):
+            if ex.estado not in ("rodando", "aguardando-voce", "interrompida", "aguardando-limite"):
                 raise Bloqueio(f"a execução está {ex.rotulo}")
             sessao = self.sessoes.get(ex.id)
             ex.estado, ex.pendentes = "aguardando-validacao", []
@@ -900,6 +941,101 @@ class Gerenciador:
         elif ex.estado == "conflito" and self.resolver_conflitos and gitops.conflitados(cwd):
             self._resolver_sozinho(ex_id)
 
+    # ── limite de uso ───────────────────────────────────────────────────────
+
+    def limite_ativo(self) -> bool:
+        return self.limite["ate"] > time.time()
+
+    def limite_info(self) -> dict | None:
+        if not self.limite_ativo():
+            return None
+        ate = dt.datetime.fromtimestamp(self.limite["ate"])
+        hoje = dt.date.today()
+        quando = ate.strftime("%H:%M") if ate.date() == hoje else ate.strftime("%d/%m %H:%M")
+        esperando = [e for e in self.execucoes.values() if e.estado in ("aguardando-limite", "na-fila")]
+        return {"quando": quando, "tipo": self.limite["tipo"], "esperando": len(esperando)}
+
+    def _anotar_limite(self, info: dict) -> None:
+        status = info.get("status")
+        if status == "rejected" and info.get("resetsAt"):
+            self.limite = {"ate": float(info["resetsAt"]), "tipo": info.get("rateLimitType", "")}
+        elif status in ("allowed", "allowed_warning") and self.limite["ate"] and not self.limite_ativo():
+            self.limite = {"ate": 0.0, "tipo": ""}
+
+    @staticmethod
+    def _eh_limite(ev: dict) -> bool:
+        if ev.get("type") != "result" or not ev.get("is_error"):
+            return False
+        return ev.get("api_error_status") == 429 or bool(LIMITE_TEXTO.search(str(ev.get("result", ""))))
+
+    @staticmethod
+    def _ate_do_texto(texto: str) -> float:
+        """"resets 2:50pm" → próxima ocorrência desse horário local (a máquina e o plano estão no mesmo fuso)."""
+        m = re.search(r"resets\s+(\d{1,2})(?::(\d{2}))?\s*(am|pm)", texto or "", re.IGNORECASE)
+        if not m:
+            return 0.0
+        hora = int(m.group(1)) % 12 + (12 if m.group(3).lower() == "pm" else 0)
+        alvo = dt.datetime.now().replace(hour=hora, minute=int(m.group(2) or 0), second=0, microsecond=0)
+        if alvo <= dt.datetime.now():
+            alvo += dt.timedelta(days=1)
+        return alvo.timestamp()
+
+    def _limite_atingido(self, ex: Execucao, ev: dict) -> str:
+        """Fim de turno barrado pelo limite: espera a virada e a Central retoma sozinha."""
+        agora_ts = time.time()
+        ate = self.limite["ate"] if self.limite_ativo() else self._ate_do_texto(str(ev.get("result", "")))
+        if ate <= agora_ts:
+            # Sem horário (ou a retomada bateu de novo): espera crescente, 5 → 10 → 20 → 40 → 60 min.
+            ate = agora_ts + min(60, 5 * 2 ** ex.tentativas_limite) * 60
+            self.limite = {"ate": ate, "tipo": self.limite["tipo"] or "desconhecido"}
+        ex.tentativas_limite += 1
+        ex.retomar_em = ate + config.LIMITE_MARGEM_S
+        ex.limite_tipo = self.limite["tipo"]
+        ex.ultimo_texto = ""
+        ex.estado = "aguardando-limite"
+        quando = dt.datetime.fromtimestamp(ex.retomar_em).strftime("%H:%M" if ate - agora_ts < 86400 else "%d/%m %H:%M")
+        ex.mensagem = f"Limite de uso atingido. A Central retoma sozinha às {quando} — não precisa mandar «continue»."
+        sessao = self.sessoes.get(ex.id)
+        if sessao:   # horas de espera: o processo fecha e a sessão é retomada pelo id
+            threading.Thread(target=sessao.encerrar, daemon=True).start()
+        return ex.mensagem
+
+    def retomar_limites(self, forcar: str | None = None) -> list[str]:
+        """Chamado pelo zelador: retoma o que esperava o limite e já passou do horário."""
+        retomadas = []
+        with self.trava:
+            agora_ts = time.time()
+            prontas = sorted((e for e in self.execucoes.values() if e.estado == "aguardando-limite"
+                              and (e.retomar_em <= agora_ts or e.id == forcar)), key=lambda e: e.retomar_em)
+            for ex in prontas:
+                sessao = self.sessoes.get(ex.id)
+                viva = bool(sessao and sessao.vivo)
+                if not viva and self.vivas() >= self.max:
+                    continue        # sem vaga agora; o próximo ciclo tenta de novo
+                texto = RETOMADA + ("\n\nRecados do responsável durante a espera:\n" +
+                                    "\n".join(f"- {r}" for r in ex.recados) if ex.recados else "")
+                ex.recados, ex.estado, ex.mensagem = [], "rodando", ""
+                self._registrar(ex, {"tipo": "nota", "texto": "O limite de uso virou — retomando a execução."})
+                if viva:
+                    sessao.enviar(texto)
+                else:
+                    self._abrir_sessao(ex, texto, retomar=True)
+                self._salvar(ex)
+                retomadas.append(ex.id)
+        if retomadas:
+            self._escalonar()
+        return retomadas
+
+    def retomar_agora(self, ex_id: str) -> None:
+        with self.trava:
+            ex = self.obter(ex_id)
+            if ex.estado != "aguardando-limite":
+                raise Bloqueio(f"a execução está {ex.rotulo}")
+            if not (self.sessoes.get(ex.id) and self.sessoes[ex.id].vivo) and self.vivas() >= self.max:
+                raise Bloqueio(f"já há {self.vivas()} agentes rodando (limite {self.max})")
+        if not self.retomar_limites(forcar=ex_id):
+            raise Bloqueio("não foi possível retomar agora")
+
     # ── manutenção ──────────────────────────────────────────────────────────
 
     def limpar_sobras(self) -> list[str]:
@@ -922,8 +1058,9 @@ class Gerenciador:
 
     def _zelador(self) -> None:
         while True:
-            time.sleep(30)
+            time.sleep(20)
             try:
+                self.retomar_limites()
                 limite = time.time() - config.INATIVIDADE_MIN * 60
                 with self.trava:
                     ociosas = [(e, self.sessoes.get(e.id)) for e in self.execucoes.values()
