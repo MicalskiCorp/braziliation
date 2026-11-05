@@ -25,6 +25,7 @@ camada, sem os agentes funcionais nem as skills.
 | Meta-check / paletas | `py .claude/skills/meta-check/check_meta_pairs.py` · `py Design/ArteFonte/Ferramentas/check_art_palettes.py` |
 | Ativar o pre-commit (uma vez por clone) | `git config core.hooksPath .githooks` |
 | Ferramentas de arte | `py Design/ArteFonte/Ferramentas/<script>.py` — **use `py`, não `python`** |
+| Motor `pxfx` (VFX e esqueleto, ADR-016) | de `Design/ArteFonte/Ferramentas/`: `py -m pxfx.render <id>` · `py -m pxfx.esqueleto.animar <rig.json> ...` · paridade `py -m pxfx.paridade nucleo` |
 | Central (painel das filas) | `Central\iniciar-central.cmd` → http://127.0.0.1:8765 · `py .claude/skills/gerir-todo/todo.py validar` |
 
 O build do Core copia as DLLs para `Desenvolvimento/Assets/Plugins/Braziliation/`
@@ -73,5 +74,9 @@ abrir o Unity, ou o projeto não compila.
   sempre manual. TODO se lê e escreve pelo parser único `gerir-todo/todo_md.py`. Tokens de
   cada execução na página Tokens; janela de compactação por fila e mod `Central/mod-economia/`
   (ADR-015).
+- **Motor `pxfx` (ADR-016):** personagem e VFX nascem em `Design/ArteFonte/Ferramentas/pxfx/`
+  (port Python do PixelFX): personagem = pele + esqueleto (`rig.json`) + movimentos
+  (`anim.json`). `Ferramentas/vendor/pixelfx/` é só gabarito de paridade — nunca editar, nunca
+  ler por padrão. Spec de chars (Opção A) segue só para props e ícones.
 - Dívida técnica vive em `Desenvolvimento/Docs/Tech/tech_debt.md`. Se você encontrar
   dívida durante uma tarefa, registre lá — não só no TODO.

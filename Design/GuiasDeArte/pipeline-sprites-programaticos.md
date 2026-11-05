@@ -36,6 +36,8 @@ Qualquer modelo multimodal num harness agêntico (Claude, Copilot, Cursor) execu
 | **C — Difusão** | ComfyUI + SDXL/Flux conforme [`pipeline-ia-sprites.md`](pipeline-ia-sprites.md) | Personagens, inimigos, concepts orgânicos | Não (SD local; LLM só automatiza) |
 | **D — Acabamento/Unity** | Scripts Lua Aseprite, import automático, registro | Toda entrada de asset no Unity | Não |
 
+> **Personagem e VFX nascem no motor `pxfx`** (ADR-016): [`animacao-por-esqueleto.md`](animacao-por-esqueleto.md) e [`vfx-guide.md`](vfx-guide.md). A Opção A segue para props e ícones.
+
 ## Pré-requisitos
 
 - Python 3.10+ com Pillow (`pip install pillow`).
@@ -67,6 +69,8 @@ Qualquer modelo multimodal num harness agêntico (Claude, Copilot, Cursor) execu
 - [ ] Sem microdetalhe que desaparece em 1x? Sem pixels órfãos?
 - [ ] Clusters de pixel limpos, outline/sombra de contato onde a style-bible pede?
 - [ ] Todas as cores pertencem à paleta da região (máx. 32 — ADR-004)?
+
+> **Regras de crítica (ADR-016):** mínimo de três rodadas — aprovar no `palette_check` não é estar pronto; na silhueta, 3–5 rascunhos divergentes lado a lado; animação se julga em passos consecutivos, não em quadro solto. Tabela sintoma → correção no [`vfx-guide.md`](vfx-guide.md).
 
 ## Formato da spec consolidada
 
@@ -103,8 +107,8 @@ Quando o brief pede animação (ver contagens em [`animation-guide.md`](animatio
 4. **Declarar a sequência em `sheets`**: `"sheets": {"{acao}": ["idle", "f2", "f3"]}` — `render_spec.py` monta `{asset}_{acao}_sheet.png` automaticamente ao renderizar a spec inteira (sem precisar rodar `sheet_pack.py` à parte).
 5. **Validar o sheet**: `palette_check.py` no sheet final; inspecionar o preview do sheet para conferir a leitura do arco de movimento.
 6. **Export e registro** normais (passos 9–10). No Unity, o wiring é automatizado:
-   - **Slicing automático**: `Assets/Editor/Art/SheetAutoSlicer.cs` detecta `*_sheet.png` em `Assets/Art/` e aplica `Sprite Mode: Multiple` + grid de frames quadrados (frame = altura do sheet), pivot bottom-center, preservando IDs em reimports;
-   - **Clip + Animator**: selecionar o sheet fatiado no Project e rodar `Assets > Braziliation > Criar Animação do Spritesheet` — gera `.anim` (8 fps, sem loop) + `.controller` em `Assets/Animations/World/`;
+   - **Slicing automático**: `Assets/Editor/Art/SheetAutoSlicer.cs` detecta `*_sheet.png` em `Assets/Art/` e aplica `Sprite Mode: Multiple` + grid de frames quadrados (frame = altura do sheet), pivot bottom-center, preservando IDs em reimports — com o JSON lateral do `pxfx`, quadro e pivô vêm do JSON;
+   - **Clip + Animator**: selecionar o sheet fatiado no Project e rodar `Assets > Braziliation > Criar Animação do Spritesheet` — gera `.anim` (8 fps sem loop; com o JSON lateral, duração por quadro e loop do JSON) + `.controller` em `Assets/Animations/World/`;
    - Ligar o Animator ao GameObject/prefab do prop continua sendo wiring de cena do `@UnityDeveloper`.
 
 ## A página do personagem

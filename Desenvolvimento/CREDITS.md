@@ -35,6 +35,7 @@ dispensa atribuição.
 | Item | Autor | Licença | Observação |
 |------|-------|---------|------------|
 | TextMesh Pro / EmojiOne | Unity Technologies / EmojiOne | ver `Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt` | Pacote padrão da Unity |
+| PixelFX (port para Python: motor `pxfx`) | Patch e Hugo Duprez · `act.js` adapta Hollow Crown (rehan-remade) | MIT — aviso permanente em `Design/ArteFonte/Ferramentas/pxfx/LICENSE-pixelfx.txt` | Obra derivada (ADR-016): o aviso fica mesmo depois que a cópia `Ferramentas/vendor/pixelfx/` for removida. Efeitos portados que adaptam receitas do Sprite Fusion creditam o Hugo Duprez no docstring |
 
 ---
 

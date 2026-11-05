@@ -15,6 +15,8 @@ Hub dos padrões visuais usados para manter consistência entre arte humana, art
 | [`pipeline-sprites-programaticos.md`](pipeline-sprites-programaticos.md) | Roteiro para gerar sprites por código/agente com validação automática de paleta e leitura |
 | [`asset-brief-template.md`](asset-brief-template.md) | Template para pedir asset novo de forma consistente |
 | [`context-pack-template.md`](context-pack-template.md) | Template para empacotar contexto, prompt, referências e configurações de IA |
+| [`animacao-por-esqueleto.md`](animacao-por-esqueleto.md) | Personagem = pele + esqueleto + movimentos (ADR-016): rig.json, anim.json, pele, retoque, export |
+| [`vfx-guide.md`](vfx-guide.md) | Efeitos visuais por código no `pxfx`: regras do projeto, a régua de qualidade, sintoma → correção, método |
 | [`variation-spec-template.md`](variation-spec-template.md) | Template para especificar ações/estados/variações antes da spec JSON (Passo 3 — personagens/inimigos) |
 
 ## Fluxo completo: ideia → concept art → especificação → spec JSON → sprite
