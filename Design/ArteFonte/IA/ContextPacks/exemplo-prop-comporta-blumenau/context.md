@@ -104,6 +104,20 @@ photorealistic, 3D render, vector art, smooth gradient, anti-aliased illustratio
 - [x] Seed/modelo/configuração salvos (spec determinística — sem seed)
 - [x] Referências autorizadas listadas
 - [x] Seleção salva em `Design/ArteFonte/IA/Selected/`
-- [ ] Pixel pass feito em Aseprite (opcional — polish futuro)
+- [ ] Pixel pass da engrenagem — **teste feito em 2026-11-04, não aplicado**: ver "Pixel pass da engrenagem (teste)" abaixo
 - [x] Export final salvo em `Desenvolvimento/Assets/Art/Environments/Blumenau/Props/`
 - [x] Asset registrado no índice técnico
+
+## Pixel pass da engrenagem (teste, 2026-11-04)
+
+**Problema:** na re-autoria do ADR-011 a comporta passou pelo `spec_redetail.py --scale 3`. No 1× a
+roda era um disco de raio 4 com 3 dentes; o Scale3x arredondou cada dente em lóbulo e a peça passou a
+ler como um torrão de latão. No frame 2 sobram dois dentes soltos fora da roda, e o dente direito é
+desenhado por cima do poste.
+
+**Teste:** um passe por código redesenhou a roda — 10 dentes quadrados, 3 raios, cubo de ferro com
+parafuso de cobre, girando junto com a alavanca (−45°, 0°, +45°) — em 2 iterações, com `palette_check`
+APROVADO e leitura em 1× conferida. **Por decisão do usuário (2026-11-05) ficou como teste:** tudo está
+em [`IA/Testes/comporta-pixel-pass/`](../../Testes/index.md) — script, as 3 specs passadas, frames,
+sheet e mock. As specs deste context pack, `Selected/` e `Assets/` **continuam com a roda antiga**.
+Ao retomar: rodar o script de lá sobre as specs daqui (ele é idempotente) ou redesenhar do zero.

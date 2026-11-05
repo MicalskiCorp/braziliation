@@ -38,3 +38,31 @@
 - Iterações: 2 — a engrenagem do peito lia como painel quadrado; anel de cobre arredondado na iteração 2.
 - Destino: `Assets/Art/Enemies/`; cópia em `IA/Selected/`; registro no índice.
 - Pendências: decisão de design "inimigo básico da demo" continua aberta no TODO (este asset destrava a implementação de AI/estados como placeholder); animações de patrol/attack quando o design definir o comportamento.
+
+## 5. Frame de ataque — bench de 2026-09-03 e o que fazer com ele
+
+O bench [`bench-modelo-claude-spec-2026-09.md`](../../Models/bench-modelo-claude-spec-2026-09.md)
+usou "autorar um frame de ataque do Autômato" como tarefa de comparação entre modelos, e o
+resultado do `opus` ficou em `IA/Outputs/bench-spec-automato/opus/`. Ele saiu com um defeito
+anotado — quebrou continuidade com o idle (redesenhou a engrenagem do peito, a cabeça e a
+silhueta do torso) — e entrou no TODO como "passe de continuidade".
+
+**O passe de continuidade não deve ser feito (achado de 2026-11-04).** O frame de ataque do bench
+está ancorado em `enm_automato_idle_f1.2x.spec.json`: a versão frontal simétrica 64×64 de torso de
+latão com painel de engrenagem no peito. Essa versão **foi aposentada um mês depois do bench**, na
+re-autoria davinciana de 2026-10-05 (ADR-011, topo deste arquivo) — hoje o asset é lateral, 96×96
+@ 48 PPU, crânio-gaiola com lente no focinho, gradil de madeira com o maquinismo à vista, montado
+por catálogo de peças em `montagem.py`.
+
+Conferido lado a lado (`enm_automato_idle_f1.2x` × `enm_automato_variantes_4x`): não há um pixel em
+comum entre as duas leituras. Fazer o passe produziria um frame coerente com um design que não
+existe mais — as três correções pedidas (engrenagem do peito, cabeça, torso) são justamente os três
+elementos que a re-autoria eliminou.
+
+**Encaminhamento:** o ataque do Autômato nasce junto com dano e morte, quando o inimigo base tiver
+o comportamento decidido — e, desde o ADR-016 (2026-11-04), **pelo esqueleto do `pxfx`** (rig
+mecânico + `anim.json`, skill `animar-personagem`), não por edição de matriz nem pelo `montagem.py`.
+O esqueleto dá continuidade com o idle por construção: a pele é a mesma, só a pose muda.
+
+O resultado do bench fica onde está, como **registro do bench** — é evidência do veredito de
+modelo, não candidato a asset. Não promover, não editar.

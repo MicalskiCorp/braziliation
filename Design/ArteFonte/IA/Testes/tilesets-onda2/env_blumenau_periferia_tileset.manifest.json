@@ -1,0 +1,20 @@
+{
+  "generator": "gen_tileset.py",
+  "familia": "periferia",
+  "seed": 42,
+  "variations": 4,
+  "palette": "Design\\ArteConceitual\\Paletas\\blumenau.json",
+  "tile_size": 48,
+  "draw_size": 16,
+  "scale": 3,
+  "rows": [
+    "tabua",
+    "zinco",
+    "reboco",
+    "entulho"
+  ],
+  "layout": "linhas = tipos, colunas = variações",
+  "notas": {
+    "tabua": "base: faixa molhada nas 4 linhas de baixo, só na fiada do chão"
+  }
+}

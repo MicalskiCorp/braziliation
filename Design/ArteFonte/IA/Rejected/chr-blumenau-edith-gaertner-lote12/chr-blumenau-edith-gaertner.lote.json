@@ -1,0 +1,19 @@
+{
+  "asset": "chr-blumenau-edith-gaertner",
+  "seed": 120260726,
+  "prompt_id": "(nao registrado - lote submetido fora do comfy_batch.py)",
+  "positive": "a semi-transparent glowing ghost woman sitting on the thick exposed roots of an enormous old tree, pixel art game scene, the background is faintly visible through her translucent body, she wears a modest 1920s European day dress with pleated skirt and short cap sleeves, dignified middle-aged, hair in a low bun, head uncovered, melancholic downcast expression, holding a small glowing translucent spectral cat in her lap, another small glowing spectral cat sitting beside her with its tail clearly attached to its body, her soft blue-white spectral glow is the main light source of the scene\n\n[SCENE]\nnight in an overgrown cat cemetery garden, tall pale ringed bamboo grove trunks densely packed in the background, small rectangular concrete cat gravestones with name plaques near her, gravel path, moss, low ground mist, cold pale blue-grey moonlight\n\n[ATMOSPHERE]\nthick pale spectral blue mist wrapping around the whole scene, the mist clings to the tree roots, drifts between the bamboo trunks, glows faintly around the spectral cats and around her dress, unifying dark fantasy ghostly aura across the entire image, eerie and atmospheric\n\n[STYLE]\npixel art scene concept for a 2D side-scrolling action platformer, modern metroidvania pixel art readability (Blasphemous-like), high pixel density, limited color palette, side-view game scene composition, character clearly readable as focal point of the scene, designed for 32 PPU, no smooth gradients, no painterly rendering, no text",
+  "negative": "photorealistic, 3D render, vector art, smooth gradient, anti-aliased illustration, high resolution painting, blurry, generic fantasy, modern sci-fi, text, watermark, copyrighted character, modern clothing, colorful, cheerful, saturated colors, bright daylight, horror monster, aggressive pose, weapon, glowing red eyes, multiple views, turnaround sheet, character reference sheet, UI panel, labels, grid lines, young child, anime schoolgirl, cat ears on human, nekomimi, nude, naked, bare skin, exposed breasts, nsfw, empty scene, no people, unpopulated landscape, hood, veil, nun habit, cloak over head, detached limbs, floating disconnected tail, broadleaf tree canopy",
+  "workflow": "workflow-thumbnails.json",
+  "model": "sd_xl_base_1.0.safetensors",
+  "images": [
+    "braziliation_chr-blumenau-edith-gaertner_00062_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00063_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00064_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00065_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00066_.png",
+    "braziliation_chr-blumenau-edith-gaertner_00067_.png"
+  ],
+  "lote": 12,
+  "nota": "text-to-image puro, sem referencia. Submetido duas vezes com a mesma seed: 00068-00073 sao identicas byte a byte a 00062-00067 e foram descartadas sem copia. Veredito em ../../ContextPacks/chr-blumenau-edith-gaertner/lotes.md (Lote 12)."
+}

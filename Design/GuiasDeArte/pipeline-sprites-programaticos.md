@@ -188,7 +188,21 @@ lê o `.unity.json`, fatia os tilesets em grade se preciso, cria um `Tile` por c
 `{pasta do tileset}/Tiles/` e pinta um Tilemap novo na cena. Reimportar reusa os Tiles existentes
 em vez de duplicar. O preview PNG passa por `palette_check.py` como qualquer outro asset.
 
-**Gerador de tiles disponível:** [`gen_tileset.py`](../ArteFonte/Ferramentas/gen_tileset.py) — 3 famílias (`enxaimel`, `metal`, `agua`), layout linhas=tipos × colunas=variações. Desenha em grid 16 e entrega tiles **32×32** via `--scale 2` (default, ADR-004) — o `--scale 2` aplica **detail pass** (EPX + textura fina via `spec_redetail`), não nearest cru; famílias novas podem também ser desenhadas nativamente em 32 (`TILE=32` + `--scale 1`). Ex.: `py gen_tileset.py enxaimel --palette blumenau.json --seed 42 -o out.png`.
+**Gerador de tiles disponível:** [`gen_tileset.py`](../ArteFonte/Ferramentas/gen_tileset.py) — 7 famílias, layout linhas=tipos × colunas=variações:
+
+| Família | Tipos | Uso |
+|---|---|---|
+| `enxaimel` | panel, beam_v, beam_h, diag | parede Fachwerk do centro |
+| `metal` | plate, rusty, seams | chapa clockpunk |
+| `agua` | superficie, lama, marca_nivel | água parada, lama, linha de enchente |
+| `pedra_portuguesa` ¹ | silhar, abobada, piso, musgo | túnel do séc. XVIII (*Unterwasser-Gang*): cantaria, abóbada, pé-de-moleque |
+| `cemiterio` ¹ | terra, mato, cascalho, cova | chão do Cemitério dos Gatos e do municipal |
+| `marmore` ¹ | placa, veio, rodape, lascado | mausoléu — mármore cinza, a paleta não tem branco |
+| `periferia` ¹ | tabua, zinco, reboco, entulho | bairro pós-enchente: material improvisado, lama seca |
+
+¹ Primeiro teste (2026-11-04): a arte gerada está em [`IA/Testes/tilesets-onda2/`](../ArteFonte/IA/Testes/index.md), fora do gate e sem export — o usuário retoma cada família antes de virar asset.
+
+Desenha em grid 16 e entrega tiles **48×48** via `--scale 3` (default, ADR-011) — o `--scale 3` aplica **detail pass** (Scale3x + textura fina via `spec_redetail`), não nearest cru; `--scale 2` (32×32, ADR-004) fica como legado. O Scale3x **arredonda todo bloco de cor contra uma junta de outra cor** — é o que faz o seixo do pé-de-moleque, e é o que estraga um mosaico de cubos (registro das 4 iterações na docstring de `pedra_piso`). Tile que cruza a borda tem de ser igual em todas as variações, ou o mapa mostra costura entre elas. Os tiles de base/remate que não ladrilham livres vão marcados em `notas` no manifest. Ex.: `py gen_tileset.py cemiterio --palette blumenau.json --seed 42 -o out.png`.
 
 ## Fluxo das Opções C e D
 

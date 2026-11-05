@@ -1,0 +1,20 @@
+{
+  "generator": "gen_tileset.py",
+  "familia": "marmore",
+  "seed": 42,
+  "variations": 4,
+  "palette": "Design\\ArteConceitual\\Paletas\\blumenau.json",
+  "tile_size": 48,
+  "draw_size": 16,
+  "scale": 3,
+  "rows": [
+    "placa",
+    "veio",
+    "rodape",
+    "lascado"
+  ],
+  "layout": "linhas = tipos, colunas = variações",
+  "notas": {
+    "rodape": "remate: perfil de cimalha, alternar com placa/veio"
+  }
+}

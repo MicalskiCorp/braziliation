@@ -53,8 +53,8 @@
 
 | Asset | Ideia (P1) | Concept Art (P2) | Especificação (P3) | Spec JSON (P4) | Sprite (P5) |
 |-------|:---:|:---:|:---:|:---:|:---:|
-| Edith Gaertner — NPC da SQ-01 ([context pack](../../../../Design/ArteFonte/IA/ContextPacks/chr-blumenau-edith-gaertner/context.md)) | ✅ | 🔨 lote 12 sem veredito (teto de 3 lotes por ajuste) | ❌ | ❌ | ❌ |
-| Soldado Mercenário Clérico — inimigo de Blumenau | ✅ | ⏸ 6 thumbnails em `IA/Outputs/soldado-clerico-thumbs/` aguardando curadoria | ❌ | ❌ | ❌ |
+| Edith Gaertner — NPC da SQ-01 ([context pack](../../../../Design/ArteFonte/IA/ContextPacks/chr-blumenau-edith-gaertner/context.md)) | ✅ | ⏸ lote 12 rejeitado 2026-11-04 (só a névoa saiu); pausado pelo usuário em 2026-11-05 — retoma item a item | ❌ | ❌ | ❌ |
+| Soldado Mercenário Clérico — inimigo de Blumenau ([context pack](../../../../Design/ArteFonte/IA/ContextPacks/enm-soldado-clerico/lotes.md)) | ✅ | ⏸ 6 thumbnails rejeitados na curadoria de 2026-11-04; pausado pelo usuário em 2026-11-05 — retoma item a item | ✅ 3 variantes (tropa, escudeiro, guarda) | ✅ `enm_soldado_clerico.spec.json` | 🔨 placeholder jogável em `IA/Outputs/`, sem export para `Assets/Art/` |
 | Hermann Baumgarten — NPC das quests do cemitério e da Igreja Matriz Luterana (`Design/Criativo/Historia/personagens/Hermann-Baumgarten.md`) | ✅ | ❌ | ❌ | ❌ | ❌ |
 
 Legenda de status por célula: ❌ não iniciado · 🔨 em andamento · ⏸ aguardando aprovação do usuário · ✅ concluído.
@@ -67,8 +67,8 @@ Legenda de status por célula: ❌ não iniciado · 🔨 em andamento · ⏸ agu
 
 | Asset | Caminho | Fonte | Paleta | Observação |
 |-------|---------|-------|--------|------------|
-| `prop_blumenau_floodgate_lever.png` | `Assets/Art/Environments/Blumenau/Props/` | Spec JSON em `Design/ArteFonte/IA/ContextPacks/exemplo-prop-comporta-blumenau/` | Blumenau (proposta-inicial) | Prop 96×96 do sistema hídrico; gerado via pipeline programático (2 iterações) |
-| `prop_blumenau_floodgate_lever_activate_sheet.png` | `Assets/Art/Environments/Blumenau/Props/` | Specs `_f2`/`_f3` no mesmo context pack | Blumenau (proposta-inicial) | Sheet 288×96, 3 frames de acionamento; fatiado automaticamente pelo `SheetAutoSlicer` |
+| `prop_blumenau_floodgate_lever.png` | `Assets/Art/Environments/Blumenau/Props/` | Spec JSON em `Design/ArteFonte/IA/ContextPacks/exemplo-prop-comporta-blumenau/` | Blumenau (aprovada) | Prop 96×96 do sistema hídrico; gerado via pipeline programático (2 iterações). Teste de pixel pass da engrenagem em [`IA/Testes/comporta-pixel-pass/`](../../../../Design/ArteFonte/IA/Testes/index.md) — não aplicado |
+| `prop_blumenau_floodgate_lever_activate_sheet.png` | `Assets/Art/Environments/Blumenau/Props/` | Specs `_f2`/`_f3` no mesmo context pack | Blumenau (aprovada) | Sheet 288×96, 3 frames de acionamento; fatiado automaticamente pelo `SheetAutoSlicer` |
 | `frame_001.png`–`frame_008.png` | `Assets/Art/Menu/Background/Frames/` | — | — | 960×540 — sequência de 8 frames do fundo animado do menu principal; wiring em `Assets/Editor/Menu/MenuBackgroundSetupEditor.cs` |
 | `prop_blumenau_marcador_pilar_{verde,amarelo,vermelho,preto}.png` | `Assets/Art/Environments/Blumenau/Props/` | Specs em `ContextPacks/lote-sistema-hidrico-blumenau/` | Blumenau (aprovada) | 48×48 — 4 estados do rio (rotina/alerta/cheia/saturação) |
 | `prop_blumenau_sino_alerta.png` + `_ring_sheet.png` | idem | idem | Blumenau (aprovada) | 48×48 idle + sheet 144×48 (3 frames de badalada) |
@@ -79,6 +79,7 @@ Legenda de status por célula: ❌ não iniciado · 🔨 em andamento · ⏸ agu
 | `ui_item_pingente_gato.png` | `Assets/Art/UI/` | idem | Blumenau (aprovada) | 48×48 — item de coleta da SQ-01 (41×) |
 | `enm_automato_idle_sheet.png` | `Assets/Art/Enemies/` | `montagem.py` + spec em `ContextPacks/enm-automato-abandonado/` | Blumenau (aprovada) | 576×96 — 6 frames de idle do lanceiro bronze; a animação é o maquinismo girando, fatiada automaticamente pelo `SheetAutoSlicer` |
 | `enm_automato_{escudo,sucata,lanca_prata}.png` | idem | idem | Blumenau (aprovada) | 96×96 — variantes estáticas: escudo-engrenagem, sucata em liga de ferro, e lanceiro em liga de prata (grau de dificuldade pela liga) |
+| _(sem asset)_ frame de ataque do bench de modelo | — | `IA/Outputs/bench-spec-automato/opus/` | Blumenau (aprovada) | **Não é asset.** Registro do bench de 2026-09-03; ancorado no idle 64×64 aposentado pela re-autoria davinciana de 2026-10-05 — o "passe de continuidade" foi cancelado em 2026-11-04 por obsolescência. O ataque nasce pelo esqueleto do `pxfx` (ADR-016, skill `animar-personagem`) junto com dano e morte. Ver [context pack §5](../../../../Design/ArteFonte/IA/ContextPacks/enm-automato-abandonado/context.md) |
 | `env_blumenau_{enxaimel,metal,agua}_tileset.png` | `Assets/Art/Environments/Blumenau/Tilesets/` | `gen_tileset.py` seed 42 (manifests em `IA/Outputs/`) | Blumenau (aprovada) | Tiles 48×48 procedurais: enxaimel 4 tipos, metal 3, água/lama 3 × 4 variações |
 
 ## Páginas de Personagem (artefatos)

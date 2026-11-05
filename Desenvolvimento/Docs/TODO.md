@@ -59,17 +59,6 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
-| Onda 3: veredito do lote 12 da Edith (teto de 3 lotes por ajuste) e curadoria dos thumbnails do Soldado Clérico | Usuário + `@SpriteArtist` | Média | 🔨 |
-| Onda 2 restante: tilesets pedra portuguesa, cemitério/terra, mármore, periferia pós-enchente | `@SpriteArtist` | Média | ❌ |
-| Fechar o A/B SDXL × Z-Image: testar Z-Image + LoRA PixelArtRedmond (versão Z Image), com "full body, head to toe" no prompt (o lote anterior saiu em busto). Enquanto o `comfy_batch.py` não aprender Z-Image, patchear o campo `prompt` do workflow à mão — pelo script o prompt é ignorado em silêncio | `@SpriteArtist` | Média | ❌ — ver `Design/ArteFonte/IA/Models/bench-modelo-base-2026-09.md` |
-| Refazer a medição de tempo SDXL × Z-Image reiniciando o ComfyUI entre as rodadas — o gargalo é RAM do sistema (0,6 de 15,9 GB livres com os dois modelos residentes) | `@SpriteArtist` | Baixa | ❌ |
-| Passe de continuidade no frame de ataque do Autômato Abandonado (o opus redesenhou engrenagem do peito, cabeça e torso em relação ao idle) e registrar no context pack e em `indices/assets.md` | `@SpriteArtist` | Média | ❌ — ver `Design/ArteFonte/IA/Models/bench-modelo-claude-spec-2026-09.md` |
-| Clipes de ataque, dano e morte (o placeholder só tem idle/run/walk) | `@SpriteArtist` | Média | ⏸ com a arte própria |
-| Progressão visual da build (sprites por estágio de receptáculo) — consome `BuildProgressionView.cs` (marcador inline na linha 14) | `@SpriteArtist` + `@UnityDeveloper` | Média | ❌ |
-| VFX e feedback de sinergias híbridas — consome `HybridSynergyFeedbackView.cs` (marcador inline na linha 12) | `@SpriteArtist` + `@UnityDeveloper` | Média | ❌ |
-| Props narrativos, ícones de crafting, VFX | `@SpriteArtist` | Baixa | ❌ |
-| Pixel pass da comporta (dentes de engrenagem mais legíveis) — agora possível pelo MCP `aseprite` | `@SpriteArtist` | Baixa | ❌ opcional |
-| Substituir os placeholders Gothicvania e remover `Art/ThirdParty/` + `CREDITS.md` | `@SpriteArtist` | Baixa | ⏸ quando a Onda 3 entregar personagens |
 | Rampas estendidas da paleta Blumenau (16 → até 32 cores) | Usuário (arte) | Baixa | ⏸ quando a arte final pedir |
 | pxfx onda 1 — combate: portar e reescalar impacts, melee, projectiles, explosions, spawn, status e o resto de fire (90 arquivos), com paridade OK na escala 1, `--escala 2.5` corrigida e aprovação pelo [`vfx-guide.md`](../../Design/GuiasDeArte/vfx-guide.md) (skill `vfx`) | `@SpriteArtist` | Média | 🔨 `fire/torch` portado — ver [`pxfx/index.md`](../../Design/ArteFonte/Ferramentas/pxfx/index.md) |
 | pxfx onda 2 — mundo: water, weather, lightning, scifi, critters, nature, ice (89 arquivos) | `@SpriteArtist` | Baixa | ⏸ depois da onda 1 |

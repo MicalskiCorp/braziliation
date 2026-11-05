@@ -187,6 +187,19 @@ Format:
 - **Fix:** Alinhar o `CanvasScaler` do HUD para 960×540 / Match Width Or Height 0.5 e conferir a
   HUD em jogo depois.
 
+- **Item:** `gen_tileset.py` só gera tile de **miolo** — nenhuma das 7 famílias tem borda (topo de chão, quina, beiral)
+- **Where:** `Design/ArteFonte/Ferramentas/gen_tileset.py` · tilesets em `Assets/Art/Environments/Blumenau/Tilesets/` e o teste em `Design/ArteFonte/IA/Testes/tilesets-onda2/`
+- **Why:** Todo tipo de tile é uma textura opaca que ladrilha nas 4 direções. Para montar nível
+  em vista lateral, o Rule Tile do Unity precisa do tile de **topo** (a superfície onde se pisa,
+  com recorte transparente em cima) e de quina; sem eles o chão termina numa linha reta cortada.
+  Apareceu no mock do teste da Onda 2 (2026-11-04, `Design/ArteFonte/IA/Testes/tilesets-onda2/env_blumenau_onda2_tilesets_mock.png`): o
+  cemitério e a periferia param seco na borda de cima. Afeta as 3 famílias antigas também — o
+  blockout atual só tem topo porque usa o tileset Gothicvania (`CastleBlockout.unity`).
+- **Fix:** um modificador de borda genérico em vez de tipo novo por família — dado um tipo de
+  chão, gerar `topo` (3-5 linhas de superfície com silhueta irregular e alfa acima), `quina_esq`
+  e `quina_dir`, derivados do próprio miolo para casar de cor. Entra como linha extra no sheet e
+  no manifest; o `gen_map_wfc.py` ganha a adjacência "topo só encosta em ar por cima".
+
 ### Baixa
 
 - **Item:** `TilesetAutoSlicer` fatia o tileset placeholder do castelo em todas as 780 células (grid 52×15), não só as não-vazias
