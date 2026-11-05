@@ -1,0 +1,10511 @@
+{
+ "origem": "https://github.com/patch-gg/pixelfx @ a841596 (MIT)",
+ "unidades": "px do boneco de 38 px (o esqueleto multiplica pela escala)",
+ "atos": {
+  "arcane/arcane-beam": {
+   "nome": "Arcane beam",
+   "desc": "A beam fires right from the hand: a white core, strands twisting round it, pulses running down it, a flaring source and an end that sprays sparks.",
+   "duracao": 1.2,
+   "loop": true,
+   "chaves": [
+    [
+     -0.62,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -3
+     }
+    ],
+    [
+     -0.3,
+     {
+      "crouch": 4,
+      "fx": 1,
+      "fy": -20,
+      "bx": 4,
+      "by": -22,
+      "ffx": 9,
+      "fbx": -7,
+      "x": -3,
+      "lean": -3
+     }
+    ],
+    [
+     -0.04,
+     {
+      "crouch": 5,
+      "fx": 1,
+      "fy": -20,
+      "bx": 4,
+      "by": -22,
+      "ffx": 9,
+      "fbx": -7,
+      "x": -3,
+      "lean": -4
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -24,
+      "bx": 13,
+      "by": -20,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 4,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.3,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -24,
+      "bx": 13,
+      "by": -20,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 4,
+      "toeB": true
+     }
+    ],
+    [
+     0.6,
+     {
+      "crouch": 5,
+      "fx": 18,
+      "fy": -24,
+      "bx": 13,
+      "by": -20,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 3,
+      "toeB": true
+     }
+    ],
+    [
+     0.9,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -24,
+      "bx": 13,
+      "by": -20,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 4,
+      "toeB": true
+     }
+    ],
+    [
+     1.2,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -24,
+      "bx": 13,
+      "by": -20,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 4,
+      "toeB": true
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.1,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.5,
+     "pele": null
+    },
+    {
+     "t": 0.7,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.5,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.62,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "arcane/arcane-missiles": {
+   "nome": "Arcane missiles",
+   "desc": "A volley of violet bolts fans out of the hand, curls round on twisting ribbons and pops on the target one after another.",
+   "duracao": 1.75,
+   "loop": false,
+   "chaves": [
+    [
+     -0.52,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -3
+     }
+    ],
+    [
+     -0.24,
+     {
+      "crouch": 4,
+      "fx": 6,
+      "fy": -24,
+      "bx": 8,
+      "by": -24,
+      "ffx": 9,
+      "fbx": -7,
+      "x": -3,
+      "lean": -2
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 5,
+      "fx": 6,
+      "fy": -24,
+      "bx": 8,
+      "by": -24,
+      "ffx": 9,
+      "fbx": -7,
+      "x": -3,
+      "lean": -2
+     }
+    ],
+    [
+     0.05,
+     {
+      "crouch": 4,
+      "fx": 15,
+      "fy": -26,
+      "bx": -6,
+      "by": -22,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 2
+     },
+     "snap"
+    ],
+    [
+     0.1,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -24,
+      "bx": -6,
+      "by": -22,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 4
+     },
+     "snap"
+    ],
+    [
+     0.15,
+     {
+      "crouch": 4,
+      "fx": 15,
+      "fy": -26,
+      "bx": -6,
+      "by": -22,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 2
+     },
+     "snap"
+    ],
+    [
+     0.2,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -24,
+      "bx": -6,
+      "by": -22,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 4
+     },
+     "snap"
+    ],
+    [
+     0.25,
+     {
+      "crouch": 4,
+      "fx": 15,
+      "fy": -26,
+      "bx": -6,
+      "by": -22,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 2
+     },
+     "snap"
+    ],
+    [
+     0.29,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -24,
+      "bx": -6,
+      "by": -22,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 4
+     },
+     "snap"
+    ],
+    [
+     0.33,
+     {
+      "crouch": 4,
+      "fx": 15,
+      "fy": -26,
+      "bx": -6,
+      "by": -22,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 2
+     },
+     "snap"
+    ],
+    [
+     0.38,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -24,
+      "bx": -6,
+      "by": -22,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 4
+     },
+     "snap"
+    ],
+    [
+     0.43,
+     {
+      "crouch": 4,
+      "fx": 15,
+      "fy": -26,
+      "bx": -6,
+      "by": -22,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 2
+     },
+     "snap"
+    ],
+    [
+     0.48,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -24,
+      "bx": -6,
+      "by": -22,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 4
+     },
+     "snap"
+    ],
+    [
+     1.2,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -24,
+      "bx": -6,
+      "by": -22,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -3,
+      "lean": 4
+     }
+    ],
+    [
+     1.7,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -3
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.77,
+     "congela": 0.02,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.7,
+     "pele": null
+    },
+    {
+     "t": 0.85,
+     "congela": 0.02,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.7,
+     "pele": null
+    },
+    {
+     "t": 0.95,
+     "congela": 0.02,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.7,
+     "pele": null
+    },
+    {
+     "t": 1.08,
+     "congela": 0.02,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.7,
+     "pele": null
+    },
+    {
+     "t": 1.2,
+     "congela": 0.07,
+     "tremor": 0.14,
+     "amp": 1,
+     "empurra": 1.4,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.52,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "arcane/blink-in": {
+   "nome": "Blink in",
+   "desc": "Glittering bits spiral in to a point of light that opens into a line, then into a white silhouette that cools into the caster.",
+   "duracao": 1.4,
+   "loop": false,
+   "chaves": [
+    [
+     0,
+     {
+      "crouch": 7,
+      "lean": 3,
+      "fx": 9,
+      "fy": -12,
+      "bx": 12,
+      "by": -12,
+      "ffx": 8,
+      "fbx": -6
+     }
+    ],
+    [
+     0.48,
+     {
+      "crouch": 7,
+      "lean": 3,
+      "fx": 9,
+      "fy": -12,
+      "bx": 12,
+      "by": -12,
+      "ffx": 8,
+      "fbx": -6
+     }
+    ],
+    [
+     0.56,
+     {
+      "crouch": 6,
+      "lean": 3,
+      "fx": 9,
+      "fy": -12,
+      "bx": 12,
+      "by": -12,
+      "ffx": 8,
+      "fbx": -6
+     },
+     "snap"
+    ],
+    [
+     0.95,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     1.4,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.48,
+     "congela": 0.03,
+     "tremor": 0.1,
+     "amp": 1,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "arcane/blink-out": {
+   "nome": "Blink out",
+   "desc": "The caster crackles with gathering light, flashes white, squeezes into a line of light that collapses and pops away in sparks.",
+   "duracao": 1.6,
+   "loop": false,
+   "chaves": [
+    [
+     -0.36,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     -0.1,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "fx": -2,
+      "fy": -25,
+      "bx": 2,
+      "by": -25,
+      "armsFront": true,
+      "ffx": 0,
+      "fbx": 2
+     }
+    ],
+    [
+     0.2,
+     {
+      "turn": 1,
+      "crouch": 5,
+      "fx": -2,
+      "fy": -25,
+      "bx": 2,
+      "by": -25,
+      "armsFront": true,
+      "ffx": 0,
+      "fbx": 2
+     }
+    ],
+    [
+     0.32,
+     {
+      "turn": 1,
+      "crouch": 0,
+      "fx": -2,
+      "fy": -25,
+      "bx": 2,
+      "by": -25,
+      "armsFront": true,
+      "ffx": 0,
+      "fbx": 2
+     },
+     "snap"
+    ],
+    [
+     1.6,
+     {
+      "turn": 1,
+      "crouch": 0,
+      "fx": -2,
+      "fy": -25,
+      "bx": 2,
+      "by": -25,
+      "armsFront": true,
+      "ffx": 0,
+      "fbx": 2
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0.36,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "arcane/spell-charge": {
+   "nome": "Spell charge",
+   "desc": "Energy gathers in the caster's hand: streaks and motes spiral in, rings collapse into a swelling orb that crackles with arcs, ready to fire.",
+   "duracao": 1.6,
+   "loop": true,
+   "chaves": [
+    [
+     -0.46,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -3
+     }
+    ],
+    [
+     -0.12,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -22,
+      "bx": 11,
+      "by": -17,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": 2
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -22,
+      "bx": 11,
+      "by": -17,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": 2
+     }
+    ],
+    [
+     0.4,
+     {
+      "crouch": 5,
+      "fx": 18,
+      "fy": -22,
+      "bx": 11,
+      "by": -17,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": 2
+     }
+    ],
+    [
+     0.8,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -22,
+      "bx": 11,
+      "by": -17,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": 3
+     }
+    ],
+    [
+     1.2,
+     {
+      "crouch": 5,
+      "fx": 18,
+      "fy": -22,
+      "bx": 11,
+      "by": -17,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": 2
+     }
+    ],
+    [
+     1.6,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -22,
+      "bx": 11,
+      "by": -17,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": 2
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0.46,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "fire/fire-ring": {
+   "nome": "Fire ring",
+   "desc": "A white flash at the feet, then flames race outward along the floor in a ring, flaring as the front passes and burning down behind it over a smouldering scorch.",
+   "duracao": 3.9,
+   "loop": false,
+   "chaves": [
+    [
+     -0.32,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.02,
+     {
+      "turn": 1.15,
+      "crouch": 0,
+      "fx": -7,
+      "fy": -44,
+      "bx": 8,
+      "by": -44,
+      "ffx": -5,
+      "fbx": 6
+     }
+    ],
+    [
+     0.27,
+     {
+      "turn": 1.15,
+      "crouch": 0,
+      "fx": -7,
+      "fy": -44,
+      "bx": 8,
+      "by": -44,
+      "ffx": -5,
+      "fbx": 6,
+      "y": -1
+     }
+    ],
+    [
+     0.32,
+     {
+      "turn": 1.15,
+      "crouch": 8,
+      "lean": 3,
+      "fx": -9,
+      "fy": -8,
+      "bx": 11,
+      "by": -8,
+      "ffx": -8,
+      "fbx": 9
+     },
+     "snap"
+    ],
+    [
+     0.85,
+     {
+      "turn": 1.15,
+      "crouch": 7,
+      "lean": 3,
+      "fx": -9,
+      "fy": -8,
+      "bx": 11,
+      "by": -8,
+      "ffx": -8,
+      "fbx": 9
+     }
+    ],
+    [
+     1.5,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "fx": -8,
+      "fy": -17,
+      "bx": 9,
+      "by": -17,
+      "ffx": -4,
+      "fbx": 5
+     }
+    ],
+    [
+     2.4,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     3.9,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.32,
+     "congela": 0.1,
+     "tremor": 0.28,
+     "amp": 3,
+     "empurra": 0,
+     "pele": null
+    },
+    {
+     "t": 0.6,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 1.2,
+     "pele": "char"
+    },
+    {
+     "t": 3.5,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.32,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "holy/blessing": {
+   "nome": "Blessing",
+   "desc": "A soft cone of light rests on the character from above; sparkles drift down through it, twinkling, and wink out where they land on the head and shoulders.",
+   "duracao": 3,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 1.15,
+      "fx": -13,
+      "fy": -31,
+      "bx": 14,
+      "by": -31,
+      "hy": -1,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.75,
+     {
+      "turn": 1.15,
+      "fx": -13,
+      "fy": -33,
+      "bx": 14,
+      "by": -33,
+      "hy": -1,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.5,
+     {
+      "turn": 1.15,
+      "fx": -13,
+      "fy": -35,
+      "bx": 14,
+      "by": -35,
+      "hy": -1,
+      "ffx": -3,
+      "fbx": 4,
+      "crouch": -1
+     }
+    ],
+    [
+     2.25,
+     {
+      "turn": 1.15,
+      "fx": -13,
+      "fy": -33,
+      "bx": 14,
+      "by": -33,
+      "hy": -1,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     3,
+     {
+      "turn": 1.15,
+      "fx": -13,
+      "fy": -31,
+      "bx": 14,
+      "by": -31,
+      "hy": -1,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "holy/divine-shield": {
+   "nome": "Divine shield",
+   "desc": "A bubble of gold light round the character: a bright rim and a thin gold film, meridians turning like a slow globe, a sheen sweeping across and sparkles winking on it.",
+   "duracao": 2.4,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 0.7,
+      "crouch": 3,
+      "lean": 1,
+      "fx": 5,
+      "fy": -33,
+      "bx": 10,
+      "by": -20,
+      "ffx": 4,
+      "fbx": -2
+     }
+    ],
+    [
+     0.6,
+     {
+      "turn": 0.7,
+      "crouch": 4,
+      "lean": 1,
+      "fx": 5,
+      "fy": -33,
+      "bx": 10,
+      "by": -20,
+      "ffx": 4,
+      "fbx": -2
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 0.7,
+      "crouch": 3,
+      "lean": 1,
+      "fx": 5,
+      "fy": -35,
+      "bx": 10,
+      "by": -20,
+      "ffx": 4,
+      "fbx": -2
+     }
+    ],
+    [
+     1.8,
+     {
+      "turn": 0.7,
+      "crouch": 4,
+      "lean": 1,
+      "fx": 5,
+      "fy": -33,
+      "bx": 10,
+      "by": -20,
+      "ffx": 4,
+      "fbx": -2
+     }
+    ],
+    [
+     2.4,
+     {
+      "turn": 0.7,
+      "crouch": 3,
+      "lean": 1,
+      "fx": 5,
+      "fy": -33,
+      "bx": 10,
+      "by": -20,
+      "ffx": 4,
+      "fbx": -2
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "holy/halo": {
+   "nome": "Halo",
+   "desc": "A ring of gold light floats over the head with a glint running round it; fine dust sifts down from it and the head catches its light.",
+   "duracao": 2,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 1.1,
+      "fx": -1,
+      "fy": -26,
+      "bx": 2,
+      "by": -26,
+      "armsFront": true,
+      "hy": 1,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.5,
+     {
+      "turn": 1.1,
+      "fx": -1,
+      "fy": -26,
+      "bx": 2,
+      "by": -26,
+      "armsFront": true,
+      "hy": 1,
+      "ffx": -3,
+      "fbx": 4,
+      "crouch": 1
+     }
+    ],
+    [
+     1,
+     {
+      "turn": 1.1,
+      "fx": -1,
+      "fy": -26,
+      "bx": 2,
+      "by": -26,
+      "armsFront": true,
+      "hy": 2,
+      "ffx": -3,
+      "fbx": 4,
+      "crouch": 1
+     }
+    ],
+    [
+     1.5,
+     {
+      "turn": 1.1,
+      "fx": -1,
+      "fy": -26,
+      "bx": 2,
+      "by": -26,
+      "armsFront": true,
+      "hy": 1,
+      "ffx": -3,
+      "fbx": 4,
+      "crouch": 1
+     }
+    ],
+    [
+     2,
+     {
+      "turn": 1.1,
+      "fx": -1,
+      "fy": -26,
+      "bx": 2,
+      "by": -26,
+      "armsFront": true,
+      "hy": 1,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "holy/heal": {
+   "nome": "Heal",
+   "desc": "Petals of light bloom under the feet, a hoop of light rises up the body restoring its colour and leaving sparkles, and motes spiral up and pop into tiny hearts.",
+   "duracao": 1.9,
+   "loop": false,
+   "chaves": [
+    [
+     -0.3,
+     {
+      "turn": 0.8,
+      "crouch": 5,
+      "lean": 3,
+      "hy": 1,
+      "fx": 1,
+      "fy": -21,
+      "bx": 7,
+      "by": -15,
+      "ffx": 4,
+      "fbx": -3
+     }
+    ],
+    [
+     0.16,
+     {
+      "turn": 0.8,
+      "crouch": 6,
+      "lean": 3,
+      "hy": 1,
+      "fx": 1,
+      "fy": -21,
+      "bx": 7,
+      "by": -15,
+      "ffx": 4,
+      "fbx": -3
+     }
+    ],
+    [
+     0.5,
+     {
+      "turn": 0.8,
+      "crouch": 3,
+      "lean": 1,
+      "hy": 0,
+      "fx": 1,
+      "fy": -21,
+      "bx": 7,
+      "by": -15,
+      "ffx": 4,
+      "fbx": -3
+     }
+    ],
+    [
+     0.78,
+     {
+      "turn": 1.15,
+      "crouch": -1,
+      "fx": -13,
+      "fy": -36,
+      "bx": 14,
+      "by": -36,
+      "hy": -1,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 1.15,
+      "crouch": 0,
+      "fx": -13,
+      "fy": -30,
+      "bx": 14,
+      "by": -30,
+      "hy": 0,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.9,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0.3,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "holy/resurrection": {
+   "nome": "Resurrection",
+   "desc": "Light pours down on the fallen and life climbs back up the body; wings of light unfold, a halo forms, one great wingbeat, then the wings scatter into feathers.",
+   "duracao": 4.8,
+   "loop": false,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 0.9,
+      "crouch": 8,
+      "lean": 6,
+      "hy": 2,
+      "fx": -4,
+      "fy": -10,
+      "bx": 9,
+      "by": -10,
+      "ffx": 8,
+      "fbx": -7
+     }
+    ],
+    [
+     0.5,
+     {
+      "turn": 0.9,
+      "crouch": 8,
+      "lean": 6,
+      "hy": 2,
+      "fx": -4,
+      "fy": -10,
+      "bx": 9,
+      "by": -10,
+      "ffx": 8,
+      "fbx": -7
+     }
+    ],
+    [
+     0.85,
+     {
+      "turn": 0.9,
+      "crouch": 6,
+      "lean": 4,
+      "hy": 1,
+      "fx": -4,
+      "fy": -10,
+      "bx": 9,
+      "by": -10,
+      "ffx": 8,
+      "fbx": -7
+     }
+    ],
+    [
+     1.15,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "fx": -8,
+      "fy": -17,
+      "bx": 9,
+      "by": -17
+     }
+    ],
+    [
+     1.5,
+     {
+      "turn": 1.15,
+      "crouch": -1,
+      "fx": -15,
+      "fy": -33,
+      "bx": 16,
+      "by": -33,
+      "hy": -1,
+      "ffx": -3,
+      "ffy": -5,
+      "fbx": 4,
+      "fby": -5,
+      "y": -2
+     }
+    ],
+    [
+     1.95,
+     {
+      "turn": 1.15,
+      "crouch": -1,
+      "fx": -15,
+      "fy": -33,
+      "bx": 16,
+      "by": -33,
+      "hy": -1,
+      "ffx": -3,
+      "ffy": -5,
+      "fbx": 4,
+      "fby": -5,
+      "y": -3
+     }
+    ],
+    [
+     2.1,
+     {
+      "turn": 1.15,
+      "crouch": 1,
+      "fx": -15,
+      "fy": -37,
+      "bx": 16,
+      "by": -37,
+      "hy": -1,
+      "ffx": -3,
+      "ffy": -5,
+      "fbx": 4,
+      "fby": -5,
+      "y": -2
+     }
+    ],
+    [
+     2.3,
+     {
+      "turn": 1.15,
+      "crouch": -1,
+      "fx": -15,
+      "fy": -38,
+      "bx": 16,
+      "by": -38,
+      "hy": -1,
+      "ffx": -3,
+      "ffy": -5,
+      "fbx": 4,
+      "fby": -5,
+      "y": -9
+     }
+    ],
+    [
+     2.95,
+     {
+      "turn": 1.15,
+      "crouch": -1,
+      "fx": -15,
+      "fy": -33,
+      "bx": 16,
+      "by": -33,
+      "hy": -1,
+      "ffx": -3,
+      "ffy": -5,
+      "fbx": 4,
+      "fby": -5,
+      "y": -6
+     }
+    ],
+    [
+     3.8,
+     {
+      "turn": 1,
+      "y": 0,
+      "crouch": 2,
+      "fx": -8,
+      "fy": -17,
+      "bx": 9,
+      "by": -17
+     }
+    ],
+    [
+     4.3,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     4.8,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "ice/freeze": {
+   "nome": "Freeze",
+   "desc": "Frost races in and climbs the character, turning it to ice; a faceted block crystallizes round it pane by pane, glints, cracks and bursts, and the character thaws free.",
+   "duracao": 4,
+   "loop": false,
+   "chaves": [
+    [
+     -0.2,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.05,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.16,
+     {
+      "turn": 0.9,
+      "lean": -2,
+      "crouch": 2,
+      "fx": -8,
+      "fy": -31,
+      "bx": 9,
+      "by": -31,
+      "ffx": -3,
+      "fbx": 4
+     },
+     "snap"
+    ],
+    [
+     0.3,
+     {
+      "turn": 0.9,
+      "lean": -1,
+      "crouch": 2,
+      "fx": -10,
+      "fy": -34,
+      "bx": 9,
+      "by": -31,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.45,
+     {
+      "turn": 0.9,
+      "lean": -3,
+      "crouch": 2,
+      "fx": -7,
+      "fy": -29,
+      "bx": 11,
+      "by": -34,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.62,
+     {
+      "turn": 0.9,
+      "lean": -2,
+      "crouch": 2,
+      "fx": -8,
+      "fy": -31,
+      "bx": 9,
+      "by": -31,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     2.52,
+     {
+      "turn": 0.9,
+      "lean": -2,
+      "crouch": 2,
+      "fx": -8,
+      "fy": -31,
+      "bx": 9,
+      "by": -31,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     2.54,
+     {
+      "turn": 1,
+      "crouch": 5,
+      "fx": -12,
+      "fy": -18,
+      "bx": 12,
+      "by": -18,
+      "ffx": -5,
+      "fbx": 6
+     },
+     "snap"
+    ],
+    [
+     2.9,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "fx": -12,
+      "fy": -18,
+      "bx": 12,
+      "by": -18,
+      "ffx": -5,
+      "fbx": 6
+     }
+    ],
+    [
+     3.1,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "fx": -12,
+      "fy": -18,
+      "bx": 12,
+      "by": -18,
+      "ffx": -5,
+      "fbx": 6,
+      "lean": 1
+     }
+    ],
+    [
+     3.3,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "fx": -12,
+      "fy": -18,
+      "bx": 12,
+      "by": -18,
+      "ffx": -5,
+      "fbx": 6,
+      "lean": -1
+     }
+    ],
+    [
+     4,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.62,
+     "congela": 0.03,
+     "tremor": 0.08,
+     "amp": 1,
+     "empurra": 0,
+     "pele": null
+    },
+    {
+     "t": 2.52,
+     "congela": 0.05,
+     "tremor": 0.2,
+     "amp": 2,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.2,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "ice/frost-nova": {
+   "nome": "Frost nova",
+   "desc": "Frost spirals into a spinning snowflake, then a wave blooms three rings of ice crystals round the caster; snow drifts, frost creeps, and the ice melts back into the floor.",
+   "duracao": 3.4,
+   "loop": false,
+   "chaves": [
+    [
+     -0.34,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     -0.04,
+     {
+      "turn": 1.15,
+      "crouch": 2,
+      "fx": -7,
+      "fy": -36,
+      "bx": 8,
+      "by": -36,
+      "ffx": -5,
+      "fbx": 6
+     }
+    ],
+    [
+     0.36,
+     {
+      "turn": 1.15,
+      "crouch": 0,
+      "fx": -7,
+      "fy": -44,
+      "bx": 8,
+      "by": -44,
+      "ffx": -5,
+      "fbx": 6
+     }
+    ],
+    [
+     0.42,
+     {
+      "turn": 1.15,
+      "crouch": 8,
+      "lean": 3,
+      "fx": -9,
+      "fy": -8,
+      "bx": 11,
+      "by": -8,
+      "ffx": -8,
+      "fbx": 9
+     },
+     "snap"
+    ],
+    [
+     0.9,
+     {
+      "turn": 1.15,
+      "crouch": 7,
+      "lean": 3,
+      "fx": -9,
+      "fy": -8,
+      "bx": 11,
+      "by": -8,
+      "ffx": -8,
+      "fbx": 9
+     }
+    ],
+    [
+     1.9,
+     {
+      "turn": 1.15,
+      "crouch": 6,
+      "lean": 3,
+      "fx": -9,
+      "fy": -8,
+      "bx": 11,
+      "by": -8,
+      "ffx": -8,
+      "fbx": 9
+     }
+    ],
+    [
+     2.6,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "fx": -8,
+      "fy": -17,
+      "bx": 9,
+      "by": -17,
+      "ffx": -4,
+      "fbx": 5
+     }
+    ],
+    [
+     3.4,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.42,
+     "congela": 0.1,
+     "tremor": 0.26,
+     "amp": 2,
+     "empurra": 0,
+     "pele": null
+    },
+    {
+     "t": 0.66,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.9,
+     "pele": "ice"
+    },
+    {
+     "t": 2.9,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.2,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.34,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "impacts/heavy-landing": {
+   "nome": "Heavy landing",
+   "desc": "A character lands hard: the floor dents and cracks under their feet, two rings of dust roll out along the floor one after the other, and pebbles hop away.",
+   "duracao": 1.6,
+   "loop": false,
+   "chaves": [
+    [
+     -0.26,
+     {
+      "turn": 0.8,
+      "y": -46,
+      "crouch": -1,
+      "lean": -1,
+      "fx": -9,
+      "fy": -42,
+      "bx": 10,
+      "by": -42,
+      "ffx": 6,
+      "ffy": -8,
+      "fbx": -3,
+      "fby": -3,
+      "toeB": true,
+      "ghost": 1
+     }
+    ],
+    [
+     -0.01,
+     {
+      "turn": 0.8,
+      "y": -6,
+      "crouch": -1,
+      "lean": -1,
+      "fx": -9,
+      "fy": -42,
+      "bx": 10,
+      "by": -42,
+      "ffx": 6,
+      "ffy": -8,
+      "fbx": -3,
+      "fby": -3,
+      "toeB": true,
+      "ghost": 1
+     },
+     "in"
+    ],
+    [
+     0,
+     {
+      "y": 0,
+      "crouch": 8,
+      "lean": 5,
+      "fx": 13,
+      "fy": -8,
+      "bx": -6,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -10
+     },
+     "snap"
+    ],
+    [
+     0.55,
+     {
+      "y": 0,
+      "crouch": 7,
+      "lean": 5,
+      "fx": 13,
+      "fy": -8,
+      "bx": -6,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -10
+     }
+    ],
+    [
+     0.95,
+     {
+      "y": 0,
+      "crouch": 5,
+      "lean": 3,
+      "fx": 13,
+      "fy": -15,
+      "bx": -5,
+      "by": -20,
+      "ffx": 11,
+      "fbx": -10
+     }
+    ],
+    [
+     1.3,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     1.6,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.005,
+     "congela": 0.13,
+     "tremor": 0.32,
+     "amp": 3,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.26,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "impacts/hit-flash": {
+   "nome": "Hit flash",
+   "desc": "The character takes damage: a white frame, then their own colors flushed red and blinking white, cooling off, while comic hit lines jab in at them.",
+   "duracao": 0.5,
+   "loop": false,
+   "chaves": [
+    [
+     -0.26,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": 0
+     }
+    ],
+    [
+     0,
+     {
+      "x": -5,
+      "crouch": 4,
+      "lean": -5,
+      "hx": -1,
+      "fx": 8,
+      "fy": -33,
+      "bx": -11,
+      "by": -27,
+      "ffx": 9,
+      "ffy": -7,
+      "fbx": -6
+     },
+     "snap"
+    ],
+    [
+     0.16,
+     {
+      "x": -8,
+      "crouch": 5,
+      "lean": -5,
+      "hx": -1,
+      "fx": 8,
+      "fy": -33,
+      "bx": -11,
+      "by": -27,
+      "ffx": 9,
+      "ffy": -7,
+      "fbx": -6
+     }
+    ],
+    [
+     0.42,
+     {
+      "x": -8,
+      "crouch": 5,
+      "lean": -2,
+      "hx": -1,
+      "fx": 9,
+      "fy": -22,
+      "bx": 6,
+      "by": -20,
+      "ffx": 9,
+      "ffy": -4,
+      "fbx": -6
+     }
+    ],
+    [
+     0.86,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": 0
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0,
+     "congela": 0.07,
+     "tremor": 0.14,
+     "amp": 2,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.26,
+   "recuperacao": 0.36,
+   "no_corpo": true
+  },
+  "impacts/shield-block": {
+   "nome": "Shield block",
+   "desc": "A blow is caught on a half-dome of energy in front of the character: its diamond lattice flashes, a ripple runs over it, sparks glance off, then it blinks out cell by cell.",
+   "duracao": 1.1,
+   "loop": false,
+   "chaves": [
+    [
+     -0.36,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     -0.1,
+     {
+      "crouch": 4,
+      "fx": 13,
+      "fy": -28,
+      "bx": 6,
+      "by": -21,
+      "ffx": 9,
+      "fbx": -9,
+      "lean": 2
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 6,
+      "fx": 10,
+      "fy": -26,
+      "bx": 6,
+      "by": -21,
+      "ffx": 9,
+      "fbx": -9,
+      "lean": -2,
+      "x": -3
+     },
+     "snap"
+    ],
+    [
+     0.18,
+     {
+      "crouch": 5,
+      "fx": 13,
+      "fy": -28,
+      "bx": 6,
+      "by": -21,
+      "ffx": 9,
+      "fbx": -9,
+      "lean": 0,
+      "x": -4
+     }
+    ],
+    [
+     0.65,
+     {
+      "crouch": 4,
+      "fx": 13,
+      "fy": -28,
+      "bx": 6,
+      "by": -21,
+      "ffx": 9,
+      "fbx": -9,
+      "lean": 2,
+      "x": -3
+     }
+    ],
+    [
+     1.1,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": 0
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.005,
+     "congela": 0.09,
+     "tremor": 0.2,
+     "amp": 2,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.36,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "lightning/chain-lightning": {
+   "nome": "Chain lightning",
+   "desc": "A bolt leaps from the caster's hand through three targets in turn; each flashes, sparks and grounds itself to the floor while the arcs between them flicker, then the chain snaps.",
+   "duracao": 1.8,
+   "loop": false,
+   "chaves": [
+    [
+     -0.46,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -6
+     }
+    ],
+    [
+     -0.22,
+     {
+      "crouch": 4,
+      "fx": -5,
+      "fy": -32,
+      "bx": 8,
+      "by": -24,
+      "ffx": 9,
+      "fbx": -7,
+      "x": -6,
+      "lean": -3,
+      "armsFront": true
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 5,
+      "fx": -5,
+      "fy": -32,
+      "bx": 8,
+      "by": -24,
+      "ffx": 9,
+      "fbx": -7,
+      "x": -6,
+      "lean": -3,
+      "armsFront": true
+     }
+    ],
+    [
+     0.04,
+     {
+      "crouch": 4,
+      "fx": 16,
+      "fy": -16,
+      "bx": -6,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -6,
+      "lean": 4
+     },
+     "snap"
+    ],
+    [
+     0.7,
+     {
+      "crouch": 3,
+      "fx": 16,
+      "fy": -16,
+      "bx": -6,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -6,
+      "lean": 4
+     }
+    ],
+    [
+     1.35,
+     {
+      "crouch": 3,
+      "fx": 16,
+      "fy": -18,
+      "bx": -6,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -9,
+      "x": -6,
+      "lean": 4
+     }
+    ],
+    [
+     1.8,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -6
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.05,
+     "congela": 0.03,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 1.2,
+     "pele": "shock"
+    },
+    {
+     "t": 0.14,
+     "congela": 0.03,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 1.2,
+     "pele": "shock"
+    },
+    {
+     "t": 0.23,
+     "congela": 0.07,
+     "tremor": 0.14,
+     "amp": 1,
+     "empurra": 1.2,
+     "pele": "shock"
+    },
+    {
+     "t": 1.35,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.46,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "lightning/charge-up": {
+   "nome": "Charge up",
+   "desc": "Sparks streak and arcs whip in to a crackling core at the caster's hand that swells and pulses faster, then it flashes and bursts: bolts every way, a ring, a spray of sparks.",
+   "duracao": 2.7,
+   "loop": false,
+   "chaves": [
+    [
+     -0.36,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 3,
+      "fx": 15,
+      "fy": -21,
+      "bx": 9,
+      "by": -17,
+      "ffx": 9,
+      "fbx": -7,
+      "lean": -2
+     }
+    ],
+    [
+     0.8,
+     {
+      "crouch": 4,
+      "fx": 15,
+      "fy": -21,
+      "bx": 9,
+      "by": -17,
+      "ffx": 9,
+      "fbx": -7,
+      "lean": -2
+     }
+    ],
+    [
+     1.4,
+     {
+      "crouch": 6,
+      "fx": 15,
+      "fy": -21,
+      "bx": 9,
+      "by": -17,
+      "ffx": 9,
+      "fbx": -7,
+      "lean": 0
+     }
+    ],
+    [
+     1.59,
+     {
+      "crouch": 7,
+      "fx": 15,
+      "fy": -21,
+      "bx": 9,
+      "by": -17,
+      "ffx": 9,
+      "fbx": -7,
+      "lean": 0
+     }
+    ],
+    [
+     1.6,
+     {
+      "turn": 1.15,
+      "y": -2,
+      "crouch": 0,
+      "lean": -2,
+      "fx": -13,
+      "fy": -37,
+      "bx": 14,
+      "by": -36,
+      "ffx": -2,
+      "ffy": -6,
+      "fbx": 3,
+      "fby": -6
+     },
+     "snap"
+    ],
+    [
+     1.95,
+     {
+      "turn": 1.15,
+      "y": 0,
+      "crouch": 2,
+      "lean": -2,
+      "fx": -13,
+      "fy": -30,
+      "bx": 14,
+      "by": -30,
+      "ffx": -2,
+      "ffy": -4,
+      "fbx": 3,
+      "fby": -4
+     }
+    ],
+    [
+     2.7,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 1.6,
+     "congela": 0.14,
+     "tremor": 0.3,
+     "amp": 3,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.36,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "lightning/electrified": {
+   "nome": "Electrified",
+   "desc": "Current runs through a character: arcs crawl over and leap across the body, sparks spit off, the body flares to an electric silhouette on each jolt, and the feet ground out.",
+   "duracao": 2,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -8,
+      "fy": -17,
+      "bx": 9,
+      "by": -17,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.1,
+     {
+      "turn": 1.1,
+      "crouch": 0,
+      "y": -1,
+      "fx": -13,
+      "fy": -36,
+      "bx": 13,
+      "by": -17,
+      "ffx": -4,
+      "fbx": 5
+     },
+     "snap"
+    ],
+    [
+     0.17,
+     {
+      "turn": 0.7,
+      "crouch": 1,
+      "y": -1,
+      "fx": -13,
+      "fy": -16,
+      "bx": 13,
+      "by": -36,
+      "ffx": -4,
+      "fbx": 5
+     },
+     "snap"
+    ],
+    [
+     0.3,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -8,
+      "fy": -17,
+      "bx": 9,
+      "by": -17,
+      "ffx": -3,
+      "fbx": 4
+     },
+     "snap"
+    ],
+    [
+     0.733,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -8,
+      "fy": -17,
+      "bx": 9,
+      "by": -17,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.733,
+     {
+      "turn": 0.7,
+      "crouch": 1,
+      "y": -1,
+      "fx": -13,
+      "fy": -16,
+      "bx": 13,
+      "by": -36,
+      "ffx": -4,
+      "fbx": 5
+     },
+     "snap"
+    ],
+    [
+     0.8,
+     {
+      "turn": 1.1,
+      "crouch": 0,
+      "y": -1,
+      "fx": -13,
+      "fy": -36,
+      "bx": 13,
+      "by": -17,
+      "ffx": -4,
+      "fbx": 5
+     },
+     "snap"
+    ],
+    [
+     0.93,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -8,
+      "fy": -17,
+      "bx": 9,
+      "by": -17,
+      "ffx": -3,
+      "fbx": 4
+     },
+     "snap"
+    ],
+    [
+     1.367,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -8,
+      "fy": -17,
+      "bx": 9,
+      "by": -17,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.367,
+     {
+      "turn": 1.1,
+      "crouch": 0,
+      "y": -1,
+      "fx": -13,
+      "fy": -36,
+      "bx": 13,
+      "by": -17,
+      "ffx": -4,
+      "fbx": 5
+     },
+     "snap"
+    ],
+    [
+     1.45,
+     {
+      "turn": 0.7,
+      "crouch": 1,
+      "y": -1,
+      "fx": -13,
+      "fy": -16,
+      "bx": 13,
+      "by": -36,
+      "ffx": -4,
+      "fbx": 5
+     },
+     "snap"
+    ],
+    [
+     1.58,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -8,
+      "fy": -17,
+      "bx": 9,
+      "by": -17,
+      "ffx": -3,
+      "fbx": 4
+     },
+     "snap"
+    ],
+    [
+     2,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -8,
+      "fy": -17,
+      "bx": 9,
+      "by": -17,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "lightning/thunderclap": {
+   "nome": "Thunderclap",
+   "desc": "A thunderclap round the caster: a white flash, forked bolts burst out and stab the floor, a heavy shock ring tears across the ground raising dust and grit, sparks streak away.",
+   "duracao": 1.9,
+   "loop": false,
+   "chaves": [
+    [
+     -0.46,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     -0.18,
+     {
+      "turn": 1.15,
+      "crouch": 5,
+      "lean": -1,
+      "fx": -15,
+      "fy": -33,
+      "bx": 15,
+      "by": -33,
+      "ffx": -7,
+      "fbx": 8
+     }
+    ],
+    [
+     0.08,
+     {
+      "turn": 1.15,
+      "crouch": 6,
+      "lean": -1,
+      "fx": -15,
+      "fy": -33,
+      "bx": 15,
+      "by": -33,
+      "ffx": -7,
+      "fbx": 8
+     }
+    ],
+    [
+     0.12,
+     {
+      "turn": 1.15,
+      "y": -2,
+      "crouch": 0,
+      "fx": -1,
+      "fy": -45,
+      "bx": 1,
+      "by": -45,
+      "ffx": -3,
+      "ffy": -5,
+      "fbx": 4,
+      "fby": -5
+     },
+     "snap"
+    ],
+    [
+     0.55,
+     {
+      "turn": 1.15,
+      "y": 0,
+      "crouch": 1,
+      "fx": -1,
+      "fy": -45,
+      "bx": 1,
+      "by": -45,
+      "ffx": -3,
+      "ffy": -4,
+      "fbx": 4,
+      "fby": -4
+     }
+    ],
+    [
+     1.05,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "fx": -10,
+      "fy": -28,
+      "bx": 11,
+      "by": -28,
+      "ffx": -4,
+      "fbx": 5
+     }
+    ],
+    [
+     1.7,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.12,
+     "congela": 0.13,
+     "tremor": 0.3,
+     "amp": 3,
+     "empurra": 0,
+     "pele": null
+    },
+    {
+     "t": 0.42,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 2,
+     "pele": "shock"
+    },
+    {
+     "t": 1.2,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.46,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "melee/claw-swipe": {
+   "nome": "Claw swipe",
+   "desc": "Three claw marks rake down one after another, white-hot, cooling through orange to red, then close up from both ends and leave a dotted scar, with hot flecks and drips.",
+   "duracao": 0.9,
+   "loop": false,
+   "chaves": [
+    [
+     -0.46,
+     {
+      "crouch": 5,
+      "fx": 14,
+      "fy": -21,
+      "bx": 8,
+      "by": -25,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "claw",
+      "offWeapon": "claw",
+      "sa": -0.4,
+      "sb": -0.9,
+      "lean": 3,
+      "x": -6
+     }
+    ],
+    [
+     -0.2,
+     {
+      "crouch": 4,
+      "fx": 3,
+      "fy": -41,
+      "bx": 7,
+      "by": -18,
+      "ffx": 10,
+      "fbx": -8,
+      "weapon": "claw",
+      "offWeapon": "claw",
+      "sa": -1.4,
+      "sb": -0.3,
+      "lean": -3,
+      "x": -6
+     }
+    ],
+    [
+     -0.05,
+     {
+      "crouch": 5,
+      "fx": 3,
+      "fy": -41,
+      "bx": 7,
+      "by": -18,
+      "ffx": 10,
+      "fbx": -8,
+      "weapon": "claw",
+      "offWeapon": "claw",
+      "sa": -1.4,
+      "sb": -0.3,
+      "lean": -3,
+      "x": -6
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 3,
+      "fx": 19,
+      "fy": -36,
+      "bx": -7,
+      "by": -24,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "claw",
+      "offWeapon": "claw",
+      "sa": -0.9,
+      "sb": -0.9,
+      "lean": 4,
+      "x": 0,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.05,
+     {
+      "crouch": 5,
+      "fx": 23,
+      "fy": -24,
+      "bx": -7,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "claw",
+      "offWeapon": "claw",
+      "sa": 0.5,
+      "sb": -0.9,
+      "lean": 6,
+      "x": 2,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.1,
+     {
+      "crouch": 7,
+      "fx": 22,
+      "fy": -12,
+      "bx": -7,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "claw",
+      "offWeapon": "claw",
+      "sa": 1.2,
+      "sb": -0.9,
+      "lean": 7,
+      "x": 3,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.42,
+     {
+      "crouch": 6,
+      "fx": 21,
+      "fy": -13,
+      "bx": -6,
+      "by": -22,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "claw",
+      "offWeapon": "claw",
+      "sa": 1.1,
+      "sb": -0.9,
+      "lean": 5,
+      "x": 3
+     }
+    ],
+    [
+     0.9,
+     {
+      "crouch": 5,
+      "fx": 14,
+      "fy": -21,
+      "bx": 8,
+      "by": -25,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "claw",
+      "offWeapon": "claw",
+      "sa": -0.4,
+      "sb": -0.9,
+      "lean": 3,
+      "x": -6
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.04,
+     "congela": 0.03,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.9,
+     "pele": null
+    },
+    {
+     "t": 0.08,
+     "congela": 0.03,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.9,
+     "pele": null
+    },
+    {
+     "t": 0.12,
+     "congela": 0.08,
+     "tremor": 0.14,
+     "amp": 2,
+     "empurra": 1.4,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.46,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "melee/dagger-flurry": {
+   "nome": "Dagger flurry",
+   "desc": "A flurry of small quick crescents at every angle in front of the fighter, each with a flick of sparks, finished by one big cut that glints and bursts.",
+   "duracao": 0.95,
+   "loop": false,
+   "chaves": [
+    [
+     -0.4,
+     {
+      "crouch": 4,
+      "fx": 12,
+      "fy": -24,
+      "bx": 9,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": -0.5,
+      "sb": -0.9,
+      "lean": 3,
+      "x": -4
+     }
+    ],
+    [
+     -0.14,
+     {
+      "crouch": 5,
+      "fx": 2,
+      "fy": -22,
+      "bx": 2,
+      "by": -26,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": -1.2,
+      "sb": -1.5,
+      "lean": -2,
+      "x": -6
+     }
+    ],
+    [
+     -0.03,
+     {
+      "crouch": 6,
+      "fx": 1,
+      "fy": -21,
+      "bx": 1,
+      "by": -25,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": -1.2,
+      "sb": -1.5,
+      "lean": -3,
+      "x": -6
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 4,
+      "fx": 20,
+      "fy": -31,
+      "bx": 4,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": -0.5,
+      "sb": -1,
+      "lean": 3,
+      "x": 2,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.055,
+     {
+      "crouch": 4,
+      "fx": 1,
+      "fy": -23,
+      "bx": 21,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": -1,
+      "sb": 0.5,
+      "lean": 3,
+      "x": 3
+     },
+     "snap"
+    ],
+    [
+     0.11,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -36,
+      "bx": 4,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": -1,
+      "sb": -1,
+      "lean": 3,
+      "x": 4
+     },
+     "snap"
+    ],
+    [
+     0.165,
+     {
+      "crouch": 4,
+      "fx": 1,
+      "fy": -23,
+      "bx": 22,
+      "by": -31,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": -1,
+      "sb": -0.6,
+      "lean": 3,
+      "x": 5
+     },
+     "snap"
+    ],
+    [
+     0.22,
+     {
+      "crouch": 4,
+      "fx": 20,
+      "fy": -22,
+      "bx": 4,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": 0.2,
+      "sb": -1,
+      "lean": 3,
+      "x": 5
+     },
+     "snap"
+    ],
+    [
+     0.275,
+     {
+      "crouch": 4,
+      "fx": 1,
+      "fy": -23,
+      "bx": 21,
+      "by": -27,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": -1,
+      "sb": 0.05,
+      "lean": 3,
+      "x": 6
+     },
+     "snap"
+    ],
+    [
+     0.33,
+     {
+      "crouch": 5,
+      "fx": -1,
+      "fy": -33,
+      "bx": 2,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": -2.5,
+      "sb": -1.2,
+      "lean": -3,
+      "x": 4
+     },
+     "snap"
+    ],
+    [
+     0.37,
+     {
+      "crouch": 4,
+      "fx": 16,
+      "fy": -34,
+      "bx": -7,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": -1,
+      "sb": -2.4,
+      "lean": 2,
+      "x": 7,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.43,
+     {
+      "crouch": 6,
+      "fx": 22,
+      "fy": -23,
+      "bx": -9,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": 0.15,
+      "sb": -2.6,
+      "lean": 6,
+      "x": 9,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.68,
+     {
+      "crouch": 5,
+      "fx": 21,
+      "fy": -22,
+      "bx": -8,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": 0.2,
+      "sb": -2.6,
+      "lean": 5,
+      "x": 9
+     }
+    ],
+    [
+     1.05,
+     {
+      "crouch": 4,
+      "fx": 12,
+      "fy": -24,
+      "bx": 9,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "dagger",
+      "offWeapon": "dagger",
+      "sa": -0.5,
+      "sb": -0.9,
+      "lean": 3,
+      "x": -4
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.05,
+     "congela": 0.015,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.5,
+     "pele": null
+    },
+    {
+     "t": 0.105,
+     "congela": 0.015,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": -0.3,
+     "pele": null
+    },
+    {
+     "t": 0.16,
+     "congela": 0.015,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.5,
+     "pele": null
+    },
+    {
+     "t": 0.215,
+     "congela": 0.015,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": -0.3,
+     "pele": null
+    },
+    {
+     "t": 0.27,
+     "congela": 0.015,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.5,
+     "pele": null
+    },
+    {
+     "t": 0.325,
+     "congela": 0.015,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": -0.3,
+     "pele": null
+    },
+    {
+     "t": 0.42,
+     "congela": 0.12,
+     "tremor": 0.18,
+     "amp": 2,
+     "empurra": 2.6,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.4,
+   "recuperacao": 0.10000000000000009,
+   "no_corpo": false
+  },
+  "melee/double-slash": {
+   "nome": "Double slash",
+   "desc": "A down cut, then an up cut that crosses it: the moment the X closes both strokes flash white, the crossing bursts with light and sparks, and a dotted X lingers.",
+   "duracao": 0.8,
+   "loop": false,
+   "chaves": [
+    [
+     -0.42,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85,
+      "x": -7
+     }
+    ],
+    [
+     -0.18,
+     {
+      "crouch": 4,
+      "fx": -7,
+      "fy": -35,
+      "bx": 9,
+      "by": -25,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "sword",
+      "sa": -2.65,
+      "x": -7,
+      "lean": -4,
+      "armsFront": true
+     }
+    ],
+    [
+     -0.04,
+     {
+      "crouch": 5,
+      "fx": -7,
+      "fy": -35,
+      "bx": 9,
+      "by": -25,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "sword",
+      "sa": -2.65,
+      "x": -7,
+      "lean": -4,
+      "armsFront": true
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 2,
+      "fx": 16,
+      "fy": -37,
+      "bx": -7,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "sword",
+      "sa": -1.45,
+      "x": 0,
+      "lean": 3,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.06,
+     {
+      "crouch": 6,
+      "fx": 22,
+      "fy": -20,
+      "bx": -8,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.62,
+      "x": 3,
+      "lean": 6,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.14,
+     {
+      "crouch": 6,
+      "fx": 20,
+      "fy": -17,
+      "bx": -8,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.85,
+      "x": 4,
+      "lean": 5,
+      "toeB": true,
+      "ghost": 1
+     }
+    ],
+    [
+     0.17,
+     {
+      "crouch": 3,
+      "fx": 22,
+      "fy": -28,
+      "bx": -8,
+      "by": -18,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.1,
+      "x": 5,
+      "lean": 5,
+      "toeB": true,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.21,
+     {
+      "crouch": 1,
+      "fx": 19,
+      "fy": -37,
+      "bx": -8,
+      "by": -18,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": -0.95,
+      "x": 6,
+      "lean": 6,
+      "toeB": true,
+      "fby": -6
+     },
+     "snap"
+    ],
+    [
+     0.5,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -36,
+      "bx": -8,
+      "by": -19,
+      "ffx": 12,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": -1.05,
+      "x": 6,
+      "lean": 3,
+      "toeB": true
+     }
+    ],
+    [
+     0.92,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85,
+      "x": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.06,
+     "congela": 0.05,
+     "tremor": 0.08,
+     "amp": 1,
+     "empurra": 1.4,
+     "pele": null
+    },
+    {
+     "t": 0.16,
+     "congela": 0.14,
+     "tremor": 0.2,
+     "amp": 2,
+     "empurra": 2.8,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.42,
+   "recuperacao": 0.12,
+   "no_corpo": false
+  },
+  "melee/hammer-smash": {
+   "nome": "Hammer smash",
+   "desc": "A hammer drops in front in a wedge of motion: a white slam with rays, a dome of force, a dent with cracks, rocks thrown up that bounce and settle, and dust.",
+   "duracao": 2,
+   "loop": false,
+   "chaves": [
+    [
+     -0.72,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "hammer",
+      "two": true,
+      "sa": 0.62,
+      "x": -3
+     }
+    ],
+    [
+     -0.44,
+     {
+      "crouch": 5,
+      "fx": 16,
+      "fy": -28,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "hammer",
+      "two": true,
+      "sa": -0.9,
+      "x": -3,
+      "lean": -1
+     }
+    ],
+    [
+     -0.2,
+     {
+      "crouch": 0,
+      "fx": 3,
+      "fy": -41,
+      "bx": 9,
+      "by": -21,
+      "ffx": 8,
+      "fbx": -5,
+      "weapon": "hammer",
+      "two": true,
+      "sa": -2.1,
+      "x": -3,
+      "lean": -3,
+      "ffy": -8,
+      "toeB": true
+     }
+    ],
+    [
+     -0.03,
+     {
+      "crouch": 0,
+      "fx": 3,
+      "fy": -41,
+      "bx": 9,
+      "by": -21,
+      "ffx": 8,
+      "fbx": -5,
+      "weapon": "hammer",
+      "two": true,
+      "sa": -2.1,
+      "x": -3,
+      "lean": -3,
+      "ffy": -8,
+      "toeB": true,
+      "y": -2
+     }
+    ],
+    [
+     0.06,
+     {
+      "crouch": -1,
+      "fx": 13,
+      "fy": -41,
+      "bx": 9,
+      "by": -21,
+      "ffx": 11,
+      "fbx": -7,
+      "weapon": "hammer",
+      "two": true,
+      "sa": -1.2,
+      "x": 0,
+      "y": -3,
+      "lean": 2,
+      "ffy": -8,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.11,
+     {
+      "crouch": 3,
+      "fx": 19,
+      "fy": -30,
+      "bx": 9,
+      "by": -21,
+      "ffx": 13,
+      "fbx": -7,
+      "weapon": "hammer",
+      "two": true,
+      "sa": -0.15,
+      "x": 0,
+      "y": -1,
+      "lean": 5,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.15,
+     {
+      "crouch": 7,
+      "fx": 14,
+      "fy": -19,
+      "bx": 9,
+      "by": -21,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "hammer",
+      "two": true,
+      "sa": 0.62,
+      "x": -1,
+      "lean": 6
+     },
+     "snap"
+    ],
+    [
+     0.62,
+     {
+      "crouch": 6,
+      "fx": 14,
+      "fy": -19,
+      "bx": 9,
+      "by": -21,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "hammer",
+      "two": true,
+      "sa": 0.62,
+      "x": -1,
+      "lean": 5
+     }
+    ],
+    [
+     1.02,
+     {
+      "crouch": 5,
+      "fx": 14,
+      "fy": -24,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "hammer",
+      "two": true,
+      "sa": 0.3,
+      "x": -2,
+      "lean": 2
+     }
+    ],
+    [
+     1.4,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "hammer",
+      "two": true,
+      "sa": 0.62,
+      "x": -3
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.15,
+     "congela": 0.2,
+     "tremor": 0.34,
+     "amp": 3,
+     "empurra": 3,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.72,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "melee/heavy-cleave": {
+   "nome": "Heavy cleave",
+   "desc": "A glint over the head, then a thick ember arc accelerates over the top into the floor: a white slam, glowing cracks, dust rolling both ways, grit and rising embers.",
+   "duracao": 1.9,
+   "loop": false,
+   "chaves": [
+    [
+     -0.42,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "greatsword",
+      "two": true,
+      "sa": -1,
+      "x": -4
+     }
+    ],
+    [
+     -0.3,
+     {
+      "crouch": 4,
+      "fx": 13,
+      "fy": -29,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "greatsword",
+      "two": true,
+      "sa": -1.3,
+      "x": -3
+     }
+    ],
+    [
+     -0.12,
+     {
+      "crouch": 4,
+      "fx": 1,
+      "fy": -42,
+      "bx": 9,
+      "by": -21,
+      "ffx": 8,
+      "fbx": -7,
+      "weapon": "greatsword",
+      "two": true,
+      "sa": -2.45,
+      "x": -4,
+      "lean": -2
+     }
+    ],
+    [
+     0.2,
+     {
+      "crouch": 3,
+      "fx": 1,
+      "fy": -42,
+      "bx": 9,
+      "by": -21,
+      "ffx": 8,
+      "fbx": -7,
+      "weapon": "greatsword",
+      "two": true,
+      "sa": -2.45,
+      "x": -4,
+      "lean": -2
+     }
+    ],
+    [
+     0.27,
+     {
+      "crouch": 0,
+      "fx": 11,
+      "fy": -42,
+      "bx": 9,
+      "by": -21,
+      "ffx": 10,
+      "fbx": -7,
+      "weapon": "greatsword",
+      "two": true,
+      "sa": -1.45,
+      "x": -1,
+      "y": -2,
+      "lean": 2,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.31,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -33,
+      "bx": 9,
+      "by": -21,
+      "ffx": 12,
+      "fbx": -7,
+      "weapon": "greatsword",
+      "two": true,
+      "sa": -0.45,
+      "x": 0,
+      "y": -1,
+      "lean": 4,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.335,
+     {
+      "crouch": 7,
+      "fx": 17,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "greatsword",
+      "two": true,
+      "sa": 0.72,
+      "x": 0,
+      "lean": 6,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.85,
+     {
+      "crouch": 6,
+      "fx": 17,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "greatsword",
+      "two": true,
+      "sa": 0.72,
+      "x": 0,
+      "lean": 5,
+      "toeB": true
+     }
+    ],
+    [
+     1.3,
+     {
+      "crouch": 4,
+      "fx": 15,
+      "fy": -23,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "greatsword",
+      "two": true,
+      "sa": 0.1,
+      "x": -2,
+      "lean": 2
+     }
+    ],
+    [
+     1.7,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "greatsword",
+      "two": true,
+      "sa": -1,
+      "x": -4
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.335,
+     "congela": 0.2,
+     "tremor": 0.34,
+     "amp": 3,
+     "empurra": 3.2,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.42,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "melee/scythe-reap": {
+   "nome": "Scythe reap",
+   "desc": "A slow, huge dark crescent reaps round the front with a pale ghostly edge; it hangs, then tears away from the tail into curling wisps and cold vapour.",
+   "duracao": 2.1,
+   "loop": false,
+   "chaves": [
+    [
+     -0.56,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -22,
+      "bx": 7,
+      "by": -16,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "scythe",
+      "x": 2,
+      "sa": -1.5
+     }
+    ],
+    [
+     -0.26,
+     {
+      "crouch": 4,
+      "fx": 17,
+      "fy": -27,
+      "bx": 7,
+      "by": -16,
+      "ffx": 11,
+      "fbx": -8,
+      "weapon": "scythe",
+      "x": 2,
+      "sa": -0.45,
+      "two": true,
+      "lean": 4
+     }
+    ],
+    [
+     0.08,
+     {
+      "crouch": 5,
+      "fx": 17,
+      "fy": -27,
+      "bx": 7,
+      "by": -16,
+      "ffx": 11,
+      "fbx": -8,
+      "weapon": "scythe",
+      "x": 2,
+      "sa": -0.45,
+      "two": true,
+      "lean": 4
+     }
+    ],
+    [
+     0.2,
+     {
+      "crouch": 5,
+      "fx": 16,
+      "fy": -23,
+      "bx": 7,
+      "by": -16,
+      "ffx": 11,
+      "fbx": -8,
+      "weapon": "scythe",
+      "x": 2,
+      "sa": 0.1,
+      "two": true,
+      "lean": 3,
+      "yaw": 0.8,
+      "ghost": 1
+     }
+    ],
+    [
+     0.3,
+     {
+      "crouch": 6,
+      "fx": 15,
+      "fy": -23,
+      "bx": 7,
+      "by": -16,
+      "ffx": 11,
+      "fbx": -8,
+      "weapon": "scythe",
+      "x": 1,
+      "sa": 0.2,
+      "two": true,
+      "lean": 3,
+      "yaw": 1.9,
+      "ghost": 1
+     }
+    ],
+    [
+     0.42,
+     {
+      "crouch": 6,
+      "fx": 15,
+      "fy": -24,
+      "bx": 7,
+      "by": -16,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "scythe",
+      "x": 0,
+      "sa": 0.3,
+      "two": true,
+      "yaw": 3.14,
+      "lean": 4,
+      "toeB": true
+     }
+    ],
+    [
+     0.92,
+     {
+      "crouch": 5,
+      "fx": 15,
+      "fy": -24,
+      "bx": 7,
+      "by": -16,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "scythe",
+      "x": 0,
+      "sa": 0.3,
+      "two": true,
+      "yaw": 3.14,
+      "lean": 4,
+      "toeB": true
+     }
+    ],
+    [
+     1.3,
+     {
+      "crouch": 4,
+      "fx": 11,
+      "fy": -22,
+      "bx": 7,
+      "by": -16,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "scythe",
+      "x": 1,
+      "sa": -1.5,
+      "yaw": 1.4
+     }
+    ],
+    [
+     1.7,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -22,
+      "bx": 7,
+      "by": -16,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "scythe",
+      "x": 2,
+      "sa": -1.5
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.14,
+     "congela": 0.12,
+     "tremor": 0.16,
+     "amp": 2,
+     "empurra": 2.4,
+     "pele": "shadow"
+    }
+   ],
+   "preparacao": 0.56,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "melee/spear-sweep": {
+   "nome": "Spear sweep",
+   "desc": "A wide low sweep at shin height: a long flat crescent swings from behind the legs round the front, and the wind of it kicks a wake of dust and grit along the floor.",
+   "duracao": 1.5,
+   "loop": false,
+   "chaves": [
+    [
+     -0.56,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 7,
+      "by": -16,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "spear",
+      "sa": -1.42
+     }
+    ],
+    [
+     -0.34,
+     {
+      "crouch": 4,
+      "fx": 14,
+      "fy": -22,
+      "bx": 7,
+      "by": -16,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "spear",
+      "sa": -0.7,
+      "two": true
+     }
+    ],
+    [
+     -0.14,
+     {
+      "crouch": 6,
+      "fx": 15,
+      "fy": -17,
+      "bx": 7,
+      "by": -16,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "spear",
+      "sa": 0.05,
+      "two": true,
+      "yaw": 2.5,
+      "lean": 2
+     }
+    ],
+    [
+     -0.02,
+     {
+      "crouch": 7,
+      "fx": 15,
+      "fy": -17,
+      "bx": 7,
+      "by": -16,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "spear",
+      "sa": 0.05,
+      "two": true,
+      "yaw": 2.7,
+      "lean": 2
+     }
+    ],
+    [
+     0.045,
+     {
+      "crouch": 6,
+      "fx": 20,
+      "fy": -15,
+      "bx": 7,
+      "by": -16,
+      "ffx": 12,
+      "fbx": -10,
+      "weapon": "spear",
+      "sa": 0.04,
+      "two": true,
+      "x": 1,
+      "lean": 6,
+      "toeB": true,
+      "yaw": 1.3,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.09,
+     {
+      "crouch": 6,
+      "fx": 20,
+      "fy": -15,
+      "bx": 7,
+      "by": -16,
+      "ffx": 12,
+      "fbx": -10,
+      "weapon": "spear",
+      "sa": 0.04,
+      "two": true,
+      "x": 2,
+      "lean": 6,
+      "toeB": true,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.14,
+     {
+      "crouch": 6,
+      "fx": 20,
+      "fy": -15,
+      "bx": 7,
+      "by": -16,
+      "ffx": 12,
+      "fbx": -10,
+      "weapon": "spear",
+      "sa": 0.04,
+      "two": true,
+      "x": 2,
+      "lean": 6,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.62,
+     {
+      "crouch": 5,
+      "fx": 20,
+      "fy": -15,
+      "bx": 7,
+      "by": -16,
+      "ffx": 12,
+      "fbx": -10,
+      "weapon": "spear",
+      "sa": 0.04,
+      "two": true,
+      "x": 2,
+      "lean": 5,
+      "toeB": true
+     }
+    ],
+    [
+     1.12,
+     {
+      "crouch": 4,
+      "fx": 14,
+      "fy": -22,
+      "bx": 7,
+      "by": -16,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "spear",
+      "sa": -0.7,
+      "two": true
+     }
+    ],
+    [
+     1.5,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 7,
+      "by": -16,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "spear",
+      "sa": -1.42
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.1,
+     "congela": 0.12,
+     "tremor": 0.18,
+     "amp": 2,
+     "empurra": 2.6,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.56,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "melee/spin-slash": {
+   "nome": "Spin slash",
+   "desc": "The blade whirls once round the waist on a tilted plane, behind the body and back in front; the closed ring flares white, dissolves into a dotted trace and throws sparks.",
+   "duracao": 0.8,
+   "loop": false,
+   "chaves": [
+    [
+     -0.46,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85
+     }
+    ],
+    [
+     -0.2,
+     {
+      "crouch": 6,
+      "fx": 13,
+      "fy": -20,
+      "bx": 6,
+      "by": -24,
+      "ffx": 8,
+      "fbx": -8,
+      "weapon": "sword",
+      "sa": 0.3,
+      "lean": -2,
+      "yaw": 1.1
+     }
+    ],
+    [
+     -0.02,
+     {
+      "crouch": 7,
+      "fx": 13,
+      "fy": -20,
+      "bx": 6,
+      "by": -24,
+      "ffx": 8,
+      "fbx": -8,
+      "weapon": "sword",
+      "sa": 0.3,
+      "lean": -2,
+      "yaw": 1.3
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 5,
+      "fx": 21,
+      "fy": -21,
+      "bx": -9,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -11,
+      "weapon": "sword",
+      "sa": -0.1,
+      "lean": 3,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.05,
+     {
+      "crouch": 5,
+      "fx": 21,
+      "fy": -21,
+      "bx": -9,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -11,
+      "weapon": "sword",
+      "sa": 0.05,
+      "lean": 3,
+      "yaw": -1.57,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.09,
+     {
+      "crouch": 5,
+      "fx": 21,
+      "fy": -21,
+      "bx": -9,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -11,
+      "weapon": "sword",
+      "sa": 0.05,
+      "lean": 3,
+      "yaw": -3.14,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.13,
+     {
+      "crouch": 5,
+      "fx": 21,
+      "fy": -21,
+      "bx": -9,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -11,
+      "weapon": "sword",
+      "sa": 0.05,
+      "lean": 3,
+      "yaw": -4.71,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.17,
+     {
+      "crouch": 5,
+      "fx": 21,
+      "fy": -21,
+      "bx": -9,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -11,
+      "weapon": "sword",
+      "sa": 0.05,
+      "lean": 3
+     },
+     "snap"
+    ],
+    [
+     0.56,
+     {
+      "crouch": 4,
+      "fx": 21,
+      "fy": -21,
+      "bx": -9,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -11,
+      "weapon": "sword",
+      "sa": 0.05,
+      "lean": 2
+     }
+    ],
+    [
+     0.92,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.17,
+     "congela": 0.12,
+     "tremor": 0.16,
+     "amp": 2,
+     "empurra": 2.4,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.46,
+   "recuperacao": 0.12,
+   "no_corpo": false
+  },
+  "melee/sword-slash": {
+   "nome": "Sword slash",
+   "desc": "A tilted crescent whips round in two frames, cools from white to deep blue as it trails off, glints at the tip and throws sparks.",
+   "duracao": 0.75,
+   "loop": false,
+   "chaves": [
+    [
+     -0.55,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85,
+      "x": -8
+     }
+    ],
+    [
+     -0.3,
+     {
+      "crouch": 4,
+      "fx": -7,
+      "fy": -35,
+      "bx": 9,
+      "by": -25,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "sword",
+      "sa": -2.65,
+      "x": -8,
+      "lean": -4,
+      "armsFront": true
+     }
+    ],
+    [
+     -0.08,
+     {
+      "crouch": 5,
+      "fx": -7,
+      "fy": -35,
+      "bx": 9,
+      "by": -25,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "sword",
+      "sa": -2.65,
+      "x": -8,
+      "lean": -5,
+      "armsFront": true
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 2,
+      "fx": 16,
+      "fy": -37,
+      "bx": -7,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": -1.45,
+      "x": 0,
+      "lean": 3,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.06,
+     {
+      "crouch": 5,
+      "fx": 20,
+      "fy": -21,
+      "bx": -9,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.62,
+      "x": 2,
+      "lean": 5,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.3,
+     {
+      "crouch": 6,
+      "fx": 20,
+      "fy": -21,
+      "bx": -9,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.62,
+      "x": 3,
+      "lean": 5,
+      "toeB": true
+     }
+    ],
+    [
+     0.58,
+     {
+      "crouch": 3,
+      "fx": 15,
+      "fy": -21,
+      "bx": -5,
+      "by": -21,
+      "ffx": 9,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": 0.1,
+      "x": 1
+     }
+    ],
+    [
+     0.86,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85,
+      "x": -8
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.06,
+     "congela": 0.14,
+     "tremor": 0.18,
+     "amp": 2,
+     "empurra": 2.8,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.55,
+   "recuperacao": 0.10999999999999999,
+   "no_corpo": false
+  },
+  "melee/thrust": {
+   "nome": "Thrust",
+   "desc": "A piercing stab: a bundle of streaks shoots out from the hand to a point, a long four-point star flares at the tip with a pierce ring, sparks and speed lines.",
+   "duracao": 0.75,
+   "loop": false,
+   "chaves": [
+    [
+     -0.46,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "x": -14,
+      "sa": -0.3
+     }
+    ],
+    [
+     -0.24,
+     {
+      "crouch": 5,
+      "fx": -3,
+      "fy": -19,
+      "bx": 8,
+      "by": -30,
+      "ffx": 10,
+      "fbx": -8,
+      "weapon": "sword",
+      "x": -14,
+      "sa": -0.05,
+      "lean": -3,
+      "armsFront": true
+     }
+    ],
+    [
+     -0.05,
+     {
+      "crouch": 6,
+      "fx": -5,
+      "fy": -19,
+      "bx": 8,
+      "by": -30,
+      "ffx": 10,
+      "fbx": -8,
+      "weapon": "sword",
+      "x": -14,
+      "sa": -0.05,
+      "lean": -3,
+      "armsFront": true
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 6,
+      "fx": 23,
+      "fy": -20,
+      "bx": -8,
+      "by": -24,
+      "ffx": 15,
+      "fbx": -11,
+      "weapon": "sword",
+      "x": -14,
+      "sa": 0,
+      "lean": 6,
+      "toeB": true,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.07,
+     {
+      "crouch": 6,
+      "fx": 23,
+      "fy": -20,
+      "bx": -8,
+      "by": -24,
+      "ffx": 15,
+      "fbx": -11,
+      "weapon": "sword",
+      "x": -14,
+      "sa": 0,
+      "lean": 6,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.3,
+     {
+      "crouch": 5,
+      "fx": 23,
+      "fy": -20,
+      "bx": -8,
+      "by": -24,
+      "ffx": 15,
+      "fbx": -11,
+      "weapon": "sword",
+      "x": -14,
+      "sa": 0,
+      "lean": 5,
+      "toeB": true
+     }
+    ],
+    [
+     0.7,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "x": -14,
+      "sa": -0.3
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.07,
+     "congela": 0.12,
+     "tremor": 0.14,
+     "amp": 2,
+     "empurra": 2.8,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.46,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "melee/uppercut": {
+   "nome": "Uppercut",
+   "desc": "A crescent rises from the floor past the face, and at the top a comic impact star bursts: bold outline, hot core, burst lines, twinkles and sparks.",
+   "duracao": 0.85,
+   "loop": false,
+   "chaves": [
+    [
+     -0.42,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -25,
+      "bx": 9,
+      "by": -27,
+      "ffx": 7,
+      "fbx": -7,
+      "lean": 1
+     }
+    ],
+    [
+     -0.16,
+     {
+      "crouch": 7,
+      "fx": 8,
+      "fy": -11,
+      "bx": 8,
+      "by": -27,
+      "ffx": 10,
+      "fbx": -9,
+      "lean": 3
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 8,
+      "fx": 8,
+      "fy": -11,
+      "bx": 8,
+      "by": -27,
+      "ffx": 10,
+      "fbx": -9,
+      "lean": 3
+     }
+    ],
+    [
+     0.03,
+     {
+      "crouch": 1,
+      "fx": 18,
+      "fy": -27,
+      "bx": -5,
+      "by": -23,
+      "ffx": 9,
+      "fbx": -7,
+      "lean": 4,
+      "y": -4,
+      "toeB": true,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.076,
+     {
+      "crouch": -1,
+      "fx": 12,
+      "fy": -42,
+      "bx": -6,
+      "by": -21,
+      "ffx": 8,
+      "fbx": -3,
+      "lean": 2,
+      "x": 1,
+      "y": -11,
+      "ffy": -8,
+      "fby": -2,
+      "toeB": true,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.3,
+     {
+      "crouch": -1,
+      "fx": 12,
+      "fy": -42,
+      "bx": -6,
+      "by": -21,
+      "ffx": 8,
+      "fbx": -3,
+      "lean": 2,
+      "x": 1,
+      "y": -13,
+      "ffy": -8,
+      "fby": -2,
+      "toeB": true
+     }
+    ],
+    [
+     0.56,
+     {
+      "crouch": 2,
+      "fx": 13,
+      "fy": -31,
+      "bx": -6,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -5,
+      "lean": 2,
+      "x": 1,
+      "y": 0,
+      "ffy": -6,
+      "fby": -5,
+      "toeB": true
+     },
+     "in"
+    ],
+    [
+     0.6,
+     {
+      "crouch": 7,
+      "fx": 12,
+      "fy": -14,
+      "bx": -6,
+      "by": -16,
+      "ffx": 10,
+      "fbx": -9,
+      "lean": 3,
+      "y": 0
+     },
+     "snap"
+    ],
+    [
+     0.98,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -25,
+      "bx": 9,
+      "by": -27,
+      "ffx": 7,
+      "fbx": -7,
+      "lean": 1
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.076,
+     "congela": 0.13,
+     "tremor": 0.18,
+     "amp": 2,
+     "empurra": -2.6,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.42,
+   "recuperacao": 0.13,
+   "no_corpo": false
+  },
+  "melee/whip-crack": {
+   "nome": "Whip crack",
+   "desc": "A whip rolls out to the right as a loop running down its length, faster and faster, until the tip flips over and cracks: a white pop, a ring of air, sparks and a puff of smoke.",
+   "duracao": 0.85,
+   "loop": false,
+   "chaves": [
+    [
+     -0.46,
+     {
+      "crouch": 3,
+      "fx": 13,
+      "fy": -21,
+      "bx": 7,
+      "by": -18,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "handle",
+      "x": -7,
+      "sa": -0.3
+     }
+    ],
+    [
+     -0.22,
+     {
+      "crouch": 4,
+      "fx": -6,
+      "fy": -38,
+      "bx": 9,
+      "by": -23,
+      "ffx": 9,
+      "fbx": -7,
+      "weapon": "handle",
+      "x": -7,
+      "sa": -2.2,
+      "lean": -3,
+      "armsFront": true
+     }
+    ],
+    [
+     0.02,
+     {
+      "crouch": 4,
+      "fx": -6,
+      "fy": -38,
+      "bx": 9,
+      "by": -23,
+      "ffx": 9,
+      "fbx": -7,
+      "weapon": "handle",
+      "x": -7,
+      "sa": -2.2,
+      "lean": -4,
+      "armsFront": true
+     }
+    ],
+    [
+     0.06,
+     {
+      "crouch": 4,
+      "fx": 15,
+      "fy": -34,
+      "bx": -8,
+      "by": -23,
+      "ffx": 12,
+      "fbx": -10,
+      "weapon": "handle",
+      "x": -7,
+      "sa": -0.7,
+      "lean": 2,
+      "toeB": true,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.12,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -21,
+      "bx": -8,
+      "by": -23,
+      "ffx": 12,
+      "fbx": -10,
+      "weapon": "handle",
+      "x": -7,
+      "sa": 0,
+      "lean": 5,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.21,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -21,
+      "bx": -8,
+      "by": -23,
+      "ffx": 12,
+      "fbx": -10,
+      "weapon": "handle",
+      "x": -7,
+      "sa": 0,
+      "lean": 5,
+      "toeB": true
+     }
+    ],
+    [
+     0.26,
+     {
+      "crouch": 3,
+      "fx": 15,
+      "fy": -27,
+      "bx": -8,
+      "by": -23,
+      "ffx": 12,
+      "fbx": -10,
+      "weapon": "handle",
+      "x": -7,
+      "sa": -0.3,
+      "lean": 2,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.44,
+     {
+      "crouch": 3,
+      "fx": 17,
+      "fy": -22,
+      "bx": -8,
+      "by": -23,
+      "ffx": 12,
+      "fbx": -10,
+      "weapon": "handle",
+      "x": -7,
+      "sa": 0.1,
+      "lean": 3,
+      "toeB": true
+     }
+    ],
+    [
+     0.92,
+     {
+      "crouch": 3,
+      "fx": 13,
+      "fy": -21,
+      "bx": 7,
+      "by": -18,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "handle",
+      "x": -7,
+      "sa": -0.3
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.21,
+     "congela": 0.1,
+     "tremor": 0.14,
+     "amp": 2,
+     "empurra": 2.4,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.46,
+   "recuperacao": 0.07000000000000006,
+   "no_corpo": false
+  },
+  "moves/arrow-shot": {
+   "nome": "Arrow shot",
+   "desc": "He raises the bow, draws to his cheek, holds his breath and looses: the string snaps forward, the arrow crosses the floor and thuds home.",
+   "duracao": 1.9,
+   "loop": false,
+   "chaves": [
+    [
+     -0.44,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -20,
+      "bx": 6,
+      "by": -17,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "bow",
+      "sa": -0.4
+     }
+    ],
+    [
+     -0.14,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -28,
+      "bx": 10,
+      "by": -27,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "bow",
+      "sa": 0,
+      "lean": 1,
+      "nocked": true
+     }
+    ],
+    [
+     0.16,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -28,
+      "bx": -3,
+      "by": -29,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "bow",
+      "sa": 0,
+      "lean": -2,
+      "nocked": true,
+      "pull": true
+     }
+    ],
+    [
+     0.56,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -28,
+      "bx": -3,
+      "by": -29,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "bow",
+      "sa": 0,
+      "lean": -2,
+      "nocked": true,
+      "pull": true
+     }
+    ],
+    [
+     0.562,
+     {
+      "crouch": 3,
+      "fx": 19,
+      "fy": -28,
+      "bx": -9,
+      "by": -32,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "bow",
+      "sa": 0,
+      "lean": 2,
+      "nocked": false,
+      "pull": false
+     },
+     "snap"
+    ],
+    [
+     1.1,
+     {
+      "crouch": 3,
+      "fx": 19,
+      "fy": -28,
+      "bx": -6,
+      "by": -25,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "bow",
+      "sa": 0,
+      "lean": 2,
+      "nocked": false,
+      "pull": false
+     }
+    ],
+    [
+     1.6,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -20,
+      "bx": 6,
+      "by": -17,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "bow",
+      "sa": -0.4
+     }
+    ],
+    [
+     1.9,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -20,
+      "bx": 6,
+      "by": -17,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "bow",
+      "sa": -0.4
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.8,
+     "congela": 0.07,
+     "tremor": 0.12,
+     "amp": 2,
+     "empurra": 2.2,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.44,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "moves/dash-strike": {
+   "nome": "Dash strike",
+   "desc": "A crouch, then he's across the floor in a blur of after-images and already cutting: a critical hit, a beat, and he hops back to where he started.",
+   "duracao": 2.3,
+   "loop": false,
+   "chaves": [
+    [
+     -0.5,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85,
+      "x": 0
+     }
+    ],
+    [
+     -0.16,
+     {
+      "crouch": 6,
+      "fx": -3,
+      "fy": -17,
+      "bx": 9,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 3.05,
+      "lean": 6,
+      "x": -2
+     }
+    ],
+    [
+     -0.01,
+     {
+      "crouch": 6,
+      "fx": -3,
+      "fy": -17,
+      "bx": 9,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 3.05,
+      "lean": 6,
+      "x": -3
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 6,
+      "fx": -3,
+      "fy": -17,
+      "bx": 9,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 3.05,
+      "lean": 6,
+      "x": 8,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.14,
+     {
+      "crouch": 6,
+      "fx": -3,
+      "fy": -17,
+      "bx": 9,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 3.05,
+      "lean": 6,
+      "x": 110,
+      "ghost": 1
+     },
+     "line"
+    ],
+    [
+     0.145,
+     {
+      "crouch": 3,
+      "fx": -7,
+      "fy": -35,
+      "bx": 9,
+      "by": -25,
+      "ffx": 9,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -2.65,
+      "x": 112,
+      "lean": -2,
+      "armsFront": true
+     },
+     "snap"
+    ],
+    [
+     0.16,
+     {
+      "crouch": 2,
+      "fx": 16,
+      "fy": -37,
+      "bx": -7,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": -1.45,
+      "x": 116,
+      "lean": 3
+     },
+     "snap"
+    ],
+    [
+     0.22,
+     {
+      "crouch": 5,
+      "fx": 20,
+      "fy": -21,
+      "bx": -9,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.62,
+      "x": 118,
+      "lean": 5,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.75,
+     {
+      "crouch": 4,
+      "fx": 20,
+      "fy": -21,
+      "bx": -9,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.62,
+      "x": 118,
+      "lean": 4,
+      "toeB": true
+     }
+    ],
+    [
+     1.25,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85,
+      "x": 118
+     }
+    ],
+    [
+     1.32,
+     {
+      "crouch": 5,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85,
+      "x": 118,
+      "lean": -2
+     },
+     "snap"
+    ],
+    [
+     1.4,
+     {
+      "crouch": 0,
+      "fx": 13,
+      "fy": -31,
+      "bx": -8,
+      "by": -28,
+      "ffx": 6,
+      "fbx": -6,
+      "weapon": "sword",
+      "sa": -0.9,
+      "y": -14,
+      "lean": -3,
+      "ffy": -8,
+      "fby": -6,
+      "ghost": 1,
+      "x": 88
+     },
+     "snap"
+    ],
+    [
+     1.6,
+     {
+      "crouch": 0,
+      "fx": 13,
+      "fy": -31,
+      "bx": -8,
+      "by": -28,
+      "ffx": 6,
+      "fbx": -6,
+      "weapon": "sword",
+      "sa": -0.9,
+      "y": -18,
+      "lean": -3,
+      "ffy": -8,
+      "fby": -6,
+      "ghost": 1,
+      "x": 22
+     },
+     "line"
+    ],
+    [
+     1.74,
+     {
+      "crouch": 5,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85,
+      "x": 0,
+      "y": 0
+     },
+     "line"
+    ],
+    [
+     2.2,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85,
+      "x": 0
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.22,
+     "congela": 0.17,
+     "tremor": 0.26,
+     "amp": 3,
+     "empurra": 3.4,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.5,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "moves/earth-stomp": {
+   "nome": "Earth stomp",
+   "desc": "A knee comes up, the boot slams down, the floor heaves under the target and a stone spike rams up through it.",
+   "duracao": 3.46,
+   "loop": false,
+   "chaves": [
+    [
+     -0.5,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     -0.14,
+     {
+      "crouch": 1,
+      "fx": 3,
+      "fy": -34,
+      "bx": 11,
+      "by": -30,
+      "ffx": 9,
+      "fbx": -5,
+      "lean": -3,
+      "ffy": -15
+     }
+    ],
+    [
+     0.055,
+     {
+      "crouch": 1,
+      "fx": 3,
+      "fy": -34,
+      "bx": 11,
+      "by": -30,
+      "ffx": 9,
+      "fbx": -5,
+      "lean": -3,
+      "ffy": -17
+     }
+    ],
+    [
+     0.06,
+     {
+      "crouch": 7,
+      "fx": 14,
+      "fy": -14,
+      "bx": -5,
+      "by": -18,
+      "ffx": 11,
+      "fbx": -9,
+      "lean": 3
+     },
+     "snap"
+    ],
+    [
+     0.99,
+     {
+      "crouch": 5,
+      "fx": 14,
+      "fy": -14,
+      "bx": -5,
+      "by": -18,
+      "ffx": 11,
+      "fbx": -9,
+      "lean": 3
+     }
+    ],
+    [
+     1.59,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     3.46,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.06,
+     "congela": 0.1,
+     "tremor": 0.2,
+     "amp": 3,
+     "empurra": 0,
+     "pele": null
+    },
+    {
+     "t": 0.49,
+     "congela": 0.14,
+     "tremor": 0.28,
+     "amp": 3,
+     "empurra": -3.2,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.5,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "moves/fireball-throw": {
+   "nome": "Fireball throw",
+   "desc": "He gathers fire in his hand, leans back and hurls it: the ball flies, the target takes it in a blast and comes out charred.",
+   "duracao": 6.8100000000000005,
+   "loop": false,
+   "chaves": [
+    [
+     -0.42,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -3
+     }
+    ],
+    [
+     0.08,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -22,
+      "bx": 11,
+      "by": -17,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": 2
+     }
+    ],
+    [
+     0.5,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -22,
+      "bx": 11,
+      "by": -17,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": 2
+     }
+    ],
+    [
+     0.9199999999999999,
+     {
+      "crouch": 5,
+      "fx": 17,
+      "fy": -22,
+      "bx": 5,
+      "by": -20,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": -2
+     }
+    ],
+    [
+     0.95,
+     {
+      "crouch": 4,
+      "fx": 19,
+      "fy": -22,
+      "bx": -6,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "x": 9,
+      "lean": 6,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     1.39,
+     {
+      "crouch": 3,
+      "fx": 19,
+      "fy": -22,
+      "bx": -6,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "x": 9,
+      "lean": 4,
+      "toeB": true
+     }
+    ],
+    [
+     1.41,
+     {
+      "turn": 0.9,
+      "x": 7,
+      "crouch": 5,
+      "lean": -3,
+      "fx": -4,
+      "fy": -36,
+      "bx": 5,
+      "by": -33,
+      "ffx": 4,
+      "fbx": -4
+     },
+     "snap"
+    ],
+    [
+     2.11,
+     {
+      "turn": 0.9,
+      "x": 7,
+      "crouch": 3,
+      "lean": -2,
+      "fx": -4,
+      "fy": -36,
+      "bx": 5,
+      "by": -33,
+      "ffx": 4,
+      "fbx": -4
+     }
+    ],
+    [
+     2.8099999999999996,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": 4
+     }
+    ],
+    [
+     3.51,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -3
+     }
+    ],
+    [
+     6.8100000000000005,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -3
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 1.41,
+     "congela": 0.18,
+     "tremor": 0.38,
+     "amp": 3,
+     "empurra": 3.4,
+     "pele": "char"
+    },
+    {
+     "t": 6.21,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.42,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "moves/ground-pound": {
+   "nome": "Ground pound",
+   "desc": "He coils, leaps out of frame height, hangs, and comes down like a rock: the floor cracks, shock waves race out and throw the target about as they pass.",
+   "duracao": 3.8200000000000003,
+   "loop": false,
+   "chaves": [
+    [
+     -0.5,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     -0.16,
+     {
+      "crouch": 8,
+      "fx": -6,
+      "fy": -14,
+      "bx": 3,
+      "by": -14,
+      "ffx": 8,
+      "fbx": -8,
+      "lean": 4
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 7,
+      "fx": -6,
+      "fy": -14,
+      "bx": 3,
+      "by": -14,
+      "ffx": 8,
+      "fbx": -8,
+      "lean": 4
+     }
+    ],
+    [
+     0.03,
+     {
+      "turn": 0.8,
+      "crouch": -1,
+      "fx": -9,
+      "fy": -44,
+      "bx": 10,
+      "by": -44,
+      "ffx": 6,
+      "ffy": -8,
+      "fbx": -3,
+      "fby": -3,
+      "toeB": true,
+      "y": -10,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.26,
+     {
+      "turn": 0.8,
+      "crouch": -1,
+      "fx": -10,
+      "fy": -20,
+      "bx": 11,
+      "by": -20,
+      "ffx": 7,
+      "ffy": -10,
+      "fbx": -4,
+      "fby": -10,
+      "toeB": true,
+      "y": -60
+     },
+     "out"
+    ],
+    [
+     0.42,
+     {
+      "turn": 0.8,
+      "crouch": -1,
+      "fx": -10,
+      "fy": -20,
+      "bx": 11,
+      "by": -20,
+      "ffx": 7,
+      "ffy": -10,
+      "fbx": -4,
+      "fby": -10,
+      "toeB": true,
+      "y": -62
+     }
+    ],
+    [
+     0.615,
+     {
+      "turn": 0.8,
+      "y": -4,
+      "crouch": 0,
+      "fx": -5,
+      "fy": -40,
+      "bx": 6,
+      "by": -40,
+      "ffx": 3,
+      "ffy": -3,
+      "fbx": -3,
+      "fby": -3,
+      "ghost": 1
+     },
+     "in"
+    ],
+    [
+     0.62,
+     {
+      "y": 0,
+      "crouch": 8,
+      "lean": 5,
+      "fx": 13,
+      "fy": -8,
+      "bx": -6,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -10
+     },
+     "snap"
+    ],
+    [
+     1.42,
+     {
+      "y": 0,
+      "crouch": 6,
+      "lean": 5,
+      "fx": 13,
+      "fy": -8,
+      "bx": -6,
+      "by": -23,
+      "ffx": 11,
+      "fbx": -10
+     }
+    ],
+    [
+     1.92,
+     {
+      "y": 0,
+      "crouch": 5,
+      "lean": 3,
+      "fx": 13,
+      "fy": -15,
+      "bx": -5,
+      "by": -20,
+      "ffx": 11,
+      "fbx": -10
+     }
+    ],
+    [
+     2.42,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     3.8200000000000003,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.62,
+     "congela": 0.2,
+     "tremor": 0.5,
+     "amp": 4,
+     "empurra": 0,
+     "pele": null
+    },
+    {
+     "t": 0.76,
+     "congela": 0.04,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 3,
+     "pele": null
+    },
+    {
+     "t": 1.06,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": -1.6,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.5,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "moves/holy-smite": {
+   "nome": "Holy smite",
+   "desc": "Both hands go up and a glint marks the target; he brings them down and a bolt of light drops like a hammer, leaving the target blanched.",
+   "duracao": 2.8,
+   "loop": false,
+   "chaves": [
+    [
+     -0.42,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     -0.04,
+     {
+      "turn": 1.15,
+      "crouch": -1,
+      "fx": -7,
+      "fy": -44,
+      "bx": 8,
+      "by": -44,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.45999999999999996,
+     {
+      "turn": 1.15,
+      "crouch": -1,
+      "fx": -7,
+      "fy": -44,
+      "bx": 8,
+      "by": -44,
+      "ffx": -3,
+      "fbx": 4,
+      "y": -1
+     }
+    ],
+    [
+     0.47,
+     {
+      "crouch": 5,
+      "fx": 17,
+      "fy": -29,
+      "bx": 13,
+      "by": -25,
+      "ffx": 12,
+      "fbx": -10,
+      "lean": 5,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     1.1,
+     {
+      "crouch": 3,
+      "fx": 17,
+      "fy": -29,
+      "bx": 13,
+      "by": -25,
+      "ffx": 12,
+      "fbx": -10,
+      "lean": 3,
+      "toeB": true
+     }
+    ],
+    [
+     1.7,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     2.8,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.47,
+     "congela": 0.14,
+     "tremor": 0.32,
+     "amp": 3,
+     "empurra": 2.8,
+     "pele": "holy"
+    },
+    {
+     "t": 2.3,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.42,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "moves/ice-lance-throw": {
+   "nome": "Ice lance throw",
+   "desc": "Frost gathers into a spear in his hand, he throws it like a javelin, and the target ices over in a burst of snowflakes and shivers.",
+   "duracao": 4.34,
+   "loop": false,
+   "chaves": [
+    [
+     -0.4,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -3
+     }
+    ],
+    [
+     0.06,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -22,
+      "bx": 11,
+      "by": -17,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": 2
+     }
+    ],
+    [
+     0.6000000000000001,
+     {
+      "crouch": 4,
+      "fx": 18,
+      "fy": -22,
+      "bx": 11,
+      "by": -17,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": 2
+     }
+    ],
+    [
+     0.77,
+     {
+      "crouch": 5,
+      "fx": 17,
+      "fy": -22,
+      "bx": 5,
+      "by": -20,
+      "ffx": 10,
+      "fbx": -8,
+      "x": -3,
+      "lean": -2
+     }
+    ],
+    [
+     0.8,
+     {
+      "crouch": 4,
+      "fx": 19,
+      "fy": -24,
+      "bx": -6,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "x": 9,
+      "lean": 6,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     1.4400000000000002,
+     {
+      "crouch": 3,
+      "fx": 19,
+      "fy": -24,
+      "bx": -6,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "x": 9,
+      "lean": 4,
+      "toeB": true
+     }
+    ],
+    [
+     2.04,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -3
+     }
+    ],
+    [
+     4.34,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": -3
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 1.1400000000000001,
+     "congela": 0.13,
+     "tremor": 0.2,
+     "amp": 2,
+     "empurra": 2.4,
+     "pele": "ice"
+    },
+    {
+     "t": 2.75,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0.3,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.4,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "moves/lightning-call": {
+   "nome": "Lightning call",
+   "desc": "An arm goes up, a sigil lights under the target, and on the downswing a thick bolt comes down on it; the target jolts through the aftershocks.",
+   "duracao": 3,
+   "loop": false,
+   "chaves": [
+    [
+     0,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.26,
+     {
+      "crouch": 1,
+      "fx": 2,
+      "fy": -44,
+      "bx": 8,
+      "by": -19,
+      "ffx": 7,
+      "fbx": -5,
+      "lean": -2
+     }
+    ],
+    [
+     0.72,
+     {
+      "crouch": -1,
+      "fx": 2,
+      "fy": -44,
+      "bx": 8,
+      "by": -19,
+      "ffx": 7,
+      "fbx": -5,
+      "lean": -2,
+      "y": -1
+     }
+    ],
+    [
+     0.76,
+     {
+      "crouch": 5,
+      "fx": 18,
+      "fy": -27,
+      "bx": -7,
+      "by": -24,
+      "ffx": 12,
+      "fbx": -10,
+      "lean": 5,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     1.4,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -27,
+      "bx": -7,
+      "by": -24,
+      "ffx": 12,
+      "fbx": -10,
+      "lean": 4,
+      "toeB": true
+     }
+    ],
+    [
+     2,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     3,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.76,
+     "congela": 0.14,
+     "tremor": 0.32,
+     "amp": 3,
+     "empurra": 2.8,
+     "pele": "shock"
+    },
+    {
+     "t": 1.04,
+     "congela": 0.03,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 1.2,
+     "pele": null
+    },
+    {
+     "t": 1.26,
+     "congela": 0.03,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": -1,
+     "pele": null
+    },
+    {
+     "t": 2.5,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "moves/meteor-call": {
+   "nome": "Meteor call",
+   "desc": "A long chant: a circle draws itself round him, it flares, he points, and a burning rock comes down on the target and flattens the scene.",
+   "duracao": 6.43,
+   "loop": false,
+   "chaves": [
+    [
+     -0.34,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0,
+     {
+      "turn": 1.1,
+      "crouch": 1,
+      "fx": -1,
+      "fy": -26,
+      "bx": 2,
+      "by": -26,
+      "armsFront": true,
+      "hy": 1,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.75,
+     {
+      "turn": 1.1,
+      "crouch": 2,
+      "fx": -1,
+      "fy": -26,
+      "bx": 2,
+      "by": -26,
+      "armsFront": true,
+      "hy": 1,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.4,
+     {
+      "turn": 1.15,
+      "crouch": -1,
+      "fx": -7,
+      "fy": -44,
+      "bx": 8,
+      "by": -44,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.5,
+     {
+      "turn": 1.15,
+      "crouch": -1,
+      "fx": -7,
+      "fy": -44,
+      "bx": 8,
+      "by": -44,
+      "ffx": -3,
+      "fbx": 4,
+      "y": -1
+     }
+    ],
+    [
+     1.52,
+     {
+      "crouch": 3,
+      "fx": 17,
+      "fy": -37,
+      "bx": -6,
+      "by": -24,
+      "ffx": 12,
+      "fbx": -9,
+      "lean": 5,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     2.03,
+     {
+      "crouch": 3,
+      "fx": 17,
+      "fy": -37,
+      "bx": -6,
+      "by": -24,
+      "ffx": 12,
+      "fbx": -9,
+      "lean": 5,
+      "toeB": true
+     }
+    ],
+    [
+     2.05,
+     {
+      "turn": 0.9,
+      "x": -3,
+      "crouch": 6,
+      "lean": -4,
+      "fx": -4,
+      "fy": -36,
+      "bx": 5,
+      "by": -33,
+      "ffx": 4,
+      "fbx": -4
+     },
+     "snap"
+    ],
+    [
+     2.9499999999999997,
+     {
+      "turn": 0.9,
+      "x": -3,
+      "crouch": 3,
+      "lean": -2,
+      "fx": -4,
+      "fy": -36,
+      "bx": 5,
+      "by": -33,
+      "ffx": 4,
+      "fbx": -4
+     }
+    ],
+    [
+     3.75,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "x": 0
+     }
+    ],
+    [
+     6.35,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 1.52,
+     "congela": 0.06,
+     "tremor": 0.16,
+     "amp": 2,
+     "empurra": 0,
+     "pele": null
+    },
+    {
+     "t": 2.05,
+     "congela": 0.22,
+     "tremor": 0.55,
+     "amp": 4,
+     "empurra": 3.8,
+     "pele": "char"
+    },
+    {
+     "t": 5.949999999999999,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.34,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "moves/pistol-shots": {
+   "nome": "Pistol shots",
+   "desc": "Three aimed shots: the gun kicks up each time and settles, tracers cross the floor, and the target staggers under each hit.",
+   "duracao": 2.6,
+   "loop": false,
+   "chaves": [
+    [
+     -0.36,
+     {
+      "crouch": 3,
+      "fx": 10,
+      "fy": -17,
+      "bx": 7,
+      "by": -16,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "pistol",
+      "sa": 0.9
+     }
+    ],
+    [
+     -0.06,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -28,
+      "bx": 12,
+      "by": -25,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "pistol",
+      "sa": 0,
+      "lean": 2
+     }
+    ],
+    [
+     0.14,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -28,
+      "bx": 12,
+      "by": -25,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "pistol",
+      "sa": 0,
+      "lean": 2
+     }
+    ],
+    [
+     0.14100000000000001,
+     {
+      "crouch": 3,
+      "fx": 16,
+      "fy": -33,
+      "bx": 12,
+      "by": -28,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "pistol",
+      "sa": -0.45,
+      "lean": 0
+     },
+     "snap"
+    ],
+    [
+     0.28,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -28,
+      "bx": 12,
+      "by": -25,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "pistol",
+      "sa": 0,
+      "lean": 2
+     }
+    ],
+    [
+     0.42,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -28,
+      "bx": 12,
+      "by": -25,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "pistol",
+      "sa": 0,
+      "lean": 2
+     }
+    ],
+    [
+     0.421,
+     {
+      "crouch": 3,
+      "fx": 16,
+      "fy": -33,
+      "bx": 12,
+      "by": -28,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "pistol",
+      "sa": -0.45,
+      "lean": 0
+     },
+     "snap"
+    ],
+    [
+     0.56,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -28,
+      "bx": 12,
+      "by": -25,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "pistol",
+      "sa": 0,
+      "lean": 2
+     }
+    ],
+    [
+     0.7,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -28,
+      "bx": 12,
+      "by": -25,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "pistol",
+      "sa": 0,
+      "lean": 2
+     }
+    ],
+    [
+     0.701,
+     {
+      "crouch": 3,
+      "fx": 16,
+      "fy": -33,
+      "bx": 12,
+      "by": -28,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "pistol",
+      "sa": -0.45,
+      "lean": 0
+     },
+     "snap"
+    ],
+    [
+     0.84,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -28,
+      "bx": 12,
+      "by": -25,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "pistol",
+      "sa": 0,
+      "lean": 2
+     }
+    ],
+    [
+     1.2,
+     {
+      "crouch": 1,
+      "fx": 18,
+      "fy": -28,
+      "bx": 12,
+      "by": -25,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "pistol",
+      "sa": 0,
+      "lean": 2
+     }
+    ],
+    [
+     1.7,
+     {
+      "crouch": 3,
+      "fx": 10,
+      "fy": -17,
+      "bx": 7,
+      "by": -16,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "pistol",
+      "sa": 0.9
+     }
+    ],
+    [
+     2.6,
+     {
+      "crouch": 3,
+      "fx": 10,
+      "fy": -17,
+      "bx": 7,
+      "by": -16,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "pistol",
+      "sa": 0.9
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.26,
+     "congela": 0.04,
+     "tremor": 0.1,
+     "amp": 1,
+     "empurra": 2,
+     "pele": null
+    },
+    {
+     "t": 0.54,
+     "congela": 0.04,
+     "tremor": 0.1,
+     "amp": 1,
+     "empurra": -1.8,
+     "pele": null
+    },
+    {
+     "t": 0.82,
+     "congela": 0.08,
+     "tremor": 0.1,
+     "amp": 2,
+     "empurra": 2,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.36,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "moves/rocket-launcher": {
+   "nome": "Rocket launcher",
+   "desc": "He drops to one knee, shoulders the tube and fires: the kick shoves him back along the floor, the rocket crawls out on its jet and the target goes up.",
+   "duracao": 6.5600000000000005,
+   "loop": false,
+   "chaves": [
+    [
+     -0.52,
+     {
+      "crouch": 3,
+      "fx": 9,
+      "fy": -19,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "launcher",
+      "two": true,
+      "sa": -1
+     }
+    ],
+    [
+     -0.18,
+     {
+      "crouch": 6,
+      "fx": 9,
+      "fy": -17,
+      "bx": 9,
+      "by": -21,
+      "ffx": 12,
+      "fbx": -9,
+      "weapon": "launcher",
+      "two": true,
+      "sa": 0,
+      "lean": 2
+     }
+    ],
+    [
+     0.599,
+     {
+      "crouch": 7,
+      "fx": 9,
+      "fy": -17,
+      "bx": 9,
+      "by": -21,
+      "ffx": 12,
+      "fbx": -9,
+      "weapon": "launcher",
+      "two": true,
+      "sa": 0,
+      "lean": 2
+     }
+    ],
+    [
+     0.6,
+     {
+      "crouch": 5,
+      "fx": 4,
+      "fy": -19,
+      "bx": 9,
+      "by": -21,
+      "ffx": 12,
+      "fbx": -9,
+      "weapon": "launcher",
+      "two": true,
+      "sa": -0.12,
+      "lean": -4,
+      "x": -6
+     },
+     "snap"
+    ],
+    [
+     0.96,
+     {
+      "crouch": 6,
+      "fx": 9,
+      "fy": -17,
+      "bx": 9,
+      "by": -21,
+      "ffx": 12,
+      "fbx": -9,
+      "weapon": "launcher",
+      "two": true,
+      "sa": 0,
+      "lean": 2,
+      "x": -6
+     }
+    ],
+    [
+     2.06,
+     {
+      "crouch": 5,
+      "fx": 9,
+      "fy": -17,
+      "bx": 9,
+      "by": -21,
+      "ffx": 12,
+      "fbx": -9,
+      "weapon": "launcher",
+      "two": true,
+      "sa": 0,
+      "lean": 1,
+      "x": -6
+     }
+    ],
+    [
+     2.66,
+     {
+      "crouch": 3,
+      "fx": 9,
+      "fy": -19,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "launcher",
+      "two": true,
+      "sa": -1,
+      "x": -3
+     }
+    ],
+    [
+     3.3600000000000003,
+     {
+      "crouch": 3,
+      "fx": 9,
+      "fy": -19,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "launcher",
+      "two": true,
+      "sa": -1,
+      "x": 0
+     }
+    ],
+    [
+     6.5600000000000005,
+     {
+      "crouch": 3,
+      "fx": 9,
+      "fy": -19,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "launcher",
+      "two": true,
+      "sa": -1
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.6,
+     "congela": 0.06,
+     "tremor": 0.22,
+     "amp": 2,
+     "empurra": 0,
+     "pele": null
+    },
+    {
+     "t": 1.1600000000000001,
+     "congela": 0.2,
+     "tremor": 0.45,
+     "amp": 4,
+     "empurra": 3.8,
+     "pele": "char"
+    },
+    {
+     "t": 5.96,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.52,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "moves/sword-combo": {
+   "nome": "Sword combo",
+   "desc": "Three strokes walking forward: a slash, a crossing double cut, and a two-handed cleave into the floor that throws the target about.",
+   "duracao": 2.975,
+   "loop": false,
+   "chaves": [
+    [
+     -0.55,
+     {
+      "crouch": 3,
+      "fx": 12,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": -0.85,
+      "x": -8
+     }
+    ],
+    [
+     -0.3,
+     {
+      "crouch": 4,
+      "fx": -7,
+      "fy": -35,
+      "bx": 9,
+      "by": -25,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "sword",
+      "sa": -2.65,
+      "x": -8,
+      "lean": -4,
+      "armsFront": true
+     }
+    ],
+    [
+     -0.08,
+     {
+      "crouch": 5,
+      "fx": -7,
+      "fy": -35,
+      "bx": 9,
+      "by": -25,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "sword",
+      "sa": -2.65,
+      "x": -8,
+      "lean": -5,
+      "armsFront": true
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 2,
+      "fx": 16,
+      "fy": -37,
+      "bx": -7,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": -1.45,
+      "x": 0,
+      "lean": 3,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.06,
+     {
+      "crouch": 5,
+      "fx": 20,
+      "fy": -21,
+      "bx": -9,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.62,
+      "x": 2,
+      "lean": 5,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.3,
+     {
+      "crouch": 6,
+      "fx": 20,
+      "fy": -21,
+      "bx": -9,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.62,
+      "x": 3,
+      "lean": 5,
+      "toeB": true
+     }
+    ],
+    [
+     0.46,
+     {
+      "crouch": 5,
+      "fx": -7,
+      "fy": -35,
+      "bx": 9,
+      "by": -25,
+      "ffx": 9,
+      "fbx": -8,
+      "weapon": "sword",
+      "sa": -2.65,
+      "x": 3,
+      "lean": -4,
+      "armsFront": true
+     }
+    ],
+    [
+     0.5,
+     {
+      "crouch": 2,
+      "fx": 16,
+      "fy": -37,
+      "bx": -7,
+      "by": -24,
+      "ffx": 11,
+      "fbx": -9,
+      "weapon": "sword",
+      "sa": -1.45,
+      "x": 10,
+      "lean": 3,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.56,
+     {
+      "crouch": 6,
+      "fx": 22,
+      "fy": -20,
+      "bx": -8,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.62,
+      "x": 13,
+      "lean": 6,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.64,
+     {
+      "crouch": 6,
+      "fx": 20,
+      "fy": -17,
+      "bx": -8,
+      "by": -24,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.85,
+      "x": 14,
+      "lean": 5,
+      "toeB": true,
+      "ghost": 1
+     }
+    ],
+    [
+     0.67,
+     {
+      "crouch": 3,
+      "fx": 22,
+      "fy": -28,
+      "bx": -8,
+      "by": -18,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": 0.1,
+      "x": 15,
+      "lean": 5,
+      "toeB": true,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     0.71,
+     {
+      "crouch": 1,
+      "fx": 19,
+      "fy": -37,
+      "bx": -8,
+      "by": -18,
+      "ffx": 13,
+      "fbx": -10,
+      "weapon": "sword",
+      "sa": -0.95,
+      "x": 16,
+      "lean": 6,
+      "toeB": true,
+      "fby": -6
+     },
+     "snap"
+    ],
+    [
+     0.74,
+     {
+      "crouch": 4,
+      "fx": 13,
+      "fy": -29,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "two": true,
+      "sa": -1.3,
+      "x": 17
+     }
+    ],
+    [
+     0.92,
+     {
+      "crouch": 4,
+      "fx": 1,
+      "fy": -42,
+      "bx": 9,
+      "by": -21,
+      "ffx": 8,
+      "fbx": -7,
+      "weapon": "sword",
+      "two": true,
+      "sa": -2.45,
+      "x": 16,
+      "lean": -2
+     }
+    ],
+    [
+     1.24,
+     {
+      "crouch": 3,
+      "fx": 1,
+      "fy": -42,
+      "bx": 9,
+      "by": -21,
+      "ffx": 8,
+      "fbx": -7,
+      "weapon": "sword",
+      "two": true,
+      "sa": -2.45,
+      "x": 16,
+      "lean": -2
+     }
+    ],
+    [
+     1.31,
+     {
+      "crouch": 0,
+      "fx": 11,
+      "fy": -42,
+      "bx": 9,
+      "by": -21,
+      "ffx": 10,
+      "fbx": -7,
+      "weapon": "sword",
+      "two": true,
+      "sa": -1.45,
+      "x": 19,
+      "y": -2,
+      "lean": 2,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     1.35,
+     {
+      "crouch": 3,
+      "fx": 18,
+      "fy": -33,
+      "bx": 9,
+      "by": -21,
+      "ffx": 12,
+      "fbx": -7,
+      "weapon": "sword",
+      "two": true,
+      "sa": -0.45,
+      "x": 20,
+      "y": -1,
+      "lean": 4,
+      "ghost": 1
+     },
+     "snap"
+    ],
+    [
+     1.375,
+     {
+      "crouch": 7,
+      "fx": 17,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "sword",
+      "two": true,
+      "sa": 0.72,
+      "x": 20,
+      "lean": 6,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     1.8900000000000001,
+     {
+      "crouch": 6,
+      "fx": 17,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 11,
+      "fbx": -10,
+      "weapon": "sword",
+      "two": true,
+      "sa": 0.72,
+      "x": 20,
+      "lean": 5,
+      "toeB": true
+     }
+    ],
+    [
+     2.34,
+     {
+      "crouch": 4,
+      "fx": 15,
+      "fy": -23,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "two": true,
+      "sa": 0.1,
+      "x": 18,
+      "lean": 2
+     }
+    ],
+    [
+     2.74,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "two": true,
+      "sa": -1,
+      "x": 16
+     }
+    ],
+    [
+     2.975,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -15,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "weapon": "sword",
+      "sa": 0.38,
+      "x": 16
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.06,
+     "congela": 0.14,
+     "tremor": 0.18,
+     "amp": 2,
+     "empurra": 2.8,
+     "pele": null
+    },
+    {
+     "t": 0.56,
+     "congela": 0.05,
+     "tremor": 0.08,
+     "amp": 1,
+     "empurra": 1.4,
+     "pele": null
+    },
+    {
+     "t": 0.66,
+     "congela": 0.14,
+     "tremor": 0.2,
+     "amp": 2,
+     "empurra": 2.8,
+     "pele": null
+    },
+    {
+     "t": 1.375,
+     "congela": 0.2,
+     "tremor": 0.34,
+     "amp": 3,
+     "empurra": 3.2,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.55,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "nature/leaf-storm": {
+   "nome": "Leaf storm",
+   "desc": "Leaves tumble up a rising spiral round the character, passing behind and in front, turning and flipping, wrapped in bright bands of wind; litter swirls at their feet.",
+   "duracao": 2.4,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 1.1,
+      "crouch": 0,
+      "fx": -13,
+      "fy": -37,
+      "bx": 13,
+      "by": -37,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.6,
+     {
+      "turn": 1.1,
+      "crouch": 0,
+      "fx": -13,
+      "fy": -40,
+      "bx": 13,
+      "by": -33,
+      "ffx": -3,
+      "fbx": 4,
+      "lean": 2
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 1.1,
+      "crouch": -1,
+      "fx": -13,
+      "fy": -37,
+      "bx": 13,
+      "by": -37,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.8,
+     {
+      "turn": 1.1,
+      "crouch": 0,
+      "fx": -13,
+      "fy": -33,
+      "bx": 13,
+      "by": -40,
+      "ffx": -3,
+      "fbx": 4,
+      "lean": -2
+     }
+    ],
+    [
+     2.4,
+     {
+      "turn": 1.1,
+      "crouch": 0,
+      "fx": -13,
+      "fy": -37,
+      "bx": 13,
+      "by": -37,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "nature/root-snare": {
+   "nome": "Root snare",
+   "desc": "The floor cracks and roots burst up round the character, spiralling round its legs; they cinch tight with a snap, hold, then crack and crumble into bark and dust.",
+   "duracao": 2.7,
+   "loop": false,
+   "chaves": [
+    [
+     -0.24,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ],
+    [
+     0.3,
+     {
+      "turn": 0.9,
+      "lean": -1,
+      "crouch": 2,
+      "fx": -10,
+      "fy": -24,
+      "bx": 11,
+      "by": -24,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ],
+    [
+     0.62,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -12,
+      "fy": -34,
+      "bx": 12,
+      "by": -28,
+      "ffx": -2,
+      "fbx": 3
+     },
+     "snap"
+    ],
+    [
+     0.86,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -12,
+      "fy": -37,
+      "bx": 12,
+      "by": -27,
+      "ffx": -2,
+      "fbx": 3,
+      "lean": -3
+     }
+    ],
+    [
+     1.1,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -12,
+      "fy": -27,
+      "bx": 12,
+      "by": -37,
+      "ffx": -2,
+      "fbx": 3,
+      "lean": 3
+     }
+    ],
+    [
+     1.34,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -12,
+      "fy": -37,
+      "bx": 12,
+      "by": -27,
+      "ffx": -2,
+      "fbx": 3,
+      "lean": -3
+     }
+    ],
+    [
+     1.58,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "fx": -12,
+      "fy": -27,
+      "bx": 12,
+      "by": -37,
+      "ffx": -2,
+      "fbx": 3,
+      "lean": 3
+     }
+    ],
+    [
+     1.75,
+     {
+      "turn": 0.9,
+      "crouch": 6,
+      "fx": -12,
+      "fy": -34,
+      "bx": 12,
+      "by": -28,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ],
+    [
+     1.8,
+     {
+      "turn": 1.1,
+      "crouch": -1,
+      "y": -3,
+      "fx": -14,
+      "fy": -36,
+      "bx": 15,
+      "by": -36,
+      "ffx": -3,
+      "ffy": -6,
+      "fbx": 4,
+      "fby": -6
+     },
+     "snap"
+    ],
+    [
+     2.05,
+     {
+      "crouch": 5,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7,
+      "y": 0
+     }
+    ],
+    [
+     2.7,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.62,
+     "congela": 0.05,
+     "tremor": 0.1,
+     "amp": 1,
+     "empurra": 0,
+     "pele": null
+    },
+    {
+     "t": 1.75,
+     "congela": 0.04,
+     "tremor": 0.14,
+     "amp": 2,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.24,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "scifi/force-field": {
+   "nome": "Force field",
+   "desc": "A glassy dome of hex plates over the hero: plates glint, tracers from the right slam into it, a ripple and cracks of light race across, sparks glance off.",
+   "duracao": 2.4,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "lean": 1,
+      "fx": -9,
+      "fy": -38,
+      "bx": 10,
+      "by": -38,
+      "ffx": -5,
+      "fbx": 6
+     }
+    ],
+    [
+     0.42,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "lean": 1,
+      "fx": -9,
+      "fy": -38,
+      "bx": 10,
+      "by": -38,
+      "ffx": -5,
+      "fbx": 6
+     }
+    ],
+    [
+     0.42,
+     {
+      "turn": 1,
+      "crouch": 5,
+      "lean": -3,
+      "fx": -9,
+      "fy": -38,
+      "bx": 10,
+      "by": -38,
+      "ffx": -5,
+      "fbx": 6,
+      "x": -2
+     },
+     "snap"
+    ],
+    [
+     0.7,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "lean": 1,
+      "fx": -9,
+      "fy": -38,
+      "bx": 10,
+      "by": -38,
+      "ffx": -5,
+      "fbx": 6,
+      "x": -1
+     }
+    ],
+    [
+     1.1,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "lean": 1,
+      "fx": -9,
+      "fy": -38,
+      "bx": 10,
+      "by": -38,
+      "ffx": -5,
+      "fbx": 6
+     }
+    ],
+    [
+     1.5,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "lean": 1,
+      "fx": -9,
+      "fy": -38,
+      "bx": 10,
+      "by": -38,
+      "ffx": -5,
+      "fbx": 6
+     }
+    ],
+    [
+     1.5,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "lean": -2,
+      "fx": -9,
+      "fy": -38,
+      "bx": 10,
+      "by": -38,
+      "ffx": -5,
+      "fbx": 6,
+      "x": -2
+     },
+     "snap"
+    ],
+    [
+     1.75,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "lean": 1,
+      "fx": -9,
+      "fy": -38,
+      "bx": 10,
+      "by": -38,
+      "ffx": -5,
+      "fbx": 6
+     }
+    ],
+    [
+     2.4,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "lean": 1,
+      "fx": -9,
+      "fy": -38,
+      "bx": 10,
+      "by": -38,
+      "ffx": -5,
+      "fbx": 6
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.42,
+     "congela": 0.07,
+     "tremor": 0.16,
+     "amp": 2,
+     "empurra": 0,
+     "pele": null
+    },
+    {
+     "t": 1.5,
+     "congela": 0.03,
+     "tremor": 0.08,
+     "amp": 1,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "scifi/glitch": {
+   "nome": "Glitch",
+   "desc": "The hero's signal breaks up in bursts: an RGB split, slices torn sideways, rows smeared out, junk blocks and dead pixels, then snaps back clean.",
+   "duracao": 2.4,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {}
+    ],
+    [
+     0.3,
+     {
+      "turn": 0.3,
+      "lean": 3,
+      "crouch": 1,
+      "fx": 13,
+      "fy": -31,
+      "bx": 6,
+      "by": -14,
+      "hx": 1
+     },
+     "snap"
+    ],
+    [
+     0.37,
+     {
+      "turn": 1.2,
+      "lean": -3,
+      "crouch": 0,
+      "fx": -9,
+      "fy": -14,
+      "bx": 14,
+      "by": -31,
+      "hx": -1
+     },
+     "snap"
+    ],
+    [
+     0.44,
+     {
+      "turn": 0.3,
+      "lean": 3,
+      "crouch": 1,
+      "fx": 13,
+      "fy": -31,
+      "bx": 6,
+      "by": -14,
+      "hx": 1
+     },
+     "snap"
+    ],
+    [
+     0.53,
+     {},
+     "snap"
+    ],
+    [
+     1.1,
+     {
+      "turn": 1.2,
+      "lean": -3,
+      "crouch": 0,
+      "fx": -9,
+      "fy": -14,
+      "bx": 14,
+      "by": -31,
+      "hx": -1
+     },
+     "snap"
+    ],
+    [
+     1.23,
+     {},
+     "snap"
+    ],
+    [
+     1.7,
+     {
+      "turn": 0.3,
+      "lean": 3,
+      "crouch": 1,
+      "fx": 13,
+      "fy": -31,
+      "bx": 6,
+      "by": -14,
+      "hx": 1
+     },
+     "snap"
+    ],
+    [
+     1.8,
+     {
+      "turn": 1.2,
+      "lean": -3,
+      "crouch": 3,
+      "fx": -9,
+      "fy": -14,
+      "bx": 14,
+      "by": -31,
+      "hx": -1
+     },
+     "snap"
+    ],
+    [
+     1.9,
+     {
+      "turn": 0.3,
+      "lean": 3,
+      "crouch": 1,
+      "fx": 13,
+      "fy": -31,
+      "bx": 6,
+      "by": -14,
+      "hx": 1
+     },
+     "snap"
+    ],
+    [
+     2,
+     {
+      "turn": 1.2,
+      "lean": -3,
+      "crouch": 0,
+      "fx": -9,
+      "fy": -14,
+      "bx": 14,
+      "by": -31,
+      "hx": -1
+     },
+     "snap"
+    ],
+    [
+     2.07,
+     {},
+     "snap"
+    ],
+    [
+     2.4,
+     {}
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "scifi/scanner": {
+   "nome": "Scanner",
+   "desc": "Brackets snap onto the hero, a scan line sweeps head to toe leaving a cooling outline, and a readout counts up to OK before it all lets go.",
+   "duracao": 3.2,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {}
+    ],
+    [
+     0.3,
+     {
+      "turn": 0.9,
+      "crouch": -1,
+      "fx": -7,
+      "fy": -14,
+      "bx": 8,
+      "by": -14,
+      "ffx": -3,
+      "fbx": 4
+     },
+     "snap"
+    ],
+    [
+     1.75,
+     {
+      "turn": 0.9,
+      "crouch": -1,
+      "fx": -7,
+      "fy": -14,
+      "bx": 8,
+      "by": -14,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.85,
+     {
+      "turn": 0.9,
+      "fx": -9,
+      "fy": -37,
+      "bx": 8,
+      "by": -15,
+      "ffx": -3,
+      "fbx": 4
+     },
+     "snap"
+    ],
+    [
+     2.5,
+     {
+      "turn": 0.9,
+      "fx": -9,
+      "fy": -37,
+      "bx": 8,
+      "by": -15,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     2.8,
+     {}
+    ],
+    [
+     3.2,
+     {}
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "scifi/warp-in": {
+   "nome": "Warp in",
+   "desc": "A beam slams down, rings run down it and a scanline paints the hero in from head to toe, white-hot pixels cooling to their own colors; the beam pinches shut in sparks.",
+   "duracao": 3,
+   "loop": false,
+   "chaves": [
+    [
+     0,
+     {
+      "crouch": 7,
+      "lean": 3,
+      "fx": 9,
+      "fy": -12,
+      "bx": 12,
+      "by": -12,
+      "ffx": 8,
+      "fbx": -6
+     }
+    ],
+    [
+     1.82,
+     {
+      "crouch": 7,
+      "lean": 3,
+      "fx": 9,
+      "fy": -12,
+      "bx": 12,
+      "by": -12,
+      "ffx": 8,
+      "fbx": -6
+     }
+    ],
+    [
+     2.05,
+     {
+      "crouch": 3,
+      "fx": 8,
+      "fy": -19,
+      "bx": 8,
+      "by": -18,
+      "ffx": 4,
+      "fbx": -3
+     }
+    ],
+    [
+     2.5,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     3,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "scifi/warp-out": {
+   "nome": "Warp out",
+   "desc": "The hero's outline flickers on, they flash white and break into light from the head down, streaming up a beam that lifts off the floor and pinches shut.",
+   "duracao": 2.6,
+   "loop": false,
+   "chaves": [
+    [
+     -0.3,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.1,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "fx": -9,
+      "fy": -15,
+      "bx": 10,
+      "by": -15,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.42,
+     {
+      "turn": 1,
+      "crouch": 0,
+      "fx": -11,
+      "fy": -29,
+      "bx": 12,
+      "by": -29,
+      "ffx": -3,
+      "fbx": 4
+     },
+     "snap"
+    ],
+    [
+     2.6,
+     {
+      "turn": 1,
+      "crouch": 0,
+      "fx": -11,
+      "fy": -29,
+      "bx": 12,
+      "by": -29,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0.3,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "shadow/curse": {
+   "nome": "Curse",
+   "desc": "Wisps gather over the head, a skull stamps down with a flash, its eyes burn as the curse floods the body violet, then it cracks and crumbles.",
+   "duracao": 3.4,
+   "loop": false,
+   "chaves": [
+    [
+     -0.2,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.3,
+     {
+      "turn": 0.9,
+      "hy": -1,
+      "fx": -9,
+      "fy": -19,
+      "bx": 10,
+      "by": -19,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.55,
+     {
+      "turn": 1,
+      "crouch": 6,
+      "lean": 2,
+      "hy": 1,
+      "fx": -6,
+      "fy": -38,
+      "bx": 7,
+      "by": -38,
+      "ffx": -4,
+      "fbx": 5
+     },
+     "snap"
+    ],
+    [
+     0.8,
+     {
+      "turn": 1,
+      "crouch": 7,
+      "lean": 2,
+      "hy": 1,
+      "fx": -6,
+      "fy": -38,
+      "bx": 7,
+      "by": -38,
+      "ffx": -4,
+      "fbx": 5
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 1,
+      "crouch": 6,
+      "lean": 3,
+      "hy": 1,
+      "fx": -6,
+      "fy": -38,
+      "bx": 7,
+      "by": -38,
+      "ffx": -4,
+      "fbx": 5
+     }
+    ],
+    [
+     1.72,
+     {
+      "turn": 1,
+      "crouch": 7,
+      "lean": 2,
+      "hy": 1,
+      "fx": -6,
+      "fy": -38,
+      "bx": 7,
+      "by": -38,
+      "ffx": -4,
+      "fbx": 5
+     }
+    ],
+    [
+     2.1,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "lean": 3,
+      "hy": 2,
+      "fx": -8,
+      "fy": -15,
+      "bx": 9,
+      "by": -15,
+      "ffx": -4,
+      "fbx": 5
+     }
+    ],
+    [
+     2.9,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "lean": 1,
+      "fx": -8,
+      "fy": -16,
+      "bx": 9,
+      "by": -16,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     3.4,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.55,
+     "congela": 0.09,
+     "tremor": 0.2,
+     "amp": 2,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.2,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "shadow/life-steal": {
+   "nome": "Life steal",
+   "desc": "A target on the right is struck and bleeds red orbs; they hang a moment, then whip home as comet streaks and flood the caster crimson.",
+   "duracao": 2.2,
+   "loop": false,
+   "chaves": [
+    [
+     -0.46,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     -0.2,
+     {
+      "crouch": 4,
+      "fx": 3,
+      "fy": -27,
+      "bx": 8,
+      "by": -20,
+      "ffx": 7,
+      "fbx": -7,
+      "lean": -2
+     }
+    ],
+    [
+     0,
+     {
+      "crouch": 3,
+      "fx": 17,
+      "fy": -28,
+      "bx": -6,
+      "by": -21,
+      "ffx": 10,
+      "fbx": -9,
+      "lean": 3
+     },
+     "snap"
+    ],
+    [
+     0.4,
+     {
+      "crouch": 3,
+      "fx": 17,
+      "fy": -28,
+      "bx": -6,
+      "by": -21,
+      "ffx": 10,
+      "fbx": -9,
+      "lean": 3
+     }
+    ],
+    [
+     0.7,
+     {
+      "crouch": 3,
+      "fx": 13,
+      "fy": -26,
+      "bx": -6,
+      "by": -21,
+      "ffx": 10,
+      "fbx": -9,
+      "lean": 1
+     }
+    ],
+    [
+     0.8,
+     {
+      "turn": 1.15,
+      "crouch": 2,
+      "lean": -3,
+      "hy": -1,
+      "fx": -13,
+      "fy": -37,
+      "bx": 14,
+      "by": -37,
+      "ffx": -3,
+      "fbx": 4
+     },
+     "snap"
+    ],
+    [
+     1.22,
+     {
+      "turn": 1.15,
+      "crouch": 0,
+      "lean": -3,
+      "hy": -1,
+      "fx": -13,
+      "fy": -37,
+      "bx": 14,
+      "by": -37,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.7,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "fx": -11,
+      "fy": -26,
+      "bx": 12,
+      "by": -26,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     2.2,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.01,
+     "congela": 0.07,
+     "tremor": 0.12,
+     "amp": 1,
+     "empurra": 1.6,
+     "pele": "red"
+    },
+    {
+     "t": 1.6,
+     "congela": 0,
+     "tremor": 0,
+     "amp": 0,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.46,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "spawn/disintegrate": {
+   "nome": "Disintegrate",
+   "desc": "The character crackles with light, flashes white, then peels away from the head down: each pixel flares white-hot and streams off on the wind as a cooling mote of light.",
+   "duracao": 3.4,
+   "loop": false,
+   "chaves": [
+    [
+     -0.2,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.05,
+     {
+      "turn": 1,
+      "crouch": 3,
+      "fx": -9,
+      "fy": -16,
+      "bx": 10,
+      "by": -16,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.3,
+     {
+      "turn": 1.15,
+      "crouch": 0,
+      "hy": -1,
+      "fx": -14,
+      "fy": -36,
+      "bx": 15,
+      "by": -36,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     3.4,
+     {
+      "turn": 1.15,
+      "crouch": 0,
+      "hy": -1,
+      "fx": -14,
+      "fy": -36,
+      "bx": 15,
+      "by": -36,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0.2,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "spawn/dissolve-burn": {
+   "nome": "Dissolve burn",
+   "desc": "An ember seam lights at the feet and climbs the body: above it the body scorches and smoulders, at it flames lick up, below it there's only falling ash, embers and smoke.",
+   "duracao": 3.6,
+   "loop": false,
+   "chaves": [
+    [
+     -0.16,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.4,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "fx": -9,
+      "fy": -22,
+      "bx": 10,
+      "by": -22,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.8,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "fx": -13,
+      "fy": -35,
+      "bx": 13,
+      "by": -26,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "fx": -13,
+      "fy": -26,
+      "bx": 13,
+      "by": -36,
+      "ffx": -3,
+      "fbx": 4,
+      "lean": 2
+     }
+    ],
+    [
+     1.6,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "fx": -13,
+      "fy": -36,
+      "bx": 13,
+      "by": -26,
+      "ffx": -3,
+      "fbx": 4,
+      "lean": -2
+     }
+    ],
+    [
+     2.1,
+     {
+      "turn": 1,
+      "crouch": 5,
+      "fx": -8,
+      "fy": -38,
+      "bx": 9,
+      "by": -38,
+      "ffx": -3,
+      "fbx": 4,
+      "lean": 2
+     }
+    ],
+    [
+     3.6,
+     {
+      "turn": 1,
+      "crouch": 6,
+      "fx": -8,
+      "fy": -36,
+      "bx": 9,
+      "by": -36,
+      "ffx": -3,
+      "fbx": 4,
+      "lean": 2
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0.16,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "spawn/respawn-beam": {
+   "nome": "Respawn beam",
+   "desc": "A guide line drops, a pillar of light slams onto the spot, and a scan bar climbs from the feet writing the character back in row by row, white-hot lines cooling to its colors.",
+   "duracao": 2.5,
+   "loop": false,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "fx": -9,
+      "fy": -14,
+      "bx": 10,
+      "by": -14,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.4,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "fx": -9,
+      "fy": -14,
+      "bx": 10,
+      "by": -14,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.72,
+     {
+      "turn": 1.15,
+      "crouch": -1,
+      "fx": -13,
+      "fy": -36,
+      "bx": 14,
+      "by": -36,
+      "hy": -1,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     2.1,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     2.5,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "spawn/shatter-death": {
+   "nome": "Shatter death",
+   "desc": "Frost races up the body and seals it in faceted ice, a glint sweeps it, cracks spread from the chest, then it bursts into its own facets that tumble, bounce and melt.",
+   "duracao": 3.3,
+   "loop": false,
+   "chaves": [
+    [
+     -0.2,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.08,
+     {
+      "turn": 0.9,
+      "lean": -2,
+      "crouch": 2,
+      "fx": -9,
+      "fy": -31,
+      "bx": 9,
+      "by": -31,
+      "ffx": -3,
+      "fbx": 4
+     },
+     "snap"
+    ],
+    [
+     0.3,
+     {
+      "turn": 0.9,
+      "lean": -3,
+      "crouch": 2,
+      "fx": -9,
+      "fy": -34,
+      "bx": 9,
+      "by": -31,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.5,
+     {
+      "turn": 0.9,
+      "lean": -2,
+      "crouch": 2,
+      "fx": -9,
+      "fy": -31,
+      "bx": 9,
+      "by": -31,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     3.3,
+     {
+      "turn": 0.9,
+      "lean": -2,
+      "crouch": 2,
+      "fx": -9,
+      "fy": -31,
+      "bx": 9,
+      "by": -31,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.5,
+     "congela": 0.02,
+     "tremor": 0.06,
+     "amp": 1,
+     "empurra": 0,
+     "pele": null
+    },
+    {
+     "t": 1.4,
+     "congela": 0.09,
+     "tremor": 0.26,
+     "amp": 3,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.2,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "spawn/soul-rise": {
+   "nome": "Soul rise",
+   "desc": "The body's outline flares and dims, then a pale glowing copy of it lifts out, stretching as its legs melt into a rippling wisp, shedding motes until it thins into light.",
+   "duracao": 3.2,
+   "loop": false,
+   "chaves": [
+    [
+     -0.2,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.3,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "hy": -1,
+      "fx": -10,
+      "fy": -24,
+      "bx": 11,
+      "by": -24,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.7,
+     {
+      "turn": 0.7,
+      "crouch": 4,
+      "lean": 3,
+      "hy": 1,
+      "fx": 2,
+      "fy": -14,
+      "bx": 8,
+      "by": -14,
+      "ffx": 4,
+      "fbx": -3
+     }
+    ],
+    [
+     1.1,
+     {
+      "crouch": 8,
+      "lean": 6,
+      "hy": 2,
+      "fx": 7,
+      "fy": -9,
+      "bx": 11,
+      "by": -9,
+      "ffx": 9,
+      "fbx": -8
+     }
+    ],
+    [
+     2.7,
+     {
+      "crouch": 8,
+      "lean": 6,
+      "hy": 2,
+      "fx": 7,
+      "fy": -9,
+      "bx": 11,
+      "by": -9,
+      "ffx": 9,
+      "fbx": -8
+     }
+    ],
+    [
+     3.2,
+     {
+      "crouch": 7,
+      "lean": 6,
+      "hy": 2,
+      "fx": 7,
+      "fy": -9,
+      "bx": 11,
+      "by": -9,
+      "ffx": 9,
+      "fbx": -8
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0.2,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/bleeding": {
+   "nome": "Bleeding",
+   "desc": "Bleeding out: beads swell at three wounds, run, let go and fall to spatter into a glossy pool that ripples; each heartbeat spurts a little and flashes the body red.",
+   "duracao": 2.4,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 0.7,
+      "crouch": 5,
+      "lean": 4,
+      "fx": 2,
+      "fy": -21,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3,
+      "hy": 1
+     }
+    ],
+    [
+     0.18,
+     {
+      "turn": 0.7,
+      "crouch": 3,
+      "lean": 2,
+      "fx": 2,
+      "fy": -21,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 0.7,
+      "crouch": 3,
+      "lean": 2,
+      "fx": 2,
+      "fy": -21,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 0.7,
+      "crouch": 5,
+      "lean": 4,
+      "fx": 2,
+      "fy": -21,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3,
+      "hy": 1
+     },
+     "snap"
+    ],
+    [
+     1.38,
+     {
+      "turn": 0.7,
+      "crouch": 3,
+      "lean": 2,
+      "fx": 2,
+      "fy": -21,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3
+     }
+    ],
+    [
+     2.4,
+     {
+      "turn": 0.7,
+      "crouch": 3,
+      "lean": 2,
+      "fx": 2,
+      "fy": -21,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3
+     }
+    ],
+    [
+     2.4,
+     {
+      "turn": 0.7,
+      "crouch": 5,
+      "lean": 4,
+      "fx": 2,
+      "fy": -21,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3,
+      "hy": 1
+     },
+     "snap"
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/burning": {
+   "nome": "Burning",
+   "desc": "Burning over time: small flames lick from four hot spots, trailing sparks and thin smoke; every 0.6 s they flare, the body flashes white then orange, scorch marks spread.",
+   "duracao": 1.2,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "lean": 2,
+      "fx": -13,
+      "fy": -38,
+      "bx": 12,
+      "by": -17,
+      "ffx": -3,
+      "ffy": -7,
+      "fbx": 5
+     }
+    ],
+    [
+     0.15,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "lean": -2,
+      "fx": -12,
+      "fy": -17,
+      "bx": 13,
+      "by": -38,
+      "ffx": -4,
+      "fbx": 4,
+      "fby": -7
+     },
+     "snap"
+    ],
+    [
+     0.3,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "lean": 2,
+      "fx": -13,
+      "fy": -38,
+      "bx": 12,
+      "by": -17,
+      "ffx": -3,
+      "ffy": -7,
+      "fbx": 5
+     },
+     "snap"
+    ],
+    [
+     0.45,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "lean": -2,
+      "fx": -12,
+      "fy": -17,
+      "bx": 13,
+      "by": -38,
+      "ffx": -4,
+      "fbx": 4,
+      "fby": -7
+     },
+     "snap"
+    ],
+    [
+     0.6,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "lean": 2,
+      "fx": -13,
+      "fy": -38,
+      "bx": 12,
+      "by": -17,
+      "ffx": -3,
+      "ffy": -7,
+      "fbx": 5
+     },
+     "snap"
+    ],
+    [
+     0.75,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "lean": -2,
+      "fx": -12,
+      "fy": -17,
+      "bx": 13,
+      "by": -38,
+      "ffx": -4,
+      "fbx": 4,
+      "fby": -7
+     },
+     "snap"
+    ],
+    [
+     0.9,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "lean": 2,
+      "fx": -13,
+      "fy": -38,
+      "bx": 12,
+      "by": -17,
+      "ffx": -3,
+      "ffy": -7,
+      "fbx": 5
+     },
+     "snap"
+    ],
+    [
+     1.05,
+     {
+      "turn": 0.9,
+      "crouch": 3,
+      "lean": -2,
+      "fx": -12,
+      "fy": -17,
+      "bx": 13,
+      "by": -38,
+      "ffx": -4,
+      "fbx": 4,
+      "fby": -7
+     },
+     "snap"
+    ],
+    [
+     1.2,
+     {
+      "turn": 1,
+      "crouch": 2,
+      "lean": 2,
+      "fx": -13,
+      "fy": -38,
+      "bx": 12,
+      "by": -17,
+      "ffx": -3,
+      "ffy": -7,
+      "fbx": 5
+     },
+     "snap"
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/charmed": {
+   "nome": "Charmed",
+   "desc": "Smitten: a big heart beats over the head, throwing a ring and a flush of light with every beat, little hearts float up, the eyes go pink and the cheeks blush.",
+   "duracao": 2.4,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 1.1,
+      "fx": -2,
+      "fy": -28,
+      "bx": 2,
+      "by": -28,
+      "armsFront": true,
+      "ffx": -3,
+      "fbx": 4,
+      "lean": -2
+     }
+    ],
+    [
+     0.6,
+     {
+      "turn": 1.1,
+      "fx": -2,
+      "fy": -28,
+      "bx": 2,
+      "by": -28,
+      "armsFront": true,
+      "ffx": -3,
+      "fbx": 4,
+      "lean": 0,
+      "crouch": 1
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 1.1,
+      "fx": -2,
+      "fy": -28,
+      "bx": 2,
+      "by": -28,
+      "armsFront": true,
+      "ffx": -3,
+      "fbx": 4,
+      "lean": 2
+     }
+    ],
+    [
+     1.8,
+     {
+      "turn": 1.1,
+      "fx": -2,
+      "fy": -28,
+      "bx": 2,
+      "by": -28,
+      "armsFront": true,
+      "ffx": -3,
+      "fbx": 4,
+      "lean": 0,
+      "crouch": 1
+     }
+    ],
+    [
+     2.4,
+     {
+      "turn": 1.1,
+      "fx": -2,
+      "fy": -28,
+      "bx": 2,
+      "by": -28,
+      "armsFront": true,
+      "ffx": -3,
+      "fbx": 4,
+      "lean": -2
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/confused": {
+   "nome": "Confused",
+   "desc": "Head in a spin: a glowing spiral whirls over the head, question marks pop up round it and bob, the eyes dart left and right.",
+   "duracao": 2.4,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 1,
+      "fx": -13,
+      "fy": -26,
+      "bx": 14,
+      "by": -26,
+      "ffx": -3,
+      "fbx": 4,
+      "x": 0,
+      "lean": -2
+     }
+    ],
+    [
+     0.6,
+     {
+      "turn": 1,
+      "fx": -13,
+      "fy": -23,
+      "bx": 14,
+      "by": -29,
+      "ffx": -3,
+      "fbx": 5,
+      "x": 1,
+      "lean": 1,
+      "crouch": 1,
+      "fby": -6
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 1,
+      "fx": -13,
+      "fy": -26,
+      "bx": 14,
+      "by": -26,
+      "ffx": -3,
+      "fbx": 4,
+      "x": 2,
+      "lean": 2
+     }
+    ],
+    [
+     1.8,
+     {
+      "turn": 1,
+      "fx": -13,
+      "fy": -29,
+      "bx": 14,
+      "by": -23,
+      "ffx": -4,
+      "fbx": 4,
+      "x": 1,
+      "lean": -1,
+      "crouch": 1,
+      "ffy": -6
+     }
+    ],
+    [
+     2.4,
+     {
+      "turn": 1,
+      "fx": -13,
+      "fy": -26,
+      "bx": 14,
+      "by": -26,
+      "ffx": -3,
+      "fbx": 4,
+      "x": 0,
+      "lean": -2
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/cursed": {
+   "nome": "Cursed",
+   "desc": "Hexed: violet smoke rises off the body in winding trails, a dark stain creeps up from the feet with a glowing edge, the eyes burn, a skull glitches in overhead.",
+   "duracao": 2.4,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "lean": 3,
+      "hy": 1,
+      "fx": -7,
+      "fy": -33,
+      "bx": 8,
+      "by": -33,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     0.6,
+     {
+      "turn": 1,
+      "crouch": 5,
+      "lean": 3,
+      "hy": 1,
+      "fx": -7,
+      "fy": -33,
+      "bx": 8,
+      "by": -33,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "lean": 2,
+      "hy": 1,
+      "fx": -7,
+      "fy": -33,
+      "bx": 8,
+      "by": -33,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.8,
+     {
+      "turn": 1,
+      "crouch": 5,
+      "lean": 3,
+      "hy": 1,
+      "fx": -7,
+      "fy": -33,
+      "bx": 8,
+      "by": -33,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     2.4,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "lean": 3,
+      "hy": 1,
+      "fx": -7,
+      "fy": -33,
+      "bx": 8,
+      "by": -33,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/frozen": {
+   "nome": "Frozen",
+   "desc": "Chilled to the bone: frost ferns creep over the body, icicles hang from chin and hands and drip, breath steams, snow settles, a shiver every second, frost spreads underfoot.",
+   "duracao": 2,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 0.9,
+      "crouch": 2,
+      "fx": -6,
+      "fy": -15,
+      "bx": 7,
+      "by": -15,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ],
+    [
+     0.22,
+     {
+      "turn": 0.9,
+      "crouch": 1,
+      "fx": -6,
+      "fy": -15,
+      "bx": 7,
+      "by": -15,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ],
+    [
+     1,
+     {
+      "turn": 0.9,
+      "crouch": 1,
+      "fx": -6,
+      "fy": -15,
+      "bx": 7,
+      "by": -15,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ],
+    [
+     1,
+     {
+      "turn": 0.9,
+      "crouch": 2,
+      "fx": -6,
+      "fy": -15,
+      "bx": 7,
+      "by": -15,
+      "ffx": -2,
+      "fbx": 3
+     },
+     "snap"
+    ],
+    [
+     1.22,
+     {
+      "turn": 0.9,
+      "crouch": 1,
+      "fx": -6,
+      "fy": -15,
+      "bx": 7,
+      "by": -15,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ],
+    [
+     2,
+     {
+      "turn": 0.9,
+      "crouch": 2,
+      "fx": -6,
+      "fy": -15,
+      "bx": 7,
+      "by": -15,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/haste": {
+   "nome": "Haste",
+   "desc": "Sped up: striped after-images stream out behind, speed lines whip past, dust kicks off the heels and the leading edge catches the wind. Faces right.",
+   "duracao": 1.2,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 3,
+      "ffx": 12,
+      "ffy": -5,
+      "fbx": -10,
+      "fby": -8,
+      "toeB": true,
+      "fx": -7,
+      "fy": -19,
+      "bx": 12,
+      "by": -27
+     }
+    ],
+    [
+     0.1,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 1,
+      "ffx": 4,
+      "ffy": -8,
+      "fbx": -1,
+      "fby": -5,
+      "fx": 3,
+      "fy": -18,
+      "bx": 5,
+      "by": -19
+     },
+     "snap"
+    ],
+    [
+     0.2,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 3,
+      "ffx": -10,
+      "ffy": -8,
+      "toeF": true,
+      "fbx": 12,
+      "fby": -5,
+      "fx": 14,
+      "fy": -27,
+      "bx": -5,
+      "by": -19
+     },
+     "snap"
+    ],
+    [
+     0.3,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 1,
+      "ffx": -1,
+      "ffy": -5,
+      "fbx": 4,
+      "fby": -8,
+      "fx": 5,
+      "fy": -19,
+      "bx": 3,
+      "by": -18
+     },
+     "snap"
+    ],
+    [
+     0.4,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 3,
+      "ffx": 12,
+      "ffy": -5,
+      "fbx": -10,
+      "fby": -8,
+      "toeB": true,
+      "fx": -7,
+      "fy": -19,
+      "bx": 12,
+      "by": -27
+     },
+     "snap"
+    ],
+    [
+     0.5,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 1,
+      "ffx": 4,
+      "ffy": -8,
+      "fbx": -1,
+      "fby": -5,
+      "fx": 3,
+      "fy": -18,
+      "bx": 5,
+      "by": -19
+     },
+     "snap"
+    ],
+    [
+     0.6,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 3,
+      "ffx": -10,
+      "ffy": -8,
+      "toeF": true,
+      "fbx": 12,
+      "fby": -5,
+      "fx": 14,
+      "fy": -27,
+      "bx": -5,
+      "by": -19
+     },
+     "snap"
+    ],
+    [
+     0.7,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 1,
+      "ffx": -1,
+      "ffy": -5,
+      "fbx": 4,
+      "fby": -8,
+      "fx": 5,
+      "fy": -19,
+      "bx": 3,
+      "by": -18
+     },
+     "snap"
+    ],
+    [
+     0.8,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 3,
+      "ffx": 12,
+      "ffy": -5,
+      "fbx": -10,
+      "fby": -8,
+      "toeB": true,
+      "fx": -7,
+      "fy": -19,
+      "bx": 12,
+      "by": -27
+     },
+     "snap"
+    ],
+    [
+     0.9,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 1,
+      "ffx": 4,
+      "ffy": -8,
+      "fbx": -1,
+      "fby": -5,
+      "fx": 3,
+      "fy": -18,
+      "bx": 5,
+      "by": -19
+     },
+     "snap"
+    ],
+    [
+     1,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 3,
+      "ffx": -10,
+      "ffy": -8,
+      "toeF": true,
+      "fbx": 12,
+      "fby": -5,
+      "fx": 14,
+      "fy": -27,
+      "bx": -5,
+      "by": -19
+     },
+     "snap"
+    ],
+    [
+     1.1,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 1,
+      "ffx": -1,
+      "ffy": -5,
+      "fbx": 4,
+      "fby": -8,
+      "fx": 5,
+      "fy": -19,
+      "bx": 3,
+      "by": -18
+     },
+     "snap"
+    ],
+    [
+     1.2,
+     {
+      "turn": 0.25,
+      "lean": 4,
+      "crouch": 3,
+      "ffx": 12,
+      "ffy": -5,
+      "fbx": -10,
+      "fby": -8,
+      "toeB": true,
+      "fx": -7,
+      "fy": -19,
+      "bx": 12,
+      "by": -27
+     },
+     "snap"
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/petrified": {
+   "nome": "Petrified",
+   "desc": "Turned to stone: grey creeps up from the feet behind a crackling edge that spits grit, the statue holds, cracks run through it, and it bursts into tumbling chunks and dust.",
+   "duracao": 3.8,
+   "loop": false,
+   "chaves": [
+    [
+     -0.16,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.08,
+     {
+      "turn": 0.9,
+      "lean": -1,
+      "crouch": 2,
+      "fx": -8,
+      "fy": -24,
+      "bx": 9,
+      "by": -24
+     },
+     "snap"
+    ],
+    [
+     0.5,
+     {
+      "lean": 3,
+      "crouch": 2,
+      "fx": 14,
+      "fy": -29,
+      "bx": -4,
+      "by": -22,
+      "ffx": 8,
+      "fbx": -7,
+      "toeB": true
+     }
+    ],
+    [
+     0.95,
+     {
+      "lean": 3,
+      "crouch": 2,
+      "fx": 14,
+      "fy": -29,
+      "bx": -4,
+      "by": -22,
+      "ffx": 8,
+      "fbx": -7,
+      "toeB": true
+     }
+    ],
+    [
+     3.8,
+     {
+      "lean": 3,
+      "crouch": 2,
+      "fx": 14,
+      "fy": -29,
+      "bx": -4,
+      "by": -22,
+      "ffx": 8,
+      "fbx": -7,
+      "toeB": true
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 2.2,
+     "congela": 0.08,
+     "tremor": 0.24,
+     "amp": 2,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.16,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/poisoned": {
+   "nome": "Poisoned",
+   "desc": "Sick to the bone: green rolls up the body in waves, dark veins creep from a wound, toxic sweat drips and hisses; every 0.8 s it wobbles, blisters pop and a ring pulses out.",
+   "duracao": 1.6,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 0.8,
+      "crouch": 5,
+      "lean": 5,
+      "hy": 1,
+      "fx": 2,
+      "fy": -20,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3,
+      "x": -1
+     }
+    ],
+    [
+     0.2,
+     {
+      "turn": 0.8,
+      "crouch": 4,
+      "lean": 4,
+      "hy": 1,
+      "fx": 2,
+      "fy": -20,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3,
+      "x": 0
+     }
+    ],
+    [
+     0.5,
+     {
+      "turn": 0.8,
+      "crouch": 4,
+      "lean": 4,
+      "hy": 1,
+      "fx": 2,
+      "fy": -20,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3,
+      "x": 1
+     }
+    ],
+    [
+     0.8,
+     {
+      "turn": 0.8,
+      "crouch": 5,
+      "lean": 5,
+      "hy": 1,
+      "fx": 2,
+      "fy": -20,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3,
+      "x": 1
+     }
+    ],
+    [
+     1,
+     {
+      "turn": 0.8,
+      "crouch": 4,
+      "lean": 4,
+      "hy": 1,
+      "fx": 2,
+      "fy": -20,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3,
+      "x": 0
+     }
+    ],
+    [
+     1.3,
+     {
+      "turn": 0.8,
+      "crouch": 4,
+      "lean": 4,
+      "hy": 1,
+      "fx": 2,
+      "fy": -20,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3,
+      "x": -1
+     }
+    ],
+    [
+     1.6,
+     {
+      "turn": 0.8,
+      "crouch": 5,
+      "lean": 5,
+      "hy": 1,
+      "fx": 2,
+      "fy": -20,
+      "bx": 8,
+      "by": -14,
+      "ffx": 3,
+      "fbx": -3,
+      "x": -1
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/rage": {
+   "nome": "Rage",
+   "desc": "Seething: the body judders on every heartbeat, an anger mark throbs at the temple, eyes burn, steam jets off the head, stress lines flash out and the floor cracks hot underfoot.",
+   "duracao": 1.2,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "fx": -13,
+      "fy": -19,
+      "bx": 13,
+      "by": -19,
+      "ffx": -8,
+      "fbx": 9
+     }
+    ],
+    [
+     0.05,
+     {
+      "turn": 1,
+      "crouch": 6,
+      "fx": -13,
+      "fy": -23,
+      "bx": 13,
+      "by": -23,
+      "ffx": -8,
+      "fbx": 9
+     },
+     "snap"
+    ],
+    [
+     0.17,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "fx": -13,
+      "fy": -19,
+      "bx": 13,
+      "by": -19,
+      "ffx": -8,
+      "fbx": 9
+     },
+     "snap"
+    ],
+    [
+     0.29,
+     {
+      "turn": 1,
+      "crouch": 5,
+      "fx": -13,
+      "fy": -23,
+      "bx": 13,
+      "by": -23,
+      "ffx": -8,
+      "fbx": 9
+     },
+     "snap"
+    ],
+    [
+     0.4,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "fx": -13,
+      "fy": -19,
+      "bx": 13,
+      "by": -19,
+      "ffx": -8,
+      "fbx": 9
+     },
+     "snap"
+    ],
+    [
+     1.2,
+     {
+      "turn": 1,
+      "crouch": 4,
+      "fx": -13,
+      "fy": -19,
+      "bx": 13,
+      "by": -19,
+      "ffx": -8,
+      "fbx": 9
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/sleep": {
+   "nome": "Sleep",
+   "desc": "Fast asleep: eyes shut, soft outlined Zs float up off the head one after another, swaying and growing as they rise, dream motes drift, a slow breathing glow.",
+   "duracao": 2.4,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 0.9,
+      "crouch": 1,
+      "lean": 1,
+      "hy": 2,
+      "fx": -6,
+      "fy": -14,
+      "bx": 7,
+      "by": -14,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 0.9,
+      "crouch": 2,
+      "lean": 2,
+      "hy": 3,
+      "fx": -6,
+      "fy": -14,
+      "bx": 7,
+      "by": -14,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ],
+    [
+     2.4,
+     {
+      "turn": 0.9,
+      "crouch": 1,
+      "lean": 1,
+      "hy": 2,
+      "fx": -6,
+      "fy": -14,
+      "bx": 7,
+      "by": -14,
+      "ffx": -2,
+      "fbx": 3
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/slowed": {
+   "nome": "Slowed",
+   "desc": "Dragged through time: a glassy clock dial behind the head ticks round in heavy steps, flashing with each, while drops sink in slow motion and spread slow rings.",
+   "duracao": 2.4,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 0.3,
+      "lean": 3,
+      "crouch": 3,
+      "ffx": 11,
+      "ffy": -5,
+      "fbx": -9,
+      "fby": -5,
+      "toeB": true,
+      "fx": -5,
+      "fy": -19,
+      "bx": 11,
+      "by": -26
+     }
+    ],
+    [
+     1.2,
+     {
+      "turn": 0.3,
+      "lean": 3,
+      "crouch": 3,
+      "ffx": -9,
+      "ffy": -5,
+      "toeF": true,
+      "fbx": 11,
+      "fby": -5,
+      "fx": 13,
+      "fy": -26,
+      "bx": -4,
+      "by": -19
+     }
+    ],
+    [
+     2.4,
+     {
+      "turn": 0.3,
+      "lean": 3,
+      "crouch": 3,
+      "ffx": 11,
+      "ffy": -5,
+      "fbx": -9,
+      "fby": -5,
+      "toeB": true,
+      "fx": -5,
+      "fy": -19,
+      "bx": 11,
+      "by": -26
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "status/stunned": {
+   "nome": "Stunned",
+   "desc": "Seeing stars: three spinning stars and two little birds circle the head on a tilted ring, ducking behind it and sweeping round in front, trailing glitter.",
+   "duracao": 2,
+   "loop": true,
+   "chaves": [
+    [
+     0,
+     {
+      "turn": 1,
+      "fx": -7,
+      "fy": -15,
+      "bx": 8,
+      "by": -15,
+      "ffx": -3,
+      "fbx": 4,
+      "x": -1,
+      "lean": -3,
+      "hx": -1
+     }
+    ],
+    [
+     0.5,
+     {
+      "turn": 1,
+      "fx": -7,
+      "fy": -15,
+      "bx": 8,
+      "by": -15,
+      "ffx": -2,
+      "fbx": 4,
+      "x": 0,
+      "lean": 0,
+      "crouch": 2,
+      "hy": 1
+     }
+    ],
+    [
+     1,
+     {
+      "turn": 1,
+      "fx": -7,
+      "fy": -15,
+      "bx": 8,
+      "by": -15,
+      "ffx": -3,
+      "fbx": 4,
+      "x": 1,
+      "lean": 3,
+      "hx": 1
+     }
+    ],
+    [
+     1.5,
+     {
+      "turn": 1,
+      "fx": -7,
+      "fy": -15,
+      "bx": 8,
+      "by": -15,
+      "ffx": -3,
+      "fbx": 3,
+      "x": 0,
+      "lean": 0,
+      "crouch": 2,
+      "hy": 1
+     }
+    ],
+    [
+     2,
+     {
+      "turn": 1,
+      "fx": -7,
+      "fy": -15,
+      "bx": 8,
+      "by": -15,
+      "ffx": -3,
+      "fbx": 4,
+      "x": -1,
+      "lean": -3,
+      "hx": -1
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0,
+   "recuperacao": 0,
+   "no_corpo": true
+  },
+  "ui/exclamation": {
+   "nome": "Exclamation",
+   "desc": "A bold ! springs up off the hero's head, stretching as it shoots up and squashing as it lands; surprise ticks flick out, it wobbles, then pops away.",
+   "duracao": 1.4,
+   "loop": false,
+   "chaves": [
+    [
+     -0.08,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0,
+     {
+      "turn": 1,
+      "y": -5,
+      "crouch": -1,
+      "fx": -14,
+      "fy": -34,
+      "bx": 15,
+      "by": -34,
+      "ffx": -3,
+      "ffy": -6,
+      "fbx": 4,
+      "fby": -6
+     },
+     "snap"
+    ],
+    [
+     0.14,
+     {
+      "turn": 1,
+      "y": 0,
+      "crouch": 4,
+      "fx": -14,
+      "fy": -26,
+      "bx": 15,
+      "by": -26,
+      "ffx": -3,
+      "ffy": -4,
+      "fbx": 4,
+      "fby": -4
+     },
+     "in"
+    ],
+    [
+     0.3,
+     {
+      "turn": 1,
+      "fx": -10,
+      "fy": -23,
+      "bx": 11,
+      "by": -23,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.1,
+     {
+      "turn": 1,
+      "fx": -10,
+      "fy": -23,
+      "bx": 11,
+      "by": -23,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.4,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [],
+   "preparacao": 0.08,
+   "recuperacao": 0,
+   "no_corpo": false
+  },
+  "ui/level-up": {
+   "nome": "Level up",
+   "desc": "Gold gathers at the feet and bursts up as a pillar of light round the hero; rings climb it, LEVEL UP! drops in letter by letter, a shine sweeps it, sparkles twinkle.",
+   "duracao": 3.2,
+   "loop": false,
+   "chaves": [
+    [
+     -0.3,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     0.28,
+     {
+      "turn": 0.9,
+      "crouch": 7,
+      "lean": 2,
+      "fx": -6,
+      "fy": -13,
+      "bx": 7,
+      "by": -13,
+      "ffx": -5,
+      "fbx": 6
+     }
+    ],
+    [
+     0.3,
+     {
+      "turn": 1.1,
+      "y": -16,
+      "crouch": -1,
+      "fx": -6,
+      "fy": -45,
+      "bx": 7,
+      "by": -44,
+      "ffx": -2,
+      "ffy": -8,
+      "fbx": 5,
+      "fby": -3,
+      "toeB": true
+     },
+     "snap"
+    ],
+    [
+     0.46,
+     {
+      "turn": 1.1,
+      "y": -19,
+      "crouch": -1,
+      "fx": -6,
+      "fy": -45,
+      "bx": 7,
+      "by": -44,
+      "ffx": -2,
+      "ffy": -8,
+      "fbx": 5,
+      "fby": -3,
+      "toeB": true
+     }
+    ],
+    [
+     0.72,
+     {
+      "turn": 1.1,
+      "y": 0,
+      "crouch": -1,
+      "fx": -6,
+      "fy": -45,
+      "bx": 7,
+      "by": -44,
+      "ffx": -2,
+      "ffy": -4,
+      "fbx": 5,
+      "fby": -4,
+      "toeB": true
+     },
+     "in"
+    ],
+    [
+     0.74,
+     {
+      "turn": 0.9,
+      "crouch": 5,
+      "lean": 2,
+      "fx": -6,
+      "fy": -13,
+      "bx": 7,
+      "by": -13,
+      "ffx": -5,
+      "fbx": 6
+     },
+     "snap"
+    ],
+    [
+     0.95,
+     {
+      "turn": 0.9,
+      "crouch": 0,
+      "fx": -6,
+      "fy": -45,
+      "bx": 9,
+      "by": -15,
+      "ffx": -3,
+      "fbx": 4
+     },
+     "out"
+    ],
+    [
+     1.2,
+     {
+      "turn": 0.9,
+      "crouch": 1,
+      "fx": -6,
+      "fy": -43,
+      "bx": 9,
+      "by": -15,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     1.45,
+     {
+      "turn": 0.9,
+      "crouch": 0,
+      "fx": -6,
+      "fy": -45,
+      "bx": 9,
+      "by": -15,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     2.3,
+     {
+      "turn": 0.9,
+      "crouch": 0,
+      "fx": -6,
+      "fy": -41,
+      "bx": 9,
+      "by": -15,
+      "ffx": -3,
+      "fbx": 4
+     }
+    ],
+    [
+     2.8,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ],
+    [
+     3.2,
+     {
+      "crouch": 3,
+      "fx": 11,
+      "fy": -21,
+      "bx": 9,
+      "by": -21,
+      "ffx": 7,
+      "fbx": -7
+     }
+    ]
+   ],
+   "impactos": [
+    {
+     "t": 0.28,
+     "congela": 0.05,
+     "tremor": 0.14,
+     "amp": 2,
+     "empurra": 0,
+     "pele": null
+    }
+   ],
+   "preparacao": 0.3,
+   "recuperacao": 0,
+   "no_corpo": true
+  }
+ }
+}

@@ -1,0 +1,7 @@
+{
+  "nome": "chr_manequim",
+  "modelo": "bipede",
+  "escala": 2.5,
+  "contorno": "seletivo",
+  "_nota": "Manequim neutro de blocagem (~96 px, ADR-011/016). Anime nele, aprove o movimento, depois aplique a pele."
+}
