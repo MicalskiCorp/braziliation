@@ -23,6 +23,8 @@ As skills vivem em `.claude/skills/`. Cada agente dono tem `Skill` em `tools:` e
 | [`concept-art`](../../../.claude/skills/concept-art/SKILL.md) | `@SpriteArtist` | Etapa 2 (rota C): concept de personagem, criatura ou cena no ComfyUI, com log de lote, gate e aprovação |
 | [`sprite-pipeline`](../../../.claude/skills/sprite-pipeline/SKILL.md) | `@SpriteArtist` | Gerar ou validar um sprite programático (spec JSON, ciclo de crítica visual, `palette_check`) |
 | [`novo-asset`](../../../.claude/skills/novo-asset/SKILL.md) | `@SpriteArtist` | Asset novo sem brief/context pack |
+| [`animar-personagem`](../../../.claude/skills/animar-personagem/SKILL.md) | `@SpriteArtist` | Animar personagem, inimigo ou criatura pelo esqueleto do `pxfx` (ADR-016): rig, blocagem, pele, sheet + JSON |
+| [`vfx`](../../../.claude/skills/vfx/SKILL.md) | `@SpriteArtist` | Criar, portar (com paridade), reescalar, recolorir e exportar efeitos visuais no `pxfx` (ADR-016) |
 | [`nova-cidade`](../../../.claude/skills/nova-cidade/SKILL.md) | `@GameCreative` (Modo 6) · `@UnityDeveloper` (passo 5) | Estrutura de cidade ou estado novo; o passo das pastas em `Assets/Art/` vira pendência para `@UnityDeveloper` |
 | [`handoff`](../../../.claude/skills/handoff/SKILL.md) | `@Historiador`, `@GameCreative`, `@GameArchitect` | Escrever no TODO da camada seguinte — inclui o briefing da rota Pesquisa→Criativo (processar, brainstorm, revisão) |
 | [`novo-agente`](../../../.claude/skills/novo-agente/SKILL.md) | `@AgentArchitect` (Papel 2) | Criar ou refatorar agente (arquivo em `.claude/agents/`, wrapper da 1ª camada, registro no `AGENTS.md`) |

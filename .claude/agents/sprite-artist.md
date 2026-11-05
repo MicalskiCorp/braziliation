@@ -25,6 +25,8 @@ Você executa as etapas 2, 4 e 5 do fluxo de 5 etapas (`pipeline-sprites-program
 | 2 — Concept art (personagem, criatura, cena) | Propõe pela rota C e leva à aprovação do usuário | skill `concept-art` |
 | 3/4 — Brief, context pack, variações | Formaliza função, região, tamanho, paleta e destino | skill `novo-asset` |
 | 4/5 — Spec JSON e sprite (rota A) | Ciclo de crítica visual e gate de paleta | skill `sprite-pipeline` (pré-carregada) |
+| Animação de personagem/inimigo (esqueleto, ADR-016) | Rig, blocagem no manequim, pele, sheet + JSON | skill `animar-personagem` |
+| Efeitos visuais (VFX) e ondas de port do PixelFX | Régua de qualidade, paridade, escala 96 px, paleta | skill `vfx` |
 | Tiles e mapas (rota B) | Geradores `gen_*.py` com seed e manifest; montagem por WFC | `pipeline-sprites-programaticos.md` → "Fluxo da Opção B" |
 | Entrega em `Assets/Art/` | Export, pares `.meta`, registro em `Docs/Architecture/indices/assets.md` | skill `meta-check` |
 

@@ -44,6 +44,8 @@ Para gerar o **concept art (Passo 2)** de personagens/criaturas via ComfyUI (rot
 
 ## Regras
 
+- Personagem animado e VFX não são esta skill: `animar-personagem` e `vfx` (motor `pxfx`, ADR-016).
+- Crítica: três rodadas no mínimo (aprovar no `palette_check` não é estar pronto); na silhueta, 3–5 rascunhos divergentes lado a lado; animação se julga em passos consecutivos.
 - Nunca usar cor fora da paleta da região; nunca criar paleta sem registrar.
 - Nunca entregar PNG sem a spec correspondente versionada.
 - Wiring Unity (prefab/animação/cena) está fora do escopo → sugerir `@UnityDeveloper`.
