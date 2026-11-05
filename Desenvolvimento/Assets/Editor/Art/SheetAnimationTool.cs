@@ -12,6 +12,8 @@ namespace Braziliation.Editor.Art
     /// Uso: selecionar o sheet no Project e rodar
     /// Assets > Braziliation > Criar Animação do Spritesheet.
     /// Saída em Assets/Animations/World/ (padrão AssetsStructure.md).
+    /// Com o JSON lateral do pxfx (<see cref="SheetMetadata"/>, ADR-016), usa a duração de cada
+    /// quadro e o loop de lá; sem ele, 8 fps constantes.
     /// </summary>
     public static class SheetAnimationTool
     {
@@ -87,17 +89,44 @@ namespace Braziliation.Editor.Art
 
             Directory.CreateDirectory(OutputFolder);
 
-            var clip = new AnimationClip { frameRate = FrameRate, name = baseName };
+            // Com o JSON lateral do pxfx (ADR-016), cada quadro dura o que o JSON diz — é o que segura a
+            // antecipação e o impacto — e o loop vem de lá. Sem JSON, 8 fps constantes como antes.
+            var temMeta = SheetMetadata.TryLoadFor(texturePath, out var meta)
+                && meta.duracoes_ms != null
+                && meta.duracoes_ms.Length == sprites.Length;
+            if (temMeta)
+            {
+                loop = meta.loop;
+            }
+
+            var clip = new AnimationClip { frameRate = temMeta ? 60f : FrameRate, name = baseName };
             var binding = new EditorCurveBinding
             {
                 type = typeof(SpriteRenderer),
                 path = string.Empty,
                 propertyName = "m_Sprite",
             };
-            var keys = new ObjectReferenceKeyframe[sprites.Length];
-            for (int i = 0; i < sprites.Length; i++)
+            ObjectReferenceKeyframe[] keys;
+            if (temMeta)
             {
-                keys[i] = new ObjectReferenceKeyframe { time = i / FrameRate, value = sprites[i] };
+                // uma chave por quadro no início dele, e uma chave final que segura o último quadro pelo tempo dele
+                keys = new ObjectReferenceKeyframe[sprites.Length + 1];
+                float t = 0f;
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    keys[i] = new ObjectReferenceKeyframe { time = t, value = sprites[i] };
+                    t += meta.duracoes_ms[i] / 1000f;
+                }
+
+                keys[sprites.Length] = new ObjectReferenceKeyframe { time = t, value = sprites[sprites.Length - 1] };
+            }
+            else
+            {
+                keys = new ObjectReferenceKeyframe[sprites.Length];
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    keys[i] = new ObjectReferenceKeyframe { time = i / FrameRate, value = sprites[i] };
+                }
             }
 
             AnimationUtility.SetObjectReferenceCurve(clip, binding, keys);
@@ -126,7 +155,8 @@ namespace Braziliation.Editor.Art
             }
 
             AssetDatabase.SaveAssets();
-            Debug.Log($"Criado/atualizado: {clipPath} e {controllerPath} ({sprites.Length} frames @ {FrameRate} fps, loop={loop}).");
+            var ritmo = temMeta ? "durações do JSON lateral" : $"{FrameRate} fps";
+            Debug.Log($"Criado/atualizado: {clipPath} e {controllerPath} ({sprites.Length} frames, {ritmo}, loop={loop}).");
         }
 
         private static int ParseIndex(string spriteName)

@@ -11,8 +11,9 @@
 |---------|---------|--------|
 | `SpriteImportPostprocessor.cs` | `Assets/Editor/Art/SpriteImportPostprocessor.cs` | Força Point, sem compressão e o PPU de `PixelScale` em toda textura de `Assets/Art/` |
 | `PixelScale.cs` | `Assets/Editor/Art/PixelScale.cs` | Fonte única do PPU por asset durante a migração do ADR-011: 48 no grid atual, 32 no que ainda não foi re-autorado |
-| `SheetAutoSlicer.cs` | `Assets/Editor/Art/SheetAutoSlicer.cs` | Fatia `*_sheet.png` em grade quadrada com pivot no centro-inferior, preservando IDs |
-| `SheetAnimationTool.cs` | `Assets/Editor/Art/SheetAnimationTool.cs` | Gera AnimationClip + AnimatorController de um sheet fatiado (`Assets > Braziliation > Criar Animação do Spritesheet`); lote fixo da onda atual em `Tools > Braziliation > Setup > Gerar Animators da Onda Atual` |
+| `SheetAutoSlicer.cs` | `Assets/Editor/Art/SheetAutoSlicer.cs` | Fatia `*_sheet.png`: com o JSON lateral do pxfx, quadro e pivô do JSON (ADR-016); sem ele, grade quadrada com pivot no centro-inferior. Preserva IDs |
+| `SheetMetadata.cs` | `Assets/Editor/Art/SheetMetadata.cs` | Lê o JSON lateral `{nome}_sheet.json` (formato `braziliation-sheet/1`: quadro, pivô, durações, loop) para o slicer e o gerador de clipe |
+| `SheetAnimationTool.cs` | `Assets/Editor/Art/SheetAnimationTool.cs` | Gera AnimationClip + AnimatorController de um sheet fatiado (`Assets > Braziliation > Criar Animação do Spritesheet`), com a duração de cada quadro e o loop do JSON lateral quando existe (senão 8 fps); lote fixo da onda atual em `Tools > Braziliation > Setup > Gerar Animators da Onda Atual` |
 | `WfcMapImporter.cs` | `Assets/Editor/Art/WfcMapImporter.cs` | Pinta um Tilemap a partir do `.unity.json` do `gen_map_wfc.py` (`Assets > Braziliation > Importar Mapa WFC...`); variante sem diálogo para o mapa de teste em `Tools > Braziliation > Setup > Importar Mapa WFC de Teste` |
 | `DemoSceneBuilderEditor.cs` | `Assets/Editor/Gameplay/DemoSceneBuilderEditor.cs` | Cria/atualiza a cena fixa `DemoGameplay.unity` (`Braziliation > Demo > Create or Update Fixed Demo Scene`) |
 | `MainMenuUISetupEditor.cs` | `Assets/Editor/Menu/MainMenuUISetupEditor.cs` | Monta a hierarquia de UI do menu principal (`Tools > Braziliation > Setup Main Menu UI`) |

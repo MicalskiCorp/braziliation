@@ -9,10 +9,12 @@ namespace Braziliation.Editor.Art
     /// <summary>
     /// Fatia automaticamente spritesheets que entram em Assets/Art/.
     /// Convenção (animation-guide.md): arquivos "*_sheet.png" são sheets
-    /// horizontais de frames quadrados (largura múltipla da altura).
-    /// Aplica Sprite Mode Multiple + grid de {altura}x{altura} com pivot
-    /// bottom-center, preservando os IDs quando o sheet já está fatiado
-    /// (para não quebrar AnimationClips existentes).
+    /// horizontais. Com o JSON lateral do pxfx (<see cref="SheetMetadata"/>,
+    /// ADR-016), cada quadro tem o tamanho e o pivô que o JSON diz — quadro
+    /// retangular e pivô nos pés do personagem. Sem JSON, vale a convenção
+    /// antiga: quadros quadrados (largura múltipla da altura), pivot
+    /// bottom-center. Preserva os IDs quando o sheet já está fatiado no
+    /// tamanho atual (para não quebrar AnimationClips existentes).
     /// </summary>
     public class SheetAutoSlicer : AssetPostprocessor
     {
@@ -32,9 +34,29 @@ namespace Braziliation.Editor.Art
             }
 
             var (width, height) = ReadPngSize(assetPath);
-            if (height <= 0 || width <= height || width % height != 0)
+            int frameW, frameH, frames;
+            var pivot = new Vector2(0.5f, 0f);
+            if (SheetMetadata.TryLoadFor(assetPath, out var meta))
             {
-                return;
+                frameW = meta.FrameWidth;
+                frameH = meta.FrameHeight;
+                frames = meta.quadros;
+                pivot = meta.NormalizedPivot;
+                if (height != frameH || width != frameW * frames)
+                {
+                    Debug.LogWarning($"[SheetAutoSlicer] '{assetPath}' tem {width}x{height}, mas o JSON diz {frames} quadros de {frameW}x{frameH}. Não fatiado.");
+                    return;
+                }
+            }
+            else
+            {
+                if (height <= 0 || width <= height || width % height != 0)
+                {
+                    return;
+                }
+
+                frameW = frameH = height;
+                frames = width / height;
             }
 
             var importer = (TextureImporter)assetImporter;
@@ -45,7 +67,6 @@ namespace Braziliation.Editor.Art
             var provider = factory.GetSpriteEditorDataProviderFromObject(importer);
             provider.InitSpriteEditorDataProvider();
 
-            int frames = width / height;
             var existingRects = provider.GetSpriteRects();
             // Não basta conferir a contagem: se a textura foi redesenhada em outro
             // tamanho (ex.: 32px → 48px) mas o número de quadros não mudou, a contagem
@@ -54,8 +75,9 @@ namespace Braziliation.Editor.Art
             // o re-export em 96/48 px — a guarda só olhava `Length`.
             bool alreadySlicedAtCurrentSize = existingRects.Length == frames
                 && existingRects.Length > 0
-                && Mathf.RoundToInt(existingRects[0].rect.width) == height
-                && Mathf.RoundToInt(existingRects[0].rect.height) == height;
+                && Mathf.RoundToInt(existingRects[0].rect.width) == frameW
+                && Mathf.RoundToInt(existingRects[0].rect.height) == frameH
+                && existingRects[0].pivot == pivot;
             if (alreadySlicedAtCurrentSize)
             {
                 return;
@@ -70,9 +92,9 @@ namespace Braziliation.Editor.Art
                 {
                     name = $"{name}_{i}",
                     spriteID = id,
-                    rect = new Rect(i * height, 0, height, height),
-                    alignment = SpriteAlignment.BottomCenter,
-                    pivot = new Vector2(0.5f, 0f),
+                    rect = new Rect(i * frameW, 0, frameW, frameH),
+                    alignment = meta != null ? SpriteAlignment.Custom : SpriteAlignment.BottomCenter,
+                    pivot = pivot,
                 });
                 pairs.Add(new SpriteNameFileIdPair($"{name}_{i}", id));
             }
