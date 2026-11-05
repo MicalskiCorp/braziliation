@@ -22,6 +22,9 @@ public sealed class DocsConsistencyTests
         "_inbox", "_pendente-curadoria", "_processado", "_lotes",
         // Central (ADR-012): ambiente Python (traz .md de pacotes) e estado local das execuções.
         ".venv", ".estado",
+        // Cópia de terceiros fixada como gabarito de paridade (ADR-016): Ferramentas/vendor/pixelfx/.
+        // Não é documentação do projeto e nunca é editada — seus .md não seguem roteador nem teto de tokens.
+        "vendor",
     };
 
     internal static IEnumerable<string> MarkdownFiles()
