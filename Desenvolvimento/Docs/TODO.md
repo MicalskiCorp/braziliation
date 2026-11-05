@@ -50,7 +50,7 @@
 | Inventário completo: capacidade, categorias por pilar, persistência no save | `@SystemsDeveloper` + `@GameplayEngineer` | Média | ⏸ depende dos números de Crafting |
 | Reação a dano (stagger) e percepção por linha de visão | `@GameplayEngineer` | Média | ❌ — ver [`Mechanics/InimigosIA.md`](Mechanics/InimigosIA.md) |
 | Perfis de inimigo dos arquétipos de Blumenau (skill `novo-inimigo`) | `@GameCreative` + `@GameplayEngineer` | Média | ⏸ depende do inimigo base |
-| Trocar o inimigo placeholder pelo `enm_automato_idle_sheet.png` | `@GameplayEngineer` | Média | ⏸ depende do inimigo base |
+| Trocar o inimigo placeholder pelo `enm_automato_idle_sheet.png` — o código já trocou (`DemoSceneVisuals` aponta o autômato), falta a cena: o `Enemy_Demo` da `DemoGameplay.unity` ainda guarda sprite e sheets do cão do Gothicvania, e o `DemoSceneBootstrap` reaproveita o objeto. Trocar no próprio objeto, no Editor (sprite, `ResourcePath` dos clipes, collider); **não** usar `Braziliation > Demo > Create or Update Fixed Demo Scene`, que recria a cena do zero e apaga o que entrou nela depois | `@GameplayEngineer` | Média | ⏸ depende do inimigo base |
 | Hit-stop, tremor e empurrão no `PlayerCombat`/`HealthComponent` lendo os `eventos` do JSON lateral do sheet (`congela`, `tremor`, `amp` — ADR-016); hoje o combate não tem nenhuma resposta de impacto. Lógica de tempo no core, MonoBehaviour só aplica | `@GameplayEngineer` | Média | ❌ — formato em [`animacao-por-esqueleto.md`](../../Design/GuiasDeArte/animacao-por-esqueleto.md) |
 
 ---
@@ -66,6 +66,7 @@
 | Armas na mão do esqueleto: portar os `WEAPONS` do `rig.js` (espada, lança, martelo, pistola, lançador...) e a busca de cotovelo de quem segura — as atuações da biblioteca pedem arma | `@SpriteArtist` | Média | ❌ |
 | Decidir a camada emissiva do VFX: o brilho aditivo e a fumaça translúcida do `pxfx` reprovam no `palette_check`; opções: máscara emissiva do sprite no URP 2D, exceção de paleta para VFX, ou exportar sem luz | Usuário (arte) | Média | ❌ — contexto no [`vfx-guide.md`](../../Design/GuiasDeArte/vfx-guide.md) |
 | Afinar os modelos do esqueleto por criatura ao criar cada uma: proporções do quadrúpede (Lobisomem) e da serpente (Minhocão, Boitatá), taxa de órfãos da transferência de pele (1,5% no teste) | `@SpriteArtist` | Baixa | ⏸ junto com cada personagem |
+| Tirar os placeholders CC0 do Gothicvania do projeto quando a arte própria os substituir: remover `Assets/Art/ThirdParty/Gothicvania/`, a entrada no `Desenvolvimento/CREDITS.md`, a seção de terceiros do [`indices/assets.md`](Architecture/indices/assets.md), a lista `Legado` do `PixelScale` (vira constante de 48) e o `TilesetAutoSlicer` (só atua em `ThirdParty/`). Bloqueios por asset: herói (3 arquivos) ← protagonista; chão e tileset do castelo (o `CastleBlockoutEditor` fixa os nomes de sprite do Gothicvania) ← tile de topo e quina do `gen_tileset.py` (`Tech/tech_debt.md`); fundo ← ainda sem asset nem pendência; cão (3 arquivos) ← item do inimigo placeholder em Gameplay | `@SpriteArtist` + `@UnityDeveloper` | Baixa | ⏸ depende da premissa (protagonista) e do tile de borda |
 
 ---
 

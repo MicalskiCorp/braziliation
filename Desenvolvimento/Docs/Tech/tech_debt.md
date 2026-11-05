@@ -19,18 +19,6 @@ Format:
 
 ### Alta
 
-- **Item:** Dois artefatos antigos do autômato continuam publicados e duplicam a página do personagem
-- **Where:** claude.ai/artifact/SG8dXeBixrnPTm6GrGWiLP ("Autômato Abandonado", página de revisão de 26 set) e claude.ai/artifact/N9vDgyhyb5QNJBLjHqMxXu ("Idle do Autômato")
-- **Why:** Nasceram antes do passo de página por personagem. Hoje o conteúdo deles vive na página canônica (9TF8ejHqNuMmzcJe43EurS), e a lista da galeria mostra dois itens com o mesmo nome "Autômato Abandonado" — exatamente a desorganização que o hub veio resolver.
-- **Fix:** Apagar os dois, com confirmação do usuário (apagar artefato é irreversível e quebra o link para quem o tiver). Só o usuário decide.
-
-
-
-- **Item:** Só os placeholders CC0 seguem no grid antigo depois do ADR-011
-- **Where:** `Assets/Art/ThirdParty/Gothicvania/**` · lista viva em `Assets/Editor/Art/Escala/PixelScale.cs`
-- **Why:** Toda a arte própria está no grid de 48 desde 2026-10-05, quando o autômato foi redesenhado. Restam os 9 placeholders do Gothicvania, importados a 32 PPU — mantêm o tamanho em mundo e só parecem menos densos ao lado do resto.
-- **Fix:** Saem junto com `Art/ThirdParty/` e o `CREDITS.md` quando a arte própria os substituir, conforme o item já rastreado no TODO. Aí `PixelScale` vira uma constante só.
-
 - **Item:** UI de slots trata `Corrupt` e `FromNewerBuild` como "slot vazio"
 - **Where:** `Assets/Scripts/UI/SaveSlotsView.cs` (usa `SaveGameService.Load`)
 - **Why:** ADR-007 criou `LoadDetailed` com status distinguíveis, mas a UI ainda chama o
@@ -201,6 +189,11 @@ Format:
   no manifest; o `gen_map_wfc.py` ganha a adjacência "topo só encosta em ar por cima".
 
 ### Baixa
+
+- **Item:** Regras e fichas ainda descrevem a escala de antes do ADR-011 e o caminho antigo do `PixelScale`
+- **Where:** `.claude/rules/csharp.md` (contexto e seção Unity: "640×360 @ 32 PPU") · `.claude/rules/arte.md` (aviso "Migração em curso") · `.claude/agents/unity-developer.md` (linha da resolução) · `Docs/Architecture/Sistemas/Editor.md` (Fontes Técnicas do `PixelScale.cs`)
+- **Why:** O `csharp.md` entra em toda sessão que toca C# e ainda manda 640×360 @ 32 PPU (ADR-004, substituído). Os outros três apontam `Assets/Editor/Art/PixelScale.cs`, mas o arquivo mora em `Assets/Editor/Art/Escala/`, e falam de "arte antiga" a 32 PPU quando só restam os placeholders CC0. O `DocsConsistencyTests` não pega porque confere a ficha pelo nome do script, não pelo caminho. Achado ao pagar a dívida dos placeholders em 2026-11-05 (o `CLAUDE.md` foi corrigido na mesma sessão).
+- **Fix:** Trocar para 960×540 @ 48 PPU, tile 48 (ADR-011), corrigir o caminho para `Assets/Editor/Art/Escala/PixelScale.cs` e dizer que só os placeholders do Gothicvania seguem a 32 PPU, apontando para a pendência deles em UI e arte no `Docs/TODO.md`. Edição de texto, sem código.
 
 - **Item:** Rampas de material anteriores à paleta de 32 continuam repetindo degrau ou emprestando cor de outro material
 - **Where:** `Design/ArteFonte/Ferramentas/montagem_base.py` (`LIGAS` bronze `6·7·8·8` e prata `3·4·5·5`, `BASE_RAMPS` cobre `1·9·C·C`) · `ContextPacks/enm-soldado-clerico/montagem.py` (`esmalte` `2·4·5·D`, `clero` `1·G·9·C`, `loden` `1·2·E·E`, `meia` `2·C·D·D`) · mapas fixos de textura do `spec_redetail.py` e do `gen_tileset.py` (`claro`/`escuro`), que só conhecem as keys `1`-`G`
