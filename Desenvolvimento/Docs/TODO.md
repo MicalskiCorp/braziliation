@@ -51,6 +51,7 @@
 | Reação a dano (stagger) e percepção por linha de visão | `@GameplayEngineer` | Média | ❌ — ver [`Mechanics/InimigosIA.md`](Mechanics/InimigosIA.md) |
 | Perfis de inimigo dos arquétipos de Blumenau (skill `novo-inimigo`) | `@GameCreative` + `@GameplayEngineer` | Média | ⏸ depende do inimigo base |
 | Trocar o inimigo placeholder pelo `enm_automato_idle_sheet.png` | `@GameplayEngineer` | Média | ⏸ depende do inimigo base |
+| Hit-stop, tremor e empurrão no `PlayerCombat`/`HealthComponent` lendo os `eventos` do JSON lateral do sheet (`congela`, `tremor`, `amp` — ADR-016); hoje o combate não tem nenhuma resposta de impacto. Lógica de tempo no core, MonoBehaviour só aplica | `@GameplayEngineer` | Média | ❌ — formato em [`animacao-por-esqueleto.md`](../../Design/GuiasDeArte/animacao-por-esqueleto.md) |
 
 ---
 
@@ -70,6 +71,13 @@
 | Pixel pass da comporta (dentes de engrenagem mais legíveis) — agora possível pelo MCP `aseprite` | `@SpriteArtist` | Baixa | ❌ opcional |
 | Substituir os placeholders Gothicvania e remover `Art/ThirdParty/` + `CREDITS.md` | `@SpriteArtist` | Baixa | ⏸ quando a Onda 3 entregar personagens |
 | Rampas estendidas da paleta Blumenau (16 → até 32 cores) | Usuário (arte) | Baixa | ⏸ quando a arte final pedir |
+| pxfx onda 1 — combate: portar e reescalar impacts, melee, projectiles, explosions, spawn, status e o resto de fire (90 arquivos), com paridade OK na escala 1, `--escala 2.5` corrigida e aprovação pelo [`vfx-guide.md`](../../Design/GuiasDeArte/vfx-guide.md) (skill `vfx`) | `@SpriteArtist` | Média | 🔨 `fire/torch` portado — ver [`pxfx/index.md`](../../Design/ArteFonte/Ferramentas/pxfx/index.md) |
+| pxfx onda 2 — mundo: water, weather, lightning, scifi, critters, nature, ice (89 arquivos) | `@SpriteArtist` | Baixa | ⏸ depois da onda 1 |
+| pxfx onda 3 — sobrenatural: holy, shadow, arcane redesenhados para lendas e clero (37 arquivos) | `@SpriteArtist` | Baixa | ⏸ depois da onda 2 |
+| pxfx onda 4 — interface: ui, pickups, transitions (36 arquivos); ao fechar, remover `Ferramentas/vendor/pixelfx/` (o aviso MIT fica) | `@SpriteArtist` | Baixa | ⏸ depois da onda 3 |
+| Armas na mão do esqueleto: portar os `WEAPONS` do `rig.js` (espada, lança, martelo, pistola, lançador...) e a busca de cotovelo de quem segura — as atuações da biblioteca pedem arma | `@SpriteArtist` | Média | ❌ |
+| Decidir a camada emissiva do VFX: o brilho aditivo e a fumaça translúcida do `pxfx` reprovam no `palette_check`; opções: máscara emissiva do sprite no URP 2D, exceção de paleta para VFX, ou exportar sem luz | Usuário (arte) | Média | ❌ — contexto no [`vfx-guide.md`](../../Design/GuiasDeArte/vfx-guide.md) |
+| Afinar os modelos do esqueleto por criatura ao criar cada uma: proporções do quadrúpede (Lobisomem) e da serpente (Minhocão, Boitatá), taxa de órfãos da transferência de pele (1,5% no teste) | `@SpriteArtist` | Baixa | ⏸ junto com cada personagem |
 
 ---
 

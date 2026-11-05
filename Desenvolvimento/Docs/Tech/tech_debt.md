@@ -26,13 +26,6 @@ Format:
 
 
 
-- **Item:** `Ferramentas/index.md` vive raspando o teto de 1500 tokens do roteador
-- **Where:** `Design/ArteFonte/Ferramentas/index.md`
-- **Why:** São 19 ferramentas numa tabela só, com descrição de uma ou duas linhas cada. Em 2026-10-07 estourou ao ganhar duas linhas e foi preciso enxugar seis descrições para caber. A próxima ferramenta estoura de novo.
-- **Fix:** Separar como já se fez em `Design/Pesquisa/Fontes/`: o `index.md` vira roteador com nome e meia linha por ferramenta, e um `catalogo.md` ao lado guarda uso, parâmetros e o porquê de cada uma.
-
-
-
 - **Item:** Só os placeholders CC0 seguem no grid antigo depois do ADR-011
 - **Where:** `Assets/Art/ThirdParty/Gothicvania/**` · lista viva em `Assets/Editor/Art/Escala/PixelScale.cs`
 - **Why:** Toda a arte própria está no grid de 48 desde 2026-10-05, quando o autômato foi redesenhado. Restam os 9 placeholders do Gothicvania, importados a 32 PPU — mantêm o tamanho em mundo e só parecem menos densos ao lado do resto.
@@ -51,6 +44,17 @@ Format:
 - **Fix:** tela de rebind sobre `InputActionRebindingExtensions`; avaliar Steam Input API.
 
 ### Média
+
+- **Item:** `montagem_base.py` pinta contorno uniforme e sombreia por faixa horizontal
+- **Where:** `Design/ArteFonte/Ferramentas/montagem_base.py` (`outline()`, `shade()`) — usado pelo Autômato e pelo Soldado Clérico
+- **Why:** A style-bible pede "outline não uniforme" (escuro na sombra, sutil na luz), e o `outline()` pinta `"1"` em toda a borda; o `shade()` decide a banda só pela posição do pixel na linha, então topo e base de uma peça não diferem por luz. Achado na análise do PixelFX (ADR-016).
+- **Fix:** Personagem novo nasce no `pxfx` (contorno seletivo, 4 tons por normal · luz); os dois personagens abertos serão refeitos do zero lá. O `montagem_base` fica para props e legado — só corrigir se um prop precisar.
+
+- **Item:** Reescala de efeito do `pxfx` amostra ruído por célula LOCAL — trama em blocos
+- **Where:** `pxfx/efeitos/*` com `rand(floor(x), floor(y))` em `shade` (ex.: o enrolado do `fire/torch` na escala 2,5)
+- **Why:** Na escala 1 cada célula local é um pixel; na 2,5 vira um bloco de 2,5 px, a mesma mistura de densidade que o ADR-011 veta. A paridade não pega porque roda na escala 1.
+- **Fix:** Ao reescalar cada efeito (ondas do TODO), amostrar o ruído por pixel de TELA quando `p.k != 1` — mesmo padrão do `flameTongue` no `fire/_lib.py`.
+
 
 - **Item:** `architecture_decisions.md` passou do teto de tokens — registrado como exceção em `TokenBudgetTests.DocumentExceptions`
 - **Where:** `Desenvolvimento/Docs/Architecture/architecture_decisions.md` (~5595 de 5000 tokens do `TokenBudgetTests`)
