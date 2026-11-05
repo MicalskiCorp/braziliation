@@ -18,7 +18,7 @@
 | Pipeline | URP 2D — apenas sprites e tilemaps; sem modelos 3D no gameplay |
 | Tamanho base de sprite | 48×48 a 96×96 px (1 tile = 48×48 @ 48 PPU = 1 unidade Unity) |
 | Animação | Sprite-based (2D Animation, Aseprite); run 8-12 frames, attack 6-10 |
-| Paleta máxima por sprite | ~32 cores (base regional de 16 + rampas estendidas conforme necessário) |
+| Paleta máxima por sprite | ~32 cores — paleta regional de 16 base + até 16 de rampa (Blumenau: 32 desde 2026-11-05, ver `palette-guide.md`) |
 | Assets legados (pré-ADR-004) | Upscale ×2 nearest — funcionais, aguardam re-autoria em densidade nova |
 
 ## Audio direction

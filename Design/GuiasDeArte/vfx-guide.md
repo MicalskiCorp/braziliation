@@ -9,8 +9,9 @@
 
 - **Escala:** efeito nasce para o personagem de ~96 px (ADR-011). Os efeitos do PixelFX foram feitos para um
   boneco de 38 px: renderize com `--escala 2.5` e corrija os laços de ponto (ver `pxfx/index.md`).
-- **Paleta:** a cor do efeito vem de uma rampa da paleta regional (`--regiao blumenau --rampa 1,9,G,8`), do escuro
-  ao claro. O buffer de COR do pxfx é opaco com dither Bayer: passa no `palette_check.py`.
+- **Paleta:** a cor do efeito vem de uma rampa da paleta regional (`--regiao blumenau --rampa L,9,W,K` para fogo),
+  do escuro ao claro — as rampas por material estão no [`palette-guide.md`](palette-guide.md#rampas-de-blumenau), na ordem
+  inversa (aceso → escuro). O buffer de COR do pxfx é opaco com dither Bayer: passa no `palette_check.py`.
 - **Brilho e translucidez:** a luz aditiva (`glow`, `light`) e a fumaça translúcida (`disc`, `blend`) geram alpha
   parcial, que o `palette_check` reprova. Até a decisão da camada emissiva (TODO de Desenvolvimento), exporte
   com `--opts '{"light": 0}'` ou troque `disc` por dither, e registre o brilho desejado no brief.

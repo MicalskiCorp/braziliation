@@ -59,7 +59,6 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
-| Rampas estendidas da paleta Blumenau (16 → até 32 cores) | Usuário (arte) | Baixa | ⏸ quando a arte final pedir |
 | pxfx onda 1 — combate: portar e reescalar impacts, melee, projectiles, explosions, spawn, status e o resto de fire (90 arquivos), com paridade OK na escala 1, `--escala 2.5` corrigida e aprovação pelo [`vfx-guide.md`](../../Design/GuiasDeArte/vfx-guide.md) (skill `vfx`) | `@SpriteArtist` | Média | 🔨 `fire/torch` portado — ver [`pxfx/index.md`](../../Design/ArteFonte/Ferramentas/pxfx/index.md) |
 | pxfx onda 2 — mundo: water, weather, lightning, scifi, critters, nature, ice (89 arquivos) | `@SpriteArtist` | Baixa | ⏸ depois da onda 1 |
 | pxfx onda 3 — sobrenatural: holy, shadow, arcane redesenhados para lendas e clero (37 arquivos) | `@SpriteArtist` | Baixa | ⏸ depois da onda 2 |

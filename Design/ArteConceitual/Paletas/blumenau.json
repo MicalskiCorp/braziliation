@@ -2,9 +2,25 @@
   "region": "Blumenau",
   "status": "aprovada",
   "approved": "2026-07-11",
+  "extended": "2026-11-05",
   "source": "Design/GuiasDeArte/palette-guide.md",
-  "note": "Valores hex derivados das direções do palette-guide (Blumenau clockpunk/hídrico). Aprovada em 2026-07-11; paleta Aseprite equivalente em Design/ArteFonte/Aseprite/blumenau.gpl. ADR-004: limite por sprite elevado a 32 (rampas estendidas a adicionar conforme re-autoria).",
+  "note": "Valores hex derivados das direções do palette-guide (Blumenau clockpunk/hídrico). Base de 16 (keys 1-9, A-G) aprovada em 2026-07-11; 16 cores de rampa (keys H-Y, sem I e O) aprovadas em 2026-11-05 para fechar rampas de 4 degraus por material (ADR-016) e dar tom de pele. Paleta Aseprite equivalente em Design/ArteFonte/Aseprite/blumenau.gpl; folha de referência em blumenau-rampas.svg.",
   "max_colors_per_sprite": 32,
+  "rampas": {
+    "_ordem": "aceso → escuro, a convenção do \"rampas\" do rig.json (ADR-016). O --rampa do pxfx e as LIGAS/BASE_RAMPS do montagem_base pedem escuro → claro: inverter.",
+    "ferro": ["5", "H", "4", "3"],
+    "esmalte": ["J", "5", "H", "4"],
+    "latao": ["K", "8", "7", "6"],
+    "cobre": ["T", "M", "9", "L"],
+    "chama": ["K", "W", "9", "L"],
+    "vinho": ["P", "G", "N", "1"],
+    "musgo": ["R", "E", "Q", "2"],
+    "espectral": ["X", "R", "E", "Q"],
+    "madeira": ["D", "C", "B", "A"],
+    "pele_clara": ["S", "T", "U", "V"],
+    "pele_escura": ["T", "U", "V", "A"],
+    "sombra_fria": ["4", "Y", "2", "1"]
+  },
   "colors": [
     {
       "key": "1",
@@ -85,6 +101,86 @@
       "key": "G",
       "hex": "#7a2e2a",
       "role": "vermelho escuro dessaturado — sangue/alerta"
+    },
+    {
+      "key": "H",
+      "hex": "#66717c",
+      "role": "ferro médio — meio-tom entre 4 e 5"
+    },
+    {
+      "key": "J",
+      "hex": "#c2c8cb",
+      "role": "branco frio — especular de metal, esmalte, Edith"
+    },
+    {
+      "key": "K",
+      "hex": "#e6d293",
+      "role": "latão polido — brilho do latão e luz pálida da chama"
+    },
+    {
+      "key": "L",
+      "hex": "#5b2e1f",
+      "role": "cobre escuro — sombra do cobre e da chama"
+    },
+    {
+      "key": "M",
+      "hex": "#b86b40",
+      "role": "cobre vivo — luz do cobre"
+    },
+    {
+      "key": "N",
+      "hex": "#4a1e22",
+      "role": "vinho escuro — sombra do vermelho (teatro, clero)"
+    },
+    {
+      "key": "P",
+      "hex": "#a8503e",
+      "role": "vermelho gasto — luz do vinho"
+    },
+    {
+      "key": "Q",
+      "hex": "#333d33",
+      "role": "musgo sombra — sombra do verde"
+    },
+    {
+      "key": "R",
+      "hex": "#7e8c69",
+      "role": "musgo luz — loden, folhagem iluminada"
+    },
+    {
+      "key": "S",
+      "hex": "#e8c8a4",
+      "role": "pele luz"
+    },
+    {
+      "key": "T",
+      "hex": "#c9997a",
+      "role": "pele clara — também brilho do cobre"
+    },
+    {
+      "key": "U",
+      "hex": "#9e6d50",
+      "role": "pele média"
+    },
+    {
+      "key": "V",
+      "hex": "#6e4535",
+      "role": "pele escura — sombra da pele clara"
+    },
+    {
+      "key": "W",
+      "hex": "#d4842f",
+      "role": "âmbar — chama e lampião, só fonte de luz"
+    },
+    {
+      "key": "X",
+      "hex": "#a8c9b4",
+      "role": "verde espectral — brilho do Jardim de Edith, pouca área"
+    },
+    {
+      "key": "Y",
+      "hex": "#3b3644",
+      "role": "roxo acinzentado — sombra fria noturna"
     }
   ]
 }

@@ -202,6 +202,11 @@ Format:
 
 ### Baixa
 
+- **Item:** Rampas de material anteriores à paleta de 32 continuam repetindo degrau ou emprestando cor de outro material
+- **Where:** `Design/ArteFonte/Ferramentas/montagem_base.py` (`LIGAS` bronze `6·7·8·8` e prata `3·4·5·5`, `BASE_RAMPS` cobre `1·9·C·C`) · `ContextPacks/enm-soldado-clerico/montagem.py` (`esmalte` `2·4·5·D`, `clero` `1·G·9·C`, `loden` `1·2·E·E`, `meia` `2·C·D·D`) · mapas fixos de textura do `spec_redetail.py` e do `gen_tileset.py` (`claro`/`escuro`), que só conhecem as keys `1`-`G`
+- **Why:** A paleta de Blumenau ganhou 16 cores de rampa em 2026-11-05 (keys `H`-`Y`, rampas por nome no bloco `"rampas"` do `blumenau.json`). Por decisão do usuário, as rampas antigas **não** foram trocadas: o Autômato e o Soldado Clérico estão aprovados, e regerar com rampa nova mudaria os PNGs entregues.
+- **Fix:** Trocar pela rampa nomeada do `palette-guide.md` (invertida, porque o `montagem_base` pede escuro → claro) **só quando o asset for re-autorado** — e os dois personagens já vão ser refeitos no `pxfx` (item do `montagem_base` acima). Os mapas `claro`/`escuro` ganham as keys novas quando um tile ou spec de prop usar cor de rampa. Atenção também ao `pixelize.py`: ele quantiza para as 32 cores, então um concept sem gente pode cair em tom de pele — conferir no gate e, se acontecer, dar a ele um filtro por rampa.
+
 - **Item:** `TilesetAutoSlicer` fatia o tileset placeholder do castelo em todas as 780 células (grid 52×15), não só as não-vazias
 - **Where:** `Assets/Editor/Art/TilesetAutoSlicer.cs` · `Assets/Art/ThirdParty/Gothicvania/Environments/env_placeholder_castelo_tileset.png`
 - **Why:** Ler a transparência por célula durante o import (`OnPreprocessTexture`) exigiria decodificar o PNG à mão nesse ponto do pipeline (a textura ainda não existe como objeto legível) — optei pela fatia completa, igual ao "Grid By Cell Size" padrão do Unity, para não arriscar um import quebrado sem retorno visual síncrono. A maioria das ~500 células vazias nunca vira sprite usado; só 3 viraram Tile asset para o blockout.
