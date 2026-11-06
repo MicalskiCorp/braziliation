@@ -55,14 +55,35 @@ public sealed class TokenBudgetTests
             $"Prompt de agente acima de {AgentPromptBudget} tokens — mover detalhe para skill ou doc lido sob demanda:\n{Report(over)}");
     }
 
+    /// <summary>
+    /// Regra em `.claude/rules/` sem `paths:` no frontmatter carrega em toda sessão, como o CLAUDE.md —
+    /// e ficava fora da conta até 2026-11-05, quando entrou a `busca-com-filtro.md`.
+    /// </summary>
+    private static readonly Regex PathsFrontmatter = new(@"\A---\n(?:.*\n)*?paths:", RegexOptions.Compiled);
+
+    internal static IEnumerable<string> AlwaysLoadedRules() =>
+        Directory.EnumerateFiles(Path.Combine(GitRoot, ".claude", "rules"), "*.md")
+            .Where(f => !PathsFrontmatter.IsMatch(File.ReadAllText(f).Replace("\r\n", "\n")));
+
     [Fact]
     public void Session_Context_Fits_Budget()
     {
-        var total = Tokens(Path.Combine(GitRoot, "CLAUDE.md")) + Tokens(Path.Combine(GitRoot, "AGENTS.md"));
+        var files = new[] { Path.Combine(GitRoot, "CLAUDE.md"), Path.Combine(GitRoot, "AGENTS.md") }
+            .Concat(AlwaysLoadedRules()).ToList();
+        var total = files.Sum(Tokens);
 
         Assert.True(total <= SessionContextBudget,
-            $"CLAUDE.md + AGENTS.md somam ~{total} tokens (teto {SessionContextBudget}) e entram em toda sessão. " +
-            "Detalhe de processo vai para Desenvolvimento/Docs/Tech/processos.md.");
+            $"CLAUDE.md + AGENTS.md + regras sem paths: somam ~{total} tokens (teto {SessionContextBudget}) e entram em toda sessão: " +
+            $"{string.Join(", ", files.Select(Relative))}. Detalhe de processo vai para Desenvolvimento/Docs/Tech/processos.md.");
+    }
+
+    [Fact]
+    public void Path_Scoped_Rules_Are_Not_Counted_As_Session_Context()
+    {
+        var always = AlwaysLoadedRules().Select(Path.GetFileName).ToList();
+
+        Assert.Contains("busca-com-filtro.md", always);
+        Assert.DoesNotContain("csharp.md", always);
     }
 
     [Fact]

@@ -19,6 +19,7 @@ As skills vivem em `.claude/skills/`. Cada agente dono tem `Skill` em `tools:` e
 
 | Skill | Agente(s) | Quando invocar |
 |-------|-----------|-----------------|
+| [`estrutura`](../../../.claude/skills/estrutura/SKILL.md) | Todos (não invocável pelo usuário) | Antes da primeira busca para localizar algo, e antes de criar, mover ou renomear: leva ao mapa [`estrutura.md`](../../../estrutura.md), que dá o caminho sem `Glob`/`Grep` às cegas |
 | [`gerir-todo`](../../../.claude/skills/gerir-todo/SKILL.md) | `@GameArchitect`, `@GameCreative`, `@Historiador`, `@AgentArchitect` | Operar o TODO da própria camada: listar, adicionar, status, concluir (regra de baixa de cada TODO), `concept-art`, varredura |
 | [`concept-art`](../../../.claude/skills/concept-art/SKILL.md) | `@SpriteArtist` | Etapa 2 (rota C): concept de personagem, criatura ou cena no ComfyUI, com log de lote, gate e aprovação |
 | [`sprite-pipeline`](../../../.claude/skills/sprite-pipeline/SKILL.md) | `@SpriteArtist` | Gerar ou validar um sprite programático (spec JSON, ciclo de crítica visual, `palette_check`) |
@@ -108,6 +109,8 @@ Painel local em `Central/` (ADR-012, [README](../../../Central/README.md)): uma 
 
 | Arquivo | Conteúdo | Como é usado |
 |---------|----------|--------------|
+| [`estrutura.md`](../../../estrutura.md) | Mapa de navegação: onde fica cada coisa, o que não ler, onde criar | Lido uma vez por sessão antes de buscar (skill `estrutura`, contrato da Central e regra `busca-com-filtro`) |
+| `.claude/rules/busca-com-filtro.md` | Restrição de busca: `path` sempre, nunca a raiz, sem `**/*.ext` solto, caminho conhecido → `Read` | Única regra sem `paths:`, carregada em **toda** sessão; o `TokenBudgetTests` a soma ao `CLAUDE.md` + `AGENTS.md` |
 | [`Desenvolvimento/Docs/GDD/visao.md`](../GDD/visao.md) | Pitch, pilares e experiência-alvo | Lido pelos agentes e pela skill `fechar-decisao` |
 | `.claude/rules/csharp.md` | Convenções C# e definição de pronto | Carregada ao tocar `*.cs` |
 | `.claude/rules/arte.md` · [`direcao-de-arte.md`](../../../Design/GuiasDeArte/direcao-de-arte.md) | Direção de arte e áudio | Regra carregada nas pastas de arte (`ArteConceitual`, `ArteFonte`, `GuiasDeArte`, `Assets/Art`); guia sob demanda |

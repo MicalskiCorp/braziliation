@@ -175,7 +175,8 @@ def criar_app(raiz: Path | None = None, estado: Path | None = None, fabrica=None
             linhas += ["", f.instrucao]
         if extra.strip():
             linhas += ["", "Orientação do responsável: " + extra.strip()]
-        linhas += ["", "Trabalhe nesses itens seguindo o seu Passo 0 e o seu Passo Final. Pergunte quando precisar de decisão."]
+        linhas += ["", "Trabalhe nesses itens (com o seu Passo 0 e o seu Passo Final, se o seu agente os tiver). "
+                       "Pergunte quando precisar de decisão."]
         return "\n".join(linhas)
 
     @app.post("/fila/{fila_id}/executar")

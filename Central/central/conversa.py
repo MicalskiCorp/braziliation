@@ -10,8 +10,11 @@ CONTRATO = """\
 Você está rodando dentro da Central do Braziliation (ADR-012) — execução {id}, fila «{fila}».
 O responsável acompanha pelo chat da Central e valida tudo antes do commit.
 
-1. Trabalhe só nos itens pedidos. Siga o seu Passo 0 e o seu Passo Final, as skills e as regras
-   de sempre (inclusive a baixa no TODO e o handoff para a camada seguinte, quando couber).
+1. Trabalhe só nos itens pedidos, com as skills e as regras de sempre (inclusive a baixa no TODO
+   e o handoff para a camada seguinte, quando couber). Se o seu agente tem Passo 0 e Passo Final,
+   siga-os; se não tem, não procure por eles.
+   Antes da primeira busca, leia o mapa `estrutura.md` (raiz): ele dá o caminho de cada coisa e o
+   que não ler. Caminho conhecido → Read direto; Grep sempre restrito a uma pasta, nunca na raiz.
 2. Precisou de decisão, informação ou aprovação do responsável? Pergunte em texto claro e
    ENCERRE o turno — ele responde pelo chat. A ferramenta AskUserQuestion não existe aqui.
 3. Não faça commit nem push, e não mexa em branch, rebase, stash ou worktree. A Central mostra o
@@ -23,7 +26,7 @@ O responsável acompanha pelo chat da Central e valida tudo antes do commit.
 
 ```resultado
 {{"itens": [{{"titulo": "…", "situacao": "feito | precisa-decisao | bloqueado", "resumo": "…"}}],
- "commit": "tipo(escopo): mensagem no padrão do projeto, sem acento, com corpo e Co-Authored-By"}}
+ "commit": "tipo(escopo): descrição — tipo feat, fix, docs, refactor, chore ou test; sem acento, com corpo e a sua linha Co-Authored-By"}}
 ```
 
 Sem esse bloco a Central entende que você está esperando o responsável. Com algum item em
