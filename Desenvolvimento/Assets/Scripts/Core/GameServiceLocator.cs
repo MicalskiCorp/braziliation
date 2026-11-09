@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Braziliation.Crafting;
+using Braziliation.Hydric;
 using Braziliation.SaveSystem;
 using Braziliation.Settings;
 using Braziliation.Storage;
@@ -62,8 +63,18 @@ namespace Braziliation.Core
                 SaveMigrations.All);
             SettingsService = new SettingsService(new StorageProviderSettingsAdapter(configProvider));
 
+            // Controles (ADR-017): overrides de binding e glifo aplicados antes da primeira leitura de
+            // input; cada rebind ou restauração volta para o GameSettings por aqui.
+            var settings = SettingsService.Load();
+            GameInput.Configure(settings.InputBindingOverrides, settings.GlyphStyle);
+            GameInput.BindingOverridesChanged += PersistBindingOverrides;
+
             if (initializeCraftingService)
                 Register(new CraftingService());
+
+            // Estado global do rio (Blumenau). Vive aqui porque o locator dura entre cenas, e o rio
+            // é estado de campanha, não de mapa. Mudado só pelos eventos de campanha (SetState).
+            Register(new HydricStateManager());
         }
 
         /// <summary>
@@ -75,8 +86,19 @@ namespace Braziliation.Core
         /// </summary>
         private void OnDestroy()
         {
-            if (ReferenceEquals(Instance, this))
-                Instance = null;
+            if (!ReferenceEquals(Instance, this))
+                return;
+
+            GameInput.BindingOverridesChanged -= PersistBindingOverrides;
+            Instance = null;
+        }
+
+        /// <summary>Grava só os overrides, relendo o arquivo para não apagar o que outra tela mudou.</summary>
+        private void PersistBindingOverrides(string json)
+        {
+            var settings = SettingsService.Load();
+            settings.InputBindingOverrides = json;
+            SettingsService.Save(settings);
         }
 
         /// <summary>

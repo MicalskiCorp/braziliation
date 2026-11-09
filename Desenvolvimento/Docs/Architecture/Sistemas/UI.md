@@ -18,6 +18,11 @@
 | `CraftingPanelController.cs` | `Assets/Scripts/UI/CraftingPanelController.cs` | Painel de crafting (ver [Crafting](Crafting.md)) |
 | `BuildProgressionView.cs` | `Assets/Scripts/UI/BuildProgressionView.cs` | Progressão visual da build por receptáculo (ver [Build](Build.md)) |
 | `HybridSynergyFeedbackView.cs` | `Assets/Scripts/UI/HybridSynergyFeedbackView.cs` | Feedback de sinergia híbrida ativada |
+| `UiCanvasScaling.cs` | `Assets/Scripts/UI/UiCanvasScaling.cs` | Padrão único de `CanvasScaler` (ADR-011): Scale With Screen Size, 960×540, Match 0.5 — todo código que cria canvas passa por ele |
+| `RebindView.cs` | `Assets/Scripts/UI/RebindView.cs` | Tela de controles (ADR-017): lista, troca e restaura os bindings pelo `GameInput`, navegável por controle |
+| `RebindRowView.cs` | `Assets/Scripts/UI/RebindRowView.cs` | Linha da tela de controles: ação, glifo ou texto do binding, trocar e restaurar |
+| `ControlGlyphLibrary.cs` | `Assets/Scripts/UI/ControlGlyphLibrary.cs` | ScriptableObject seletor de glifo: família + caminho do controle → sprite |
+| `UiEventSystem.cs` | `Assets/Scripts/UI/UiEventSystem.cs` | Garante o par `EventSystem` + `InputSystemUIInputModule` na cena (navegação por controle) |
 
 ## Features que Usam Este Sistema
 
@@ -42,13 +47,14 @@
 
 - As views de UI não devem conter lógica de negócio — apenas apresentação e eventos.
 - Toda comunicação com SaveSystem e Settings passa pelos serviços, nunca diretamente pelos arquivos.
+- Canvas novo nunca faz `AddComponent<CanvasScaler>()` cru, que deixa Constant Pixel Size e 800×600: usa `UiCanvasScaling.Apply`. Layout se escreve em pixels da referência 960×540, que sai ×2 em 1080p.
+- Cena com painel interativo tem `EventSystem`: o builder ou bootstrap chama `UiEventSystem.Ensure()`.
 
 ### Estado do slot por `SaveLoadStatus` (ADR-007)
 
 Contrato fechado pelo `@TechLead` em 2026-11-05. `SaveSlotsView` carrega cada slot com
-`SaveGameService.LoadDetailed` e entrega o `SaveLoadResult` inteiro ao `SaveSlotEntryView.Bind`.
-Enquanto a dívida "UI de slots trata `Corrupt`…" constar em [`tech_debt.md`](../../Tech/tech_debt.md),
-o código ainda usa `Load`.
+`SaveGameService.LoadDetailed` e entrega o `SaveLoadResult` inteiro ao `SaveSlotEntryView.Bind`
+(implementado em 2026-11-09; testes em `SaveLoadResultTests`).
 
 | Status | Indicador | Texto | Continuar (`Mode.Load`) | Novo Jogo (`Mode.New`) |
 |--------|-----------|-------|-------------------------|------------------------|

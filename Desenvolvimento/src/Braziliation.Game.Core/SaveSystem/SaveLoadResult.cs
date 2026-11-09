@@ -52,8 +52,26 @@ public readonly struct SaveLoadResult
     /// <summary>Versão de schema encontrada nos bytes. -1 quando não foi possível ler.</summary>
     public int FoundVersion { get; }
 
-    /// <summary>Verdadeiro quando há um slot utilizável.</summary>
+    /// <summary>Verdadeiro quando há um slot utilizável. Decide o Continuar do menu.</summary>
     public bool IsUsable => Status is SaveLoadStatus.Ok or SaveLoadStatus.Migrated;
+
+    /// <summary>
+    /// Verdadeiro quando Novo Jogo pode gravar por cima deste slot. Decide o Novo Jogo do menu.
+    /// </summary>
+    public bool CanOverwrite => AllowsOverwrite(Status);
+
+    /// <summary>
+    /// Regra de sobrescrita por status (contrato em <c>Sistemas/UI.md</c> › Estado do slot).
+    /// É uma lista **positiva**: um status novo nasce bloqueado até alguém decidir.
+    /// <see cref="SaveLoadStatus.Corrupt"/> pode ser sobrescrito porque não há tela para apagar o
+    /// slot; <see cref="SaveLoadStatus.FromNewerBuild"/> e <see cref="SaveLoadStatus.NoMigrationPath"/>
+    /// nunca, porque os bytes ainda podem ser lidos por outra build.
+    /// </summary>
+    public static bool AllowsOverwrite(SaveLoadStatus status) =>
+        status is SaveLoadStatus.Empty
+            or SaveLoadStatus.Ok
+            or SaveLoadStatus.Migrated
+            or SaveLoadStatus.Corrupt;
 
     internal static SaveLoadResult Ok(SaveSlot slot) =>
         new(SaveLoadStatus.Ok, slot, slot.SchemaVersion);

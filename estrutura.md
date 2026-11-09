@@ -60,7 +60,7 @@ A versão curta destas regras, carregada em toda sessão, é a [busca-com-filtro
 | Escala de placeholders (32 PPU) | [PixelScale.cs](Desenvolvimento/Assets/Editor/Art/Escala/PixelScale.cs) |
 | Input | [GameInput.cs](Desenvolvimento/Assets/Scripts/Core/GameInput.cs) · [action map](Desenvolvimento/Assets/InputSystem_Actions.inputactions) |
 | Serviços na cena | [GameServiceLocator.cs](Desenvolvimento/Assets/Scripts/Core/GameServiceLocator.cs) |
-| Core C# puro | [src/Braziliation.Game.Core/](Desenvolvimento/src/Braziliation.Game.Core/): `Build/`, `Crafting/`, `Enemies/`, `SaveSystem/`, `Serialization/`, `Settings/`, `Storage/` |
+| Core C# puro | [src/Braziliation.Game.Core/](Desenvolvimento/src/Braziliation.Game.Core/): `Build/`, `Crafting/`, `Enemies/`, `Hydric/`, `SaveSystem/`, `Serialization/`, `Settings/`, `Storage/` |
 | Testes xUnit e guardas do repositório | [Tests/Braziliation.Game.Tests/](Desenvolvimento/Tests/Braziliation.Game.Tests/): `{Sistema}Tests.cs`, `TestDoubles.cs`, `DocsConsistencyTests`, `TokenBudgetTests` |
 | Testes EditMode | [Assets/Tests/EditMode/](Desenvolvimento/Assets/Tests/EditMode/) |
 | Inimigo como dado | [InimigosIA.md](Desenvolvimento/Docs/Mechanics/InimigosIA.md) · [ScriptableObjects/](Desenvolvimento/Assets/ScriptableObjects/) |

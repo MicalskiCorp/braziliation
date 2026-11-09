@@ -3,7 +3,6 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Braziliation.Core;
@@ -18,19 +17,21 @@ namespace Braziliation.Editor.Menu
     /// </summary>
     public static class MainMenuUISetupEditor
     {
-        // ── Layout constants (reference canvas: 320 × 180 px — UI canvas escala
-        // independente do PPU; migração p/ 640×360 é opcional e cosmética, ADR-004) ──
-        private const float ButtonWidth    = 80f;
-        private const float ButtonHeight   = 10f;
-        private const float ButtonSpacing  = 2f;
-        private const float PanelPaddingH  = 8f;
-        private const float PanelPaddingV  = 4f;
-        private const int   FontSize       = 5;
-        private const float TitleHeight    = 10f;
-        private const float TitleSpacing   = 3f;  // gap between title and first button
+        // ── Layout constants, em pixels da referência 960 × 540 do UiCanvasScaling (ADR-011).
+        // Eram de um canvas 320 × 180; os valores são os antigos × 3, então o menu sai igual. ──
+        private const float ButtonWidth    = 240f;
+        private const float ButtonHeight   = 30f;
+        private const float ButtonSpacing  = 6f;
+        private const float PanelPaddingH  = 24f;
+        private const float PanelPaddingV  = 12f;
+        private const int   FontSize       = 15;
+        private const int   TitleFontSize  = 30;
+        private const float TitleHeight    = 30f;
+        private const float TitleSpacing   = 9f;  // gap between title and first button
+        private const float LabelInsetH    = 12f;
+        private const float LabelInsetV    = 6f;
 
         private const string CanvasName    = "MainMenuCanvas";
-        private const string EventSysName  = "EventSystem";
         private const string ServicesName  = "GameServices";
 
         // ── Entry points ──────────────────────────────────────────────────────
@@ -93,13 +94,9 @@ namespace Braziliation.Editor.Menu
         // ── EventSystem ───────────────────────────────────────────────────────
         private static void EnsureEventSystem()
         {
-            if (Object.FindAnyObjectByType<EventSystem>() != null)
-                return;
-
-            var go = new GameObject(EventSysName);
-            Undo.RegisterCreatedObjectUndo(go, "Create EventSystem");
-            go.AddComponent<EventSystem>();
-            go.AddComponent<InputSystemUIInputModule>();
+            var go = UiEventSystem.Ensure();
+            if (go != null)
+                Undo.RegisterCreatedObjectUndo(go, "Create EventSystem");
         }
 
         // ── GameServiceLocator ────────────────────────────────────────────────
@@ -118,7 +115,15 @@ namespace Braziliation.Editor.Menu
         {
             var existing = GameObject.Find(CanvasName);
             if (existing != null)
+            {
+                // Reaplica o padrão: um canvas criado antes ainda está em 320 × 180, e o layout abaixo
+                // já é de 960 × 540 — sem isto, rodar o setup de novo deixaria o menu 3× maior.
+                var existingScaler = existing.GetComponent<CanvasScaler>();
+                if (existingScaler != null)
+                    Undo.RecordObject(existingScaler, "Apply Canvas Scaling");
+                UiCanvasScaling.Apply(existing);
                 return existing;
+            }
 
             var go     = new GameObject(CanvasName);
             Undo.RegisterCreatedObjectUndo(go, "Create MainMenuCanvas");
@@ -128,10 +133,7 @@ namespace Braziliation.Editor.Menu
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvas.sortingOrder = 10;
 
-            var scaler = go.AddComponent<CanvasScaler>();
-            scaler.uiScaleMode         = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(320f, 180f);
-            scaler.matchWidthOrHeight  = 0.5f;
+            UiCanvasScaling.Apply(go);
 
             go.AddComponent<GraphicRaycaster>();
             return go;
@@ -190,7 +192,7 @@ namespace Braziliation.Editor.Menu
 
             var tmp = EnsureComponent<TextMeshProUGUI>(go);
             tmp.text             = "B R A Z I L I A T I O N";
-            tmp.fontSize         = 10;
+            tmp.fontSize         = TitleFontSize;
             tmp.fontStyle        = FontStyles.Bold;
             tmp.alignment        = TextAlignmentOptions.Center;
             tmp.color            = new Color(0.88f, 0.68f, 0.22f, 1f);  // dieselpunk amber/gold
@@ -254,8 +256,8 @@ namespace Braziliation.Editor.Menu
             var rt = labelGo.GetComponent<RectTransform>();
             rt.anchorMin = Vector2.zero;
             rt.anchorMax = Vector2.one;
-            rt.offsetMin = new Vector2(4f, 2f);
-            rt.offsetMax = new Vector2(-4f, -2f);
+            rt.offsetMin = new Vector2(LabelInsetH, LabelInsetV);
+            rt.offsetMax = new Vector2(-LabelInsetH, -LabelInsetV);
 
             var lbl = EnsureComponent<TextMeshProUGUI>(labelGo);
             lbl.text           = text;
@@ -335,8 +337,8 @@ namespace Braziliation.Editor.Menu
         // ── Camera ───────────────────────────────────────────────────────────
 
         /// <summary>
-        /// Sets the main camera orthographic size so that a 320×180 sprite at 16 PPU
-        /// fills the viewport exactly. orthoSize = referenceHeight / (2 × PPU) = 5.625
+        /// Sets the main camera orthographic size for the 960×540 @ 48 PPU reference (ADR-011):
+        /// orthoSize = referenceHeight / (2 × PPU) = 540 / 96 = 5.625 (20 × 11.25 units on screen).
         /// </summary>
         private static void FixCamera()
         {
@@ -352,7 +354,7 @@ namespace Braziliation.Editor.Menu
                 Undo.RecordObject(cam, "Fix Camera OrthoSize");
                 cam.orthographicSize = 5.625f;
                 EditorUtility.SetDirty(cam);
-                Debug.Log("[MainMenuUISetup] Camera orthoSize set to 5.625 (320×180 @ 16 PPU).");
+                Debug.Log("[MainMenuUISetup] Camera orthoSize set to 5.625 (960×540 @ 48 PPU, ADR-011).");
             }
         }
 

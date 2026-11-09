@@ -15,8 +15,13 @@ Famílias disponíveis:
   marmore           — mausoléu: placa polida, bloco veado, cimalha, variante lascada
   periferia         — bairro pós-enchente: tábua encharcada, zinco, reboco com lama, entulho
 
+Bordas (--bordas TIPO): cinco linhas a mais no fim do sheet — topo (superfície com ar por cima),
+quina_esq, quina_dir, lateral_esq e lateral_dir —, derivadas do miolo do TIPO para casar de cor.
+O resto do sheet não muda.
+
 Uso:
   python gen_tileset.py enxaimel --palette ../../ArteConceitual/Paletas/blumenau.json --seed 42 -o out.png
+  python gen_tileset.py cemiterio --palette ../../ArteConceitual/Paletas/blumenau.json --seed 42 --bordas terra -o out.png
 
 Dependência: pip install pillow
 """
@@ -553,6 +558,106 @@ FAMILIES = {
 }
 
 
+# ---------------------------------------------------------------- bordas (modificador genérico)
+#
+# Todo tipo acima é miolo: textura opaca que ladrilha nas 4 direções. Nível em vista lateral precisa
+# também da superfície onde se pisa (ar por cima) e das quinas. Em vez de um tipo novo por família,
+# `--bordas TIPO` deriva topo e quinas do próprio miolo daquele tipo, para casar de cor. As linhas
+# entram DEPOIS das normais e sorteiam depois delas, então o resto do sheet sai idêntico.
+
+AR = "."              # pixel transparente (mesmo símbolo das specs)
+SUPERFICIE = 2        # linha mais alta da superfície no grid 16 (2 linhas de ar no mínimo)
+SUPERFICIE_VARIA = 2  # a silhueta desce até 2 px: o ar ocupa de 2 a 4 linhas, a borda de 3 a 5
+LATERAL = 2           # coluna da face lateral das quinas (2 a 4 px de ar ao lado)
+LATERAL_VARIA = 2
+
+
+def _luminance(rgba: tuple) -> float:
+    r, g, b = rgba[:3]
+    return 0.299 * r + 0.587 * g + 0.114 * b
+
+
+def _tons(grid: list, palette: dict) -> tuple:
+    """(luz, sombra) do próprio miolo: a cor mais clara e a mais escura entre as que cobrem ≥ 5% do tile."""
+    conta = {}
+    for row in grid:
+        for ch in row:
+            conta[ch] = conta.get(ch, 0) + 1
+    usadas = [ch for ch, n in conta.items() if n >= TILE * TILE * 0.05 and ch in palette] or list(conta)
+    usadas.sort(key=lambda ch: _luminance(palette[ch]))
+    return usadas[-1], usadas[0]
+
+
+def _perfil(rng: random.Random, base: int, varia: int) -> list:
+    """Passeio de ±1 px que começa e termina em `base`: a borda encosta igual em qualquer variação vizinha."""
+    h = [base] * TILE
+    for i in range(1, TILE):
+        h[i] = min(base + varia, max(base, h[i - 1] + rng.choice((-1, 0, 0, 1))))
+    for i in range(TILE - 1, -1, -1):  # volta à base no fim sem degrau maior que 1
+        h[i] = min(h[i], base + (TILE - 1 - i))
+    return h
+
+
+def _recorta(grid: list, palette: dict, ar, lateral) -> list:
+    """Aplica a máscara: ar(x, y) vira transparente; a primeira linha opaca ganha a luz (topo
+    iluminado) e a primeira coluna opaca da lateral ganha a sombra (face do lado)."""
+    luz, sombra = _tons(grid, palette)
+    out = [list(r) for r in grid]
+    for y in range(TILE):
+        for x in range(TILE):
+            if ar(x, y):
+                out[y][x] = AR
+            elif ar(x, y - 1) if y > 0 else False:
+                out[y][x] = luz
+            elif lateral(x, y):
+                out[y][x] = sombra
+    return out
+
+
+def border_rows(base_fn, palette: dict) -> list:
+    """Linhas topo, quina_esq, quina_dir, lateral_esq e lateral_dir derivadas do miolo `base_fn`."""
+
+    def topo(rng: random.Random) -> list:
+        h = _perfil(rng, SUPERFICIE, SUPERFICIE_VARIA)
+        return _recorta(base_fn(rng), palette, lambda x, y: y < h[x], lambda x, y: False)
+
+    def quina(lado: str):
+        def fn(rng: random.Random) -> list:
+            h = _perfil(rng, SUPERFICIE, SUPERFICIE_VARIA)
+            w = _perfil(rng, LATERAL, LATERAL_VARIA)  # por linha; fecha na base em cima e embaixo
+            if lado == "esq":
+                fora = lambda x, y: x < w[y]
+                face = lambda x, y: x == w[y]
+            else:
+                fora = lambda x, y: x > TILE - 1 - w[y]
+                face = lambda x, y: x == TILE - 1 - w[y]
+            return _recorta(base_fn(rng), palette, lambda x, y: y < h[x] or fora(x, y), face)
+        return fn
+
+    def lateral(lado: str):
+        # Face do lado sem ar por cima: empilha sob a quina. O recorte começa e termina na mesma
+        # coluna da quina (LATERAL), então as fiadas encostam sem degrau.
+        def fn(rng: random.Random) -> list:
+            w = _perfil(rng, LATERAL, LATERAL_VARIA)
+            if lado == "esq":
+                return _recorta(base_fn(rng), palette, lambda x, y: x < w[y], lambda x, y: x == w[y])
+            return _recorta(base_fn(rng), palette, lambda x, y: x > TILE - 1 - w[y],
+                            lambda x, y: x == TILE - 1 - w[y])
+        return fn
+
+    return [("topo", topo), ("quina_esq", quina("esq")), ("quina_dir", quina("dir")),
+            ("lateral_esq", lateral("esq")), ("lateral_dir", lateral("dir"))]
+
+
+NOTAS_BORDA = {
+    "topo": "superfície de chão: ar por cima. No gen_map_wfc.py, marcar o tile com \"exige_ar_acima\": true",
+    "quina_esq": "fim de chão à esquerda: ar por cima e à esquerda; encosta em topo pela direita",
+    "quina_dir": "fim de chão à direita: ar por cima e à direita; encosta em topo pela esquerda",
+    "lateral_esq": "face esquerda do bloco, sob a quina_esq: ar à esquerda; encosta em miolo pela direita",
+    "lateral_dir": "face direita do bloco, sob a quina_dir: ar à direita; encosta em miolo pela esquerda",
+}
+
+
 # Tiles que NÃO ladrilham livremente — vão para o manifest e para o Rule Tile.
 NOTAS = {
     "agua": {"marca_nivel": "base: uma linha d'água por tile, não empilhar na vertical"},
@@ -568,12 +673,19 @@ def main() -> None:
     ap.add_argument("--seed", type=int, required=True, help="Seed determinística (registrada no manifest)")
     ap.add_argument("--variations", type=int, default=4, help="Variações por tipo de tile (default 4)")
     ap.add_argument("--scale", type=int, default=3, help="Expansão do sheet final: 3 = tile 48px do ADR-011 (default, Scale3x + textura), 2 = tile 32px do ADR-004, legado (EPX + textura), 1 = nativo 16")
+    ap.add_argument("--bordas", metavar="TIPO",
+                    help="Acrescenta topo, quina_esq e quina_dir derivados do miolo deste tipo (ex.: terra)")
     ap.add_argument("-o", "--out", type=Path, required=True)
     args = ap.parse_args()
 
     palette = load_palette(args.palette)
     rng = random.Random(args.seed)
-    types = FAMILIES[args.familia]
+    types = list(FAMILIES[args.familia])
+    if args.bordas:
+        base = dict(types).get(args.bordas)
+        if base is None:
+            ap.error(f"--bordas: '{args.bordas}' não é tipo de {args.familia} ({', '.join(n for n, _ in types)})")
+        types += border_rows(base, palette)
 
     out_tile = TILE * args.scale
     sheet = Image.new("RGBA", (out_tile * args.variations, out_tile * len(types)), (0, 0, 0, 0))
@@ -599,7 +711,8 @@ def main() -> None:
                 grid = [ "".join(ch * args.scale for ch in r) for r in grid for _ in range(args.scale) ]
             for y in range(len(grid)):
                 for x in range(len(grid[0])):
-                    sheet.putpixel((col * out_tile + x, row * out_tile + y), palette[grid[y][x]])
+                    if grid[y][x] != AR:  # ar das bordas fica transparente
+                        sheet.putpixel((col * out_tile + x, row * out_tile + y), palette[grid[y][x]])
     sheet.save(args.out)
 
     manifest = {
@@ -614,8 +727,12 @@ def main() -> None:
         "rows": [name for name, _ in types],
         "layout": "linhas = tipos, colunas = variações",
     }
-    if args.familia in NOTAS:
-        manifest["notas"] = NOTAS[args.familia]
+    notas = dict(NOTAS.get(args.familia, {}))
+    if args.bordas:
+        manifest["bordas"] = {"de": args.bordas, "linhas": [n for n, _ in types[-len(NOTAS_BORDA):]]}
+        notas.update(NOTAS_BORDA)
+    if notas:
+        manifest["notas"] = notas
     manifest_path = args.out.with_suffix(".manifest.json")
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"OK: {args.out} ({len(types)} tipos x {args.variations} variações, seed {args.seed}) + {manifest_path.name}")

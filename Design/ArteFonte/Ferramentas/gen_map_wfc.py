@@ -65,6 +65,26 @@ class Ruleset:
             raise ValueError("peso de tile deve ser > 0")
 
         self.allowed = self._build_adjacency(data.get("adjacency", {}))
+        self._require_air_above(data["tiles"])
+
+    def _require_air_above(self, tiles: list) -> None:
+        """Tile com "exige_ar_acima": true (topo e quinas do `gen_tileset.py --bordas`) so aceita ar
+        por cima -- tile sem "source", como o ceu. Vale sobre a adjacencia escrita ou aprendida: um
+        exemplo mal desenhado nao consegue enterrar a superficie do chao debaixo de outro tile."""
+        air = 0
+        for t in tiles:
+            if t.get("source") is None:
+                air |= 1 << self.index[t["id"]]
+        for t in tiles:
+            if not t.get("exige_ar_acima"):
+                continue
+            if air == 0:
+                raise ValueError(f"{t['id']} exige ar acima, mas o ruleset nao tem tile de ar (source null)")
+            i = self.index[t["id"]]
+            self.allowed["up"][i] &= air
+            for j in range(len(self.ids)):  # e a metade simetrica: nada solido aceita o topo por baixo
+                if not (air >> j) & 1:
+                    self.allowed["down"][j] &= ~(1 << i)
 
     def _build_adjacency(self, raw: dict) -> dict:
         """Converte a adjacencia declarada em mascaras de bits, ja simetrizada.

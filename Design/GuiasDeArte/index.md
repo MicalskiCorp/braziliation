@@ -7,11 +7,12 @@ Hub dos padrões visuais usados para manter consistência entre arte humana, art
 | Guia | Uso |
 |------|-----|
 | [`style-bible.md`](style-bible.md) | Bíblia visual: pilares, formas, materiais, leitura e acabamento |
-| [`direcao-de-arte.md`](direcao-de-arte.md) | Direção de arte e de áudio: estilo, restrições técnicas (ADR-004), música, SFX e idioma |
+| [`direcao-de-arte.md`](direcao-de-arte.md) | Direção de arte e de áudio: estilo, restrições técnicas (ADR-011), música, SFX e idioma |
 | [`sprite-scale-guide.md`](sprite-scale-guide.md) | Escala, tamanhos de sprite, tile grid e PPU |
 | [`palette-guide.md`](palette-guide.md) | Paletas, limites de cor e contraste por região |
 | [`animation-guide.md`](animation-guide.md) | Regras de animação, frames, timing e spritesheets |
 | [`pipeline-ia-sprites.md`](pipeline-ia-sprites.md) | Roteiro para gerar sprites/assets com IA (difusão/ComfyUI) mantendo estilo |
+| [`pipeline-ia-fundamentos.md`](pipeline-ia-fundamentos.md) | Fundamentos da rota de IA: stack e ferramentas, consistência, quando treinar LoRA (gate do ADR-014) e trilha de estudo |
 | [`pipeline-sprites-programaticos.md`](pipeline-sprites-programaticos.md) | Roteiro para gerar sprites por código/agente com validação automática de paleta e leitura |
 | [`asset-brief-template.md`](asset-brief-template.md) | Template para pedir asset novo de forma consistente |
 | [`context-pack-template.md`](context-pack-template.md) | Template para empacotar contexto, prompt, referências e configurações de IA |

@@ -1,4 +1,5 @@
 using Braziliation.Core;
+using Braziliation.Hydric;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,12 +14,10 @@ namespace Braziliation.Gameplay
     /// o método <see cref="Toggle"/> desta comporta (ou usar o prefab
     /// <c>Prop_FloodgateGate</c>, que já nasce com essa ligação pronta).
     ///
-    /// Hoje a comporta só conhece aberta/fechada/travada por ação local (a alavanca). O
-    /// sistema global de 4 estados do rio
-    /// (<c>Docs/GDD/Features/Blumenau-SistemaHidrico.md</c>) ainda não existe
-    /// (<c>@SystemsDeveloper</c>, <c>HydricStateManager</c>) — quando existir, ele trava a
-    /// comporta via <see cref="SetLocked"/> nos estados de Cheia/Saturação em vez de
-    /// alterar esta classe. Ver <c>Docs/Tech/tech_debt.md</c>.
+    /// O estado global do rio (<see cref="HydricStateManager"/>, no <c>GameServiceLocator</c>;
+    /// <c>Docs/GDD/Features/Blumenau-SistemaHidrico.md</c>) trava a comporta em Cheia e Saturação
+    /// (<see cref="HydricStateRules.LocksFloodgates"/>) e a destrava nos outros estados. Sem locator
+    /// na cena, a comporta responde só à alavanca.
     /// </summary>
     [RequireComponent(typeof(Collider2D))]
     public sealed class FloodgateController : MonoBehaviour
@@ -46,13 +45,14 @@ namespace Braziliation.Gameplay
         private Collider2D _collider;
         private bool _isOpen;
         private bool _locked;
+        private HydricStateManager _hydric;
 
         /// <summary>Comporta aberta (sem bloqueio) ou fechada (bloqueando a passagem).</summary>
         public bool IsOpen => _isOpen;
 
         /// <summary>
         /// Travada ignora <see cref="Toggle"/>, <see cref="Open"/> e <see cref="Close"/> —
-        /// reservado para o futuro <c>HydricStateManager</c> (ex.: trava fechada em Saturação).
+        /// hoje quem trava é o estado do rio (Cheia e Saturação).
         /// </summary>
         public bool IsLocked => _locked;
 
@@ -65,6 +65,30 @@ namespace Braziliation.Gameplay
 
             ApplyState(_startsOpen, force: true);
         }
+
+        // No Start, não no Awake: o GameServiceLocator registra o rio no Awake dele.
+        private void Start()
+        {
+            var locator = GameServiceLocator.Instance;
+            if (locator == null)
+                return;
+
+            _hydric = locator.Resolve<HydricStateManager>();
+            if (_hydric == null)
+                return;
+
+            _hydric.StateChanged += OnHydricStateChanged;
+            SetLocked(_hydric.Current.LocksFloodgates());
+        }
+
+        private void OnDestroy()
+        {
+            if (_hydric != null)
+                _hydric.StateChanged -= OnHydricStateChanged;
+        }
+
+        private void OnHydricStateChanged(HydricState previous, HydricState current) =>
+            SetLocked(current.LocksFloodgates());
 
         /// <summary>Alterna aberta/fechada. Pensado para o <c>UnityEvent</c> da alavanca.</summary>
         public void Toggle()
@@ -94,8 +118,9 @@ namespace Braziliation.Gameplay
         }
 
         /// <summary>
-        /// Trava a comporta no estado atual, ignorando novas interações da alavanca. Ponto
-        /// de integração do futuro <c>HydricStateManager</c> (ex.: travar fechada em Saturação).
+        /// Trava a comporta no estado atual, ignorando novas interações da alavanca. Chamado pelo
+        /// estado do rio a cada mudança: uma trava posta por outro sistema é desfeita quando o rio
+        /// volta a Rotina ou Alerta.
         /// </summary>
         public void SetLocked(bool locked) => _locked = locked;
 

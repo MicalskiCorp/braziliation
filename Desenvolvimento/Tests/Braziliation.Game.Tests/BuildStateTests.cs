@@ -197,4 +197,83 @@ public sealed class BuildStateTests
         Assert.Contains("NightVision", state.UnlockedExplorationFlags);
         Assert.DoesNotContain("HiddenPaths", state.UnlockedExplorationFlags);
     }
+
+    // ── GetReceptacle / CreateDefault (BuildState é o dono dos receptáculos) ──
+
+    [Fact]
+    public void GetReceptacle_PresentType_ReturnsSameInstance()
+    {
+        var cape = new ReceptacleData { Type = ReceptacleType.Cape, Pillar = PillarType.Mystical };
+        var state = new BuildState
+        {
+            Receptacles = new List<ReceptacleData>
+            {
+                new ReceptacleData { Type = ReceptacleType.Exoskeleton, Pillar = PillarType.Mechanical },
+                cape,
+            }
+        };
+
+        Assert.Same(cape, state.GetReceptacle(ReceptacleType.Cape));
+    }
+
+    [Fact]
+    public void GetReceptacle_AbsentType_ReturnsNull()
+    {
+        var state = new BuildState
+        {
+            Receptacles = new List<ReceptacleData>
+            {
+                new ReceptacleData { Type = ReceptacleType.Exoskeleton, Pillar = PillarType.Mechanical },
+            }
+        };
+
+        Assert.Null(state.GetReceptacle(ReceptacleType.Spine));
+    }
+
+    [Fact]
+    public void GetReceptacle_EmptyState_ReturnsNull()
+    {
+        Assert.Null(new BuildState().GetReceptacle(ReceptacleType.Exoskeleton));
+    }
+
+    [Fact]
+    public void GetReceptacle_SeesChangesMadeThroughTheReturnedInstance()
+    {
+        var state = BuildState.CreateDefault();
+
+        state.GetReceptacle(ReceptacleType.Spine)!.ExpansionLevel = 2;
+
+        Assert.Equal(2, state.GetReceptacle(ReceptacleType.Spine)!.ExpansionLevel);
+    }
+
+    [Theory]
+    [InlineData(ReceptacleType.Exoskeleton, PillarType.Mechanical, "Exoesqueleto dos Trilhos")]
+    [InlineData(ReceptacleType.Cape, PillarType.Mystical, "Capa das Lendas do Mar")]
+    [InlineData(ReceptacleType.Spine, PillarType.Biological, "Espinha de Fungo")]
+    public void CreateDefault_HasEachReceptacleWithItsPillar(ReceptacleType type, PillarType pillar, string name)
+    {
+        var receptacle = BuildState.CreateDefault().GetReceptacle(type);
+
+        Assert.NotNull(receptacle);
+        Assert.Equal(pillar, receptacle!.Pillar);
+        Assert.Equal(name, receptacle.DisplayName);
+        Assert.Equal(0, receptacle.ExpansionLevel);
+    }
+
+    [Fact]
+    public void CreateDefault_HasExactlyThreeReceptacles()
+    {
+        Assert.Equal(3, BuildState.CreateDefault().Receptacles.Count);
+    }
+
+    [Fact]
+    public void CreateDefault_ReturnsIndependentStates()
+    {
+        var a = BuildState.CreateDefault();
+        var b = BuildState.CreateDefault();
+
+        a.GetReceptacle(ReceptacleType.Cape)!.ExpansionLevel = 1;
+
+        Assert.Equal(0, b.GetReceptacle(ReceptacleType.Cape)!.ExpansionLevel);
+    }
 }

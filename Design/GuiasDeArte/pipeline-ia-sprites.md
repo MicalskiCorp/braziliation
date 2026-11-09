@@ -3,47 +3,19 @@
 Este roteiro define como usar IA sem perder a identidade visual do Braziliation. A IA deve acelerar conceito, variação e iteração; o sprite final ainda precisa de curadoria e acabamento manual.
 
 > **Escopo deste guia (2026-07-24):** dono das Etapas 1-2 do fluxo em 5 etapas (ideia → **concept art aprovado**) para assets orgânicos (personagens, criaturas, bosses) — ver [`pipeline-sprites-programaticos.md`](pipeline-sprites-programaticos.md#fluxo-completo-da-ideia-ao-sprite-5-etapas). A partir de concept art aprovado, as Etapas 3-5 (especificação → spec JSON → sprite) são regidas por aquele guia, mesmo quando o acabamento final é manual no Aseprite (passos 7-11 abaixo continuam válidos como uma das formas de executar essas etapas — a outra é a spec JSON programática). Nenhum dos dois guias descreve "o processo inteiro" sozinho.
+>
+> Stack e ferramentas, consistência, quando treinar LoRA (gate do ADR-014) e trilha de estudo: [`pipeline-ia-fundamentos.md`](pipeline-ia-fundamentos.md).
 
 ## Objetivo
 
 Gerar assets 2D/pixel art consistentes com:
 
-- 640x360 de leitura final.
-- 32 PPU.
+- 960x540 de leitura final (ADR-011).
+- 48 PPU, tile 48×48.
 - Paleta restrita.
 - Diesel/clockpunk brasileiro.
 - Silhueta clara.
 - Estilo próprio do projeto, sem depender do nome de artistas vivos ou de obras protegidas como referência de estilo.
-
-## Ferramentas Sugeridas
-
-| Etapa | Ferramentas |
-|-------|-------------|
-| Brief e organização | Markdown, VS Code, Claude Code |
-| Conceito IA | ComfyUI com SDXL/Flux ou ferramenta equivalente |
-| Controle de pose/composição | ControlNet, IP-Adapter, image-to-image, silhouettes próprias |
-| Pixel pass | Aseprite, LibreSprite ou ferramenta equivalente |
-| Paleta | Aseprite palettes, Lospec como estudo, paletas próprias do projeto |
-| Unity | Sprite Editor, Pixel Perfect Camera, Sprite Atlas, Presets de importação |
-
-## Stack Recomendada
-
-### Melhor Opção Para o Projeto
-
-Use **ComfyUI + modelo base SDXL/Flux + ControlNet/IP-Adapter + Aseprite**.
-
-Motivo: o Braziliation precisa de consistência visual, não só imagens bonitas. ComfyUI permite montar workflows repetíveis, reaproveitar seed, carregar imagens de referência, fixar etapas e salvar o processo. Aseprite entra como etapa obrigatória para transformar a saída da IA em sprite real de jogo.
-
-### Alternativas por Perfil
-
-| Perfil | Ferramentas | Quando usar |
-|--------|-------------|-------------|
-| Rápido e simples | Ferramenta online de geração + Aseprite | Ideias iniciais, mood e thumbnails |
-| Controle local | ComfyUI + SDXL/Flux + ControlNet/IP-Adapter | Pipeline principal do projeto |
-| Pintura/overpaint | Krita + plugin de IA + Aseprite | Refinar concepts e props antes do pixel pass |
-| Pixel art manual | Aseprite ou LibreSprite | Sprite final, animação e limpeza |
-| Paleta | Aseprite, Lospec, paletas próprias | Criar, comparar e limitar cores |
-| Unity final | Unity Sprite Editor, Tile Palette, Sprite Atlas | Importação, slicing, tilemaps e validação em cena |
 
 ## Organização na Estrutura do Projeto
 
@@ -107,7 +79,7 @@ Este é o fluxo que deve ser usado para cada asset novo:
 7. **Redesenhar no Aseprite:** faça pixel pass manual em tamanho real a partir do resultado do 6b — corrigir bandas de sombra, outline e highlight direcional (ver `style-bible.md#densidade-alvo`), não redesenhar do zero.
 8. **Animar se necessário:** use tags do Aseprite e siga [`animation-guide.md`](animation-guide.md).
 9. **Exportar para Unity:** salve PNG/spritesheet em `Desenvolvimento/Assets/Art/`.
-10. **Validar em cena:** teste em 640x360, 32 PPU, em fundo real ou cena sandbox.
+10. **Validar em cena:** teste em 960x540, 48 PPU, em fundo real ou cena sandbox.
 11. **Registrar:** atualize `Desenvolvimento/Docs/Architecture/indices/assets.md`.
 
 Exemplo preenchido: `Design/ArteFonte/IA/ContextPacks/exemplo-prop-comporta-blumenau/context.md`.
@@ -123,7 +95,7 @@ Todo pedido de asset deve ter:
 - **Brief:** função, região, tamanho, paleta e caminho final.
 - **Contexto do mundo:** dieselpunk brasileiro, pós-apocalipse, pixel art de alta densidade.
 - **Contexto regional:** exemplo: Blumenau clockpunk, enxaimel, rio Itajaí-Açu, cheias, engrenagens e clero.
-- **Restrições técnicas:** 32 PPU, canvas, sprite side-view, paleta limitada, sem gradiente suave.
+- **Restrições técnicas:** 48 PPU, canvas, sprite side-view, paleta limitada, sem gradiente suave.
 - **Referências autorizadas:** sprites próprios, conceitos próprios, silhuetas próprias, paleta do projeto.
 - **Prompt negativo:** o que a IA deve evitar.
 
@@ -139,10 +111,10 @@ pixel art sprite for a 2D side-scrolling action platformer, modern metroidvania 
 Blumenau clockpunk district, colonial-german timber architecture influence, flood marks, aged brass gears, dark iron, wet wood, muddy water stains
 
 [ASSET]
-32x32 side-view floodgate lever prop, readable silhouette, one interaction point, brass handle, iron base, wet wooden support
+48x48 side-view floodgate lever prop, readable silhouette, one interaction point, brass handle, iron base, wet wooden support
 
 [TECHNICAL]
-orthographic side view, no background, transparent background, readable at 640x360, designed for 32 PPU, no smooth gradients, no painterly rendering
+orthographic side view, no background, transparent background, readable at 960x540, designed for 48 PPU, no smooth gradients, no painterly rendering
 ```
 
 Prompt negativo:
@@ -269,7 +241,7 @@ Atualize `Desenvolvimento/Docs/Architecture/indices/assets.md` com o asset aprov
 Use em inglês quando a ferramenta responder melhor, mas mantenha os conceitos do projeto:
 
 ```text
-pixel art sprite for a 2D side-scrolling action platformer, modern metroidvania pixel art readability (Blasphemous-like), high pixel density, limited 32 color palette, clear silhouette, Brazilian post-apocalyptic dieselpunk, aged brass, dark iron, wet wood, soot, handcrafted machinery, readable at 640x360, orthographic side view, no smooth gradients, no high resolution texture, no painterly rendering
+pixel art sprite for a 2D side-scrolling action platformer, modern metroidvania pixel art readability (Blasphemous-like), high pixel density, limited 32 color palette, clear silhouette, Brazilian post-apocalyptic dieselpunk, aged brass, dark iron, wet wood, soot, handcrafted machinery, readable at 960x540, orthographic side view, no smooth gradients, no high resolution texture, no painterly rendering
 ```
 
 Prompt negativo:
@@ -281,89 +253,8 @@ photorealistic, 3D render, vector art, smooth gradient, anti-aliased illustratio
 ## Exemplo — Prop de Blumenau
 
 ```text
-pixel art prop, side view, 32x32 canvas, old clockpunk floodgate mechanism from Blumenau, Brazilian colonial-german timber architecture influence, aged brass gears, dark iron frame, wet wood planks, muddy water stains, limited 32 color palette, strong silhouette, readable at 640x360, modern metroidvania 2D platformer asset
+pixel art prop, side view, 48x48 canvas, old clockpunk floodgate mechanism from Blumenau, Brazilian colonial-german timber architecture influence, aged brass gears, dark iron frame, wet wood planks, muddy water stains, limited 32 color palette, strong silhouette, readable at 960x540, modern metroidvania 2D platformer asset
 ```
-
-## Como Criar Consistência Forte com IA
-
-1. Definir 5 a 10 sprites âncora feitos/retocados manualmente.
-2. Usar sempre a mesma paleta por região.
-3. Manter prompt base fixo por cidade.
-4. Usar ControlNet/silhueta própria para poses e proporção.
-5. Treinar LoRA apenas com assets aprovados do próprio projeto quando houver volume suficiente.
-6. Fazer pixel pass manual obrigatório antes de entrar no Unity.
-7. Revisar assets em lote: personagem + inimigo + prop + tile + background.
-
-## Quando Treinar um LoRA
-
-Treine apenas depois de ter pelo menos 30 a 80 imagens aprovadas do próprio Braziliation, idealmente separadas por categoria:
-
-- Personagens/NPCs.
-- Props e máquinas.
-- Tiles e cenários.
-- VFX/UI.
-
-Antes disso, prefira prompt fixo, paleta fixa, image-to-image e pixel pass manual.
-
-### Gate do projeto (ADR-014, 2026-11-03)
-
-Decisão vigente: **não treinar LoRA de estilo próprio ainda.** O assunto só reabre quando os três
-critérios valerem ao mesmo tempo — a contagem oficial é a tabela "Assets Registrados" de
-[`indices/assets.md`](../../Desenvolvimento/Docs/Architecture/indices/assets.md):
-
-1. **≥ 30 imagens próprias aprovadas no grid 48 PPU**, das quais **≥ 10 de personagem/inimigo** com pixel pass fechado;
-2. **modelo base decidido** — o A/B SDXL × Z-Image resolvido, porque LoRA é treinado *para* uma base (um LoRA de SDXL não serve no Z-Image);
-3. **≥ 2 personagens com sheet de animação aprovado**, para o treino ter noção de pose e não só de material.
-
-Quando reabrir, a rota é **treino em GPU alugada por hora** (`kohya_ss`), com os pesos
-`.safetensors` guardados junto dos outros LoRAs e **inferência sempre local no ComfyUI**. SaaS de
-treino gerenciado (tipo Scenario) está descartado — mensalidade sem relação com uso e pesos não
-exportáveis. Comparativo completo em
-[`decisao-lora-estilo-proprio.md`](../ArteFonte/IA/Models/decisao-lora-estilo-proprio.md).
-
-## Trilha de Estudo
-
-### Fase 1 — Fundamentos de Pixel Art
-
-- Estudar clusters, contraste, silhueta, anti-aliasing manual, dithering e limitação de paleta.
-- Buscar no YouTube: `AdamCYounis pixel art class`, `Brandon James Greer pixel art beginner`, `Pixel Pete pixel art basics`, `Saultoons pixel art character`.
-
-### Fase 2 — Aseprite e Animação
-
-- Estudar tags, onion skin, timeline, export de spritesheet e paletas.
-- Buscar no YouTube: `MortMort Aseprite animation`, `Aseprite sprite sheet export`, `AdamCYounis Aseprite workflow`.
-
-### Fase 3 — Unity 2D Pixel Perfect
-
-- Estudar import settings, 32 PPU, Sprite Editor, Tilemap, Rule Tile, Sprite Atlas e Pixel Perfect Camera.
-- Buscar no YouTube: `Unity 2D Pixel Perfect Camera official`, `Unity Tilemap 2D tutorial`, `Unity Sprite Atlas 2D pixel art`.
-
-### Fase 4 — IA Controlada para Game Art
-
-- Estudar Stable Diffusion/ComfyUI, image-to-image, ControlNet, IP-Adapter, seed, denoise e LoRA.
-- Buscar no YouTube: `ComfyUI beginner workflow`, `Stable Diffusion img2img game assets`, `ControlNet pose reference workflow`, `Kohya LoRA training basics`.
-
-### Fase 5 — Pipeline Próprio
-
-- Criar sprites âncora do Braziliation.
-- Criar paletas por cidade.
-- Criar prompts base por região.
-- Testar lote pequeno: 1 personagem, 1 inimigo, 1 prop, 1 tile e 1 VFX.
-- Revisar tudo junto em uma cena sandbox no Unity.
-
-## Vídeos/Temas Recomendados Para Buscar
-
-| Tema | Busca sugerida |
-|------|----------------|
-| Fundamentos de pixel art | `AdamCYounis pixel art fundamentals` |
-| Personagens em pixel art | `Brandon James Greer character pixel art` |
-| Animação no Aseprite | `MortMort Aseprite animation tutorial` |
-| Tilesets 2D | `pixel art tileset tutorial 16x16` |
-| Unity Tilemap | `Unity 2D Tilemap official tutorial` |
-| Pixel Perfect Unity | `Unity Pixel Perfect Camera 2D tutorial` |
-| ComfyUI | `ComfyUI beginner guide stable diffusion` |
-| ControlNet | `ControlNet img2img workflow game art` |
-| LoRA próprio | `Kohya LoRA training own dataset` |
 
 ## Checklist Final
 
@@ -375,7 +266,7 @@ exportáveis. Comparativo completo em
 - [ ] Lote registrado em `lotes.md` e decisão (Selected/Rejected/iterar) explícita — Etapa 2b.
 - [ ] Passou por `pixelize.py` antes do Aseprite (Etapa 4b).
 - [ ] Pixel pass manual feito — bandas de valor e dithering conforme `style-bible.md#densidade-alvo`.
-- [ ] Sprite lê em 640x360.
-- [ ] Export com 32 PPU.
+- [ ] Sprite lê em 960x540.
+- [ ] Export com 48 PPU.
 - [ ] Asset final em `Desenvolvimento/Assets/Art/`.
 - [ ] Índice de assets atualizado.

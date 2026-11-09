@@ -90,6 +90,18 @@ class Painter:
             return math.floor(self.toY(x, y))
         return math.floor(self.toY(math.floor(x) + 0.5, math.floor(y) + 0.5))
 
+    def noiseCell(self, x, y):
+        """Célula inteira para sortear ruído de TEXTURA num shade: rand(*p.noiseCell(x, y), seed).
+
+        É uma grade local com passo de um pixel de tela (1/k): presa ao efeito (anda, espelha e gira
+        com ele) e com a densidade de um pixel em qualquer escala. Na escala 1 é floor(x), floor(y),
+        o mesmo do PixelFX, e a paridade não muda. Sem isto, rand(floor(x), floor(y)) na escala 2,5
+        sorteia um valor por bloco de 2,5 px: a trama vira mosaico (a mistura de densidade que o
+        ADR-011 veta). Vale só para ruído de pixel; banda ou mancha maior que um pixel
+        (floor(y / 3)) continua em unidade local, escalando com a forma."""
+        k = self.k
+        return math.floor(x * k), math.floor(y * k)
+
     # ---- escritas cruas, espaço de tela, pixel inteiro. Cor 0 = "nada": nunca apaga.
     def put(self, sx, sy, c, a=1.0):
         if not c:

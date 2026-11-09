@@ -8,11 +8,12 @@ namespace Braziliation.UI
     /// <summary>
     /// Save Slots panel supporting two modes:
     /// <list type="bullet">
-    ///   <item><see cref="Mode.Load"/> — Continue flow: empty slots are disabled.</item>
-    ///   <item><see cref="Mode.New"/> — New Game flow: all slots are selectable.</item>
+    ///   <item><see cref="Mode.Load"/> — Continue flow: only usable slots (<see cref="SaveLoadResult.IsUsable"/>) are selectable.</item>
+    ///   <item><see cref="Mode.New"/> — New Game flow: only overwritable slots (<see cref="SaveLoadResult.CanOverwrite"/>) are selectable.</item>
     /// </list>
-    /// Reads slot metadata from <see cref="SaveGameService"/> and raises Unity events for
-    /// gameplay integration. No scene transitions or game state changes happen here.
+    /// Loads each slot with <see cref="SaveGameService.LoadDetailed"/> so a corrupt save or one from a
+    /// newer build is never shown as empty (ADR-007; contract in Sistemas/UI.md › Estado do slot).
+    /// Raises Unity events for gameplay integration. No scene transitions or game state changes happen here.
     /// </summary>
     public sealed class SaveSlotsView : MonoBehaviour
     {
@@ -75,7 +76,28 @@ namespace Braziliation.UI
         private void RefreshSlots()
         {
             for (int i = 0; i < slotEntries.Length; i++)
-                slotEntries[i].Bind(i, _saveGameService.Load(i), _mode, OnSlotSelected);
+            {
+                SaveLoadResult result = _saveGameService.LoadDetailed(i);
+                LogBlockedStatus(i, result);
+                slotEntries[i].Bind(i, result, _mode, OnSlotSelected);
+            }
+        }
+
+        // O jogador vê só o aviso do slot; o log guarda o que ajuda a diagnosticar.
+        private static void LogBlockedStatus(int slotIndex, SaveLoadResult result)
+        {
+            switch (result.Status)
+            {
+                case SaveLoadStatus.Corrupt:
+                    Debug.LogWarning($"[SaveSlotsView] Slot {slotIndex}: save corrompido (versão lida {result.FoundVersion}).");
+                    break;
+                case SaveLoadStatus.FromNewerBuild:
+                    Debug.LogWarning($"[SaveSlotsView] Slot {slotIndex}: save de build mais nova (versão {result.FoundVersion}, esta lê até {SaveSlot.CurrentSchemaVersion}). Bloqueado, nunca sobrescrito.");
+                    break;
+                case SaveLoadStatus.NoMigrationPath:
+                    Debug.LogError($"[SaveSlotsView] Slot {slotIndex}: versão {result.FoundVersion} sem degrau de migração até {SaveSlot.CurrentSchemaVersion}. Falta registrar um ISaveMigration.");
+                    break;
+            }
         }
 
         private void OnSlotSelected(int slotIndex)

@@ -76,7 +76,7 @@ public sealed class HybridSynergyResolverTests
     // ── Pilares diferentes — sinergia detectada (tabela populada após Opção B) ─
 
     [Fact]
-    public void GetActiveHybridEffects_MechanicalBiological_ReturnsPrótesisViva()
+    public void GetActiveHybridEffects_MechanicalBiological_ReturnsProteseViva()
     {
         var state = StateWith(
             Item("gear",   PillarType.Mechanical),
@@ -84,7 +84,7 @@ public sealed class HybridSynergyResolverTests
 
         var result = _sut.GetActiveHybridEffects(state);
 
-        Assert.Contains("PrótesisViva", result);
+        Assert.Contains("ProteseViva", result);
     }
 
     [Fact]
@@ -148,7 +148,7 @@ public sealed class HybridSynergyResolverTests
 
         var result = _sut.GetActiveHybridEffects(state);
 
-        Assert.Contains("PrótesisViva",     result);
+        Assert.Contains("ProteseViva",     result);
         Assert.Contains("MutaçãoArcana",    result);
         Assert.Contains("ArmaduraEncantada", result);
         Assert.Equal(3, result.Count);

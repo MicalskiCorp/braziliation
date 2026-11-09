@@ -42,7 +42,10 @@ namespace Braziliation.Build
 
         private void Awake()
         {
-            _buildState = new BuildState();
+            // O BuildServiceBinder pode ter injetado o estado antes deste Awake (a ordem entre objetos
+            // não é garantida): só cria um local se ninguém injetou.
+            if (_buildState == null)
+                _buildState = BuildState.CreateDefault();
 
             if (_statReceiverComponent is IStatReceiver receiver)
                 _statReceiver = receiver;

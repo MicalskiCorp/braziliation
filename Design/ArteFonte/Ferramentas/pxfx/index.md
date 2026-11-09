@@ -47,6 +47,11 @@ pixel de fronteira). Acima disso é bug de port.
 - **Laço `for (let i = n-1; i >= 0; i--)` com `splice`** → `range` invertido + `del lista[i]`.
 - **Escala**: forma cheia escala sozinha; laço de pontos em passo fixo precisa amostrar em `1/p.k`
   (ou `p.passo`) e manter o caminho original quando `p.k == 1`, para a paridade continuar exata.
+- **Ruído de textura no `shade`**: `rand(*p.noiseCell(x, y), seed)`, nunca `rand(floor(x), floor(y), seed)`.
+  O helper sorteia numa grade local de um pixel de tela (`floor(x·k)`): a trama fica presa ao efeito e
+  tem um sorteio por pixel em qualquer escala. Na escala 1 é igual ao original, e a paridade não muda.
+  Banda ou mancha maior que um pixel (`floor(y / 3)`) fica em unidade local. Primeiro uso: o enrolado
+  do `fire/torch` (comparação em `IA/Testes/pxfx-ruido-tela/`).
 
 ## Como portar um efeito (uma onda = uma categoria)
 

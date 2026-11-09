@@ -12,7 +12,7 @@
 | `ISaveStorage.cs` | `src/Braziliation.Game.Core/SaveSystem/ISaveStorage.cs` | Contrato de armazenamento de saves |
 | `SaveGameService.cs` | `src/Braziliation.Game.Core/SaveSystem/SaveGameService.cs` | Serviço principal: save, load, delete |
 | `SaveSlot.cs` | `src/Braziliation.Game.Core/SaveSystem/SaveSlot.cs` | Modelo de dados de um slot de save |
-| `SaveLoadResult.cs` | `src/Braziliation.Game.Core/SaveSystem/SaveLoadResult.cs` | Resultado de `LoadDetailed` com `SaveLoadStatus` (ADR-007) |
+| `SaveLoadResult.cs` | `src/Braziliation.Game.Core/SaveSystem/SaveLoadResult.cs` | Resultado de `LoadDetailed` com `SaveLoadStatus` (ADR-007); `IsUsable` decide Continuar e `CanOverwrite` decide Novo Jogo (lista positiva) |
 | `ISaveMigration.cs` | `src/Braziliation.Game.Core/SaveSystem/ISaveMigration.cs` | Contrato de um degrau de migração sobre o JSON bruto |
 | `DelegateSaveMigration.cs` | `src/Braziliation.Game.Core/SaveSystem/DelegateSaveMigration.cs` | Degrau de migração a partir de um delegate |
 | `SaveMigrations.cs` | `src/Braziliation.Game.Core/SaveSystem/SaveMigrations.cs` | Registro `SaveMigrations.All` aplicado em cadeia |

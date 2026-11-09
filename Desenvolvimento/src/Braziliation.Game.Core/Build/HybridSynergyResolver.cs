@@ -11,14 +11,14 @@ public sealed class HybridSynergyResolver
 {
     // Tabela de sinergias híbridas — chave normalizada em ordem alfabética (A|B == B|A).
     // Conforme Build.md — Sinergias Híbridas:
-    //   Mecânico × Biológico → "PrótesisViva"
+    //   Mecânico × Biológico → "ProteseViva"
     //   Biológico × Místico  → "MutaçãoArcana"
     //   Mecânico × Místico   → "ArmaduraEncantada"
     // Nota: "Biological" < "Mechanical" < "Mystical" em ordem alfabética ordinal.
     private static readonly Dictionary<string, List<string>> _hybridEffectTable =
         new Dictionary<string, List<string>>
         {
-            ["Biological|Mechanical"] = new List<string> { "PrótesisViva" },
+            ["Biological|Mechanical"] = new List<string> { "ProteseViva" },
             ["Biological|Mystical"]   = new List<string> { "MutaçãoArcana" },
             ["Mechanical|Mystical"]   = new List<string> { "ArmaduraEncantada" },
         };

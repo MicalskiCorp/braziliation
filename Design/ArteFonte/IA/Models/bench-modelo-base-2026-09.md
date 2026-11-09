@@ -59,9 +59,9 @@ de pixel art de Z-Image instalado) e em **3,5× menos tempo**.
    `"model": "sd_xl_base_1.0.safetensors"` fixo no log. Como o `TextEncodeZImageOmni` lê o campo
    `prompt`, apontar o script para o workflow do Z-Image **não dá erro** — gera com o prompt
    embutido no JSON e mente no `lotes.md`. Na prática a Etapa 2 continua em SDXL, contra o que
-   está decidido aqui. Dívida aberta em `Desenvolvimento/Docs/Tech/tech_debt.md` (Média).
-   **É a precondição real da pendência 1**, não o contrário: até ela ser paga, patchear
-   `prompt` à mão.
+   está decidido aqui. **Pago em 2026-11-09:** o script lê o grafo do workflow, escreve no campo
+   certo de cada encode e registra o modelo do próprio workflow. Para a Etapa 2 em Z-Image:
+   `--workflow Design/ArteFonte/IA/Models/workflow-zimage-thumbnails.json`.
 
 > **Retenção dos modelos — decidida em 2026-11-03: manter.** Os 11,7 GB do Z-Image ficam em
 > `D:\Tools\ComfyUI`. Nenhum desfecho das pendências acima produz "apagar" (se o Z-Image + LoRA

@@ -41,6 +41,7 @@ namespace Braziliation.Editor.Gameplay
             CreateEnemy(root.transform, player.transform);
             CreateCamera(root.transform, player.transform);
             CreateHud(root.transform, player.GetComponent<HealthComponent>());
+            CreateEventSystem(root.transform);
 
             EditorSceneManager.SaveScene(scene, ScenePath);
             AssetDatabase.Refresh();
@@ -172,6 +173,14 @@ namespace Braziliation.Editor.Gameplay
                 cameraObject.AddComponent(urpCameraDataType);
         }
 
+        // Sem EventSystem, painel interativo aberto nesta cena lança NullReferenceException ao focar.
+        private static void CreateEventSystem(Transform parent)
+        {
+            var eventSystem = UiEventSystem.Ensure();
+            if (eventSystem != null)
+                eventSystem.transform.SetParent(parent);
+        }
+
         private static void CreateHud(Transform parent, HealthComponent playerHealth)
         {
             var canvasObj = new GameObject("HUD_Demo");
@@ -179,7 +188,7 @@ namespace Braziliation.Editor.Gameplay
 
             var canvas = canvasObj.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvasObj.AddComponent<CanvasScaler>();
+            UiCanvasScaling.Apply(canvasObj);
             canvasObj.AddComponent<GraphicRaycaster>();
 
             var panelObj = new GameObject("HealthPanel");

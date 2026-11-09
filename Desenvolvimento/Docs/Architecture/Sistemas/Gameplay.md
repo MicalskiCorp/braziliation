@@ -20,7 +20,7 @@
 | `DemoAutoBootstrapper.cs` | `Assets/Scripts/Gameplay/DemoAutoBootstrapper.cs` | Garante o bootstrap de demo em cenas que não são de menu |
 | `DemoSceneVisuals.cs` | `Assets/Scripts/Gameplay/DemoSceneVisuals.cs` | Fonte única de aparência e geometria da demo (runtime e cena fixa) |
 | `FloodgateLeverInteractable.cs` | `Assets/Scripts/Gameplay/FloodgateLeverInteractable.cs` | Casca visual da alavanca da comporta: toca a animação e dispara `UnityEvent` (`OnActivated`, exposto); implementa `IInteractable`; zero regra hídrica |
-| `FloodgateController.cs` | `Assets/Scripts/Gameplay/FloodgateController.cs` | Comporta hídrica: bloqueia/libera passagem (colisor + layer Ground), `Toggle`/`Open`/`Close`, trava reservada ao futuro `HydricStateManager` |
+| `FloodgateController.cs` | `Assets/Scripts/Gameplay/FloodgateController.cs` | Comporta hídrica: bloqueia/libera passagem (colisor + layer Ground), `Toggle`/`Open`/`Close`; o estado do rio ([Hydric](Hydric.md)) a trava em Cheia e Saturação |
 
 Os adaptadores de inimigo (`EnemyController.cs`, `EnemySpriteAnimation.cs`) moram nesta pasta, mas são documentados em [Enemies](Enemies.md).
 
@@ -28,7 +28,7 @@ Os adaptadores de inimigo (`EnemyController.cs`, `EnemySpriteAnimation.cs`) mora
 
 | Feature | Arquivo | Relação |
 |---------|---------|---------|
-| Sistema Hídrico de Blumenau | [`Blumenau-SistemaHidrico.md`](../../GDD/Features/Blumenau-SistemaHidrico.md) | `FloodgateLeverInteractable` + `FloodgateController` implementam comportas abertas/fechadas por ação local; o 4-estados global (`HydricStateManager`) ainda não existe |
+| Sistema Hídrico de Blumenau | [`Blumenau-SistemaHidrico.md`](../../GDD/Features/Blumenau-SistemaHidrico.md) | `FloodgateLeverInteractable` + `FloodgateController` implementam comportas abertas/fechadas pela alavanca, travadas pelo `HydricStateManager` em Cheia e Saturação |
 
 ## Dependências de Outros Sistemas
 
@@ -48,4 +48,4 @@ Os adaptadores de inimigo (`EnemyController.cs`, `EnemySpriteAnimation.cs`) mora
 ## Notas de Design
 
 - Os scripts `Demo*` são andaime da demo com placeholders CC0; saem quando houver cena de nível real.
-- `HealthComponent` emite `OnHealthChanged` no `Awake` — ver `Tech/tech_debt.md`.
+- `HealthComponent` inicializa a vida no `Awake` e emite o estado inicial de `OnHealthChanged` no `Start`. Quem se inscreve depois lê `CurrentHealth`/`MaxHealth` na inscrição, como o `CanvasHealthHud` faz no `OnEnable`.

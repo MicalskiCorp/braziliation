@@ -36,6 +36,7 @@ namespace Braziliation.Gameplay
 
             EnsureCamera(player.transform);
             EnsureHud(player.GetComponent<HealthComponent>());
+            UiEventSystem.Ensure();
 
             if (enemy != null)
                 enemy.name = "Enemy_Demo";
@@ -229,7 +230,7 @@ namespace Braziliation.Gameplay
             hudObj = new GameObject("HUD_Demo");
             var canvas = hudObj.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            hudObj.AddComponent<CanvasScaler>();
+            UiCanvasScaling.Apply(hudObj);
             hudObj.AddComponent<GraphicRaycaster>();
 
             var panelObj = new GameObject("HealthPanel");

@@ -22,7 +22,7 @@ Use este modelo dentro de `Design/ArteFonte/IA/ContextPacks/{nome-do-asset}/cont
 - Elementos proibidos:
 
 ## 3. Contexto Visual do Projeto
-Braziliation é um jogo de plataforma/ação 2D em pixel art, leitura Blasphemous-like (ADR-004), 640x360, 32 PPU, paleta restrita, pós-apocalipse brasileiro e estética dieselpunk/clockpunk regional.
+Braziliation é um jogo de plataforma/ação 2D em pixel art, leitura Blasphemous-like (ADR-011), 960x540, 48 PPU, paleta restrita, pós-apocalipse brasileiro e estética dieselpunk/clockpunk regional.
 
 ## 4. Contexto Regional
 Descrever aqui a região/cidade. Exemplo para Blumenau:

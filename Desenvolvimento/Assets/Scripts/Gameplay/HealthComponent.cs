@@ -26,6 +26,13 @@ namespace Braziliation.Gameplay
         {
             _maxHealth = Mathf.Max(1f, _maxHealth);
             CurrentHealth = _maxHealth;
+        }
+
+        // Emissão inicial no Start, não no Awake: aqui todo Awake/OnEnable da cena já rodou, então
+        // quem se inscreveu por código neles recebe o estado. Quem se inscreve depois lê
+        // CurrentHealth/MaxHealth na hora da inscrição.
+        private void Start()
+        {
             OnHealthChanged?.Invoke(CurrentHealth, _maxHealth);
         }
 

@@ -1,8 +1,6 @@
 {
   "_comment": "Workflow API do ComfyUI - lote de thumbnails com Z-Image Turbo (candidato B do bench de modelo base). Placeholders: {POSITIVE}, {NEGATIVE}, {SEED}. Contraparte de workflow-thumbnails.json (SDXL, candidato A) para comparacao A/B com prompt e seed identicos.",
 
-  "_incompatibilidade": "comfy_batch.py NAO patcheia este workflow direto: ele escreve em inputs.text dos nos 6/7, e o TextEncodeZImageOmni usa o campo 'prompt', nao 'text'. Use o bench dedicado ou patcheie 'prompt' a mao. Os ids 3/5/9 seguem a mesma convencao dos outros workflows.",
-
   "20": {
     "_note": "Z-Image nao vem como checkpoint unico: difusao, text encoder e VAE sao tres arquivos separados. fp8_e4m3fn e o que cabe nos 8GB desta placa (o bf16 pede 16GB).",
     "class_type": "UNETLoader",

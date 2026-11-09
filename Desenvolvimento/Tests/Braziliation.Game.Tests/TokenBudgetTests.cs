@@ -22,7 +22,6 @@ public sealed class TokenBudgetTests
     private static readonly Dictionary<string, string> DocumentExceptions = new()
     {
         ["Desenvolvimento/Docs/TODO-arquivo.md"] = "histórico congelado, fora do caminho de leitura dos agentes",
-        ["Design/GuiasDeArte/pipeline-ia-sprites.md"] = "dívida registrada: dividir o guia por rota",
     };
 
     /// <summary>`lotes.md` de context pack é log de geração: cresce por lote, é lido por trecho.</summary>

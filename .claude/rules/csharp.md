@@ -28,6 +28,7 @@ ADR-003). Script novo vai para a pasta do domínio, não do tipo de entidade.
 | Core puro | `src/.../Settings/` | `Braziliation.Settings` |
 | Core puro | `src/.../Storage/` | `Braziliation.Storage` |
 | Core puro | `src/.../Enemies/` | `Braziliation.Enemies` |
+| Core puro | `src/.../Hydric/` | `Braziliation.Hydric` |
 
 `Braziliation.Build` e `Braziliation.Crafting` existem nas **duas** camadas (adaptador
 Unity + lógica pura). Ao adicionar tipo nesses namespaces, confira que o nome não colide

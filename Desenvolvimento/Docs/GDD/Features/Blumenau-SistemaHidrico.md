@@ -139,9 +139,7 @@ O rio Itajaí-Açu é o coração de Die Unterwelt — fonte de energia e ameaç
 ### `@SystemsDeveloper`
 | Tarefa | Prioridade |
 |--------|-----------|
-| Modelar `HydricState.cs` — enum com 4 estados (Rotina/Alerta/Cheia/Saturação) e dados de configuração | Alta |
-| Modelar `HydricStateManager.cs` — serviço do core (registrado no `GameServiceLocator`, sem estado estático) que mantém o estado atual e dispara eventos de mudança | Alta |
-| Implementar eventos/callbacks que notificam todas as features dependentes ao mudar estado | Alta |
+| ✅ 2026-11-09 — `HydricState`, `HydricStateManager` e o evento `StateChanged`, registrados no `GameServiceLocator` (ficha [`Hydric.md`](../../Architecture/Sistemas/Hydric.md)); a comporta já trava em Cheia e Saturação | — |
 | Modelar tabela de acessibilidade por área × estado (scriptable object ou config) | Alta |
 
 ### `@GameplayEngineer`

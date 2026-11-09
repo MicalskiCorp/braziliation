@@ -31,5 +31,6 @@ A coluna Status desta tabela tem de bater com o `**Status:**` do arquivo — o `
 | [ADR-015](ADR-015.md) | Economia de tokens nas execuções da Central | Accepted | 2026-11-04 |
 | [ADR-016](ADR-016.md) | Motor `pxfx` e pipeline de personagem por esqueleto | Accepted | 2026-11-04 |
 | [ADR-017](ADR-017.md) | Controle na Steam por emulação de gamepad, rebind no jogo e glifos próprios | Accepted | 2026-11-09 |
+| [ADR-018](ADR-018.md) | Os receptáculos da build vivem no `BuildState` | Accepted | 2026-11-09 |
 
 > Até 2026-11-09 todos os ADRs viviam num arquivo único, o `architecture_decisions.md`. Ele passou do teto de 5 mil tokens do `TokenBudgetTests` e foi dividido. O texto de cada ADR foi preservado; só os links relativos ganharam um `../`.

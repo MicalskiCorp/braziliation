@@ -6,6 +6,8 @@ namespace Braziliation.Build;
 /// <summary>
 /// Estado atual da build do personagem — o que está instalado nos três receptáculos.
 /// Este modelo agrega toda a progressão material do jogador derivada do sistema de crafting.
+/// É a **fonte única** dos receptáculos: o <c>ReceptacleController</c> (Unity) altera as instâncias
+/// devolvidas por <see cref="GetReceptacle"/>, e quem lê (build, sinergias, flags, UI) lê daqui.
 /// C# puro: sem dependências Unity.
 /// </summary>
 public sealed class BuildState
@@ -34,6 +36,50 @@ public sealed class BuildState
     /// Controlam acesso a zonas específicas do mundo (ex: "NightVision", "HiddenPaths", "UnderwaterBreathing").
     /// </summary>
     public HashSet<string> UnlockedExplorationFlags { get; set; } = new HashSet<string>();
+
+    /// <summary>
+    /// Build inicial do jogo: os três receptáculos de Build.md, sem itens e sem expansão.
+    /// Cada chamada devolve um estado novo e independente.
+    /// </summary>
+    public static BuildState CreateDefault() => new BuildState
+    {
+        Receptacles = new List<ReceptacleData>
+        {
+            new ReceptacleData
+            {
+                DisplayName = "Exoesqueleto dos Trilhos",
+                Type        = ReceptacleType.Exoskeleton,
+                Pillar      = PillarType.Mechanical,
+            },
+            new ReceptacleData
+            {
+                DisplayName = "Capa das Lendas do Mar",
+                Type        = ReceptacleType.Cape,
+                Pillar      = PillarType.Mystical,
+            },
+            new ReceptacleData
+            {
+                DisplayName = "Espinha de Fungo",
+                Type        = ReceptacleType.Spine,
+                Pillar      = PillarType.Biological,
+            },
+        },
+    };
+
+    /// <summary>
+    /// Receptáculo do tipo informado, ou null se a build não tiver um. Devolve a própria instância
+    /// guardada no estado: alterar o retorno altera a build.
+    /// </summary>
+    public ReceptacleData? GetReceptacle(ReceptacleType type)
+    {
+        foreach (var receptacle in Receptacles)
+        {
+            if (receptacle.Type == type)
+                return receptacle;
+        }
+
+        return null;
+    }
 
     /// <summary>
     /// Retorna todos os itens atualmente instalados em qualquer slot de qualquer receptáculo.

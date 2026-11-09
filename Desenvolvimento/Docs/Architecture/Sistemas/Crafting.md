@@ -14,7 +14,7 @@
 | `ReceptacleData.cs` | `src/Braziliation.Game.Core/Crafting/ReceptacleData.cs` | Receptáculo com slots, pilar e nível de expansão |
 | `CraftingRecipe.cs` | `src/Braziliation.Game.Core/Crafting/CraftingRecipe.cs` | Receita: componentes de entrada e resultado |
 | `CraftingService.cs` | `src/Braziliation.Game.Core/Crafting/CraftingService.cs` | Resolve receitas, valida compatibilidade e detecta híbridos |
-| `ReceptacleController.cs` | `Assets/Scripts/Crafting/ReceptacleController.cs` | Gerencia os slots dos 3 receptáculos no runtime |
+| `ReceptacleController.cs` | `Assets/Scripts/Crafting/ReceptacleController.cs` | Equipa, desequipa e expande os 3 receptáculos do `BuildState` registrado no locator (não guarda dados próprios, ADR-018) |
 | `HybridRollHandler.cs` | `Assets/Scripts/Crafting/HybridRollHandler.cs` | Sorteio 50/50 ao craftar item híbrido |
 | `CraftingPanelController.cs` | `Assets/Scripts/UI/CraftingPanelController.cs` | Painel de crafting (UI) |
 

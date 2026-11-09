@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Braziliation.Build;
 using Braziliation.Core;
 using Braziliation.Crafting;
 
@@ -9,6 +10,8 @@ namespace Braziliation.Crafting
     /// <summary>
     /// Gerencia os três receptáculos da build do personagem no contexto Unity.
     /// Instala e remove itens dos slots, comunicando mudanças via UnityEvents para a UI e demais sistemas.
+    /// Os receptáculos vivem no <see cref="BuildState"/> registrado no <see cref="GameServiceLocator"/>
+    /// (fonte única); este componente só os altera.
     ///
     /// Receptáculos conforme Build.md:
     ///   - Exoesqueleto dos Trilhos (Mecânico)
@@ -29,35 +32,36 @@ namespace Braziliation.Crafting
 
         private CraftingService _craftingService;
 
-        // Dados de runtime dos três receptáculos — inicializados em Awake
-        private readonly Dictionary<ReceptacleType, ReceptacleData> _receptaculos =
-            new Dictionary<ReceptacleType, ReceptacleData>();
+        // Fonte única dos receptáculos. Resolvido na primeira leitura, não no Awake, porque o
+        // BuildServiceBinder registra o BuildState no Awake dele e a ordem entre objetos não é garantida.
+        private BuildState _buildState;
+
+        private BuildState State
+        {
+            get
+            {
+                if (_buildState != null)
+                    return _buildState;
+
+                if (GameServiceLocator.Instance != null)
+                    _buildState = GameServiceLocator.Instance.Resolve<BuildState>();
+
+                if (_buildState == null)
+                {
+                    Debug.LogWarning("[ReceptacleController] BuildState não registrado — usando uma build local, " +
+                                     "que o PlayerBuildController e a UI não enxergam. Falta um BuildServiceBinder na cena.");
+                    _buildState = BuildState.CreateDefault();
+                }
+
+                return _buildState;
+            }
+        }
 
         private void Awake()
         {
             _craftingService = GameServiceLocator.Instance != null
                 ? GameServiceLocator.Instance.Resolve<CraftingService>()
                 : new CraftingService();
-
-            // Inicializa os receptáculos com configuração base conforme a spec (Build.md)
-            _receptaculos[ReceptacleType.Exoskeleton] = new ReceptacleData
-            {
-                DisplayName = "Exoesqueleto dos Trilhos",
-                Type        = ReceptacleType.Exoskeleton,
-                Pillar      = PillarType.Mechanical
-            };
-            _receptaculos[ReceptacleType.Cape] = new ReceptacleData
-            {
-                DisplayName = "Capa das Lendas do Mar",
-                Type        = ReceptacleType.Cape,
-                Pillar      = PillarType.Mystical
-            };
-            _receptaculos[ReceptacleType.Spine] = new ReceptacleData
-            {
-                DisplayName = "Espinha de Fungo",
-                Type        = ReceptacleType.Spine,
-                Pillar      = PillarType.Biological
-            };
         }
 
         /// <summary>
@@ -122,10 +126,6 @@ namespace Braziliation.Crafting
         /// <summary>
         /// Retorna o ReceptacleData do receptáculo informado, ou null se não encontrado.
         /// </summary>
-        public ReceptacleData GetReceptacle(ReceptacleType type)
-        {
-            _receptaculos.TryGetValue(type, out var data);
-            return data;
-        }
+        public ReceptacleData GetReceptacle(ReceptacleType type) => State.GetReceptacle(type);
     }
 }

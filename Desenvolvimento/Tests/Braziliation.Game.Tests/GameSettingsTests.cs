@@ -139,4 +139,70 @@ public sealed class GameSettingsTests
         Assert.Equal(0.1f, a.MasterVolume);
         Assert.Equal(0.9f, b.MasterVolume);
     }
+
+
+    // ── Controles: overrides de binding e estilo de glifo (ADR-017) ──────────
+
+    [Fact]
+    public void Constructor_DefaultInputBindingOverrides_IsEmpty()
+    {
+        Assert.Equal(string.Empty, new GameSettings().InputBindingOverrides);
+    }
+
+    [Fact]
+    public void Constructor_DefaultGlyphStyle_IsAuto()
+    {
+        Assert.Equal(GlyphStyle.Auto, new GameSettings().GlyphStyle);
+    }
+
+    [Fact]
+    public void InputBindingOverrides_SetNull_BecomesEmpty()
+    {
+        var s = new GameSettings { InputBindingOverrides = null! };
+        Assert.Equal(string.Empty, s.InputBindingOverrides);
+    }
+
+    [Theory]
+    [InlineData(GlyphStyle.Auto)]
+    [InlineData(GlyphStyle.Xbox)]
+    [InlineData(GlyphStyle.PlayStation)]
+    [InlineData(GlyphStyle.Switch)]
+    public void GlyphStyle_SetDefinedValue_IsKept(GlyphStyle style)
+    {
+        Assert.Equal(style, new GameSettings { GlyphStyle = style }.GlyphStyle);
+    }
+
+    [Fact]
+    public void GlyphStyle_SetUndefinedValue_FallsBackToAuto()
+    {
+        var s = new GameSettings { GlyphStyle = (GlyphStyle)99 };
+        Assert.Equal(GlyphStyle.Auto, s.GlyphStyle);
+    }
+
+    [Fact]
+    public void GlyphStyle_PersistedValues_NeverChange()
+    {
+        // O valor numérico vai para o arquivo de settings: renumerar muda a preferência de quem já jogou.
+        Assert.Equal(0, (int)GlyphStyle.Auto);
+        Assert.Equal(1, (int)GlyphStyle.Xbox);
+        Assert.Equal(2, (int)GlyphStyle.PlayStation);
+        Assert.Equal(3, (int)GlyphStyle.Switch);
+    }
+
+    [Fact]
+    public void ResetToDefaults_ClearsControlsToo()
+    {
+        var s = new GameSettings
+        {
+            MasterVolume = 0.3f,
+            InputBindingOverrides = "{\"bindings\":[]}",
+            GlyphStyle = GlyphStyle.PlayStation,
+        };
+
+        s.ResetToDefaults();
+
+        Assert.Equal(1f, s.MasterVolume);
+        Assert.Equal(string.Empty, s.InputBindingOverrides);
+        Assert.Equal(GlyphStyle.Auto, s.GlyphStyle);
+    }
 }

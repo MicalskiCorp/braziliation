@@ -9,7 +9,7 @@
 > [**ADR-014**](../../../../Desenvolvimento/Docs/Architecture/ADR/ADR-014.md):
 > não treinar antes do gate; quando treinar, GPU alugada por hora com pesos e inferência locais;
 > Scenario descartado. O gate também está escrito em
-> [`pipeline-ia-sprites.md § Quando Treinar um LoRA`](../../../GuiasDeArte/pipeline-ia-sprites.md#gate-do-projeto-adr-014-2026-11-03).
+> [`pipeline-ia-fundamentos.md § Quando Treinar um LoRA`](../../../GuiasDeArte/pipeline-ia-fundamentos.md#gate-do-projeto-adr-014-2026-11-03).
 > Este arquivo fica como o **raciocínio por trás** do ADR — nada aqui foi contratado nem instalado.
 >
 > Preços e limites dos serviços pagos **não foram verificados nesta sessão** (sem acesso web) —
@@ -28,7 +28,7 @@ O item mistura dois eixos, e isso muda a conversa:
 
 ## Gate que o próprio pipeline já define
 
-[`pipeline-ia-sprites.md` § Quando Treinar um LoRA](../../../GuiasDeArte/pipeline-ia-sprites.md#quando-treinar-um-lora):
+[`pipeline-ia-fundamentos.md` § Quando Treinar um LoRA](../../../GuiasDeArte/pipeline-ia-fundamentos.md#quando-treinar-um-lora):
 treinar só com **30 a 80 imagens aprovadas do próprio Braziliation**, separadas por categoria
 (personagens/NPCs, props e máquinas, tiles e cenários, VFX/UI). Antes disso: prompt fixo, paleta
 fixa, img2img e pixel pass manual.
@@ -124,7 +124,7 @@ estilo — é a etapa de *animação* (PixelLab), que é a que o pipeline realme
 Recomendação aceita pelo responsável. Executado na mesma sessão:
 
 1. **ADR-014** registrado em `Desenvolvimento/Docs/Architecture/ADR/ADR-014.md` (nenhum ADR substituído);
-2. gate escrito em `pipeline-ia-sprites.md § Quando Treinar um LoRA` — § "Gate do projeto (ADR-014)";
+2. gate escrito em `pipeline-ia-fundamentos.md § Quando Treinar um LoRA` (no `pipeline-ia-sprites.md` até a divisão de 2026-11-09) — § "Gate do projeto (ADR-014)";
 3. regra curta em `.claude/rules/arte.md`, que é o que toda sessão de arte carrega;
 4. linha **removida** do `Desenvolvimento/Docs/TODO.md` (baixa da camada de Desenvolvimento = o commit);
 5. lista de ADRs vigentes atualizada em `Desenvolvimento/Docs/Processos/documentacao.md` § D5.

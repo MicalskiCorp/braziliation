@@ -56,12 +56,12 @@ namespace Braziliation.UI
 
         private void OnApplyClicked()
         {
-            _settingsService.Save(new GameSettings
-            {
-                MasterVolume = masterVolumeSlider.value,
-                MusicVolume  = musicVolumeSlider.value,
-                SfxVolume    = sfxVolumeSlider.value,
-            });
+            // Relê e muda só o áudio: um GameSettings novo apagaria os controles (overrides e glifo).
+            var settings = _settingsService.Load();
+            settings.MasterVolume = masterVolumeSlider.value;
+            settings.MusicVolume  = musicVolumeSlider.value;
+            settings.SfxVolume    = sfxVolumeSlider.value;
+            _settingsService.Save(settings);
         }
 
         private void OnBackClicked() => _menuController.ShowMainMenu();

@@ -9,7 +9,7 @@
 
 | Arquivo | Caminho | Função |
 |---------|---------|--------|
-| `BuildState.cs` | `src/Braziliation.Game.Core/Build/BuildState.cs` | Estado da build: itens equipados, habilidades, flags de exploração |
+| `BuildState.cs` | `src/Braziliation.Game.Core/Build/BuildState.cs` | Estado da build e fonte única dos receptáculos (ADR-018): `CreateDefault`, `GetReceptacle`, itens equipados, habilidades, flags de exploração |
 | `HybridSynergyResolver.cs` | `src/Braziliation.Game.Core/Build/HybridSynergyResolver.cs` | Detecta combinações de pilares e devolve os efeitos híbridos ativos |
 | `BuildServiceBinder.cs` | `Assets/Scripts/Build/BuildServiceBinder.cs` | Registra o estado da build no `GameServiceLocator` |
 | `PlayerBuildController.cs` | `Assets/Scripts/Build/PlayerBuildController.cs` | Aplica stats e habilidades ao jogador (`IStatReceiver`) |
@@ -31,4 +31,5 @@ Testes: `BuildStateTests.cs`, `HybridSynergyResolverTests.cs`.
 
 - `Braziliation.Build` existe nas duas camadas (ADR-005): lógica pura em `src/`, adaptadores Unity em `Assets/Scripts/Build/`. Nomes de tipo não podem colidir.
 - A pasta chama `Build/` e é código — a regra de ignore de player build é ancorada em `/Desenvolvimento/Build/`.
-- O efeito `"PrótesisViva"` tem erro de grafia registrado em `tech_debt.md`; renomear antes de o identificador entrar no save.
+- **Receptáculos vivem no `BuildState` ([ADR-018](../ADR/ADR-018.md)).** O `BuildServiceBinder` registra `BuildState.CreateDefault()` no locator; o `ReceptacleController` só altera as instâncias de `GetReceptacle`; `PlayerBuildController`, sinergias, flags e `BuildProgressionView` leem do estado.
+- Os efeitos híbridos são strings (`"ProteseViva"`, `"MutaçãoArcana"`, `"ArmaduraEncantada"`) e ainda não entram no save. Renomear um deles depois que o inventário ou a build forem persistidos exige um degrau `ISaveMigration`.

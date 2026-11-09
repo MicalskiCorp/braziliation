@@ -139,4 +139,68 @@ public sealed class SettingsServiceTests
 
         Assert.True(storageA.Read()!.SequenceEqual(storageB.Read()!));
     }
+
+
+    // ── Controles: overrides de binding e estilo de glifo (ADR-017) ──────────
+
+    [Fact]
+    public void Save_ThenLoad_KeepsBindingOverridesAndGlyphStyle()
+    {
+        var (svc, _) = CreateSut();
+        const string overrides = "{\"bindings\":[{\"action\":\"Player/Jump\",\"path\":\"<Keyboard>/w\"}]}";
+
+        svc.Save(new GameSettings { InputBindingOverrides = overrides, GlyphStyle = GlyphStyle.Switch });
+        var loaded = svc.Load();
+
+        Assert.Equal(overrides, loaded.InputBindingOverrides);
+        Assert.Equal(GlyphStyle.Switch, loaded.GlyphStyle);
+    }
+
+    [Fact]
+    public void Save_ThenLoad_DoesNotInterpretOverrides()
+    {
+        // O JSON é do Input System (SaveBindingOverridesAsJson); o core só guarda e devolve.
+        var (svc, _) = CreateSut();
+        const string notJson = "isto não é json { [";
+
+        svc.Save(new GameSettings { InputBindingOverrides = notJson });
+
+        Assert.Equal(notJson, svc.Load().InputBindingOverrides);
+    }
+
+    [Fact]
+    public void Load_SettingsFileWithoutControlFields_UsesDefaultsAndKeepsVolumes()
+    {
+        var (svc, storage) = CreateSut();
+        storage.Write(System.Text.Encoding.UTF8.GetBytes("{\"MasterVolume\":0.4,\"MusicVolume\":0.6,\"SfxVolume\":0.8}"));
+
+        var loaded = svc.Load();
+
+        Assert.Equal(string.Empty, loaded.InputBindingOverrides);
+        Assert.Equal(GlyphStyle.Auto, loaded.GlyphStyle);
+        Assert.Equal(0.4f, loaded.MasterVolume);
+        Assert.Equal(0.6f, loaded.MusicVolume);
+    }
+
+    [Fact]
+    public void Load_UnknownGlyphStyle_FallsBackToAutoWithoutLosingOtherSettings()
+    {
+        var (svc, storage) = CreateSut();
+        storage.Write(System.Text.Encoding.UTF8.GetBytes("{\"MasterVolume\":0.4,\"GlyphStyle\":42,\"InputBindingOverrides\":\"x\"}"));
+
+        var loaded = svc.Load();
+
+        Assert.Equal(GlyphStyle.Auto, loaded.GlyphStyle);
+        Assert.Equal(0.4f, loaded.MasterVolume);
+        Assert.Equal("x", loaded.InputBindingOverrides);
+    }
+
+    [Fact]
+    public void Load_NullOverridesInFile_BecomesEmpty()
+    {
+        var (svc, storage) = CreateSut();
+        storage.Write(System.Text.Encoding.UTF8.GetBytes("{\"InputBindingOverrides\":null}"));
+
+        Assert.Equal(string.Empty, svc.Load().InputBindingOverrides);
+    }
 }

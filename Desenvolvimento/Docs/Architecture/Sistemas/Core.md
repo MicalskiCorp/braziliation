@@ -9,10 +9,12 @@
 
 | Arquivo | Caminho | Função |
 |---------|---------|--------|
-| `GameServiceLocator.cs` | `Assets/Scripts/Core/GameServiceLocator.cs` | Service locator global — registro e resolução de serviços |
+| `GameServiceLocator.cs` | `Assets/Scripts/Core/GameServiceLocator.cs` | Service locator global — registro e resolução de serviços; cria save, settings, crafting e o estado do rio ([Hydric](Hydric.md)) |
 | `GameInitializer.cs` | `Assets/Scripts/Core/GameInitializer.cs` | Bootstrap do jogo — ordem de inicialização |
 | `CameraScaler.cs` | `Assets/Scripts/Core/CameraScaler.cs` | Adapta a câmera Unity à resolução alvo (pixel-perfect) |
 | `GameInput.cs` | `Assets/Scripts/Core/GameInput.cs` | Única porta de leitura de input, sobre o action map project-wide (ADR-006) |
+| `GameInput.Rebind.cs` | `Assets/Scripts/Core/GameInput.Rebind.cs` | Rebind no jogo (ADR-017): aplica e salva os overrides, lista os bindings do map Player, rebind interativo (Esc cancela, 8 s de timeout, mouse fora do Move, conflito avisado) e restaurar padrão |
+| `GameInput.Devices.cs` | `Assets/Scripts/Core/GameInput.Devices.cs` | Família do dispositivo ativo pela última ação, preferência de glifo e `GlyphFamilyChanged`; `Configure` no boot |
 | `GameLayers.cs` | `Assets/Scripts/Core/GameLayers.cs` | Nomes e máscaras das physics layers — nunca índice mágico |
 | `IDamageable.cs` | `Assets/Scripts/Core/IDamageable.cs` | Contrato de quem recebe dano |
 | `IInteractable.cs` | `Assets/Scripts/Core/IInteractable.cs` | Contrato de objeto com o qual o jogador interage |

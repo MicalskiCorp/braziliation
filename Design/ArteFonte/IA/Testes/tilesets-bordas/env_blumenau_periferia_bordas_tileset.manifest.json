@@ -1,0 +1,40 @@
+{
+  "generator": "gen_tileset.py",
+  "familia": "periferia",
+  "seed": 42,
+  "variations": 4,
+  "palette": "..\\..\\ArteConceitual\\Paletas\\blumenau.json",
+  "tile_size": 48,
+  "draw_size": 16,
+  "scale": 3,
+  "rows": [
+    "tabua",
+    "zinco",
+    "reboco",
+    "entulho",
+    "topo",
+    "quina_esq",
+    "quina_dir",
+    "lateral_esq",
+    "lateral_dir"
+  ],
+  "layout": "linhas = tipos, colunas = variações",
+  "bordas": {
+    "de": "entulho",
+    "linhas": [
+      "topo",
+      "quina_esq",
+      "quina_dir",
+      "lateral_esq",
+      "lateral_dir"
+    ]
+  },
+  "notas": {
+    "tabua": "base: faixa molhada nas 4 linhas de baixo, só na fiada do chão",
+    "topo": "superfície de chão: ar por cima. No gen_map_wfc.py, marcar o tile com \"exige_ar_acima\": true",
+    "quina_esq": "fim de chão à esquerda: ar por cima e à esquerda; encosta em topo pela direita",
+    "quina_dir": "fim de chão à direita: ar por cima e à direita; encosta em topo pela esquerda",
+    "lateral_esq": "face esquerda do bloco, sob a quina_esq: ar à esquerda; encosta em miolo pela direita",
+    "lateral_dir": "face direita do bloco, sob a quina_dir: ar à direita; encosta em miolo pela esquerda"
+  }
+}

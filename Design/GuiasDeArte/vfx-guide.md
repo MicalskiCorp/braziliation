@@ -54,6 +54,7 @@
 | one-shot que some de estalo | deixe encolher, dissolver em dither ou cair antes do fim |
 | efeito ótimo num corpo morto | dê atuação: preparação, pose de soltura, congelamento no contato, alvo que reage |
 | pontilhado depois de `--escala` | laço de pontos em passo fixo: amostre em `1/p.k` (ver `pxfx/index.md`) |
+| trama em blocos (mosaico) depois de `--escala` | ruído de textura sorteado por célula local: troque `rand(floor(x), floor(y), s)` por `rand(*p.noiseCell(x, y), s)` no `shade`. Banda ou mancha maior que um pixel continua em unidade local |
 
 ## O método
 

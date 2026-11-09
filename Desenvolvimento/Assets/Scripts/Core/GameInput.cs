@@ -16,8 +16,12 @@ namespace Braziliation.Core
     ///
     /// Convenção: só expõe as ações que o jogo usa hoje. Ação nova = binding no asset
     /// primeiro, propriedade aqui depois — nunca polling de dispositivo espalhado.
+    ///
+    /// Partes (ADR-017): leitura aqui; rebind e overrides em <c>GameInput.Rebind.cs</c>;
+    /// família do dispositivo e glifo em <c>GameInput.Devices.cs</c>. Só esta classe toca o
+    /// action map.
     /// </summary>
-    public static class GameInput
+    public static partial class GameInput
     {
         private const string Map = "Player";
 
@@ -102,6 +106,8 @@ namespace Braziliation.Core
             _attack = null;
             _interact = null;
             _warnedMissingAsset = false;
+            ResetRebind();
+            ResetDevices();
         }
     }
 }

@@ -31,8 +31,9 @@ namespace Braziliation.Build
                 return;
             }
 
-            // Cria o estado inicial da build e registra no ServiceLocator
-            var buildState = new BuildState();
+            // Cria a build inicial (os três receptáculos) e registra no ServiceLocator: é a fonte
+            // única que o ReceptacleController altera e que build, sinergias e UI leem.
+            var buildState = BuildState.CreateDefault();
             locator.Register(buildState);
 
             // Injeta o BuildState no PlayerBuildController se a referência estiver vinculada

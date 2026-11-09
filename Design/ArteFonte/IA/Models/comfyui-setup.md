@@ -73,11 +73,13 @@ Três diferenças que quebram se você copiar o workflow do SDXL:
 - Latente é `EmptySD3LatentImage`, não `EmptyLatentImage`.
 - É modelo **destilado**: `steps: 8`, `cfg: 1.0`. Os 25 steps / cfg 6.5 do SDXL queimam a imagem.
 
-> `comfy_batch.py` não patcheia este workflow direto — ele escreve em `inputs.text` dos nós
-> 6/7, que aqui se chama `prompt`.
+> O `comfy_batch.py` dirige este workflow desde 2026-11-09: segue as ligações do `KSampler` até os
+> encodes e escreve no campo de cada tipo (`text` no `CLIPTextEncode`, `prompt` no
+> `TextEncodeZImageOmni`). Modelo, LoRAs, steps e cfg vão para o `.lote.json` lidos do workflow.
+> Encode desconhecido para o script com erro. `--dry-run` mostra o que seria enviado.
 
-`workflow-sprite-alpha.json` mantém os ids `3/6/7/9` do workflow de thumbnails, então
-`comfy_batch.py --workflow ../IA/Models/workflow-sprite-alpha.json` funciona sem alteração.
+O mesmo vale para o `workflow-sprite-alpha.json`: ids de nó não importam mais, e as duas saídas
+(paleta travada e RGBA) ganham o prefixo do asset com o sufixo de cada uma.
 Requer o swatch em `D:\Tools\ComfyUI\input\` — gerar com
 `py Ferramentas/palette_swatch.py ../../ArteConceitual/Paletas/blumenau.json -o D:/Tools/ComfyUI/input/blumenau_swatch.png`.
 

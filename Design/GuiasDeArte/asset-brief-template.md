@@ -40,7 +40,7 @@ Use este modelo antes de criar concept art, sprite final ou prompt de IA.
 - Referências autorizadas usadas:
 
 ## Checklist de Aprovação
-- [ ] Lê em 640x360
+- [ ] Lê em 960x540
 - [ ] Usa paleta aprovada
 - [ ] Está alinhado ao grid de 32 px
 - [ ] Mantém estilo pixel art, sem cara de imagem reduzida

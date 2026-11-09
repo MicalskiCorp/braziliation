@@ -90,7 +90,7 @@ def wrap_(p, W, I, H, t):
         if abs(x) > half - 0.5 or y > -10.5:
             return W[0]
         cord = math.floor(y - x * 0.6 + 40) % 3 == 0
-        h = rand(math.floor(x), math.floor(y), 31)
+        h = rand(*p.noiseCell(x, y), 31)  # trama do trapo: um sorteio por pixel de tela (ADR-011)
         if v < 0.45:
             if h < 0.42:
                 g = 0.5 + 0.5 * math.sin((t / D) * math.pi * 4 + h * 40)

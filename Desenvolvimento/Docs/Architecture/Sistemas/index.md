@@ -17,6 +17,7 @@
 | [`Storage.md`](Storage.md) | Abstração de leitura/escrita em disco | 🔨 Em Desenvolvimento |
 | [`Build.md`](Build.md) | Estado da build do personagem e sinergias híbridas | 🔨 Em Desenvolvimento |
 | [`Crafting.md`](Crafting.md) | Componentes, receitas, receptáculos e itens híbridos | 🔨 Em Desenvolvimento |
+| [`Hydric.md`](Hydric.md) | Estado global do rio em Blumenau (Rotina, Alerta, Cheia, Saturação) | 🔨 Em Desenvolvimento |
 | [`Enemies.md`](Enemies.md) | Motor de IA de inimigos por perfil | ✅ Motor implementado |
 | [`Editor.md`](Editor.md) | Ferramentas do Unity Editor (import, sheets, WFC, cenas) | 🔨 Em Desenvolvimento |
 
