@@ -59,7 +59,7 @@ Aplicar a regra da coluna "Item concluído" daquele TODO.
 ### varredura
 Rodar sem confirmar passo a passo e devolver a lista — o usuário decide o que entra no TODO.
 
-A parte mecânica é script: `py .claude/skills/gerir-todo/todo.py varredura {criativo|pesquisa}` faz as checagens abaixo e marca o que já está citado no TODO — o agente não precisa ler a camada inteira. Sem `Bash` (hoje `@GameCreative` e `@Historiador`), seguir a mesma checklist lendo os arquivos.
+A parte mecânica é script: `py .claude/skills/gerir-todo/todo.py varredura {criativo|pesquisa}` faz as checagens abaixo e marca o que já está citado no TODO — o agente não precisa ler a camada inteira. Use o script: ler a camada inteira para refazer a checklist à mão custa muito mais contexto. Só sem `Bash` (sessão em que ele foi negado), seguir a mesma checklist lendo os arquivos.
 
 - **Criativo** (`Design/Criativo/`): marcadores abertos (`{TODO}`, `*(a definir)*`, `*(Escrever aqui)*`, `*(nenhum…*`); lendas ❌ no catálogo sem mapeamento; ideias 💡 paradas desde a sessão anterior; arcos e personagens sem lenda associada; cidades 📋 com Características vazias; personagens ou criaturas com Aparência preenchida sem linha em Concept Art Pendente nem concept aprovado em `Design/ArteConceitual/`. Comparar com o TODO e listar o que falta nele.
 - **Pesquisa**: estados e temas de `Design/Criativo/Estados/index.md` sem cobertura em `Design/Pesquisa/index.md`.

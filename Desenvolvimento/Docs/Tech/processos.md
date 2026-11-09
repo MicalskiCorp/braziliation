@@ -34,7 +34,7 @@ As skills vivem em `.claude/skills/`. Cada agente dono tem `Skill` em `tools:` e
 | [`hemeroteca-blumenau`](../../../.claude/skills/hemeroteca-blumenau/SKILL.md) | `@Historiador` | Fato, data ou nome de Blumenau em fonte primária ("Blumenau em Cadernos") |
 | [`processar-entrevistas`](../../../.claude/skills/processar-entrevistas/SKILL.md) | `@Historiador` | Curar entrevistas/conversas de pesquisa capturadas via WhatsApp (ADR-009) — áudio, texto, foto e documento — em `Design/Pesquisa/Entrevistas/_pendente-curadoria/` |
 | [`meta-check`](../../../.claude/skills/meta-check/SKILL.md) | `@UnityDeveloper` · `@SpriteArtist` | Pares asset/`.meta` em `Desenvolvimento/Assets/` |
-| [`unity-validar`](../../../.claude/skills/unity-validar/SKILL.md) | `@UnityDeveloper` · `@GameplayEngineer` · `@TestEngineer` | Compilar o Unity em batchmode antes de commitar mudança em `Assets/`; `--testes` roda os EditMode |
+| [`unity-validar`](../../../.claude/skills/unity-validar/SKILL.md) | `@UnityDeveloper` · `@GameplayEngineer` · `@TestEngineer` · `@QAEngineer` (só `--testes`, pelo script — não tem `Skill`) | Compilar o Unity em batchmode antes de commitar mudança em `Assets/`; `--testes` roda os EditMode |
 | [`fechar-decisao`](../../../.claude/skills/fechar-decisao/SKILL.md) | `@GameCreative` (com `@TechLead` nos números) | Transformar pendência de design parada em DDR aprovado, com handoff |
 | [`novo-adr`](../../../.claude/skills/novo-adr/SKILL.md) | `@TechLead` | Registrar decisão de arquitetura e marcar o ADR substituído |
 | [`novo-inimigo`](../../../.claude/skills/novo-inimigo/SKILL.md) | `@GameplayEngineer` | Inimigo como perfil de dados + teste + linha em `InimigosIA.md` |
