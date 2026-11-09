@@ -20,10 +20,11 @@ Format:
 ### Alta
 
 - **Item:** UI de slots trata `Corrupt` e `FromNewerBuild` como "slot vazio"
-- **Where:** `Assets/Scripts/UI/SaveSlotsView.cs` (usa `SaveGameService.Load`)
+- **Where:** `Assets/Scripts/UI/SaveSlotsView.cs` (usa `SaveGameService.Load`) e `SaveSlotEntryView.cs`
 - **Why:** ADR-007 criou `LoadDetailed` com status distinguíveis, mas a UI ainda chama o
-  `Load` de conveniência. O jogador que abrir um save de build mais nova vê "vazio".
-- **Fix:** trocar por `LoadDetailed` e renderizar estado por `SaveLoadStatus`.
+  `Load` de conveniência. O jogador que abrir um save de build mais nova vê "vazio" e, em
+  Novo Jogo, pode gravar por cima dele.
+- **Fix:** contrato em [`Sistemas/UI.md`](../Architecture/Sistemas/UI.md) › Estado do slot; implementa o `@UnityDeveloper` (`Docs/TODO.md` › UI e arte).
 
 - **Item:** Não há UI de rebind de controles nem integração Steam Input
 - **Where:** `Assets/Scripts/Core/GameInput.cs`, `Assets/InputSystem_Actions.inputactions`
