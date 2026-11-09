@@ -18,7 +18,7 @@
 |-------|-----------|---------|
 | Sistemas | Ficha de cada sistema — **é o índice de scripts** | [`Architecture/Sistemas/`](Architecture/Sistemas/index.md) |
 | Índices | Assets e protocolo de sincronização | [`Architecture/indices/`](Architecture/indices/index.md) |
-| ADRs | Decisões de arquitetura | [`Architecture/architecture_decisions.md`](Architecture/architecture_decisions.md) |
+| ADRs | Decisões de arquitetura | [`Architecture/ADR/`](Architecture/ADR/index.md) |
 | Estrutura de Assets | Layout de `Assets/` | [`Architecture/Assets/AssetsStructure.md`](Architecture/Assets/AssetsStructure.md) |
 | Tech | Regras de desenvolvimento, dívida técnica, CI Unity e processos dos agentes | [`Tech/`](Tech/index.md) |
 | Processos | Manual de processos por camada (Pesquisa → Implementação) | [`Processos/`](Processos/index.md) |

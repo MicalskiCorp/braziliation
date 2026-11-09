@@ -10,7 +10,7 @@
 | [`Sistemas/`](Sistemas/index.md) | Ficha técnica de cada sistema — a "Fontes Técnicas" de cada uma é o índice de scripts |
 | [`indices/`](indices/index.md) | Assets por etapa e protocolo de sincronização código ↔ docs |
 | [`motor/`](motor/index.md) | Metodologia de indexação |
-| [`architecture_decisions.md`](architecture_decisions.md) | ADRs — decisões de arquitetura |
+| [`ADR/`](ADR/index.md) | ADRs — decisões de arquitetura, um arquivo por ADR |
 | [`Assets/AssetsStructure.md`](Assets/AssetsStructure.md) | Layout de `Assets/` e o que cada pasta contém |
 
 > Decisão estrutural significativa vira ADR (skill `novo-adr`).

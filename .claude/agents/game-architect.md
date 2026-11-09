@@ -56,7 +56,7 @@ Docs/
 │   ├── indices/              ← assets.md (backlog de 5 etapas por asset) + protocolo
 │   ├── motor/                ← metodologia de indexação
 │   ├── Assets/AssetsStructure.md
-│   └── architecture_decisions.md
+│   └── ADR/                  ← um arquivo por ADR (ADR-0NN.md), roteados pelo index.md
 ├── Roadmap/                  ← roadmap.md (fases) · backlog.md (features → docs)
 ├── Tech/                     ← regras, dívida técnica, CI Unity, processos dos agentes
 └── Models/                   ← templates (não editar)

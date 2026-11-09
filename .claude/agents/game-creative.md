@@ -44,7 +44,9 @@ Design/Criativo/
 │       └── cidades/
 │           ├── index.md
 │           └── {Cidade}/
-│               └── index.md   ← Características + Monstros + Lugares + Ideias/EasterEggs
+│               ├── index.md   ← cabeçalho + Características + tabela da ficha
+│               ├── monstros.md · ideias.md
+│               └── lugar-{slug}.md  ← um por lugar: lenda, mapa, NPC, missão, boss
 ├── Historia/                   ← premissa, arcos, personagens
 │   ├── index.md
 │   ├── premissa.md
@@ -67,7 +69,7 @@ Design/Criativo/
     └── sessoes/                ← AAAA-MM-DD-{tema}.md
 ```
 
-**Template de cidade:** `Design/Models/ModelCidade.md`
+**Template de cidade:** `Design/Models/ModelCidade.md` — ficha é pasta, um arquivo por seção e um por lugar. Mexer num lugar = ler o `index.md` e o `lugar-{slug}.md` dele, não a cidade inteira.
 
 ---
 
@@ -180,7 +182,7 @@ Perguntar ao usuário, se faltar: a qual arco pertence e qual a reinterpretaçã
 1. **Estrutura** pela skill `nova-cidade`: template `Design/Models/ModelCidade.md`, índices do estado e de cidades e paleta proposta; estado novo cria `{Estado}/index.md`, `ideias.md` e `cidades/index.md` e sai de "Planejados" em `Estados/index.md`.
 2. **Pedir o que faltar**: nome real e nome no game, Punk Genre (ou sugerir pela característica da cidade real); para estado novo, as primeiras cidades.
 3. **Preencher** Características (Estrutura, Tipo, Descrição) com o que o usuário fornecer.
-4. **Usar a pesquisa aprovada** em `Design/Pesquisa/` (lendas, folclore, arquitetura da cidade real) para popular Monstros, Lugares e Ideias/EasterEggs. Este agente não pesquisa na web nem inventa fato: lacuna factual é reportada ao usuário com a sugestão `@Historiador Pesquisar: {tema}`.
+4. **Usar a pesquisa aprovada** em `Design/Pesquisa/` (lendas, folclore, arquitetura da cidade real) para popular `monstros.md`, um `lugar-{slug}.md` por lugar e `ideias.md`, cada um com a linha na tabela do `index.md`. Este agente não pesquisa na web nem inventa fato: lacuna factual é reportada ao usuário com a sugestão `@Historiador Pesquisar: {tema}`.
 5. **Catalogar** lendas novas (Modo 1) e abrir concept art de cada monstro/criatura novo (operação `concept-art` da skill `gerir-todo`).
 6. **Pastas Unity** `Assets/Art/Environments/{Cidade}/` → pendência do `@UnityDeveloper` no `Desenvolvimento/Docs/TODO.md`.
 

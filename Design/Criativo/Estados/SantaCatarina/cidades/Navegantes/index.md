@@ -16,42 +16,15 @@
 
 ---
 
-## Monstros
+## Ficha
 
-> ⚠️ **TODO:** Nenhum monstro definido ainda — decisão adiada por escolha do usuário (20/09/2026).
+Um arquivo por seção; cada lugar no seu `lugar-{slug}.md`. Template: [`ModelCidade.md`](../../../../../Models/ModelCidade.md).
 
----
-
-## Lugares
-
-### Pedra da Miraguaia (bairro Gravatá) — A Mulher de Branco
-
-- **Base factual verificada:** grafia confirmada **Pedra da Miraguaia**, localizada no bairro **Gravatá**, em Navegantes (não "Miranguaia" — essa variante não aparece em nenhuma fonte consultada).
-- **Lenda confirmada:** segundo relatos de pescadores locais, uma figura feminina vestida inteiramente de branco surgia no alto da pedra em noites de lua cheia, assustando pescadores e marisqueiros que ficavam acordados observando a praia à noite. Diz a lenda que, caso a aparição alcance alguém, ela avança rasgando suas roupas.
-- **Ideias** *(placeholder, não desenvolvida)*:
-  - > ⚠️ **TODO:** Desenvolver ideias de cenário/quest quando a adaptação distópica da cidade for decidida.
-
-### Figueiras da Cidade — O Fantasma da Figueira
-
-- **Base factual verificada:** narrativa sobre José Izídio, que subia em figueiras e assustava transeuntes se cobrindo com um lençol branco. Uma variante fala de um homem vestido de preto, com botões, que aparecia à noite no bairro São Paulo. A lenda também associa as figueiras a "ouro enterrado embaixo delas" — outra variação regional do motivo geral de tesouro enterrado/botija, já registrado como motivo folclórico brasileiro amplo (não local) na pesquisa de Indaial e no pool de ideias.
-- **Ideias** *(placeholder, não desenvolvida)*:
-  - > ⚠️ **TODO:** Desenvolver ideias de cenário/quest quando a adaptação distópica da cidade for decidida.
-
-### Trajeto da Pedreira — A Luz do Trilho
-
-- **Base factual verificada:** fenômeno luminoso relatado no trajeto da pedreira usada durante a construção dos molhes do Rio Itajaí-Açu. Moradores associavam a luz a uma criatura semelhante ao **Boitatá** (serpente flamejante do folclore brasileiro amplo); relato mais comum na época anterior à iluminação elétrica das ruas.
-- **Ideias** *(placeholder, não desenvolvida)*:
-  - > ⚠️ **TODO:** Desenvolver ideias de cenário/quest quando a adaptação distópica da cidade for decidida.
-
-### Boi de Mamão — manifestação cultural, não lenda de terror
-
-- **Base factual verificada:** tradição folclórica catarinense mais ampla (presente em diversas cidades do estado como dança/folguedo popular, não exclusiva de Navegantes): um marido, tentando satisfazer o desejo de gravidez da esposa por vísceras bovinas, mata um boi do vizinho; um curandeiro ressuscita o animal, e o evento é celebrado até hoje com festividades coloridas.
-- **Nota de manuseio:** tratar como manifestação cultural festiva catarinense, não como lenda de terror/assombração — categoria diferente das outras três desta ficha.
-- **Ideias** *(placeholder, não desenvolvida)*:
-  - > ⚠️ **TODO:** Avaliar se vira evento cultural sazonal in-game (festividade, não combate) quando a cidade for desenvolvida.
-
----
-
-## Ideias / Easter Eggs *(sem lugar específico)*
-
-> ⚠️ **TODO:** Adicionar ideias gerais e Easter Eggs de Navegantes quando a pesquisa cobrir mais da cidade.
+| Arquivo | Conteúdo |
+|---------|----------|
+| [`monstros.md`](monstros.md) | Estética e tipos de monstro |
+| [`lugar-pedra-da-miraguaia.md`](lugar-pedra-da-miraguaia.md) | Pedra da Miraguaia (bairro Gravatá) — A Mulher de Branco |
+| [`lugar-figueiras-da-cidade.md`](lugar-figueiras-da-cidade.md) | Figueiras da Cidade — O Fantasma da Figueira |
+| [`lugar-trajeto-da-pedreira.md`](lugar-trajeto-da-pedreira.md) | Trajeto da Pedreira — A Luz do Trilho |
+| [`lugar-boi-de-mamao.md`](lugar-boi-de-mamao.md) | Boi de Mamão — manifestação cultural, não lenda de terror |
+| [`ideias.md`](ideias.md) | Ideias e easter eggs sem lugar específico |

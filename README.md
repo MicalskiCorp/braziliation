@@ -104,7 +104,7 @@ git config core.hooksPath .githooks
 
 ## 🤖 Desenvolvimento assistido por IA (Claude Code)
 
-O projeto usa **Claude Code** como único harness de agentes ([ADR-008](Desenvolvimento/Docs/Architecture/architecture_decisions.md)): agentes, skills, hooks e regras vivem em `.claude/`.
+O projeto usa **Claude Code** como único harness de agentes ([ADR-008](Desenvolvimento/Docs/Architecture/ADR/ADR-008.md)): agentes, skills, hooks e regras vivem em `.claude/`.
 
 ### Agentes disponíveis
 

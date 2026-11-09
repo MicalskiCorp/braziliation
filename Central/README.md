@@ -1,6 +1,6 @@
 # Central do Braziliation
 
-Painel local das **filas de trabalho** do projeto ([ADR-012](../Desenvolvimento/Docs/Architecture/architecture_decisions.md#adr-012-central--painel-local-das-filas-de-trabalho-com-parser-único-dos-todos)). Cada seção dos TODOs de camada é uma fila — mais a dívida técnica e as entrevistas para curar. Escolhe a fila, seleciona os itens, executa com o agente dono, conversa quando ele pedir decisão, valida o que saiu e só então commita. Desenho completo e decisões: [`PLANO.md`](PLANO.md).
+Painel local das **filas de trabalho** do projeto ([ADR-012](../Desenvolvimento/Docs/Architecture/ADR/ADR-012.md)). Cada seção dos TODOs de camada é uma fila — mais a dívida técnica e as entrevistas para curar. Escolhe a fila, seleciona os itens, executa com o agente dono, conversa quando ele pedir decisão, valida o que saiu e só então commita. Desenho completo e decisões: [`PLANO.md`](PLANO.md).
 
 **Endereço:** <http://127.0.0.1:8765> — só nesta máquina. Nada fica exposto na rede.
 
@@ -47,7 +47,7 @@ Quando o limite do plano (janela de 5 h ou semanal) estoura no meio de uma execu
 
 ## Economia de tokens
 
-([ADR-015](../Desenvolvimento/Docs/Architecture/architecture_decisions.md#adr-015-economia-de-tokens-nas-execuções-da-central--medir-compactar-cedo-por-fila-e-um-mod-para-o-resumo))
+([ADR-015](../Desenvolvimento/Docs/Architecture/ADR/ADR-015.md))
 Cada requisição ao modelo relê a conversa inteira: o que pesa é **requisições × tamanho do contexto**.
 
 - **Medir.** A página **Tokens** mostra, por fila, a média das execuções com e sem janela de compactação, e cada execução com requisições, contexto inicial e máximo, compactações e custo. No chat de uma execução, o quadro «Tokens» lista também os resultados de ferramenta que mais pesaram. Tudo vem do `bruto.jsonl`; o custo é o equivalente em US$ que o Claude Code informa.

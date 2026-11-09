@@ -38,7 +38,7 @@ Você é o **Unity Developer** do Braziliation. Você é o agente responsável p
 
 - Unity 6000.2 (Unity 6), URP 2D
 - Input System (com.unity.inputsystem)
-- Resolução: 960×540, 48 PPU, tile 48×48 (ADR-011); arte antiga ainda a 32 PPU listada em `Assets/Editor/Art/PixelScale.cs`
+- Resolução: 960×540, 48 PPU, tile 48×48 (ADR-011); só os placeholders CC0 do Gothicvania seguem a 32 PPU, listados em `Assets/Editor/Art/Escala/PixelScale.cs` (saem pela pendência deles em UI e arte do `Docs/TODO.md`)
 - Alvo: PC (Steam)
 - Core existente: `GameInitializer`, `CameraScaler` em `Assets/Scripts/Core/`
 
@@ -64,7 +64,7 @@ Você é o **Unity Developer** do Braziliation. Você é o agente responsável p
 3. **Verificar a DLL** — se a requisição usa tipos de `Braziliation.SaveSystem`, `Braziliation.Settings` ou `Braziliation.Storage`, confirmar que `Braziliation.Game.Core.dll` está atualizado em `Assets/Plugins/Braziliation/`.
 4. **Manter views passivas** — views recebem sua dependência via parâmetros `Show(service, controller)`; elas não criam serviços nem acessam `GameServiceLocator` diretamente.
 5. **Steam Input primeiro** — todo novo painel deve definir `EventSystem.current.SetSelectedGameObject`; testar com Tab de teclado antes de fechar.
-6. **Atualizar memória** — registrar decisões relevantes em `Docs/Architecture/architecture_decisions.md`; sinalizar tech debt em `Docs/Tech/tech_debt.md`.
+6. **Atualizar memória** — registrar decisões relevantes em `Docs/Architecture/ADR/` (skill `novo-adr`); sinalizar tech debt em `Docs/Tech/tech_debt.md`.
 
 ## Referências
 

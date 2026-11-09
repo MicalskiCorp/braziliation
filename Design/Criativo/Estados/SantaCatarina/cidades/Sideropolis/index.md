@@ -16,25 +16,12 @@
 
 ---
 
-## Monstros
+## Ficha
 
-> ⚠️ **TODO:** Nenhum monstro definido ainda — decisão adiada por escolha do usuário (20/09/2026).
+Um arquivo por seção; cada lugar no seu `lugar-{slug}.md`. Template: [`ModelCidade.md`](../../../../../Models/ModelCidade.md).
 
----
-
-## Lugares
-
-### Túnel da Ferrovia Dona Teresa Cristina ("Túnel Mal-Assombrado")
-
-- **Base factual verificada:** estrutura ferroviária real de **388,45 metros**, que corta o morro entre as comunidades de Santa Luzia e Ex-Patrimônio, no centro de Siderópolis. A obra foi aprovada por decreto federal em **31 de outubro de 1942**; a construção em si começou em **1943** e se estendeu até aproximadamente **1946/1947**, executada pela empresa **SOCIMBRA** (Sociedade Construtora e Importadora Brasília Ltda.). O propósito era ligar as minas de carvão de Treviso e Siderópolis à usina de beneficiamento de Capivari, permitindo o escoamento do carvão por trem até os portos de Imbituba e Laguna — a demanda crescente da Companhia Siderúrgica Nacional (CSN) é apontada como motor econômico da obra. Hoje é tratado como patrimônio cultural local.
-- **Lenda urbana confirmada (existe e é contada, sem lastro documental):** relatos de que "muitas pessoas morreram durante a construção em 1944, em um acidente" (desmoronamento), seguidos de gritos de dor, lamentos, murmúrios roucos, pedidos de socorro e uma luz pálida que acende e apaga dentro do túnel. Um historiador consultado pela reportagem de origem (Macsuel De Bona) admite nunca ter visto a fotografia que supostamente comprovaria o episódio. Ossos humanos ocasionalmente encontrados nas redondezas alimentam a lenda, mas sem laudo ou registro forense citado nas fontes.
-- **Não confirmado — não usar como fato:** a origem específica da mão de obra como "SP, MG e imigrantes fugidos da Europa do pós-guerra" não tem fonte — a fonte mais detalhada só registra que os operários "vieram de diferentes estados, muitos sem documentos, sem família e com costumes desconhecidos pelos moradores locais", sem citar estados ou nacionalidades.
-- **Ideias** *(sugestão trazida pelo handoff de pesquisa, não desenvolvida)*:
-  - O túnel já funciona como cenário dieselpunk pronto pela engenharia real (ferrovia de carvão, empresa construtora, decreto federal, uso industrial CSN), sem precisar da lenda.
-  - A lenda do acidente de 1944 pode ser tratada como "boato dos operários" dentro da narrativa do jogo, nunca como fato histórico do túnel real.
-
----
-
-## Ideias / Easter Eggs *(sem lugar específico)*
-
-> ⚠️ **TODO:** Adicionar ideias gerais e Easter Eggs de Siderópolis quando a pesquisa cobrir mais da cidade além do túnel.
+| Arquivo | Conteúdo |
+|---------|----------|
+| [`monstros.md`](monstros.md) | Estética e tipos de monstro |
+| [`lugar-tunel-da-ferrovia-dona-teresa-cristina.md`](lugar-tunel-da-ferrovia-dona-teresa-cristina.md) | Túnel da Ferrovia Dona Teresa Cristina ("Túnel Mal-Assombrado") |
+| [`ideias.md`](ideias.md) | Ideias e easter eggs sem lugar específico |

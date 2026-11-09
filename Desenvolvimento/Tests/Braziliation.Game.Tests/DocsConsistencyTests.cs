@@ -226,19 +226,29 @@ public sealed class DocsConsistencyTests
         Assert.True(problems.Count == 0, "Roteadores incompletos:\n" + string.Join("\n", problems));
     }
 
+    /// <summary>Um arquivo por ADR, `ADR-NNN.md`, roteados por `ADR/index.md` (dívida paga em 2026-11-09).</summary>
+    private static string AdrDir => Path.Combine(UnityRoot, "Docs", "Architecture", "ADR");
+
+    private static IEnumerable<string> AdrFiles() =>
+        Directory.EnumerateFiles(AdrDir, "ADR-*.md").OrderBy(f => f, StringComparer.Ordinal);
+
+    private static string AdrStatus(string text) =>
+        Regex.Match(text.Replace("\r\n", "\n"), @"\*\*Status:\*\*(.*?)(?=\n- \*\*|\z)", RegexOptions.Singleline).Groups[1].Value;
+
+    private static bool IsSuperseded(string status) =>
+        status.Contains("Superseded", StringComparison.OrdinalIgnoreCase)
+        || status.Contains("Substituí", StringComparison.OrdinalIgnoreCase);
+
     [Fact]
     public void Superseded_Adrs_Name_Their_Replacement()
     {
-        var text = File.ReadAllText(Path.Combine(UnityRoot, "Docs", "Architecture", "architecture_decisions.md"));
         var problems = new List<string>();
 
-        foreach (Match adr in Regex.Matches(text, @"^## (ADR-\d{3}).*?(?=^## |\z)", RegexOptions.Multiline | RegexOptions.Singleline))
+        foreach (var file in AdrFiles())
         {
-            var id = adr.Groups[1].Value;
-            var status = Regex.Match(adr.Value, @"\*\*Status:\*\*(.*?)(?=\n- \*\*|\z)", RegexOptions.Singleline).Groups[1].Value;
-            var superseded = status.Contains("Superseded", StringComparison.OrdinalIgnoreCase)
-                             || status.Contains("Substituí", StringComparison.OrdinalIgnoreCase);
-            if (!superseded)
+            var id = Path.GetFileNameWithoutExtension(file);
+            var status = AdrStatus(File.ReadAllText(file));
+            if (!IsSuperseded(status))
                 continue;
 
             var replacement = Regex.Matches(status, @"ADR-\d{3}").Select(m => m.Value).Where(r => r != id);
@@ -247,6 +257,39 @@ public sealed class DocsConsistencyTests
         }
 
         Assert.True(problems.Count == 0, "ADR substituído sem indicar o substituto: " + string.Join(", ", problems));
+    }
+
+    /// <summary>
+    /// O índice é o que o agente lê primeiro; se a coluna Status mentir, ele segue um ADR
+    /// substituído. Foi o que a lista "Vigentes" do Processos/documentacao.md fez em set/2026,
+    /// dois ADRs atrás, sem teste nenhum.
+    /// </summary>
+    [Fact]
+    public void Adr_Index_Matches_Adr_Files()
+    {
+        var index = File.ReadAllText(Path.Combine(AdrDir, "index.md"));
+        var rows = Regex.Matches(index, @"^\| \[(ADR-\d{3})\]\((ADR-\d{3})\.md\) \|[^|\n]*\|([^|\n]*)\|", RegexOptions.Multiline)
+            .ToDictionary(m => m.Groups[1].Value, m => (File: m.Groups[2].Value, Status: m.Groups[3].Value));
+        var problems = new List<string>();
+
+        foreach (var file in AdrFiles())
+        {
+            var id = Path.GetFileNameWithoutExtension(file);
+            var text = File.ReadAllText(file);
+            if (!text.StartsWith($"# {id}: ", StringComparison.Ordinal))
+                problems.Add($"{id}.md não começa com \"# {id}: \"");
+            if (!rows.TryGetValue(id, out var row))
+            {
+                problems.Add($"{id} sem linha na tabela do ADR/index.md");
+                continue;
+            }
+            if (row.File != id)
+                problems.Add($"linha {id} do índice aponta para {row.File}.md");
+            if (IsSuperseded(AdrStatus(text)) != IsSuperseded(row.Status))
+                problems.Add($"{id}: status do índice ({row.Status.Trim()}) diverge do arquivo");
+        }
+
+        Assert.True(problems.Count == 0, "ADR/index.md fora de sincronia com os arquivos:\n" + string.Join("\n", problems));
     }
 
     /// <summary>

@@ -115,7 +115,7 @@ Painel local em `Central/` (ADR-012, [README](../../../Central/README.md)): uma 
 | `.claude/rules/csharp.md` | Convenções C# e definição de pronto | Carregada ao tocar `*.cs` |
 | `.claude/rules/arte.md` · [`direcao-de-arte.md`](../../../Design/GuiasDeArte/direcao-de-arte.md) | Direção de arte e áudio | Regra carregada nas pastas de arte (`ArteConceitual`, `ArteFonte`, `GuiasDeArte`, `Assets/Art`); guia sob demanda |
 | `.claude/rules/todos.md` | Regras de TODO e status | Carregada em `**/TODO.md` e no `Roadmap/` |
-| `Desenvolvimento/Docs/Architecture/architecture_decisions.md` | ADRs | Referenciado pelos agentes |
+| [`Desenvolvimento/Docs/Architecture/ADR/`](../Architecture/ADR/index.md) | ADRs, um arquivo por ADR | Referenciado pelos agentes |
 | `Desenvolvimento/Docs/Tech/tech_debt.md` | Dívida técnica | Referenciado pelos agentes |
 
 ## 11. Modo, skill ou regra — onde cada procedimento mora

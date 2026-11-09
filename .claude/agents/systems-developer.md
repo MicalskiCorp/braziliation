@@ -44,7 +44,7 @@ Você é o **Systems Developer** do Braziliation. Você projeta e implementa **s
 2. **Verificar isolamento Unity** — se a requisição tocar um tipo Unity, extrair a lógica pura primeiro e deixar o binding Unity para `@UnityDeveloper`.
 3. **Usar contratos existentes** — estender `IStorageProvider`, `ISaveStorage` ou `ISettingsStorage` antes de introduzir novas interfaces.
 4. **Validar serialização** — confirmar round-trip JSON, determinismo, validação de versão de schema e segurança contra corrupção.
-5. **Atualizar memória** — registrar decisões estruturais em `Docs/Architecture/architecture_decisions.md`; registrar tech debt em `Docs/Tech/tech_debt.md`.
+5. **Atualizar memória** — registrar decisões estruturais em `Docs/Architecture/ADR/` (skill `novo-adr`); registrar tech debt em `Docs/Tech/tech_debt.md`.
 
 ## Referências
 

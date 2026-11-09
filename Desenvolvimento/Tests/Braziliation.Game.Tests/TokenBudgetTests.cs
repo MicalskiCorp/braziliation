@@ -22,21 +22,22 @@ public sealed class TokenBudgetTests
     private static readonly Dictionary<string, string> DocumentExceptions = new()
     {
         ["Desenvolvimento/Docs/TODO-arquivo.md"] = "histórico congelado, fora do caminho de leitura dos agentes",
-        ["Desenvolvimento/Docs/Architecture/architecture_decisions.md"] = "dívida registrada: dividir em um arquivo por ADR",
-        ["Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md"] = "dívida registrada: dividir a ficha da cidade por seção",
         ["Design/GuiasDeArte/pipeline-ia-sprites.md"] = "dívida registrada: dividir o guia por rota",
     };
 
     /// <summary>`lotes.md` de context pack é log de geração: cresce por lote, é lido por trecho.</summary>
     private static readonly Regex GenerationLog = new(@"^Design/ArteFonte/IA/ContextPacks/[^/]+/lotes\.md$", RegexOptions.Compiled);
 
-    /// <summary>Ficha de cidade usa index.md como conteúdo (template ModelCidade), não como roteador.</summary>
-    private static readonly Regex CityFile = new(@"/cidades/[^/]+/index\.md$", RegexOptions.Compiled);
+    /// <summary>
+    /// Ficha de **pesquisa** de cidade usa index.md como conteúdo, não como roteador. A ficha criativa
+    /// deixou de ser exceção em 2026-11-09: virou pasta, com um arquivo por seção e por lugar (ModelCidade).
+    /// </summary>
+    private static readonly Regex ResearchCityFile = new(@"^Design/Pesquisa/Estados/[^/]+/cidades/[^/]+/index\.md$", RegexOptions.Compiled);
 
     private static string GitRoot => RepoRootFinder.FindGitRoot();
     private static string Relative(string path) => Path.GetRelativePath(GitRoot, path).Replace('\\', '/');
     // Conta com quebra de linha LF. Com core.autocrlf, o mesmo commit tem CRLF num checkout e LF noutro, e
-    // o tamanho em disco mudava o veredito: o architecture_decisions.md passava no main (~4970) e reprovava
+    // o tamanho em disco mudava o veredito: o antigo architecture_decisions.md passava no main (~4970) e reprovava
     // no worktree da Central (~5036) — 2026-11-03.
     private static long Tokens(string path) =>
         System.Text.Encoding.UTF8.GetByteCount(File.ReadAllText(path).Replace("\r\n", "\n")) / 4;
@@ -91,7 +92,7 @@ public sealed class TokenBudgetTests
     {
         var over = DocsConsistencyTests.MarkdownFiles()
             .Where(f => Path.GetFileName(f) == "index.md")
-            .Where(f => !CityFile.IsMatch(Relative(f)))
+            .Where(f => !ResearchCityFile.IsMatch(Relative(f)))
             .Where(f => Tokens(f) > RouterIndexBudget)
             .Select(f => $"{Relative(f)}: ~{Tokens(f)} tokens")
             .ToList();

@@ -59,4 +59,4 @@ Cada seção de TODO é também uma fila da **Central** (`Central/`, ADR-012), o
 - `Desenvolvimento/Docs/Processos/index.md` — manual de processos por camada (para humanos; o canônico é o agente/skill)
 - `Desenvolvimento/Docs/index.md` — entrada da documentação técnica
 - `Desenvolvimento/Docs/Tech/DevelopmentRules.md` — branches, commits, versionamento
-- `Desenvolvimento/Docs/Architecture/architecture_decisions.md` · `Desenvolvimento/Docs/Tech/tech_debt.md` · `Desenvolvimento/Docs/Roadmap/roadmap.md`
+- `Desenvolvimento/Docs/Architecture/ADR/index.md` · `Desenvolvimento/Docs/Tech/tech_debt.md` · `Desenvolvimento/Docs/Roadmap/roadmap.md`

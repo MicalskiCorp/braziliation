@@ -25,9 +25,11 @@ Guia canônico: `Design/GuiasDeArte/style-bible.md` · direção de arte e áudi
 Estilo: pixel art dieselpunk brasileiro — industrial, enferrujado, oleoso, tecnologia
 improvisada. Silhueta legível em 1× antes de qualquer detalhe.
 
-> **Migração em curso (ADR-011):** a arte anterior ao grid de 48 continua importada a 32 PPU
-> para não mudar de tamanho em mundo. A lista viva está em `Assets/Editor/Art/PixelScale.cs`;
-> ao re-autorar um asset, apague a linha dele de lá.
+> **Exceção de escala (ADR-011):** toda a arte própria já está no grid de 48. Só os placeholders
+> CC0 do Gothicvania seguem importados a 32 PPU, para não mudar de tamanho em mundo — lista em
+> `Assets/Editor/Art/Escala/PixelScale.cs` (`Legado`). Eles não são re-autorados: saem do projeto
+> pela pendência dos placeholders em UI e arte do `Desenvolvimento/Docs/TODO.md`. Sprite novo
+> nunca entra nessa lista.
 
 ## Regras inegociáveis
 

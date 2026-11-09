@@ -18,6 +18,22 @@ tem". Precisa de um comando que não está aqui? Filtre:
   **Safe Mode** por erro de compilação: rode o `validar.py` (batchmode) para ver os erros, não edite cena à mão.
 - Sufixos úteis: `--json` (saída para script), `--timeout 60` (o padrão é 30 s), `2>&1`.
 
+## Quando todo `unity command` dá timeout com o Editor `ready`
+
+Sintoma: todo comando devolve *"Main thread operation timed out after 30000ms"* (também no
+`Editor.log`), sem parar, e `unity status` continua `ready` porque não sonda o processo de verdade.
+Antes de supor crash, **suspeite de um diálogo nativo** do Editor. O caso visto em 2026-11-04 foi
+um `.unity` editado em disco (Edit/Write) com a cena aberta no Editor. Um `AssetDatabase.Refresh()`
+depois disso abre o modal Win32 *"The open scene(s) have been modified externally"*, que prende a
+thread principal e não aparece no JSON de nenhum comando.
+
+- **Confirmar:** `Get-Process -Id <pid> | Select Responding,MainWindowTitle` dá `Responding: True`
+  com o título intacto. Enumerar as janelas do processo (Win32 `EnumWindows`) mostra o diálogo com
+  `&Reload`/`&Ignore`.
+- **Recuperar:** clicar `Reload`, ou pedir ao responsável que clique. Não espere e não derrube o processo.
+- **Evitar:** com a cena aberta no Editor, edite pelos comandos (`set_serialized_field`,
+  `create_gameobject`…), não pelo `.unity` em disco.
+
 ## Sintaxe
 
 ```bash

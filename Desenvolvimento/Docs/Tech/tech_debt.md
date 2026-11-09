@@ -30,7 +30,9 @@ Format:
 - **Where:** `Assets/Scripts/Core/GameInput.cs`, `Assets/InputSystem_Actions.inputactions`
 - **Why:** ADR-006 destravou a possibilidade ao centralizar o input no action map, mas
   parou aí. Steam Deck Verified exige suporte a controle e glifos corretos.
-- **Fix:** tela de rebind sobre `InputActionRebindingExtensions`; avaliar Steam Input API.
+- **Fix:** → [ADR-017](../Architecture/ADR/ADR-017.md) (Steam Input em emulação de gamepad, rebind no jogo, glifos próprios) e
+  três pendências em `Docs/TODO.md` › UI e arte: campos no `GameSettings` (`@SystemsDeveloper`), `GameInput` +
+  `RebindView` (`@UnityDeveloper`) e sprites de glifo (`@SpriteArtist`).
 
 ### Média
 
@@ -42,13 +44,7 @@ Format:
 - **Item:** Reescala de efeito do `pxfx` amostra ruído por célula LOCAL — trama em blocos
 - **Where:** `pxfx/efeitos/*` com `rand(floor(x), floor(y))` em `shade` (ex.: o enrolado do `fire/torch` na escala 2,5)
 - **Why:** Na escala 1 cada célula local é um pixel; na 2,5 vira um bloco de 2,5 px, a mesma mistura de densidade que o ADR-011 veta. A paridade não pega porque roda na escala 1.
-- **Fix:** Ao reescalar cada efeito (ondas do TODO), amostrar o ruído por pixel de TELA quando `p.k != 1` — mesmo padrão do `flameTongue` no `fire/_lib.py`.
-
-
-- **Item:** `architecture_decisions.md` passou do teto de tokens — registrado como exceção em `TokenBudgetTests.DocumentExceptions`
-- **Where:** `Desenvolvimento/Docs/Architecture/architecture_decisions.md` (~5595 de 5000 tokens do `TokenBudgetTests`)
-- **Why:** O ADR-012 (Central, 2026-11-03) já precisou ser enxugado para caber; o ADR-013 (declaração de IA na Steam, 2026-11-03) estourou de fato. Um arquivo único com todos os ADRs só cresce.
-- **Fix:** Um arquivo por ADR em `Architecture/ADR/` com um `index.md` roteador (e a skill `novo-adr` apontando para lá), ou mover os ADRs substituídos (001, 003, 004) para um arquivo de histórico. Até lá, a exceção no teste segue valendo.
+- **Fix:** → `Docs/TODO.md` › UI e arte, pxfx onda 1 (`@SpriteArtist`, 🔨), que já pede `--escala 2.5` corrigida. Ao reescalar cada efeito (ondas do TODO), amostrar o ruído por pixel de TELA quando `p.k != 1` — mesmo padrão do `flameTongue` no `fire/_lib.py`.
 
 - **Item:** O veredito do bench de modelo base nunca entrou na rota operacional — `comfy_batch.py` só dirige SDXL
 - **Where:** `Design/ArteFonte/Ferramentas/comfy_batch.py` (linhas 65-71 e 106) · `Design/ArteFonte/IA/Models/workflow-zimage-thumbnails.json`
@@ -61,7 +57,7 @@ Format:
   **não quebra**: ele grava um `text` que ninguém lê, gera com o prompt embutido no JSON e
   mente no `lotes.md`. Falha silenciosa — a pior categoria. Resultado prático: a skill
   `concept-art` roda SDXL em toda Etapa 2, e os 11,7 GB do Z-Image não têm rota de uso.
-- **Fix:** no `comfy_batch.py`, detectar o `class_type` do nó de encode (`TextEncodeZImageOmni`
+- **Fix:** → `Docs/TODO.md` › UI e arte (`@SpriteArtist`). No `comfy_batch.py`, detectar o `class_type` do nó de encode (`TextEncodeZImageOmni`
   → campo `prompt`; `CLIPTextEncode` → `text`), ajustar steps/cfg do destilado (8 / 1.0) e ler o
   nome do modelo do próprio workflow em vez da constante. Enquanto não for pago, o aviso no
   passo 5 da skill `concept-art` segura o engano, e o A/B pendente roda com o campo `prompt`
@@ -74,30 +70,33 @@ Format:
   a superfície da água sobe e desce em degraus em vez de ser plana. O ruleset **derivado**
   (`--learn` a partir de `exemplos/blumenau-fachada-exemplo.json`) já sai com água plana, mas
   produz prédios estreitos demais — porque o exemplo desenhado é estreito.
-- **Fix:** Redesenhar `exemplos/blumenau-fachada-exemplo.json` com massas de prédio mais largas
+- **Fix:** → `Docs/TODO.md` › UI e arte (`@SpriteArtist`, desenho aprovado pelo responsável). Redesenhar `exemplos/blumenau-fachada-exemplo.json` com massas de prédio mais largas
   e variadas, e passar a usar o ruleset derivado como padrão. É edição de uma grade de texto de
   12 linhas, não reescrita de regras — decisão de direção de arte, não de código.
 
 - **Item:** `PlayerInventory` é uma lista sem capacidade, categorias nem persistência
 - **Where:** `Assets/Scripts/Core/PlayerInventory.cs` (TODO inline)
 - **Why:** stub para destravar crafting.
-- **Fix:** definir regras no GDD antes de implementar; inventário não entra no save hoje.
+- **Fix:** → `Docs/TODO.md` › Gameplay, inventário completo (`@SystemsDeveloper` + `@GameplayEngineer`, ⏸ números de Crafting). Definir regras no GDD antes de implementar; inventário não entra no save hoje.
 
 - **Item:** Efeito híbrido nomeado `"PrótesisViva"` (espanhol) entre nomes PT-BR
 - **Where:** `src/Braziliation.Game.Core/Build/HybridSynergyResolver.cs`
 - **Why:** erro de digitação que virou identificador.
-- **Fix:** renomear para `"ProteseViva"` **junto com** um degrau `ISaveMigration`, se o
+- **Fix:** → `Docs/TODO.md` › Gameplay (`@GameplayEngineer`). Renomear para `"ProteseViva"` **junto com** um degrau `ISaveMigration`, se o
   identificador chegar a ser persistido — hoje ainda não é. Fazer antes que seja.
 
 - **Item:** `MainMenuUISetupEditor` calcula a câmera do menu para 320×180 @ 16 PPU
-- **Where:** `Assets/Editor/Menu/MainMenuUISetupEditor.cs` (comentário e cálculo de `orthographicSize`)
-- **Why:** anterior ao ADR-004 (640×360 @ 32 PPU). Encontrado ao indexar os scripts em 2026-09-13.
-- **Fix:** recalcular com 640×360 / 32 PPU (mesmo `orthographicSize` 5,625 se o fundo for re-autorado em 32 PPU) e conferir o menu no Editor.
+- **Where:** `Assets/Editor/Menu/MainMenuUISetupEditor.cs` (comentário e log do `orthographicSize`, l. 338-355; `referenceResolution` do canvas, l. 133)
+- **Why:** anterior ao ADR-004. Revisto em 2026-11-09: o **valor** 5,625 está certo — 540 / (2 × 48) = 5,625, o
+  mesmo enquadramento de 20 × 11,25 unidades desde o ADR-001. Desatualizados estão o comentário e o log, e o
+  canvas de referência 320×180 com as constantes de layout nessa escala, enquanto o `CraftingPanel` já nasce em 960×540.
+- **Fix:** → `Docs/TODO.md` › UI e arte, padrão único de `CanvasScaler` (`@UnityDeveloper`): constantes ×3, referência
+  960×540, comentário e log corrigidos; conferir o menu no Editor.
 
 - **Item:** Dois documentos acima do teto de 5 mil tokens
-- **Where:** `Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md` (~5,8k) · `Design/GuiasDeArte/pipeline-ia-sprites.md` (~5,8k)
-- **Why:** crescem por acréscimo; são lidos inteiros pelo `@GameCreative` e pelo `@SpriteArtist`. Estão como exceção explícita no `TokenBudgetTests`.
-- **Fix:** dividir a ficha de Blumenau por seção (características, monstros, lugares, missões) com o `index.md` virando roteador — muda o template `ModelCidade`, então é decisão do usuário; dividir o guia de IA por rota. Ao dividir, remover a exceção (o teste acusa exceção sobrando).
+- **Where:** `Design/GuiasDeArte/pipeline-ia-sprites.md` (~5,8k). A ficha de Blumenau já foi dividida em 2026-11-09: a ficha de cidade virou pasta, com um arquivo por seção e um por lugar (`ModelCidade`, decisão do responsável), e as 10 cidades de SC migraram
+- **Why:** cresce por acréscimo e é lido inteiro pelo `@SpriteArtist`. Está como exceção explícita no `TokenBudgetTests`.
+- **Fix:** → `Docs/TODO.md` › UI e arte (`@SpriteArtist`): dividir o guia de IA por rota e, ao terminar, remover a exceção dele do `TokenBudgetTests` (o teste acusa exceção sobrando).
 
 - **Item:** `BuildProgressionView` lê `ExpansionLevel` pelo `ReceptacleController`, não pelo `BuildState`
 - **Where:** `Assets/Scripts/UI/BuildProgressionView.cs` (TODO inline nas linhas 11 e 71)
@@ -105,7 +104,7 @@ Format:
   vai buscar o dado no controller de crafting. É UI atravessando uma camada: a view passa a
   depender de `ReceptacleController` estar vinculado na cena, e já degrada com
   `Debug.LogWarning` quando não está.
-- **Fix:** expor `BuildState.GetReceptacle(ReceptacleType)` no core (com teste, I2) e trocar
+- **Fix:** → `Docs/TODO.md` › Gameplay (`@GameplayEngineer` + `@UnityDeveloper`). Expor `BuildState.GetReceptacle(ReceptacleType)` no core (com teste, I2) e trocar
   as três leituras; a view volta a depender só do estado que o `PlayerBuildController` emite.
 
 - **Item:** `BuildProgressionView` aplica os três arrays de estágio no mesmo `SpriteRenderer`
@@ -115,7 +114,8 @@ Format:
   dois primeiros não aparecem. Funciona como placeholder enquanto o personagem é um sprite só.
 - **Fix:** quando a arte entregar o personagem em partes, um `SerializeField` de renderer por
   parte (`_rendererCapa`, `_rendererEspinha`) e um `AplicarSprite` por renderer. Depende da
-  pendência "Progressão visual da build" no `TODO.md`.
+  decisão dos estágios visuais em «Parâmetros numéricos de Build» (`Docs/TODO.md` › Decisões de design) e
+  da arte em partes; aí implementa o `@UnityDeveloper`.
 
 - **Item:** Comporta hídrica de Blumenau só conhece aberta/fechada local, sem o sistema global de 4 estados nem arte de porta
 - **Where:** `Assets/Scripts/Gameplay/FloodgateController.cs` · `Docs/GDD/Features/Blumenau-SistemaHidrico.md`
@@ -125,36 +125,14 @@ Format:
   um hook `SetLocked` para esse sistema travar em Cheia/Saturação quando existir. Também não
   há sprite de comporta/porta em `Assets/Art/Environments/Blumenau/Props/` — só a alavanca —
   então `FloodgateController` funciona hoje só com o colisor (sem troca de sprite visível).
-- **Fix:** Modelar `HydricState.cs`/`HydricStateManager.cs` (TODOs já descritos em
+- **Fix:** → `Docs/TODO.md` › Gameplay, sistema hídrico global (`@SystemsDeveloper` + `@GameplayEngineer`). Modelar `HydricState.cs`/`HydricStateManager.cs` (TODOs já descritos em
   `Blumenau-SistemaHidrico.md`) e chamar `FloodgateController.SetLocked` nas transições de
   estado; pedir o asset de comporta pela skill `novo-asset` e plugar em `_gateRenderer`.
 
 - **Item:** `HealthComponent` dispara `OnHealthChanged` no `Awake`
 - **Where:** `Assets/Scripts/Gameplay/HealthComponent.cs`
 - **Why:** ouvinte registrado por código em outro `Awake` pode não estar inscrito ainda.
-- **Fix:** mover a emissão inicial para `Start`, ou expor `EmitCurrent()` para a HUD puxar.
-
-- **Item:** Editar um `.unity` em disco (fora do Editor) enquanto o Editor tem essa cena
-  aberta trava o servidor de comandos (`unity command ...`) sem erro visível
-- **Where:** processo geral de qualquer agente que edite `Assets/Scenes/*.unity` direto pelo
-  `Edit`/`Write` com o Editor aberto (não só este item)
-- **Why:** Ao editar `MainMenu.unity`/`DemoGameplay.unity` em disco e, bem depois, rodar
-  `AssetDatabase.Refresh()` via `unity command run_script` (para gerar
-  `CraftingPanel.prefab`), o Editor abriu o diálogo nativo "The open scene(s) have been
-  modified externally" — um modal Win32 que não aparece no JSON de nenhum comando: todo
-  `unity command <algo>` subsequente só devolve "Main thread operation timed out after
-  30000ms" (confirmado no `Editor.log`), indefinidamente, porque o diálogo roda seu próprio
-  loop de mensagens e nunca libera a thread principal para o despachante de comandos. `unity
-  status` continua dizendo "ready" (não sonda o processo de verdade) — só
-  `Get-Process -Id <pid> | Select Responding,MainWindowTitle` mostra `Responding: True` com
-  o título sem alteração, e enumerar as janelas do processo (Win32 `EnumWindows`) revela o
-  diálogo e os botões `&Reload`/`&Ignore`.
-- **Fix:** Nenhuma ação de código pendente — é comportamento normal do Editor. Registrado
-  para a próxima vez: se `unity command` travar em 30 s repetidamente com o Editor "ready",
-  suspeitar de um diálogo nativo antes de supor crash; recuperar clicando `Reload` (ou pedir
-  ao usuário) em vez de esperar ou derrubar o processo. Evitar o gatilho: preferir editar
-  cenas pelos comandos do Editor (`set_component_properties`, `attach_script` etc.) a
-  editar o `.unity` em disco quando o Editor já tem aquela cena aberta.
+- **Fix:** → `Docs/TODO.md` › Gameplay (`@GameplayEngineer`); decidido pelo @TechLead: emissão inicial no `Start`; quem se inscreve depois lê `CurrentHealth`/`MaxHealth` — `EmitCurrent()` só se surgir caso real.
 
 - **Item:** `DemoGameplay.unity` não tem `EventSystem` — nenhum painel UGUI instanciado nela
   ganha navegação por teclado/controle
@@ -164,17 +142,18 @@ Format:
   `EventSystem`, `EventSystem.current` é `null` e qualquer `ShowPanel()` que chame
   `SetSelectedGameObject` (convenção de Steam Input deste agente) lança `NullReferenceException`
   assim que um painel interativo for instanciado e aberto nessa cena.
-- **Fix:** Adicionar `EventSystem` + `InputSystemUIInputModule` à cena (mesmo par que já existe
-  em `MainMenu.unity`) quando o crafting (ou qualquer outro painel UGUI) for de fato wireado em
-  `DemoGameplay`.
+- **Fix:** → `Docs/TODO.md` › UI e arte, na pendência do `CanvasScaler` (`@UnityDeveloper`): pôr o par `EventSystem` +
+  `InputSystemUIInputModule` já (o mesmo da `MainMenu.unity`), sem esperar o crafting ser wireado — custa nada e
+  tira a `NullReferenceException` do caminho.
 
 - **Item:** `HUD_Demo` (`CanvasHealthHud`) usa `CanvasScaler` com referência 800×600, de antes do ADR-011
 - **Where:** `Assets/Scenes/DemoGameplay.unity` → GameObject `HUD_Demo` → `CanvasScaler`
 - **Why:** Encontrado na mesma inspeção acima. `Assets/Prefabs/UI/CraftingPanel.prefab` já nasce
   com `CanvasScaler` em Scale With Screen Size, referência 960×540 (ADR-011); o HUD ficou para
   trás.
-- **Fix:** Alinhar o `CanvasScaler` do HUD para 960×540 / Match Width Or Height 0.5 e conferir a
-  HUD em jogo depois.
+- **Fix:** → `Docs/TODO.md` › UI e arte, padrão único de `CanvasScaler` (`@UnityDeveloper`). A causa é código, não só
+  cena: `DemoSceneBuilderEditor` e `DemoSceneBootstrap` fazem `AddComponent<CanvasScaler>()` sem configurar, e
+  800×600 é o padrão do Unity — corrigir só a cena volta no próximo rebuild. Conferir a HUD em jogo depois.
 
 - **Item:** `gen_tileset.py` só gera tile de **miolo** — nenhuma das 7 famílias tem borda (topo de chão, quina, beiral)
 - **Where:** `Design/ArteFonte/Ferramentas/gen_tileset.py` · tilesets em `Assets/Art/Environments/Blumenau/Tilesets/` e o teste em `Design/ArteFonte/IA/Testes/tilesets-onda2/`
@@ -184,17 +163,12 @@ Format:
   Apareceu no mock do teste da Onda 2 (2026-11-04, `Design/ArteFonte/IA/Testes/tilesets-onda2/env_blumenau_onda2_tilesets_mock.png`): o
   cemitério e a periferia param seco na borda de cima. Afeta as 3 famílias antigas também — o
   blockout atual só tem topo porque usa o tileset Gothicvania (`CastleBlockout.unity`).
-- **Fix:** um modificador de borda genérico em vez de tipo novo por família — dado um tipo de
+- **Fix:** → `Docs/TODO.md` › UI e arte (`@SpriteArtist`). Um modificador de borda genérico em vez de tipo novo por família — dado um tipo de
   chão, gerar `topo` (3-5 linhas de superfície com silhueta irregular e alfa acima), `quina_esq`
   e `quina_dir`, derivados do próprio miolo para casar de cor. Entra como linha extra no sheet e
   no manifest; o `gen_map_wfc.py` ganha a adjacência "topo só encosta em ar por cima".
 
 ### Baixa
-
-- **Item:** Regras e fichas ainda descrevem a escala de antes do ADR-011 e o caminho antigo do `PixelScale`
-- **Where:** `.claude/rules/csharp.md` (contexto e seção Unity: "640×360 @ 32 PPU") · `.claude/rules/arte.md` (aviso "Migração em curso") · `.claude/agents/unity-developer.md` (linha da resolução) · `Docs/Architecture/Sistemas/Editor.md` (Fontes Técnicas do `PixelScale.cs`)
-- **Why:** O `csharp.md` entra em toda sessão que toca C# e ainda manda 640×360 @ 32 PPU (ADR-004, substituído). Os outros três apontam `Assets/Editor/Art/PixelScale.cs`, mas o arquivo mora em `Assets/Editor/Art/Escala/`, e falam de "arte antiga" a 32 PPU quando só restam os placeholders CC0. O `DocsConsistencyTests` não pega porque confere a ficha pelo nome do script, não pelo caminho. Achado ao pagar a dívida dos placeholders em 2026-11-05 (o `CLAUDE.md` foi corrigido na mesma sessão).
-- **Fix:** Trocar para 960×540 @ 48 PPU, tile 48 (ADR-011), corrigir o caminho para `Assets/Editor/Art/Escala/PixelScale.cs` e dizer que só os placeholders do Gothicvania seguem a 32 PPU, apontando para a pendência deles em UI e arte no `Docs/TODO.md`. Edição de texto, sem código.
 
 - **Item:** Rampas de material anteriores à paleta de 32 continuam repetindo degrau ou emprestando cor de outro material
 - **Where:** `Design/ArteFonte/Ferramentas/montagem_base.py` (`LIGAS` bronze `6·7·8·8` e prata `3·4·5·5`, `BASE_RAMPS` cobre `1·9·C·C`) · `ContextPacks/enm-soldado-clerico/montagem.py` (`esmalte` `2·4·5·D`, `clero` `1·G·9·C`, `loden` `1·2·E·E`, `meia` `2·C·D·D`) · mapas fixos de textura do `spec_redetail.py` e do `gen_tileset.py` (`claro`/`escuro`), que só conhecem as keys `1`-`G`
@@ -205,11 +179,6 @@ Format:
 - **Where:** `Assets/Editor/Art/TilesetAutoSlicer.cs` · `Assets/Art/ThirdParty/Gothicvania/Environments/env_placeholder_castelo_tileset.png`
 - **Why:** Ler a transparência por célula durante o import (`OnPreprocessTexture`) exigiria decodificar o PNG à mão nesse ponto do pipeline (a textura ainda não existe como objeto legível) — optei pela fatia completa, igual ao "Grid By Cell Size" padrão do Unity, para não arriscar um import quebrado sem retorno visual síncrono. A maioria das ~500 células vazias nunca vira sprite usado; só 3 viraram Tile asset para o blockout.
 - **Fix:** Se algum dia vier um segundo tileset de terceiros maior, considerar filtrar por alfa no pós-import (`OnPostprocessTexture`, textura já legível) para não gerar sprites inúteis.
-
-- **Item:** `env_placeholder_castelo_tileset.png` reslicado por engano durante o desenvolvimento do `TilesetAutoSlicer` chegou a colidir com os tilesets próprios de Blumenau (mesmo sufixo `_tileset.png`) — revertido antes do commit, mas o Editor aberto na sessão manteve os três por um instante com GUIDs trocados
-- **Where:** `Assets/Art/Environments/Blumenau/Tilesets/env_blumenau_{agua,enxaimel,metal}_tileset.png`
-- **Why:** O postprocessor nasceu com escopo `Assets/Art/` inteiro; corrigido para `Assets/Art/ThirdParty/` apenas (ver `Sistemas/Editor.md` → Notas de Design). Os três `.meta` foram revertidos via `git checkout --` e resincronizados com `AssetDatabase.Refresh(ForceUpdate)` antes do commit; nenhuma mudança chegou a ser commitada.
-- **Fix:** Nenhuma ação pendente — registrado para o caso de algum Tile/Tilemap de Blumenau aparecer com sprite faltando; sinal de que o Editor ficou com estado em memória dessincronizado do disco por algum motivo não coberto aqui. Reimportar os três manualmente (clique direito → Reimport) resolveria.
 
 ---
 

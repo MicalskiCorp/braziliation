@@ -42,7 +42,7 @@ O projeto usa **Claude Code** como único harness de agentes (ADR-008): agentes,
 - **Skills, travas automáticas e processos:** [Docs/Tech/processos.md](Docs/Tech/processos.md).
 - **Manual de processos por camada:** [Docs/Processos/index.md](Docs/Processos/index.md).
 - O hook `SessionStart` injeta a foto do projeto; regras por caminho em `.claude/rules/`.
-- **Atualizar docs:** decisão de arquitetura → `Docs/Architecture/architecture_decisions.md`; dívida técnica → `Docs/Tech/tech_debt.md`.
+- **Atualizar docs:** decisão de arquitetura → `Docs/Architecture/ADR/` (skill `novo-adr`); dívida técnica → `Docs/Tech/tech_debt.md`.
 
 > 🎨 **Camada criativa:** `Design/Criativo/` na raiz do repo — gerida por `@GameCreative`.
 

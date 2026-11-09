@@ -93,7 +93,7 @@ Transforma folclore e ideias em material estruturado — cidades, lendas mapeada
 **Quem:** @GameCreative · Modo 6 · skill `nova-cidade`
 **Aciona:** `@GameCreative Nova cidade: Chapecó — Santa Catarina` · `@GameCreative Novo estado: Rio Grande do Sul`
 
-1. Estrutura pela skill: template `ModelCidade.md`, índices do estado e de cidades, paleta proposta; estado novo cria `index.md`, `ideias.md`, `cidades/index.md` e sai de "Planejados".
+1. Estrutura pela skill: template `ModelCidade.md` (pasta com `index.md`, `monstros.md`, `ideias.md` e um `lugar-{slug}.md` por lugar), índices do estado e de cidades, paleta proposta; estado novo cria `index.md`, `ideias.md`, `cidades/index.md` e sai de "Planejados".
 2. Pedir nome real, nome no jogo e Punk Genre; para estado, as primeiras cidades.
 3. Preencher Características com o que o usuário der.
 4. Monstros, Lugares e Easter Eggs a partir da pesquisa aprovada; lacuna → sugestão de `@Historiador Pesquisar`.

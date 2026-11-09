@@ -3,7 +3,7 @@
 Pipeline que alimenta a pesquisa do `@Historiador` com entrevistas e conversas
 esporádicas (historiadores locais, quem viveu ou ouviu as lendas) gravadas numa
 conversa dedicada do WhatsApp. Decisão registrada em
-[ADR-009](../../../Desenvolvimento/Docs/Architecture/architecture_decisions.md#adr-009-captura-de-entrevistas-de-pesquisa-via-whatsapp-baileys--whisper-local).
+[ADR-009](../../../Desenvolvimento/Docs/Architecture/ADR/ADR-009.md).
 
 > Áudio bruto e transcrição ficam fora do git (dado pessoal/de terceiros) — só o
 > material já curado e aprovado entra em `Design/Pesquisa/Estados/` ou `Temas/`.

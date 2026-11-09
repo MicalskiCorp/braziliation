@@ -6,7 +6,7 @@
 >
 > **Status: DECIDIDO em 2026-11-03 — o responsável aprovou a recomendação deste dossiê
 > (opção 1).** A decisão vigente é o
-> [**ADR-014**](../../../../Desenvolvimento/Docs/Architecture/architecture_decisions.md#adr-014-lora-de-estilo-próprio--gate-de-dataset-antes-do-treino-e-treino-em-gpu-alugada-por-hora):
+> [**ADR-014**](../../../../Desenvolvimento/Docs/Architecture/ADR/ADR-014.md):
 > não treinar antes do gate; quando treinar, GPU alugada por hora com pesos e inferência locais;
 > Scenario descartado. O gate também está escrito em
 > [`pipeline-ia-sprites.md § Quando Treinar um LoRA`](../../../GuiasDeArte/pipeline-ia-sprites.md#gate-do-projeto-adr-014-2026-11-03).
@@ -123,7 +123,7 @@ estilo — é a etapa de *animação* (PixelLab), que é a que o pipeline realme
 
 Recomendação aceita pelo responsável. Executado na mesma sessão:
 
-1. **ADR-014** registrado em `Desenvolvimento/Docs/Architecture/architecture_decisions.md` (nenhum ADR substituído);
+1. **ADR-014** registrado em `Desenvolvimento/Docs/Architecture/ADR/ADR-014.md` (nenhum ADR substituído);
 2. gate escrito em `pipeline-ia-sprites.md § Quando Treinar um LoRA` — § "Gate do projeto (ADR-014)";
 3. regra curta em `.claude/rules/arte.md`, que é o que toda sessão de arte carrega;
 4. linha **removida** do `Desenvolvimento/Docs/TODO.md` (baixa da camada de Desenvolvimento = o commit);

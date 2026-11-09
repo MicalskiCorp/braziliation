@@ -79,14 +79,14 @@ Traduz o que o Criativo aprovou em documentação técnica navegável — featur
 
 **Quem:** @TechLead · skill `novo-adr` (sob demanda)
 
-1. Próximo número = maior ADR + 1.
+1. Próximo número = maior ADR da tabela do [`ADR/index.md`](../Architecture/ADR/index.md) + 1.
 2. Confirmar contexto, decisão, consequências e se substitui algum ADR.
-3. Escrever antes da linha final do arquivo; marcar o substituído como `Superseded por ADR-NNN`.
+3. Criar `ADR/ADR-NNN.md` e a linha dele no índice; marcar o substituído como `Superseded por ADR-NNN` no arquivo e no índice.
 4. Atualizar `CLAUDE.md` e `.claude/rules/` se repetem o tema.
 5. Rodar `dotnet test`.
 
-- **Gate:** ADR substituído sem substituto quebra o teste
-- **Vigentes:** 002, 005, 006, 007, 008, 009, 010, 011, 012, 013, 014, 015, 016 · substituídos: 001 (→004), 003 (→005) e 004 (→011). Lista conferida em 4 nov 2026; a fonte é [`architecture_decisions.md`](../Architecture/architecture_decisions.md) e a skill `novo-adr` manda atualizar esta linha ao registrar um ADR novo.
+- **Gate:** ADR substituído sem substituto, ou índice com status diferente do arquivo, quebra o teste
+- **Vigentes:** a coluna Status do [`ADR/index.md`](../Architecture/ADR/index.md), conferida pelo `DocsConsistencyTests`. Até 2026-11-09 havia uma lista aqui, mantida à mão, e ela chegou a ficar dois ADRs atrasada.
 
 ## D6 — Handoff para a Implementação
 

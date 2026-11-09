@@ -4,7 +4,7 @@
 > **Status:** 📋 Planejado
 > **Sistema(s) envolvido(s):** Exploração, Economia, Combate, Progressão de Bosses
 > **Prioridade:** Alta
-> **Referência criativa:** [`Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md`](../../../../Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/index.md)
+> **Referência criativa:** [`Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/lugar-rio-itajai-acu.md`](../../../../Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/lugar-rio-itajai-acu.md)
 
 ---
 
@@ -140,7 +140,7 @@ O rio Itajaí-Açu é o coração de Die Unterwelt — fonte de energia e ameaç
 | Tarefa | Prioridade |
 |--------|-----------|
 | Modelar `HydricState.cs` — enum com 4 estados (Rotina/Alerta/Cheia/Saturação) e dados de configuração | Alta |
-| Modelar `HydricStateManager.cs` — singleton que mantém estado atual e dispara eventos de mudança | Alta |
+| Modelar `HydricStateManager.cs` — serviço do core (registrado no `GameServiceLocator`, sem estado estático) que mantém o estado atual e dispara eventos de mudança | Alta |
 | Implementar eventos/callbacks que notificam todas as features dependentes ao mudar estado | Alta |
 | Modelar tabela de acessibilidade por área × estado (scriptable object ou config) | Alta |
 

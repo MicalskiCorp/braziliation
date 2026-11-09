@@ -46,7 +46,7 @@ A versão curta destas regras, carregada em toda sessão, é a [busca-com-filtro
 |-------------|-------|
 | Pendência de Pesquisa · Criativo · Dev | [Pesquisa](Design/Pesquisa/TODO.md) · [Criativo](Design/Criativo/TODO.md) · [Dev](Desenvolvimento/Docs/TODO.md), operados pela skill `gerir-todo` |
 | Dívida técnica | [tech_debt.md](Desenvolvimento/Docs/Tech/tech_debt.md): item pago sai do arquivo e o registro é o commit |
-| Decisão de arquitetura (ADR) | [architecture_decisions.md](Desenvolvimento/Docs/Architecture/architecture_decisions.md): `Grep "^## ADR-0NN"` |
+| Decisão de arquitetura (ADR) | [ADR/](Desenvolvimento/Docs/Architecture/ADR/index.md): um arquivo por ADR — sabendo o número, `Read` direto em `ADR/ADR-0NN.md` |
 | Decisão de design (DDR) | [GDD/Decisoes/](Desenvolvimento/Docs/GDD/Decisoes/index.md) |
 | Fase e backlog | [roadmap.md](Desenvolvimento/Docs/Roadmap/roadmap.md) · [backlog.md](Desenvolvimento/Docs/Roadmap/backlog.md) |
 
@@ -92,7 +92,7 @@ A versão curta destas regras, carregada em toda sessão, é a [busca-com-filtro
 |-------------|-------|
 | Pesquisa com fonte, por cidade | [SantaCatarina/](Design/Pesquisa/Estados/SantaCatarina/index.md) lista as cidades → `cidades/{Cidade}/index.md` · [Pesquisa/](Design/Pesquisa/index.md) |
 | Entrevistas (WhatsApp) | [Entrevistas/](Design/Pesquisa/Entrevistas/index.md) |
-| Ficha criativa de cidade | [cidades/](Design/Criativo/Estados/SantaCatarina/cidades/index.md) → `{Cidade}/index.md` · estados em [Estados/](Design/Criativo/Estados/index.md). Pasta = nome sem espaço nem acento: `SantaCatarina/cidades/SaoFranciscoDoSul/` |
+| Ficha criativa de cidade | [cidades/](Design/Criativo/Estados/SantaCatarina/cidades/index.md) → `{Cidade}/index.md` (roteador) + `monstros.md`, `ideias.md` e um `lugar-{slug}.md` por lugar · estados em [Estados/](Design/Criativo/Estados/index.md). Pasta = nome sem espaço nem acento: `SantaCatarina/cidades/SaoFranciscoDoSul/` |
 | Lendas | [catalogo.md](Design/Criativo/Lendas/catalogo.md) · [mapeamento.md](Design/Criativo/Lendas/mapeamento.md) |
 | Premissa, arcos, personagens | [Historia/](Design/Criativo/Historia/index.md) |
 | Direção de arte, escala, paletas, pipelines | [GuiasDeArte/](Design/GuiasDeArte/index.md): comece por `style-bible.md` |

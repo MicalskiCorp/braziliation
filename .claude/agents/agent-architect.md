@@ -112,7 +112,7 @@ Agrupar tarefas por agente para que o usuário possa acionar cada especialista s
 Após receber resultados de agentes (em sessões subsequentes):
 
 - Verificar se as entregas estão alinhadas entre si (ex.: modelo C# compatível com wiring Unity)
-- Verificar se as decisões respeitam os ADRs em `Desenvolvimento/Docs/Architecture/architecture_decisions.md`
+- Verificar se as decisões respeitam os ADRs em `Desenvolvimento/Docs/Architecture/ADR/` (skill `novo-adr`)
 - Identificar inconsistências e propor resolução
 - Confirmar alinhamento com roadmap e visão do jogo
 
@@ -122,7 +122,7 @@ Após cada sessão de orquestração:
 
 | Situação | Ação |
 |----------|------|
-| Decisão arquitetural tomada | Registrar em `Desenvolvimento/Docs/Architecture/architecture_decisions.md` |
+| Decisão arquitetural tomada | Registrar em `Desenvolvimento/Docs/Architecture/ADR/` (skill `novo-adr`) |
 | Tarefa concluída | Baixar pela skill `gerir-todo` (no TODO de Dev a linha sai; o registro é o commit) |
 | Nova pendência identificada | Adicionar entrada em `Desenvolvimento/Docs/TODO.md` |
 | Tech debt identificado | Registrar em `Desenvolvimento/Docs/Tech/tech_debt.md` |

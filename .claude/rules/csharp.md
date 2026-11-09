@@ -9,7 +9,7 @@ paths:
 
 ## Contexto
 
-C# · Unity 6 (6000.2) URP 2D · New Input System · alvo PC (Steam) · 640×360 @ 32 PPU.
+C# · Unity 6 (6000.2) URP 2D · New Input System · alvo PC (Steam) · 960×540 @ 48 PPU, tile 48 (ADR-011).
 
 ## Namespaces reais
 
@@ -70,10 +70,15 @@ cada agente.
 
 ## Unity
 
-- Pixel perfect: 640×360, 32 PPU. Nenhum scaling arbitrário que quebre alinhamento.
+- Pixel perfect: 960×540, 48 PPU, tile 48×48 (ADR-011). Nenhum scaling arbitrário que quebre
+  alinhamento. Só os placeholders CC0 do Gothicvania seguem a 32 PPU, listados em
+  `Assets/Editor/Art/Escala/PixelScale.cs` — nunca hardcode o PPU, leia de `PixelScale`.
 - `Rigidbody2D`/`Collider2D`; layers via `GameLayers`, nunca índice mágico.
 - Um prefab por entidade lógica; Variants para tuning.
 - ScriptableObject para dado de design; estado de runtime fica em componente.
 - **Input:** use o action map de `Assets/InputSystem_Actions.inputactions`. Não adicione
   polling novo de `Keyboard.current`/`Mouse.current`/`Gamepad.current` — isso quebra
   rebind, Steam Input e Steam Deck.
+- **Controle na Steam (ADR-017):** o Steam Input fica em emulação de gamepad, e nenhum código chama a API
+  dele. Rebind, overrides e família do dispositivo passam pelo `GameInput`. Os overrides são um JSON opaco
+  em `GameSettings`, e o glifo é sprite nosso por família, nunca texto de tecla fixo na UI.

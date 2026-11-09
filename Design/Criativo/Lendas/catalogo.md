@@ -8,7 +8,7 @@
 | Lenda / Entidade | Origem Regional | Categoria | Mapeada? | Arquivo |
 |-----------------|----------------|-----------|----------|---------|
 | Bruxas Açorianas | SC / Florianópolis | Ocultismo / MythPunk | 🔨 | [Florianópolis](../Estados/SantaCatarina/cidades/Florianopolis/index.md) |
-| Lobisomem de Ratones | SC / Florianópolis | Transformação / Maldição | 🔨 | [Florianópolis](../Estados/SantaCatarina/cidades/Florianopolis/index.md) |
+| Lobisomem de Ratones | SC / Florianópolis | Transformação / Maldição | 🔨 | [Florianópolis › Ratones](../Estados/SantaCatarina/cidades/Florianopolis/lugar-bairro-ratones.md) |
 | Enterrado Vivo (Catalepsia) | SC / Blumenau | Terror Real / Horror Urbano | 🔨 | [Blumenau](../Estados/SantaCatarina/cidades/Blumenau/index.md) |
 | Minhocão | SC / Lages | Criatura Subterrânea / Rio | 🔨 | [Lages](../Estados/SantaCatarina/cidades/Lages/index.md) |
 | Pelznickel | SC / Guabiruba (germânico) | Figura Punitiva / Inverno | 🔨 | [Guabiruba](../Estados/SantaCatarina/cidades/Guabiruba/index.md) |
@@ -22,7 +22,7 @@
 | Chapeludo da Biblioteca | SC / Joinville | Vulto / Assombração Urbana | ❌ | [Joinville](../Estados/SantaCatarina/cidades/Joinville/index.md) |
 | Mulher de Branco da Pedra da Miraguaia | SC / Navegantes | Entidade Vingativa / Vulto Feminino | ❌ | [Navegantes](../Estados/SantaCatarina/cidades/Navegantes/index.md) |
 | Cemitério Histórico de Santa Bárbara | SC / Serra Catarinense — municípios de ocorrência: Urubici, Bom Jardim da Serra | Terror Real / Horror Urbano (intenção: NPC ou boss situado em um destes municípios) | ❌ | [Ideias — Santa Catarina](../Estados/SantaCatarina/ideias.md#cemitério-histórico-de-santa-bárbara) |
-| Túneis Secretos de Blumenau (Teatro Carlos Gomes) | SC / Blumenau | Mistério Urbano / Passagem Secreta | ❌ | [Blumenau](../Estados/SantaCatarina/cidades/Blumenau/index.md) |
+| Túneis Secretos de Blumenau (Teatro Carlos Gomes) | SC / Blumenau | Mistério Urbano / Passagem Secreta | ❌ | [Blumenau › Teatro](../Estados/SantaCatarina/cidades/Blumenau/lugar-teatro-carlos-gomes.md) |
 | Monge João Maria | Origem histórica: SC / Planalto Catarinense — Vale do Contestado (Curitibanos, Campos Novos, Lages, Mafra, Irani e outros). **No jogo: não atrelado a uma região — NPC itinerante.** | NPC Aliado / Curandeiro Andarilho *(⚠️ devoção religiosa viva — ver nota de manuseio e direção de tratamento em `Estados/SantaCatarina/ideias.md`; nunca monstro, boss ou alvo de combate)* | ❌ | [Contexto — Santa Catarina](../Estados/SantaCatarina/ideias.md#monge-joão-maria--contexto-histórico-cultural-sensível) |
 
 ## Legenda
