@@ -14,7 +14,6 @@ public sealed class BuildState
 {
     /// <summary>
     /// Os três receptáculos da build: Exoesqueleto (Mecânico), Capa (Místico), Espinha (Biológico).
-    /// TODO-DESIGN: valor a definir pelo game design (quantidade de receptáculos = 3, confirmado na spec).
     /// </summary>
     public List<ReceptacleData> Receptacles { get; set; } = new List<ReceptacleData>();
 

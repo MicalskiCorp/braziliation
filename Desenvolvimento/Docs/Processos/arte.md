@@ -78,7 +78,7 @@ Todo asset percorre 5 etapas, cada uma acionada manualmente e fechada por um reg
 
 **Quem:** Editor tools · @UnityDeveloper no wiring
 
-1. `SpriteImportPostprocessor` força 32 PPU, Point, sem compressão e sem mipmap em tudo que entra em `Assets/Art/`.
+1. `SpriteImportPostprocessor` aplica o PPU do `PixelScale` (48; 32 só nos placeholders do Gothicvania), Point, sem compressão e sem mipmap em tudo que entra em `Assets/Art/`.
 2. `SheetAutoSlicer` fatia `*_sheet.png` em grade quadrada com pivot no centro-inferior, preservando IDs.
 3. `Assets > Braziliation > Criar Animação do Spritesheet` gera clip e controller.
 4. `Assets > Braziliation > Importar Mapa WFC...` pinta o Tilemap a partir do `.unity.json`.

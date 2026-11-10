@@ -27,7 +27,7 @@
 
 - 🔨 Crafting e Build — lógica implementada e testada; números e catálogo de componentes dependem de design
 - ❌ Inventário real (hoje é uma lista sem capacidade nem persistência)
-- ❌ Áreas de Blumenau — 7 features documentadas no GDD, nenhuma implementada
+- 🔨 Áreas de Blumenau — 7 features documentadas no GDD; só o Sistema Hídrico começou (estado global do rio e trava da comporta, 2026-11-09), as outras 6 não foram iniciadas
 - ❌ Lore e narrativa dentro do jogo (premissa ainda vazia)
 - ❌ Balanceamento e dificuldade
 - ❌ Performance e checagens de plataforma
@@ -35,7 +35,7 @@
 ## Fase: Preparação da v1 — 🔨
 
 - ✅ Save versionado com migração explícita (ADR-007)
-- 🔨 Opções — `SettingsService` e tela de configurações prontos; rebind de controles e Steam Input pendentes
+- 🔨 Opções — `SettingsService`, tela de configurações e rebind no código (`GameInput.Rebind`) prontos; na Steam o controle chega por emulação de gamepad, sem a API do Steam Input (ADR-017); faltam a tela de controles no menu e os glifos (`Docs/TODO.md`)
 - ✅ Pipeline de build — CI .NET ativo; CI do Unity desligado por decisão (ADR-010), com a validação Unity local e obrigatória no pre-commit
 - ✅ Versionamento — `VERSION` e `bundleVersion` sincronizados por `scripts/update_version.ps1`, com teste
 - ❌ Créditos e jurídico finais (hoje `CREDITS.md` só lista os placeholders CC0)

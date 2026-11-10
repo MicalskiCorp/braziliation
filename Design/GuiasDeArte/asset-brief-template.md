@@ -42,7 +42,7 @@ Use este modelo antes de criar concept art, sprite final ou prompt de IA.
 ## Checklist de Aprovação
 - [ ] Lê em 960x540
 - [ ] Usa paleta aprovada
-- [ ] Está alinhado ao grid de 32 px
+- [ ] Está alinhado ao grid de 48 px (ADR-011)
 - [ ] Mantém estilo pixel art, sem cara de imagem reduzida
 - [ ] Combina com os sprites âncora do projeto
 - [ ] Export final está em `Desenvolvimento/Assets/Art/`

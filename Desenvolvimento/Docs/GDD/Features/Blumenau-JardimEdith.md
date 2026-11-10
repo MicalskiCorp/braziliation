@@ -172,7 +172,7 @@ O Jardim de Edith é o único ponto místico de Die Unterwelt — enclave oculto
 |--------|-----------|
 | Criar cena do Jardim de Edith (clareira, árvore, 9 lápides, estátua) | Alta |
 | Criar visual e animação dos gatos espectrais (vulto etéreo, movimento) | Alta |
-| Criar pingente 3D com nome gravado (reutilizável, nome parametrizado) | Média |
+| Criar o pingente como sprite 2D de item, reutilizável, com o nome do gato parametrizado (texto na UI, não gravado no pixel) | Média |
 
 ### `@SystemsDeveloper`
 | Tarefa | Prioridade |

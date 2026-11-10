@@ -1,7 +1,7 @@
 # Blumenau — Sistema Hídrico de Die Unterwelt
 
 > **Tipo:** Feature — Sistema Global de Estado (afeta todos os mapas de Blumenau)
-> **Status:** 📋 Planejado
+> **Status:** 🔨 Em desenvolvimento
 > **Sistema(s) envolvido(s):** Exploração, Economia, Combate, Progressão de Bosses
 > **Prioridade:** Alta
 > **Referência criativa:** [`Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/lugar-rio-itajai-acu.md`](../../../../Design/Criativo/Estados/SantaCatarina/cidades/Blumenau/lugar-rio-itajai-acu.md)
@@ -145,7 +145,7 @@ O rio Itajaí-Açu é o coração de Die Unterwelt — fonte de energia e ameaç
 ### `@GameplayEngineer`
 | Tarefa | Prioridade |
 |--------|-----------|
-| Implementar comportas com estados aberta/parcial/fechada/travada por `HydricStateManager` | Alta |
+| Comporta seguindo o estado do rio: aberta em Rotina, **parcialmente fechada em Alerta** (estado novo) e fechada em Cheia. Aberta/fechada pela alavanca e a trava em Cheia e Saturação já existem no `FloodgateController` | Alta |
 | Implementar passarelas elevadas com animação de subida/descida por estado | Alta |
 | Implementar docas ativas com rota de barco/jangada em estado de Cheia | Alta |
 | Implementar sinos submersos com áudio posicional direcional em Cheia/Saturação | Média |
@@ -165,3 +165,4 @@ O rio Itajaí-Açu é o coração de Die Unterwelt — fonte de energia e ameaç
 | Data | Alteração |
 |------|-----------|
 | 2026-05-17 | Criado — handoff do @GameCreative processado pelo @GameArchitect |
+| 2026-11-10 | Status para 🔨 (estado global do rio e trava da comporta entraram em 2026-11-09); a tarefa da comporta ficou só com o que falta |

@@ -23,7 +23,7 @@
 | Blumenau — Igreja Luterana Matriz + SQ Hermann | Alta | 📋 Planejado | [`GDD/Features/Blumenau-IgrejaLuterana.md`](../GDD/Features/Blumenau-IgrejaLuterana.md) |
 | Blumenau — Igreja Matriz do Centro + Podres de Ricos | Alta | 📋 Planejado | [`GDD/Features/Blumenau-IgrejaMatriz.md`](../GDD/Features/Blumenau-IgrejaMatriz.md) |
 | Blumenau — Teatro Carlos Gomes + mercado negro + boss Autômato | Alta | 📋 Planejado | [`GDD/Features/Blumenau-TeatroCarlosGomes.md`](../GDD/Features/Blumenau-TeatroCarlosGomes.md) |
-| Blumenau — Sistema Hídrico (4 estados) | Alta | 📋 Planejado | [`GDD/Features/Blumenau-SistemaHidrico.md`](../GDD/Features/Blumenau-SistemaHidrico.md) |
+| Blumenau — Sistema Hídrico (4 estados) | Alta | 🔨 Em desenvolvimento | [`GDD/Features/Blumenau-SistemaHidrico.md`](../GDD/Features/Blumenau-SistemaHidrico.md) |
 | Blumenau — Jardim de Edith + SQ-01 + Guizo de Edith | Alta | 📋 Planejado | [`GDD/Features/Blumenau-JardimEdith.md`](../GDD/Features/Blumenau-JardimEdith.md) |
 | Blumenau — Mausoléu do Fundador + catacumba | Média | 📋 Planejado | [`GDD/Features/Blumenau-MausoleumFundador.md`](../GDD/Features/Blumenau-MausoleumFundador.md) |
 | Blumenau — Morro do Zendron + mapas periféricos | Média | 📋 Planejado | [`GDD/Features/Blumenau-MorroZendron.md`](../GDD/Features/Blumenau-MorroZendron.md) |

@@ -69,7 +69,7 @@ Lógica testável vive em C# puro (`src/`), sem Unity; o Unity só adapta. Scrip
 **Aciona:** URP, câmera, physics layers, action map, UI, ServiceLocator, Steam Input
 
 1. Classificar: setup de engine, wiring de runtime ou os dois.
-2. Respeitar as restrições: Unity 6000.2, URP 2D, 640×360, 32 PPU, alvo PC/Steam.
+2. Respeitar as restrições: Unity 6000.2, URP 2D, 960×540, 48 PPU (ADR-011), alvo PC/Steam.
 3. Views passivas (`Show`/`Hide`), serviços obtidos do `GameServiceLocator` no `Awake`, zero regra de negócio.
 4. Todo painel chama `EventSystem.SetSelectedGameObject` (teclado, controle, Steam Deck).
 5. `[SerializeField]` sempre, com `[Header]`/`[Tooltip]`; layers via `GameLayers`.

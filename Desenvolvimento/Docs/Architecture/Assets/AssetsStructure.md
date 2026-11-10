@@ -104,14 +104,14 @@ Regras:
   atribuição obrigatória. **Não** aceite CC-BY-NC nem "free for non-commercial".
 - Assets de terceiros são **placeholder por padrão**: não seguem a paleta da região nem a
   style-bible, e não contam como entrega de arte no backlog.
-- Antes de importar, adeque a densidade ao ADR-004 (32 PPU, 1 tile = 32px). Arte externa
-  autorada em 16px normalmente precisa de upscale ×2 nearest para não ficar com metade do
-  tamanho de pixel da arte própria na mesma tela.
+- Antes de importar, adeque a densidade ao ADR-011 (48 PPU, 1 tile = 48px). Arte externa
+  autorada em 16px precisa de upscale ×3 nearest (em 24px, ×2) para não ficar com um pixel
+  menor que o da arte própria na mesma tela.
 - Se algum asset for referenciado por código em runtime, ele vive em uma subpasta
   `Resources/` **dentro** do pacote — assim o `SpriteImportPostprocessor` continua valendo
   (o caminho começa com `Assets/Art/`) e o pacote segue removível em bloco.
 
-> Import automático: `Assets/Editor/Art/SpriteImportPostprocessor.cs` força 32 PPU, Filter Point, sem compressão e sem mipmap em toda textura que entrar em `Assets/Art/`. Spritesheets `*_sheet.png` são fatiados automaticamente pelo `SheetAutoSlicer.cs` (Multiple + grid quadrado + pivot bottom-center); o clip/controller é gerado via menu `Assets > Braziliation > Criar Animação do Spritesheet` (`SheetAnimationTool.cs`, saída em `Animations/World/`). Não configure import settings de sprite manualmente, salvo exceção documentada.
+> Import automático: `Assets/Editor/Art/SpriteImportPostprocessor.cs` aplica o PPU do `PixelScale` (48; 32 só nos placeholders do Gothicvania), Filter Point, sem compressão e sem mipmap em toda textura que entrar em `Assets/Art/`. Spritesheets `*_sheet.png` são fatiados automaticamente pelo `SheetAutoSlicer.cs` (Multiple + grid quadrado + pivot bottom-center); o clip/controller é gerado via menu `Assets > Braziliation > Criar Animação do Spritesheet` (`SheetAnimationTool.cs`, saída em `Animations/World/`). Não configure import settings de sprite manualmente, salvo exceção documentada.
 
 ### Audio/
 

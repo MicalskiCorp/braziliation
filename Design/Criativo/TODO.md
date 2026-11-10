@@ -17,7 +17,7 @@
 | Definir tom e atmosfera narrativa | [`Historia/premissa.md`](Historia/premissa.md) | Média | 📋 Rascunho |
 | Listar referências de obras | [`Historia/premissa.md`](Historia/premissa.md) | Baixa | 📋 Rascunho |
 | Criar arco: *A Rede Esquecida* — meta-arco dos túneis intercidades | [`Historia/arcos.md`](Historia/arcos.md) | Alta | ❌ Não iniciado |
-| Criar primeiro personagem (protagonista) | [`Historia/personagens/index.md`](Historia/personagens/index.md) | Média | ❌ Não iniciado |
+| Criar a ficha do protagonista em `personagens/` com o nome, a motivação e o conflito definidos na premissa | [`Historia/personagens/index.md`](Historia/personagens/index.md) | Média | ⏸ depende de «Definir protagonista (nome, motivação, conflito)» |
 
 ### Lendas
 
@@ -70,7 +70,7 @@
 | Popular ficha completa de Joinville | [`Estados/SantaCatarina/cidades/Joinville/index.md`](Estados/SantaCatarina/cidades/Joinville/index.md) | Alta | 📋 Rascunho |
 | Definir nome no game e Punk Genre de Navegantes | [`Estados/SantaCatarina/cidades/Navegantes/index.md`](Estados/SantaCatarina/cidades/Navegantes/index.md) | Alta | 📋 Rascunho |
 | Popular ficha completa de Navegantes | [`Estados/SantaCatarina/cidades/Navegantes/index.md`](Estados/SantaCatarina/cidades/Navegantes/index.md) | Alta | 📋 Rascunho |
-| Pesquisa complementar: aprofundar Noiva da Ponte e Rosa do Pé Inchado (Joinville) se o Criativo quiser desenvolvê-las | [`Estados/SantaCatarina/cidades/Joinville/index.md`](Estados/SantaCatarina/cidades/Joinville/index.md) | Baixa | ❌ Não iniciado |
+| Decidir se desenvolve Noiva da Ponte e Rosa do Pé Inchado (Joinville); se sim, pedir a pesquisa complementar ao `@Historiador` | [`Estados/SantaCatarina/cidades/Joinville/index.md`](Estados/SantaCatarina/cidades/Joinville/index.md) | Baixa | ❌ Não iniciado |
 | Criar cidade: Criciúma (CoalPunk) | [`Estados/SantaCatarina/cidades/`](Estados/SantaCatarina/cidades/) | Média | ❌ Não iniciado |
 
 ### Estados Planejados
@@ -97,7 +97,7 @@
 
 | Item | Arquivo | Prioridade | Status |
 |------|---------|-----------|--------|
-| Registrar primeiras ideias no pool | [`Ideias/pool.md`](Ideias/pool.md) | Baixa | ❌ Não iniciado |
+| *(nenhuma pendente — as primeiras ideias estão no pool desde 2026-09-20)* | | | |
 
 ### Concept Art Pendente
 
@@ -149,6 +149,7 @@
 | Handoff de pesquisa processado: 11 lendas de SC — rodada 2. Fichas criadas para Siderópolis, São Francisco do Sul, Balneário Piçarras, Joinville e Navegantes (só material confirmado); túneis secretos do Teatro Carlos Gomes registrados na ficha de Blumenau (separados do `Unterwasser-Gang`, sem citar partido político); O Gritador e Cemitério de Santa Bárbara registrados como lendas regionais em `Estados/SantaCatarina/ideias.md`; Monge João Maria registrado como contexto histórico-cultural sensível (não monstro) no mesmo arquivo; 9 novas entradas em `Lendas/catalogo.md`; arquétipo "Noiva Vingativa" registrado em `Ideias/pool.md` | 2026-09-20 |
 | Decidido: O Gritador e o Cemitério Histórico de Santa Bárbara ficam como lendas regionais de SC em `Estados/SantaCatarina/ideias.md` (não viram parte de Lages nem justificam cidade nova); cada um recebeu campo "Municípios de ocorrência" (Urubici/Otacílio Costa; Urubici/Bom Jardim da Serra), padronizado também na coluna de origem de `Lendas/catalogo.md`; intenção de uso registrada (NPC ou boss num desses municípios, papel/local não decidido) | 2026-09-20 |
 | Decidido: Monge João Maria entra em `Lendas/catalogo.md` como "NPC Aliado / Curandeiro Andarilho", não atrelado a região (itinerante); direção de tratamento fechada como regra em `Estados/SantaCatarina/ideias.md` (gentil, cura, ajuda o jogador, nunca monstro/boss/vilão, abordagem respeitosa da devoção viva); as duas entradas linkadas entre si | 2026-09-20 |
+| Primeiras ideias registradas no pool (`Ideias/pool.md`): botija/luz da botija e arquétipo "Noiva Vingativa" — baixa dada na revisão de TODOs de 2026-11-10 | 2026-09-20 |
 
 ---
 

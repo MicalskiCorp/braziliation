@@ -26,7 +26,7 @@
 | Parâmetros numéricos de Crafting (slots iniciais/máximos, expansões, combinações híbridas) | [`Mechanics/Crafting.md`](Mechanics/Crafting.md) | Alta | ❌ |
 | Parâmetros numéricos de Build (habilidades por receptáculo, resistências, estágios visuais) | [`Mechanics/Build.md`](Mechanics/Build.md) | Alta | ❌ |
 | IDs dos materiais especiais de expansão (Artesão/Costureira/Alquimista) | [`Mechanics/Build.md`](Mechanics/Build.md) | Alta | ❌ |
-| Regras de compatibilidade e composição final dos itens híbridos | [`Sistemas/Crafting.md`](Architecture/Sistemas/Crafting.md) | Alta | ❌ |
+| Composição final dos itens híbridos (stats, nome e lore do resultado) — a compatibilidade de slot já está decidida no `Mechanics/Crafting.md` (híbrido entra no slot de qualquer um dos seus tipos) | [`Mechanics/Crafting.md`](Mechanics/Crafting.md) | Alta | ❌ |
 | Política de seed do sorteio híbrido (determinístico × aleatório) | [`Sistemas/Crafting.md`](Architecture/Sistemas/Crafting.md) | Média | ❌ |
 | Localização e quantidade de totens | [`Mechanics/Build.md`](Mechanics/Build.md) | Média | ❌ |
 | Localização das benzedeiras (uma por região; a casa é o checkpoint?) e do ponto único do Monge João Maria — quando houver mapa | [DDR-001](GDD/Decisoes/DDR-001-benzedeira-npc.md) · [DDR-002](GDD/Decisoes/DDR-002-monge-joao-maria-papel.md) | Média | ❌ |
@@ -79,15 +79,14 @@
 
 | Item | Responsável | Prioridade | Status |
 |------|-------------|-----------|--------|
-| Avaliar a janela de compactação do ADR-015 na página Tokens da Central depois de ~5 execuções com janela nas filas Unity, Gameplay e UI e arte: manter, ajustar ou voltar ao `auto`; e decidir se vale o passo seguinte por mod (esforço por requisição, saídas grandes encurtadas) | @TechLead | Média | ❌ Não iniciado |
+| Avaliar a janela de compactação do ADR-015 na página Tokens da Central depois de ~5 execuções com janela nas filas Unity, Gameplay e UI e arte: manter, ajustar ou voltar ao `auto`; e decidir se vale o passo seguinte por mod (esforço por requisição, saídas grandes encurtadas) | @TechLead | Média | ⏸ aguardando as ~5 execuções com janela — nenhuma nas filas Unity, Gameplay e UI e arte desde o ADR-015 (2026-11-04) |
 
 ---
 
 ## Sequência recomendada para a demo
 
 1. `fechar-decisao`: premissa → inimigo base → arma inicial → números de Crafting e Build.
-2. Play-teste no Editor (menu → demo) e wiring pendente da seção Unity.
-3. `novo-inimigo` para o inimigo base; trocar o placeholder.
-4. Inventário real no save.
-5. UI e arte pendentes.
-6. Checklist final da demo com o loop completo (combate + progressão + feedback).
+2. `novo-inimigo` para o inimigo base; trocar o placeholder.
+3. Inventário real no save.
+4. UI e arte pendentes.
+5. Checklist final da demo com o loop completo (combate + progressão + feedback).
